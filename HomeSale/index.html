@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>House For Nepal</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="res/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="res/custom.css">
+    <script src="res/jquery-3.2.1.js"></script>
+    <script src="res/bootstrap/js/bootstrap.js"></script>
+</head>
+<body>
+
+<div class="container-fluid" id="main-container">
+
+    <div class="row over-the-fold-wrapper">
+        <div class="header">
+            <div class="container top-bar">
+                <div class="col-md-3">
+                    <div class="logo-outer-wrapper">
+                        <div class="logo-wrapper">
+                            <a href="#">
+                                <img style="vertical-align: middle;width: 100%;max-width: 300px;"
+                                     src="image/rent-buy-live-logo.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-9 hidden-xs hidden-sm wrapper">
+                    <div class="header-top clearfix">
+                        <a href="#"><span class="glyphicon glyphicon-envelope"></span>HELP@RENTBUYLIVE.CO.NP</a>
+                        <a href="#"><span class="glyphicon glyphicon-lock"></span>LOGIN</a>
+                        <a href="#"><span class="glyphicon glyphicon-lock"></span>SIGN UP</a>
+                        <a href="#"><span class="glyphicon glyphicon-star"></span>SAVED PROPERTIES</a>
+                        <a href="#"><span class="glyphicon glyphicon-plus-sign"></span>LIST PROPERTIES</a>
+                    </div>
+                    <ul id="header-tab" class="nav nav-pills bottom clearfix">
+                        <li class="active"><a data-toggle="pill" href="#home">HOME</a></li>
+                        <li><a data-toggle="pill" href="#menu1">FIND AGENT</a></li>
+                        <li><a data-toggle="pill" href="#menu2">FREE TRIAL</a></li>
+                        <li><a data-toggle="pill" href="#menu3">CONTACT US</a></li>
+                        <li><a data-toggle="pill" href="#menu4">ABOUT US</a></li>
+                        <li><a data-toggle="pill" href="#menu5">HELP</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h1>SEARCH FOR PROPERTIES TO RENT OR BUY</h1>
+                <form>
+                    <div class="radio-container">
+                        <label>
+                            <input hidden type="radio" name="rentbuy" value="rent" checked>
+                            <span class="radio-label">RENT</span>
+                        </label>
+                        <label>
+                            <input hidden type="radio" name="rentbuy" value="buy">
+                            <span class="radio-label">BUY</span>
+                        </label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Address, city, location">
+                    <div class="form-control-container">
+
+                        <input placeholder="Property Type" title="Property Type" name="property_type"
+                               class="inline-control  form-control" id="color" list="suggestions">
+
+                        <input placeholder="Min Price" title="Property Type" name="property_type"
+                               class="inline-control form-control" list="suggestions">
+                        <input placeholder="Max Price" title="Property Type" name="property_type"
+                               class="inline-control form-control" list="suggestions">
+                        <input placeholder="Min Bathroom" title="Property Type" name="property_type"
+                               class="inline-control form-control" list="suggestions">
+                        <input placeholder="Max Bathroom" title="Property Type" name="property_type"
+                               class="inline-control form-control" list="suggestions">
+                        <button class="btn btn-danger inline-control ">SEARCH</button>
+                    </div>
+                    <datalist id="suggestions">
+                        <option value="Black">
+                        <option value="Red">
+                        <option value="Green">
+                        <option value="Blue">
+                        <option value="White">
+                    </datalist>
+                </form>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <h3>Menu 1</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.</p>
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    totam
+                    rem aperiam.</p>
+            </div>
+            <div id="menu3" class="tab-pane fade">
+                <h3>Menu 3</h3>
+                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                    explicabo.</p>
+            </div>
+            <div id="menu4" class="tab-pane fade">
+                <h3>Menu 3</h3>
+                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                    explicabo.</p>
+            </div>
+            <div id="menu5" class="tab-pane fade">
+                <h3>Menu 3</h3>
+                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                    explicabo.</p>
+            </div>
+        </div>
+    </div>
+    <div style="height: 110px;"></div>
+    <div style="height: 110px;"></div>
+    <div style="height: 110px;"></div>
+    <div style="height: 110px;"></div>
+    <div style="height: 110px;"></div>
+</div>
+
+</body>
+</html>
