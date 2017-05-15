@@ -1,0 +1,185 @@
+/*accent rgb(199, 42, 40)*/
+/*primary rgb(93, 126, 169)*/
+/*primary-dark rgb(63, 85, 112)*/
+:root {
+    --color-primary: rgb(93, 126, 169);
+    --color-primary-dark: rgb(63, 85, 112);
+    --color-accent: rgb(199, 42, 40);
+}
+
+html, body {
+    min-height: 100%;
+    width: 100%;
+}
+
+.wrapper {
+    position: static;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.header {
+    background-color: var(--color-primary-dark);
+    /*background-color: rgb(29, 27, 25);*/
+    box-shadow: 0 15px 24px rgba(0, 0, 0, .22), 0 19px 76px rgba(0, 0, 0, 0.30);
+    z-index: 9999;
+}
+
+.header-top {
+    margin-bottom: 64px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: none;
+}
+
+.logo-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.logo-outer-wrapper {
+    display: table;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.top-bar {
+    position: relative;
+}
+
+.header-top a {
+    float: right;
+    font-size: 0.8em;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#header-tab a {
+    font-size: 1.2em;
+    border-radius: 0;
+    margin: 0;
+    flex-grow: 0;
+}
+
+#main-container {
+    height: 100vh;
+}
+
+.over-the-fold-wrapper {
+    position: relative;;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.tab-content {
+    background: url("../image/bg2.jpg") no-repeat fixed center;
+    background-size: cover;
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header a {
+    /*color: rgb(93, 126, 169);*/
+    color: #FFFFFF;
+
+}
+
+.tab-content .tab-pane {
+    position: relative;
+    width: 78%;
+    padding: 12px 30px 80px;
+    color: #ffffff;
+    background-color: rgba(96, 128, 168, 0.83);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .23), 0 3px 12px rgba(0, 0, 0, 0.16);
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+    color: #fff;
+    /*background-color: rgb(93, 126, 169);*/
+
+    background-color: rgb(199, 42, 40);
+
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background: rgb(93, 126, 169);
+}
+
+.radio-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+}
+
+.radio-container .radio-label {
+    display: inline-block;
+    width: 140px;
+    text-align: center;
+}
+
+label > input + .radio-label { /* IMAGE STYLES */
+    cursor: pointer;
+    border: 2px solid transparent;
+    background-color: inherit;
+}
+
+label > input:checked + .radio-label { /* (RADIO CHECKED) IMAGE STYLES */
+    border: 2px solid rgb(29, 27, 25);
+    background-color: rgb(29, 27, 25);
+}
+
+.radio-label {
+    padding: 8px;
+    font-size: 2.2em;
+
+}
+
+.inline-control {
+    display: inline-block;
+    width: 15%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 0;
+}
+
+.form-control {
+    border-radius: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+input::-webkit-calendar-picker-indicator {
+    opacity: 100;
+}
+
+.primary-button {
+    background-color: #fff;
+    border-color: #fff;
+    color: #FFFFFF;
+}
+
+#home > h1 {
+    font-size: 2.8em;
+    text-align: center;
+    margin: 30px;
+    font-weight: bold;
+}
+
+.form-control-container {
+    display: flex;
+    justify-content: space-between;
+
+}

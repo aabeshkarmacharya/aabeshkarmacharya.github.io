@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="res/custom.css">
     <script src="res/jquery-3.2.1.js"></script>
     <script src="res/bootstrap/js/bootstrap.js"></script>
+    <script src="res/custom.js"></script>
 </head>
 <body>
 
@@ -27,21 +28,21 @@
                     </div>
                 </div>
 
-                <div class="col-md-9 hidden-xs hidden-sm wrapper">
-                    <div class="header-top clearfix">
-                        <a href="#"><span class="glyphicon glyphicon-envelope"></span>HELP@RENTBUYLIVE.CO.NP</a>
-                        <a href="#"><span class="glyphicon glyphicon-lock"></span>LOGIN</a>
-                        <a href="#"><span class="glyphicon glyphicon-lock"></span>SIGN UP</a>
-                        <a href="#"><span class="glyphicon glyphicon-star"></span>SAVED PROPERTIES</a>
-                        <a href="#"><span class="glyphicon glyphicon-plus-sign"></span>LIST PROPERTIES</a>
+                <div class="hidden-xs hidden-sm nav-item-wrapper">
+                    <div class="header-top">
+                        <a href="#"><span class="glyphicon glyphicon-envelope"></span> HELP@RENTBUYLIVE.CO.NP</a>
+                        <a href="#"><span class="glyphicon glyphicon-lock"></span> LOGIN</a>
+                        <a href="#"><span class="glyphicon glyphicon-lock"></span> SIGN UP</a>
+                        <a href="#"><span class="glyphicon glyphicon-star"></span> SAVED PROPERTIES</a>
+                        <a href="#"><span class="glyphicon glyphicon-plus-sign"></span> LIST PROPERTIES</a>
                     </div>
-                    <ul id="header-tab" class="nav nav-pills bottom clearfix">
+                    <ul id="header-tab" class="nav nav-pills bottom">
                         <li class="active"><a data-toggle="pill" href="#home">HOME</a></li>
-                        <li><a data-toggle="pill" href="#menu1">FIND AGENT</a></li>
-                        <li><a data-toggle="pill" href="#menu2">FREE TRIAL</a></li>
-                        <li><a data-toggle="pill" href="#menu3">CONTACT US</a></li>
-                        <li><a data-toggle="pill" href="#menu4">ABOUT US</a></li>
-                        <li><a data-toggle="pill" href="#menu5">HELP</a></li>
+                        <li><a data-toggle="pill" href="#find-agent">FIND AGENT</a></li>
+                        <li><a data-toggle="pill" href="#free-trial">FREE TRIAL</a></li>
+                        <li><a data-toggle="pill" href="#contact-us">CONTACT US</a></li>
+                        <li><a data-toggle="pill" href="#about-us">ABOUT US</a></li>
+                        <li><a data-toggle="pill" href="#help">HELP</a></li>
                     </ul>
                 </div>
             </div>
@@ -60,11 +61,17 @@
                             <span class="radio-label">BUY</span>
                         </label>
                     </div>
-                    <input type="text" class="form-control" placeholder="Address, city, location">
+                    <!--<div class="group">-->
+                    <!--<input id="material-field" type="text" required>-->
+                    <!--<span class="highlight"></span>-->
+                    <!--<span class="bar"></span>-->
+                    <!--<label for="material-field">Email</label>-->
+                    <!--</div>-->
+                    <input type="text" name="query" class="form-control" placeholder="Address, city, location">
                     <div class="form-control-container">
 
                         <input placeholder="Property Type" title="Property Type" name="property_type"
-                               class="inline-control  form-control" id="color" list="suggestions">
+                               class="inline-control  form-control" id="color" list="property-type-suggestions">
 
                         <input placeholder="Min Price" title="Property Type" name="property_type"
                                class="inline-control form-control" list="suggestions">
@@ -74,46 +81,58 @@
                                class="inline-control form-control" list="suggestions">
                         <input placeholder="Max Bathroom" title="Property Type" name="property_type"
                                class="inline-control form-control" list="suggestions">
-                        <button class="btn btn-danger inline-control ">SEARCH</button>
+                        <button class="primary-button inline-control ">SEARCH</button>
                     </div>
+                    <datalist id="property-type-suggestions">
+                        <option value="House">
+                        <option value="Flat">
+                        <option value="Commercial">
+                        <option value="Land">
+                    </datalist>
                     <datalist id="suggestions">
-                        <option value="Black">
-                        <option value="Red">
-                        <option value="Green">
-                        <option value="Blue">
-                        <option value="White">
+                        <option value="House">
+                        <option value="Flat">
+                        <option value="Commercial">
+                        <option value="Land">
                     </datalist>
                 </form>
             </div>
-            <div id="menu1" class="tab-pane fade">
+            <div id="find-agent" class="tab-pane fade">
                 <h3>Menu 1</h3>
                 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                     consequat.</p>
             </div>
-            <div id="menu2" class="tab-pane fade">
+            <div id="free-trial" class="tab-pane fade">
                 <h3>Menu 2</h3>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
                     totam
                     rem aperiam.</p>
             </div>
-            <div id="menu3" class="tab-pane fade">
+            <div id="contact-us" class="tab-pane fade">
                 <h3>Menu 3</h3>
                 <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
                     explicabo.</p>
             </div>
-            <div id="menu4" class="tab-pane fade">
+            <div id="about-us" class="tab-pane fade">
                 <h3>Menu 3</h3>
                 <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
                     explicabo.</p>
             </div>
-            <div id="menu5" class="tab-pane fade">
+            <div id="help" class="tab-pane fade">
                 <h3>Menu 3</h3>
                 <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
                     explicabo.</p>
             </div>
         </div>
     </div>
-    <div style="height: 110px;"></div>
+    <div class="row slider">
+        <div class="container">
+            <h2 class="slider-title">FEATURED PROPERTIES</h2>
+            <div class="slider-item-container">
+
+            </div>
+        </div>
+    </div>
     <div style="height: 110px;"></div>
     <div style="height: 110px;"></div>
     <div style="height: 110px;"></div>

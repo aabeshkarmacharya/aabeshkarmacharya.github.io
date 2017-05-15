@@ -1,28 +1,67 @@
 
+:root {
+    --color-primary-light: rgb(103, 139, 184);
+    --color-primary: rgb(93, 126, 169);
+    --color-primary-dark: rgb(63, 85, 112);
+    --color-primary-text: rgb(240, 240, 240);
+    --color-accent-light: rgb(255, 51, 51);
+    --color-accent: rgb(252, 50, 50);
+    --color-accent-dark: rgb(235, 47, 47);
+    --color-accent-text: rgb(33, 33, 33);
+}
+
 html, body {
     min-height: 100%;
     width: 100%;
+
 }
 
-.wrapper {
-    position: static;
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.top-bar {
+    display: flex;
+    flex-direction: row;
+    /*justify-content: flex-end;*/
+    align-items: stretch;
+
+}
+
+.nav-item-wrapper {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
 }
 
 .bottom {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    margin-top: auto;
 }
 
 .header {
-    background-color: rgb(29, 27, 25);
+    background-color: var(--color-primary-dark);
+    /*background-color: rgb(29, 27, 25);*/
+    box-shadow: 0 15px 24px rgba(0, 0, 0, .22), 0 19px 76px rgba(0, 0, 0, 0.30);
+    z-index: 9999;
 }
 
 .header-top {
-    margin-bottom: 64px;
     padding-top: 20px;
     padding-bottom: 20px;
+    padding-right: 5px;
     border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    justify-self: flex-start;
+}
+
+.header-top a {
+    font-size: 0.8em;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .logo-wrapper {
@@ -35,17 +74,6 @@ html, body {
     width: 100%;
     padding-top: 10px;
     padding-bottom: 10px;
-}
-
-.top-bar {
-    position: relative;
-}
-
-.header-top a {
-    float: right;
-    font-size: 0.8em;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 #header-tab a {
@@ -71,27 +99,40 @@ html, body {
     background: url("../image/bg2.jpg") no-repeat fixed center;
     background-size: cover;
     flex-grow: 1;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .header a {
-    color: rgb(93, 126, 169);
+    /*color: rgb(93, 126, 169);*/
+    color: #FFFFFF;
+
 }
 
 .tab-content .tab-pane {
-    position: relative;
     width: 78%;
     padding: 12px 30px 80px;
     color: #ffffff;
-    background-color: rgba(93, 126, 169, 0.72);
+    background-color: rgba(96, 128, 168, 0.83);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .23), 0 3px 12px rgba(0, 0, 0, 0.16);
 }
 
-.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
     color: #fff;
-    background-color: rgb(93, 126, 169);
+    /*background-color: rgb(93, 126, 169);*/
+    position: relative;
+    background-color: var(--color-accent);
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background: var(--color-primary);
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background: var(--color-primary);
 }
 
 .radio-container {
@@ -106,21 +147,23 @@ html, body {
     width: 140px;
     text-align: center;
 }
-label > input + .radio-label{ /* IMAGE STYLES */
-    cursor:pointer;
-    border:2px solid transparent;
+
+label > input + .radio-label {
+    cursor: pointer;
     background-color: inherit;
 }
-label > input:checked + .radio-label{ /* (RADIO CHECKED) IMAGE STYLES */
-    border:2px solid rgb(29, 27, 25);
-    background-color: rgb(29, 27, 25);
+
+label > input:checked + .radio-label {
+    background-color: var(--color-primary-dark);
 }
 
 .radio-label {
     padding: 8px;
-    font-size: 2.2em;
+    font-size: 2.1em;
+    font-weight: normal;
 
 }
+
 .inline-control {
     display: inline-block;
     width: 15%;
@@ -139,15 +182,164 @@ input::-webkit-calendar-picker-indicator {
     opacity: 100;
 }
 
-#home > h1{
-    font-size: 2.8em;
-    text-align: center;
-    margin: 30px;
-    font-weight: bold;
+.primary-button {
+    background-color: var(--color-accent);
+    border-color: transparent;
+    color: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .6);
 }
 
-.form-control-container{
+.primary-button:active,
+.primary-button:focus {
+    outline: 0;
+}
+
+.primary-button:focus {
+    background-color: var(--color-accent-dark);
+}
+
+.primary-button:active {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}
+
+#home > h1 {
+    font-size: 2.6em;
+    text-align: center;
+    margin-top: 20px;
+
+}
+
+.form-control-container {
     display: flex;
     justify-content: space-between;
 
 }
+
+.slider {
+    background-color: rgb(237, 239, 242);
+    height: 100vh;
+
+}
+
+.slider-title {
+    padding-top: 16px;
+}
+
+/*.group {*/
+/*position: relative;*/
+/*margin-bottom: 45px;*/
+/*}*/
+
+/*input {*/
+/*font-size: 18px;*/
+/*padding: 10px 10px 10px 5px;*/
+/*display: block;*/
+/*width: 300px;*/
+/*border: none;*/
+/*border-bottom: 1px solid #757575;*/
+/*}*/
+
+/*input:focus {*/
+/*outline: none;*/
+/*}*/
+
+/*label {*/
+/*color: #999;*/
+/*font-size: 18px;*/
+/*font-weight: normal;*/
+/*position: absolute;*/
+/*pointer-events: none;*/
+/*left: 5px;*/
+/*top: 10px;*/
+/*transition: 0.2s ease all;*/
+/*-moz-transition: 0.2s ease all;*/
+/*-webkit-transition: 0.2s ease all;*/
+/*}*/
+
+/*!* active state *!*/
+/*input:focus ~ label, input:valid ~ label {*/
+/*top: -20px;*/
+/*font-size: 14px;*/
+/*color: #5264AE;*/
+/*}*/
+
+/*!* BOTTOM BARS ================================= *!*/
+/*.bar {*/
+/*position: relative;*/
+/*display: block;*/
+/*width: 300px;*/
+/*}*/
+
+/*.bar:before, .bar:after {*/
+/*content: '';*/
+/*height: 2px;*/
+/*width: 0;*/
+/*bottom: 1px;*/
+/*position: absolute;*/
+/*background: #5264AE;*/
+/*transition: 0.2s ease all;*/
+/*-moz-transition: 0.2s ease all;*/
+/*-webkit-transition: 0.2s ease all;*/
+/*}*/
+
+/*.bar:before {*/
+/*left: 50%;*/
+/*}*/
+
+/*.bar:after {*/
+/*right: 50%;*/
+/*}*/
+
+/*!* active state *!*/
+/*input:focus ~ .bar:before, input:focus ~ .bar:after {*/
+/*width: 50%;*/
+/*}*/
+
+/*!* HIGHLIGHTER ================================== *!*/
+/*.highlight {*/
+/*position: absolute;*/
+/*height: 60%;*/
+/*width: 100px;*/
+/*top: 25%;*/
+/*left: 0;*/
+/*pointer-events: none;*/
+/*opacity: 0.5;*/
+/*}*/
+
+/*!* active state *!*/
+/*input:focus ~ .highlight {*/
+/*-webkit-animation: inputHighlighter 0.3s ease;*/
+/*-moz-animation: inputHighlighter 0.3s ease;*/
+/*animation: inputHighlighter 0.3s ease;*/
+/*}*/
+
+/*!* ANIMATIONS ================ *!*/
+/*@-webkit-keyframes inputHighlighter {*/
+/*from {*/
+/*background: #5264AE;*/
+/*}*/
+/*to {*/
+/*width: 0;*/
+/*background: transparent;*/
+/*}*/
+/*}*/
+
+/*@-moz-keyframes inputHighlighter {*/
+/*from {*/
+/*background: #5264AE;*/
+/*}*/
+/*to {*/
+/*width: 0;*/
+/*background: transparent;*/
+/*}*/
+/*}*/
+
+/*@keyframes inputHighlighter {*/
+/*from {*/
+/*background: #5264AE;*/
+/*}*/
+/*to {*/
+/*width: 0;*/
+/*background: transparent;*/
+/*}*/
+/*}*/
