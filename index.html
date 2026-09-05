@@ -1,22 +1,200 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <title>Aabesh Karmacharya</title>
-  <style>
-      body, html {
-          margin: 0;
-          padding: 0;
-          height: 100%;
-          overflow: hidden;
-      }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Four Datasets, Taken Seriously">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%93%8A%3C%2Ftext%3E%3C%2Fsvg%3E">
+<title>Four Datasets, Taken Seriously</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#F2F1EF; --surface:#FCFCFB; --surface-2:#F7F6F4; --sunk:#E6E4E0;
+  --ink:#16171A; --ink-2:#4F5257; --ink-3:#85888E; --rule:#DAD8D4; --rule-2:#C6C3BE;
+  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6;
+  --shadow:0 1px 2px rgba(22,23,26,.05),0 12px 32px -18px rgba(22,23,26,.22);
+  --measure:64ch; --wide:1080px;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
+    --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
+    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
+  --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
+  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+  font-optical-sizing:auto; font-size:18.5px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+.wrap{max-width:var(--wide); margin-inline:auto; padding-inline:24px}
+.narrow{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
+a{color:inherit}
 
-      embed {
-          width: 100%;
-          height: 100%;
-      }
-  </style>
+header{padding:clamp(56px,10vw,110px) 0 clamp(30px,5vw,48px); border-bottom:1px solid var(--rule)}
+.eyebrow{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:20px}
+h1{margin:0 0 .5em; font-size:clamp(38px,6.6vw,72px); line-height:1.02; font-weight:700;
+   letter-spacing:-.028em; max-width:16ch; text-wrap:balance}
+.lede{font-size:clamp(18px,2.1vw,22px); line-height:1.5; color:var(--ink-2); max-width:58ch;
+  margin:0 0 1em}
+.lede+p{color:var(--ink-2); max-width:58ch; margin:0}
+
+main{padding-block:clamp(36px,6vw,64px)}
+/* two columns for four cards: a three-up grid leaves an orphan */
+.grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(420px,1fr))}
+.card{display:block; text-decoration:none; background:var(--surface);
+  border:1px solid var(--rule); border-radius:2px; box-shadow:var(--shadow);
+  padding:26px 26px 22px; position:relative;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
+.card:hover{transform:translateY(-2px); border-color:var(--rule-2);
+  box-shadow:0 2px 4px rgba(0,0,0,.06),0 18px 40px -20px rgba(0,0,0,.35)}
+.card:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+.card h2{margin:0 0 .35em; font-size:26px; line-height:1.12; font-weight:700;
+  letter-spacing:-.02em}
+.card .sub{color:var(--ink-2); font-size:16.5px; line-height:1.48; margin:0 0 18px}
+.src{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--accent); margin-bottom:14px; display:block}
+.finds{list-style:none; margin:0 0 18px; padding:0; border-top:1px solid var(--rule)}
+.finds li{padding:9px 0; border-bottom:1px solid var(--rule); font-size:15.5px;
+  line-height:1.42; color:var(--ink-2); display:flex; gap:12px; align-items:baseline}
+.finds b{font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:500;
+  color:var(--ink); white-space:nowrap; font-variant-numeric:tabular-nums}
+.go{font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-3); display:inline-flex; align-items:center; gap:7px}
+.card:hover .go{color:var(--accent)}
+
+.method{margin-top:clamp(40px,6vw,72px); padding-top:clamp(30px,4vw,44px);
+  border-top:1px solid var(--rule)}
+.method h3{font-size:20px; margin:0 0 .6em; font-weight:600; letter-spacing:-.01em}
+.method p{color:var(--ink-2); font-size:16.5px; max-width:62ch; margin:0 0 1em}
+.method ul{color:var(--ink-2); font-size:16.5px; max-width:62ch; padding-left:1.1em; margin:0}
+.method li{margin-bottom:.5em}
+footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
 </head>
 <body>
-<embed src="/resume.pdf" type="application/pdf"/>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Data essays &middot; September 2026</div>
+    <h1>Four public datasets, taken seriously</h1>
+    <p class="lede">Four scientific archives, downloaded raw and analysed from scratch: every
+      recorded earthquake, every known atomic nucleus, every sunspot count since 1749, and
+      everything humans have left in orbit.</p>
+    <p>Each one is an interactive essay. Every number in them was computed from the downloaded
+      files rather than quoted, and where the data could not settle a question, they say so.</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="grid">
+
+      <a class="card" style="--accent:var(--quake)"
+         href="earthquakes/">
+        <span class="src">USGS &middot; 457,408 earthquakes</span>
+        <h2>Four Hundred Thousand Earthquakes</h2>
+        <p class="sub">Fifty years of the global seismic catalogue &mdash; the laws that hold
+          exactly, and the places where the archive quietly misleads.</p>
+        <ul class="finds">
+          <li><b>b = 1.078</b><span>Gutenberg&ndash;Richter holds across four orders of magnitude</span></li>
+          <li><b>66%</b><span>of every recorded earthquake is an aftershock of another one</span></li>
+          <li><b>26.8%</b><span>of all reported depths are exactly 10.0 km &mdash; a placeholder</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--nuclide)"
+         href="nuclides/">
+        <span class="src">IAEA &middot; 3,383 nuclides</span>
+        <h2>The Valley of Stability</h2>
+        <p class="sub">Every combination of protons and neutrons ever observed to hold together,
+          and why so few of them last.</p>
+        <ul class="finds">
+          <li><b>244</b><span>are stable &mdash; and only four have odd counts of both</span></li>
+          <li><b>Ni-62</b><span>or Fe-56 is the binding-energy peak, depending on the question</span></li>
+          <li><b>Tl-205</b><span>the neptunium decay chain gained a rung in 2003</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--sun)"
+         href="sunspots/">
+        <span class="src">SILSO &middot; 277 years of counts</span>
+        <h2>Eleven Years, Roughly</h2>
+        <p class="sub">The solar cycle's period, derived from the data rather than quoted &mdash;
+          and the width of the peak, which is the more interesting number.</p>
+        <ul class="finds">
+          <li><b>11.107 yr</b><span>the dominant period, from a periodogram of 3,332 months</span></li>
+          <li><b>2.1&times;</b><span>broader than a perfect clock: the sun keeps bad time</span></li>
+          <li><b>r = &minus;0.749</b><span>cycles that rise fastest reach highest</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--orbit)"
+         href="orbits/">
+        <span class="src">CelesTrak &middot; 70,580 objects</span>
+        <h2>The Shells Above Us</h2>
+        <p class="sub">Everything in Earth orbit, placed by altitude and inclination. Near-Earth
+          space turns out to have architecture.</p>
+        <ul class="finds">
+          <li><b>86.6%</b><span>of everything at 800&ndash;900 km is debris; at 400&ndash;500 km it is 1%</span></li>
+          <li><b>2,315</b><span>fragments from one 2007 missile test are still up there</span></li>
+          <li><b>31.9%</b><span>of all tracked objects are Starlink satellites</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
+    </div>
+
+    <div class="method narrow" style="padding-inline:0">
+      <h3>What these have in common</h3>
+      <p>Each essay starts from a public archive that anyone can download, and computes
+        everything on the page from it. That constraint turns out to matter more than the
+        subject, because the same problem appears in all four:</p>
+      <ul>
+        <li>The seismic catalogue records twice as many earthquakes as it did in 1976. The Earth
+          did not change; the network did.</li>
+        <li>&ldquo;Stable&rdquo; nuclides become unstable when instruments improve. Bismuth
+          crossed that line in 2003.</li>
+        <li>The sunspot record was recalibrated end to end in 2015, moving historical values by
+          roughly 45 per cent.</li>
+        <li>The satellite catalogue stores each object's most recent orbit, which quietly ruins
+          any analysis of how long things last at a given altitude.</li>
+      </ul>
+      <p style="margin-top:1.2em">In every case the archive is partly a record of the world and
+        partly a record of the people measuring it, and the interesting work is separating the
+        two. Where that could not be done &mdash; whether great earthquakes have genuinely become
+        more frequent, for instance &mdash; the essays say so rather than picking a side.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 1.1em"><a href="about/"
+      style="text-decoration-color:var(--rule-2)">Aabesh Karmacharya &mdash; r&eacute;sum&eacute;</a></p>
+    Sources: USGS Earthquake Catalog &middot; IAEA Nuclear Data Services &middot; SILSO, Royal
+    Observatory of Belgium &middot; CelesTrak. Plate boundaries after Bird (2003).
+  </div>
+</footer>
 </body>
 </html>
