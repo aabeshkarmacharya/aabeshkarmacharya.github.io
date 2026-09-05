@@ -57,8 +57,11 @@ h1{margin:0 0 .5em; font-size:clamp(38px,6.6vw,72px); line-height:1.02; font-wei
 .lede+p{color:var(--ink-2); max-width:58ch; margin:0}
 
 main{padding-block:clamp(36px,6vw,64px)}
-/* two columns for four cards: a three-up grid leaves an orphan */
-.grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(420px,1fr))}
+/* Two columns for four cards: a three-up grid leaves an orphan.
+   min(420px,100%) is load-bearing -- a bare minmax(420px,1fr) keeps the 420px
+   minimum even when the container is narrower, so cards overflow the viewport
+   and the page scrolls sideways on a phone. */
+.grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
 .card{display:block; text-decoration:none; background:var(--surface);
   border:1px solid var(--rule); border-radius:2px; box-shadow:var(--shadow);
   padding:26px 26px 22px; position:relative;
