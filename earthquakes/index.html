@@ -401,7 +401,9 @@ footer{padding:56px 24px 72px; border-top:1px solid var(--rule); background:var(
         <p class="fig-note">Maximum-likelihood b from every M5.0+ earthquake within 300 km of
           each grid node. Nodes with fewer than 120 such events are left blank rather than
           filled by interpolation &mdash; 915 nodes of 14,040 qualify, which is what
-          &ldquo;seismicity is concentrated&rdquo; looks like as a coverage statistic.</p>
+          &ldquo;seismicity is concentrated&rdquo; looks like as a coverage statistic. Coastlines
+          (Natural Earth) and plate boundaries lie underneath for orientation; where you can see
+          them, there is no estimate &mdash; not a low one.</p>
       </div>
       <div class="fig-body" style="padding-bottom:8px">
         <div style="position:relative; background:var(--sunk); border-radius:2px; overflow:hidden">
@@ -1063,29 +1065,35 @@ function mix(aHex, bHex, t){
   const a = hexRgb(aHex), b = hexRgb(bHex);
   return "rgb(" + a.map((v,i)=>Math.round(v + (b[i]-v)*t)).join(",") + ")";
 }
+/* Land is always the bottom layer, so it is derived from whatever ground it is
+   painted on. Kept deliberately faint: the plate boundaries are the meaningful
+   lines and the data is on top of this; land is orientation, nothing more. */
+const landFill = groundHex => mix(groundHex, css("--rule-2"), 0.26);
+const landLine = groundHex => mix(groundHex, css("--rule-2"), 0.62);
+
+function drawLand(ctx, w, h, groundHex, dpr){
+  ctx.beginPath();
+  for (const ring of A.land){
+    for (let k=0;k<ring.length;k++){
+      const p = proj(ring[k][0], ring[k][1], w, h);
+      k ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]);
+    }
+    ctx.closePath();
+  }
+  ctx.fillStyle = landFill(groundHex); ctx.fill();
+  ctx.strokeStyle = landLine(groundHex); ctx.lineWidth = Math.max(0.5, 0.55*dpr);
+  ctx.lineJoin = "round"; ctx.stroke();
+}
+
 const landCache = { key:null, img:null };
 function landSurface(ctx, pw, ph, groundHex, dpr){
-  // Kept deliberately faint. The plate boundaries are the meaningful lines on
-  // this map and the epicentres are the data; land is orientation, nothing more.
-  const fill = mix(groundHex, css("--rule-2"), 0.26);
-  const line = mix(groundHex, css("--rule-2"), 0.62);
-  const key = [pw, ph, groundHex, fill, line].join("|");
+  const key = [pw, ph, groundHex, landFill(groundHex), landLine(groundHex)].join("|");
   if (landCache.key !== key){
     const off = document.createElement("canvas");
     off.width = pw; off.height = ph;
     const o = off.getContext("2d", { willReadFrequently:true });
     o.fillStyle = groundHex; o.fillRect(0, 0, pw, ph);
-    o.beginPath();
-    for (const ring of A.land){
-      for (let k=0;k<ring.length;k++){
-        const p = proj(ring[k][0], ring[k][1], pw, ph);
-        k ? o.lineTo(p[0], p[1]) : o.moveTo(p[0], p[1]);
-      }
-      o.closePath();
-    }
-    o.fillStyle = fill; o.fill();
-    o.strokeStyle = line; o.lineWidth = Math.max(0.5, 0.55*dpr);
-    o.lineJoin = "round"; o.stroke();
+    drawLand(o, pw, ph, groundHex, dpr);
     landCache.key = key;
     landCache.img = o.getImageData(0, 0, pw, ph);
   }
@@ -1975,6 +1983,7 @@ register(function tide(){
     const pw=cv.width, ph=cv.height;
     ctx.save(); ctx.setTransform(1,0,0,1,0,0);
     ctx.fillStyle=css("--sunk"); ctx.fillRect(0,0,pw,ph);
+    drawLand(ctx,pw,ph,css("--sunk"),dpr);
     const warm=hexRgb(css("--shallow")), cold=hexRgb(css("--deep")), neu=hexRgb(css("--ink-3"));
     for(let iy=0;iy<G.nlat;iy++){
       const lat=G.lat0+iy*G.step;
