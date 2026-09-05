@@ -1451,7 +1451,7 @@ register(function rates(){
   const series=[["m45","M 4.5+","--deep"],["m55","M 5.5+","--shallow"],
                 ["m65","M 6.5+","--inter"],["m70","M 7.0+","--slot4"]];
   const smooth=(a,k)=>a.map((_,i)=>{let s=0,n=0;for(let j=Math.max(0,i-k);j<=Math.min(a.length-1,i+k);j++){s+=a[j];n++;}return s/n;});
-  series.forEach(([key,name,cv])=>{
+  const built = series.map(([key,name,cv])=>{
     const col=css(cv), raw=M.annual[key];
     const b0=raw.slice(0,10).reduce((a,c)=>a+c,0)/10;
     const idx=raw.map(v=>v/b0);
@@ -1459,14 +1459,39 @@ register(function rates(){
     let d=""; sm.forEach((v,i)=> d+=(i?"L":"M")+X(yrs[i])+","+Y(v));
     path(g,d,col,2.4);
     keyMark(g,x1+10,Y(sm[sm.length-1])+4,col,name);
-    // hover targets
-    idx.forEach((v,i)=>{
-      const r=el("rect",{x:X(yrs[i])-4,y:y0,width:8,height:y1-y0,fill:"transparent"});
-      r.style.cursor="pointer";
-      r.addEventListener("mouseenter",ev=>showTip(ev,"<b>"+yrs[i]+"</b><br>"+name+": <b>"+fmt(raw[i])+
-        "</b> events<br><i>"+v.toFixed(2)+"\u00d7 the 1976\u20131985 average</i>"));
-      r.addEventListener("mouseleave",hideTip); g.appendChild(r);
+    return {name,col,raw,idx,sm};
+  });
+  /* One crosshair and one hover target per year, reporting every series at once.
+     Each series used to append its own full-height rect at every year, so 200 of
+     them stacked up and the last one drawn swallowed all pointer events -- which
+     made every line report "M 7.0+" regardless of which one you were over. */
+  const hair=el("line",{x1:x0,y1:y0,x2:x0,y2:y1,stroke:css("--ink-3"),
+    "stroke-width":1,"stroke-dasharray":"3 3",opacity:0,"pointer-events":"none"});
+  g.appendChild(hair);
+  const dots=built.map(s=>{
+    const c=el("circle",{r:4.5,cx:x0,cy:y0,fill:css("--surface"),stroke:s.col,
+      "stroke-width":2,opacity:0,"pointer-events":"none"});
+    g.appendChild(c); return c;
+  });
+  const stepW=(x1-x0)/(yrs.length-1);
+  yrs.forEach((yr,i)=>{
+    const r=el("rect",{x:X(yr)-stepW/2,y:y0,width:stepW,height:y1-y0,fill:"transparent"});
+    r.style.cursor="crosshair";
+    r.addEventListener("mouseenter",ev=>{
+      hair.setAttribute("x1",X(yr)); hair.setAttribute("x2",X(yr)); hair.setAttribute("opacity","1");
+      built.forEach((s,k)=>{
+        dots[k].setAttribute("cx",X(yr)); dots[k].setAttribute("cy",Y(s.sm[i]));
+        dots[k].setAttribute("opacity","1");
+      });
+      showTip(ev,"<b>"+yr+"</b><br>"+built.map(s=>
+        s.name+"  <b>"+fmt(s.raw[i])+"</b> <i>("+s.idx[i].toFixed(2)+"\u00d7)</i>").join("<br>"));
     });
+    r.addEventListener("mouseleave",()=>{
+      hair.setAttribute("opacity","0");
+      dots.forEach(d=>d.setAttribute("opacity","0"));
+      hideTip();
+    });
+    g.appendChild(r);
   });
   txt(g,(x0+x1)/2,y1+42,"YEAR","axlab","middle");
   const yl=txt(g,0,0,"RATE RELATIVE TO 1976\u20131985","axlab","middle");
