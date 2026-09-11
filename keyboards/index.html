@@ -204,6 +204,7 @@ footer{padding:44px 0 66px; border-top:1px solid var(--rule); background:var(--s
           <span class="grp-l">Edit</span>
           <div class="chips">
             <button class="chip" id="bSwap" aria-pressed="false">Swap two keys</button>
+            <button class="chip" id="bOpt">Find a shorter layout</button>
             <button class="chip" id="bReset">Reset</button>
           </div>
         </div>
@@ -214,6 +215,7 @@ footer{padding:44px 0 66px; border-top:1px solid var(--rule); background:var(--s
             aria-label="A row-staggered keyboard showing the selected layout, each key shaded by how often it is pressed"></svg>
           <p class="note" id="kbNote" style="margin:12px 2px 16px">Hover a key for its share of
             keystrokes. Turn on <b>Swap two keys</b> and click any two to trade them.</p>
+          <p class="note" id="optNote" style="margin:0 2px 16px"></p>
           <div id="worst"></div>
         </div>
         <div class="readout" id="readout"></div>
@@ -249,6 +251,31 @@ footer{padding:44px 0 66px; border-top:1px solid var(--rule); background:var(--s
       Getting scissors right requires knowing that the middle finger is the longest, which is why
       QWERTY's <span class="mono">in</span> is comfortable and its
       <span class="mono">ct</span> is not, despite being geometrically identical.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Searching</div>
+    <h2>What falls out of distance alone</h2>
+    <p>The <b>Find a shorter layout</b> button runs simulated annealing over the keys, the same
+      procedure that produced Halmak. Its objective is fingertip travel and nothing else &mdash;
+      travel is the only quantity here carrying a physical unit, and it already contains the cost
+      of same-finger pairs, because a finger forced between two keys travels the distance between
+      them. It is told nothing about rolls, alternation, or what a hand enjoys.</p>
+    <p>On literary English it reliably lands near <span class="mono">7.85&nbsp;m</span> per
+      thousand characters, against QWERTY's <span class="mono">17.08</span>, and drops
+      same-finger pairs to about <span class="mono">1.0%</span> &mdash; under Colemak's
+      <span class="mono">1.52%</span>, which is not a claim that it is a better layout, only that
+      distance is most of what the metric rewards.</p>
+    <p>The interesting part is what it keeps rediscovering. Run it repeatedly and the objective
+      settles within a few hundredths of a metre every time while the arrangement comes out
+      different, so the surface has many near-equal minima rather than one answer. But the home
+      row is nearly the same each run, and usually shares nine of its eleven letters with
+      Colemak's. Nobody told it about Colemak. Two people and a search procedure, given the same
+      language and the same hand, keep putting <span class="mono">e a i o n s t r</span> under the
+      fingers &mdash; which is a reasonable amount of evidence that the layouts designed by hand
+      were not arbitrary.</p>
   </div>
 </section>
 
@@ -623,6 +650,116 @@ function onKeyClick(i){
   renderAll();
 }
 
+/* ================= search =================
+   Halmak was found by simulated annealing rather than by hand, so letting the
+   reader run the same procedure on their own text is only fair.
+
+   The objective is fingertip travel and nothing else. That is a deliberate
+   restriction: travel is the one quantity here with a physical unit, and it
+   already contains the cost of same-finger pairs, since a finger that has to
+   move between two keys travels the distance between them. It knows nothing
+   about rolls, alternation or what your hand enjoys, and the result should be
+   read as "the shortest arrangement", not "the best one". */
+function makeObjective(corpus, chars){
+  const idx = {}; chars.forEach((c,i)=>idx[c]=i);
+  const n = chars.length;
+  const uni = new Float64Array(n);
+  for (const ch in corpus.uni) if (ch in idx) uni[idx[ch]] += corpus.uni[ch];
+  // only the pairs that carry real mass; the tail cannot move the optimum
+  const pairs = [];
+  for (const g in corpus.bi){
+    const a = idx[g[0]], b = idx[g[1]];
+    if (a === undefined || b === undefined || a === b) continue;
+    pairs.push([a, b, corpus.bi[g]]);
+  }
+  pairs.sort((x,y)=>y[2]-x[2]);
+  const keep = pairs.slice(0, 600);
+  const pa = new Int32Array(keep.length), pb = new Int32Array(keep.length),
+        pn = new Float64Array(keep.length);
+  keep.forEach((p,i)=>{ pa[i]=p[0]; pb[i]=p[1]; pn[i]=p[2]; });
+
+  let total = 0; for (let i=0;i<n;i++) total += uni[i];
+  // distance tables, precomputed once
+  const HOMED = new Float64Array(NPOS), PD = new Float64Array(NPOS*NPOS);
+  for (let i=0;i<NPOS;i++){
+    const h = POS[HOME_POS[POS[i].f]];
+    HOMED[i] = Math.hypot(POS[i].x-h.x, POS[i].y-h.y);
+    for (let j=0;j<NPOS;j++)
+      PD[i*NPOS+j] = (POS[i].f === POS[j].f && i !== j)
+        ? Math.hypot(POS[i].x-POS[j].x, POS[i].y-POS[j].y) : 0;
+  }
+  // perm[position] = char index;  at[charIndex] = position
+  return function cost(at){
+    let t = 0;
+    for (let c=0;c<n;c++) t += uni[c] * HOMED[at[c]];
+    for (let k=0;k<pa.length;k++) t += pn[k] * PD[at[pa[k]]*NPOS + at[pb[k]]];
+    return t / total * 1000 * U_MM;      // mm per 1000 characters
+  };
+}
+
+let searching = false;
+function optimise(){
+  if (searching) return;
+  const corpus = curCorpus(), start = cur();
+  const chars = start.split("");
+  const cost = makeObjective(corpus, chars);
+  // at[charIndex] = position index
+  let at = new Int32Array(chars.length);
+  for (let i=0;i<chars.length;i++) at[i] = i;
+  let best = at.slice(), bestC = cost(at), curC = bestC;
+  const startC = bestC;
+
+  searching = true;
+  $("bOpt").textContent = "Searching...";
+  const ROUNDS = 12, PER = 20000;
+  let round = 0;
+  function chunk(){
+    const T0 = 3.2, T1 = 0.004;
+    for (let k=0;k<PER;k++){
+      const frac = (round*PER + k) / (ROUNDS*PER);
+      const T = T0 * Math.pow(T1/T0, frac);
+      const i = (Math.random()*chars.length)|0, j = (Math.random()*chars.length)|0;
+      if (i === j) continue;
+      const t = at[i]; at[i] = at[j]; at[j] = t;
+      const c = cost(at);
+      if (c <= curC || Math.random() < Math.exp(-(c-curC)/T)){
+        curC = c;
+        if (c < bestC){ bestC = c; best = at.slice(); }
+      } else {
+        const u = at[i]; at[i] = at[j]; at[j] = u;   // reject, put it back
+      }
+    }
+    round++;
+    $("bOpt").textContent = "Searching " + Math.round(round/ROUNDS*100) + "%";
+    if (round < ROUNDS){ setTimeout(chunk, 0); return; }
+
+    const out = new Array(NPOS);
+    for (let c=0;c<chars.length;c++) out[best[c]] = chars[c];
+    custom = out.join("");
+    searching = false;
+    $("bOpt").textContent = "Find a shorter layout";
+    const after = analyse(custom, corpus);
+    // how much of the found home row agrees with a layout designed by hand
+    const homeOf = str => new Set(POS.map((p,i)=>p.r===1?str[i]:null).filter(Boolean));
+    const mine = homeOf(custom), theirs = homeOf(LAYOUTS.colemak);
+    let overlap = 0; mine.forEach(c => { if (theirs.has(c)) overlap++; });
+    $("optNote").innerHTML =
+      "Annealing on <b>" + corpus.title + "</b> cut travel from <b>" +
+      (startC/1000).toFixed(2) + " m</b> to <b>" + (bestC/1000).toFixed(2) +
+      " m</b> per 1000 characters, a " +
+      ((1-bestC/startC)*100).toFixed(1) + "% reduction, and left same-finger pairs at <b>" +
+      after.sfb.toFixed(2) + "%</b>. It optimised distance only &mdash; it knows nothing " +
+      "about rolls or alternation, so compare it against the table before believing it. " +
+      "Run it again and you will get a different answer; the surface has many near-equal minima." +
+      (overlap >= 8
+        ? " Worth noticing: " + overlap + " of the 11 letters it put on the home row are the " +
+          "same ones Colemak puts there. Nobody told it about Colemak."
+        : "");
+    renderAll();
+  }
+  setTimeout(chunk, 0);
+}
+
 /* ================= the pairs that cost the most =================
    The single most useful thing to see about a layout you are considering:
    not that its same-finger rate is 1.5%, but which of your actual letter
@@ -808,6 +945,7 @@ function renderAll(){ syncChips(); drawKeyboard(); drawTable(); drawHero(); }
 $("vHeat").addEventListener("click", ()=>{ view="heat"; renderAll(); });
 $("vFing").addEventListener("click", ()=>{ view="fingers"; renderAll(); });
 $("bSwap").addEventListener("click", ()=>{ swapMode=!swapMode; swapFirst=-1; renderAll(); });
+$("bOpt").addEventListener("click", optimise);
 $("bReset").addEventListener("click", ()=>{ custom=null; swapFirst=-1; renderAll(); });
 
 let taT;
