@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Four Datasets, Taken Seriously">
+<meta name="description" content="Five Public Datasets, Taken Seriously">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%93%8A%3C%2Ftext%3E%3C%2Fsvg%3E">
-<title>Four Datasets, Taken Seriously</title>
+<title>Five Public Datasets, Taken Seriously</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&display=swap">
@@ -15,7 +15,7 @@
   color-scheme: light;
   --ground:#F2F1EF; --surface:#FCFCFB; --surface-2:#F7F6F4; --sunk:#E6E4E0;
   --ink:#16171A; --ink-2:#4F5257; --ink-3:#85888E; --rule:#DAD8D4; --rule-2:#C6C3BE;
-  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6;
+  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6; --keys:#8b5cf6;
   --shadow:0 1px 2px rgba(22,23,26,.05),0 12px 32px -18px rgba(22,23,26,.22);
   --measure:64ch; --wide:1080px;
 }
@@ -24,7 +24,7 @@
     color-scheme: dark;
     --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
     --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5;
+    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa;
     --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
   }
 }
@@ -32,7 +32,7 @@
   color-scheme: dark;
   --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
   --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5;
+  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa;
   --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
 }
 *{box-sizing:border-box}
@@ -57,11 +57,14 @@ h1{margin:0 0 .5em; font-size:clamp(38px,6.6vw,72px); line-height:1.02; font-wei
 .lede+p{color:var(--ink-2); max-width:58ch; margin:0}
 
 main{padding-block:clamp(36px,6vw,64px)}
-/* Two columns for four cards: a three-up grid leaves an orphan.
+/* Two columns: a three-up grid leaves an orphan.
    min(420px,100%) is load-bearing -- a bare minmax(420px,1fr) keeps the 420px
    minimum even when the container is narrower, so cards overflow the viewport
    and the page scrolls sideways on a phone. */
 .grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
+/* Five cards in a two-up grid leaves an orphan; let the odd one out -- the only
+   one that is a tool rather than an essay -- take the full width. */
+.card.span{grid-column:1/-1}
 .card{display:block; text-decoration:none; background:var(--surface);
   border:1px solid var(--rule); border-radius:2px; box-shadow:var(--shadow);
   padding:26px 26px 22px; position:relative;
@@ -96,13 +99,15 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
 <body>
 <header>
   <div class="wrap">
-    <div class="eyebrow">Data essays &middot; September 2026</div>
-    <h1>Four public datasets, taken seriously</h1>
-    <p class="lede">Four scientific archives, downloaded raw and analysed from scratch: every
-      recorded earthquake, every known atomic nucleus, every sunspot count since 1749, and
-      everything humans have left in orbit.</p>
-    <p>Each one is an interactive essay. Every number in them was computed from the downloaded
-      files rather than quoted, and where the data could not settle a question, they say so.</p>
+    <div class="eyebrow">Data essays &amp; tools &middot; September 2026</div>
+    <h1>Five public datasets, taken seriously</h1>
+    <p class="lede">Public archives, downloaded raw and analysed from scratch: every recorded
+      earthquake, every known atomic nucleus, every sunspot count since 1749, everything humans
+      have left in orbit &mdash; and ten million keystrokes of English, to settle what a keyboard
+      layout is actually worth.</p>
+    <p>The first four are interactive essays; the last is a tool you can point at your own
+      writing. Every number was computed from the downloaded files rather than quoted, and where
+      the data could not settle a question, they say so.</p>
   </div>
 </header>
 
@@ -166,13 +171,26 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
         <span class="go">Read &rarr;</span>
       </a>
 
+      <a class="card span" style="--accent:var(--keys)" href="keyboards/">
+        <span class="src">Project Gutenberg + Python stdlib &middot; 10.5M keystrokes</span>
+        <h2>The Layout Under Your Hands</h2>
+        <p class="sub">Seven keyboard layouts scored on real text, on a real staggered board.
+          Rearrange the keys yourself, or paste in something you wrote and measure that.</p>
+        <ul class="finds">
+          <li><b>6.53%</b><span>of QWERTY letter pairs land on one finger; Colemak manages 1.52%</span></li>
+          <li><b>33.8%</b><span>of QWERTY keystrokes fall on the home row, against 71.8% for Colemak</span></li>
+          <li><b>4.70 km</b><span>of fingertip travel per novel on QWERTY, versus 2.29 km</span></li>
+        </ul>
+        <span class="go">Open the tool &rarr;</span>
+      </a>
+
     </div>
 
     <div class="method narrow" style="padding-inline:0">
       <h3>What these have in common</h3>
       <p>Each essay starts from a public archive that anyone can download, and computes
         everything on the page from it. That constraint turns out to matter more than the
-        subject, because the same problem appears in all four:</p>
+        subject, because the same problem appears in all of them:</p>
       <ul>
         <li>The seismic catalogue records twice as many earthquakes as it did in 1976. The Earth
           did not change; the network did.</li>
