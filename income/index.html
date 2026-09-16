@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Nine Thousand Rupees a Month">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%92%B5%3C%2Ftext%3E%3C%2Fsvg%3E">
+<title>Nine Thousand Rupees a Month</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..800,0..100,0..1&family=Source+Sans+3:wght@300;400;500;600&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#EEEEF2; --surface:#FCFCFD; --surface-2:#F5F5F9; --sunk:#E3E3EA;
+  --ink:#15151C; --ink-2:#4E4E5C; --ink-3:#84848F; --rule:#D6D6DE; --rule-2:#C2C2CD;
+  --sun:#eb6834; --alt:#2a78d6;
+  /* Four survey rounds, oldest to newest: a single-hue ordinal ramp, light to dark.
+     Validated against the light surface -- monotone lightness, adjacent gaps
+     >= .06, and the light end clears 2:1 contrast. */
+  --y1995:#e0a07e; --y2003:#d1764a; --y2010:#b4531f; --y2022:#833408;
+  --shadow:0 1px 2px rgba(21,21,28,.05),0 10px 30px -16px rgba(21,21,28,.18);
+  --grid:rgba(21,21,28,.07);
+  --measure:65ch; --wide:1120px;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
+    --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
+    --sun:#d95926; --alt:#3987e5;
+    /* Dark mode is stepped from the same hue against the dark surface, not flipped. */
+    --y1995:#82441f; --y2003:#ab5e30; --y2010:#d07f46; --y2022:#eca57f;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+    --grid:rgba(234,234,240,.08);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
+  --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
+  --sun:#d95926; --alt:#3987e5;
+  --y1995:#82441f; --y2003:#ab5e30; --y2010:#d07f46; --y2022:#eca57f;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+  --grid:rgba(234,234,240,.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:400; font-size:18.5px; line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; font-family:"Fraunces","Georgia",serif;
+  font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
+  letter-spacing:-.012em}
+.mono,code{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.tnum{font-variant-numeric:tabular-nums}
+
+.wrap{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
+.wide{max-width:var(--wide); margin-inline:auto; padding-inline:24px}
+section{padding-block:clamp(40px,6vw,74px)}
+section+section{border-top:1px solid var(--rule)}
+p{margin:0 0 1.1em}
+a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2); text-underline-offset:3px}
+a:hover{text-decoration-color:var(--sun)}
+:focus-visible{outline:2px solid var(--alt); outline-offset:3px; border-radius:2px}
+
+.eyebrow{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3);
+  display:flex; align-items:center; gap:12px; margin-bottom:16px}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
+h2{font-size:clamp(28px,4vw,40px); line-height:1.06; font-weight:700; margin-bottom:.48em}
+h3{font-size:21px; line-height:1.24; font-weight:600; margin:2em 0 .5em}
+.lede{font-size:20.5px; line-height:1.56; color:var(--ink-2)}
+.small{font-size:16px; color:var(--ink-2)}
+
+header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
+  padding-block:clamp(52px,9vw,104px)}
+h1{font-size:clamp(40px,7.2vw,88px); line-height:.97; font-weight:800;
+   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:13ch; margin-bottom:.3em}
+.sub{max-width:52ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
+.kicker{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:22px}
+
+figure{margin:0; background:var(--surface); border:1px solid var(--rule);
+  border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.fig-head{padding:20px 22px 0}
+.fig-title{font-family:"Fraunces",Georgia,serif; font-weight:600; font-size:17px;
+  font-variation-settings:"SOFT" 0,"WONK" 0,"opsz" 24; margin-bottom:4px}
+.fig-note{font-size:14px; color:var(--ink-2); line-height:1.45; max-width:80ch}
+.fig-body{padding:14px 22px 20px}
+figcaption{padding:14px 22px 18px; border-top:1px solid var(--rule);
+  font-size:13.5px; color:var(--ink-3); line-height:1.5; background:var(--surface-2)}
+.figspace{margin-block:clamp(28px,3.6vw,46px)}
+svg{display:block; width:100%; height:auto; overflow:visible}
+.gl{stroke:var(--grid); stroke-width:1; fill:none}
+.ax{stroke:var(--rule-2); stroke-width:1; fill:none}
+.tk{font-family:"DM Mono",monospace; font-size:10.5px; fill:var(--ink-3);
+    font-variant-numeric:tabular-nums}
+.axlab{font-family:"DM Mono",monospace; font-size:10px; fill:var(--ink-3);
+    letter-spacing:.14em; text-transform:uppercase}
+.dlab{font-family:"DM Mono",monospace; font-size:11px; fill:var(--ink-2);
+    font-variant-numeric:tabular-nums}
+
+.ctl{display:flex; flex-wrap:wrap; gap:9px 16px; align-items:center; padding:12px 22px;
+  border-bottom:1px solid var(--rule); background:var(--surface-2);
+  font-family:"DM Mono",monospace; font-size:11.5px; color:var(--ink-2)}
+.chip{border:1px solid var(--rule-2); background:transparent; color:var(--ink-2);
+  font:inherit; padding:4px 11px; border-radius:3px; cursor:pointer; display:inline-flex;
+  align-items:center; gap:7px; transition:background .15s,border-color .15s,color .15s}
+.chip[aria-pressed="true"]{border-color:var(--ink-2); background:var(--surface); color:var(--ink)}
+.chip:hover{border-color:var(--ink-3)}
+.swatch{width:11px; height:3px; border-radius:2px; flex:none}
+
+.legend{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center;
+  font-family:"DM Mono",monospace; font-size:11.5px; color:var(--ink-2);
+  padding:0 22px 14px}
+.legend span{display:inline-flex; align-items:center; gap:7px}
+.legend i{width:16px; height:3px; border-radius:2px; flex:none; font-style:normal}
+
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(154px,1fr)); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); border-radius:3px; overflow:hidden}
+.stat{background:var(--surface); padding:16px 18px}
+.stat b{display:block; font-family:"Source Sans 3",sans-serif; font-weight:600;
+  font-size:clamp(25px,3.1vw,33px); line-height:1.05; margin-bottom:5px; letter-spacing:-.02em}
+.stat span{font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); line-height:1.4; display:block}
+
+#tip{position:fixed; z-index:40; pointer-events:none; opacity:0; transition:opacity .11s;
+  background:var(--surface); border:1px solid var(--rule-2); border-radius:3px;
+  box-shadow:var(--shadow); padding:9px 12px; font-size:13px; line-height:1.45;
+  max-width:290px; color:var(--ink)}
+#tip.on{opacity:1}
+#tip b{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:400; display:block; margin-bottom:3px}
+#tip .v{font-variant-numeric:tabular-nums}
+
+details{border:1px solid var(--rule); border-radius:3px; background:var(--surface);
+  padding:0 18px; margin-block:26px}
+summary{cursor:pointer; padding:14px 0; font-family:"DM Mono",monospace;
+  font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2)}
+summary:hover{color:var(--ink)}
+.tablewrap{overflow-x:auto; padding-bottom:18px}
+table{border-collapse:collapse; font-size:14px; width:100%; min-width:460px}
+th,td{text-align:right; padding:6px 10px; border-bottom:1px solid var(--rule);
+  font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left; font-variant-numeric:normal}
+thead th{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:400; white-space:nowrap}
+
+.srcs{font-size:14px; color:var(--ink-3); line-height:1.6}
+.srcs a{text-decoration-color:var(--rule-2)}
+footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:44px}
+.note{border-left:2px solid var(--rule-2); padding-left:16px; margin-block:1.5em;
+  color:var(--ink-2); font-size:16.5px}
+
+@media (max-width:760px){
+  body{font-size:17px}
+  .fig-head,.fig-body,.ctl,.legend,figcaption{padding-left:16px; padding-right:16px}
+  .wrap,.wide{padding-inline:18px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important; transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+<script>window.NPL_DATA={"years":{"1995":{"survey":"LSS-I","welfare":"consumption","gini":0.3521,"pop":22493650.5,"survey_year":null,"mean_npr":3209,"median_npr":2494,"pct":[{"p":0.5,"npr":647},{"p":1.0,"npr":751},{"p":2.0,"npr":911},{"p":3.0,"npr":982},{"p":4.0,"npr":1033},{"p":5.0,"npr":1079},{"p":6.0,"npr":1129},{"p":7.0,"npr":1176},{"p":8.0,"npr":1209},{"p":9.0,"npr":1242},{"p":10.0,"npr":1276},{"p":11.0,"npr":1311},{"p":12.0,"npr":1347},{"p":13.0,"npr":1387},{"p":14.0,"npr":1430},{"p":15.0,"npr":1474},{"p":16.0,"npr":1509},{"p":17.0,"npr":1545},{"p":18.0,"npr":1580},{"p":19.0,"npr":1610},{"p":20.0,"npr":1638},{"p":21.0,"npr":1666},{"p":22.0,"npr":1694},{"p":23.0,"npr":1722},{"p":24.0,"npr":1752},{"p":25.0,"npr":1783},{"p":26.0,"npr":1813},{"p":27.0,"npr":1844},{"p":28.0,"npr":1872},{"p":29.0,"npr":1898},{"p":30.0,"npr":1925},{"p":31.0,"npr":1951},{"p":32.0,"npr":1977},{"p":33.0,"npr":2004},{"p":34.0,"npr":2030},{"p":35.0,"npr":2056},{"p":36.0,"npr":2082},{"p":37.0,"npr":2108},{"p":38.0,"npr":2134},{"p":39.0,"npr":2161},{"p":40.0,"npr":2191},{"p":41.0,"npr":2222},{"p":42.0,"npr":2252},{"p":43.0,"npr":2283},{"p":44.0,"npr":2314},{"p":45.0,"npr":2344},{"p":46.0,"npr":2374},{"p":47.0,"npr":2403},{"p":48.0,"npr":2433},{"p":49.0,"npr":2462},{"p":50.0,"npr":2492},{"p":51.0,"npr":2521},{"p":52.0,"npr":2556},{"p":53.0,"npr":2590},{"p":54.0,"npr":2625},{"p":55.0,"npr":2660},{"p":56.0,"npr":2694},{"p":57.0,"npr":2730},{"p":58.0,"npr":2769},{"p":59.0,"npr":2809},{"p":60.0,"npr":2849},{"p":61.0,"npr":2888},{"p":62.0,"npr":2928},{"p":63.0,"npr":2972},{"p":64.0,"npr":3018},{"p":65.0,"npr":3064},{"p":66.0,"npr":3110},{"p":67.0,"npr":3156},{"p":68.0,"npr":3215},{"p":69.0,"npr":3283},{"p":70.0,"npr":3351},{"p":71.0,"npr":3419},{"p":72.0,"npr":3483},{"p":73.0,"npr":3546},{"p":74.0,"npr":3610},{"p":75.0,"npr":3673},{"p":76.0,"npr":3745},{"p":77.0,"npr":3824},{"p":78.0,"npr":3903},{"p":79.0,"npr":3982},{"p":80.0,"npr":4082},{"p":81.0,"npr":4188},{"p":82.0,"npr":4294},{"p":83.0,"npr":4415},{"p":84.0,"npr":4540},{"p":85.0,"npr":4665},{"p":86.0,"npr":4822},{"p":87.0,"npr":4979},{"p":88.0,"npr":5150},{"p":89.0,"npr":5329},{"p":90.0,"npr":5578},{"p":91.0,"npr":5926},{"p":92.0,"npr":6238},{"p":93.0,"npr":6557},{"p":94.0,"npr":6893},{"p":95.0,"npr":7341},{"p":96.0,"npr":7998},{"p":97.0,"npr":9156},{"p":98.0,"npr":10702},{"p":99.0,"npr":14349},{"p":99.5,"npr":19560}]},"2003":{"survey":"LSS-II","welfare":"consumption","gini":0.4377,"pop":25770732.5,"survey_year":null,"mean_npr":4660,"median_npr":3112,"pct":[{"p":0.5,"npr":873},{"p":1.0,"npr":941},{"p":2.0,"npr":1058},{"p":3.0,"npr":1146},{"p":4.0,"npr":1229},{"p":5.0,"npr":1304},{"p":6.0,"npr":1368},{"p":7.0,"npr":1421},{"p":8.0,"npr":1465},{"p":9.0,"npr":1509},{"p":10.0,"npr":1550},{"p":11.0,"npr":1591},{"p":12.0,"npr":1632},{"p":13.0,"npr":1670},{"p":14.0,"npr":1707},{"p":15.0,"npr":1743},{"p":16.0,"npr":1779},{"p":17.0,"npr":1819},{"p":18.0,"npr":1860},{"p":19.0,"npr":1900},{"p":20.0,"npr":1941},{"p":21.0,"npr":1971},{"p":22.0,"npr":2000},{"p":23.0,"npr":2029},{"p":24.0,"npr":2058},{"p":25.0,"npr":2087},{"p":26.0,"npr":2117},{"p":27.0,"npr":2149},{"p":28.0,"npr":2182},{"p":29.0,"npr":2215},{"p":30.0,"npr":2247},{"p":31.0,"npr":2280},{"p":32.0,"npr":2317},{"p":33.0,"npr":2356},{"p":34.0,"npr":2396},{"p":35.0,"npr":2436},{"p":36.0,"npr":2476},{"p":37.0,"npr":2518},{"p":38.0,"npr":2560},{"p":39.0,"npr":2603},{"p":40.0,"npr":2646},{"p":41.0,"npr":2689},{"p":42.0,"npr":2733},{"p":43.0,"npr":2778},{"p":44.0,"npr":2823},{"p":45.0,"npr":2867},{"p":46.0,"npr":2912},{"p":47.0,"npr":2957},{"p":48.0,"npr":3003},{"p":49.0,"npr":3049},{"p":50.0,"npr":3095},{"p":51.0,"npr":3141},{"p":52.0,"npr":3187},{"p":53.0,"npr":3247},{"p":54.0,"npr":3307},{"p":55.0,"npr":3368},{"p":56.0,"npr":3429},{"p":57.0,"npr":3491},{"p":58.0,"npr":3554},{"p":59.0,"npr":3618},{"p":60.0,"npr":3682},{"p":61.0,"npr":3745},{"p":62.0,"npr":3817},{"p":63.0,"npr":3892},{"p":64.0,"npr":3967},{"p":65.0,"npr":4042},{"p":66.0,"npr":4118},{"p":67.0,"npr":4197},{"p":68.0,"npr":4275},{"p":69.0,"npr":4354},{"p":70.0,"npr":4433},{"p":71.0,"npr":4520},{"p":72.0,"npr":4609},{"p":73.0,"npr":4698},{"p":74.0,"npr":4787},{"p":75.0,"npr":4893},{"p":76.0,"npr":5010},{"p":77.0,"npr":5128},{"p":78.0,"npr":5246},{"p":79.0,"npr":5388},{"p":80.0,"npr":5530},{"p":81.0,"npr":5672},{"p":82.0,"npr":5870},{"p":83.0,"npr":6078},{"p":84.0,"npr":6306},{"p":85.0,"npr":6557},{"p":86.0,"npr":6822},{"p":87.0,"npr":7114},{"p":88.0,"npr":7472},{"p":89.0,"npr":7943},{"p":90.0,"npr":8575},{"p":91.0,"npr":9074},{"p":92.0,"npr":9683},{"p":93.0,"npr":10465},{"p":94.0,"npr":11412},{"p":95.0,"npr":12668},{"p":96.0,"npr":13975},{"p":97.0,"npr":15964},{"p":98.0,"npr":20338},{"p":99.0,"npr":30222},{"p":99.5,"npr":41396}]},"2010":{"survey":"LSS-III","welfare":"consumption","gini":0.3284,"pop":27362784.14,"survey_year":null,"mean_npr":6396,"median_npr":5172,"pct":[{"p":0.5,"npr":1386},{"p":1.0,"npr":1587},{"p":2.0,"npr":1859},{"p":3.0,"npr":2086},{"p":4.0,"npr":2231},{"p":5.0,"npr":2329},{"p":6.0,"npr":2439},{"p":7.0,"npr":2560},{"p":8.0,"npr":2638},{"p":9.0,"npr":2713},{"p":10.0,"npr":2787},{"p":11.0,"npr":2851},{"p":12.0,"npr":2916},{"p":13.0,"npr":2981},{"p":14.0,"npr":3036},{"p":15.0,"npr":3086},{"p":16.0,"npr":3136},{"p":17.0,"npr":3186},{"p":18.0,"npr":3236},{"p":19.0,"npr":3286},{"p":20.0,"npr":3337},{"p":21.0,"npr":3387},{"p":22.0,"npr":3438},{"p":23.0,"npr":3488},{"p":24.0,"npr":3540},{"p":25.0,"npr":3593},{"p":26.0,"npr":3647},{"p":27.0,"npr":3700},{"p":28.0,"npr":3753},{"p":29.0,"npr":3806},{"p":30.0,"npr":3864},{"p":31.0,"npr":3921},{"p":32.0,"npr":3979},{"p":33.0,"npr":4037},{"p":34.0,"npr":4094},{"p":35.0,"npr":4157},{"p":36.0,"npr":4221},{"p":37.0,"npr":4286},{"p":38.0,"npr":4350},{"p":39.0,"npr":4415},{"p":40.0,"npr":4484},{"p":41.0,"npr":4557},{"p":42.0,"npr":4630},{"p":43.0,"npr":4704},{"p":44.0,"npr":4777},{"p":45.0,"npr":4846},{"p":46.0,"npr":4911},{"p":47.0,"npr":4976},{"p":48.0,"npr":5041},{"p":49.0,"npr":5106},{"p":50.0,"npr":5170},{"p":51.0,"npr":5239},{"p":52.0,"npr":5313},{"p":53.0,"npr":5387},{"p":54.0,"npr":5461},{"p":55.0,"npr":5535},{"p":56.0,"npr":5609},{"p":57.0,"npr":5692},{"p":58.0,"npr":5778},{"p":59.0,"npr":5864},{"p":60.0,"npr":5950},{"p":61.0,"npr":6036},{"p":62.0,"npr":6125},{"p":63.0,"npr":6218},{"p":64.0,"npr":6311},{"p":65.0,"npr":6404},{"p":66.0,"npr":6497},{"p":67.0,"npr":6590},{"p":68.0,"npr":6701},{"p":69.0,"npr":6811},{"p":70.0,"npr":6922},{"p":71.0,"npr":7033},{"p":72.0,"npr":7147},{"p":73.0,"npr":7280},{"p":74.0,"npr":7413},{"p":75.0,"npr":7546},{"p":76.0,"npr":7679},{"p":77.0,"npr":7844},{"p":78.0,"npr":8016},{"p":79.0,"npr":8188},{"p":80.0,"npr":8366},{"p":81.0,"npr":8574},{"p":82.0,"npr":8782},{"p":83.0,"npr":8990},{"p":84.0,"npr":9282},{"p":85.0,"npr":9586},{"p":86.0,"npr":9901},{"p":87.0,"npr":10227},{"p":88.0,"npr":10554},{"p":89.0,"npr":10927},{"p":90.0,"npr":11300},{"p":91.0,"npr":11805},{"p":92.0,"npr":12367},{"p":93.0,"npr":12943},{"p":94.0,"npr":13603},{"p":95.0,"npr":14473},{"p":96.0,"npr":15507},{"p":97.0,"npr":17056},{"p":98.0,"npr":20132},{"p":99.0,"npr":24331},{"p":99.5,"npr":29749}]},"2022":{"survey":"LSS-IV","welfare":"consumption","gini":0.3002,"pop":29705025,"survey_year":null,"mean_npr":10810,"median_npr":9172,"pct":[{"p":0.5,"npr":2741},{"p":1.0,"npr":2929},{"p":2.0,"npr":3313},{"p":3.0,"npr":3588},{"p":4.0,"npr":3903},{"p":5.0,"npr":4088},{"p":6.0,"npr":4279},{"p":7.0,"npr":4442},{"p":8.0,"npr":4618},{"p":9.0,"npr":4791},{"p":10.0,"npr":4905},{"p":11.0,"npr":4991},{"p":12.0,"npr":5088},{"p":13.0,"npr":5193},{"p":14.0,"npr":5312},{"p":15.0,"npr":5431},{"p":16.0,"npr":5548},{"p":17.0,"npr":5662},{"p":18.0,"npr":5797},{"p":19.0,"npr":5922},{"p":20.0,"npr":6036},{"p":21.0,"npr":6171},{"p":22.0,"npr":6280},{"p":23.0,"npr":6366},{"p":24.0,"npr":6455},{"p":25.0,"npr":6551},{"p":26.0,"npr":6648},{"p":27.0,"npr":6753},{"p":28.0,"npr":6857},{"p":29.0,"npr":6961},{"p":30.0,"npr":7065},{"p":31.0,"npr":7164},{"p":32.0,"npr":7262},{"p":33.0,"npr":7360},{"p":34.0,"npr":7456},{"p":35.0,"npr":7557},{"p":36.0,"npr":7660},{"p":37.0,"npr":7765},{"p":38.0,"npr":7873},{"p":39.0,"npr":7981},{"p":40.0,"npr":8070},{"p":41.0,"npr":8159},{"p":42.0,"npr":8250},{"p":43.0,"npr":8361},{"p":44.0,"npr":8472},{"p":45.0,"npr":8595},{"p":46.0,"npr":8721},{"p":47.0,"npr":8838},{"p":48.0,"npr":8951},{"p":49.0,"npr":9064},{"p":50.0,"npr":9175},{"p":51.0,"npr":9286},{"p":52.0,"npr":9398},{"p":53.0,"npr":9510},{"p":54.0,"npr":9623},{"p":55.0,"npr":9734},{"p":56.0,"npr":9846},{"p":57.0,"npr":9966},{"p":58.0,"npr":10103},{"p":59.0,"npr":10238},{"p":60.0,"npr":10366},{"p":61.0,"npr":10493},{"p":62.0,"npr":10636},{"p":63.0,"npr":10789},{"p":64.0,"npr":10948},{"p":65.0,"npr":11113},{"p":66.0,"npr":11268},{"p":67.0,"npr":11402},{"p":68.0,"npr":11536},{"p":69.0,"npr":11696},{"p":70.0,"npr":11867},{"p":71.0,"npr":12040},{"p":72.0,"npr":12215},{"p":73.0,"npr":12414},{"p":74.0,"npr":12648},{"p":75.0,"npr":12913},{"p":76.0,"npr":13166},{"p":77.0,"npr":13368},{"p":78.0,"npr":13588},{"p":79.0,"npr":13857},{"p":80.0,"npr":14139},{"p":81.0,"npr":14444},{"p":82.0,"npr":14849},{"p":83.0,"npr":15192},{"p":84.0,"npr":15553},{"p":85.0,"npr":15932},{"p":86.0,"npr":16338},{"p":87.0,"npr":16852},{"p":88.0,"npr":17348},{"p":89.0,"npr":17910},{"p":90.0,"npr":18629},{"p":91.0,"npr":19324},{"p":92.0,"npr":19900},{"p":93.0,"npr":20542},{"p":94.0,"npr":21426},{"p":95.0,"npr":22742},{"p":96.0,"npr":24301},{"p":97.0,"npr":26713},{"p":98.0,"npr":29650},{"p":99.0,"npr":35300},{"p":99.5,"npr":45509}]}},"pop":29705025,"hh":3.999,"ladder":[{"nominal":19550,"real":17588,"per_person":4398,"label":"Minimum wage","src":"Nepal Gazette, Jul 2025","p":6.73,"below":1999148},{"nominal":17809,"real":23426,"per_person":5858,"label":"Mean employee earnings","src":"NLFS III, 2017/18","p":18.49,"below":5492459},{"nominal":30000,"real":30000,"per_person":7502,"label":"Rs 30,000 a month","src":null,"p":34.45,"below":10233381},{"nominal":56787,"real":51088,"per_person":12775,"label":"Joint secretary, basic","src":"Civil service, FY 2082/83","p":74.48,"below":22124303},{"nominal":77211,"real":69463,"per_person":17370,"label":"Chief secretary, basic","src":"Civil service, FY 2082/83","p":88.04,"below":26152304},{"nominal":100000,"real":100000,"per_person":25006,"label":"Rs 1 lakh a month","src":null,"p":96.29,"below":28602969},{"nominal":200000,"real":200000,"per_person":50013,"label":"Rs 2 lakh a month","src":null,"p":99.5,"below":29556500}],"density":{"1995":{"band":1000,"top":40000,"bars":[{"lo":0,"hi":1000,"mid":500.0,"share":0.03299,"people":742055},{"lo":1000,"hi":2000,"mid":1500.0,"share":0.295652,"people":6650285},{"lo":2000,"hi":3000,"mid":2500.0,"share":0.307475,"people":6916239},{"lo":3000,"hi":4000,"mid":3500.0,"share":0.156133,"people":3512009},{"lo":4000,"hi":5000,"mid":4500.0,"share":0.079071,"people":1778604},{"lo":5000,"hi":6000,"mid":5500.0,"share":0.041046,"people":923276},{"lo":6000,"hi":7000,"mid":6500.0,"share":0.030012,"people":675082},{"lo":7000,"hi":8000,"mid":7500.0,"share":0.017646,"people":396915},{"lo":8000,"hi":9000,"mid":8500.0,"share":0.009134,"people":205460},{"lo":9000,"hi":10000,"mid":9500.0,"share":0.006507,"people":146374},{"lo":10000,"hi":11000,"mid":10500.0,"share":0.005911,"people":132960},{"lo":11000,"hi":12000,"mid":11500.0,"share":0.00374,"people":84121},{"lo":12000,"hi":13000,"mid":12500.0,"share":0.001564,"people":35171},{"lo":13000,"hi":14000,"mid":13500.0,"share":0.001904,"people":42818},{"lo":14000,"hi":15000,"mid":14500.0,"share":0.002891,"people":65035},{"lo":15000,"hi":16000,"mid":15500.0,"share":0.001087,"people":24450},{"lo":16000,"hi":17000,"mid":16500.0,"share":0.000865,"people":19463},{"lo":17000,"hi":18000,"mid":17500.0,"share":0.000639,"people":14374},{"lo":18000,"hi":19000,"mid":18500.0,"share":0.000507,"people":11394},{"lo":19000,"hi":20000,"mid":19500.0,"share":0.000405,"people":9105},{"lo":20000,"hi":21000,"mid":20500.0,"share":0.000436,"people":9798},{"lo":21000,"hi":22000,"mid":21500.0,"share":0.000426,"people":9586},{"lo":22000,"hi":23000,"mid":22500.0,"share":0.000405,"people":9111},{"lo":23000,"hi":24000,"mid":23500.0,"share":0.000453,"people":10183},{"lo":24000,"hi":25000,"mid":24500.0,"share":0.000482,"people":10847},{"lo":25000,"hi":26000,"mid":25500.0,"share":0.000381,"people":8569},{"lo":26000,"hi":27000,"mid":26500.0,"share":0.000347,"people":7813},{"lo":27000,"hi":28000,"mid":27500.0,"share":0.000227,"people":5107},{"lo":28000,"hi":29000,"mid":28500.0,"share":0.000184,"people":4135},{"lo":29000,"hi":30000,"mid":29500.0,"share":0.000129,"people":2892},{"lo":30000,"hi":31000,"mid":30500.0,"share":8.5e-05,"people":1915},{"lo":31000,"hi":32000,"mid":31500.0,"share":8.4e-05,"people":1885},{"lo":32000,"hi":33000,"mid":32500.0,"share":7.9e-05,"people":1773},{"lo":33000,"hi":34000,"mid":33500.0,"share":7.9e-05,"people":1773},{"lo":34000,"hi":35000,"mid":34500.0,"share":7.5e-05,"people":1685},{"lo":35000,"hi":36000,"mid":35500.0,"share":7.3e-05,"people":1642},{"lo":36000,"hi":37000,"mid":36500.0,"share":7.3e-05,"people":1642},{"lo":37000,"hi":38000,"mid":37500.0,"share":3.5e-05,"people":792},{"lo":38000,"hi":39000,"mid":38500.0,"share":3.3e-05,"people":731},{"lo":39000,"hi":40000,"mid":39500.0,"share":3.3e-05,"people":731}],"above":0.000705,"above_people":15850},"2022":{"band":1000,"top":40000,"bars":[{"lo":0,"hi":1000,"mid":500.0,"share":3.4e-05,"people":1000},{"lo":1000,"hi":2000,"mid":1500.0,"share":0.000526,"people":15636},{"lo":2000,"hi":3000,"mid":2500.0,"share":0.011211,"people":333010},{"lo":3000,"hi":4000,"mid":3500.0,"share":0.033538,"people":996240},{"lo":4000,"hi":5000,"mid":4500.0,"share":0.065727,"people":1952419},{"lo":5000,"hi":6000,"mid":5500.0,"share":0.085817,"people":2549208},{"lo":6000,"hi":7000,"mid":6500.0,"share":0.096845,"people":2876769},{"lo":7000,"hi":8000,"mid":7500.0,"share":0.098373,"people":2922166},{"lo":8000,"hi":9000,"mid":8500.0,"share":0.09223,"people":2739703},{"lo":9000,"hi":10000,"mid":9500.0,"share":0.088161,"people":2618815},{"lo":10000,"hi":11000,"mid":10500.0,"share":0.070708,"people":2100368},{"lo":11000,"hi":12000,"mid":11500.0,"share":0.064516,"people":1916439},{"lo":12000,"hi":13000,"mid":12500.0,"share":0.045462,"people":1350452},{"lo":13000,"hi":14000,"mid":13500.0,"share":0.04202,"people":1248213},{"lo":14000,"hi":15000,"mid":14500.0,"share":0.029245,"people":868711},{"lo":15000,"hi":16000,"mid":15500.0,"share":0.027339,"people":812116},{"lo":16000,"hi":17000,"mid":16500.0,"share":0.021258,"people":631455},{"lo":17000,"hi":18000,"mid":17500.0,"share":0.018235,"people":541672},{"lo":18000,"hi":19000,"mid":18500.0,"share":0.01394,"people":414074},{"lo":19000,"hi":20000,"mid":19500.0,"share":0.01679,"people":498734},{"lo":20000,"hi":21000,"mid":20500.0,"share":0.013284,"people":394599},{"lo":21000,"hi":22000,"mid":21500.0,"share":0.009069,"people":269385},{"lo":22000,"hi":23000,"mid":22500.0,"share":0.007699,"people":228687},{"lo":23000,"hi":24000,"mid":23500.0,"share":0.006558,"people":194809},{"lo":24000,"hi":25000,"mid":24500.0,"share":0.004706,"people":139790},{"lo":25000,"hi":26000,"mid":25500.0,"share":0.003735,"people":110953},{"lo":26000,"hi":27000,"mid":26500.0,"share":0.00383,"people":113777},{"lo":27000,"hi":28000,"mid":27500.0,"share":0.003759,"people":111656},{"lo":28000,"hi":29000,"mid":28500.0,"share":0.003675,"people":109152},{"lo":29000,"hi":30000,"mid":29500.0,"share":0.00255,"people":75751},{"lo":30000,"hi":31000,"mid":30500.0,"share":0.002812,"people":83543},{"lo":31000,"hi":32000,"mid":31500.0,"share":0.001297,"people":38530},{"lo":32000,"hi":33000,"mid":32500.0,"share":0.001223,"people":36329},{"lo":33000,"hi":34000,"mid":33500.0,"share":0.001567,"people":46549},{"lo":34000,"hi":35000,"mid":34500.0,"share":0.001734,"people":51523},{"lo":35000,"hi":36000,"mid":35500.0,"share":0.000971,"people":28846},{"lo":36000,"hi":37000,"mid":36500.0,"share":0.000516,"people":15333},{"lo":37000,"hi":38000,"mid":37500.0,"share":0.000393,"people":11676},{"lo":38000,"hi":39000,"mid":38500.0,"share":0.000509,"people":15108},{"lo":39000,"hi":40000,"mid":39500.0,"share":0.000966,"people":28688}],"above":0.007175,"above_people":213139}},"nlss":{"poverty_line_year":72908,"food_line":35029,"nonfood_line":37879,"poverty_rate":20.27,"gini":0.3,"mean_pc_year":130853,"hh_size":3.999,"ktm_pc_year":263318,"madhesh_pc_year":71828},"min_wage":19550,"pov_month":6075.7,"pov_p":20.29,"ktm_p":94.39,"madhesh_p":19.56,"wage_share":21.4,"remit_gdp":26.0,"gni_pc":1570,"labour_force":8362760,"cpi":{"y2017":174.14,"y2022":229.06,"y2025":254.62}};</script>
+
+<div id="tip" role="status" aria-live="polite"></div>
+
+<header class="top">
+  <div class="wide">
+    <div class="kicker">Nepal &middot; NLSS 1995&ndash;2023 &middot; World Bank PIP</div>
+    <h1>Nine Thousand Rupees a Month</h1>
+    <p class="sub">That is the median Nepali&rsquo;s share of what their household
+    spends &mdash; the middle of a country of 29.7 million. This is what money looks
+    like across that whole population, percentile by percentile, and where an
+    actual salary lands on it.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wide">
+    <div class="stats" id="statRow"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The curve</div>
+    <h2>Everyone, lined up poorest to richest</h2>
+    <p>Line up all 29.7 million Nepalis by how much their household spends per
+    head, and read off the person standing at each percentile. The line below is
+    that reading. It is steep at both ends and flat through the middle, which is
+    the shape of a country where almost everyone is close to everyone else and a
+    thin tail is not.</p>
+    <p>The vertical scale is logarithmic, because the top of an income
+    distribution is always several times the bottom and a linear axis would
+    crush the bottom 90&nbsp;% into the floor.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <div class="fig-title">Consumption per person by population percentile,
+          four survey rounds</div>
+        <div class="fig-note">Rupees per person per month, all four rounds restated
+          at 2022&ndash;23 prices so the lines are comparable in real terms. Drag or
+          hover to read any percentile.</div>
+      </div>
+      <div class="ctl">
+        <span>Read as</span>
+        <button class="chip" id="unitPerson" aria-pressed="true">Per person</button>
+        <button class="chip" id="unitHouse" aria-pressed="false">Household of 4</button>
+        <span style="margin-left:auto">Rounds</span>
+        <button class="chip" id="showOld" aria-pressed="true">Show 1995&ndash;2010</button>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="fig-body">
+        <svg id="curve" viewBox="0 0 900 470" preserveAspectRatio="xMidYMid meet"
+             role="img" aria-label="Consumption per person by population percentile for four Nepali survey rounds"></svg>
+      </div>
+      <figcaption id="curveCap"></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <div class="note" id="povNote"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The shape</div>
+    <h2>The same survey, read the other way</h2>
+    <p>The curve above answers &ldquo;what does the person at rank <em>p</em>
+    have?&rdquo; Turn the question around &mdash; &ldquo;how many people are at
+    this many rupees?&rdquo; &mdash; and the same numbers make the shape below:
+    a steep climb, a crowded peak in the single-digit thousands, and a tail that
+    thins out long before it reaches anything anyone would call a good salary.</p>
+    <p>This is the picture that makes the country legible. Nepal is not a place
+    with rich people and poor people in two camps. It is a place where an enormous
+    number of people are within a few thousand rupees of each other.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <div class="fig-title">How many Nepalis are at each level</div>
+        <div class="fig-note">People per Rs 1,000 band of monthly consumption per
+          person, at 2022&ndash;23 prices. 1995/96 is drawn on the same axis to show
+          how far the whole country has moved.</div>
+      </div>
+      <div class="legend" id="densLegend"></div>
+      <div class="fig-body">
+        <svg id="dens" role="img"
+             aria-label="Distribution of Nepalis across monthly consumption bands, 1995/96 and 2022/23"></svg>
+      </div>
+      <figcaption id="densCap"></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The ladder</div>
+    <h2>Where a salary actually lands</h2>
+    <p>The curve above measures consumption per person. A salary is earned by one
+    person and feeds a household &mdash; four people, on the NLSS-IV&rsquo;s own
+    average. So to put a wage on the same axis, divide it by four and ask which
+    percentile that household member occupies. Every wage below has been restated
+    at 2022&ndash;23 prices first, so it is being compared against the curve at the
+    same price level.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <div class="fig-title">One earner&rsquo;s monthly pay, mapped onto the
+          population</div>
+        <div class="fig-note">Every wage is restated at 2022&ndash;23 prices, the same price level as the curve above, and assumed to be the household&rsquo;s only income. Hover a rung for the figure as originally set.</div>
+      </div>
+      <div class="fig-body">
+        <svg id="ladder" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet"
+             role="img" aria-label="Named Nepali salaries mapped onto population percentiles"></svg>
+      </div>
+      <figcaption id="ladderCap"></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <div class="note" id="minNote"></div>
+
+    <details>
+      <summary>Table view &mdash; every percentile, all four rounds</summary>
+      <div class="tablewrap"><table id="pctTable"></table></div>
+    </details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">What this is, and is not</div>
+    <h2>The word &ldquo;salary&rdquo; is doing a lot of work</h2>
+
+    <p>Nepal does not publish a salary distribution. No agency releases a table of
+    what the 10th, 50th or 90th-percentile <em>earner</em> takes home. What the
+    country does publish, and what this page is built from, is the distribution of
+    <strong>household consumption per person</strong> from the Nepal Living
+    Standards Survey. The two are related but they are not the same quantity, and
+    three gaps between them matter.</p>
+
+    <p><strong>Most working Nepalis have no salary at all.</strong> Wage and
+    salaried employees are <span id="wsRate" class="mono"></span>&nbsp;% of
+    employment. The rest are self-employed, in family farming, or in own-account
+    work. A salary distribution, even a perfect one, would describe a fifth of the
+    workers.</p>
+
+    <p><strong>A quarter of the money arrives from abroad.</strong> Remittances are
+    <span id="remitRate" class="mono"></span>&nbsp;% of GDP &mdash; one of the
+    highest shares in the world. That income is in the consumption curve, because
+    the household spends it. It is in no wage table anywhere, because it was not
+    earned in Nepal.</p>
+
+    <p><strong>Surveys miss the top.</strong> Household surveys everywhere
+    undercount the richest, who are hard to sample and understate their income.
+    The p99 here should be read as a floor, not a measurement, and there is no
+    reliable Nepali estimate of the top 1&nbsp;% at all.</p>
+
+    <p>What the curve is very good at is the other 99&nbsp;%. Its shape, its
+    middle, and its movement since 1995 are measured on 9,600 households with a
+    published methodology, and the reconstruction below reproduces the official
+    poverty rate to within a fortieth of a percentage point.</p>
+
+    <div class="note" id="checkNote"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="srcs" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All six datasets</a></p>
+    <p class="srcs" id="sources"></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+const D = window.NPL_DATA;
+const NS = "http://www.w3.org/2000/svg";
+const el = (n,a) => { const e=document.createElementNS(NS,n);
+  if(a) for(const k in a) e.setAttribute(k,a[k]); return e; };
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const fmt = n => Math.round(n).toLocaleString("en-US");
+const rs  = n => "Rs " + fmt(n);
+
+/* Nepali numbering: above a lakh people read lakh/crore, not millions. */
+function people(n){
+  if (n >= 1e7) return (n/1e7).toFixed(2).replace(/\.?0+$/,"") + " crore";
+  if (n >= 1e5) return (n/1e5).toFixed(1).replace(/\.0$/,"") + " lakh";
+  return fmt(n);
+}
+
+const YEARS = [
+  {k:"1995", label:"1995/96", survey:"NLSS-I",   v:"--y1995", w:1.6},
+  {k:"2003", label:"2003/04", survey:"NLSS-II",  v:"--y2003", w:1.6},
+  {k:"2010", label:"2010/11", survey:"NLSS-III", v:"--y2010", w:1.6},
+  {k:"2022", label:"2022/23", survey:"NLSS-IV",  v:"--y2022", w:3.0},
+];
+const CUR = YEARS[YEARS.length-1];
+
+/* ---------- tooltip ---------- */
+const tipEl = document.getElementById("tip");
+function showTip(x, y, html){
+  tipEl.innerHTML = html; tipEl.classList.add("on");
+  const r = tipEl.getBoundingClientRect();
+  let px = x + 16, py = y - 12;
+  if (px + r.width  > innerWidth  - 10) px = x - r.width - 16;
+  if (py + r.height > innerHeight - 10) py = innerHeight - r.height - 10;
+  if (py < 10) py = 10;
+  if (px < 10) px = 10;
+  tipEl.style.left = px+"px"; tipEl.style.top = py+"px";
+}
+const hideTip = () => tipEl.classList.remove("on");
+
+/* Size the SVG in real pixels rather than scaling a fixed viewBox: a 900-unit
+   viewBox squeezed onto a 360px phone would shrink 10px tick text to 4px. */
+function size(svg, ratio, min, max){
+  const W = Math.max(280, Math.round(svg.getBoundingClientRect().width));
+  const H = Math.round(Math.min(max, Math.max(min, W*ratio)));
+  svg.setAttribute("viewBox", "0 0 "+W+" "+H);
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+  return {W, H};
+}
+
+/* ---------- state ---------- */
+let perHousehold = false;      // read the same numbers per person, or times four
+let showOld = true;
+
+const HH = D.hh;
+const unit = v => perHousehold ? v*HH : v;
+
+/* ---------- headline figures ---------- */
+(function stats(){
+  const y = D.years["2022"];
+  const med = y.pct.find(q => q.p === 50).npr;
+  const rows = [
+    [rs(med),            "Median, per person, per month"],
+    [D.pov_p.toFixed(1)+" %", "Below the national poverty line"],
+    [D.wage_share+" %",  "Of workers hold a wage job"],
+    [y.gini.toFixed(2),  "Gini, consumption per person"],
+  ];
+  const host = document.getElementById("statRow");
+  rows.forEach(([b,s]) => {
+    const d = document.createElement("div"); d.className = "stat";
+    const B = document.createElement("b"); B.textContent = b;
+    const S = document.createElement("span"); S.textContent = s;
+    d.append(B,S); host.appendChild(d);
+  });
+})();
+
+/* ---------- legend ---------- */
+(function legend(){
+  const host = document.getElementById("legend");
+  function paint(){
+    host.textContent = "";
+    YEARS.forEach(y => {
+      if (!showOld && y.k !== CUR.k) return;
+      const s = document.createElement("span");
+      const i = document.createElement("i");
+      i.style.background = css(y.v);
+      if (y.k === CUR.k) i.style.height = "4px";
+      const t = document.createElement("span");
+      t.textContent = y.label + "  " + y.survey;
+      s.append(i, t); host.appendChild(s);
+    });
+  }
+  paint();
+  window.__legend = paint;
+})();
+
+/* ---------- figure 1: the percentile curve ---------- */
+const curve = (function(){
+  const svg = document.getElementById("curve");
+  let geom = null;
+
+  function visible(){
+    return YEARS.filter(y => showOld || y.k === CUR.k);
+  }
+
+  function draw(){
+    const {W,H} = size(svg, 0.52, 300, 470);
+    /* T leaves room for the unit caption, which sits horizontally above the axis:
+       rotated up the side it collides with the five-digit tick labels. */
+    /* Narrow: the right-end year labels do not fit beside the curves, so the
+       legend above carries identity instead and the margin goes back to the plot. */
+    const narrow = W < 560;
+    const L = narrow ? 50 : 62, R = narrow ? 16 : 74, T = 38, B = 46;
+    const iw = W-L-R, ih = H-T-B;
+    const vis = visible();
+
+    // domain across whatever is on screen, padded a little at both ends
+    let lo = Infinity, hi = -Infinity;
+    vis.forEach(y => D.years[y.k].pct.forEach(q => {
+      if (q.npr < lo) lo = q.npr; if (q.npr > hi) hi = q.npr;
+    }));
+    lo = Math.max(300, lo*0.85); hi = hi*1.15;
+    const l0 = Math.log10(lo), l1 = Math.log10(hi);
+    const X = p => L + p/100*iw;
+    const Y = v => T + ih - (Math.log10(v)-l0)/(l1-l0)*ih;
+    geom = {X, Y, L, R, T, B, W, H, iw, ih, lo, hi};
+
+    /* y gridlines on the 1-2-3-5 decade steps. Pick them in the unit on display,
+       then map back to position: scaling round per-person steps by 3.999 would
+       label the axis 199,950 and 119,970. */
+    const k = perHousehold ? HH : 1;
+    const ticks = [];
+    for (let d = 2; d <= 7; d++)
+      [1,2,3,5].forEach(m => { const dv = m*Math.pow(10,d);
+        if (dv >= lo*k && dv <= hi*k) ticks.push(dv); });
+    ticks.forEach(dv => {
+      const yy = Y(dv/k);
+      svg.appendChild(el("line",{class:"gl", x1:L, x2:W-R, y1:yy, y2:yy}));
+      const t = el("text",{class:"tk", x:L-9, y:yy+3.5, "text-anchor":"end"});
+      t.textContent = fmt(dv); svg.appendChild(t);
+    });
+
+    // x axis: percentiles, thinned on a narrow screen so the labels do not touch
+    const pstep = narrow ? 20 : 10;
+    for (let p = 0; p <= 100; p += pstep){
+      if (p>0 && p<100)
+        svg.appendChild(el("line",{class:"gl", x1:X(p), x2:X(p), y1:T, y2:T+ih}));
+      const t = el("text",{class:"tk", x:X(p), y:T+ih+18, "text-anchor":"middle"});
+      t.textContent = p; svg.appendChild(t);
+    }
+    svg.appendChild(el("line",{class:"ax", x1:L, x2:W-R, y1:T+ih, y2:T+ih}));
+
+    const xl = el("text",{class:"axlab", x:L+iw/2, y:T+ih+38, "text-anchor":"middle"});
+    xl.textContent = "Population percentile"; svg.appendChild(xl);
+    const yl = el("text",{class:"axlab", x:Math.max(4, L-52), y:T-18});
+    yl.textContent = perHousehold ? "Rs / household / month" : "Rs / person / month";
+    svg.appendChild(yl);
+
+    // the national poverty line, which is a fact about this axis
+    const pv = D.pov_month;
+    if (pv >= lo && pv <= hi){
+      svg.appendChild(el("line",{x1:L, x2:W-R, y1:Y(pv), y2:Y(pv),
+        stroke:css("--ink-2"), "stroke-width":1.4}));
+      const g = el("text",{class:"dlab", x:W-R-4, y:Y(pv)-13, "text-anchor":"end"});
+      g.textContent = narrow ? "Poverty line"
+        : "Poverty line \u2014 " + D.pov_p.toFixed(1) + "% of people below";
+      g.setAttribute("fill", css("--ink-2"));
+      svg.appendChild(g);
+    }
+
+    // the curves, oldest first so the newest sits on top
+    const ends = [];
+    vis.forEach(y => {
+      const pts = D.years[y.k].pct;
+      let d = "";
+      pts.forEach((q,i) => { d += (i?"L":"M") + X(q.p).toFixed(1) + " " + Y(q.npr).toFixed(1); });
+      svg.appendChild(el("path",{d, fill:"none", stroke:css(y.v),
+        "stroke-width":y.w, "stroke-linejoin":"round", "stroke-linecap":"round"}));
+      const last = pts[pts.length-1];
+      ends.push({y, ly:Y(last.npr), x:X(last.p)});
+    });
+
+    // direct labels at the right end, pushed apart so they never overlap
+    ends.sort((a,b) => a.ly - b.ly);
+    for (let i=1;i<ends.length;i++)
+      if (ends[i].ly - ends[i-1].ly < 13) ends[i].ly = ends[i-1].ly + 13;
+    ends.forEach(e => {
+      if (!narrow){
+        const t = el("text",{class:"dlab", x:e.x+8, y:e.ly+3.5});
+        t.setAttribute("fill", css(e.y.v));
+        t.textContent = e.y.label; svg.appendChild(t);
+      }
+      svg.appendChild(el("circle",{cx:e.x, cy:Y(D.years[e.y.k].pct.slice(-1)[0].npr),
+        r:e.y.k===CUR.k?3.4:2.6, fill:css(e.y.v),
+        stroke:css("--surface"), "stroke-width":2}));
+    });
+
+    // hover layer
+    const hair = el("line",{x1:0,x2:0,y1:T,y2:T+ih, stroke:css("--ink-3"),
+      "stroke-width":1, opacity:0});
+    svg.appendChild(hair);
+    const dots = el("g",{opacity:0}); svg.appendChild(dots);
+    const hit = el("rect",{x:L, y:T, width:iw, height:ih, fill:"transparent",
+      style:"cursor:crosshair"});
+    svg.appendChild(hit);
+
+    function at(clientX, clientY){
+      const r = svg.getBoundingClientRect();
+      const sx = (clientX - r.left) * (W / r.width);
+      let p = (sx - L)/iw*100;
+      p = Math.max(0.5, Math.min(99.5, p));
+      const pr = Math.round(p);
+      hair.setAttribute("x1", X(pr)); hair.setAttribute("x2", X(pr));
+      hair.setAttribute("opacity", 1);
+      while (dots.firstChild) dots.removeChild(dots.firstChild);
+      let rows = "";
+      vis.slice().reverse().forEach(y => {
+        const q = D.years[y.k].pct.find(o => o.p === pr);
+        if (!q) return;
+        dots.appendChild(el("circle",{cx:X(pr), cy:Y(q.npr), r:4, fill:css(y.v),
+          stroke:css("--surface"), "stroke-width":2}));
+        rows += '<div><span class="v">' + rs(unit(q.npr)) + "</span> &middot; " +
+                y.label + "</div>";
+      });
+      dots.setAttribute("opacity", 1);
+      const below = Math.round(pr/100 * D.pop);
+      showTip(clientX, clientY,
+        "<b>Percentile " + pr + "</b>" + rows +
+        '<div style="color:var(--ink-3);margin-top:4px">' +
+        people(below) + " people below, " + people(D.pop-below) + " above</div>");
+    }
+    hit.addEventListener("mousemove", e => at(e.clientX, e.clientY));
+    hit.addEventListener("mouseleave", () => {
+      hideTip(); hair.setAttribute("opacity",0); dots.setAttribute("opacity",0);
+    });
+    hit.addEventListener("touchstart", e => {
+      const t = e.touches[0]; at(t.clientX, t.clientY);
+    }, {passive:true});
+    hit.addEventListener("touchmove", e => {
+      const t = e.touches[0]; at(t.clientX, t.clientY);
+    }, {passive:true});
+  }
+
+  return {draw};
+})();
+
+/* ---------- figure 2: the distribution itself ---------- */
+const dens = (function(){
+  const svg = document.getElementById("dens");
+  const SER = [
+    {k:"1995", label:"1995/96", v:"--y1995", fill:false},
+    {k:"2022", label:"2022/23", v:"--y2022", fill:true},
+  ];
+
+  (function legend(){
+    const host = document.getElementById("densLegend");
+    SER.slice().reverse().forEach(s => {
+      const w = document.createElement("span");
+      const i = document.createElement("i");
+      i.style.background = css(s.v);
+      if (s.fill) i.style.height = "4px";
+      const t = document.createElement("span"); t.textContent = s.label;
+      w.append(i,t); host.appendChild(w);
+    });
+  })();
+
+  function draw(){
+    const {W,H} = size(svg, 0.46, 280, 400);
+    const L = 62, R = 22, T = 34, B = 48;
+    const iw = W-L-R, ih = H-T-B;
+    const top = D.density["2022"].top;
+
+    let ymax = 0;
+    SER.forEach(s => D.density[s.k].bars.forEach(b => { if (b.people > ymax) ymax = b.people; }));
+    // a step that lands on 1/2/5 and leaves roughly seven gridlines, not fifteen
+    const raw = ymax/7, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    const step = (raw/mag <= 1 ? 1 : raw/mag <= 2 ? 2 : raw/mag <= 5 ? 5 : 10)*mag;
+    ymax = Math.ceil(ymax/step)*step;
+
+    const X = v => L + Math.min(v, top)/top*iw;
+    const Y = n => T + ih - n/ymax*ih;
+
+    // y grid in lakh, which is how these counts are read in Nepal
+    for (let n = 0; n <= ymax; n += step){
+      svg.appendChild(el("line",{class:"gl", x1:L, x2:W-R, y1:Y(n), y2:Y(n)}));
+      const t = el("text",{class:"tk", x:L-9, y:Y(n)+3.5, "text-anchor":"end"});
+      t.textContent = (n/1e5).toFixed(0); svg.appendChild(t);
+    }
+    const vstep = W < 560 ? 10000 : 5000;
+    for (let v = 0; v <= top; v += vstep){
+      if (v>0) svg.appendChild(el("line",{class:"gl", x1:X(v), x2:X(v), y1:T, y2:T+ih}));
+      const t = el("text",{class:"tk", x:X(v), y:T+ih+18, "text-anchor":"middle"});
+      t.textContent = v ? (v/1000)+"k" : "0"; svg.appendChild(t);
+    }
+    svg.appendChild(el("line",{class:"ax", x1:L, x2:W-R, y1:T+ih, y2:T+ih}));
+
+    const yl = el("text",{class:"axlab", x:Math.max(4,L-52), y:T-16});
+    yl.textContent = "People, lakh"; svg.appendChild(yl);
+    const xl = el("text",{class:"axlab", x:L+iw/2, y:T+ih+40, "text-anchor":"middle"});
+    xl.textContent = "Rs per person per month"; svg.appendChild(xl);
+
+    SER.forEach(s => {
+      const bars = D.density[s.k].bars;
+      let d = "";
+      bars.forEach((b,i) => { d += (i?"L":"M") + X(b.mid).toFixed(1) + " " + Y(b.people).toFixed(1); });
+      if (s.fill){
+        const area = "M"+X(bars[0].mid).toFixed(1)+" "+(T+ih) + d.slice(1) +
+                     "L"+X(bars[bars.length-1].mid).toFixed(1)+" "+(T+ih)+"Z";
+        const p = el("path",{d:area, fill:css(s.v), stroke:"none"});
+        p.setAttribute("opacity", "0.20"); svg.appendChild(p);
+      }
+      svg.appendChild(el("path",{d, fill:"none", stroke:css(s.v),
+        "stroke-width":s.fill?2.4:1.6, "stroke-linejoin":"round"}));
+
+      // name each curve at its own peak, so identity never rests on hue alone
+      const pk = bars.reduce((a,b) => b.people > a.people ? b : a);
+      const t = el("text",{class:"dlab", x:X(pk.mid)+9, y:Y(pk.people)-9});
+      t.setAttribute("fill", css(s.v));
+      t.textContent = s.label; svg.appendChild(t);
+    });
+
+    /* The two facts worth marking. Their names run up the marker itself: laid
+       horizontally at the top they collide with whichever curve peaks nearby. */
+    const med = D.years["2022"].pct.find(q=>q.p===50).npr;
+    [[D.pov_month, "poverty line"], [med, "median"]].forEach(([v,label]) => {
+      svg.appendChild(el("line",{x1:X(v), x2:X(v), y1:T, y2:T+ih,
+        stroke:css("--ink-2"), "stroke-width":1}));
+      /* rotate(-90) turns the local +x axis upward, so "start" runs the label
+         up the marker from just above the axis rather than down through it. */
+      const t = el("text",{class:"dlab", x:0, y:0, "text-anchor":"start",
+        transform:"translate("+(X(v)-5)+","+(T+ih-8)+") rotate(-90)"});
+      t.setAttribute("fill", css("--ink-2")); t.textContent = label;
+      svg.appendChild(t);
+    });
+
+    // hover: nearest band
+    const mark = el("rect",{x:0, y:T, width:0, height:ih, fill:css("--ink-3"), opacity:0});
+    svg.appendChild(mark);
+    const hit = el("rect",{x:L, y:T, width:iw, height:ih, fill:"transparent",
+      style:"cursor:crosshair"});
+    svg.appendChild(hit);
+    const bw = iw/D.density["2022"].bars.length;
+    function at(cx, cy){
+      const r = svg.getBoundingClientRect();
+      const sx = (cx - r.left) * (W / r.width);
+      const v = Math.max(0, Math.min(top-1, (sx-L)/iw*top));
+      const b22 = D.density["2022"].bars.find(b => v >= b.lo && v < b.hi);
+      if (!b22) return;
+      const b95 = D.density["1995"].bars.find(b => b.lo === b22.lo);
+      mark.setAttribute("x", X(b22.lo)); mark.setAttribute("width", Math.max(1,bw));
+      mark.setAttribute("opacity", 0.13);
+      showTip(cx, cy,
+        "<b>Rs " + fmt(b22.lo) + " \u2013 " + fmt(b22.hi) + " a month</b>" +
+        '<div><span class="v">' + people(b22.people) + "</span> people &middot; 2022/23</div>" +
+        (b95 ? '<div><span class="v">' + people(b95.people) + "</span> people &middot; 1995/96</div>" : "") +
+        '<div style="color:var(--ink-3);margin-top:4px">' +
+        (b22.share*100).toFixed(1) + "% of the country in this band</div>");
+    }
+    hit.addEventListener("mousemove", e => at(e.clientX, e.clientY));
+    hit.addEventListener("mouseleave", () => { hideTip(); mark.setAttribute("opacity",0); });
+    hit.addEventListener("touchstart", e => { const t=e.touches[0]; at(t.clientX,t.clientY); }, {passive:true});
+    hit.addEventListener("touchmove",  e => { const t=e.touches[0]; at(t.clientX,t.clientY); }, {passive:true});
+  }
+  return {draw};
+})();
+
+/* ---------- figure 3: the salary ladder ---------- */
+const ladder = (function(){
+  const svg = document.getElementById("ladder");
+
+  function draw(){
+    const rungs = D.ladder;
+    const rowH = 34;
+    const W = Math.max(280, Math.round(svg.getBoundingClientRect().width));
+    const T = 30, B = 46;
+    const H = T + B + rungs.length*rowH;
+    svg.setAttribute("viewBox", "0 0 "+W+" "+H);
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+    const narrow = W < 560;
+    const L = narrow ? 14 : 190, R = 60;
+    const iw = W-L-R;
+    const X = p => L + p/100*iw;
+
+    [0,10,20,30,40,50,60,70,80,90,100].forEach(p => {
+      svg.appendChild(el("line",{class:"gl", x1:X(p), x2:X(p), y1:T-8, y2:H-B+6}));
+      const t = el("text",{class:"tk", x:X(p), y:H-B+22, "text-anchor":"middle"});
+      t.textContent = p; svg.appendChild(t);
+    });
+    svg.appendChild(el("line",{class:"ax", x1:L, x2:W-R, y1:H-B+6, y2:H-B+6}));
+    const xl = el("text",{class:"axlab", x:L+iw/2, y:H-B+40, "text-anchor":"middle"});
+    xl.textContent = narrow ? "Population percentile"
+      : "Population percentile the household lands in";
+    svg.appendChild(xl);
+
+    // the poverty line, the same fact as in figure 1
+    svg.appendChild(el("line",{x1:X(D.pov_p), x2:X(D.pov_p), y1:T-14, y2:H-B+6,
+      stroke:css("--ink-3"), "stroke-width":1, "stroke-dasharray":"none"}));
+    const pl = el("text",{class:"dlab", x:X(D.pov_p)+6, y:T-18});
+    pl.setAttribute("fill", css("--ink-3"));
+    pl.textContent = "poverty line"; svg.appendChild(pl);
+
+    rungs.forEach((r,i) => {
+      const y = T + i*rowH + rowH/2;
+      const g = el("g",{style:"cursor:default"});
+      g.appendChild(el("line",{x1:L, x2:X(r.p), y1:y, y2:y,
+        stroke:css("--rule-2"), "stroke-width":1}));
+      g.appendChild(el("circle",{cx:X(r.p), cy:y, r:5.5, fill:css(CUR.v),
+        stroke:css("--surface"), "stroke-width":2}));
+
+      if (narrow){
+        const t = el("text",{class:"dlab", x:L, y:y-9});
+        t.setAttribute("fill", css("--ink")); t.textContent = r.label;
+        g.appendChild(t);
+      } else {
+        const t = el("text",{class:"dlab", x:L-12, y:y+3.5, "text-anchor":"end"});
+        t.setAttribute("fill", css("--ink")); t.textContent = r.label;
+        g.appendChild(t);
+        // the figure places the dot by the deflated wage, so that is what we show
+        const s = el("text",{class:"tk", x:L-12, y:y+15, "text-anchor":"end"});
+        s.textContent = rs(r.real) + "/mo"; g.appendChild(s);
+      }
+
+      const v = el("text",{class:"dlab", x:X(r.p)+10, y:y+3.5});
+      v.setAttribute("fill", css("--ink-2"));
+      // nobody stands at the 100th percentile; keep the decimal where it matters
+      v.textContent = "p" + (r.p >= 99 ? r.p.toFixed(1) : r.p.toFixed(0));
+      g.appendChild(v);
+
+      const hit = el("rect",{x:L, y:y-rowH/2, width:iw, height:rowH,
+        fill:"transparent", style:"cursor:pointer"});
+      const tipHtml =
+        "<b>" + r.label + "</b>" +
+        '<div><span class="v">' + rs(r.nominal) + "</span> a month as set" +
+        (r.src ? ' <span style="color:var(--ink-3)">(' + r.src + ")</span>" : "") + "</div>" +
+        '<div><span class="v">' + rs(r.real) + "</span> at 2022\u201323 prices, which is " +
+        '<span class="v">' + rs(r.per_person) + "</span> a head in a household of 4</div>" +
+        '<div style="margin-top:4px">Percentile <span class="v">' + r.p.toFixed(1) +
+        '</span> &mdash; <span class="v">' + people(r.below) + "</span> people below</div>";
+      hit.addEventListener("mousemove", e => showTip(e.clientX, e.clientY, tipHtml));
+      hit.addEventListener("mouseleave", hideTip);
+      hit.addEventListener("touchstart", e => {
+        const t = e.touches[0]; showTip(t.clientX, t.clientY, tipHtml);
+      }, {passive:true});
+      g.appendChild(hit);
+      svg.appendChild(g);
+    });
+  }
+  return {draw};
+})();
+
+/* ---------- table view ---------- */
+(function table(){
+  const t = document.getElementById("pctTable");
+  const ps = [1,5,10,20,25,30,40,50,60,70,75,80,90,95,99];
+  const head = t.createTHead().insertRow();
+  ["Percentile","1995/96","2003/04","2010/11","2022/23"].forEach(h => {
+    const th = document.createElement("th"); th.textContent = h; head.appendChild(th);
+  });
+  const tb = t.createTBody();
+  ps.forEach(p => {
+    const r = tb.insertRow();
+    const c0 = r.insertCell(); c0.textContent = "p"+p;
+    YEARS.forEach(y => {
+      const q = D.years[y.k].pct.find(o => o.p === p);
+      r.insertCell().textContent = q ? rs(q.npr) : "\u2014";
+    });
+  });
+  const foot = t.createTFoot().insertRow();
+  const f0 = document.createElement("th"); f0.textContent = "Mean"; foot.appendChild(f0);
+  YEARS.forEach(y => {
+    const th = document.createElement("th");
+    th.textContent = rs(D.years[y.k].mean_npr); foot.appendChild(th);
+  });
+})();
+
+/* ---------- prose numbers ---------- */
+(function prose(){
+  document.getElementById("wsRate").textContent = D.wage_share;
+  document.getElementById("remitRate").textContent = D.remit_gdp;
+
+  const y22 = D.years["2022"], y95 = D.years["1995"];
+  const med22 = y22.pct.find(q=>q.p===50).npr, med95 = y95.pct.find(q=>q.p===50).npr;
+  document.getElementById("curveCap").innerHTML =
+    "Reconstructed from the World Bank&rsquo;s Poverty and Inequality Platform by " +
+    "sweeping 380 poverty lines across the four NLSS rounds and inverting the " +
+    "resulting cumulative curves. PPP dollars converted at " +
+    "Rs&nbsp;33.83 to the 2021 international dollar and restated at 2022&ndash;23 " +
+    "prices. Real median consumption per person rose from " + rs(med95) +
+    " a month in 1995/96 to " + rs(med22) + " in 2022/23.";
+
+  const mwR = D.ladder[0], lakh = D.ladder.find(r => r.nominal === 100000);
+  document.getElementById("ladderCap").innerHTML =
+    "Each rung is restated at 2022&ndash;23 prices before it is placed, so a wage " +
+    "set in 2025 is not flattered by five years of inflation: the " +
+    rs(D.min_wage) + " minimum wage is " + rs(mwR.real) + " in the " +
+    "survey&rsquo;s money. Rungs without a source are round numbers chosen for " +
+    "reference, not published figures. Rs 1 lakh a month &mdash; " +
+    lakh.p.toFixed(1) + "% of the country &mdash; stands above " + people(lakh.below) +
+    " people.";
+
+  const peak = D.density["2022"].bars.reduce((a,b) => b.people > a.people ? b : a);
+  document.getElementById("densCap").innerHTML =
+    "Built by interpolating the same cumulative curves onto even Rs 1,000 bands and " +
+    "differencing them. The fullest band is Rs " + fmt(peak.lo) + "\u2013" +
+    fmt(peak.hi) + ", holding " + people(peak.people) + " people. Only " +
+    people(D.density["2022"].above_people) + " are above Rs " +
+    fmt(D.density["2022"].top) + " a month, which is why the axis stops there.";
+
+  document.getElementById("povNote").innerHTML =
+    "Nepal&rsquo;s official poverty line is <strong>" + rs(D.nlss.poverty_line_year) +
+    " per person per year</strong> &mdash; " + rs(D.pov_month) + " a month. " +
+    "Reading it off this curve puts <strong>" + D.pov_p.toFixed(2) + "&nbsp;%</strong> " +
+    "of the population below it. The National Statistics Office, working from the " +
+    "household records themselves, published <strong>" + D.nlss.poverty_rate +
+    "&nbsp;%</strong>.";
+
+  const mw = D.ladder[0];
+  document.getElementById("minNote").innerHTML =
+    "The whole legal minimum wage &mdash; " + rs(D.min_wage) +
+    " a month, set by gazette in July 2025 &mdash; supports a household of four at " +
+    "about <strong>" + rs(mw.per_person) + " per person</strong>. That is the " +
+    "<strong>" + mw.p.toFixed(0) + "th percentile</strong>, well under the poverty " +
+    "line at the " + D.pov_p.toFixed(0) + "th. A single minimum wage is not a way " +
+    "out of poverty for a family; it is roughly two of them, or one wage and a " +
+    "remittance.";
+
+  document.getElementById("checkNote").innerHTML =
+    "<strong>Check.</strong> Mean consumption per person from this reconstruction is " +
+    rs(D.years["2022"].mean_npr * 12) + " a year; the NLSS-IV report publishes " +
+    rs(D.nlss.mean_pc_year) + ", a gap of 0.9&nbsp;%. The share below the poverty " +
+    "line comes out at " + D.pov_p.toFixed(2) + "&nbsp;% against a published " +
+    D.nlss.poverty_rate + "&nbsp;%.";
+
+  document.getElementById("sources").innerHTML =
+    "<strong>Sources.</strong> Distribution: " +
+    '<a href="https://pip.worldbank.org/">World Bank Poverty and Inequality Platform</a>' +
+    " (2021 PPP), NLSS rounds I&ndash;IV. Poverty line, household size, mean " +
+    "expenditure: " +
+    '<a href="https://nsonepal.gov.np/">National Statistics Office, Nepal</a>, ' +
+    "<em>Nepal Living Standards Survey IV 2022/23</em>. Mean employee earnings: " +
+    "CBS/ILO, <em>Nepal Labour Force Survey 2017/18</em>. Minimum wage: Nepal " +
+    "Gazette, 5 Shrawan 2082. Price index, remittances, wage-employment share: " +
+    '<a href="https://data.worldbank.org/">World Bank World Development Indicators</a>.' +
+    " Every figure on this page is computed from those archives by the scripts in " +
+    "this project; none is quoted from a secondary source.";
+})();
+
+/* ---------- controls ---------- */
+(function controls(){
+  const bP = document.getElementById("unitPerson");
+  const bH = document.getElementById("unitHouse");
+  const bO = document.getElementById("showOld");
+  function redraw(){ curve.draw(); dens.draw(); ladder.draw(); }
+  bP.addEventListener("click", () => {
+    perHousehold = false;
+    bP.setAttribute("aria-pressed","true"); bH.setAttribute("aria-pressed","false");
+    curve.draw();
+  });
+  bH.addEventListener("click", () => {
+    perHousehold = true;
+    bH.setAttribute("aria-pressed","true"); bP.setAttribute("aria-pressed","false");
+    curve.draw();
+  });
+  bO.addEventListener("click", () => {
+    showOld = !showOld;
+    bO.setAttribute("aria-pressed", showOld ? "true" : "false");
+    window.__legend(); curve.draw();
+  });
+  redraw();
+  let t;
+  addEventListener("resize", () => { clearTimeout(t); t = setTimeout(redraw, 180); });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+})();
+
+})();
+</script>
+</body>
+</html>

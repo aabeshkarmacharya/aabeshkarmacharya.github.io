@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Five Public Datasets, Taken Seriously">
+<meta name="description" content="Six Public Datasets, Taken Seriously">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%93%8A%3C%2Ftext%3E%3C%2Fsvg%3E">
-<title>Five Public Datasets, Taken Seriously</title>
+<title>Six Public Datasets, Taken Seriously</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&display=swap">
@@ -15,7 +15,7 @@
   color-scheme: light;
   --ground:#F2F1EF; --surface:#FCFCFB; --surface-2:#F7F6F4; --sunk:#E6E4E0;
   --ink:#16171A; --ink-2:#4F5257; --ink-3:#85888E; --rule:#DAD8D4; --rule-2:#C6C3BE;
-  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6; --keys:#8b5cf6;
+  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6; --keys:#8b5cf6; --income:#c2255c;
   --shadow:0 1px 2px rgba(22,23,26,.05),0 12px 32px -18px rgba(22,23,26,.22);
   --measure:64ch; --wide:1080px;
 }
@@ -24,7 +24,7 @@
     color-scheme: dark;
     --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
     --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa;
+    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980;
     --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
   }
 }
@@ -32,7 +32,7 @@
   color-scheme: dark;
   --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
   --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa;
+  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980;
   --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
 }
 *{box-sizing:border-box}
@@ -62,8 +62,8 @@ main{padding-block:clamp(36px,6vw,64px)}
    minimum even when the container is narrower, so cards overflow the viewport
    and the page scrolls sideways on a phone. */
 .grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
-/* Five cards in a two-up grid leaves an orphan; let the odd one out -- the only
-   one that is a tool rather than an essay -- take the full width. */
+/* Six cards fill a two-up grid exactly, so nothing needs to span. Kept for
+   the next odd count. */
 .card.span{grid-column:1/-1}
 .card{display:block; text-decoration:none; background:var(--surface);
   border:1px solid var(--rule); border-radius:2px; box-shadow:var(--shadow);
@@ -100,7 +100,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
 <header>
   <div class="wrap">
     <div class="eyebrow">Data essays &amp; tools &middot; September 2026</div>
-    <h1>Five public datasets, taken seriously</h1>
+    <h1>Six public datasets, taken seriously</h1>
     <p class="lede">Public archives, downloaded raw and analysed from scratch: every recorded
       earthquake, every known atomic nucleus, every sunspot count since 1749, everything humans
       have left in orbit &mdash; and ten million keystrokes of English, to settle what a keyboard
@@ -171,7 +171,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
         <span class="go">Read &rarr;</span>
       </a>
 
-      <a class="card span" style="--accent:var(--keys)" href="keyboards/">
+      <a class="card" style="--accent:var(--keys)" href="keyboards/">
         <span class="src">Project Gutenberg + Python stdlib &middot; 10.5M keystrokes</span>
         <h2>The Layout Under Your Hands</h2>
         <p class="sub">Seven keyboard layouts scored on real text, on a real staggered board.
@@ -182,6 +182,20 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
           <li><b>4.70 km</b><span>of fingertip travel per novel on QWERTY, versus 2.29 km</span></li>
         </ul>
         <span class="go">Open the tool &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--income)" href="income/">
+        <span class="src">World Bank PIP + NSO Nepal &middot; four survey rounds</span>
+        <h2>Nine Thousand Rupees a Month</h2>
+        <p class="sub">What money actually looks like across 29.7 million Nepalis,
+          percentile by percentile &mdash; and where a real salary, from the minimum
+          wage to a lakh a month, lands on that curve.</p>
+        <ul class="finds">
+          <li><b>Rs 9,175</b><span>a month per person is the median Nepali&rsquo;s share of household spending</span></li>
+          <li><b>7th</b><span>percentile is where the entire legal minimum wage puts a household of four</span></li>
+          <li><b>21.4%</b><span>of workers hold a wage job at all; a quarter of GDP arrives as remittances</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
       </a>
 
     </div>
