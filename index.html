@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Six Public Datasets, Taken Seriously">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%93%8A%3C%2Ftext%3E%3C%2Fsvg%3E">
-<title>Six Public Datasets, Taken Seriously</title>
+<title>Seven Public Datasets, Taken Seriously</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&display=swap">
@@ -15,7 +15,7 @@
   color-scheme: light;
   --ground:#F2F1EF; --surface:#FCFCFB; --surface-2:#F7F6F4; --sunk:#E6E4E0;
   --ink:#16171A; --ink-2:#4F5257; --ink-3:#85888E; --rule:#DAD8D4; --rule-2:#C6C3BE;
-  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6; --keys:#8b5cf6; --income:#c2255c;
+  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6; --keys:#8b5cf6; --income:#c2255c; --land:#0e9594;
   --shadow:0 1px 2px rgba(22,23,26,.05),0 12px 32px -18px rgba(22,23,26,.22);
   --measure:64ch; --wide:1080px;
 }
@@ -24,7 +24,7 @@
     color-scheme: dark;
     --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
     --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980;
+    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6;
     --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
   }
 }
@@ -32,7 +32,7 @@
   color-scheme: dark;
   --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
   --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980;
+  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6;
   --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
 }
 *{box-sizing:border-box}
@@ -62,8 +62,7 @@ main{padding-block:clamp(36px,6vw,64px)}
    minimum even when the container is narrower, so cards overflow the viewport
    and the page scrolls sideways on a phone. */
 .grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
-/* Six cards fill a two-up grid exactly, so nothing needs to span. Kept for
-   the next odd count. */
+/* Seven cards: six fill the two-up grid and the last one spans it. */
 .card.span{grid-column:1/-1}
 .card{display:block; text-decoration:none; background:var(--surface);
   border:1px solid var(--rule); border-radius:2px; box-shadow:var(--shadow);
@@ -100,7 +99,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
 <header>
   <div class="wrap">
     <div class="eyebrow">Data essays &amp; tools &middot; September 2026</div>
-    <h1>Six public datasets, taken seriously</h1>
+    <h1>Seven public datasets, taken seriously</h1>
     <p class="lede">Public archives, downloaded raw and analysed from scratch: every recorded
       earthquake, every known atomic nucleus, every sunspot count since 1749, everything humans
       have left in orbit &mdash; and ten million keystrokes of English, to settle what a keyboard
@@ -194,6 +193,21 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
           <li><b>Rs 9,175</b><span>a month per person is the median Nepali&rsquo;s share of household spending</span></li>
           <li><b>7th</b><span>percentile is where the entire legal minimum wage puts a household of four</span></li>
           <li><b>21.4%</b><span>of workers hold a wage job at all; a quarter of GDP arrives as remittances</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
+      <a class="card span" style="--accent:var(--land)" href="land/">
+        <span class="src">nepalhomes.com + OpenStreetMap &middot; 2,115 plots</span>
+        <h2>Four Million Rupees an Aana</h2>
+        <p class="sub">What the ground costs anywhere in the Kathmandu Valley,
+          modelled from every plot on the market &mdash; and which of a plot&rsquo;s
+          features you are actually paying for, from the width of the road to
+          the schools within a kilometre.</p>
+        <ul class="finds">
+          <li><b>Rs 4.3m</b><span>is the median asking price for one aana &mdash; 342 square feet &mdash; of valley land</span></li>
+          <li><b>8.3&times;</b><span>separates the dearest tole, Jhamsikhel, from the cheapest, Chapagaun</span></li>
+          <li><b>+31%</b><span>is what widening the access road from eight feet to twenty-six is worth</span></li>
         </ul>
         <span class="go">Read &rarr;</span>
       </a>
