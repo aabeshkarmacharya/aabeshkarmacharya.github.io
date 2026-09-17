@@ -16,13 +16,14 @@
   --ground:#EEEEF2; --surface:#FCFCFD; --surface-2:#F5F5F9; --sunk:#E3E3EA;
   --ink:#15151C; --ink-2:#4E4E5C; --ink-3:#84848F; --rule:#D6D6DE; --rule-2:#C2C2CD;
   --accent:#0e9594; --alt:#2a78d6;
-  /* Price surface: one hue, light to dark, because the quantity is magnitude.
-     OKLab lightness runs .936 -> .405 in even steps of about .08, so the ramp
-     stays monotone for a reader who sees no colour at all.  The palest step is
-     allowed to recede into the surface -- that is what "nearly nothing" should
-     look like on a choropleth -- and the legend carries the numbers. */
-  --p1:#d7f0ec; --p2:#a9ddd6; --p3:#77c7bd; --p4:#46aea3;
-  --p5:#229086; --p6:#0e7369; --p7:#06554e;
+  /* Price surface: one warm hue, light to dark, because the quantity is
+     magnitude.  Warm against the neutral grey basemap, so the data never
+     competes with the streets underneath it.  OKLab lightness runs .931 ->
+     .372 in even steps of about .078, monotone for a reader who sees no
+     colour at all; the palest step is allowed to recede, which is what
+     "nearly nothing" should look like, and the legend carries the numbers. */
+  --p1:#fde4c4; --p2:#f8c391; --p3:#f09f5e; --p4:#e17a37;
+  --p5:#c25a1c; --p6:#99400d; --p7:#6b2906;
   /* Effects that raise a price against effects that lower it: two poles and a
      neutral middle, never a hue at the midpoint. */
   --up:#0e7369; --down:#c2255c; --mid:#f0efec;
@@ -33,6 +34,10 @@
      the surface, which is exactly where they are densest. */
   --roadink:rgba(21,21,28,.34); --roadink-2:rgba(21,21,28,.15);
   --riverink:rgba(42,120,214,.40);
+  /* Road casing: a wide halo and a thin core of opposite tone.  Drawn over
+     the price surface, this is what keeps a road readable whatever colour it
+     happens to cross -- the trick every printed map uses. */
+  --roadcase:rgba(255,255,255,.80); --roadcore:rgba(24,24,30,.62);
   --measure:65ch; --wide:1120px;
 }
 @media (prefers-color-scheme: dark){
@@ -41,16 +46,17 @@
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
     --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
     --accent:#14b8a6; --alt:#3987e5;
-    /* Re-stepped against the dark surface, not flipped: cheap land is the step
+    /* Re-stepped against the dark basemap, not flipped: cheap land is the step
        nearest the background and expensive land is the brightest.  Lightness
-       climbs .324 -> .829, again in even steps. */
-    --p1:#0b3c38; --p2:#12544e; --p3:#1a6d65; --p4:#24887e;
-    --p5:#35a399; --p6:#59beb4; --p7:#8ad8cf;
+       climbs .294 -> .853, again in even steps. */
+    --p1:#4a1d05; --p2:#6b2906; --p3:#99400d; --p4:#c25a1c;
+    --p5:#e17a37; --p6:#f09f5e; --p7:#f8c391;
     --up:#59beb4; --down:#e64980; --mid:#383835;
     --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
     --grid:rgba(234,234,240,.08);
     --roadink:rgba(234,234,240,.38); --roadink-2:rgba(234,234,240,.16);
     --riverink:rgba(57,135,229,.46);
+    --roadcase:rgba(0,0,0,.62); --roadcore:rgba(240,240,246,.88);
   }
 }
 :root[data-theme="dark"]{
@@ -58,13 +64,14 @@
   --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
   --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
   --accent:#14b8a6; --alt:#3987e5;
-  --p1:#0b3c38; --p2:#12544e; --p3:#1a6d65; --p4:#24887e;
-  --p5:#35a399; --p6:#59beb4; --p7:#8ad8cf;
+  --p1:#4a1d05; --p2:#6b2906; --p3:#99400d; --p4:#c25a1c;
+  --p5:#e17a37; --p6:#f09f5e; --p7:#f8c391;
   --up:#59beb4; --down:#e64980; --mid:#383835;
   --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
   --grid:rgba(234,234,240,.08);
   --roadink:rgba(234,234,240,.38); --roadink-2:rgba(234,234,240,.16);
   --riverink:rgba(57,135,229,.46);
+  --roadcase:rgba(0,0,0,.62); --roadcore:rgba(240,240,246,.88);
 }
 *{box-sizing:border-box}
 body{
@@ -135,6 +142,12 @@ svg{display:block; width:100%; height:auto; overflow:visible}
 .chip[aria-pressed="true"]{border-color:var(--ink-2); background:var(--surface); color:var(--ink)}
 .chip:hover{border-color:var(--ink-3)}
 .swatch{width:11px; height:3px; border-radius:2px; flex:none}
+input[type=range]{-webkit-appearance:none; appearance:none; width:92px; height:3px;
+  background:var(--rule-2); border-radius:2px; outline-offset:6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:13px; height:13px;
+  border-radius:50%; background:var(--ink-2); cursor:pointer; border:2px solid var(--surface)}
+input[type=range]::-moz-range-thumb{width:13px; height:13px; border-radius:50%;
+  background:var(--ink-2); cursor:pointer; border:2px solid var(--surface)}
 
 .legend{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center;
   font-family:"DM Mono",monospace; font-size:11.5px; color:var(--ink-2);
@@ -156,7 +169,28 @@ svg{display:block; width:100%; height:auto; overflow:visible}
 /* The map is a canvas because it paints 6,868 cells; everything else on the
    page is SVG, which keeps its text crisp and its classes shared. */
 .mapwrap{position:relative}
-canvas{display:block; width:100%; height:auto; touch-action:pan-y}
+/* pan-y, not none: this map lives inside a long essay, and a finger that
+   lands on it must still scroll the page.  Horizontal drags pan the map
+   and the +/- buttons carry zoom on touch. */
+canvas{display:block; width:100%; height:auto; touch-action:pan-y; cursor:grab}
+canvas.dragging{cursor:grabbing}
+
+/* Zoom chrome sits on the map, not in the control bar: it belongs to the
+   thing it manipulates. */
+.zoomer{position:absolute; right:14px; top:14px; display:flex; flex-direction:column;
+  gap:1px; background:var(--rule); border:1px solid var(--rule-2); border-radius:3px;
+  overflow:hidden; box-shadow:var(--shadow)}
+.zoomer button{width:32px; height:32px; border:0; background:var(--surface);
+  color:var(--ink-2); font:500 17px/1 "DM Mono",monospace; cursor:pointer; padding:0;
+  display:flex; align-items:center; justify-content:center}
+.zoomer button:hover{background:var(--surface-2); color:var(--ink)}
+.zoomer button:last-child{font-size:10px; letter-spacing:.06em}
+.attrib{position:absolute; right:0; bottom:0; background:var(--surface);
+  border-top-left-radius:3px; border-top:1px solid var(--rule);
+  border-left:1px solid var(--rule); padding:3px 8px;
+  font-family:"DM Mono",monospace; font-size:9.5px; color:var(--ink-3);
+  letter-spacing:.02em}
+.attrib a{text-decoration-color:var(--rule-2)}
 .readout{position:absolute; left:14px; top:14px; pointer-events:none;
   background:var(--surface); border:1px solid var(--rule-2); border-radius:3px;
   box-shadow:var(--shadow); padding:9px 12px; font-size:13px; line-height:1.45;
@@ -277,20 +311,31 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
           <button class="chip" data-road="26" aria-pressed="false">26 ft</button>
         </label>
         <button class="chip" id="bPoints" aria-pressed="false">Show the 313 localities</button>
+        <label>Surface <input type="range" id="opacity" min="20" max="90" value="60"
+          aria-label="Opacity of the price surface"><span class="mono" id="opval">60%</span></label>
       </div>
       <div class="mapwrap">
         <canvas id="map" width="1120" height="760"
           role="img" aria-label="Modelled land price across the Kathmandu Valley"></canvas>
         <div class="readout" id="mapreadout" aria-live="polite"></div>
+        <div class="zoomer">
+          <button id="zin" type="button" aria-label="Zoom in">+</button>
+          <button id="zout" type="button" aria-label="Zoom out">&minus;</button>
+          <button id="zreset" type="button" aria-label="Reset the view">RST</button>
+        </div>
+        <div class="attrib">Basemap <a href="https://www.esri.com/">Esri</a>, HERE, Garmin,
+          &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</div>
       </div>
       <div class="ramp">
         <div class="ramp-bar"></div>
         <div class="ramp-ticks" id="rampticks"></div>
       </div>
-      <figcaption>Ring Road and the major highways in grey, the Bagmati and its
-        tributaries in blue. Move the pointer over the valley to read a price;
-        the road-width control redraws the whole surface, which is the clearest
-        way to see how much a wider approach is worth.</figcaption>
+      <figcaption>Drag to pan, scroll or use the buttons to zoom &mdash; the
+        streets, rivers and place names underneath are the real map, and the
+        price surface is laid over them so you can see which roads and which
+        toles the colour belongs to. Move the pointer over the valley to read a
+        price; the road-width control redraws the whole surface, which is the
+        clearest way to see how much a wider approach is worth.</figcaption>
     </figure>
   </div>
 </section>
@@ -522,33 +567,104 @@ const map = (function(){
   const lons = [...new Set(G.lon)].sort((a,b)=>a-b);
   const NLAT = lats.length, NLON = lons.length;
 
+  /* MAXZ stops at 14 on purpose.  The surface is a 440 m lattice fitted
+     from locality centroids, so at street zoom it would be inventing
+     detail it does not have; 14 is about where one cell is still a block
+     rather than a house. */
+  const TILE = 256, MINZ = 10.6, MAXZ = 14;
+  let alpha = 0.60;
   let roadW = 13, showPts = false;
+  let cssW = 1120, cssH = 760;
+  let view = {lat:(S+N)/2, lon:(W+E)/2, zoom:11.5};
+  /* If the tile CDN is unreachable the page must still be a map, so the
+     vector roads from OpenStreetMap stay in the payload and get drawn
+     instead. */
+  let tilesOk = true, tileFails = 0;
 
-  /* The colour domain is fixed at the 13 ft reference and never rescaled, so
-     that widening the road visibly moves the whole valley up the ramp instead
-     of repainting it to look identical. */
-  const base = G.npr_per_aana.filter(v => v != null).sort((a,b)=>a-b);
-  const q = p => base[Math.floor(p*(base.length-1))];
-  const LO = Math.log(q(0.02)), HI = Math.log(q(0.98));
-
-  /* Degrees are not square this far north: one degree of longitude is
-     cos(27.7) as wide as one of latitude, so the box is fitted, not stretched. */
-  const KMLON = 111.320*Math.cos(27.7*Math.PI/180), KMLAT = 110.574;
-  const wKm = (E-W)*KMLON, hKm = (N-S)*KMLAT;
-  let box = {x:0, y:0, w:0, h:0};
-  function layout(cssW, cssH){
-    const s = Math.min(cssW/wKm, cssH/hKm);
-    box.w = wKm*s; box.h = hKm*s;
-    box.x = (cssW-box.w)/2; box.y = (cssH-box.h)/2;
+  /* ---- Web Mercator, in world pixels at a given zoom ---- */
+  const worldSize = z => TILE * Math.pow(2, z);
+  const mx = (lon,z) => (lon+180)/360 * worldSize(z);
+  function my(lat,z){
+    const s = Math.sin(lat*Math.PI/180);
+    return (0.5 - Math.log((1+s)/(1-s))/(4*Math.PI)) * worldSize(z);
   }
-  const px = lon => box.x + (lon-W)/(E-W)*box.w;
-  const py = lat => box.y + (N-lat)/(N-S)*box.h;
+  const lonAt = (x,z) => x/worldSize(z)*360 - 180;
+  function latAt(y,z){
+    const n = Math.PI - 2*Math.PI*y/worldSize(z);
+    return 180/Math.PI * Math.atan(0.5*(Math.exp(n)-Math.exp(-n)));
+  }
+  const sx = lon => mx(lon,view.zoom) - mx(view.lon,view.zoom) + cssW/2;
+  const sy = lat => my(lat,view.zoom) - my(view.lat,view.zoom) + cssH/2;
+  const unlon = x => lonAt(mx(view.lon,view.zoom) + x - cssW/2, view.zoom);
+  const unlat = y => latAt(my(view.lat,view.zoom) + y - cssH/2, view.zoom);
 
+  function fit(){
+    const merc = lat => { const s = Math.sin(lat*Math.PI/180);
+      return 0.5 - Math.log((1+s)/(1-s))/(4*Math.PI); };
+    const zx = Math.log2(cssW/(TILE*(E-W)/360));
+    const zy = Math.log2(cssH/(TILE*Math.abs(merc(S)-merc(N))));
+    view = {lat:(S+N)/2, lon:(W+E)/2,
+            zoom: Math.max(MINZ, Math.min(MAXZ, Math.min(zx,zy) - 0.04))};
+  }
+  function clamp(){
+    const pad = 0.05;
+    view.lat = Math.max(S-pad, Math.min(N+pad, view.lat));
+    view.lon = Math.max(W-pad, Math.min(E+pad, view.lon));
+  }
+
+  /* ---- raster basemap: XYZ tiles are just images, so no map library ---- */
+  const cache = new Map();
+  const isDark = () => {
+    const t = document.documentElement.getAttribute("data-theme");
+    return t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  };
+  /* Esri's Grey Canvas services, which exist precisely to sit under a data
+     overlay: no API key, no watermark, and a light and a dark variant that
+     match the page's two themes.  CARTO's basemaps were the obvious first
+     choice and still answer 200, but they now stamp every tile
+     "API KEY REQUIRED", which you only discover by looking at one.
+     Note the path order: Esri serves /tile/{z}/{row}/{col}, so y precedes x. */
+  const ESRI = "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/";
+  function tile(layer, z, x, y){
+    const k = layer+"/"+z+"/"+x+"/"+y;
+    let img = cache.get(k);
+    if (img) return img;
+    img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = schedule;
+    img.onerror = () => { img.failed = true;
+      if (++tileFails > 8) tilesOk = false;
+      schedule(); };
+    img.src = ESRI + layer + "/MapServer/tile/" + z + "/" + y + "/" + x;
+    cache.set(k, img);
+    return img;
+  }
+  function drawTiles(layer){
+    const Z = Math.max(0, Math.min(18, Math.round(view.zoom)));
+    const scale = Math.pow(2, view.zoom - Z), size = TILE*scale, n = Math.pow(2, Z);
+    const ox = mx(view.lon,Z)*scale - cssW/2, oy = my(view.lat,Z)*scale - cssH/2;
+    for (let x = Math.floor(ox/size); x <= Math.floor((ox+cssW)/size); x++){
+      for (let y = Math.floor(oy/size); y <= Math.floor((oy+cssH)/size); y++){
+        if (y < 0 || y >= n) continue;
+        const img = tile(layer, Z, ((x%n)+n)%n, y);
+        if (img.complete && !img.failed && img.naturalWidth){
+          ctx.drawImage(img, Math.round(x*size-ox), Math.round(y*size-oy),
+                        Math.ceil(size), Math.ceil(size));
+        }
+      }
+    }
+  }
+
+  /* ---- the price surface ---- */
+  const baseVals = G.npr_per_aana.filter(v => v != null).sort((a,b)=>a-b);
+  const q = t => baseVals[Math.floor(t*(baseVals.length-1))];
+  const LO = Math.log(q(0.02)), HI = Math.log(q(0.98));
   const off = document.createElement("canvas");
   off.width = NLON; off.height = NLAT;
   const octx = off.getContext("2d");
 
-  function paintGrid(stops){
+  function paintGrid(){
+    const stops = RAMP_VARS.map(v => hex2rgb(css(v)));
     const img = octx.createImageData(NLON, NLAT);
     const mult = D.road_scale[String(roadW)] || 1;
     for (let i = 0; i < G.npr_per_aana.length; i++){
@@ -558,7 +674,7 @@ const map = (function(){
       const o = ((NLAT-1-ilat)*NLON + ilon)*4;
       if (v == null){ img.data[o+3] = 0; continue; }
       const c = rampColor(stops, (Math.log(v*mult)-LO)/(HI-LO));
-      img.data[o] = c[0]; img.data[o+1] = c[1]; img.data[o+2] = c[2]; img.data[o+3] = 255;
+      img.data[o]=c[0]; img.data[o+1]=c[1]; img.data[o+2]=c[2]; img.data[o+3]=255;
     }
     octx.putImageData(img, 0, 0);
   }
@@ -569,35 +685,63 @@ const map = (function(){
     ctx.beginPath();
     for (const w of ways){
       for (let i = 0; i < w.length; i++){
-        const x = px(w[i][1]), y = py(w[i][0]);
+        const x = sx(w[i][1]), y = sy(w[i][0]);
         if (i === 0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
       }
     }
     ctx.stroke();
   }
 
-  function draw(){
-    const cssW = cv.clientWidth || 1120, cssH = Math.round(cssW*760/1120);
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    cv.width = Math.round(cssW*dpr); cv.height = Math.round(cssH*dpr);
-    cv.style.height = cssH + "px";
+  let pending = false;
+  function schedule(){
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => { pending = false; render(); });
+  }
+
+  function render(){
+    const dpr = Math.min(devicePixelRatio||1, 2);
+    if (cv.width !== Math.round(cssW*dpr)){
+      cv.width = Math.round(cssW*dpr); cv.height = Math.round(cssH*dpr);
+      cv.style.height = cssH + "px";
+    }
     ctx.setTransform(dpr,0,0,dpr,0,0);
-    ctx.clearRect(0,0,cssW,cssH);
-    layout(cssW, cssH);
+    ctx.fillStyle = css("--surface-2");
+    ctx.fillRect(0,0,cssW,cssH);
 
-    paintGrid(RAMP_VARS.map(v => hex2rgb(css(v))));
+    const dark = isDark();
+    if (tilesOk) drawTiles(dark ? "World_Dark_Gray_Base" : "World_Light_Gray_Base");
+
+    paintGrid();
     ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
-    ctx.drawImage(off, box.x, box.y, box.w, box.h);
+    ctx.globalAlpha = alpha;
+    /* The lattice is in degrees and the screen is in Mercator, but over 30 km
+       of latitude the difference is under a pixel, so the corners suffice. */
+    const x0 = sx(W), y0 = sy(N), x1 = sx(E), y1 = sy(S);
+    ctx.drawImage(off, x0, y0, x1-x0, y1-y0);
+    ctx.globalAlpha = 1;
 
-    strokeWays(C.river, css("--riverink"), 1.1);
-    strokeWays(C.major, css("--roadink-2"), 0.8);
-    strokeWays(C.ring,  css("--roadink"), 2);
+    /* Roads go OVER the surface, cased, so they stay readable wherever the
+       colour happens to be darkest.  The basemap underneath still carries the
+       minor streets and the terrain; these are the ones you navigate by. */
+    strokeWays(C.river, css("--riverink"), 2.4);
+    const caseInk = css("--roadcase"), coreInk = css("--roadcore");
+    strokeWays(C.major, caseInk, 3.0); strokeWays(C.major, coreInk, 1.2);
+    strokeWays(C.ring,  caseInk, 4.6); strokeWays(C.ring,  coreInk, 2.2);
+
+    if (tilesOk){
+      /* Place names ride on top of everything: that is the whole point of
+         asking the basemap for streets and names as two separate layers. */
+      drawTiles(dark ? "World_Dark_Gray_Reference" : "World_Light_Gray_Reference");
+    }
 
     if (showPts){
       const ink = css("--ink"), surf = css("--surface");
       for (const L of D.localities){
+        const x = sx(L.lon), y = sy(L.lat);
+        if (x < -20 || x > cssW+20 || y < -20 || y > cssH+20) continue;
         const r = Math.min(9, 2.2 + Math.sqrt(L.n)*0.9);
-        ctx.beginPath(); ctx.arc(px(L.lon), py(L.lat), r, 0, 6.2832);
+        ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832);
         ctx.fillStyle = ink; ctx.globalAlpha = 0.55; ctx.fill();
         ctx.globalAlpha = 1; ctx.lineWidth = 2; ctx.strokeStyle = surf; ctx.stroke();
       }
@@ -605,24 +749,31 @@ const map = (function(){
     ticks();
   }
 
+  function draw(){
+    const w = cv.clientWidth || 1120;
+    const refit = Math.abs(w - cssW) > 1;
+    cssW = w; cssH = Math.round(w*760/1120);
+    if (refit) fit();
+    render();
+  }
+
   function ticks(){
     const mult = D.road_scale[String(roadW)] || 1;
-    const box2 = el("rampticks"); box2.innerHTML = "";
+    const bar = el("rampticks"); bar.innerHTML = "";
     for (let i = 0; i <= 4; i++){
       const v = Math.exp(LO + (HI-LO)*i/4)*mult;
-      box2.appendChild(Object.assign(document.createElement("span"), {textContent: rs(v)}));
+      bar.appendChild(Object.assign(document.createElement("span"), {textContent: rs(v)}));
     }
   }
 
+  /* ---- readout ---- */
   function at(clientX, clientY){
     const r = cv.getBoundingClientRect();
-    const x = clientX-r.left, y = clientY-r.top;
-    if (x < box.x || x > box.x+box.w || y < box.y || y > box.y+box.h){
+    const lon = unlon(clientX-r.left), lat = unlat(clientY-r.top);
+    const ilon = Math.round((lon-lons[0])/G.step), ilat = Math.round((lat-lats[0])/G.step);
+    if (ilon < 0 || ilon >= NLON || ilat < 0 || ilat >= NLAT){
       ro.classList.remove("on"); return;
     }
-    const lon = W + (x-box.x)/box.w*(E-W), lat = N - (y-box.y)/box.h*(N-S);
-    const ilon = Math.round((lon-lons[0])/G.step), ilat = Math.round((lat-lats[0])/G.step);
-    if (ilon < 0 || ilon >= NLON || ilat < 0 || ilat >= NLAT){ ro.classList.remove("on"); return; }
     const v = G.npr_per_aana[ilat*NLON + ilon];
     if (v == null){
       ro.classList.add("on");
@@ -630,8 +781,7 @@ const map = (function(){
       return;
     }
     const mult = D.road_scale[String(roadW)] || 1;
-    /* Name the nearest tole, but only if it is close enough to be the place
-       the reader thinks they are pointing at. */
+    const KMLON = 111.320*Math.cos(27.7*Math.PI/180), KMLAT = 110.574;
     let best = null, bd = 1e9;
     for (const L of D.localities){
       const dx = (L.lon-lon)*KMLON, dy = (L.lat-lat)*KMLAT, d = dx*dx+dy*dy;
@@ -648,15 +798,73 @@ const map = (function(){
     ro.classList.add("on"); ro.innerHTML = html;
   }
 
-  cv.addEventListener("mousemove", e => at(e.clientX, e.clientY));
-  cv.addEventListener("mouseleave", () => ro.classList.remove("on"));
-  cv.addEventListener("touchstart", e => { const t=e.touches[0]; at(t.clientX,t.clientY); }, {passive:true});
-  cv.addEventListener("touchmove",  e => { const t=e.touches[0]; at(t.clientX,t.clientY); }, {passive:true});
+  /* ---- pan and zoom ---- */
+  function zoomBy(dz, cx, cy){
+    const lon0 = unlon(cx), lat0 = unlat(cy);
+    const z = Math.max(MINZ, Math.min(MAXZ, view.zoom + dz));
+    if (z === view.zoom) return;
+    view.zoom = z;
+    /* Put the point that was under the cursor back under the cursor. */
+    view.lon = lonAt(mx(view.lon,z) + (sx(lon0)-cx), z);
+    view.lat = latAt(my(view.lat,z) + (sy(lat0)-cy), z);
+    clamp(); schedule();
+  }
+
+  const active = new Map();
+  let lastPinch = 0;
+
+  cv.addEventListener("pointerdown", e => {
+    cv.setPointerCapture(e.pointerId);
+    active.set(e.pointerId, {x:e.clientX, y:e.clientY});
+    cv.classList.add("dragging");
+  });
+  cv.addEventListener("pointermove", e => {
+    const p = active.get(e.pointerId);
+    if (!p){ at(e.clientX, e.clientY); return; }
+    const px = p.x, py = p.y;
+    p.x = e.clientX; p.y = e.clientY;
+    if (active.size === 1){
+      view.lon = lonAt(mx(view.lon,view.zoom) - (e.clientX-px), view.zoom);
+      view.lat = latAt(my(view.lat,view.zoom) - (e.clientY-py), view.zoom);
+      clamp(); schedule();
+    } else if (active.size === 2){
+      const two = [...active.values()];
+      const d = Math.hypot(two[0].x-two[1].x, two[0].y-two[1].y);
+      if (lastPinch){
+        const r = cv.getBoundingClientRect();
+        zoomBy(Math.log2(d/lastPinch),
+               (two[0].x+two[1].x)/2-r.left, (two[0].y+two[1].y)/2-r.top);
+      }
+      lastPinch = d;
+    }
+  });
+  function release(e){
+    active.delete(e.pointerId);
+    if (active.size < 2) lastPinch = 0;
+    if (!active.size) cv.classList.remove("dragging");
+  }
+  cv.addEventListener("pointerup", release);
+  cv.addEventListener("pointercancel", release);
+  cv.addEventListener("pointerleave", () => { if (!active.size) ro.classList.remove("on"); });
+  cv.addEventListener("wheel", e => {
+    e.preventDefault();
+    const r = cv.getBoundingClientRect();
+    zoomBy(-e.deltaY*0.0022, e.clientX-r.left, e.clientY-r.top);
+  }, {passive:false});
+  cv.addEventListener("dblclick", e => {
+    const r = cv.getBoundingClientRect();
+    zoomBy(1, e.clientX-r.left, e.clientY-r.top);
+  });
+
+  el("zin").addEventListener("click", () => zoomBy(0.8, cssW/2, cssH/2));
+  el("zout").addEventListener("click", () => zoomBy(-0.8, cssW/2, cssH/2));
+  el("zreset").addEventListener("click", () => { fit(); schedule(); });
 
   return {
     draw,
-    setRoad(w){ roadW = w; draw(); },
-    togglePoints(){ showPts = !showPts; draw(); return showPts; }
+    setRoad(w){ roadW = w; schedule(); },
+    setAlpha(a){ alpha = a; schedule(); },
+    togglePoints(){ showPts = !showPts; schedule(); return showPts; }
   };
 })();
 
@@ -870,6 +1078,12 @@ for (const b of roadBtns){
     map.setRoad(Number(b.dataset.road));
   });
 }
+const slider = el("opacity"), opval = el("opval");
+slider.addEventListener("input", () => {
+  opval.textContent = slider.value + "%";
+  map.setAlpha(Number(slider.value)/100);
+});
+
 el("bPoints").addEventListener("click", e => {
   e.currentTarget.setAttribute("aria-pressed", String(map.togglePoints()));
 });
