@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Ten Public Datasets, Taken Seriously">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%93%8A%3C%2Ftext%3E%3C%2Fsvg%3E">
-<title>Ten Public Datasets, Taken Seriously</title>
+<title>Aabesh Karmacharya &mdash; Backend &amp; Data Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&display=swap">
@@ -32,7 +32,7 @@
   color-scheme: dark;
   --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
   --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6; --worlds:#9085e9;
+  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6; --worlds:#9085e9; --himalaya:#2b9fb3; --tides:#6fb2f0;
   --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
 }
 *{box-sizing:border-box}
@@ -71,7 +71,7 @@ main{padding-block:clamp(36px,6vw,64px)}
 .card:hover{transform:translateY(-2px); border-color:var(--rule-2);
   box-shadow:0 2px 4px rgba(0,0,0,.06),0 18px 40px -20px rgba(0,0,0,.35)}
 .card:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
-.card h2{margin:0 0 .35em; font-size:26px; line-height:1.12; font-weight:700;
+.card h3{margin:0 0 .35em; font-size:26px; line-height:1.12; font-weight:700;
   letter-spacing:-.02em}
 .card .sub{color:var(--ink-2); font-size:16.5px; line-height:1.48; margin:0 0 18px}
 .src{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.13em;
@@ -92,32 +92,82 @@ main{padding-block:clamp(36px,6vw,64px)}
 .method ul{color:var(--ink-2); font-size:16.5px; max-width:62ch; padding-left:1.1em; margin:0}
 .method li{margin-bottom:.5em}
 footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
+.links{display:flex; flex-wrap:wrap; gap:10px 20px; margin:28px 0 0;
+  font-family:"IBM Plex Mono",monospace; font-size:13.5px}
+.links a{color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--rule-2);
+  padding-bottom:2px; transition:color .15s, border-color .15s}
+.links a:hover{color:var(--ink); border-bottom-color:var(--ink-3)}
+.links .sep{color:var(--ink-3)}
+
+.sec{margin-top:clamp(46px,7vw,86px)}
+.sec:first-of-type{margin-top:0}
+.sech{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:400; margin:0 0 22px;
+  padding-bottom:12px; border-bottom:1px solid var(--rule)}
+.secnote{color:var(--ink-2); font-size:16.5px; max-width:62ch; margin:0 0 28px}
+
+/* Dates in a left rail on a wide screen, stacked above the role on a narrow
+   one -- a fixed two-column grid would squeeze the bullets to nothing. */
+.exp{display:grid; gap:36px}
+.job{display:grid; grid-template-columns:minmax(0,1fr); gap:4px}
+@media(min-width:780px){.job{grid-template-columns:186px minmax(0,1fr); gap:0 34px}}
+.job .when{font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--ink-3);
+  line-height:1.55; padding-top:6px}
+.job h3{margin:0 0 .18em; font-size:20.5px; font-weight:600; letter-spacing:-.014em}
+.job .org{color:var(--ink-2); font-size:16px; margin:0 0 .75em}
+.job ul{margin:0; padding-left:1.05em; color:var(--ink-2); font-size:16.5px}
+.job li{margin-bottom:.45em}
+.job li b{font-weight:600; color:var(--ink)}
+
+.skills{display:grid; gap:1px; background:var(--rule); border:1px solid var(--rule);
+  border-radius:2px; overflow:hidden;
+  grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr))}
+.skill{background:var(--surface); padding:17px 19px}
+.skill b{display:block; font-family:"IBM Plex Mono",monospace; font-size:10.5px;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3); font-weight:400;
+  margin-bottom:7px}
+.skill span{color:var(--ink-2); font-size:16px; line-height:1.5}
+
 @media (prefers-reduced-motion:reduce){.card{transition:none}}
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <div class="eyebrow">Data essays &amp; tools &middot; September 2026</div>
-    <h1>Ten public datasets, taken seriously</h1>
-    <p class="lede">Public archives, downloaded raw and analysed from scratch: every recorded
-      earthquake, every known atomic nucleus, every sunspot count since 1749, everything humans
-      have left in orbit, every planet found around another star &mdash; and ten million
-      keystrokes of English, to settle what a keyboard layout is actually worth.</p>
-    <p>The first four are interactive essays; the last is a tool you can point at your own
-      writing. Every number was computed from the downloaded files rather than quoted, and where
-      the data could not settle a question, they say so.</p>
+    <div class="eyebrow">Software Engineer at Maitri Services &middot; Kathmandu, Nepal</div>
+    <h1>Aabesh Karmacharya</h1>
+    <p class="lede">I build backend systems and the data pipelines that feed them &mdash; nine
+      years of it, mostly in Python. Django and FastAPI at the front, Dagster doing the
+      orchestration, PostgreSQL and BigQuery underneath, and language models wired in where
+      they actually earn their place.</p>
+    <p>Everything below is the same instinct pointed at public archives: take something anyone
+      can download, compute every number on the page from it, and pay attention to where the
+      record stops describing the world and starts describing the people who measured it.</p>
+    <p class="links">
+      <a href="mailto:aabesh.karmacharya@gmail.com">aabesh.karmacharya@gmail.com</a>
+      <span class="sep">&middot;</span>
+      <a href="https://github.com/aabeshkarmacharya">github.com/aabeshkarmacharya</a>
+      <span class="sep">&middot;</span>
+      <a href="resume.pdf">R&eacute;sum&eacute; (PDF)</a>
+    </p>
   </div>
 </header>
 
 <main>
   <div class="wrap">
+
+    <section class="sec">
+      <h2 class="sech">Selected work &mdash; ten public archives</h2>
+      <p class="secnote">Each of these begins with an archive anyone can download and computes
+        everything on the page from it: the fetch, the analysis and the figures are all in the
+        repository. Nine are interactive essays; the keyboard one is a tool you can point at
+        your own writing.</p>
     <div class="grid">
 
       <a class="card" style="--accent:var(--quake)"
          href="earthquakes/">
         <span class="src">USGS &middot; 457,408 earthquakes</span>
-        <h2>Four Hundred Thousand Earthquakes</h2>
+        <h3>Four Hundred Thousand Earthquakes</h3>
         <p class="sub">Fifty years of the global seismic catalogue &mdash; the laws that hold
           exactly, and the places where the archive quietly misleads.</p>
         <ul class="finds">
@@ -131,7 +181,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
       <a class="card" style="--accent:var(--nuclide)"
          href="nuclides/">
         <span class="src">IAEA &middot; 3,383 nuclides</span>
-        <h2>The Valley of Stability</h2>
+        <h3>The Valley of Stability</h3>
         <p class="sub">Every combination of protons and neutrons ever observed to hold together,
           and why so few of them last.</p>
         <ul class="finds">
@@ -145,7 +195,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
       <a class="card" style="--accent:var(--sun)"
          href="sunspots/">
         <span class="src">SILSO &middot; 277 years of counts</span>
-        <h2>Eleven Years, Roughly</h2>
+        <h3>Eleven Years, Roughly</h3>
         <p class="sub">The solar cycle's period, derived from the data rather than quoted &mdash;
           and the width of the peak, which is the more interesting number.</p>
         <ul class="finds">
@@ -159,7 +209,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
       <a class="card" style="--accent:var(--orbit)"
          href="orbits/">
         <span class="src">CelesTrak &middot; 70,580 objects</span>
-        <h2>The Shells Above Us</h2>
+        <h3>The Shells Above Us</h3>
         <p class="sub">Everything in Earth orbit, placed by altitude and inclination. Near-Earth
           space turns out to have architecture.</p>
         <ul class="finds">
@@ -172,7 +222,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
 
       <a class="card" style="--accent:var(--keys)" href="keyboards/">
         <span class="src">Project Gutenberg + Python stdlib &middot; 10.5M keystrokes</span>
-        <h2>The Layout Under Your Hands</h2>
+        <h3>The Layout Under Your Hands</h3>
         <p class="sub">Seven keyboard layouts scored on real text, on a real staggered board.
           Rearrange the keys yourself, or paste in something you wrote and measure that.</p>
         <ul class="finds">
@@ -185,7 +235,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
 
       <a class="card" style="--accent:var(--income)" href="income/">
         <span class="src">World Bank PIP + NSO Nepal &middot; four survey rounds</span>
-        <h2>Nine Thousand Rupees a Month</h2>
+        <h3>Nine Thousand Rupees a Month</h3>
         <p class="sub">What money actually looks like across 29.7 million Nepalis,
           percentile by percentile &mdash; and where a real salary, from the minimum
           wage to a lakh a month, lands on that curve.</p>
@@ -199,7 +249,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
 
       <a class="card" style="--accent:var(--land)" href="land/">
         <span class="src">nepalhomes.com + OpenStreetMap &middot; 2,115 plots</span>
-        <h2>Four Million Rupees an Aana</h2>
+        <h3>Four Million Rupees an Aana</h3>
         <p class="sub">What the ground costs anywhere in the Kathmandu Valley,
           modelled from every plot on the market &mdash; and which of a plot&rsquo;s
           features you are actually paying for, from the width of the road to
@@ -214,7 +264,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
 
       <a class="card" style="--accent:var(--worlds)" href="worlds/">
         <span class="src">NASA Exoplanet Archive &middot; 6,366 planets</span>
-        <h2>The Gap at Twice the Earth</h2>
+        <h3>The Gap at Twice the Earth</h3>
         <p class="sub">Almost no planet is 1.8 times the size of Earth. The hole in
           the catalogue is not a hole in what our telescopes can see &mdash; it is a
           hole in what exists, and starlight appears to have burned it open.</p>
@@ -228,7 +278,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
 
       <a class="card" style="--accent:var(--himalaya)" href="himalaya/">
         <span class="src">The Himalayan Database &middot; 76,519 people on the mountain</span>
-        <h2>Twelve Hundred Metres Lower</h2>
+        <h3>Twelve Hundred Metres Lower</h3>
         <p class="sub">On Nepal&rsquo;s peaks the people paid to climb and the
           people who pay to climb now die at almost the same rate &mdash; but not
           the same deaths, and not in the same places. A century of expedition
@@ -243,7 +293,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
 
       <a class="card" style="--accent:var(--tides)" href="sealevel/">
         <span class="src">PSMSL &middot; 1,609 tide gauges since 1807</span>
-        <h2>Where the Sea Is Falling</h2>
+        <h3>Where the Sea Is Falling</h3>
         <p class="sub">About one tide gauge in five reports that the sea
           beside it is getting lower. They are not measuring a different
           ocean &mdash; they are measuring a different piece of land, and a
@@ -258,7 +308,10 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
 
     </div>
 
-    <div class="method narrow" style="padding-inline:0">
+    </section>
+
+    <section class="sec">
+      <div class="method narrow" style="padding-inline:0; margin-top:0; border-top:0; padding-top:0">
       <h3>What these have in common</h3>
       <p>Each essay starts from a public archive that anyone can download, and computes
         everything on the page from it. That constraint turns out to matter more than the
@@ -277,16 +330,107 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
         partly a record of the people measuring it, and the interesting work is separating the
         two. Where that could not be done &mdash; whether great earthquakes have genuinely become
         more frequent, for instance &mdash; the essays say so rather than picking a side.</p>
-    </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2 class="sech">Experience</h2>
+      <div class="exp">
+
+        <div class="job">
+          <div class="when">April 2026 &ndash; present</div>
+          <div>
+            <h3>Software Engineer</h3>
+            <p class="org">Maitri Services</p>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="when">June 2021 &ndash; September 2025<br>Remote</div>
+          <div>
+            <h3>Full-Stack Developer</h3>
+            <p class="org">Onaroll Inc.</p>
+            <ul>
+              <li>Built the <b>data pipelines</b> in Dagster that fetched, cleaned and processed
+                customer data from several sources, generating the analytics and performance
+                metrics a rewards system ran on.</li>
+              <li>Architected <b>microservices</b> around Redis for caching, AWS SQS and Google
+                Pub/Sub for queuing, Django-Q for asynchronous work and Dagster for
+                scheduling.</li>
+              <li>Designed the schema on both sides of the house: <b>BigQuery</b> for
+                warehousing, <b>PostgreSQL</b> for transactional work.</li>
+              <li>Shipped an <b>AI chatbot</b> that answered natural-language questions about
+                employee performance, grounding the model&rsquo;s answers in the actual metrics
+                rather than letting it improvise.</li>
+              <li>Cut technical debt by introducing <b>static typing</b> across the Python
+                codebase and writing the API and service-development standards the team worked
+                to.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="when">2016 &ndash; 2021<br>Remote, global clients</div>
+          <div>
+            <h3>Freelance Developer</h3>
+            <p class="org">Upwork and independent projects</p>
+            <ul>
+              <li>Full-stack delivery for startups and businesses across the US, Europe and
+                Asia, working directly with clients to turn a rough requirement into something
+                shipped.</li>
+              <li>Built <b>data-mining tools</b> that extracted and processed millions of
+                records from thousands of sites.</li>
+              <li>Developed admin dashboards and APIs to visualise, transform and serve large
+                datasets, and <b>flexible API architectures</b> that served the same data in
+                whatever shape each client needed.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2 class="sech">What I work with</h2>
+      <div class="skills">
+        <div class="skill"><b>Languages</b><span>Python, TypeScript, JavaScript, Kotlin, Java</span></div>
+        <div class="skill"><b>Frameworks</b><span>Django, FastAPI, React</span></div>
+        <div class="skill"><b>Data &amp; AI</b><span>Dagster, Polars, Pandas, LangChain, OpenAI API, Hugging Face Transformers</span></div>
+        <div class="skill"><b>Databases</b><span>PostgreSQL, MySQL, Redis, MongoDB, Neo4j</span></div>
+        <div class="skill"><b>Cloud &amp; DevOps</b><span>AWS, GCP, Docker, Heroku</span></div>
+        <div class="skill"><b>Practice</b><span>LLM integration, prompt engineering, data pipelines, model deployment, microservice architecture</span></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2 class="sech">Education</h2>
+      <div class="exp">
+        <div class="job">
+          <div class="when">2012 &ndash; 2016</div>
+          <div>
+            <h3>BSc, Computer Science and Information Technology</h3>
+            <p class="org">Tribhuvan University, Kathmandu</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
 </main>
 
 <footer>
   <div class="wrap">
-    <p style="margin:0 0 1.1em"><a href="about/"
-      style="text-decoration-color:var(--rule-2)">Aabesh Karmacharya &mdash; r&eacute;sum&eacute;</a></p>
-    Sources: USGS Earthquake Catalog &middot; IAEA Nuclear Data Services &middot; SILSO, Royal
-    Observatory of Belgium &middot; CelesTrak. Plate boundaries after Bird (2003).
+    <p class="links" style="margin:0 0 20px">
+      <a href="mailto:aabesh.karmacharya@gmail.com">aabesh.karmacharya@gmail.com</a>
+      <span class="sep">&middot;</span>
+      <a href="https://github.com/aabeshkarmacharya">github.com/aabeshkarmacharya</a>
+      <span class="sep">&middot;</span>
+      <a href="resume.pdf">R&eacute;sum&eacute; (PDF)</a>
+    </p>
+    Essay sources: USGS ComCat &middot; IAEA Nuclear Data Services &middot; SILSO, Royal
+    Observatory of Belgium &middot; CelesTrak &middot; NASA Exoplanet Archive &middot; The
+    Himalayan Database &middot; PSMSL &middot; World Bank PIP &middot; OpenStreetMap &middot;
+    Project Gutenberg. Plate boundaries after Bird (2003).
   </div>
 </footer>
 </body>
