@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Six Public Datasets, Taken Seriously">
+<meta name="description" content="Ten Public Datasets, Taken Seriously">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%93%8A%3C%2Ftext%3E%3C%2Fsvg%3E">
-<title>Seven Public Datasets, Taken Seriously</title>
+<title>Ten Public Datasets, Taken Seriously</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&display=swap">
@@ -15,7 +15,7 @@
   color-scheme: light;
   --ground:#F2F1EF; --surface:#FCFCFB; --surface-2:#F7F6F4; --sunk:#E6E4E0;
   --ink:#16171A; --ink-2:#4F5257; --ink-3:#85888E; --rule:#DAD8D4; --rule-2:#C6C3BE;
-  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6; --keys:#8b5cf6; --income:#c2255c; --land:#0e9594;
+  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6; --keys:#8b5cf6; --income:#c2255c; --land:#0e9594; --worlds:#4a3aa7; --himalaya:#0b7285; --tides:#1b4f8a;
   --shadow:0 1px 2px rgba(22,23,26,.05),0 12px 32px -18px rgba(22,23,26,.22);
   --measure:64ch; --wide:1080px;
 }
@@ -24,7 +24,7 @@
     color-scheme: dark;
     --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
     --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6;
+    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6; --worlds:#9085e9; --himalaya:#2b9fb3; --tides:#6fb2f0;
     --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
   }
 }
@@ -32,7 +32,7 @@
   color-scheme: dark;
   --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
   --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6;
+  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6; --worlds:#9085e9;
   --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
 }
 *{box-sizing:border-box}
@@ -62,7 +62,7 @@ main{padding-block:clamp(36px,6vw,64px)}
    minimum even when the container is narrower, so cards overflow the viewport
    and the page scrolls sideways on a phone. */
 .grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
-/* Seven cards: six fill the two-up grid and the last one spans it. */
+/* Ten cards, which fill the two-up grid exactly -- no spanner needed. */
 .card.span{grid-column:1/-1}
 .card{display:block; text-decoration:none; background:var(--surface);
   border:1px solid var(--rule); border-radius:2px; box-shadow:var(--shadow);
@@ -99,11 +99,11 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
 <header>
   <div class="wrap">
     <div class="eyebrow">Data essays &amp; tools &middot; September 2026</div>
-    <h1>Seven public datasets, taken seriously</h1>
+    <h1>Ten public datasets, taken seriously</h1>
     <p class="lede">Public archives, downloaded raw and analysed from scratch: every recorded
       earthquake, every known atomic nucleus, every sunspot count since 1749, everything humans
-      have left in orbit &mdash; and ten million keystrokes of English, to settle what a keyboard
-      layout is actually worth.</p>
+      have left in orbit, every planet found around another star &mdash; and ten million
+      keystrokes of English, to settle what a keyboard layout is actually worth.</p>
     <p>The first four are interactive essays; the last is a tool you can point at your own
       writing. Every number was computed from the downloaded files rather than quoted, and where
       the data could not settle a question, they say so.</p>
@@ -197,7 +197,7 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
         <span class="go">Read &rarr;</span>
       </a>
 
-      <a class="card span" style="--accent:var(--land)" href="land/">
+      <a class="card" style="--accent:var(--land)" href="land/">
         <span class="src">nepalhomes.com + OpenStreetMap &middot; 2,115 plots</span>
         <h2>Four Million Rupees an Aana</h2>
         <p class="sub">What the ground costs anywhere in the Kathmandu Valley,
@@ -208,6 +208,50 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
           <li><b>Rs 4.3m</b><span>is the median asking price for one aana &mdash; 342 square feet &mdash; of valley land</span></li>
           <li><b>8.3&times;</b><span>separates the dearest tole, Jhamsikhel, from the cheapest, Chapagaun</span></li>
           <li><b>+31%</b><span>is what widening the access road from eight feet to twenty-six is worth</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--worlds)" href="worlds/">
+        <span class="src">NASA Exoplanet Archive &middot; 6,366 planets</span>
+        <h2>The Gap at Twice the Earth</h2>
+        <p class="sub">Almost no planet is 1.8 times the size of Earth. The hole in
+          the catalogue is not a hole in what our telescopes can see &mdash; it is a
+          hole in what exists, and starlight appears to have burned it open.</p>
+        <ul class="finds">
+          <li><b>1.81 R&oplus;</b><span>is where the gap sits, 38% below the two peaks either side of it</span></li>
+          <li><b>6.1 vs 2.9</b><span>grams per cubic centimetre, the median density below the gap against above it</span></li>
+          <li><b>2,974</b><span>of the archive&rsquo;s planetary masses were predicted from the radius, not measured</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--himalaya)" href="himalaya/">
+        <span class="src">The Himalayan Database &middot; 76,519 people on the mountain</span>
+        <h2>Twelve Hundred Metres Lower</h2>
+        <p class="sub">On Nepal&rsquo;s peaks the people paid to climb and the
+          people who pay to climb now die at almost the same rate &mdash; but not
+          the same deaths, and not in the same places. A century of expedition
+          records, which happen also to be an employment record.</p>
+        <ul class="finds">
+          <li><b>1,225 m</b><span>separates where hired staff die from where members die</span></li>
+          <li><b>61% vs 26%</b><span>of each group&rsquo;s deaths come from something falling on them</span></li>
+          <li><b>36%</b><span>of hired deaths arrive three or more at once, against 17% for members</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--tides)" href="sealevel/">
+        <span class="src">PSMSL &middot; 1,609 tide gauges since 1807</span>
+        <h2>Where the Sea Is Falling</h2>
+        <p class="sub">About one tide gauge in five reports that the sea
+          beside it is getting lower. They are not measuring a different
+          ocean &mdash; they are measuring a different piece of land, and a
+          gauge cannot tell the two apart.</p>
+        <ul class="finds">
+          <li><b>19%</b><span>of gauges show the sea falling, almost all of them on coasts still rising out of the last ice age</span></li>
+          <li><b>+419 mm</b><span>appeared at Onahama in an afternoon in March 2011 &mdash; Japan dropped, the ocean did not rise</span></li>
+          <li><b>100%</b><span>of the gauges recording in 1850 were in Europe, which is what an early &ldquo;global&rdquo; mean is made of</span></li>
         </ul>
         <span class="go">Read &rarr;</span>
       </a>
