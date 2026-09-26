@@ -1,0 +1,1589 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="What Are My Odds Up There?">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%9B%B0%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E">
+<title>What Are My Odds Up There?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..800,0..100,0..1&family=Source+Sans+3:wght@300;400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#EEEEF2; --surface:#FCFCFD; --surface-2:#F5F5F9; --sunk:#E3E3EA;
+  --ink:#15151C; --ink-2:#4E4E5C; --ink-3:#84848F; --rule:#D6D6DE; --rule-2:#C2C2CD;
+  --accent:#0b7285; --alt:#2a78d6;
+  /* One hue carries every mark on this page.  The site's up/down pair sits in
+     the 6-8 CVD separation band, which is legal only alongside a second
+     encoding, so identity here is never colour alone: the chosen peak gets a
+     ring and a direct label, and every raised/lowered figure keeps its sign. */
+  --mark:#0b7285; --mark-soft:rgba(11,114,133,.16); --mark-line:rgba(11,114,133,.34);
+  --up:#0e7369; --down:#c2255c; --warn:#b54708;
+  --grid:rgba(21,21,28,.08); --axis:#84848F;
+  --shadow:0 1px 2px rgba(21,21,28,.05),0 10px 30px -16px rgba(21,21,28,.18);
+  --shadow-lg:0 2px 4px rgba(21,21,28,.06),0 24px 60px -28px rgba(21,21,28,.30);
+  --field:#FFFFFF; --field-rule:#C2C2CD;
+  --measure:65ch; --wide:1120px;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
+    --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
+    --accent:#2b9fb3; --alt:#3987e5;
+    --mark:#2b9fb3; --mark-soft:rgba(43,159,179,.22); --mark-line:rgba(43,159,179,.42);
+    --up:#59beb4; --down:#e64980; --warn:#f0913a;
+    --grid:rgba(234,234,240,.09); --axis:#70707E;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+    --shadow-lg:0 2px 4px rgba(0,0,0,.55),0 24px 60px -28px rgba(0,0,0,.85);
+    --field:#15151B; --field-rule:#3A3A46;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
+  --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
+  --accent:#2b9fb3; --alt:#3987e5;
+  --mark:#2b9fb3; --mark-soft:rgba(43,159,179,.22); --mark-line:rgba(43,159,179,.42);
+  --up:#59beb4; --down:#e64980; --warn:#f0913a;
+  --grid:rgba(234,234,240,.09); --axis:#70707E;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+  --shadow-lg:0 2px 4px rgba(0,0,0,.55),0 24px 60px -28px rgba(0,0,0,.85);
+  --field:#15151B; --field-rule:#3A3A46;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:400; font-size:18.5px; line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; font-family:"Fraunces","Georgia",serif;
+  font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
+  letter-spacing:-.012em}
+.mono,code{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.wrap{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
+.wide{max-width:var(--wide); margin-inline:auto; padding-inline:24px}
+section{padding-block:clamp(38px,5.5vw,68px)}
+section+section{border-top:1px solid var(--rule)}
+p{margin:0 0 1.1em}
+a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2); text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--alt); outline-offset:3px; border-radius:3px}
+
+.eyebrow{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3);
+  display:flex; align-items:center; gap:12px; margin-bottom:16px}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
+h2{font-size:clamp(26px,3.6vw,36px); line-height:1.08; font-weight:700; margin-bottom:.48em}
+h3{font-size:20px; line-height:1.26; font-weight:600; margin:1.8em 0 .5em}
+.lede{font-size:20px; line-height:1.56; color:var(--ink-2)}
+.small{font-size:15.5px; line-height:1.55; color:var(--ink-2)}
+.tiny{font-size:13.5px; line-height:1.5; color:var(--ink-3)}
+
+header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
+  padding-block:clamp(40px,6.5vw,76px)}
+h1{font-size:clamp(34px,5.8vw,68px); line-height:.99; font-weight:800;
+   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:15ch; margin-bottom:.3em}
+.sub{max-width:56ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
+.kicker{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:20px}
+
+/* ------------------------------------------------------------ the form */
+.tool{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  gap:28px; align-items:start}
+.split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:26px;
+  align-items:start}
+.card{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+  box-shadow:var(--shadow); padding:24px}
+.card+.card{margin-top:20px}
+.card h3:first-child{margin-top:0}
+
+.field{margin-bottom:17px}
+.field:last-child{margin-bottom:0}
+label.lab{display:block; font-family:"DM Mono",monospace; font-size:11px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+  margin-bottom:7px}
+input[type=text],input[type=number],select{
+  width:100%; font:inherit; font-size:17px; color:var(--ink);
+  background:var(--field); border:1px solid var(--field-rule); border-radius:9px;
+  padding:10px 12px; appearance:none; -webkit-appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--ink-3) 50%),
+  linear-gradient(135deg,var(--ink-3) 50%,transparent 50%);
+  background-position:calc(100% - 19px) 50%,calc(100% - 13px) 50%;
+  background-size:6px 6px,6px 6px; background-repeat:no-repeat; padding-right:36px}
+input:focus,select:focus{border-color:var(--accent); outline:none;
+  box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 22%,transparent)}
+.two{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px}
+.seg{display:flex; border:1px solid var(--field-rule); border-radius:9px;
+  overflow:hidden; background:var(--field)}
+.seg button{flex:1; font:inherit; font-size:14.5px; padding:8px 4px; border:0;
+  background:transparent; color:var(--ink-2); cursor:pointer;
+  border-right:1px solid var(--field-rule)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--accent); color:#fff; font-weight:600}
+.agerow{display:flex; align-items:center; gap:13px}
+.agerow input[type=range]{flex:1; accent-color:var(--accent)}
+.agerow .num{width:88px; flex-shrink:0}
+
+/* ----------------------------------------------------------- the answer */
+.answer{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+  box-shadow:var(--shadow-lg); overflow:hidden; position:sticky; top:20px}
+.odds{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.odd{padding:22px 22px 20px}
+.odd+.odd{border-left:1px solid var(--rule)}
+.odd .cap{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:6px; display:block}
+.odd .big{font-family:"Fraunces",Georgia,serif; font-weight:800; line-height:1;
+  font-size:clamp(34px,4.6vw,50px); letter-spacing:-.022em;
+  font-variant-numeric:tabular-nums}
+/* The unit rides with the number rather than wrapping under it: "25.4 in
+   1,000" set at 50px breaks across two lines in a half-width panel. */
+.odd .big .unit{font-family:"Source Sans 3",sans-serif; font-weight:500;
+  font-size:.34em; letter-spacing:0; color:var(--ink-3); margin-left:.35em;
+  white-space:nowrap}
+.odd .sub2{font-size:14.5px; color:var(--ink-2); margin-top:7px; line-height:1.4}
+.odd .ci{font-family:"DM Mono",monospace; font-size:12.5px; color:var(--ink-3);
+  margin-top:3px}
+
+.rows{border-top:1px solid var(--rule)}
+.row{display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+  padding:10px 22px; font-size:15.5px; border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}
+.row .k{color:var(--ink-2)}
+.row .k em{font-style:normal; color:var(--ink-3); font-size:13.5px; display:block;
+  line-height:1.35}
+.row .v{font-family:"DM Mono",monospace; font-size:15px; white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.rows.tight{border-top:1px solid var(--rule); margin-top:14px}
+.rows.tight .row{padding-inline:0}
+.up{color:var(--up)} .down{color:var(--down)}
+/* Two quantities in one value cell: each on its own line with its own unit,
+   right-aligned so the numbers stack. */
+.dual{display:grid; grid-template-columns:auto auto; gap:1px 7px;
+  justify-items:end; align-items:baseline}
+.dual em{font-style:normal; font-size:11.5px; color:var(--ink-3);
+  font-family:"Source Sans 3",sans-serif; justify-self:start}
+
+.flag{margin:0 22px 20px; padding:11px 13px; border-radius:9px; font-size:14.5px;
+  line-height:1.48; background:var(--surface-2); border:1px solid var(--rule);
+  color:var(--ink-2)}
+.flag b{color:var(--ink)}
+.flag.warn{background:color-mix(in oklab,var(--warn) 10%,var(--surface));
+  border-color:color-mix(in oklab,var(--warn) 30%,var(--rule))}
+.acts{display:flex; gap:10px; padding:16px 22px 20px; border-top:1px solid var(--rule)}
+.acts .cta{font-size:14.5px; padding:9px 12px}
+#shareOut{margin:0 22px 18px; width:calc(100% - 44px);
+  font-family:"DM Mono",monospace; font-size:12.5px}
+.printonly{display:none}
+
+/* --------------------------------------------------------------- charts */
+.fig{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+  box-shadow:var(--shadow); padding:20px 20px 14px; position:relative}
+.fig h3{margin:0 0 4px; font-size:19px}
+.fig .note{font-size:14.5px; color:var(--ink-2); margin:0 0 12px; line-height:1.45}
+.fig svg{display:block; width:100%; height:auto; overflow:visible}
+.gridline{stroke:var(--grid); stroke-width:1}
+.axisline{stroke:var(--rule-2); stroke-width:1}
+.axistext{font-family:"DM Mono",monospace; font-size:10px; fill:var(--ink-3)}
+.axistitle{font-family:"Source Sans 3",sans-serif; font-size:11.5px; fill:var(--ink-3)}
+.dot{fill:var(--mark-soft); stroke:var(--mark); stroke-width:1.5}
+.dot.on{fill:var(--mark); stroke:var(--ink); stroke-width:2}
+.dotlab{font-family:"Source Sans 3",sans-serif; font-size:11px; fill:var(--ink-2);
+  paint-order:stroke; stroke:var(--surface); stroke-width:3px; stroke-linejoin:round}
+.dotlab.on{fill:var(--ink); font-weight:600}
+.refline{stroke:var(--ink-3); stroke-width:1.5; stroke-dasharray:4 4}
+.hit{fill:transparent; cursor:pointer}
+.tip{position:absolute; pointer-events:none; z-index:20; background:var(--surface);
+  border:1px solid var(--rule-2); border-radius:9px; box-shadow:var(--shadow-lg);
+  padding:9px 11px; font-size:13.5px; line-height:1.45; max-width:230px;
+  opacity:0; transition:opacity .1s}
+.tip.on{opacity:1}
+.tip b{display:block; font-size:14.5px; margin-bottom:2px}
+.tip .mono{font-size:12.5px; color:var(--ink-2)}
+
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(156px,100%),1fr));
+  gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:11px;
+  overflow:hidden}
+.stats.pair{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stat{background:var(--surface); padding:15px 16px}
+.stat .n{font-family:"DM Mono",monospace; font-size:23px; line-height:1.1;
+  font-variant-numeric:tabular-nums; margin-bottom:3px}
+.stat .l{font-size:13px; color:var(--ink-3); line-height:1.35}
+
+table{width:100%; border-collapse:collapse; font-size:15px}
+th{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:400; text-align:right;
+  padding:0 0 8px; border-bottom:1px solid var(--rule)}
+th:first-child{text-align:left}
+td{padding:7px 0; border-bottom:1px solid var(--rule); text-align:right;
+  font-family:"DM Mono",monospace; font-variant-numeric:tabular-nums; font-size:14.5px}
+td:first-child{text-align:left; font-family:"Source Sans 3",sans-serif; font-size:15.5px}
+tr:last-child td{border-bottom:0}
+tr.on td{background:var(--surface-2); font-weight:600}
+
+/* ------------------------------------------------------------- offers */
+.offers{display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start}
+.offer{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+  padding:24px; box-shadow:var(--shadow)}
+.offer.lead{border-color:color-mix(in oklab,var(--accent) 45%,var(--rule));
+  box-shadow:var(--shadow-lg)}
+.price{display:flex; align-items:baseline; gap:9px; margin:2px 0 14px}
+.price .amt{font-family:"Fraunces",Georgia,serif; font-weight:800; font-size:33px;
+  line-height:1; letter-spacing:-.02em}
+.price .per{font-size:14.5px; color:var(--ink-3)}
+ul.ticks{list-style:none; margin:0 0 20px; padding:0; font-size:15.5px}
+ul.ticks li{padding-left:26px; position:relative; margin-bottom:9px; line-height:1.45;
+  color:var(--ink-2)}
+ul.ticks li::before{content:""; position:absolute; left:4px; top:.55em; width:10px;
+  height:6px; border-left:2px solid var(--accent); border-bottom:2px solid var(--accent);
+  transform:rotate(-45deg)}
+button.cta{width:100%; font:inherit; font-size:17px; font-weight:600; padding:13px 18px;
+  border:0; border-radius:10px; background:var(--accent); color:#fff; cursor:pointer;
+  transition:filter .12s}
+button.cta:hover{filter:brightness(1.1)}
+button.cta.ghost{background:transparent; color:var(--ink);
+  border:1px solid var(--rule-2); font-weight:500}
+button.cta.ghost:hover{border-color:var(--accent); filter:none}
+a.cta.paylink{display:block; margin-top:10px; text-align:center; text-decoration:none;
+  background:var(--ink); color:var(--ground)}
+.leadform{margin-top:18px; padding-top:18px; border-top:1px solid var(--rule); display:none}
+.leadform.on{display:block}
+.err{color:var(--down); font-size:13.5px; margin-top:6px; display:none}
+.err.on{display:block}
+.done{display:none; padding:15px 16px; border-radius:10px; font-size:15.5px;
+  background:color-mix(in oklab,var(--up) 12%,var(--surface));
+  border:1px solid color-mix(in oklab,var(--up) 34%,var(--rule)); line-height:1.5}
+.done.on{display:block}
+.demo{margin-top:13px; font-size:13px; color:var(--ink-3); line-height:1.45}
+textarea.raw{width:100%; margin-top:12px; font-family:"DM Mono",monospace;
+  font-size:13px; line-height:1.5; color:var(--ink); background:var(--field);
+  border:1px solid var(--field-rule); border-radius:9px; padding:11px 12px;
+  resize:vertical}
+
+footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:46px;
+  font-size:15.5px; color:var(--ink-2)}
+.srcs{font-size:14.5px; color:var(--ink-3)}
+
+@media print{
+  :root{color-scheme:light}
+  body{background:#fff; color:#000; font-size:10.5pt}
+  .noprint,.acts,.tip{display:none !important}
+  .printonly{display:block; margin:12px 22px 18px; font-size:9.5pt; color:#444}
+  header.top{background:none; border-bottom:1px solid #999; padding-block:0 14px}
+  h1{font-size:21pt; max-width:none; margin-bottom:.2em}
+  .sub{display:none}
+  section{padding-block:15px !important; border-top:0 !important; break-inside:avoid}
+  .tool{display:block}
+  .answer{position:static; box-shadow:none; border:1px solid #999; break-inside:avoid}
+  .card,.fig,.stats{box-shadow:none; border-color:#bbb; break-inside:avoid}
+  a[href]::after{content:""}
+}
+
+@media (max-width:900px){
+  .tool{grid-template-columns:minmax(0,1fr)}
+  .split{grid-template-columns:minmax(0,1fr)}
+  .answer{position:static}
+  .offers{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+  body{font-size:17.5px}
+  .wrap,.wide{padding-inline:18px}
+  .card,.offer,.fig{padding:19px}
+  .row{padding-inline:19px}
+  .flag,#shareOut{margin-inline:19px}
+  #shareOut{width:calc(100% - 38px)}
+  .acts{flex-direction:column; padding-inline:19px}
+  .odds{grid-template-columns:minmax(0,1fr)}
+  .odd+.odd{border-left:0; border-top:1px solid var(--rule)}
+  .row{flex-direction:column; align-items:flex-start; gap:1px}
+  .row .v{white-space:normal}
+  input[type=text],input[type=number],select{font-size:16px}
+  select{padding-right:28px;
+    background-position:calc(100% - 15px) 50%,calc(100% - 9px) 50%}
+  table{font-size:14px}
+  td:first-child{font-size:14.5px}
+}
+</style>
+</head>
+<body>
+<script>window.ODDS_DATA={"meta":{"modern_from":2000,"people":40605,"expeditions":5838,"peaks":17,"summits":19689,"deaths":332,"year_max":2019,"dropped_no_age":811,"age0":38.0,"year0":2015.0,"source":"The Himalayan Database"},"columns":["peak=AMAD","peak=CHOY","peak=MANA","peak=LHOT","peak=BARU","peak=HIML","peak=MAKA","peak=DHA1","peak=PUMO","peak=ANN1","peak=KANG","peak=PUTH","peak=TILI","peak=ANN4","peak=TUKU","peak=GYAJ","season=Autumn","season=Winter","season=Summer","oxygen","hired","female","age","age_sq","year"],"peak_order":["EVER","AMAD","CHOY","MANA","LHOT","BARU","HIML","MAKA","DHA1","PUMO","ANN1","KANG","PUTH","TILI","ANN4","TUKU","GYAJ"],"seasons":["Spring","Autumn","Winter","Summer"],"age_bands":[{"lo":0,"hi":25,"label":"under 25"},{"lo":25,"hi":35,"label":"25 to 34"},{"lo":35,"hi":45,"label":"35 to 44"},{"lo":45,"hi":55,"label":"45 to 54"},{"lo":55,"hi":65,"label":"55 to 64"},{"lo":65,"hi":200,"label":"65 and over"}],"models":{"summit":{"intercept":-2.247514,"coef":{"peak=AMAD":2.169875,"peak=CHOY":1.260497,"peak=MANA":0.624142,"peak=LHOT":0.299772,"peak=BARU":1.196684,"peak=HIML":1.750015,"peak=MAKA":0.132447,"peak=DHA1":0.151676,"peak=PUMO":0.837158,"peak=ANN1":0.699011,"peak=KANG":0.383413,"peak=PUTH":1.851237,"peak=TILI":0.527268,"peak=ANN4":-0.273389,"peak=TUKU":0.535718,"peak=GYAJ":1.387826,"season=Autumn":0.206746,"season=Winter":-0.747091,"season=Summer":0.749066,"oxygen":3.356174,"hired":0.815502,"female":-0.156652,"age":-0.194666,"age_sq":-0.077249,"year":0.029004}},"death":{"intercept":-4.627576,"coef":{"peak=AMAD":-0.569643,"peak=CHOY":-0.488593,"peak=MANA":0.215835,"peak=LHOT":-0.108006,"peak=BARU":-0.313768,"peak=HIML":-0.602639,"peak=MAKA":0.628474,"peak=DHA1":1.077874,"peak=PUMO":0.677893,"peak=ANN1":0.989218,"peak=KANG":0.626854,"peak=PUTH":-1.147171,"peak=TILI":0.119679,"peak=ANN4":-0.506032,"peak=TUKU":-1.13278,"peak=GYAJ":-1.146617,"season=Autumn":-0.253957,"season=Winter":-0.306282,"season=Summer":-1.38067,"oxygen":-0.306604,"hired":0.066788,"female":-0.555953,"age":0.121601,"age_sq":0.027502,"year":-0.033062}}},"fit":{"summit":{"lambda":10.0,"auc":0.8409,"brier":0.16077,"base_rate":0.484891,"calibration":[{"n":5076,"pred":0.08029,"obs":0.05753},{"n":5077,"pred":0.14897,"obs":0.16663},{"n":5074,"pred":0.25144,"obs":0.22093},{"n":5076,"pred":0.38748,"obs":0.39578},{"n":5076,"pred":0.54861,"obs":0.58964},{"n":5077,"pred":0.72636,"obs":0.75556},{"n":5077,"pred":0.83164,"obs":0.83258},{"n":5072,"pred":0.90516,"obs":0.86061}]},"death":{"lambda":100.0,"auc":0.6559,"brier":0.008094,"base_rate":0.008176,"calibration":[{"n":5076,"pred":0.00331,"obs":0.00433},{"n":5076,"pred":0.00461,"obs":0.00473},{"n":5075,"pred":0.00554,"obs":0.00394},{"n":5076,"pred":0.00661,"obs":0.00493},{"n":5075,"pred":0.00735,"obs":0.00473},{"n":5076,"pred":0.00837,"obs":0.01221},{"n":5076,"pred":0.01029,"obs":0.0132},{"n":5075,"pred":0.01937,"obs":0.01734}]}},"peaks":[{"id":"EVER","name":"Everest","height":8850,"n":14855,"summits":8709,"deaths":131,"oxygen_share":0.701,"hired_share":0.3848},{"id":"KANG","name":"Kangchenjunga","height":8586,"n":622,"summits":292,"deaths":11,"oxygen_share":0.4614,"hired_share":0.3071},{"id":"LHOT","name":"Lhotse","height":8516,"n":1728,"summits":727,"deaths":13,"oxygen_share":0.4201,"hired_share":0.2274},{"id":"MAKA","name":"Makalu","height":8485,"n":1174,"summits":409,"deaths":21,"oxygen_share":0.3382,"hired_share":0.2496},{"id":"CHOY","name":"Cho Oyu","height":8188,"n":5784,"summits":2647,"deaths":23,"oxygen_share":0.2367,"hired_share":0.2125},{"id":"DHA1","name":"Dhaulagiri I","height":8167,"n":1087,"summits":251,"deaths":31,"oxygen_share":0.1546,"hired_share":0.2125},{"id":"MANA","name":"Manaslu","height":8163,"n":3334,"summits":1538,"deaths":33,"oxygen_share":0.3809,"hired_share":0.308},{"id":"ANN1","name":"Annapurna I","height":8091,"n":632,"summits":189,"deaths":17,"oxygen_share":0.1535,"hired_share":0.2278},{"id":"ANN4","name":"Annapurna IV","height":7525,"n":250,"summits":24,"deaths":1,"oxygen_share":0.02,"hired_share":0.164},{"id":"PUTH","name":"Putha Hiunchuli","height":7246,"n":524,"summits":224,"deaths":0,"oxygen_share":0.0191,"hired_share":0.2099},{"id":"BARU","name":"Baruntse","height":7152,"n":1466,"summits":440,"deaths":8,"oxygen_share":0.0082,"hired_share":0.1999},{"id":"PUMO","name":"Pumori","height":7138,"n":743,"summits":160,"deaths":14,"oxygen_share":0.0027,"hired_share":0.1265},{"id":"TILI","name":"Tilicho","height":7134,"n":307,"summits":53,"deaths":3,"oxygen_share":0.0,"hired_share":0.1433},{"id":"HIML","name":"Himlung Himal","height":7126,"n":1266,"summits":546,"deaths":4,"oxygen_share":0.0174,"hired_share":0.2567},{"id":"GYAJ","name":"Gyajikang","height":7074,"n":154,"summits":50,"deaths":0,"oxygen_share":0.0065,"hired_share":0.1883},{"id":"TUKU","name":"Tukuche","height":6920,"n":214,"summits":37,"deaths":0,"oxygen_share":0.0093,"hired_share":0.1308},{"id":"AMAD","name":"Ama Dablam","height":6814,"n":6465,"summits":3393,"deaths":22,"oxygen_share":0.004,"hired_share":0.2116}],"cells":[[1,1,0,0,1,0,27,14,0],[1,1,0,0,1,1,203,102,0],[1,1,0,0,1,2,249,128,0],[1,1,0,0,1,3,139,61,0],[1,1,0,0,1,4,35,13,0],[1,1,0,0,1,5,6,0,0],[1,1,0,0,0,0,108,66,0],[1,1,0,0,0,1,898,540,3],[1,1,0,0,0,2,1163,631,4],[1,1,0,0,0,3,945,462,4],[1,1,0,0,0,4,422,163,1],[1,1,0,0,0,5,70,12,0],[1,1,0,1,1,1,1,0,0],[1,1,0,1,1,2,4,1,0],[1,1,0,1,1,5,1,0,0],[1,1,0,1,0,0,2,1,0],[1,1,0,1,0,1,2,0,0],[1,1,0,1,0,2,3,1,0],[1,1,0,1,0,3,5,3,0],[1,1,0,1,0,4,1,0,0],[1,1,1,0,1,0,2,2,0],[1,1,1,0,1,1,2,2,0],[1,1,1,0,0,0,149,121,0],[1,1,1,0,0,1,577,446,2],[1,1,1,0,0,2,401,280,3],[1,1,1,0,0,3,83,44,1],[1,1,1,0,0,4,8,3,0],[1,1,1,1,0,1,1,1,0],[1,0,0,0,1,0,3,1,0],[1,0,0,0,1,1,31,6,0],[1,0,0,0,1,2,20,6,0],[1,0,0,0,1,3,9,1,0],[1,0,0,0,1,4,3,1,0],[1,0,0,0,1,5,1,0,0],[1,0,0,0,0,0,29,11,0],[1,0,0,0,0,1,168,56,0],[1,0,0,0,0,2,180,57,1],[1,0,0,0,0,3,128,33,2],[1,0,0,0,0,4,48,5,0],[1,0,0,0,0,5,8,3,0],[1,0,0,1,0,1,1,0,0],[1,0,0,1,0,3,1,0,0],[1,0,0,1,0,4,1,0,0],[1,0,0,1,0,5,1,0,0],[1,0,1,0,0,0,12,2,0],[1,0,1,0,0,1,42,14,0],[1,0,1,0,0,2,40,9,0],[1,0,1,0,0,3,9,3,0],[1,0,1,0,0,4,4,0,0],[1,2,0,0,1,0,5,3,0],[1,2,0,0,1,1,9,3,0],[1,2,0,0,1,2,9,4,0],[1,2,0,0,1,3,4,1,0],[1,2,0,0,1,4,3,0,0],[1,2,0,0,0,0,23,6,0],[1,2,0,0,0,1,48,25,0],[1,2,0,0,0,2,41,14,0],[1,2,0,0,0,3,32,8,1],[1,2,0,0,0,4,4,0,0],[1,2,0,0,0,5,1,0,0],[1,2,0,1,0,2,1,1,0],[1,2,0,1,0,3,1,0,0],[1,2,1,0,0,0,6,6,0],[1,2,1,0,0,1,19,10,0],[1,2,1,0,0,2,13,7,0],[10,1,0,0,1,1,1,0,0],[10,1,0,0,1,2,3,0,0],[10,1,0,0,1,3,1,0,0],[10,1,0,0,0,0,3,0,0],[10,1,0,0,0,1,26,0,1],[10,1,0,0,0,2,51,5,2],[10,1,0,0,0,3,25,1,4],[10,1,0,0,0,4,11,0,0],[10,1,0,0,0,5,1,0,0],[10,1,0,1,0,2,1,0,0],[10,1,1,0,0,0,2,0,0],[10,1,1,0,0,1,8,1,0],[10,1,1,0,0,2,4,0,1],[10,1,1,0,0,3,1,0,0],[10,1,1,0,0,4,1,0,0],[10,0,0,0,1,1,7,2,0],[10,0,0,0,1,2,9,2,0],[10,0,0,0,1,3,6,1,0],[10,0,0,0,1,4,1,1,0],[10,0,0,0,0,0,7,2,0],[10,0,0,0,0,1,91,24,1],[10,0,0,0,0,2,116,23,5],[10,0,0,0,0,3,53,15,0],[10,0,0,0,0,4,17,5,0],[10,0,0,0,0,5,5,0,0],[10,0,0,1,1,1,4,2,0],[10,0,0,1,1,2,2,2,0],[10,0,0,1,1,3,2,2,0],[10,0,0,1,1,4,1,1,0],[10,0,0,1,0,1,3,2,0],[10,0,0,1,0,2,12,9,0],[10,0,0,1,0,3,16,14,1],[10,0,0,1,0,4,9,3,0],[10,0,0,1,0,5,1,1,0],[10,0,1,0,0,0,8,4,0],[10,0,1,0,0,1,40,19,0],[10,0,1,0,0,2,16,3,0],[10,0,1,0,0,3,8,4,1],[10,0,1,0,0,4,1,0,0],[10,0,1,1,0,0,1,1,0],[10,0,1,1,0,1,32,28,0],[10,0,1,1,0,2,12,11,1],[10,0,1,1,0,3,1,1,0],[10,2,0,0,0,1,1,0,0],[10,2,0,0,0,2,1,0,0],[10,2,0,0,0,5,1,0,0],[10,2,1,0,0,1,4,0,0],[10,2,1,0,0,2,4,0,0],[10,2,1,0,0,3,1,0,0],[14,1,0,0,1,0,1,0,0],[14,1,0,0,1,1,9,0,0],[14,1,0,0,1,2,2,0,0],[14,1,0,0,1,3,9,0,0],[14,1,0,0,1,4,2,0,0],[14,1,0,0,0,0,2,0,0],[14,1,0,0,0,1,22,1,0],[14,1,0,0,0,2,40,0,0],[14,1,0,0,0,3,37,1,0],[14,1,0,0,0,4,27,0,1],[14,1,0,0,0,5,1,0,0],[14,1,0,1,0,5,1,1,0],[14,1,1,0,0,0,1,0,0],[14,1,1,0,0,1,7,2,0],[14,1,1,0,0,2,10,1,0],[14,1,1,0,0,3,1,1,0],[14,0,0,0,1,1,1,0,0],[14,0,0,0,1,2,6,0,0],[14,0,0,0,1,3,2,0,0],[14,0,0,0,1,4,2,0,0],[14,0,0,0,1,5,1,0,0],[14,0,0,0,0,1,9,0,0],[14,0,0,0,0,2,6,1,0],[14,0,0,0,0,3,9,0,0],[14,0,0,0,0,4,6,0,0],[14,0,0,0,0,5,3,0,0],[14,0,0,1,1,0,1,1,0],[14,0,0,1,1,1,3,3,0],[14,0,1,0,0,1,6,1,0],[14,0,1,0,0,2,8,4,0],[14,0,1,0,0,3,4,1,0],[14,0,1,0,0,4,1,0,0],[14,3,0,0,0,1,3,3,0],[14,3,1,0,0,1,1,1,0],[14,3,1,0,0,3,2,2,0],[14,2,0,0,0,0,3,0,0],[14,2,0,0,0,2,1,0,0],[5,1,0,0,1,0,6,4,0],[5,1,0,0,1,1,55,14,0],[5,1,0,0,1,2,39,7,0],[5,1,0,0,1,3,47,12,0],[5,1,0,0,1,4,16,0,0],[5,1,0,0,1,5,2,0,0],[5,1,0,0,0,0,27,12,0],[5,1,0,0,0,1,147,56,1],[5,1,0,0,0,2,225,69,1],[5,1,0,0,0,3,210,59,0],[5,1,0,0,0,4,98,16,0],[5,1,0,0,0,5,28,3,0],[5,1,0,1,1,1,1,0,0],[5,1,0,1,1,3,1,0,0],[5,1,0,1,0,1,2,1,0],[5,1,0,1,0,3,1,0,0],[5,1,1,0,1,0,1,0,0],[5,1,1,0,1,1,2,1,0],[5,1,1,0,0,0,27,14,0],[5,1,1,0,0,1,96,61,0],[5,1,1,0,0,2,82,43,2],[5,1,1,0,0,3,33,15,1],[5,1,1,0,0,4,1,1,0],[5,1,1,1,0,1,2,0,1],[5,0,0,0,1,0,2,0,0],[5,0,0,0,1,1,11,1,0],[5,0,0,0,1,2,14,1,0],[5,0,0,0,1,3,5,0,0],[5,0,0,0,1,4,3,0,0],[5,0,0,0,1,5,1,0,0],[5,0,0,0,0,0,6,1,0],[5,0,0,0,0,1,65,10,0],[5,0,0,0,0,2,77,11,1],[5,0,0,0,0,3,47,9,0],[5,0,0,0,0,4,27,5,0],[5,0,0,0,0,5,5,0,0],[5,0,0,1,0,2,3,1,0],[5,0,0,1,0,3,2,0,0],[5,0,1,0,0,0,1,1,0],[5,0,1,0,0,1,26,7,1],[5,0,1,0,0,2,20,5,0],[5,0,1,0,0,3,1,0,0],[5,0,1,0,0,4,1,0,0],[2,1,0,0,1,0,8,2,0],[2,1,0,0,1,1,85,25,0],[2,1,0,0,1,2,99,18,0],[2,1,0,0,1,3,63,8,0],[2,1,0,0,1,4,21,1,0],[2,1,0,0,1,5,2,0,0],[2,1,0,0,0,0,61,18,1],[2,1,0,0,0,1,490,151,1],[2,1,0,0,0,2,699,225,2],[2,1,0,0,0,3,500,116,1],[2,1,0,0,0,4,207,28,1],[2,1,0,0,0,5,27,1,0],[2,1,0,1,1,0,15,14,0],[2,1,0,1,1,1,40,34,0],[2,1,0,1,1,2,50,42,0],[2,1,0,1,1,3,31,27,0],[2,1,0,1,1,4,16,15,0],[2,1,0,1,1,5,3,3,0],[2,1,0,1,0,0,31,25,0],[2,1,0,1,0,1,157,130,1],[2,1,0,1,0,2,253,224,0],[2,1,0,1,0,3,186,158,2],[2,1,0,1,0,4,98,74,0],[2,1,0,1,0,5,19,15,1],[2,1,1,0,1,1,2,1,0],[2,1,1,0,0,0,134,111,0],[2,1,1,0,0,1,313,225,0],[2,1,1,0,0,2,211,134,0],[2,1,1,0,0,3,34,21,0],[2,1,1,0,0,4,2,2,0],[2,1,1,1,0,0,27,26,0],[2,1,1,1,0,1,90,82,0],[2,1,1,1,0,2,96,91,0],[2,1,1,1,0,3,28,28,0],[2,1,1,1,0,4,1,1,0],[2,0,0,0,1,0,4,0,0],[2,0,0,0,1,1,35,11,1],[2,0,0,0,1,2,41,5,0],[2,0,0,0,1,3,27,5,0],[2,0,0,0,1,4,6,1,0],[2,0,0,0,1,5,1,0,0],[2,0,0,0,0,0,33,11,0],[2,0,0,0,0,1,271,73,2],[2,0,0,0,0,2,391,100,2],[2,0,0,0,0,3,279,43,3],[2,0,0,0,0,4,111,13,2],[2,0,0,0,0,5,11,1,0],[2,0,0,1,1,1,6,5,0],[2,0,0,1,1,2,6,3,0],[2,0,0,1,1,3,6,5,0],[2,0,0,1,1,4,2,0,0],[2,0,0,1,0,0,5,3,0],[2,0,0,1,0,1,40,30,0],[2,0,0,1,0,2,50,34,1],[2,0,0,1,0,3,40,25,0],[2,0,0,1,0,4,22,14,0],[2,0,0,1,0,5,4,4,0],[2,0,1,0,0,0,27,20,0],[2,0,1,0,0,1,97,68,0],[2,0,1,0,0,2,89,39,2],[2,0,1,0,0,3,29,9,0],[2,0,1,0,0,4,2,1,0],[2,0,1,1,0,0,9,9,0],[2,0,1,1,0,1,21,20,0],[2,0,1,1,0,2,12,12,0],[2,0,1,1,0,3,5,5,0],[2,2,0,0,0,1,2,2,0],[2,2,0,0,0,2,1,0,0],[8,1,0,0,1,1,8,0,0],[8,1,0,0,1,2,3,0,0],[8,1,0,0,1,3,8,0,0],[8,1,0,0,1,4,2,0,0],[8,1,0,0,1,5,1,0,0],[8,1,0,0,0,0,4,0,0],[8,1,0,0,0,1,55,3,4],[8,1,0,0,0,2,77,7,3],[8,1,0,0,0,3,58,4,1],[8,1,0,0,0,4,18,0,2],[8,1,0,0,0,5,3,0,0],[8,1,0,1,0,1,2,0,0],[8,1,0,1,0,2,5,2,0],[8,1,0,1,0,3,4,2,0],[8,1,0,1,0,4,1,1,0],[8,1,0,1,0,5,2,0,0],[8,1,1,0,0,0,4,0,1],[8,1,1,0,0,1,30,0,0],[8,1,1,0,0,2,18,1,1],[8,1,1,0,0,3,6,1,1],[8,1,1,0,0,4,1,0,0],[8,1,1,1,0,0,1,0,0],[8,1,1,1,0,1,5,2,0],[8,1,1,1,0,2,1,0,0],[8,0,0,0,1,0,2,0,0],[8,0,0,0,1,1,21,6,0],[8,0,0,0,1,2,30,6,0],[8,0,0,0,1,3,11,2,0],[8,0,0,0,1,4,5,0,0],[8,0,0,0,0,0,13,4,0],[8,0,0,0,0,1,120,26,2],[8,0,0,0,0,2,171,32,5],[8,0,0,0,0,3,106,21,4],[8,0,0,0,0,4,27,1,0],[8,0,0,0,0,5,8,0,0],[8,0,0,1,1,0,1,0,0],[8,0,0,1,1,2,3,2,0],[8,0,0,1,1,3,7,6,0],[8,0,0,1,1,4,2,2,0],[8,0,0,1,1,5,1,0,1],[8,0,0,1,0,0,3,1,0],[8,0,0,1,0,1,18,11,1],[8,0,0,1,0,2,28,18,1],[8,0,0,1,0,3,19,13,1],[8,0,0,1,0,4,5,1,1],[8,0,0,1,0,5,2,0,0],[8,0,1,0,0,0,14,6,0],[8,0,1,0,0,1,45,9,0],[8,0,1,0,0,2,34,7,0],[8,0,1,0,0,3,4,1,0],[8,0,1,0,0,4,4,0,0],[8,0,1,1,0,0,8,7,0],[8,0,1,1,0,1,31,27,1],[8,0,1,1,0,2,17,14,1],[8,0,1,1,0,3,2,2,0],[8,3,0,0,1,2,1,1,0],[8,3,0,0,0,3,1,1,0],[8,3,1,0,0,0,2,0,0],[8,3,1,0,0,1,3,1,0],[8,3,1,0,0,2,1,0,0],[0,1,0,0,1,0,2,0,0],[0,1,0,0,1,1,8,0,0],[0,1,0,0,1,2,5,0,0],[0,1,0,0,0,0,9,0,0],[0,1,0,0,0,1,75,0,0],[0,1,0,0,0,2,54,0,1],[0,1,0,0,0,3,31,0,0],[0,1,0,0,0,4,6,0,0],[0,1,0,0,0,5,1,0,0],[0,1,0,1,1,2,1,1,0],[0,1,0,1,0,0,4,3,1],[0,1,0,1,0,1,19,7,0],[0,1,0,1,0,2,15,5,0],[0,1,0,1,0,3,4,1,0],[0,1,0,1,0,4,2,0,0],[0,1,1,0,0,0,3,0,0],[0,1,1,0,0,1,18,0,0],[0,1,1,0,0,2,11,0,0],[0,1,1,0,0,3,3,0,0],[0,1,1,1,0,0,5,4,0],[0,1,1,1,0,1,18,10,0],[0,1,1,1,0,2,8,3,0],[0,1,1,1,0,3,2,2,0],[0,0,0,0,1,0,29,0,0],[0,0,0,0,1,1,143,3,1],[0,0,0,0,1,2,147,1,0],[0,0,0,0,1,3,111,1,0],[0,0,0,0,1,4,31,0,1],[0,0,0,0,1,5,13,0,0],[0,0,0,0,0,0,127,1,0],[0,0,0,0,0,1,679,25,7],[0,0,0,0,0,2,965,38,7],[0,0,0,0,0,3,789,11,5],[0,0,0,0,0,4,359,1,3],[0,0,0,0,0,5,86,0,2],[0,0,0,1,1,0,91,76,0],[0,0,0,1,1,1,250,212,2],[0,0,0,1,1,2,264,208,1],[0,0,0,1,1,3,139,99,2],[0,0,0,1,1,4,37,25,1],[0,0,0,1,1,5,7,2,0],[0,0,0,1,0,0,260,196,0],[0,0,0,1,0,1,1145,907,11],[0,0,0,1,0,2,1676,1304,18],[0,0,0,1,0,3,1120,842,11],[0,0,0,1,0,4,371,247,10],[0,0,0,1,0,5,56,31,1],[0,0,1,0,0,0,105,1,6],[0,0,1,0,0,1,290,15,18],[0,0,1,0,0,2,227,9,9],[0,0,1,0,0,3,83,1,6],[0,0,1,0,0,4,10,0,2],[0,0,1,1,1,0,3,3,0],[0,0,1,1,1,1,2,1,0],[0,0,1,1,0,0,871,775,0],[0,0,1,1,0,1,2312,2081,2],[0,0,1,1,0,2,1388,1261,2],[0,0,1,1,0,3,320,282,1],[0,0,1,1,0,4,18,14,0],[0,3,0,0,0,1,3,0,0],[0,3,0,0,0,3,1,0,0],[0,3,1,0,0,1,1,0,0],[0,3,1,0,0,2,1,0,0],[0,2,0,0,0,1,1,0,0],[0,2,0,0,0,2,3,0,0],[0,2,1,0,0,0,1,0,0],[0,2,1,0,0,1,8,0,0],[0,2,1,0,0,2,3,0,0],[0,2,1,1,0,1,3,0,0],[0,2,1,1,0,2,2,0,0],[16,1,0,0,1,1,8,2,0],[16,1,0,0,1,2,5,1,0],[16,1,0,0,1,3,4,1,0],[16,1,0,0,0,0,1,0,0],[16,1,0,0,0,1,13,4,0],[16,1,0,0,0,2,17,5,0],[16,1,0,0,0,3,23,9,0],[16,1,0,0,0,4,19,6,0],[16,1,0,0,0,5,4,3,0],[16,1,0,1,0,5,1,0,0],[16,1,1,0,0,0,6,4,0],[16,1,1,0,0,1,11,4,0],[16,1,1,0,0,2,7,5,0],[16,1,1,0,0,3,1,0,0],[16,0,0,0,1,1,2,0,0],[16,0,0,0,1,2,1,0,0],[16,0,0,0,1,3,1,0,0],[16,0,0,0,0,1,2,1,0],[16,0,0,0,0,2,6,3,0],[16,0,0,0,0,3,11,2,0],[16,0,0,0,0,4,7,0,0],[16,0,1,0,0,0,1,0,0],[16,0,1,0,0,1,2,0,0],[16,0,1,0,0,2,1,0,0],[6,1,0,0,1,0,3,0,0],[6,1,0,0,1,1,35,9,0],[6,1,0,0,1,2,45,14,0],[6,1,0,0,1,3,47,16,0],[6,1,0,0,1,4,24,6,0],[6,1,0,0,0,0,12,4,0],[6,1,0,0,0,1,89,37,0],[6,1,0,0,0,2,169,65,0],[6,1,0,0,0,3,203,72,0],[6,1,0,0,0,4,133,33,0],[6,1,0,0,0,5,18,4,0],[6,1,0,1,1,1,2,2,0],[6,1,0,1,0,0,1,1,0],[6,1,0,1,0,1,6,6,0],[6,1,0,1,0,2,6,4,0],[6,1,0,1,0,3,3,3,0],[6,1,0,1,0,4,3,3,0],[6,1,1,0,0,0,27,20,0],[6,1,1,0,0,1,120,83,0],[6,1,1,0,0,2,98,63,4],[6,1,1,0,0,3,22,16,0],[6,1,1,0,0,4,3,3,0],[6,1,1,1,0,2,1,0,0],[6,0,0,0,1,1,8,5,0],[6,0,0,0,1,2,3,3,0],[6,0,0,0,1,3,2,1,0],[6,0,0,0,1,4,2,0,0],[6,0,0,0,1,5,1,0,0],[6,0,0,0,0,0,6,5,0],[6,0,0,0,0,1,16,10,0],[6,0,0,0,0,2,43,15,0],[6,0,0,0,0,3,26,9,0],[6,0,0,0,0,4,21,7,0],[6,0,0,0,0,5,5,3,0],[6,0,1,0,1,1,1,0,0],[6,0,1,0,0,0,7,2,0],[6,0,1,0,0,1,27,16,0],[6,0,1,0,0,2,11,6,0],[6,0,1,0,0,3,3,0,0],[6,3,0,0,1,2,2,0,0],[6,3,0,0,0,3,1,0,0],[6,3,1,0,0,1,2,0,0],[6,3,1,0,0,2,1,0,0],[6,2,0,0,0,2,5,0,0],[6,2,0,0,0,3,1,0,0],[6,2,1,0,0,1,1,0,0],[6,2,1,0,0,2,1,0,0],[11,1,0,0,1,1,1,0,0],[11,1,0,0,0,1,8,0,0],[11,1,0,0,0,2,9,0,0],[11,1,0,0,0,3,1,0,0],[11,1,0,1,0,1,2,2,0],[11,1,0,1,0,2,4,4,0],[11,1,1,0,0,2,1,0,0],[11,1,1,1,0,1,4,4,0],[11,0,0,0,1,1,7,1,0],[11,0,0,0,1,2,10,2,0],[11,0,0,0,1,3,3,1,0],[11,0,0,0,0,0,10,1,0],[11,0,0,0,0,1,53,13,1],[11,0,0,0,0,2,103,29,2],[11,0,0,0,0,3,61,15,2],[11,0,0,0,0,4,14,1,0],[11,0,0,0,0,5,1,0,0],[11,0,0,1,1,0,1,1,0],[11,0,0,1,1,1,6,4,0],[11,0,0,1,1,2,14,8,0],[11,0,0,1,1,3,8,4,0],[11,0,0,1,1,4,1,0,0],[11,0,0,1,0,0,1,1,0],[11,0,0,1,0,1,32,23,0],[11,0,0,1,0,2,38,29,0],[11,0,0,1,0,3,32,20,3],[11,0,0,1,0,4,7,4,0],[11,0,0,1,0,5,4,2,0],[11,0,1,0,0,0,10,4,1],[11,0,1,0,0,1,32,11,1],[11,0,1,0,0,2,9,0,0],[11,0,1,0,0,3,2,1,0],[11,0,1,1,0,0,9,6,1],[11,0,1,1,0,1,65,53,0],[11,0,1,1,0,2,47,39,0],[11,0,1,1,0,3,12,9,0],[4,1,0,0,1,0,1,0,0],[4,1,0,0,1,1,3,0,0],[4,1,0,0,1,3,1,0,0],[4,1,0,0,0,0,8,0,0],[4,1,0,0,0,1,34,1,1],[4,1,0,0,0,2,38,1,0],[4,1,0,0,0,3,31,0,0],[4,1,0,0,0,4,4,0,0],[4,1,0,1,1,3,1,1,0],[4,1,0,1,0,0,3,3,0],[4,1,0,1,0,1,12,12,0],[4,1,0,1,0,2,3,3,0],[4,1,0,1,0,3,1,1,0],[4,1,1,0,0,0,3,0,0],[4,1,1,0,0,1,13,0,0],[4,1,1,0,0,2,7,0,0],[4,1,1,0,0,3,4,0,0],[4,1,1,1,0,0,2,1,0],[4,1,1,1,0,1,7,6,0],[4,1,1,1,0,2,2,1,1],[4,1,1,1,0,3,2,1,0],[4,0,0,0,1,0,2,0,0],[4,0,0,0,1,1,23,1,0],[4,0,0,0,1,2,37,7,0],[4,0,0,0,1,3,18,0,0],[4,0,0,0,1,4,4,0,0],[4,0,0,0,1,5,1,0,0],[4,0,0,0,0,0,19,0,0],[4,0,0,0,0,1,163,27,0],[4,0,0,0,0,2,234,42,3],[4,0,0,0,0,3,189,23,2],[4,0,0,0,0,4,62,2,0],[4,0,0,0,0,5,10,0,0],[4,0,0,1,1,0,4,4,0],[4,0,0,1,1,1,26,19,0],[4,0,0,1,1,2,30,25,1],[4,0,0,1,1,3,15,14,0],[4,0,0,1,1,4,1,1,0],[4,0,0,1,1,5,1,1,0],[4,0,0,1,0,0,20,16,0],[4,0,0,1,0,1,93,69,0],[4,0,0,1,0,2,112,99,2],[4,0,0,1,0,3,71,63,0],[4,0,0,1,0,4,29,19,1],[4,0,0,1,0,5,5,3,0],[4,0,1,0,0,0,7,2,0],[4,0,1,0,0,1,40,13,1],[4,0,1,0,0,2,27,1,0],[4,0,1,0,0,3,8,0,0],[4,0,1,1,1,1,2,0,0],[4,0,1,1,0,0,31,31,0],[4,0,1,1,0,1,136,128,1],[4,0,1,1,0,2,77,69,0],[4,0,1,1,0,3,20,16,0],[4,0,1,1,0,4,1,1,0],[4,2,0,0,1,3,1,0,0],[4,2,0,0,0,1,2,0,0],[4,2,0,0,0,2,8,0,0],[4,2,0,1,0,1,9,0,0],[4,2,0,1,0,2,3,0,0],[4,2,0,1,0,3,2,0,0],[4,2,0,1,0,4,1,0,0],[4,2,1,1,0,0,1,0,0],[4,2,1,1,0,1,3,0,0],[7,1,0,0,1,0,1,0,0],[7,1,0,0,1,2,7,0,0],[7,1,0,0,1,3,6,0,0],[7,1,0,0,0,1,25,3,0],[7,1,0,0,0,2,21,0,0],[7,1,0,0,0,3,15,1,0],[7,1,0,0,0,4,4,0,0],[7,1,0,0,0,5,1,0,0],[7,1,0,1,1,1,1,0,0],[7,1,0,1,1,2,1,0,0],[7,1,0,1,0,1,1,0,0],[7,1,0,1,0,2,2,0,0],[7,1,0,1,0,3,1,0,0],[7,1,1,0,1,1,1,0,0],[7,1,1,0,0,0,3,0,0],[7,1,1,0,0,1,17,0,0],[7,1,1,0,0,2,10,0,0],[7,1,1,1,0,0,1,0,0],[7,1,1,1,0,1,1,0,0],[7,1,1,1,0,2,3,0,0],[7,1,1,1,0,3,1,0,0],[7,0,0,0,1,0,2,0,0],[7,0,0,0,1,1,23,6,1],[7,0,0,0,1,2,26,5,0],[7,0,0,0,1,3,15,1,0],[7,0,0,0,1,4,4,0,0],[7,0,0,0,1,5,1,0,0],[7,0,0,0,0,0,17,1,0],[7,0,0,0,0,1,117,30,1],[7,0,0,0,0,2,192,42,2],[7,0,0,0,0,3,126,24,3],[7,0,0,0,0,4,30,0,1],[7,0,0,0,0,5,5,1,0],[7,0,0,1,1,0,1,0,0],[7,0,0,1,1,1,9,6,0],[7,0,0,1,1,2,18,9,0],[7,0,0,1,1,3,15,11,0],[7,0,0,1,1,4,1,1,0],[7,0,0,1,1,5,1,1,0],[7,0,0,1,0,0,6,4,0],[7,0,0,1,0,1,42,26,1],[7,0,0,1,0,2,55,38,2],[7,0,0,1,0,3,49,30,2],[7,0,0,1,0,4,15,10,0],[7,0,0,1,0,5,4,0,0],[7,0,1,0,0,0,21,6,0],[7,0,1,0,0,1,27,10,1],[7,0,1,0,0,2,28,10,3],[7,0,1,0,0,3,10,2,1],[7,0,1,0,0,4,1,0,0],[7,0,1,1,0,0,15,14,0],[7,0,1,1,0,1,71,58,2],[7,0,1,1,0,2,62,45,0],[7,0,1,1,0,3,19,10,0],[7,0,1,1,0,4,2,2,0],[7,2,0,0,1,3,2,0,0],[7,2,0,0,0,0,1,0,0],[7,2,0,0,0,1,3,0,0],[7,2,0,0,0,2,6,2,1],[7,2,0,0,0,3,9,0,0],[3,1,0,0,1,0,4,0,0],[3,1,0,0,1,1,26,11,0],[3,1,0,0,1,2,58,16,0],[3,1,0,0,1,3,42,10,0],[3,1,0,0,1,4,7,0,0],[3,1,0,0,1,5,2,0,0],[3,1,0,0,0,0,24,3,0],[3,1,0,0,0,1,190,50,2],[3,1,0,0,0,2,308,79,4],[3,1,0,0,0,3,273,48,4],[3,1,0,0,0,4,117,13,2],[3,1,0,0,0,5,26,2,2],[3,1,0,1,1,0,6,5,0],[3,1,0,1,1,1,41,36,0],[3,1,0,1,1,2,61,50,0],[3,1,0,1,1,3,32,29,1],[3,1,0,1,1,4,14,12,0],[3,1,0,1,1,5,3,2,0],[3,1,0,1,0,0,13,11,1],[3,1,0,1,0,1,91,71,0],[3,1,0,1,0,2,173,133,1],[3,1,0,1,0,3,161,130,3],[3,1,0,1,0,4,61,54,1],[3,1,0,1,0,5,22,16,0],[3,1,1,0,0,0,42,21,0],[3,1,1,0,0,1,180,73,1],[3,1,1,0,0,2,116,51,0],[3,1,1,0,0,3,36,14,0],[3,1,1,1,1,1,1,1,0],[3,1,1,1,0,0,86,70,0],[3,1,1,1,0,1,230,194,0],[3,1,1,1,0,2,160,137,0],[3,1,1,1,0,3,45,40,0],[3,1,1,1,0,4,3,2,0],[3,0,0,0,1,0,1,0,0],[3,0,0,0,1,1,9,4,0],[3,0,0,0,1,2,13,1,1],[3,0,0,0,1,3,13,0,0],[3,0,0,0,1,4,3,0,0],[3,0,0,0,1,5,1,0,0],[3,0,0,0,0,0,9,2,0],[3,0,0,0,0,1,103,23,3],[3,0,0,0,0,2,164,34,3],[3,0,0,0,0,3,128,25,1],[3,0,0,0,0,4,50,6,1],[3,0,0,0,0,5,5,0,0],[3,0,0,1,1,1,2,1,0],[3,0,0,1,1,2,2,2,0],[3,0,0,1,1,3,2,0,0],[3,0,0,1,1,4,2,0,0],[3,0,0,1,0,1,14,11,0],[3,0,0,1,0,2,8,4,0],[3,0,0,1,0,3,6,3,0],[3,0,0,1,0,4,7,1,0],[3,0,0,1,0,5,2,1,0],[3,0,1,0,0,0,14,6,0],[3,0,1,0,0,1,52,12,1],[3,0,1,0,0,2,26,7,0],[3,0,1,0,0,3,11,3,0],[3,0,1,0,0,4,2,0,0],[3,0,1,1,0,0,6,1,0],[3,0,1,1,0,1,9,4,0],[3,0,1,1,0,2,5,2,0],[3,0,1,1,0,3,2,1,1],[3,2,0,0,1,1,1,0,0],[3,2,0,0,1,2,1,0,0],[3,2,0,0,0,1,1,0,0],[3,2,0,0,0,2,3,0,0],[3,2,0,0,0,3,2,0,0],[3,2,1,0,0,1,1,0,0],[9,1,0,0,1,1,17,3,0],[9,1,0,0,1,2,7,0,0],[9,1,0,0,1,3,5,0,0],[9,1,0,0,1,4,2,0,0],[9,1,0,0,1,5,1,0,0],[9,1,0,0,0,0,28,4,4],[9,1,0,0,0,1,93,14,2],[9,1,0,0,0,2,109,22,0],[9,1,0,0,0,3,83,15,0],[9,1,0,0,0,4,31,1,0],[9,1,0,0,0,5,2,0,0],[9,1,0,1,1,2,1,0,0],[9,1,0,1,0,0,1,0,0],[9,1,1,0,0,0,4,0,0],[9,1,1,0,0,1,19,6,3],[9,1,1,0,0,2,21,5,0],[9,1,1,0,0,3,6,2,1],[9,0,0,0,1,1,15,7,0],[9,0,0,0,1,2,5,0,0],[9,0,0,0,1,3,4,0,0],[9,0,0,0,1,4,1,0,0],[9,0,0,0,0,0,11,5,0],[9,0,0,0,0,1,66,18,1],[9,0,0,0,0,2,80,12,1],[9,0,0,0,0,3,42,11,1],[9,0,0,0,0,4,27,4,0],[9,0,0,0,0,5,3,0,0],[9,0,1,0,1,1,1,1,0],[9,0,1,0,0,0,8,7,0],[9,0,1,0,0,1,9,6,1],[9,0,1,0,0,2,10,6,0],[9,0,1,0,0,3,2,1,0],[9,0,1,0,0,4,1,0,0],[9,2,0,0,1,1,1,0,0],[9,2,0,0,1,2,1,0,0],[9,2,0,0,1,3,1,0,0],[9,2,0,0,0,1,4,0,0],[9,2,0,0,0,2,4,2,0],[9,2,0,0,0,3,3,1,0],[9,2,0,0,0,4,1,0,0],[9,2,1,0,0,0,3,1,0],[9,2,1,0,0,1,5,3,0],[9,2,1,0,0,2,4,3,0],[9,2,1,0,0,3,1,0,0],[12,1,0,0,1,0,5,2,0],[12,1,0,0,1,1,7,4,0],[12,1,0,0,1,2,20,7,0],[12,1,0,0,1,3,23,8,0],[12,1,0,0,1,4,11,4,0],[12,1,0,0,1,5,4,0,0],[12,1,0,0,0,0,6,3,0],[12,1,0,0,0,1,30,12,0],[12,1,0,0,0,2,67,24,0],[12,1,0,0,0,3,87,26,0],[12,1,0,0,0,4,60,24,0],[12,1,0,0,0,5,21,4,0],[12,1,0,1,1,3,1,1,0],[12,1,0,1,1,4,1,1,0],[12,1,0,1,0,0,1,1,0],[12,1,0,1,0,2,1,1,0],[12,1,0,1,0,3,2,2,0],[12,1,0,1,0,4,2,1,0],[12,1,0,1,0,5,1,1,0],[12,1,1,0,0,0,11,9,0],[12,1,1,0,0,1,40,22,0],[12,1,1,0,0,2,28,14,0],[12,1,1,0,0,3,8,5,0],[12,0,0,0,1,1,3,2,0],[12,0,0,0,1,2,2,2,0],[12,0,0,0,1,3,3,0,0],[12,0,0,0,1,4,1,1,0],[12,0,0,0,0,0,1,0,0],[12,0,0,0,0,1,14,4,0],[12,0,0,0,0,2,6,5,0],[12,0,0,0,0,3,13,9,0],[12,0,0,0,0,4,16,9,0],[12,0,0,0,0,5,4,1,0],[12,0,0,1,1,3,1,0,0],[12,0,1,0,1,0,1,0,0],[12,0,1,0,1,1,2,0,0],[12,0,1,0,0,0,4,4,0],[12,0,1,0,0,1,5,4,0],[12,0,1,0,0,2,8,5,0],[12,0,1,0,0,3,3,2,0],[13,1,0,0,1,1,8,3,0],[13,1,0,0,1,2,14,2,0],[13,1,0,0,1,3,8,1,0],[13,1,0,0,1,4,1,0,0],[13,1,0,0,1,5,1,0,0],[13,1,0,0,0,0,16,8,0],[13,1,0,0,0,1,36,6,1],[13,1,0,0,0,2,51,7,2],[13,1,0,0,0,3,72,3,0],[13,1,0,0,0,4,25,1,0],[13,1,0,0,0,5,9,0,0],[13,1,1,0,0,0,6,1,0],[13,1,1,0,0,1,22,6,0],[13,1,1,0,0,2,11,5,0],[13,1,1,0,0,3,1,0,0],[13,1,1,0,0,4,1,0,0],[13,0,0,0,1,1,4,0,0],[13,0,0,0,1,3,2,1,0],[13,0,0,0,0,1,2,1,0],[13,0,0,0,0,2,5,2,0],[13,0,0,0,0,3,6,3,0],[13,0,0,0,0,4,3,1,0],[13,0,1,0,0,1,2,2,0],[13,0,1,0,0,2,1,0,0],[15,1,0,0,1,0,1,0,0],[15,1,0,0,1,1,1,1,0],[15,1,0,0,1,2,6,1,0],[15,1,0,0,1,3,10,0,0],[15,1,0,0,1,4,2,0,0],[15,1,0,0,0,0,7,1,0],[15,1,0,0,0,1,30,15,0],[15,1,0,0,0,2,26,9,0],[15,1,0,0,0,3,27,2,0],[15,1,0,0,0,4,10,0,0],[15,1,0,0,0,5,5,0,0],[15,1,0,1,0,1,1,0,0],[15,1,0,1,0,5,1,0,0],[15,1,1,0,0,0,5,1,0],[15,1,1,0,0,1,5,2,0],[15,1,1,0,0,2,7,1,0],[15,1,1,0,0,3,2,1,0],[15,1,1,0,0,4,1,0,0],[15,1,1,0,0,5,1,0,0],[15,0,0,0,1,1,1,0,0],[15,0,0,0,1,2,4,0,0],[15,0,0,0,1,3,3,0,0],[15,0,0,0,1,4,1,0,0],[15,0,0,0,0,0,1,0,0],[15,0,0,0,0,1,12,0,0],[15,0,0,0,0,2,15,1,0],[15,0,0,0,0,3,7,0,0],[15,0,0,0,0,4,9,2,0],[15,0,0,0,0,5,1,0,0],[15,0,1,0,0,1,3,0,0],[15,0,1,0,0,2,4,0,0],[15,2,0,0,1,1,1,0,0],[15,2,0,0,0,0,4,0,0]]};</script>
+
+<header class="top">
+  <div class="wide">
+    <p class="kicker">The Himalayan Database &middot; 40,605 people since 2000</p>
+    <h1>What are my odds up there?</h1>
+    <p class="sub">Every expedition operator on earth quotes you a success rate.
+      None of them quote you theirs against the archive, and none of them quote
+      you the other number at all. This page fits both from the record of forty
+      thousand people who went &mdash; and then shows you exactly how much of
+      the outcome it cannot see, which is most of it.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wide">
+    <div class="tool">
+
+      <div class="noprint">
+        <div class="card">
+          <h3>Your climb</h3>
+
+          <div class="field">
+            <label class="lab" for="peak">Peak</label>
+            <select id="peak"></select>
+            <p class="tiny" id="peakNote" style="margin:7px 0 0"></p>
+          </div>
+
+          <div class="two">
+            <div class="field">
+              <label class="lab" for="season">Season</label>
+              <select id="season"></select>
+            </div>
+            <div class="field">
+              <label class="lab" for="sex">Sex as recorded</label>
+              <select id="sex">
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="lab" for="age">Age</label>
+            <div class="agerow">
+              <input type="range" id="ageRange" min="16" max="80" step="1" value="38"
+                     aria-label="Age in years">
+              <input type="number" class="num" id="age" min="16" max="80" step="1"
+                     value="38" aria-label="Age in years">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="lab">Bottled oxygen</label>
+            <div class="seg" id="o2Seg" role="group" aria-label="Bottled oxygen">
+              <button type="button" data-o2="1" aria-pressed="true">Using it</button>
+              <button type="button" data-o2="0" aria-pressed="false">Without</button>
+            </div>
+            <p class="tiny" style="margin:7px 0 0">The single largest lever in the
+              whole archive. Worth toggling before you read anything else here.</p>
+          </div>
+
+          <div class="field">
+            <label class="lab">You are on the mountain as</label>
+            <div class="seg" id="roleSeg" role="group" aria-label="Role">
+              <button type="button" data-hired="0" aria-pressed="true">A member</button>
+              <button type="button" data-hired="1" aria-pressed="false">Hired staff</button>
+            </div>
+            <p class="tiny" style="margin:7px 0 0">Members pay to be there. Hired
+              staff are paid to be there, and are Nepali about ninety-six times in
+              a hundred. The archive is one of the few places their outcomes are
+              recorded at all, so they get their own answer here rather than being
+              folded into everyone else's.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="answer">
+          <p class="cap mono" style="font-family:'DM Mono',monospace; font-size:11px;
+             letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+             margin:0; padding:18px 22px 0" id="outWho">&mdash;</p>
+          <div class="odds">
+            <div class="odd">
+              <span class="cap">Reach the summit</span>
+              <div class="big" id="outSummit">&mdash;</div>
+              <p class="sub2" id="outSummitSub">&mdash;</p>
+              <p class="ci" id="outSummitCi"></p>
+            </div>
+            <div class="odd">
+              <span class="cap">Do not come back</span>
+              <div class="big" id="outDeath">&mdash;</div>
+              <p class="sub2" id="outDeathSub">&mdash;</p>
+              <p class="ci" id="outDeathCi"></p>
+            </div>
+          </div>
+          <p class="printonly mono" id="printPlan"></p>
+          <div class="rows" id="outRows"></div>
+          <div class="flag" id="outFlag"></div>
+          <div class="acts noprint">
+            <button type="button" class="cta ghost" id="shareBtn">Copy a link to this</button>
+            <button type="button" class="cta ghost" id="printBtn">Print or save as PDF</button>
+          </div>
+          <input type="text" id="shareOut" class="noprint" readonly
+                 aria-label="Link to these odds" style="display:none">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">The part you can actually choose</p>
+    <h2>What moves the numbers</h2>
+    <p class="lede" style="margin-bottom:26px">Most of what decides a Himalayan
+      outcome is not a choice. The mountain, the weather of that particular week,
+      and the people you happen to be roped to are not dials. These four are.</p>
+    <div class="split">
+      <div class="card">
+        <h3 style="margin-top:0">Change one thing, hold the rest</h3>
+        <p class="small">Each row refits nothing: it asks the same two fitted
+          models what happens to a person identical to you but for one
+          attribute.</p>
+        <div id="levers"></div>
+        <p class="tiny" style="margin:14px 0 0">Read these as differences
+          between groups of climbers, not as promises. The archive watched who
+          used oxygen; it never ran the experiment of taking it away from
+          someone.</p>
+      </div>
+      <div class="fig" id="figField">
+        <h3>Every peak in the model</h3>
+        <p class="note">How often people got up against how often they did not
+          come back, since 2000. Area is how many people. Your peak is filled
+          and named.</p>
+        <div id="fieldChart"></div>
+        <div class="tip" id="fieldTip"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">The people the answer is made of</p>
+    <h2>Who else went like this</h2>
+    <p class="lede" style="margin-bottom:26px">A fitted probability nobody can
+      check against real people is a number you should not act on. These are the
+      climbers in the archive who match what you entered, counted rather than
+      modelled.</p>
+    <div class="stats" id="compStats" style="margin-bottom:24px"></div>
+    <div class="card">
+      <p class="small" id="compNote" style="margin:0"></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">Does the number mean anything</p>
+    <h2>When it says two per cent, do two per cent die?</h2>
+    <div class="split">
+      <div class="fig" id="figCalib">
+        <h3>Predicted against observed</h3>
+        <p class="note">Everyone in the fit, sorted by the chance the model gave
+          them and cut into eight equal groups. A point on the dashed line is a
+          group where the model was exactly right.</p>
+        <div class="seg" id="calibSeg" style="margin-bottom:14px"
+             role="group" aria-label="Which model to check">
+          <button type="button" data-model="death" aria-pressed="true">Coming back</button>
+          <button type="button" data-model="summit" aria-pressed="false">Summiting</button>
+        </div>
+        <div id="calibChart"></div>
+        <div class="tip" id="calibTip"></div>
+      </div>
+      <div>
+        <div class="stats pair" id="fitStats"></div>
+        <p class="small" style="margin-top:18px" id="fitNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">Before you book anything</p>
+    <h2>Two things this page cannot do for you</h2>
+    <div class="offers">
+      <div class="offer lead">
+        <p class="eyebrow" style="margin-bottom:10px">Operator shortlist</p>
+        <div class="price"><span class="amt">Free</span><span class="per">three Nepali-run operators, matched to your peak</span></div>
+        <ul class="ticks">
+          <li>Three agencies with expeditions on your peak in the archive, with
+            what the record says about their own climbs</li>
+          <li>Their client-to-guide ratio, their oxygen policy and what they pay
+            hired staff, asked on your behalf and answered in writing</li>
+          <li>No commission, and nothing is released to them until you say so</li>
+        </ul>
+        <button type="button" class="cta" id="openOperator">Get the shortlist</button>
+        <a class="cta paylink" id="payLink" href="#" style="display:none"
+           rel="noopener">Pay now</a>
+      </div>
+
+      <div class="offer">
+        <p class="eyebrow" style="margin-bottom:10px">Rescue cover</p>
+        <div class="price"><span class="amt">Quote</span><span class="per">helicopter evacuation above 6,000 m</span></div>
+        <ul class="ticks">
+          <li>Standard travel insurance stops well below where you are going;
+            most policies exclude mountaineering above 6,000 metres outright</li>
+          <li>A quote for cover that actually names your peak and your altitude,
+            from insurers who write it</li>
+          <li>What the exclusions say, in plain words, before you pay</li>
+        </ul>
+        <button type="button" class="cta ghost" id="openInsurance">Get a quote</button>
+      </div>
+    </div>
+
+    <div class="offer leadform" id="leadForm" style="margin-top:20px">
+      <h3 style="margin-top:0" id="leadTitle">Get the shortlist</h3>
+      <p class="small" id="leadBlurb"></p>
+      <div class="two">
+        <div class="field">
+          <label class="lab" for="leadName">Your name</label>
+          <input type="text" id="leadName" autocomplete="name" placeholder="Full name">
+        </div>
+        <div class="field">
+          <label class="lab" for="leadEmail">Email</label>
+          <input type="text" id="leadEmail" autocomplete="email" placeholder="you@example.com">
+        </div>
+      </div>
+      <div class="two">
+        <div class="field">
+          <label class="lab" for="leadWhen">When you plan to go</label>
+          <select id="leadWhen"></select>
+        </div>
+        <div class="field">
+          <label class="lab" for="leadExp">Highest you have been</label>
+          <select id="leadExp">
+            <option value="under5">Under 5,000 m</option>
+            <option value="5to6">5,000 to 6,000 m</option>
+            <option value="6to7">6,000 to 7,000 m</option>
+            <option value="7to8">7,000 to 8,000 m</option>
+            <option value="over8">Above 8,000 m</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="lab">Climb as entered above</label>
+        <p class="small mono" id="leadPlan" style="margin:0; color:var(--ink-2)">&mdash;</p>
+      </div>
+      <p class="err" id="leadErr"></p>
+      <button type="button" class="cta" id="leadSubmit">Send request</button>
+      <p class="demo" id="leadDemo"></p>
+    </div>
+
+    <div class="offer done" id="leadDone" style="margin-top:20px"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Read this part</p>
+    <h2>What the archive cannot see</h2>
+    <p><b>Almost everything that decides the outcome.</b> The database records
+      which peak, which season, member or hired, oxygen or not, age and sex. It
+      does not record how fit you are, how many seasons you have climbed, how
+      good your guides are, how heavy your pack is, or &mdash; above all &mdash;
+      what the weather does in your particular summit window. Those are most of
+      the answer. What is fitted here is the base rate for a category of person,
+      which is a useful thing to know and is not a prediction about you.</p>
+    <p><b>The death model is weak, and says so.</b> It separates who died from
+      who lived with a held-out AUC of <span id="limAuc">&mdash;</span>, where
+      0.5 is a coin and 1.0 is perfect. The summit model reaches
+      <span id="limAuc2">&mdash;</span>. That gap is the honest finding of this
+      page: the record can tell you fairly well who gets to the top and barely at
+      all who comes home. Dying on a mountain is mostly bad luck arriving at a
+      specific place and minute, and no table of categories will predict it.</p>
+    <p><b>Deaths arrive in clusters.</b> An avalanche kills whoever is beneath it,
+      so the cross-validation holds out whole expeditions rather than individual
+      people. A split that put two victims of one serac on both sides would have
+      flattered every score above.</p>
+    <p><b>The record thins out behind you.</b> The fit starts at 2000 because
+      before then the recording of hired staff is too uneven to compare, which is
+      <a href="../himalaya/">the neighbouring essay's</a> own finding. It ends at
+      <span id="limYear">&mdash;</span>, where this copy of the database ends.</p>
+    <p class="small" id="limStats"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="srcs" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs" id="srcs"></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+var D = window.ODDS_DATA;
+var M = D.meta, MODELS = D.models, FIT = D.fit, COLS = D.columns;
+function el(id){ return document.getElementById(id); }
+
+/* ------------------------------------------------------------- contact
+   Same arrangement as the land estimator: a page with no server can still
+   deliver a request by handing the reader one already written. Fill these in
+   before publishing; assemble.py prints a warning for each left blank.
+
+     whatsapp  international digits, no + and no spaces
+     email     the inbox that should receive requests
+     pay_link  a hosted payment link, or "" to hide the button */
+var CONTACT = {whatsapp: "", email: "", pay_link: ""};
+
+/* ------------------------------------------------------------- numbers */
+
+function pct(p, dp){ return (100 * p).toFixed(dp === undefined ? 1 : dp) + "%"; }
+function per1000(p){ return (1000 * p).toFixed(1); }
+function group(n){ return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+function signed(x, dp){ return (x >= 0 ? "+" : "") + x.toFixed(dp === undefined ? 1 : dp); }
+function esc(s){
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function odds(p){
+  // "One in N" is how climbers talk about a risk, and for a number near a
+  // per cent it carries far better than a decimal.  It falls apart above
+  // about a tenth, where 1-in-1.3 is nonsense, so a likely outcome gets the
+  // nearest simple fraction instead: three in four, not one in one.
+  if (p <= 0) return "never, in this record";
+  if (p >= 1) return "everyone, in this record";
+  if (p < 0.1) {
+    var n = 1 / p;
+    return "about 1 in " + (n >= 20 ? Math.round(n / 5) * 5 : Math.round(n));
+  }
+  var best = null;
+  for (var d = 2; d <= 10; d++) {
+    var k = Math.round(p * d);
+    if (k < 1 || k >= d) continue;
+    var err = Math.abs(k / d - p);
+    if (best === null || err < best.err - 1e-9) best = {k: k, d: d, err: err};
+  }
+  return best ? "about " + best.k + " in " + best.d
+              : "about " + Math.round(p * 100) + " in 100";
+}
+
+function wilson(k, n){
+  if (!n) return null;
+  var ph = k / n, z = 1.96, den = 1 + z * z / n;
+  var c = (ph + z * z / (2 * n)) / den;
+  var h = z * Math.sqrt(ph * (1 - ph) / n + z * z / (4 * n * n)) / den;
+  return {p: ph, lo: Math.max(0, c - h), hi: Math.min(1, c + h)};
+}
+
+/* ---------------------------------------------------------------- state */
+
+var PEAKS = D.peaks.slice();                       // sorted by height already
+var PEAK_INDEX = {};                               // peak id -> model column
+D.peak_order.forEach(function(p, i){ PEAK_INDEX[p] = i; });
+
+var state = {
+  peak: "EVER",
+  season: "Spring",
+  sex: "M",
+  age: 38,
+  o2: 1,
+  hired: 0,
+  calib: "death"
+};
+
+function peakRow(id){
+  for (var i = 0; i < PEAKS.length; i++) if (PEAKS[i].id === id) return PEAKS[i];
+  return null;
+}
+
+/* ---------------------------------------------------------------- model
+   The browser rebuilds the same row build_model.py fitted on, column by
+   column and by name, so a column added in Python cannot silently go missing
+   here -- it throws instead. */
+
+function features(s){
+  var out = [];
+  for (var i = 0; i < COLS.length; i++) {
+    var c = COLS[i], v;
+    if (c.indexOf("peak=") === 0) v = (s.peak === c.slice(5)) ? 1 : 0;
+    else if (c.indexOf("season=") === 0) v = (s.season === c.slice(7)) ? 1 : 0;
+    else if (c === "oxygen") v = s.o2;
+    else if (c === "hired") v = s.hired;
+    else if (c === "female") v = (s.sex === "F") ? 1 : 0;
+    else if (c === "age") v = (s.age - M.age0) / 10;
+    else if (c === "age_sq") v = Math.pow((s.age - M.age0) / 10, 2);
+    else if (c === "year") v = (M.year_max - M.year0) / 10;
+    else throw new Error("no rule for model column " + c);
+    out.push(v);
+  }
+  return out;
+}
+
+function score(which, s){
+  var m = MODELS[which], x = features(s), lp = m.intercept, i;
+  for (i = 0; i < COLS.length; i++) lp += m.coef[COLS[i]] * x[i];
+  return 1 / (1 + Math.exp(-Math.max(-30, Math.min(30, lp))));
+}
+
+/* --------------------------------------------------------- comparables
+   The cells are [peak, season, hired, oxygen, female, ageband, n, summits,
+   deaths].  An exact match is best; when too few people sit in it the match
+   is loosened one attribute at a time, in the order that costs least, and the
+   page says which. */
+
+function ageBand(age){
+  for (var i = 0; i < D.age_bands.length; i++) {
+    var b = D.age_bands[i];
+    if (age >= b.lo && age < b.hi) return i;
+  }
+  return D.age_bands.length - 1;
+}
+
+var RELAX = [
+  {drop: [], says: ""},
+  {drop: ["female"], says: "either sex"},
+  {drop: ["female", "ageband"], says: "either sex, any age"},
+  {drop: ["female", "ageband", "season"], says: "either sex, any age, any season"}
+];
+
+var MIN_MATCH = 60;   // below this the observed rate is too noisy to check against
+
+function matches(){
+  var want = {
+    peak: PEAK_INDEX[state.peak],
+    season: D.seasons.indexOf(state.season),
+    hired: state.hired,
+    female: state.sex === "F" ? 1 : 0,
+    oxygen: state.o2,
+    ageband: ageBand(state.age)
+  };
+  for (var r = 0; r < RELAX.length; r++) {
+    var drop = RELAX[r].drop, n = 0, summits = 0, deaths = 0;
+    for (var i = 0; i < D.cells.length; i++) {
+      var c = D.cells[i];
+      if (c[0] !== want.peak) continue;
+      if (c[2] !== want.hired) continue;
+      if (c[3] !== want.oxygen) continue;
+      if (drop.indexOf("season") < 0 && c[1] !== want.season) continue;
+      if (drop.indexOf("female") < 0 && c[4] !== want.female) continue;
+      if (drop.indexOf("ageband") < 0 && c[5] !== want.ageband) continue;
+      n += c[6]; summits += c[7]; deaths += c[8];
+    }
+    if (n >= MIN_MATCH || r === RELAX.length - 1) {
+      return {n: n, summits: summits, deaths: deaths, relaxed: RELAX[r].says};
+    }
+  }
+}
+
+function planLine(){
+  var p = peakRow(state.peak);
+  return [p ? p.name : state.peak, state.season,
+          state.o2 ? "with oxygen" : "without oxygen",
+          state.hired ? "hired staff" : "member",
+          state.age + ", " + (state.sex === "F" ? "female" : "male")].join("  /  ");
+}
+
+/* ================================================================ answer */
+
+var answer = (function(){
+
+  function draw(){
+    var p = peakRow(state.peak);
+    var ps = score("summit", state), pd = score("death", state);
+    var mt = matches();
+
+    el("outWho").textContent = p.name + "  /  " + p.height + " m  /  " +
+      state.season + (state.o2 ? "  /  oxygen" : "  /  no oxygen");
+    el("outSummit").textContent = pct(ps, 0);
+    // The space matters: without it a screen reader says "25.4in 1,000".
+    el("outDeath").innerHTML = per1000(pd) +
+      ' <span class="unit">in 1,000</span>';
+
+    var ws = wilson(mt.summits, mt.n), wd = wilson(mt.deaths, mt.n);
+    el("outSummitSub").textContent = mt.n
+      ? group(mt.summits) + " of " + group(mt.n) + " matching climbers got up"
+      : "no matching climbers in the record";
+    el("outDeathSub").textContent = mt.n
+      ? group(mt.deaths) + " of " + group(mt.n) + " did not come back"
+      : "";
+    el("outSummitCi").textContent = ws
+      ? "observed " + pct(ws.p, 0) + ", 95% CI " + pct(ws.lo, 0) + " to " + pct(ws.hi, 0)
+      : "";
+    el("outDeathCi").textContent = wd
+      ? "observed " + per1000(wd.p) + " in 1,000, 95% CI " +
+        per1000(wd.lo) + " to " + per1000(wd.hi)
+      : "";
+    el("printPlan").textContent = planLine() + "  /  fitted on " +
+      group(M.people) + " people, " + M.modern_from + " to " + M.year_max;
+
+    rows(ps, pd, mt, p);
+    flag(mt, ps, pd, p);
+  }
+
+  function rows(ps, pd, mt, p){
+    var r = [];
+    function row(k, sub, v, cls){
+      r.push('<div class="row' + (cls ? " " + cls : "") + '"><span class="k">' + k +
+             (sub ? '<em>' + sub + '</em>' : '') + '</span><span class="v">' + v + '</span></div>');
+    }
+    row("Summit, in plain words", "the model's figure for someone like you",
+        odds(ps) + " get up");
+    row("Not coming back", "the same, for the other outcome",
+        odds(pd));
+    row("This peak overall", "everyone on it since " + M.modern_from,
+        pct(p.summits / p.n, 0) + " up, " + per1000(p.deaths / p.n) + " in 1,000 lost");
+    row("Climbers matched to you", mt.relaxed
+        ? "loosened to " + mt.relaxed + " to find enough of them"
+        : "exactly your peak, season, role, oxygen, sex and age band",
+        group(mt.n));
+    el("outRows").innerHTML = r.join("");
+  }
+
+  function flag(mt, ps, pd, p){
+    var msgs = [], warn = false;
+
+    // The model carries one oxygen coefficient for all seventeen peaks, so on
+    // a mountain where almost nobody uses it the fit is borrowing Everest's
+    // experience.  Rather than hide that, compare the estimate against the
+    // people who actually matched and say plainly which to believe.
+    if (mt.n >= 30) {
+      var ws = wilson(mt.summits, mt.n), wd = wilson(mt.deaths, mt.n);
+      if (ps < ws.lo || ps > ws.hi) {
+        msgs.push("<b>The model and the record disagree about summiting.</b> " +
+          "It puts you at " + pct(ps, 0) + "; the " + group(mt.n) + " climbers " +
+          "who actually matched you got up " + pct(ws.p, 0) + " of the time. " +
+          "With that many people behind it, believe them. The fit carries one " +
+          "oxygen coefficient for every peak, so on a mountain where few use " +
+          "it the estimate is borrowing from Everest.");
+        warn = true;
+      }
+      if (pd < wd.lo || pd > wd.hi) {
+        msgs.push("<b>The model and the record disagree about the risk</b>, and " +
+          "here that matters more. It puts you at " + per1000(pd) + " in 1,000; " +
+          group(mt.deaths) + " of the " + group(mt.n) + " matching climbers did " +
+          "not come back, which is " + per1000(wd.p) + " in 1,000. Take the " +
+          "larger of the two seriously.");
+        warn = true;
+      }
+    }
+    if (mt.n < 30) {
+      msgs.push("<b>Only " + mt.n + " climbers in the record match this.</b> " +
+        "The observed figures beside the estimate are too thin to check it " +
+        "against; treat them as a hint, not a second opinion.");
+      warn = true;
+    }
+    if (state.hired && state.o2 === 0 && p.oxygen_share > 0.3) {
+      msgs.push("<b>Hired staff on this peak mostly do use oxygen.</b> The " +
+        "few who did not are an unusual group, and the estimate leans on the " +
+        "model rather than on them.");
+    }
+    if (state.age > 65 || state.age < 20) {
+      msgs.push("<b>Very few climbers this age are in the record</b>, so the " +
+        "age term is extrapolating past most of its evidence.");
+      warn = true;
+    }
+    if (state.season === "Summer" || state.season === "Winter") {
+      msgs.push("<b>" + state.season + " is rare here.</b> Fewer than one " +
+        "climber in twenty in this archive went in " + state.season.toLowerCase() +
+        ", and those who did were an unusually experienced group. The season " +
+        "coefficient partly measures who goes, not what the season does.");
+    }
+    if (!msgs.length) {
+      el("outFlag").className = "flag";
+      el("outFlag").innerHTML = "These are base rates for a category of person, " +
+        "not a prediction about you. The archive cannot see your fitness, your " +
+        "experience, your guides, or the weather of your summit window.";
+    } else {
+      el("outFlag").className = "flag" + (warn ? " warn" : "");
+      el("outFlag").innerHTML = msgs.join("<br><br>");
+    }
+  }
+
+  return {draw: draw};
+})();
+
+/* ================================================================ levers */
+
+var levers = (function(){
+
+  function whatIf(patch){
+    var s = {}, k;
+    for (k in state) s[k] = state[k];
+    for (k in patch) s[k] = patch[k];
+    return {summit: score("summit", s), death: score("death", s)};
+  }
+
+  function row(label, sub, now, alt){
+    // Two different quantities, so two labelled lines rather than one run-on:
+    // "-66 pts up +2.5 in 1,000" reads as a single garbled number.  Each keeps
+    // its sign, which is also the second encoding the palette check wants
+    // beside the colour.
+    var ds = (alt.summit - now.summit) * 100;
+    var dd = (alt.death - now.death) * 1000;
+    return '<div class="row"><span class="k">' + label +
+      (sub ? '<em>' + sub + '</em>' : '') + '</span><span class="v">' +
+      '<span class="dual">' +
+      '<span class="' + (ds >= 0 ? "up" : "down") + '">' + signed(ds, 0) +
+      ' pts</span><em>summit</em>' +
+      '<span class="' + (dd <= 0 ? "up" : "down") + '">' + signed(dd, 1) +
+      '</span><em>per 1,000</em>' +
+      '</span></span></div>';
+  }
+
+  function draw(){
+    var now = {summit: score("summit", state), death: score("death", state)};
+    var out = [];
+    out.push(row(state.o2 ? "Climbing without oxygen" : "Taking bottled oxygen",
+                 "everything else held", now, whatIf({o2: state.o2 ? 0 : 1})));
+    var otherSeason = state.season === "Spring" ? "Autumn" : "Spring";
+    out.push(row("Going in " + otherSeason, "instead of " + state.season,
+                 now, whatIf({season: otherSeason})));
+    out.push(row("Ten years older", "at " + (state.age + 10) + " rather than " + state.age,
+                 now, whatIf({age: Math.min(80, state.age + 10)})));
+    var alt = peakRow(state.peak).id === "EVER" ? "AMAD" : "EVER";
+    out.push(row("On " + peakRow(alt).name, "the same person, a different mountain",
+                 now, whatIf({peak: alt})));
+    el("levers").innerHTML = '<div class="rows tight">' + out.join("") + '</div>';
+  }
+
+  return {draw: draw};
+})();
+
+/* ================================================================= comps */
+
+var comps = (function(){
+
+  function draw(){
+    var mt = matches(), p = peakRow(state.peak);
+    var ws = wilson(mt.summits, mt.n), wd = wilson(mt.deaths, mt.n);
+    var stats = [
+      [group(mt.n), "climbers in the archive matched to you"],
+      [mt.n ? pct(ws.p, 0) : "--", "of them reached the summit"],
+      [mt.n ? group(mt.deaths) : "--", "of them did not come back"],
+      [group(p.n), "people on this peak since " + M.modern_from]
+    ];
+    el("compStats").innerHTML = stats.map(function(s){
+      return '<div class="stat"><div class="n">' + s[0] + '</div>' +
+             '<div class="l">' + s[1] + '</div></div>';
+    }).join("");
+
+    var note = mt.relaxed
+      ? "No exact match had enough people in it, so the comparison was loosened " +
+        "to <b>" + esc(mt.relaxed) + "</b> on " + esc(p.name) + ", keeping your " +
+        "role and your oxygen choice, which are the two that move the numbers most."
+      : "These are climbers on <b>" + esc(p.name) + "</b> in " +
+        esc(state.season.toLowerCase()) + ", " +
+        (state.hired ? "hired staff" : "members") + ", " +
+        (state.o2 ? "using oxygen" : "without oxygen") + ", " +
+        (state.sex === "F" ? "female" : "male") + ", aged " +
+        esc(D.age_bands[ageBand(state.age)].label) + ".";
+    if (mt.n && wd) {
+      note += " Their death rate was " + per1000(wd.p) + " in 1,000, and with " +
+        group(mt.n) + " people behind it the 95% interval runs " +
+        per1000(wd.lo) + " to " + per1000(wd.hi) + " &mdash; which is the real " +
+        "width of what anyone can tell you about a risk this small.";
+    }
+    el("compNote").innerHTML = note;
+  }
+
+  return {draw: draw};
+})();
+
+/* ================================================================ charts
+   Both figures size their viewBox to the column they land in and redraw on
+   resize, rather than drawing into a fixed 1000-unit box and letting the
+   browser scale the type down to four pixels on a phone. */
+
+var REDRAW = [];
+
+function fig(host, build){
+  function go(){
+    var w = Math.max(240, host.clientWidth || 480);
+    host.innerHTML = build(w);
+  }
+  REDRAW.push(go);
+  return go;
+}
+
+function axisTicks(lo, hi, want){
+  var span = hi - lo, raw = span / want;
+  var mag = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
+  var step = [1, 2, 2.5, 5, 10].map(function(m){ return m * mag; })
+    .filter(function(s){ return s >= raw; })[0] || mag * 10;
+  var out = [];
+  for (var v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) out.push(v);
+  return out;
+}
+
+var field = (function(){
+
+  var MAXR = 15;
+  var host, tip;
+
+  function build(w){
+    var h = Math.round(Math.max(230, Math.min(330, w * 0.66)));
+    var L = 46, R = 18, T = 14, B = 40;
+    var iw = w - L - R, ih = h - T - B;
+    var xmax = 0, ymax = 0, nmax = 0, i;
+    for (i = 0; i < PEAKS.length; i++) {
+      xmax = Math.max(xmax, PEAKS[i].summits / PEAKS[i].n);
+      ymax = Math.max(ymax, PEAKS[i].deaths / PEAKS[i].n);
+      nmax = Math.max(nmax, PEAKS[i].n);
+    }
+    xmax = Math.min(1, xmax * 1.12); ymax = ymax * 1.18;
+    var X = function(v){ return L + v / xmax * iw; };
+    var Y = function(v){ return T + ih - v / ymax * ih; };
+    var Rr = function(n){ return 3 + MAXR * Math.sqrt(n / nmax); };
+
+    var s = ['<svg viewBox="0 0 ' + w + ' ' + h +
+             '" role="img" aria-label="Summit rate against death rate for 17 peaks">'];
+    axisTicks(0, ymax, 4).forEach(function(v){
+      s.push('<line class="gridline" x1="' + L + '" y1="' + Y(v).toFixed(1) +
+             '" x2="' + (L + iw) + '" y2="' + Y(v).toFixed(1) + '"/>');
+      s.push('<text class="axistext" x="' + (L - 7) + '" y="' + (Y(v) + 3.5).toFixed(1) +
+             '" text-anchor="end">' + (1000 * v).toFixed(0) + '</text>');
+    });
+    axisTicks(0, xmax, 5).forEach(function(v){
+      s.push('<text class="axistext" x="' + X(v).toFixed(1) + '" y="' + (T + ih + 15) +
+             '" text-anchor="middle">' + (100 * v).toFixed(0) + '%</text>');
+    });
+    s.push('<line class="axisline" x1="' + L + '" y1="' + (T + ih) + '" x2="' +
+           (L + iw) + '" y2="' + (T + ih) + '"/>');
+    s.push('<text class="axistitle" x="' + (L + iw / 2) + '" y="' + (h - 4) +
+           '" text-anchor="middle">reached the summit</text>');
+    s.push('<text class="axistitle" transform="translate(11,' + (T + ih / 2) +
+           ') rotate(-90)" text-anchor="middle">deaths per 1,000</text>');
+
+    // Big circles first, so a small peak is never hidden under Everest.
+    var order = PEAKS.slice().sort(function(a, b){ return b.n - a.n; });
+    order.forEach(function(p){
+      var on = p.id === state.peak;
+      s.push('<circle class="dot' + (on ? " on" : "") + '" data-peak="' + p.id +
+             '" cx="' + X(p.summits / p.n).toFixed(1) + '" cy="' +
+             Y(p.deaths / p.n).toFixed(1) + '" r="' + Rr(p.n).toFixed(1) + '"/>');
+    });
+    // Label the chosen peak and the corners worth naming, never all 17.
+    // Placed naively above the dot here; relax() below then measures what the
+    // browser actually drew and moves them apart.  Estimating text width from
+    // the character count was tried first and was not good enough -- it left
+    // "Ama Dablam" sitting across Everest.
+    // On a phone the plot is about 295 units across and four names will not
+    // fit however they are nudged, so it keeps the one that carries identity
+    // -- the peak you chose -- and leaves the rest to the tooltip.
+    var named = {};
+    named[state.peak] = 1;
+    if (iw > 330) ["DHA1", "ANN1", "AMAD", "EVER"].forEach(function(k){ named[k] = 1; });
+    PEAKS.forEach(function(p){
+      if (!named[p.id]) return;
+      var cx = X(p.summits / p.n), cy = Y(p.deaths / p.n), r = Rr(p.n);
+      var anchor = cx > L + iw - 70 ? "end" : cx < L + 60 ? "start" : "middle";
+      s.push('<text class="dotlab' + (p.id === state.peak ? " on" : "") +
+             '" data-peak="' + p.id + '" x="' + cx.toFixed(1) + '" y="' +
+             Math.max(T + 9, cy - r - 5).toFixed(1) + '" text-anchor="' + anchor +
+             '">' + esc(p.name) + '</text>');
+    });
+    PEAKS.forEach(function(p, i){
+      s.push('<circle class="hit" data-i="' + i + '" cx="' +
+             X(p.summits / p.n).toFixed(1) + '" cy="' + Y(p.deaths / p.n).toFixed(1) +
+             '" r="' + Math.max(11, Rr(p.n)).toFixed(1) + '"/>');
+    });
+    s.push('</svg>');
+    return s.join("");
+  }
+
+  function wire(){
+    host.addEventListener("mousemove", function(ev){
+      var t = ev.target.closest(".hit");
+      if (!t) { tip.classList.remove("on"); return; }
+      var p = PEAKS[+t.dataset.i];
+      tip.innerHTML = "<b>" + esc(p.name) + "</b>" +
+        '<span class="mono">' + group(p.height) + " m &middot; " + group(p.n) +
+        " people<br>" + pct(p.summits / p.n, 0) + " summited &middot; " +
+        per1000(p.deaths / p.n) + " in 1,000 died</span>";
+      tip.classList.add("on");
+      var box = host.getBoundingClientRect();
+      var x = ev.clientX - box.left + 14, y = ev.clientY - box.top - 10;
+      tip.style.left = Math.min(box.width - tip.offsetWidth - 6, Math.max(4, x)) + "px";
+      tip.style.top = Math.max(4, y) + "px";
+    });
+    host.addEventListener("mouseleave", function(){ tip.classList.remove("on"); });
+    host.addEventListener("click", function(ev){
+      var t = ev.target.closest(".hit");
+      if (!t) return;
+      state.peak = PEAKS[+t.dataset.i].id;
+      el("peak").value = state.peak;
+      render();
+    });
+  }
+
+  function relax(){
+    // Measured, not estimated: getBBox reports the box the browser drew, so
+    // the only thing left to decide is how far to move each name.
+    var svg = host.querySelector("svg");
+    if (!svg) return;
+    var labs = [].slice.call(svg.querySelectorAll("text.dotlab"));
+    var dots = [].slice.call(svg.querySelectorAll("circle.dot")).map(function(c){
+      var x = +c.getAttribute("cx"), y = +c.getAttribute("cy"), r = +c.getAttribute("r");
+      return {id: c.getAttribute("data-peak"),
+              x0: x - r, x1: x + r, y0: y - r, y1: y + r};
+    });
+    var placed = [];
+    labs.forEach(function(t){
+      var id = t.getAttribute("data-peak"), base = +t.getAttribute("y");
+      var blockers = dots.filter(function(d){ return d.id !== id; }).concat(placed);
+      var best = null;
+      [0, 17, -17, 29, -29, 41, -41].forEach(function(dy){
+        if (best && best.ov === 0) return;
+        t.setAttribute("y", (base + dy).toFixed(1));
+        var b = t.getBBox();
+        var box = {x0: b.x, x1: b.x + b.width, y0: b.y, y1: b.y + b.height};
+        var ov = 0;
+        blockers.forEach(function(q){
+          var w = Math.min(box.x1, q.x1) - Math.max(box.x0, q.x0);
+          var h = Math.min(box.y1, q.y1) - Math.max(box.y0, q.y0);
+          if (w > 0 && h > 0) ov += w * h;
+        });
+        if (!best || ov < best.ov) best = {dy: dy, ov: ov, box: box};
+      });
+      t.setAttribute("y", (base + best.dy).toFixed(1));
+      placed.push(best.box);
+    });
+  }
+
+  var go = null;
+  function draw(){
+    if (!go) {
+      host = el("fieldChart"); tip = el("fieldTip");
+      go = fig(host, build);
+      wire();
+    }
+    go();
+    relax();
+  }
+
+  return {draw: draw};
+})();
+
+var calib = (function(){
+
+  var host, tip, rowsNow = [];
+
+  function build(w){
+    var h = Math.round(Math.max(220, Math.min(300, w * 0.72)));
+    var L = 50, R = 16, T = 14, B = 40;
+    var iw = w - L - R, ih = h - T - B;
+    var rows = FIT[state.calib].calibration;
+    rowsNow = rows;
+    var hi = 0;
+    rows.forEach(function(r){ hi = Math.max(hi, r.pred, r.obs); });
+    hi = hi * 1.12;
+    var X = function(v){ return L + v / hi * iw; };
+    var Y = function(v){ return T + ih - v / hi * ih; };
+    var asPct = state.calib === "summit";
+    var fmt = function(v){ return asPct ? (100 * v).toFixed(0) + "%" : (1000 * v).toFixed(0); };
+
+    var s = ['<svg viewBox="0 0 ' + w + ' ' + h +
+             '" role="img" aria-label="Predicted against observed rates in eight equal groups">'];
+    axisTicks(0, hi, 4).forEach(function(v){
+      s.push('<line class="gridline" x1="' + L + '" y1="' + Y(v).toFixed(1) +
+             '" x2="' + (L + iw) + '" y2="' + Y(v).toFixed(1) + '"/>');
+      s.push('<text class="axistext" x="' + (L - 7) + '" y="' + (Y(v) + 3.5).toFixed(1) +
+             '" text-anchor="end">' + fmt(v) + '</text>');
+      s.push('<text class="axistext" x="' + X(v).toFixed(1) + '" y="' + (T + ih + 15) +
+             '" text-anchor="middle">' + fmt(v) + '</text>');
+    });
+    s.push('<line class="refline" x1="' + X(0) + '" y1="' + Y(0) + '" x2="' +
+           X(hi) + '" y2="' + Y(hi) + '"/>');
+    s.push('<line class="axisline" x1="' + L + '" y1="' + (T + ih) + '" x2="' +
+           (L + iw) + '" y2="' + (T + ih) + '"/>');
+    s.push('<text class="axistitle" x="' + (L + iw / 2) + '" y="' + (h - 4) +
+           '" text-anchor="middle">the model said' +
+           (asPct ? "" : " (per 1,000)") + '</text>');
+    s.push('<text class="axistitle" transform="translate(12,' + (T + ih / 2) +
+           ') rotate(-90)" text-anchor="middle">what happened</text>');
+    rows.forEach(function(r, i){
+      s.push('<circle class="dot" cx="' + X(r.pred).toFixed(1) + '" cy="' +
+             Y(r.obs).toFixed(1) + '" r="6"/>');
+      s.push('<circle class="hit" data-i="' + i + '" cx="' + X(r.pred).toFixed(1) +
+             '" cy="' + Y(r.obs).toFixed(1) + '" r="13"/>');
+    });
+    s.push('</svg>');
+    return s.join("");
+  }
+
+  function stats(){
+    var f = FIT[state.calib];
+    var tiles = [
+      [f.auc.toFixed(2), "held-out AUC, where 0.5 is a coin toss"],
+      [pct(f.base_rate, f.base_rate < 0.05 ? 2 : 0), "of everyone in the fit"],
+      [group(M.people), "people, " + group(M.expeditions) + " expeditions"],
+      [String(M.peaks), "peaks with enough climbers to model"]
+    ];
+    el("fitStats").innerHTML = tiles.map(function(t){
+      return '<div class="stat"><div class="n">' + t[0] + '</div>' +
+             '<div class="l">' + t[1] + '</div></div>';
+    }).join("");
+    el("fitNote").innerHTML = state.calib === "death"
+      ? "An AUC of " + FIT.death.auc.toFixed(2) + " is weak, and it should be " +
+        "read as the finding rather than as a flaw in the fitting. Given two " +
+        "climbers, one of whom died, this model picks the right one about " +
+        pct(FIT.death.auc, 0) + " of the time. The points still sit near the " +
+        "line, so the <em>level</em> is roughly honest &mdash; it knows what " +
+        "share of a group will die, and not which of them."
+      : "An AUC of " + FIT.summit.auc.toFixed(2) + " is a genuinely strong " +
+        "separation, and almost all of it is oxygen and the choice of peak. " +
+        "The points track the line closely: when this model says seventy per " +
+        "cent, about seventy per cent of that group got up.";
+  }
+
+  function wire(){
+    host.addEventListener("mousemove", function(ev){
+      var t = ev.target.closest(".hit");
+      if (!t) { tip.classList.remove("on"); return; }
+      var r = rowsNow[+t.dataset.i];
+      var asPct = state.calib === "summit";
+      var f = function(v){ return asPct ? pct(v, 0) : per1000(v) + " in 1,000"; };
+      tip.innerHTML = "<b>Group " + (+t.dataset.i + 1) + " of " + rowsNow.length + "</b>" +
+        '<span class="mono">' + group(r.n) + " climbers<br>model said " + f(r.pred) +
+        "<br>actually " + f(r.obs) + "</span>";
+      tip.classList.add("on");
+      var box = host.getBoundingClientRect();
+      var x = ev.clientX - box.left + 14, y = ev.clientY - box.top - 10;
+      tip.style.left = Math.min(box.width - tip.offsetWidth - 6, Math.max(4, x)) + "px";
+      tip.style.top = Math.max(4, y) + "px";
+    });
+    host.addEventListener("mouseleave", function(){ tip.classList.remove("on"); });
+  }
+
+  var go = null;
+  function draw(){
+    if (!go) {
+      host = el("calibChart"); tip = el("calibTip");
+      go = fig(host, build);
+      wire();
+    }
+    go();
+    stats();
+  }
+
+  return {draw: draw};
+})();
+
+/* ================================================================= share */
+
+var share = (function(){
+
+  function params(){
+    return ["p=" + state.peak, "s=" + encodeURIComponent(state.season),
+            "a=" + state.age, "x=" + state.sex,
+            "o=" + state.o2, "h=" + state.hired].join("&");
+  }
+  function url(){ return location.origin + location.pathname + "#" + params(); }
+
+  function restore(){
+    var h = location.hash.replace(/^#/, "");
+    if (!h) return false;
+    var q = {};
+    h.split("&").forEach(function(kv){
+      var i = kv.indexOf("=");
+      if (i > 0) q[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1));
+    });
+    if (!q.p || !peakRow(q.p)) return false;
+    state.peak = q.p;
+    if (D.seasons.indexOf(q.s) >= 0) state.season = q.s;
+    if (isFinite(+q.a)) state.age = Math.min(80, Math.max(16, Math.round(+q.a)));
+    state.sex = q.x === "F" ? "F" : "M";
+    state.o2 = q.o === "0" ? 0 : 1;
+    state.hired = q.h === "1" ? 1 : 0;
+    return true;
+  }
+
+  function copy(){
+    var text = url(), btn = el("shareBtn"), was = btn.textContent, box = el("shareOut");
+    function say(m){
+      btn.textContent = m;
+      setTimeout(function(){ btn.textContent = was; }, 2200);
+    }
+    function fallback(){
+      box.value = text; box.style.display = ""; box.select(); say("Copy it below");
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){
+        box.style.display = "none"; say("Link copied");
+      }, fallback);
+    } else { fallback(); }
+  }
+
+  function draw(){
+    try { history.replaceState(null, "", "#" + params()); } catch (err) {}
+  }
+
+  el("shareBtn").addEventListener("click", copy);
+  el("printBtn").addEventListener("click", function(){ window.print(); });
+  window.addEventListener("hashchange", function(){
+    if (location.hash.replace(/^#/, "") === params()) return;
+    if (restore()) { reflect(); render(); }
+  });
+
+  return {draw: draw, url: url, restore: restore};
+})();
+
+/* ================================================================== lead */
+
+var lead = (function(){
+
+  var mode = "operator";
+
+  var COPY = {
+    operator: {
+      subject: "Operator shortlist request",
+      title: "Get the shortlist",
+      blurb: "Three agencies with a record on your peak, and written answers " +
+             "on ratio, oxygen policy and what they pay their staff. Nothing " +
+             "reaches them until you say so.",
+      cta: "Send request",
+      ok: "the shortlist comes back by email, usually within two working days"
+    },
+    insurance: {
+      subject: "Rescue cover quote request",
+      title: "Get a rescue cover quote",
+      blurb: "A quote for cover that names your peak and your altitude, from " +
+             "insurers who actually write mountaineering above 6,000 metres.",
+      cta: "Request a quote",
+      ok: "the quote comes back by email, usually within two working days"
+    }
+  };
+
+  function reveal(which){
+    mode = which;
+    var c = COPY[which];
+    el("leadTitle").textContent = c.title;
+    el("leadBlurb").textContent = c.blurb;
+    el("leadSubmit").textContent = c.cta;
+    el("leadForm").classList.add("on");
+    el("leadDone").classList.remove("on");
+    plan();
+    el("leadForm").scrollIntoView({behavior: "smooth", block: "center"});
+    el("leadName").focus({preventScroll: true});
+  }
+
+  function plan(){ el("leadPlan").textContent = planLine(); }
+
+  function bad(msg){
+    var b = el("leadErr");
+    b.textContent = msg; b.classList.add("on");
+    return false;
+  }
+
+  function validate(){
+    el("leadErr").classList.remove("on");
+    var name = el("leadName").value.trim();
+    var mail = el("leadEmail").value.trim();
+    if (name.length < 2) return bad("Please enter the name we should use.");
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail))
+      return bad("That email address is not quite right.");
+    return {name: name, mail: mail};
+  }
+
+  function wording(v, ref){
+    return [
+      COPY[mode].subject + " " + ref,
+      "Name: " + v.name,
+      "Email: " + v.mail,
+      "Season planned: " + el("leadWhen").selectedOptions[0].text,
+      "Highest previously: " + el("leadExp").selectedOptions[0].text,
+      "Climb: " + planLine(),
+      "Page estimate: " + pct(score("summit", state), 0) + " summit, " +
+        per1000(score("death", state)) + " in 1,000 death",
+      "Link: " + share.url()
+    ].join("\n");
+  }
+
+  function deliver(msg, ref){
+    if (CONTACT.email) {
+      window.location.href = "mailto:" + CONTACT.email + "?subject=" +
+        encodeURIComponent(COPY[mode].subject + " " + ref) +
+        "&body=" + encodeURIComponent(msg);
+      return "email";
+    }
+    if (CONTACT.whatsapp) {
+      window.open("https://wa.me/" + CONTACT.whatsapp + "?text=" +
+                  encodeURIComponent(msg), "_blank", "noopener");
+      return "whatsapp";
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText)
+        navigator.clipboard.writeText(msg).catch(function(){});
+    } catch (err) { /* the text is printed below either way */ }
+    return "clipboard";
+  }
+
+  var SENT = {
+    email: "Your mail app should have opened with the request already written. " +
+      "Press send there and it reaches us.",
+    whatsapp: "WhatsApp should have opened with the request already written. " +
+      "Press send there and it reaches us.",
+    clipboard: "No inbox is wired up on this build yet, so the request has been " +
+      "copied to your clipboard instead of sent."
+  };
+
+  function submit(){
+    var v = validate();
+    if (!v) return;
+    var ref = "HIM-" + String(Date.now()).slice(-6);
+    var rec = {ref: ref, mode: mode, at: new Date().toISOString(),
+               name: v.name, email: v.mail,
+               when: el("leadWhen").value, experience: el("leadExp").value,
+               peak: state.peak, season: state.season, age: state.age,
+               sex: state.sex, oxygen: state.o2, hired: state.hired,
+               summit_p: score("summit", state), death_p: score("death", state)};
+    try {
+      var all = JSON.parse(localStorage.getItem("odds.leads") || "[]");
+      all.push(rec);
+      localStorage.setItem("odds.leads", JSON.stringify(all));
+    } catch (err) { /* private window, or storage off -- not fatal */ }
+
+    var msg = wording(v, ref);
+    var how = deliver(msg, ref);
+    el("leadForm").classList.remove("on");
+    var done = el("leadDone");
+    done.innerHTML = "<b>Request " + ref + "</b><br>" + esc(v.name) + ", " +
+      COPY[mode].ok + " at " + esc(v.mail) + "." +
+      '<p class="demo" style="margin-top:11px">' + SENT[how] +
+      " Nothing has been charged.</p>" +
+      (how === "clipboard"
+        ? '<textarea class="raw" readonly rows="9" aria-label="Your request, to copy">' +
+          esc(msg) + '</textarea>'
+        : "");
+    done.classList.add("on");
+    done.scrollIntoView({behavior: "smooth", block: "center"});
+  }
+
+  function draw(){
+    if (el("leadForm").classList.contains("on")) plan();
+  }
+
+  el("openOperator").addEventListener("click", function(){ reveal("operator"); });
+  el("openInsurance").addEventListener("click", function(){ reveal("insurance"); });
+  el("leadSubmit").addEventListener("click", submit);
+  el("leadDemo").textContent = CONTACT.email || CONTACT.whatsapp
+    ? "Sending opens your own mail or WhatsApp with the request already " +
+      "written; you press send. Nothing is charged here."
+    : "No inbox is wired up on this build yet: sending copies the request to " +
+      "your clipboard instead. Nothing is charged and nothing leaves the page.";
+
+  if (CONTACT.pay_link) {
+    var pay = el("payLink");
+    pay.href = CONTACT.pay_link;
+    pay.target = "_blank";
+    pay.style.display = "";
+  }
+
+  return {draw: draw};
+})();
+
+/* ================================================================ wiring */
+
+function reflect(){
+  el("peak").value = state.peak;
+  el("season").value = state.season;
+  el("sex").value = state.sex;
+  el("age").value = state.age;
+  el("ageRange").value = state.age;
+  press("o2Seg", "o2", String(state.o2));
+  press("roleSeg", "hired", String(state.hired));
+  press("calibSeg", "model", state.calib);
+  var p = peakRow(state.peak);
+  el("peakNote").textContent = group(p.height) + " m  /  " + group(p.n) +
+    " climbers since " + M.modern_from + "  /  " + pct(p.summits / p.n, 0) +
+    " summited  /  " + per1000(p.deaths / p.n) + " in 1,000 died";
+}
+
+function press(segId, key, value){
+  var btns = el(segId).querySelectorAll("button"), i;
+  for (i = 0; i < btns.length; i++)
+    btns[i].setAttribute("aria-pressed", String(btns[i].dataset[key] === value));
+}
+
+function render(){
+  answer.draw();
+  levers.draw();
+  field.draw();
+  comps.draw();
+  calib.draw();
+  lead.draw();
+  share.draw();
+}
+
+(function(){
+  el("peak").innerHTML = PEAKS.map(function(p){
+    return '<option value="' + esc(p.id) + '">' + esc(p.name) + "  " +
+      group(p.height) + " m</option>";
+  }).join("");
+  el("season").innerHTML = D.seasons.map(function(s){
+    return '<option value="' + esc(s) + '">' + esc(s) + "</option>";
+  }).join("");
+  el("leadWhen").innerHTML = (function(){
+    var out = [], y = new Date().getFullYear(), i, j;
+    for (i = 0; i < 3; i++) for (j = 0; j < D.seasons.length; j++)
+      out.push('<option value="' + esc(D.seasons[j]) + " " + (y + i) + '">' +
+               esc(D.seasons[j]) + " " + (y + i) + "</option>");
+    return out.join("");
+  })();
+
+  el("peak").addEventListener("change", function(){
+    state.peak = el("peak").value; reflect(); render();
+  });
+  el("season").addEventListener("change", function(){
+    state.season = el("season").value; render();
+  });
+  el("sex").addEventListener("change", function(){
+    state.sex = el("sex").value; render();
+  });
+  el("ageRange").addEventListener("input", function(){
+    state.age = +el("ageRange").value; el("age").value = state.age; render();
+  });
+  el("age").addEventListener("input", function(){
+    var v = parseInt(el("age").value, 10);
+    if (!isFinite(v)) return;
+    state.age = Math.min(80, Math.max(16, v));
+    el("ageRange").value = state.age;
+    render();
+  });
+  el("o2Seg").addEventListener("click", function(ev){
+    var b = ev.target.closest("button[data-o2]");
+    if (!b) return;
+    state.o2 = +b.dataset.o2; press("o2Seg", "o2", b.dataset.o2); render();
+  });
+  el("roleSeg").addEventListener("click", function(ev){
+    var b = ev.target.closest("button[data-hired]");
+    if (!b) return;
+    state.hired = +b.dataset.hired; press("roleSeg", "hired", b.dataset.hired); render();
+  });
+  el("calibSeg").addEventListener("click", function(ev){
+    var b = ev.target.closest("button[data-model]");
+    if (!b) return;
+    state.calib = b.dataset.model; press("calibSeg", "model", state.calib); calib.draw();
+  });
+
+  var t = null;
+  window.addEventListener("resize", function(){
+    clearTimeout(t);
+    t = setTimeout(function(){ REDRAW.forEach(function(f){ f(); }); }, 120);
+  });
+
+  share.restore();
+  reflect();
+
+  el("limAuc").textContent = FIT.death.auc.toFixed(2);
+  el("limAuc2").textContent = FIT.summit.auc.toFixed(2);
+  el("limYear").textContent = M.year_max;
+  el("limStats").textContent = "The fit covers " + group(M.people) + " people on " +
+    M.peaks + " peaks across " + group(M.expeditions) + " expeditions between " +
+    M.modern_from + " and " + M.year_max + ": " + group(M.summits) +
+    " summits and " + group(M.deaths) + " deaths. A further " +
+    group(M.dropped_no_age) + " people on those peaks are left out because the " +
+    "record gives no age for them.";
+  el("srcs").innerHTML = "Every figure computed from " + esc(M.source) +
+    ", the expedition-by-expedition record kept since 1963. The essay that " +
+    "reads the same archive for how the two populations on a mountain die is " +
+    '<a href="../himalaya/">Twelve Hundred Metres Lower</a>. Everything on ' +
+    "this page runs in your browser; nothing you enter leaves it.";
+
+  render();
+})();
+
+})();
+</script>
+</body>
+</html>

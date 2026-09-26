@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Ten Public Datasets, Taken Seriously">
+<meta name="description" content="Fifteen Public Datasets, Taken Seriously">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%93%8A%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>Aabesh Karmacharya &mdash; Backend &amp; Data Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
   color-scheme: light;
   --ground:#F2F1EF; --surface:#FCFCFB; --surface-2:#F7F6F4; --sunk:#E6E4E0;
   --ink:#16171A; --ink-2:#4F5257; --ink-3:#85888E; --rule:#DAD8D4; --rule-2:#C6C3BE;
-  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6; --keys:#8b5cf6; --income:#c2255c; --land:#0e9594; --worlds:#4a3aa7; --himalaya:#0b7285; --tides:#1b4f8a;
+  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6; --keys:#8b5cf6; --income:#c2255c; --land:#0e9594; --worth:#c25a1c; --odds:#0b7285; --stand:#a61e4d; --shake:#c1470f; --coast:#1b4f8a; --shells:#2a78d6; --warmed:#b5281b; --worlds:#4a3aa7; --himalaya:#0b7285; --tides:#1b4f8a; --sent:#15803d; --rates:#7e22ce; --rice:#a16207; --leave:#0891b2; --lakes:#0e7490;
   --shadow:0 1px 2px rgba(22,23,26,.05),0 12px 32px -18px rgba(22,23,26,.22);
   --measure:64ch; --wide:1080px;
 }
@@ -24,7 +24,7 @@
     color-scheme: dark;
     --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
     --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6; --worlds:#9085e9; --himalaya:#2b9fb3; --tides:#6fb2f0;
+    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6; --worth:#e17a37; --odds:#2b9fb3; --stand:#f06595; --shake:#eb6834; --coast:#6fb2f0; --shells:#5596e0; --warmed:#f0776a; --worlds:#9085e9; --himalaya:#2b9fb3; --tides:#6fb2f0; --sent:#22a55a; --rates:#a855f7; --rice:#d4a017; --leave:#22b8d4; --lakes:#2ba3c0;
     --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
   }
 }
@@ -32,7 +32,7 @@
   color-scheme: dark;
   --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
   --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6; --worlds:#9085e9; --himalaya:#2b9fb3; --tides:#6fb2f0;
+  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6; --worth:#e17a37; --odds:#2b9fb3; --stand:#f06595; --shake:#eb6834; --coast:#6fb2f0; --shells:#5596e0; --warmed:#f0776a; --worlds:#9085e9; --himalaya:#2b9fb3; --tides:#6fb2f0; --sent:#22a55a; --rates:#a855f7; --rice:#d4a017; --leave:#22b8d4; --lakes:#2ba3c0;
   --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
 }
 *{box-sizing:border-box}
@@ -62,7 +62,8 @@ main{padding-block:clamp(36px,6vw,64px)}
    minimum even when the container is narrower, so cards overflow the viewport
    and the page scrolls sideways on a phone. */
 .grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
-/* Ten cards, which fill the two-up grid exactly -- no spanner needed. */
+/* Ten essay cards, which fill the two-up grid exactly; the estimator is a
+   tool rather than an archive and takes the full width above them. */
 .card.span{grid-column:1/-1}
 .card{display:block; text-decoration:none; background:var(--surface);
   border:1px solid var(--rule); border-radius:2px; box-shadow:var(--shadow);
@@ -157,12 +158,120 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
   <div class="wrap">
 
     <section class="sec">
-      <h2 class="sech">Selected work &mdash; ten public archives</h2>
+      <h2 class="sech">Selected work &mdash; fifteen public archives</h2>
       <p class="secnote">Each of these begins with an archive anyone can download and computes
         everything on the page from it: the fetch, the analysis and the figures are all in the
-        repository. Nine are interactive essays; the keyboard one is a tool you can point at
-        your own writing.</p>
+        repository. Nine are interactive essays; eight are tools &mdash; you point them at your
+        own writing, your own land, your own pay packet, the ground under your house, the sea
+        at the end of your street, the thermometer nearest it, a mountain you are thinking of
+        climbing, or an orbit you are thinking of buying.</p>
     <div class="grid">
+
+      <a class="card" style="--accent:var(--shells)" href="shells/">
+        <span class="src">Tool &middot; built on 34,328 objects on orbit</span>
+        <h3>What Else Is At My Altitude?</h3>
+        <p class="sub">The two most crowded shells of low orbit are crowded with opposite
+          things: one with working satellites, one with fragments nothing will clear. Pick an
+          altitude and an inclination and this counts the neighbours &mdash; and explains why
+          no figure for orbital lifetime appears anywhere on the page.</p>
+        <ul class="finds">
+          <li><b>9% v 83%</b><span>debris in the busiest shell against the junkiest &mdash; the difference is air</span></li>
+          <li><b>7,100</b><span>tracked objects cross the single busiest 25 km shell, at 450&ndash;475 km</span></li>
+          <li><b>Unanswerable</b><span>how long an orbit lasts: the catalogue overwrites the launch orbit with the last one</span></li>
+        </ul>
+        <span class="go">Count your neighbours &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--warmed)" href="warmed/">
+        <span class="src">Tool &middot; NOAA GHCN-Monthly, 3,243 long thermometer records</span>
+        <h3>How Much Has It Warmed Here?</h3>
+        <p class="sub">Not the planet &mdash; one thermometer, in a place you can name, read
+          from the year you choose. It carries both versions of every record: what the
+          thermometers wrote down, and what they say after homogenisation. The gap between
+          them is the thing everybody argues about and almost nobody is shown.</p>
+        <ul class="finds">
+          <li><b>+0.13 v +0.30</b><span>degrees a decade: the median station over its whole life, against since 1970</span></li>
+          <li><b>66%</b><span>of records have their trend raised by homogenisation, by a median of +0.03 a decade</span></li>
+          <li><b>55%</b><span>of the world's long thermometer records are in one country</span></li>
+        </ul>
+        <span class="go">Read your own thermometer &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--coast)" href="coast/">
+        <span class="src">Tool &middot; built on 659 tide gauges with forty years or more</span>
+        <h3>How Fast Is The Sea Coming?</h3>
+        <p class="sub">The global figure is the wrong number. A tide gauge measures the ocean
+          rising and the ground sinking together, and it is the sum that floods a street. Pick
+          a gauge and this says what its own record shows, how that compares with its
+          neighbours, and why a straight line through it is a floor.</p>
+        <ul class="finds">
+          <li><b>76%</b><span>of gauges are steeper over their last thirty years than over their whole record</span></li>
+          <li><b>19%</b><span>report the sea falling &mdash; almost all of them are on land that is rising</span></li>
+          <li><b>2.9 v 1.8</b><span>mm a year: the median recent rate against the median long one</span></li>
+        </ul>
+        <span class="go">Read your own coast &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--shake)" href="shake/">
+        <span class="src">Tool &middot; built on the USGS catalogue, 8,811 Himalayan earthquakes</span>
+        <h3>How Often Does It Shake Here?</h3>
+        <p class="sub">Pick a town anywhere in Nepal and this counts every earthquake the
+          instrumental record has put near it since 1976 &mdash; how many, how big, how close,
+          how often. It counts, and refuses to model shaking, because a wrong ground-motion
+          model produces a confident number nobody can see is wrong.</p>
+        <ul class="finds">
+          <li><b>157</b><span>earthquakes on record within 100 km of Kathmandu; six of magnitude 6 or more</span></li>
+          <li><b>66%</b><span>of this archive is aftershocks &mdash; the counts are not independent events</span></li>
+          <li><b>1934</b><span>was Nepal's last great earthquake, four decades before the record starts</span></li>
+        </ul>
+        <span class="go">Count them where you live &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--stand)" href="stand/">
+        <span class="src">Tool &middot; built on the four Nepal Living Standards Surveys</span>
+        <h3>Where Does My Salary Put Me?</h3>
+        <p class="sub">Nepal knows exactly how its money is distributed and almost nobody
+          ever sees themselves on that curve. Enter what a household lives on and how many
+          people it supports; this places it among 29.7 million, after the two corrections
+          that decide the answer and that every other calculator skips.</p>
+        <ul class="finds">
+          <li><b>Rs 9,172</b><span>a month per person is the national median &mdash; the line half the country is under</span></li>
+          <li><b>&minus;10%</b><span>is what deflating today's rupees to 2022 survey prices does before the lookup</span></li>
+          <li><b>1.72 crore</b><span>is four aana at the valley median &mdash; decades of a whole household's income</span></li>
+        </ul>
+        <span class="go">Find your place &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--odds)" href="odds/">
+        <span class="src">Tool &middot; built on the 40,605-climber Himalayan record</span>
+        <h3>What Are My Odds Up There?</h3>
+        <p class="sub">Two models fitted on everyone who went up a Nepali peak this
+          century: one for reaching the top, one for coming back. Pick the mountain,
+          the season, your age and whether you will carry bottled oxygen. Then read
+          the part almost nobody publishes &mdash; how much of the outcome the
+          archive cannot see.</p>
+        <ul class="finds">
+          <li><b>75% v 10%</b><span>summit odds on Everest at 38 with bottled oxygen, against without</span></li>
+          <li><b>AUC 0.84</b><span>at picking who summits &mdash; and only 0.66 at picking who dies</span></li>
+          <li><b>1 in 122</b><span>of everyone on these seventeen peaks since 2000 did not come home</span></li>
+        </ul>
+        <span class="go">Work out your odds &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--worth)" href="worth/">
+        <span class="src">Tool &middot; built on the 2,115-plot land model</span>
+        <h3>What Is My Land Worth?</h3>
+        <p class="sub">The land essay drew a map of valley prices. This asks that map the
+          only question a person holding a plot actually has. Give it a tole, an area in
+          ropani or aana, a road width and a facing; it returns a value, the band around
+          that value, and every listing near you it drew the number from.</p>
+        <ul class="finds">
+          <li><b>313 toles</b><span>across Kathmandu, Lalitpur and Bhaktapur, priced from one fit</span></li>
+          <li><b>&plusmn;17%</b><span>median error with whole toles held out &mdash; printed on the page, not buried</span></li>
+          <li><b>+1.0%/yr</b><span>is the real move once plots are held comparable; the raw median says +32%</span></li>
+        </ul>
+        <span class="go">Value a plot &rarr;</span>
+      </a>
 
       <a class="card" style="--accent:var(--quake)"
          href="earthquakes/">
@@ -261,6 +370,72 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
         </ul>
         <span class="go">Read &rarr;</span>
       </a>
+
+      <a class="card" style="--accent:var(--sent)" href="remittances/">
+        <span class="src">Nepal Rastra Bank &middot; 212 monthly bulletins</span>
+        <h3>Six Times What We Sell</h3>
+        <p class="sub">The central bank publishes a typed PDF each month and nothing else.
+          Parsing nineteen years of them gives a series that does not otherwise exist.</p>
+        <ul class="finds">
+          <li><b>6.22&times;</b><span>remittance to exports in FY2024/25 &mdash; the year exports grew 81.8%</span></li>
+          <li><b>7.03&times;</b><span>the median month; exports have never reached a third of remittance</span></li>
+          <li><b>53 gaps</b><span>in 228 fiscal-month slots &mdash; drawn as gaps, never interpolated</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--rates)" href="spread/">
+        <span class="src">Nepal Rastra Bank &middot; 107 months of rates</span>
+        <h3>The Spread That Closed</h3>
+        <p class="sub">What a Nepali bank charges a borrower, what it pays a saver, and the
+          gap between the two &mdash; out of the same stack of PDFs.</p>
+        <ul class="finds">
+          <li><b>51%</b><span>the spread is half what it was: 6.84 points down to 3.49</span></li>
+          <li><b>4.1&times;</b><span>the lending rate moves that much more than the spread does</span></li>
+          <li><b>1.208</b><span>pass-through slope &mdash; the spread widens when money is dear</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--rice)" href="rice/">
+        <span class="src">FAOSTAT &middot; 64 years, four areas</span>
+        <h3>The Rice We Grow and Still Buy</h3>
+        <p class="sub">Nepal&rsquo;s paddy yield against its neighbours since 1961, and the
+          import line that crossed it.</p>
+        <ul class="finds">
+          <li><b>125.7%</b><span>of India&rsquo;s yield in 1961 &mdash; Nepal was ahead, then stopped</span></li>
+          <li><b>0.32%/yr</b><span>growth to 1990, slowest of four; 1.76%/yr since, second fastest</span></li>
+          <li><b>266 of 266</b><span>import figures are FAO-imputed. Nepal reported none of them</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--leave)" href="destinations/">
+        <span class="src">Govt of Nepal &middot; 741,292 labour permits</span>
+        <h3>One Hundred Forty-Four Destinations, Six Countries</h3>
+        <p class="sub">Where Nepali workers are permitted to go, from the annexes of two
+          labour migration reports &mdash; and the destination the record cannot see.</p>
+        <ul class="finds">
+          <li><b>80.3%</b><span>the top six&rsquo;s share in 2023/24, down 13.2 points from 2017/18</span></li>
+          <li><b>Croatia</b><span>holds the sixth seat now; in 2017/18 it was Bahrain</span></li>
+          <li><b>India</b><span>issues no permit, so it appears nowhere in the official record</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
+      <a class="card" style="--accent:var(--lakes)" href="lakes/">
+        <span class="src">Glacial Lake Observatory &middot; 4,150 lakes</span>
+        <h3>Two Hundred and Eighty Lakes</h3>
+        <p class="sub">Every glacial lake in Nepal&rsquo;s three great basins, measured across
+          eight years of imagery &mdash; growth you can measure against danger someone assigns.</p>
+        <ul class="finds">
+          <li><b>280</b><span>grew beyond their own uncertainty; 84% did not move at all</span></li>
+          <li><b>61, then 15</b><span>the same lakes counted at a 10- and 50-hectare minimum</span></li>
+          <li><b>43%</b><span>of the lakes in Nepal&rsquo;s basins are not in Nepal</span></li>
+        </ul>
+        <span class="go">Read &rarr;</span>
+      </a>
+
 
       <a class="card" style="--accent:var(--worlds)" href="worlds/">
         <span class="src">NASA Exoplanet Archive &middot; 6,366 planets</span>

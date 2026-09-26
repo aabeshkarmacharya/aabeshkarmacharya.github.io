@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Six Times What We Sell">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%92%B8%3C%2Ftext%3E%3C%2Fsvg%3E">
+<title>Six Times What We Sell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..800,0..100,0..1&family=Source+Sans+3:wght@300;400;500;600&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#EFEEEA; --surface:#FDFCFA; --surface-2:#F6F4F0; --sunk:#E4E2DC;
+  --ink:#1A1813; --ink-2:#55514A; --ink-3:#8A8579; --rule:#D9D6CE; --rule-2:#C4C0B6;
+
+  /* Two quantities that are the same kind of thing -- money crossing the
+     border, in rupees a month -- so they get two hues of equal weight rather
+     than a light and a dark of one.  Amber for what arrives, teal for what is
+     sold: no ordering is implied and none exists.  The ratio is a third,
+     derived quantity and gets a third hue, deliberately not between them. */
+  --rem:#A8550B; --rem-soft:#E8C79A;
+  --exp:#0E6E76; --exp-soft:#A3CBD0;
+  --ratio:#5B3E9B; --ratio-soft:#C3B4E4;
+  --accent:#0E6E76; --alt:#A8550B;
+
+  /* Three states of archive coverage: nothing, a bulletin but no month, and a
+     month recovered.  A sequential grey-to-teal, because this is completeness
+     and completeness has an order. */
+  --g0:#E4E2DC; --g1:#9EBCC0; --g2:#0E6E76;
+
+  --shadow:0 1px 2px rgba(26,24,19,.05),0 10px 30px -16px rgba(26,24,19,.20);
+  --grid:rgba(26,24,19,.07);
+  --measure:65ch; --wide:1120px;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --ground:#14130F; --surface:#1C1A16; --surface-2:#23211C; --sunk:#0C0B08;
+    --ink:#EFEDE7; --ink-2:#A9A499; --ink-3:#77726A; --rule:#2F2C26; --rule-2:#3E3A33;
+    /* Both hues lightened onto the dark surface by about the same amount, so
+       neither starts shouting louder than it did in daylight. */
+    --rem:#E9A13B; --rem-soft:#6B4210;
+    --exp:#43AEB8; --exp-soft:#12484E;
+    --ratio:#A98BE0; --ratio-soft:#3B2C63;
+    --accent:#43AEB8; --alt:#E9A13B;
+    --g0:#26241E; --g1:#2E6A70; --g2:#43AEB8;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+    --grid:rgba(239,237,231,.08);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --ground:#14130F; --surface:#1C1A16; --surface-2:#23211C; --sunk:#0C0B08;
+  --ink:#EFEDE7; --ink-2:#A9A499; --ink-3:#77726A; --rule:#2F2C26; --rule-2:#3E3A33;
+  --rem:#E9A13B; --rem-soft:#6B4210;
+  --exp:#43AEB8; --exp-soft:#12484E;
+  --ratio:#A98BE0; --ratio-soft:#3B2C63;
+  --accent:#43AEB8; --alt:#E9A13B;
+  --g0:#26241E; --g1:#2E6A70; --g2:#43AEB8;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+  --grid:rgba(239,237,231,.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:400; font-size:18.5px; line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; font-family:"Fraunces","Georgia",serif;
+  font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
+  letter-spacing:-.012em}
+.mono,code{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.tnum{font-variant-numeric:tabular-nums}
+
+.wrap{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
+.wide{max-width:var(--wide); margin-inline:auto; padding-inline:24px}
+section{padding-block:clamp(40px,6vw,74px)}
+section+section{border-top:1px solid var(--rule)}
+p{margin:0 0 1.1em}
+a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2); text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--alt); outline-offset:3px; border-radius:2px}
+
+.eyebrow{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3);
+  display:flex; align-items:center; gap:12px; margin-bottom:16px}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
+h2{font-size:clamp(28px,4vw,40px); line-height:1.06; font-weight:700; margin-bottom:.48em}
+h3{font-size:21px; line-height:1.24; font-weight:600; margin:2em 0 .5em}
+.lede{font-size:20.5px; line-height:1.56; color:var(--ink-2)}
+.small{font-size:16px; color:var(--ink-2)}
+
+header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
+  padding-block:clamp(52px,9vw,104px)}
+h1{font-size:clamp(40px,7.2vw,88px); line-height:.97; font-weight:800;
+   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:13ch; margin-bottom:.3em}
+.sub{max-width:54ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
+.kicker{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:22px}
+
+figure{margin:0; background:var(--surface); border:1px solid var(--rule);
+  border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.fig-head{padding:20px 22px 0}
+.fig-title{font-family:"Fraunces",Georgia,serif; font-weight:600; font-size:17px;
+  font-variation-settings:"SOFT" 0,"WONK" 0,"opsz" 24; margin-bottom:4px}
+.fig-note{font-size:14px; color:var(--ink-2); line-height:1.45; max-width:80ch}
+.fig-body{padding:14px 22px 20px}
+figcaption{padding:14px 22px 18px; border-top:1px solid var(--rule);
+  font-size:13.5px; color:var(--ink-3); line-height:1.5; background:var(--surface-2)}
+.figspace{margin-block:clamp(28px,3.6vw,46px)}
+svg{display:block; width:100%; height:auto; overflow:visible}
+.gl{stroke:var(--grid); stroke-width:1; fill:none}
+.ax{stroke:var(--rule-2); stroke-width:1; fill:none}
+.tk{font-family:"DM Mono",monospace; font-size:10.5px; fill:var(--ink-3);
+    font-variant-numeric:tabular-nums}
+.axlab{font-family:"DM Mono",monospace; font-size:10px; fill:var(--ink-3);
+    letter-spacing:.14em; text-transform:uppercase}
+.dlab{font-family:"DM Mono",monospace; font-size:11px; fill:var(--ink-2);
+    font-variant-numeric:tabular-nums}
+.halo{paint-order:stroke; stroke:var(--surface); stroke-width:3.5px;
+      stroke-linejoin:round}
+
+.ctl{display:flex; flex-wrap:wrap; gap:9px 16px; align-items:center; padding:12px 22px;
+  border-bottom:1px solid var(--rule); background:var(--surface-2);
+  font-family:"DM Mono",monospace; font-size:11.5px; color:var(--ink-2)}
+.chip{border:1px solid var(--rule-2); background:transparent; color:var(--ink-2);
+  font:inherit; padding:4px 11px; border-radius:3px; cursor:pointer; display:inline-flex;
+  align-items:center; gap:7px; transition:background .15s,border-color .15s,color .15s}
+.chip[aria-pressed="true"]{border-color:var(--ink-2); background:var(--surface); color:var(--ink)}
+.chip:hover{border-color:var(--ink-3)}
+
+.legend{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center;
+  font-family:"DM Mono",monospace; font-size:11.5px; color:var(--ink-2);
+  padding:0 22px 14px}
+.legend span{display:inline-flex; align-items:center; gap:7px}
+.legend i{width:16px; height:3px; border-radius:2px; flex:none; font-style:normal}
+.legend i.box{width:12px; height:12px; border-radius:2px}
+
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); border-radius:3px; overflow:hidden;
+  margin-block:30px}
+.stat{background:var(--surface); padding:16px 18px}
+.stat b{display:block; font-family:"Source Sans 3",sans-serif; font-weight:600;
+  font-size:clamp(25px,3.1vw,33px); line-height:1.05; margin-bottom:5px; letter-spacing:-.02em}
+.stat span{font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); line-height:1.4; display:block}
+.stat.a b{color:var(--rem)} .stat.b b{color:var(--exp)} .stat.c b{color:var(--ratio)}
+
+#tip{position:fixed; z-index:40; pointer-events:none; opacity:0; transition:opacity .11s;
+  background:var(--surface); border:1px solid var(--rule-2); border-radius:3px;
+  box-shadow:var(--shadow); padding:9px 12px; font-size:13px; line-height:1.45;
+  max-width:300px; color:var(--ink)}
+#tip.on{opacity:1}
+#tip b{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--ink-3); font-weight:400; display:block; margin-bottom:3px}
+#tip .v{font-variant-numeric:tabular-nums}
+#tip .nm{font-weight:600; letter-spacing:-.01em}
+
+.tablewrap{overflow-x:auto; padding-bottom:18px}
+table{border-collapse:collapse; font-size:14px; width:100%; min-width:460px}
+th,td{text-align:right; padding:6px 10px; border-bottom:1px solid var(--rule);
+  font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left; font-variant-numeric:normal}
+thead th{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:400; white-space:nowrap}
+
+.srcs{font-size:14px; color:var(--ink-3); line-height:1.6}
+.srcs a{text-decoration-color:var(--rule-2)}
+footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:44px}
+.note{border-left:2px solid var(--rule-2); padding-left:16px; margin-block:1.5em;
+  color:var(--ink-2); font-size:16.5px}
+.note b{color:var(--ink)}
+
+@media (max-width:760px){
+  body{font-size:17px}
+  .fig-head,.fig-body,.ctl,.legend,figcaption{padding-left:16px; padding-right:16px}
+  .wrap,.wide{padding-inline:18px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important; transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+<script>window.SENT_DATA={"booms":{"bust_drop":21.4,"bust_exp":157.14,"bust_growth":-21.4,"bust_label":"2022/23","first_exp":200.03,"first_label":"2021/22","first_lowest_since":"2011/12","first_r":5.036,"pre_exp":97.71,"pre_label":"2019/20","second_exp":277.03,"second_growth":81.8,"second_label":"2024/25","second_r":6.221},"checks":{"pct_hist":{"counts":[245,15,9,19,15,8,0,0],"edges":[0,0.0005,0.001,0.002,0.005,0.01,0.02,0.05,1.0]},"pct_median":0.027,"pct_n":311,"pct_p90":0.33,"pct_within1":0.974,"pct_worst":1.94,"quoted_exact":13,"quoted_median":0.0,"quoted_n":14,"quoted_pts":[{"d":165.3,"fy":"2024/25","m":10,"s":165.3},{"d":176.32,"fy":"2024/25","m":11,"s":176.32},{"d":190.34,"fy":"2024/25","m":12,"s":189.11},{"d":174.67,"fy":"2025/26","m":2,"s":174.67},{"d":201.23,"fy":"2025/26","m":3,"s":201.22},{"d":133.82,"fy":"2025/26","m":4,"s":133.82},{"d":183.18,"fy":"2025/26","m":5,"s":183.18},{"d":192.62,"fy":"2025/26","m":6,"s":192.62},{"d":198.08,"fy":"2025/26","m":7,"s":198.08},{"d":188.64,"fy":"2025/26","m":8,"s":188.64},{"d":209.76,"fy":"2025/26","m":9,"s":209.75},{"d":257.49,"fy":"2025/26","m":10,"s":257.49},{"d":203.9,"fy":"2025/26","m":11,"s":203.89},{"d":242.33,"fy":"2025/26","m":12,"s":242.33}],"quoted_worst":0.65},"coverage":[{"fy":2007,"issue":[1,0,0,0,0,0,0,0,0,1,0,1],"label":"2007/08","month":[0,0,0,0,0,0,0,0,0,0,0,0]},{"fy":2009,"issue":[0,0,0,0,0,0,1,1,1,1,1,1],"label":"2009/10","month":[0,0,0,0,0,0,0,1,1,1,1,1]},{"fy":2010,"issue":[0,1,1,1,1,1,1,1,1,1,1,1],"label":"2010/11","month":[0,0,1,1,1,1,1,1,1,1,1,1]},{"fy":2011,"issue":[1,1,1,1,1,1,1,1,1,1,1,1],"label":"2011/12","month":[1,1,1,1,1,1,1,1,1,1,1,1]},{"fy":2012,"issue":[1,1,1,1,1,1,1,1,1,1,1,1],"label":"2012/13","month":[1,1,1,1,1,1,1,1,1,1,1,1]},{"fy":2013,"issue":[1,1,1,1,1,1,1,1,1,1,1,1],"label":"2013/14","month":[1,1,1,1,1,1,1,1,1,1,1,1]},{"fy":2014,"issue":[1,1,1,1,1,1,1,1,1,1,1,1],"label":"2014/15","month":[1,1,1,1,1,1,1,1,1,1,1,1]},{"fy":2015,"issue":[1,1,1,1,1,0,1,1,1,1,1,0],"label":"2015/16","month":[1,1,1,1,1,0,0,1,1,1,1,0]},{"fy":2016,"issue":[0,0,0,0,0,0,0,1,0,0,0,0],"label":"2016/17","month":[0,0,0,0,0,0,0,0,0,0,0,0]},{"fy":2017,"issue":[0,0,0,0,0,1,1,1,1,1,1,1],"label":"2017/18","month":[0,0,0,0,0,0,1,1,1,1,1,1]},{"fy":2018,"issue":[1,1,1,1,1,1,1,1,1,1,1,1],"label":"2018/19","month":[1,1,1,1,1,1,1,1,1,1,1,1]},{"fy":2019,"issue":[1,1,1,1,1,1,1,1,1,1,1,1],"label":"2019/20","month":[1,1,1,1,1,1,1,1,1,1,1,1]},{"fy":2020,"issue":[1,1,1,1,1,1,1,1,1,1,1,1],"label":"2020/21","month":[1,1,1,1,1,1,1,1,1,1,1,1]},{"fy":2021,"issue":[1,1,1,1,1,1,1,1,1,1,1,1],"label":"2021/22","month":[1,1,1,1,1,1,1,1,1,1,1,1]},{"fy":2022,"issue":[1,1,1,1,1,1,1,1,1,1,1,1],"label":"2022/23","month":[1,1,1,1,1,1,1,1,1,1,1,1]},{"fy":2023,"issue":[1,1,1,1,1,1,1,1,1,1,1,1],"label":"2023/24","month":[1,1,1,1,1,1,1,1,1,1,1,1]},{"fy":2024,"issue":[1,1,1,1,1,1,1,1,1,1,1,1],"label":"2024/25","month":[1,1,1,1,1,1,1,1,1,1,1,1]},{"fy":2025,"issue":[1,1,1,1,1,1,1,1,1,1,1,1],"label":"2025/26","month":[1,1,1,1,1,1,1,1,1,1,1,1]},{"fy":2026,"issue":[1,0,0,0,0,0,0,0,0,0,0,0],"label":"2026/27","month":[1,0,0,0,0,0,0,0,0,0,0,0]}],"episodes":{"blockade":{"exp":4.15,"fy":2015,"label":"Oct-Nov 2015/16","m":4,"nep":"Kartik","r":11.8,"rem":48.97,"t":2015.75},"blockade_pre":{"exp":5.78,"fy":2015,"label":"Aug-Sep 2015/16","m":2,"nep":"Bhadra","r":9.412,"rem":54.4,"t":2015.5833},"covid_exp":{"exp":3.24,"fy":2019,"label":"Apr-May 2019/20","m":10,"nep":"Baisakh","r":16.648,"rem":53.94,"t":2020.25},"covid_prev":{"exp":9.94,"fy":2019,"label":"Feb-Mar 2019/20","m":8,"nep":"Falgun","r":7.969,"rem":79.21,"t":2020.0833},"covid_rem":{"exp":3.91,"fy":2019,"label":"Mar-Apr 2019/20","m":9,"nep":"Chaitra","r":8.818,"rem":34.48,"t":2020.1667},"quake":{"exp":6.7,"fy":2014,"label":"Apr-May 2014/15","m":10,"nep":"Baisakh","r":9.385,"rem":62.88,"t":2015.25},"quake_prev":{"exp":7.41,"fy":2014,"label":"Mar-Apr 2014/15","m":9,"nep":"Chaitra","r":7.448,"rem":55.19,"t":2015.1667},"recent":{"exp":38.7,"fy":2026,"m":1,"r":5.557,"rem":215.05,"t":2026.5}},"growth":[{"exp":3.6,"fy":2012,"label":"2012/13","rem":20.9},{"exp":17.4,"fy":2013,"label":"2013/14","rem":25.0},{"exp":-5.5,"fy":2014,"label":"2014/15","rem":13.6},{"exp":0.6,"fy":2019,"label":"2019/20","rem":-0.5},{"exp":44.4,"fy":2020,"label":"2020/21","rem":9.8},{"exp":41.7,"fy":2021,"label":"2021/22","rem":4.8},{"exp":-21.4,"fy":2022,"label":"2022/23","rem":21.2},{"exp":-3.0,"fy":2023,"label":"2023/24","rem":18.4},{"exp":81.8,"fy":2024,"label":"2024/25","rem":19.2},{"exp":13.8,"fy":2025,"label":"2025/26","rem":37.1}],"headline":{"exp":277.03,"exp_growth":81.8,"label":"2024/25","post_exp":315.29,"post_exp_growth":13.8,"post_label":"2025/26","post_r":7.495,"post_rem":2363.13,"post_rem_growth":37.1,"prev_exp":152.38,"prev_label":"2023/24","prev_r":9.485,"prev_rem":1445.32,"r":6.221,"rem":1723.27,"rem_growth":19.2},"meta":{"downloaded":212,"empty_fy":"2016/17","empty_fy_issues":1,"first_month":"Feb-Mar 2009/10","fy_all":19,"fy_complete":12,"fy_first":"2007/08","fy_last":"2026/27","fy_partial":7,"gap_months":53,"last_month":"Jul-Aug 2026/27","median_chars":25048,"months":175,"net_error":1,"no_level":29,"not_pdf":156,"observations":183,"parsed_both":180,"parsed_exp":180,"parsed_rem":183,"relabelled":2,"retrieved":"2026-09-26","sitemap_urls":369,"slots":228,"span_years":16.4},"months":[{"exp":4.61,"fy":2009,"m":8,"r":4.262,"rem":19.65,"t":2010.0833},{"exp":5.26,"fy":2009,"m":9,"r":3.987,"rem":20.97,"t":2010.1667},{"exp":4.53,"fy":2009,"m":10,"r":4.748,"rem":21.51,"t":2010.25},{"exp":5.17,"fy":2009,"m":11,"r":4.783,"rem":24.73,"t":2010.3333},{"exp":5.76,"fy":2009,"m":12,"r":3.569,"rem":20.56,"t":2010.4167},{"exp":6.19,"fy":2010,"m":3,"r":3.491,"rem":21.61,"t":2010.6667},{"exp":4.77,"fy":2010,"m":4,"r":3.537,"rem":16.87,"t":2010.75},{"exp":5.61,"fy":2010,"m":5,"r":3.513,"rem":19.71,"t":2010.8333},{"exp":5.38,"fy":2010,"m":6,"r":4.063,"rem":21.86,"t":2010.9167},{"exp":5.28,"fy":2010,"m":7,"r":3.873,"rem":20.45,"t":2011.0},{"exp":4.93,"fy":2010,"m":8,"r":4.609,"rem":22.72,"t":2011.0833},{"exp":5.14,"fy":2010,"m":9,"r":3.934,"rem":20.22,"t":2011.1667},{"exp":4.69,"fy":2010,"m":10,"r":5.292,"rem":24.82,"t":2011.25},{"exp":5.47,"fy":2010,"m":11,"r":4.179,"rem":22.86,"t":2011.3333},{"exp":6.42,"fy":2010,"m":12,"r":3.743,"rem":24.03,"t":2011.4167},{"exp":6.07,"fy":2011,"m":1,"r":3.603,"rem":21.87,"t":2011.5},{"exp":6.41,"fy":2011,"m":2,"r":3.972,"rem":25.46,"t":2011.5833},{"exp":5.56,"fy":2011,"m":3,"r":5.135,"rem":28.55,"t":2011.6667},{"exp":5.65,"fy":2011,"m":4,"r":4.835,"rem":27.32,"t":2011.75},{"exp":6.37,"fy":2011,"m":5,"r":4.708,"rem":29.99,"t":2011.8333},{"exp":5.86,"fy":2011,"m":6,"r":4.98,"rem":29.18,"t":2011.9167},{"exp":6.67,"fy":2011,"m":7,"r":3.871,"rem":25.82,"t":2012.0},{"exp":5.97,"fy":2011,"m":8,"r":4.955,"rem":29.58,"t":2012.0833},{"exp":6.68,"fy":2011,"m":9,"r":4.552,"rem":30.41,"t":2012.1667},{"exp":5.66,"fy":2011,"m":10,"r":5.979,"rem":33.84,"t":2012.25},{"exp":6.31,"fy":2011,"m":11,"r":6.079,"rem":38.36,"t":2012.3333},{"exp":7.05,"fy":2011,"m":12,"r":5.556,"rem":39.17,"t":2012.4167},{"exp":7.2,"fy":2012,"m":1,"r":4.696,"rem":33.81,"t":2012.5},{"exp":6.77,"fy":2012,"m":2,"r":4.663,"rem":31.57,"t":2012.5833},{"exp":6.76,"fy":2012,"m":3,"r":4.784,"rem":32.34,"t":2012.6667},{"exp":5.73,"fy":2012,"m":4,"r":5.171,"rem":29.63,"t":2012.75},{"exp":6.42,"fy":2012,"m":5,"r":5.629,"rem":36.14,"t":2012.8333},{"exp":6.37,"fy":2012,"m":6,"r":5.37,"rem":34.21,"t":2012.9167},{"exp":5.73,"fy":2012,"m":7,"r":4.775,"rem":27.36,"t":2013.0},{"exp":6.03,"fy":2012,"m":8,"r":6.804,"rem":41.03,"t":2013.0833},{"exp":6.15,"fy":2012,"m":9,"r":5.933,"rem":36.49,"t":2013.1667},{"exp":6.17,"fy":2012,"m":10,"r":6.494,"rem":40.07,"t":2013.25},{"exp":6.6,"fy":2012,"m":11,"r":6.941,"rem":45.81,"t":2013.3333},{"exp":6.99,"fy":2012,"m":12,"r":6.598,"rem":46.12,"t":2013.4167},{"exp":7.59,"fy":2013,"m":1,"r":5.516,"rem":41.87,"t":2013.5},{"exp":7.57,"fy":2013,"m":2,"r":6.099,"rem":46.17,"t":2013.5833},{"exp":7.91,"fy":2013,"m":3,"r":5.941,"rem":46.99,"t":2013.6667},{"exp":6.53,"fy":2013,"m":4,"r":6.717,"rem":43.86,"t":2013.75},{"exp":7.77,"fy":2013,"m":5,"r":5.443,"rem":42.29,"t":2013.8333},{"exp":7.77,"fy":2013,"m":6,"r":5.719,"rem":44.44,"t":2013.9167},{"exp":7.75,"fy":2013,"m":7,"r":5.973,"rem":46.29,"t":2014.0},{"exp":8.01,"fy":2013,"m":8,"r":5.594,"rem":44.81,"t":2014.0833},{"exp":7.22,"fy":2013,"m":9,"r":5.69,"rem":41.08,"t":2014.1667},{"exp":7.0,"fy":2013,"m":10,"r":6.669,"rem":46.68,"t":2014.25},{"exp":6.61,"fy":2013,"m":11,"r":7.03,"rem":46.47,"t":2014.3333},{"exp":8.56,"fy":2013,"m":12,"r":6.114,"rem":52.34,"t":2014.4167},{"exp":6.72,"fy":2014,"m":1,"r":6.278,"rem":42.19,"t":2014.5},{"exp":7.71,"fy":2014,"m":2,"r":5.485,"rem":42.29,"t":2014.5833},{"exp":8.1,"fy":2014,"m":3,"r":6.137,"rem":49.71,"t":2014.6667},{"exp":7.02,"fy":2014,"m":4,"r":6.574,"rem":46.15,"t":2014.75},{"exp":7.36,"fy":2014,"m":5,"r":6.367,"rem":46.86,"t":2014.8333},{"exp":6.48,"fy":2014,"m":6,"r":7.525,"rem":48.76,"t":2014.9167},{"exp":6.8,"fy":2014,"m":7,"r":6.613,"rem":44.97,"t":2015.0},{"exp":6.68,"fy":2014,"m":8,"r":7.496,"rem":50.07,"t":2015.0833},{"exp":7.41,"fy":2014,"m":9,"r":7.448,"rem":55.19,"t":2015.1667},{"exp":6.7,"fy":2014,"m":10,"r":9.385,"rem":62.88,"t":2015.25},{"exp":6.85,"fy":2014,"m":11,"r":9.149,"rem":62.67,"t":2015.3333},{"exp":7.49,"fy":2014,"m":12,"r":8.75,"rem":65.54,"t":2015.4167},{"exp":6.46,"fy":2015,"m":1,"r":8.246,"rem":53.27,"t":2015.5},{"exp":5.78,"fy":2015,"m":2,"r":9.412,"rem":54.4,"t":2015.5833},{"exp":4.57,"fy":2015,"m":3,"r":12.856,"rem":58.75,"t":2015.6667},{"exp":4.15,"fy":2015,"m":4,"r":11.8,"rem":48.97,"t":2015.75},{"exp":5.21,"fy":2015,"m":5,"r":10.75,"rem":56.01,"t":2015.8333},{"exp":6.13,"fy":2015,"m":8,"r":8.517,"rem":52.21,"t":2016.0833},{"exp":6.51,"fy":2015,"m":9,"r":8.344,"rem":54.32,"t":2016.1667},{"exp":6.36,"fy":2015,"m":10,"r":8.991,"rem":57.18,"t":2016.25},{"exp":6.56,"fy":2015,"m":11,"r":9.159,"rem":60.08,"t":2016.3333},{"exp":6.48,"fy":2017,"m":7,"r":9.384,"rem":60.81,"t":2018.0},{"exp":5.8,"fy":2017,"m":8,"r":12.157,"rem":70.51,"t":2018.0833},{"exp":6.32,"fy":2017,"m":9,"r":10.842,"rem":68.52,"t":2018.1667},{"exp":6.91,"fy":2017,"m":10,"r":9.595,"rem":66.3,"t":2018.25},{"exp":7.66,"fy":2017,"m":11,"r":9.537,"rem":73.05,"t":2018.3333},{"exp":6.88,"fy":2017,"m":12,"r":10.949,"rem":75.33,"t":2018.4167},{"exp":6.92,"fy":2018,"m":1,"r":10.686,"rem":73.95,"t":2018.5},{"exp":7.78,"fy":2018,"m":2,"r":10.315,"rem":80.25,"t":2018.5833},{"exp":9.04,"fy":2018,"m":3,"r":9.731,"rem":87.97,"t":2018.6667},{"exp":5.54,"fy":2018,"m":4,"r":12.652,"rem":70.09,"t":2018.75},{"exp":8.22,"fy":2018,"m":5,"r":7.826,"rem":64.33,"t":2018.8333},{"exp":7.91,"fy":2018,"m":6,"r":8.441,"rem":66.77,"t":2018.9167},{"exp":7.67,"fy":2018,"m":7,"r":9.412,"rem":72.19,"t":2019.0},{"exp":8.14,"fy":2018,"m":8,"r":8.187,"rem":66.64,"t":2019.0833},{"exp":8.6,"fy":2018,"m":9,"r":8.256,"rem":71.0,"t":2019.1667},{"exp":8.71,"fy":2018,"m":10,"r":8.279,"rem":72.11,"t":2019.25},{"exp":9.3,"fy":2018,"m":11,"r":7.927,"rem":73.72,"t":2019.3333},{"exp":9.28,"fy":2018,"m":12,"r":8.648,"rem":80.25,"t":2019.4167},{"exp":8.84,"fy":2019,"m":1,"r":8.529,"rem":75.4,"t":2019.5},{"exp":9.66,"fy":2019,"m":2,"r":8.109,"rem":78.33,"t":2019.5833},{"exp":8.67,"fy":2019,"m":3,"r":8.825,"rem":76.51,"t":2019.6667},{"exp":9.11,"fy":2019,"m":4,"r":8.203,"rem":74.73,"t":2019.75},{"exp":11.34,"fy":2019,"m":5,"r":6.351,"rem":72.02,"t":2019.8333},{"exp":9.66,"fy":2019,"m":6,"r":7.274,"rem":70.27,"t":2019.9167},{"exp":7.69,"fy":2019,"m":7,"r":8.576,"rem":65.95,"t":2020.0},{"exp":9.94,"fy":2019,"m":8,"r":7.969,"rem":79.21,"t":2020.0833},{"exp":3.91,"fy":2019,"m":9,"r":8.818,"rem":34.48,"t":2020.1667},{"exp":3.24,"fy":2019,"m":10,"r":16.648,"rem":53.94,"t":2020.25},{"exp":5.94,"fy":2019,"m":11,"r":15.83,"rem":94.03,"t":2020.3333},{"exp":9.71,"fy":2019,"m":12,"r":10.315,"rem":100.16,"t":2020.4167},{"exp":9.62,"fy":2020,"m":1,"r":9.637,"rem":92.71,"t":2020.5},{"exp":10.82,"fy":2020,"m":2,"r":6.749,"rem":73.02,"t":2020.5833},{"exp":10.61,"fy":2020,"m":3,"r":8.778,"rem":93.13,"t":2020.6667},{"exp":9.15,"fy":2020,"m":4,"r":8.619,"rem":78.86,"t":2020.75},{"exp":9.86,"fy":2020,"m":5,"r":8.021,"rem":79.09,"t":2020.8333},{"exp":10.74,"fy":2020,"m":6,"r":7.309,"rem":78.5,"t":2020.9167},{"exp":9.12,"fy":2020,"m":7,"r":7.938,"rem":72.39,"t":2021.0},{"exp":10.86,"fy":2020,"m":8,"r":6.855,"rem":74.44,"t":2021.0833},{"exp":13.99,"fy":2020,"m":9,"r":6.21,"rem":86.88,"t":2021.1667},{"exp":13.71,"fy":2020,"m":10,"r":5.899,"rem":80.87,"t":2021.25},{"exp":12.77,"fy":2020,"m":11,"r":4.781,"rem":61.05,"t":2021.3333},{"exp":19.87,"fy":2020,"m":12,"r":4.535,"rem":90.11,"t":2021.4167},{"exp":20.76,"fy":2021,"m":1,"r":3.659,"rem":75.96,"t":2021.5},{"exp":23.28,"fy":2021,"m":2,"r":3.411,"rem":79.41,"t":2021.5833},{"exp":21.01,"fy":2021,"m":3,"r":3.996,"rem":83.95,"t":2021.6667},{"exp":17.07,"fy":2021,"m":4,"r":4.282,"rem":73.1,"t":2021.75},{"exp":20.8,"fy":2021,"m":5,"r":3.662,"rem":76.16,"t":2021.8333},{"exp":15.93,"fy":2021,"m":6,"r":5.014,"rem":79.87,"t":2021.9167},{"exp":12.81,"fy":2021,"m":7,"r":5.595,"rem":71.67,"t":2022.0},{"exp":16.09,"fy":2021,"m":8,"r":5.66,"rem":91.07,"t":2022.0833},{"exp":12.82,"fy":2021,"m":9,"r":7.297,"rem":93.55,"t":2022.1667},{"exp":12.78,"fy":2021,"m":10,"r":6.811,"rem":87.05,"t":2022.25},{"exp":12.49,"fy":2021,"m":11,"r":7.397,"rem":92.39,"t":2022.3333},{"exp":14.19,"fy":2021,"m":12,"r":7.268,"rem":103.13,"t":2022.4167},{"exp":14.81,"fy":2022,"m":1,"r":6.226,"rem":92.21,"t":2022.5},{"exp":13.87,"fy":2022,"m":2,"r":6.837,"rem":94.83,"t":2022.5833},{"exp":13.14,"fy":2022,"m":3,"r":7.154,"rem":94.01,"t":2022.6667},{"exp":12.95,"fy":2022,"m":4,"r":7.49,"rem":96.99,"t":2022.75},{"exp":12.53,"fy":2022,"m":5,"r":8.177,"rem":102.46,"t":2022.8333},{"exp":13.51,"fy":2022,"m":6,"r":7.741,"rem":104.58,"t":2022.9167},{"exp":12.62,"fy":2022,"m":7,"r":8.304,"rem":104.8,"t":2023.0},{"exp":11.37,"fy":2022,"m":8,"r":9.186,"rem":104.44,"t":2023.0833},{"exp":13.48,"fy":2022,"m":9,"r":8.091,"rem":109.07,"t":2023.1667},{"exp":12.62,"fy":2022,"m":10,"r":8.066,"rem":101.79,"t":2023.25},{"exp":12.69,"fy":2022,"m":11,"r":8.459,"rem":107.34,"t":2023.3333},{"exp":13.55,"fy":2022,"m":12,"r":7.973,"rem":108.04,"t":2023.4167},{"exp":13.53,"fy":2023,"m":1,"r":8.575,"rem":116.02,"t":2023.5},{"exp":12.92,"fy":2023,"m":2,"r":8.696,"rem":112.35,"t":2023.5833},{"exp":14.42,"fy":2023,"m":3,"r":9.499,"rem":136.97,"t":2023.6667},{"exp":9.7,"fy":2023,"m":4,"r":11.61,"rem":112.62,"t":2023.75},{"exp":12.64,"fy":2023,"m":5,"r":10.703,"rem":135.29,"t":2023.8333},{"exp":11.76,"fy":2023,"m":6,"r":10.202,"rem":119.97,"t":2023.9167},{"exp":11.86,"fy":2023,"m":7,"r":8.919,"rem":105.78,"t":2024.0},{"exp":13.79,"fy":2023,"m":8,"r":8.863,"rem":122.22,"t":2024.0833},{"exp":13.33,"fy":2023,"m":9,"r":9.107,"rem":121.4,"t":2024.1667},{"exp":12.22,"fy":2023,"m":10,"r":9.491,"rem":115.98,"t":2024.25},{"exp":13.09,"fy":2023,"m":11,"r":9.848,"rem":128.91,"t":2024.3333},{"exp":13.12,"fy":2023,"m":12,"r":8.979,"rem":117.81,"t":2024.4167},{"exp":12.23,"fy":2024,"m":1,"r":11.196,"rem":136.93,"t":2024.5},{"exp":12.86,"fy":2024,"m":2,"r":9.814,"rem":126.21,"t":2024.5833},{"exp":13.29,"fy":2024,"m":3,"r":10.848,"rem":144.17,"t":2024.6667},{"exp":14.29,"fy":2024,"m":4,"r":8.0,"rem":114.32,"t":2024.75},{"exp":20.99,"fy":2024,"m":5,"r":5.66,"rem":118.8,"t":2024.8333},{"exp":25.13,"fy":2024,"m":6,"r":4.881,"rem":122.65,"t":2024.9167},{"exp":28.41,"fy":2024,"m":7,"r":4.84,"rem":137.5,"t":2025.0},{"exp":30.97,"fy":2024,"m":8,"r":4.882,"rem":151.19,"t":2025.0833},{"exp":30.03,"fy":2024,"m":9,"r":4.647,"rem":139.54,"t":2025.1667},{"exp":29.71,"fy":2024,"m":10,"q":165.3,"r":5.564,"rem":165.3,"t":2025.25},{"exp":29.66,"fy":2024,"m":11,"q":176.32,"r":5.945,"rem":176.32,"t":2025.3333},{"exp":29.46,"fy":2024,"m":12,"q":189.11,"r":6.461,"rem":190.34,"t":2025.4167},{"exp":23.93,"fy":2025,"m":1,"r":7.414,"rem":177.41,"t":2025.5},{"exp":23.39,"fy":2025,"m":2,"q":174.67,"r":7.468,"rem":174.67,"t":2025.5833},{"exp":25.46,"fy":2025,"m":3,"q":201.22,"r":7.904,"rem":201.23,"t":2025.6667},{"exp":20.72,"fy":2025,"m":4,"q":133.82,"r":6.458,"rem":133.82,"t":2025.75},{"exp":23.01,"fy":2025,"m":5,"q":183.18,"r":7.961,"rem":183.18,"t":2025.8333},{"exp":25.51,"fy":2025,"m":6,"q":192.62,"r":7.551,"rem":192.62,"t":2025.9167},{"exp":26.13,"fy":2025,"m":7,"q":198.08,"r":7.581,"rem":198.08,"t":2026.0},{"exp":22.96,"fy":2025,"m":8,"q":188.64,"r":8.216,"rem":188.64,"t":2026.0833},{"exp":31.83,"fy":2025,"m":9,"q":209.75,"r":6.59,"rem":209.76,"t":2026.1667},{"exp":26.02,"fy":2025,"m":10,"q":257.49,"r":9.896,"rem":257.49,"t":2026.25},{"exp":29.01,"fy":2025,"m":11,"q":203.89,"r":7.029,"rem":203.9,"t":2026.3333},{"exp":37.32,"fy":2025,"m":12,"q":242.33,"r":6.493,"rem":242.33,"t":2026.4167},{"exp":38.7,"fy":2026,"m":1,"r":5.557,"rem":215.05,"t":2026.5}],"no_level_fys":["2007/08","2008/09","2009/10","2010/11","2012/13"],"no_level_late":[["2012/13","current-macroeconomic-situation-english-2069-10-table-44-based-on-five-months-data-of-2069-70"]],"ratio":{"above10":17,"below4":15,"max":16.65,"max_exp":3.24,"max_fy":"2019/20","max_label":"Apr-May","max_m":10,"max_rem":53.94,"median":7.03,"min":3.41,"min_fy":"2021/22","min_label":"Aug-Sep","min_m":2,"pooled":7.03,"q1":5.52,"q3":8.62},"swing":{"exp_falls":3,"exp_hi":81.8,"exp_hi2":44.4,"exp_hi2_fy":"2020/21","exp_hi_fy":"2024/25","exp_lo":-21.4,"exp_lo_fy":"2022/23","n":10,"rem_falls":1,"rem_hi":37.1,"rem_lo":-0.5,"rem_lo_fy":"2019/20"},"years":[{"fy":2007,"issues":3,"label":"2007/08","n":0},{"fy":2009,"issues":6,"label":"2009/10","n":5},{"fy":2010,"issues":11,"label":"2010/11","n":10},{"exp":74.26,"fy":2011,"issues":12,"label":"2011/12","n":12,"r":4.842,"rem":359.55},{"exp":76.92,"fy":2012,"issues":12,"label":"2012/13","n":12,"r":5.65,"rem":434.58},{"exp":90.29,"fy":2013,"issues":12,"label":"2013/14","n":12,"r":6.017,"rem":543.29},{"exp":85.32,"fy":2014,"issues":12,"label":"2014/15","n":12,"r":7.235,"rem":617.28},{"fy":2015,"issues":10,"label":"2015/16","n":9},{"fy":2016,"issues":1,"label":"2016/17","n":0},{"fy":2017,"issues":7,"label":"2017/18","n":6},{"exp":97.11,"fy":2018,"issues":12,"label":"2018/19","n":12,"r":9.054,"rem":879.27},{"exp":97.71,"fy":2019,"issues":12,"label":"2019/20","n":12,"r":8.955,"rem":875.03},{"exp":141.12,"fy":2020,"issues":12,"label":"2020/21","n":12,"r":6.81,"rem":961.05},{"exp":200.03,"fy":2021,"issues":12,"label":"2021/22","n":12,"r":5.036,"rem":1007.31},{"exp":157.14,"fy":2022,"issues":12,"label":"2022/23","n":12,"r":7.767,"rem":1220.56},{"exp":152.38,"fy":2023,"issues":12,"label":"2023/24","n":12,"r":9.485,"rem":1445.32},{"exp":277.03,"fy":2024,"issues":12,"label":"2024/25","n":12,"r":6.221,"rem":1723.27},{"exp":315.29,"fy":2025,"issues":12,"label":"2025/26","n":12,"r":7.495,"rem":2363.13},{"fy":2026,"issues":1,"label":"2026/27","n":1}]};</script>
+
+<header class="top">
+  <div class="wrap">
+    <p class="kicker">Nepal Rastra Bank &middot; <span data-n="meta.downloaded" data-fmt="int"></span> bulletins &middot;
+      <span data-n="meta.months" data-fmt="int"></span> months reconstructed</p>
+    <h1>Six Times What We Sell</h1>
+    <p class="sub">In the best year Nepal&rsquo;s exports have ever had, remittance
+      still arrived at six times their value. There is no published series for
+      this. It had to be rebuilt out of
+      <span data-n="meta.downloaded" data-fmt="int"></span> PDFs.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">What is not published</p>
+    <h2>There is no series</h2>
+    <p class="lede">Nepal Rastra Bank publishes one macroeconomic bulletin a
+      month. It is a typed PDF. There is no CSV, no API and no spreadsheet
+      behind it, and the monthly numbers in it exist nowhere else in a form a
+      machine can read.</p>
+
+    <p>The bank&rsquo;s department sitemaps list
+      <b data-n="meta.sitemap_urls" data-fmt="int"></b> English bulletins.
+      <b data-n="meta.downloaded" data-fmt="int"></b> of them come back as
+      PDFs. <span data-n="meta.not_pdf" data-fmt="int"></span> of the URLs
+      serve something that is not a PDF at all, and
+      <span data-n="meta.net_error" data-fmt="int"></span> failed outright.
+      What arrived is about <span data-n="meta.median_chars" data-fmt="int"></span>
+      characters of extracted text per issue, spanning
+      <span data-n="meta.fy_first"></span> to <span data-n="meta.fy_last"></span>.</p>
+
+    <p>Of those <span data-n="meta.downloaded" data-fmt="int"></span> documents,
+      <b data-n="meta.parsed_rem" data-fmt="int"></b> state a remittance total
+      in rupees and <b data-n="meta.parsed_exp" data-fmt="int"></b> state a
+      merchandise export total as well.
+      <b data-n="meta.no_level" data-fmt="int"></b> state neither. Those
+      <span data-n="meta.no_level" data-fmt="int"></span> are not a parsing
+      failure. Before 2011/12 the bulletins quote growth rates and print no
+      levels, so there is nothing in them to extract; one further issue was
+      published as tables with no prose at all.</p>
+
+    <p class="note"><b>Every bulletin reports the fiscal year to date, not the
+      month.</b> &ldquo;During the eleven months of 2024/25, remittance
+      inflows increased 15.5 percent to Rs.1532.93 billion&rdquo; is eleven
+      months of money, not one. A single month is the difference between two
+      consecutive issues of the same fiscal year. Nepal&rsquo;s fiscal year
+      restarts in mid-July, so month one is not a difference at all, and there
+      is no thirteenth month to subtract from. Get that wrong and every figure
+      on this page is wrong by a factor of about ten.</p>
+
+    <p>Differencing is also why a gap in the archive costs two months rather
+      than one: a month is lost whenever either of the issues it sits between
+      is missing. <span data-n="meta.observations" data-fmt="int"></span>
+      cumulative observations across
+      <span data-n="meta.slots" data-fmt="int"></span> fiscal-month slots yield
+      <b data-n="meta.months" data-fmt="int"></b> months.
+      <b data-n="meta.gap_months" data-fmt="int"></b> slots stay empty. The
+      series runs <span data-n="meta.first_month"></span> to
+      <span data-n="meta.last_month"></span>.</p>
+
+    <p>The largest hole is a whole fiscal year. The archive holds
+      <b data-n="meta.empty_fy_issues" data-fmt="int"></b> of the twelve
+      bulletins <b data-n="meta.empty_fy"></b> should have, so that year
+      contributes nothing at all. Of the
+      <span data-n="meta.fy_all" data-fmt="int"></span> fiscal years the
+      archive touches, <b data-n="meta.fy_complete" data-fmt="int"></b> are
+      complete; the rest are partial and are drawn as such.</p>
+
+    <p>Two of the <span data-n="meta.downloaded" data-fmt="int"></span> are
+      filed under the wrong period. NRB&rsquo;s URL for the eleven-month
+      2019/20 issue says ten months, and the real ten-month issue sits at the
+      same address with a <code>-2</code> on the end. A document states its own
+      period on nearly every page and the filename states it once, so where the
+      two disagree the document wins &mdash; and both relabellings are counted
+      rather than quietly applied.</p>
+
+    <div class="stats">
+      <div class="stat"><b data-n="meta.sitemap_urls" data-fmt="int"></b><span>Bulletin URLs in the sitemaps</span></div>
+      <div class="stat"><b data-n="meta.downloaded" data-fmt="int"></b><span>Came back as a PDF</span></div>
+      <div class="stat c"><b data-n="meta.months" data-fmt="int"></b><span>Months recovered</span></div>
+      <div class="stat"><b data-n="meta.gap_months" data-fmt="int"></b><span>Month slots left empty</span></div>
+    </div>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">What the archive holds, month by month</p>
+        <p class="fig-note">One row per fiscal year, one cell per month. A
+          filled cell is a month recovered. A muted cell is a bulletin that
+          exists without the neighbour it would have to be differenced
+          against, so no month comes out of it. An empty cell is no bulletin
+          at all.</p>
+      </div>
+      <div class="legend">
+        <span><i class="box" style="background:var(--g2)"></i>Month recovered</span>
+        <span><i class="box" style="background:var(--g1)"></i>Bulletin only</span>
+        <span><i class="box" style="background:var(--g0);border:1px solid var(--rule-2)"></i>Nothing</span>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-coverage" viewBox="0 0 900 460" role="img"
+             aria-label="Grid of archive coverage by fiscal year and month"></svg>
+      </div>
+      <figcaption>Columns are months of the Nepali fiscal year: the first
+        column is mid-July to mid-August, the twelfth is mid-June to mid-July.
+        Retrieved <span data-n="meta.retrieved"></span>.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The multiple</p>
+    <h2>Six times, in the best export year on the record</h2>
+    <p class="lede">In <span data-n="headline.label"></span> Nepal&rsquo;s
+      merchandise exports grew
+      <b data-n="headline.exp_growth" data-fmt="1"></b>% &mdash; the largest
+      one-year rise anywhere in this record, against
+      <span data-n="swing.exp_hi2" data-fmt="1"></span>% for the next largest,
+      in <span data-n="swing.exp_hi2_fy"></span>. Remittance grew
+      <span data-n="headline.rem_growth" data-fmt="1"></span>%.
+      At the end of it remittance stood at Rs
+      <b data-n="headline.rem" data-fmt="2"></b> billion against Rs
+      <b data-n="headline.exp" data-fmt="2"></b> billion of exports:
+      <b data-n="headline.r" data-fmt="1"></b> times.</p>
+
+    <p>It did not stay there. The year before, exports were Rs
+      <span data-n="headline.prev_exp" data-fmt="2"></span> billion and the
+      multiple was <b data-n="headline.prev_r" data-fmt="1"></b>. The year
+      after, exports added another
+      <span data-n="headline.post_exp_growth" data-fmt="1"></span>% to Rs
+      <span data-n="headline.post_exp" data-fmt="2"></span> billion, remittance
+      added <span data-n="headline.post_rem_growth" data-fmt="1"></span>% to Rs
+      <span data-n="headline.post_rem" data-fmt="2"></span> billion, and the
+      multiple went back up to <b data-n="headline.post_r" data-fmt="1"></b>.
+      An export boom of a size Nepal has never previously managed moved the
+      ratio for one year.</p>
+
+    <p>Across all <span data-n="meta.months" data-fmt="int"></span> months the
+      median month puts remittance at
+      <b data-n="ratio.median" data-fmt="2"></b> times exports, with the middle
+      half between <span data-n="ratio.q1" data-fmt="2"></span> and
+      <span data-n="ratio.q3" data-fmt="2"></span>. The multiple has never once
+      been below <b data-n="ratio.min" data-fmt="2"></b> &mdash; that was
+      <span data-n="ratio.min_label"></span> of
+      <span data-n="ratio.min_fy"></span>, inside the export boom below.
+      It has been above ten in <span data-n="ratio.above10" data-fmt="int"></span>
+      of them. There is no month in this archive in which Nepal sold abroad as
+      much as a third of what it was sent.</p>
+
+    <div class="stats">
+      <div class="stat a"><b data-n="headline.rem" data-fmt="2"></b><span>Rs bn remittance, <span data-n="headline.label"></span></span></div>
+      <div class="stat b"><b data-n="headline.exp" data-fmt="2"></b><span>Rs bn merchandise exports</span></div>
+      <div class="stat c"><b data-n="headline.r" data-fmt="2"></b><span>Times</span></div>
+      <div class="stat"><b data-n="ratio.median" data-fmt="2"></b><span>Median month, whole record</span></div>
+    </div>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Money arriving and money earned, every month</p>
+        <p class="fig-note">Rupees billion in the month, both series
+          reconstructed the same way. Lines break where the archive does.</p>
+      </div>
+      <div class="ctl">
+        <button class="chip" id="c-log" aria-pressed="false">Logarithmic scale</button>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--rem)"></i>Remittance inflows</span>
+        <span><i style="background:var(--exp)"></i>Merchandise exports</span>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-levels" viewBox="0 0 1120 520" role="img"
+             aria-label="Monthly remittance inflows and merchandise exports"></svg>
+      </div>
+      <figcaption>Nominal rupees, not deflated and not converted to dollars.
+        Part of the rise in both lines is sixteen years of Nepali inflation,
+        and none of it is adjusted for here. The ratio in the next figure is
+        unaffected, because both sides are in the same rupees of the same
+        month.</figcaption>
+    </figure>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Remittance as a multiple of merchandise exports</p>
+        <p class="fig-note">The thin line is the month. The heavy step is the
+          whole fiscal year, drawn only for the twelve years where all twelve
+          months survive.</p>
+      </div>
+      <div class="ctl">
+        <button class="chip" id="c-mark" aria-pressed="true">Mark the shocks</button>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-ratio" viewBox="0 0 1120 500" role="img"
+             aria-label="Ratio of remittance to merchandise exports over time"></svg>
+      </div>
+      <figcaption>A monthly ratio of two seasonal series is noisy by
+        construction: Nepali exports and remittance both move with Dashain and
+        with the Gulf hiring calendar, and they do not move together. The
+        fiscal-year step is the honest summary; the month is there to show the
+        shocks.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">What moves it</p>
+    <h2>The multiple is an export statistic</h2>
+    <p class="lede">Remittance barely moves. Exports move constantly. Almost
+      every wobble in the ratio is the denominator.</p>
+
+    <p>Across the <span data-n="swing.n" data-fmt="int"></span> consecutive
+      pairs of complete fiscal years in this record, remittance changed by
+      between <span data-n="swing.rem_lo" data-fmt="1"></span>% and
+      <b data-n="swing.rem_hi" data-fmt="1"></b>%. It went down in
+      <span data-n="swing.rem_falls" data-fmt="int"></span> of the
+      <span data-n="swing.n" data-fmt="int"></span>, in
+      <span data-n="swing.rem_lo_fy"></span>, by half a per cent, in the year
+      the world shut its airports. Merchandise exports changed by between
+      <b data-n="swing.exp_lo" data-fmt="1"></b>% and
+      <b data-n="swing.exp_hi" data-fmt="1"></b>%, and went down in
+      <span data-n="swing.exp_falls" data-fmt="int"></span> of them.</p>
+
+    <p>Both of the big export years are the same trade, and the bulletins name
+      it themselves. Exports went from Rs
+      <span data-n="booms.pre_exp" data-fmt="2"></span> billion in
+      <span data-n="booms.pre_label"></span> to Rs
+      <b data-n="booms.first_exp" data-fmt="2"></b> billion in
+      <span data-n="booms.first_label"></span>, which took the multiple down
+      to <b data-n="booms.first_r" data-fmt="2"></b> &mdash; its lowest since
+      <span data-n="booms.first_lowest_since"></span>. The next year they
+      fell <b data-n="booms.bust_drop" data-fmt="1"></b>% to Rs
+      <span data-n="booms.bust_exp" data-fmt="2"></span> billion, and the
+      bulletins of that year open their list of falling items with
+      &ldquo;soyabean oil, palm oil, oil cakes&rdquo;. The trade returned in
+      <span data-n="booms.second_label"></span> at Rs
+      <span data-n="booms.second_exp" data-fmt="2"></span> billion, and the
+      list of rising items opens with soyabean oil again.</p>
+
+    <p>So the denominator of this ratio is, in two of the last five years,
+      substantially a margin on imported oil sold on. The numerator is wages,
+      earned by people who left.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Complete fiscal years, side by side</p>
+        <p class="fig-note">Rupees billion for the whole year, summed from the
+          twelve reconstructed months. Only years with all twelve months are
+          shown; the multiple is printed above each pair.</p>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--rem)"></i>Remittance</span>
+        <span><i style="background:var(--exp)"></i>Merchandise exports</span>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-years" viewBox="0 0 1120 480" role="img"
+             aria-label="Remittance and merchandise exports by fiscal year"></svg>
+      </div>
+      <figcaption><span data-n="meta.fy_partial" data-fmt="int"></span> of the
+        <span data-n="meta.fy_all" data-fmt="int"></span> fiscal years the
+        archive touches are missing from this chart, because the archive does
+        not hold all twelve of their months.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Three shocks</p>
+    <h2>You can find the earthquake without being told where it is</h2>
+    <p class="lede">A reconstructed series is worth nothing if it cannot see
+      things that certainly happened. This one sees all three.</p>
+
+    <p><b>April 2015.</b> The earthquake struck on 25 April, inside the month
+      running mid-April to mid-May. Remittance for that month came to Rs
+      <b data-n="episodes.quake.rem" data-fmt="2"></b> billion, against Rs
+      <span data-n="episodes.quake_prev.rem" data-fmt="2"></span> billion the
+      month before, and stayed at that level the month after. Exports fell from Rs
+      <span data-n="episodes.quake_prev.exp" data-fmt="2"></span> billion to Rs
+      <span data-n="episodes.quake.exp" data-fmt="2"></span> billion. The
+      multiple went from <span data-n="episodes.quake_prev.r" data-fmt="2"></span>
+      to <b data-n="episodes.quake.r" data-fmt="2"></b>.</p>
+
+    <p><b>The blockade, autumn 2015.</b> Freight across the Indian border
+      stopped in late September 2015 and did not properly restart until
+      February. Monthly exports fell from Rs
+      <span data-n="episodes.blockade_pre.exp" data-fmt="2"></span> billion in
+      <span data-n="episodes.blockade_pre.label"></span> to Rs
+      <b data-n="episodes.blockade.exp" data-fmt="2"></b> billion in
+      <span data-n="episodes.blockade.label"></span> &mdash; down
+      twenty-eight per cent in two months. Remittance over the same two months
+      went from Rs <span data-n="episodes.blockade_pre.rem" data-fmt="2"></span>
+      billion to Rs <span data-n="episodes.blockade.rem" data-fmt="2"></span>
+      billion, down ten per cent. The multiple went from
+      <span data-n="episodes.blockade_pre.r" data-fmt="2"></span> to
+      <b data-n="episodes.blockade.r" data-fmt="2"></b>.</p>
+
+    <p><b>March 2020.</b> Nepal closed on 24 March. Remittance for
+      mid-March to mid-April came to Rs
+      <b data-n="episodes.covid_rem.rem" data-fmt="2"></b> billion, against Rs
+      <span data-n="episodes.covid_prev.rem" data-fmt="2"></span> billion a
+      month earlier: it more than halved in four weeks. Exports in the
+      following month fell to Rs
+      <b data-n="episodes.covid_exp.exp" data-fmt="2"></b> billion, about a
+      third of normal, and that month holds the record for the whole series
+      &mdash; remittance at
+      <b data-n="ratio.max" data-fmt="2"></b> times exports.</p>
+
+    <p>Remittance recovered inside two months and exports did not, which is why
+      the ratio&rsquo;s peak is a month after its numerator&rsquo;s trough.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Checking it</p>
+    <h2>Two checks the archive pays for itself</h2>
+    <p class="lede">A number reconstructed by subtraction should be tested
+      against a number somebody typed. The bulletins supply both tests.</p>
+
+    <p><b>The direct one.</b> Since 2023 many issues print the single review
+      month on its own line as well as the cumulative total: &ldquo;During
+      mid-May to mid-June 2025 (Jestha month), remittance inflows stood at Rs.
+      176.32 billion&rdquo;. That figure is never used to build the series.
+      There are <b data-n="checks.quoted_n" data-fmt="int"></b> months where it
+      can be held against the differenced value.
+      <b data-n="checks.quoted_exact" data-fmt="int"></b> of the
+      <span data-n="checks.quoted_n" data-fmt="int"></span> agree to the last
+      digit printed. The median error is
+      <span data-n="checks.quoted_median" data-fmt="2"></span>% and the worst is
+      <b data-n="checks.quoted_worst" data-fmt="2"></b>%, which is NRB revising
+      its own provisional figure between two issues.</p>
+
+    <p><b>The indirect one, covering the whole record.</b> Every bulletin
+      states its change against the same period a year earlier. Dividing the
+      level by that change reconstructs the earlier level &mdash; and the
+      earlier level sits in a different bulletin, parsed separately. There are
+      <b data-n="checks.pct_n" data-fmt="int"></b> places in the archive where
+      the two can be compared. The median disagreement is
+      <b data-n="checks.pct_median" data-fmt="3"></b>%,
+      <span data-n="checks.pct_within1" data-fmt="pct"></span> are within one
+      per cent, and the worst is
+      <span data-n="checks.pct_worst" data-fmt="2"></span>%.</p>
+
+    <p>Neither check is a test of whether NRB is right. Both are tests of
+      whether the parser read what NRB wrote, and of how much the bank moves a
+      number after first printing it. The answer to the second is: by about a
+      hundredth of a per cent in the median case, and by up to two per cent
+      where the first print was provisional.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">How far the two checks miss</p>
+        <p class="fig-note">Above: the
+          <span data-n="checks.pct_n" data-fmt="int"></span> cross-year checks,
+          binned by absolute error. Below: the
+          <span data-n="checks.quoted_n" data-fmt="int"></span> months where
+          NRB printed the single month itself, differenced value against
+          printed value.</p>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-checks" viewBox="0 0 1120 470" role="img"
+             aria-label="Distribution of reconstruction errors against two independent checks"></svg>
+      </div>
+      <figcaption>Both panels are drawn from the same parse that produced the
+        series; neither uses any outside figure.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">What this does not show</p>
+    <h2>Five limits</h2>
+    <p><b>These are first prints, not revisions.</b> Each month is built from
+      the issues published at the time, so a figure NRB later restated is
+      carried here as it was first typed. That is deliberate &mdash; it keeps
+      each month independent of what came after it &mdash; but it means the
+      series will not match a table NRB publishes today for the same period.</p>
+    <p><b>Merchandise exports only.</b> Services are excluded: no tourism, no
+      transport, no the education payments that flow the other way. Adding
+      services would lower the multiple, and NRB reports them on a different
+      basis in a different paragraph.</p>
+    <p><b>Nominal rupees throughout.</b> Nothing here is deflated and nothing
+      is converted to dollars. The levels rise partly because Nepali prices
+      rose. The ratio is unaffected, since both sides are in the same rupees
+      of the same month, and the ratio is the argument.</p>
+    <p><b><span data-n="meta.gap_months" data-fmt="int"></span> months are
+      missing</b>, including all of <span data-n="meta.empty_fy"></span>. The
+      lines break where they are missing rather than interpolating across them.
+      No gap on this page has been filled with a remembered number or a figure
+      from anywhere but the bulletins.</p>
+    <p><b>Only formal remittance.</b> What NRB counts is money that came
+      through a bank or a licensed transfer company. Cash carried home across
+      the Indian border is not in this series, and nobody knows how much of it
+      there is. Whatever it is, it makes the multiple larger, not smaller.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="srcs" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs">
+      <b>Source.</b> <a href="https://www.nrb.org.np/">Nepal Rastra Bank</a>,
+      <i>Current Macroeconomic and Financial Situation</i>, the English monthly
+      bulletins, retrieved <span data-n="meta.retrieved"></span> from the
+      bank&rsquo;s own department sitemaps:
+      <span data-n="meta.sitemap_urls" data-fmt="int"></span> URLs listed,
+      <span data-n="meta.downloaded" data-fmt="int"></span> returning a PDF,
+      <span data-n="meta.parsed_rem" data-fmt="int"></span> stating a
+      remittance level and
+      <span data-n="meta.parsed_exp" data-fmt="int"></span> stating an export
+      level as well. Nothing on this page comes from any other source.
+    </p>
+    <p class="srcs" style="margin-top:1em">
+      <b>Method.</b> <code>fetch.py</code> enumerates the sitemaps and caches
+      both the PDF and its extracted text. <code>analyze.py</code> flattens
+      every document &mdash; all whitespace removed &mdash; because pypdf puts
+      spaces inside numbers and words, and matches the levels against the
+      flattened string, where <code>Rs. 248 .18 billi on</code> and
+      <code>Rs.248.18billion</code> are the same thing. Cumulative levels are
+      differenced within a fiscal year to give months; nothing is differenced
+      across the mid-July boundary. <code>assemble.py</code> re-parses several
+      bulletins with a second, independently written parser and refuses to
+      write this page if the headline does not come back the same.
+    </p>
+  </div>
+</footer>
+
+<div id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+var D = window.SENT_DATA;
+if (!D) { return; }
+
+/* ------------------------------------------------------------------ basics */
+function el(id){ return document.getElementById(id); }
+var NS = "http://www.w3.org/2000/svg";
+function mk(tag, attrs, parent){
+  var n = document.createElementNS(NS, tag);
+  if (attrs) for (var k in attrs) if (attrs[k] !== null && attrs[k] !== undefined)
+    n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+function txt(parent, x, y, s, cls, anchor){
+  var t = mk("text", { x: x, y: y, "class": cls || "tk",
+                       "text-anchor": anchor || "middle" }, parent);
+  t.textContent = s;
+  return t;
+}
+function clear(node){ while (node.firstChild) node.removeChild(node.firstChild); }
+
+function fInt(v){ return Math.round(v).toLocaleString("en-US"); }
+function fFix(v, n){ return Number(v).toFixed(n); }
+/* The prose form of a decimal number: thousands separated, and a real minus
+   sign rather than a hyphen, which at this type size is half the width the
+   digits were drawn for and reads as a dash.  Kept apart from fFix, which
+   also formats SVG path coordinates -- a grouped "1,070.5" in a path is not
+   a number at all and silently drops the whole line. */
+function fNum(v, n){
+  var s = Math.abs(Number(v)).toLocaleString("en-US",
+            { minimumFractionDigits: n, maximumFractionDigits: n });
+  return (Number(v) < 0 ? "\u2212" : "") + s;
+}
+function fPct(v){ return Math.round(v * 100) + "%"; }
+function fBn(v){ return Number(v).toFixed(v < 10 ? 2 : 1); }
+
+function dig(path){
+  var node = D, parts = path.split(".");
+  for (var i = 0; i < parts.length; i++){
+    if (node === null || node === undefined) return undefined;
+    node = node[parts[i]];
+  }
+  return node;
+}
+function fillProse(){
+  var nodes = document.querySelectorAll("[data-n]"), missing = [];
+  for (var i = 0; i < nodes.length; i++){
+    var n = nodes[i], v = dig(n.getAttribute("data-n")), f = n.getAttribute("data-fmt");
+    if (v === undefined || v === null){ missing.push(n.getAttribute("data-n")); continue; }
+    n.textContent = f === "int" ? fInt(v)
+                  : f === "pct" ? fPct(v)
+                  : (f && /^\d$/.test(f)) ? fNum(v, +f)
+                  : String(v);
+  }
+  if (missing.length) console.warn("unresolved data-n paths:", missing);
+}
+
+var tip = el("tip");
+function showTip(ev, html){
+  tip.innerHTML = html;
+  tip.classList.add("on");
+  var pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  var x = ev.clientX + pad, y = ev.clientY + pad;
+  if (x + w > innerWidth - 8) x = ev.clientX - w - pad;
+  if (y + h > innerHeight - 8) y = ev.clientY - h - pad;
+  tip.style.left = Math.max(8, x) + "px";
+  tip.style.top = Math.max(8, y) + "px";
+}
+function hideTip(){ tip.classList.remove("on"); }
+function hoverable(node, html){
+  node.addEventListener("mouseenter", function(ev){ showTip(ev, html); });
+  node.addEventListener("mousemove", function(ev){ showTip(ev, html); });
+  node.addEventListener("mouseleave", hideTip);
+}
+function chip(id, onToggle, initial){
+  var b = el(id);
+  if (!b) return { on: function(){ return !!initial; } };
+  if (initial !== undefined) b.setAttribute("aria-pressed", initial ? "true" : "false");
+  b.addEventListener("click", function(){
+    var now = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", now ? "true" : "false");
+    onToggle(now);
+  });
+  return { on: function(){ return b.getAttribute("aria-pressed") === "true"; }, node: b };
+}
+
+/* Each figure sizes its coordinate system to the column it is in.  An SVG
+   scaled down into a phone column scales its type down with it, so a 1120-unit
+   viewBox with 11-unit labels renders at about four pixels on a phone.  These
+   shrink the coordinate system to the column instead, and grow the nominal
+   height a little as they narrow so the plot does not become a letterbox. */
+function figSize(svg, baseW, baseH, maxAspect){
+  var avail = Math.round(svg.parentNode.clientWidth || baseW);
+  var W = Math.max(300, Math.min(baseW, avail));
+  var grow = W >= baseW ? 1 : Math.min(1.6, Math.pow(baseW / W, 0.45));
+  var H = Math.round(Math.min(baseH * grow, W * (maxAspect || 1.0)));
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  return { W: W, H: H, narrow: W < 640 };
+}
+
+var MONTHS = ["Jul-Aug", "Aug-Sep", "Sep-Oct", "Oct-Nov", "Nov-Dec", "Dec-Jan",
+              "Jan-Feb", "Feb-Mar", "Mar-Apr", "Apr-May", "May-Jun", "Jun-Jul"];
+var NEPMON = ["Shrawan", "Bhadra", "Ashoj", "Kartik", "Mangsir", "Poush",
+              "Magh", "Falgun", "Chaitra", "Baisakh", "Jestha", "Asar"];
+var M = D.months;
+var T0 = M[0].t, T1 = M[M.length - 1].t;
+
+/* The series has holes in it, so it is drawn as runs of adjacent months
+   rather than as one path.  Joining across a hole would draw a straight line
+   through months nobody has, which is exactly the thing this page refuses to
+   do in prose. */
+function runs(rows, key){
+  var out = [], cur = [];
+  for (var i = 0; i < rows.length; i++){
+    var r = rows[i];
+    if (cur.length){
+      var prev = cur[cur.length - 1];
+      if (Math.abs(r.t - prev.t - 1 / 12) > 0.004){ out.push(cur); cur = []; }
+    }
+    if (r[key] !== null && r[key] !== undefined) cur.push(r);
+    else { if (cur.length) out.push(cur); cur = []; }
+  }
+  if (cur.length) out.push(cur);
+  return out.filter(function(s){ return s.length > 0; });
+}
+
+function path(seg, X, Y, key){
+  return seg.map(function(r, i){
+    return (i ? "L" : "M") + fFix(X(r.t), 1) + " " + fFix(Y(r[key]), 1);
+  }).join(" ");
+}
+
+function yearTicks(t0, t1, step){
+  var out = [];
+  for (var y = Math.ceil(t0); y <= Math.floor(t1); y++) if (y % step === 0) out.push(y);
+  return out;
+}
+
+function monthTip(r){
+  return "<b>" + MONTHS[r.m - 1] + " " + fyLabel(r.fy) + " &middot; " + NEPMON[r.m - 1] +
+    "</b><span class=\"v\">Remittance Rs " + fBn(r.rem) + " bn<br>" +
+    "Exports Rs " + fBn(r.exp) + " bn<br><b style=\"display:inline\">" +
+    fFix(r.r, 2) + " times</b></span>";
+}
+function fyLabel(fy){
+  var n = (fy + 1) % 100;
+  return fy + "/" + (n < 10 ? "0" + n : "" + n);
+}
+
+/* =================================================== 1. ARCHIVE COVERAGE === */
+var coverage = (function(){
+  var svg = el("svg-coverage");
+  var C = D.coverage;
+
+  function draw(){
+    clear(svg);
+    var F = figSize(svg, 900, 460, 1.10), W = F.W, H = F.H;
+    var lab = F.narrow ? 58 : 76;
+    var Mg = { l: lab, r: 10, t: F.narrow ? 30 : 34, b: 26 };
+    var pw = W - Mg.l - Mg.r, ph = H - Mg.t - Mg.b;
+    var cw = pw / 12, rh = ph / C.length;
+    var g = mk("g", null, svg);
+
+    for (var c = 0; c < 12; c++){
+      var show = F.narrow ? (c % 3 === 0) : true;
+      if (show) txt(g, Mg.l + cw * (c + 0.5), Mg.t - 10,
+                    F.narrow ? String(c + 1) : MONTHS[c], "tk");
+    }
+    txt(g, Mg.l, Mg.t - (F.narrow ? 22 : 24),
+        F.narrow ? "MONTH OF FISCAL YEAR" : "MONTH OF THE NEPALI FISCAL YEAR",
+        "axlab", "start");
+
+    C.forEach(function(row, i){
+      var y = Mg.t + rh * i;
+      txt(g, Mg.l - 8, y + rh / 2 + 3.5, row.label, "tk", "end");
+      for (var c = 0; c < 12; c++){
+        var state = row.month[c] ? 2 : (row.issue[c] ? 1 : 0);
+        var r = mk("rect", { x: Mg.l + cw * c + 1, y: y + 1,
+                             width: Math.max(1, cw - 2), height: Math.max(1, rh - 2),
+                             rx: 1.5,
+                             fill: "var(--g" + state + ")",
+                             stroke: state ? "none" : "var(--rule)",
+                             "stroke-width": 0.8 }, g);
+        hoverable(r, "<b>" + row.label + " &middot; " + MONTHS[c] + "</b>" +
+          "<span class=\"v\">" +
+          (state === 2 ? "month recovered"
+           : state === 1 ? "bulletin held, but its neighbour is missing"
+           : "no bulletin in the archive") + "</span>");
+      }
+    });
+
+    var got = 0, iss = 0;
+    C.forEach(function(row){
+      for (var c = 0; c < 12; c++){ got += row.month[c]; iss += row.issue[c]; }
+    });
+    txt(g, W - Mg.r, H - 8,
+        fInt(got) + " of " + fInt(C.length * 12) + " months recovered from " +
+        fInt(iss) + " bulletins", "dlab", "end");
+  }
+  return { draw: draw };
+})();
+
+/* ======================================================= 2. THE LEVELS ===== */
+var levels = (function(){
+  var svg = el("svg-levels");
+  var logScale = false;
+  var remRuns = runs(M, "rem"), expRuns = runs(M, "exp");
+
+  function draw(){
+    clear(svg);
+    var F = figSize(svg, 1120, 520, 0.86), W = F.W, H = F.H;
+    var Mg = { l: F.narrow ? 44 : 58, r: 14, t: 18, b: 44 };
+    var pw = W - Mg.l - Mg.r, ph = H - Mg.t - Mg.b;
+    var g = mk("g", null, svg);
+
+    var top = 0, bot = 1e9;
+    M.forEach(function(r){
+      top = Math.max(top, r.rem, r.exp);
+      bot = Math.min(bot, r.exp);
+    });
+    var X = function(t){ return Mg.l + (t - T0) / (T1 - T0) * pw; };
+    var Y;
+    if (logScale){
+      var l0 = Math.log(Math.max(1, bot * 0.8)), l1 = Math.log(top * 1.12);
+      Y = function(v){ return Mg.t + ph - (Math.log(Math.max(0.1, v)) - l0) / (l1 - l0) * ph; };
+    } else {
+      var hi = top * 1.06;
+      Y = function(v){ return Mg.t + ph - v / hi * ph; };
+    }
+
+    var ticks = logScale ? [3, 10, 30, 100, 300] : [0, 50, 100, 150, 200, 250];
+    ticks.forEach(function(v){
+      var y = Y(v);
+      if (y < Mg.t - 2 || y > Mg.t + ph + 2) return;
+      mk("line", { x1: Mg.l, x2: Mg.l + pw, y1: y, y2: y, "class": "gl" }, g);
+      txt(g, Mg.l - 7, y + 3.5, fInt(v), "tk", "end");
+    });
+    mk("line", { x1: Mg.l, x2: Mg.l + pw, y1: Mg.t + ph, y2: Mg.t + ph, "class": "ax" }, g);
+
+    yearTicks(T0, T1, F.narrow ? 4 : 2).forEach(function(y){
+      txt(g, X(y), Mg.t + ph + 18, F.narrow ? "'" + String(y).slice(2) : String(y), "tk");
+    });
+    txt(g, Mg.l + pw / 2, H - 8, "CALENDAR YEAR", "axlab");
+    var yl = txt(g, 0, 0, F.narrow ? "RS BN" : "RUPEES BILLION IN THE MONTH", "axlab");
+    yl.setAttribute("transform", "translate(13," + (Mg.t + ph / 2) + ") rotate(-90)");
+
+    expRuns.forEach(function(seg){
+      mk("path", { d: path(seg, X, Y, "exp"), fill: "none", stroke: "var(--exp)",
+                   "stroke-width": 1.8, "stroke-linejoin": "round" }, g);
+    });
+    remRuns.forEach(function(seg){
+      mk("path", { d: path(seg, X, Y, "rem"), fill: "none", stroke: "var(--rem)",
+                   "stroke-width": 1.8, "stroke-linejoin": "round" }, g);
+    });
+
+    /* two labels, at the last month of each line, instead of a key the reader
+       has to look back up at */
+    var last = M[M.length - 1];
+    txt(g, X(last.t) - 4, Y(last.rem) - 9, "remittance", "dlab halo", "end")
+      .setAttribute("fill", "var(--rem)");
+    txt(g, X(last.t) - 4, Y(last.exp) + (logScale ? 16 : -9), "exports", "dlab halo", "end")
+      .setAttribute("fill", "var(--exp)");
+
+    var hit = mk("rect", { x: Mg.l, y: Mg.t, width: pw, height: ph, fill: "transparent" }, g);
+    hit.addEventListener("mousemove", function(ev){
+      var b = svg.getBoundingClientRect();
+      var t = T0 + ((ev.clientX - b.left) / b.width * W - Mg.l) / pw * (T1 - T0);
+      var best = null, bd = 1e9;
+      M.forEach(function(r){ var d = Math.abs(r.t - t); if (d < bd){ bd = d; best = r; } });
+      if (best && bd < 0.5) showTip(ev, monthTip(best));
+    });
+    hit.addEventListener("mouseleave", hideTip);
+  }
+  chip("c-log", function(v){ logScale = v; draw(); }, false);
+  return { draw: draw };
+})();
+
+/* ======================================================== 3. THE RATIO ===== */
+var ratio = (function(){
+  var svg = el("svg-ratio");
+  var marks = true;
+  var rRuns = runs(M, "r");
+  var full = D.years.filter(function(y){ return y.n === 12; });
+  var E = D.episodes;
+  /* The earthquake and the blockade are six months apart, which at this width
+     is about thirty units: their labels overlap into one word unless they are
+     put on different rows. */
+  var SHOCKS = [
+    { t: E.quake.t, label: "Earthquake", sub: "Apr 2015", r: E.quake.r, row: 0 },
+    { t: E.blockade.t, label: "Border blockade", sub: "Oct 2015", r: E.blockade.r, row: 1 },
+    { t: E.covid_exp.t, label: "Lockdown", sub: "Apr 2020", r: E.covid_exp.r, row: 0 }
+  ];
+
+  function draw(){
+    clear(svg);
+    var F = figSize(svg, 1120, 500, 0.86), W = F.W, H = F.H;
+    var Mg = { l: F.narrow ? 40 : 52, r: 14, t: 46, b: 44 };
+    var pw = W - Mg.l - Mg.r, ph = H - Mg.t - Mg.b;
+    var g = mk("g", null, svg);
+
+    var top = 0;
+    M.forEach(function(r){ top = Math.max(top, r.r); });
+    top = Math.ceil(top) + 1;
+    var X = function(t){ return Mg.l + (t - T0) / (T1 - T0) * pw; };
+    var Y = function(v){ return Mg.t + ph - v / top * ph; };
+
+    for (var v = 0; v <= top; v += (F.narrow ? 4 : 2)){
+      mk("line", { x1: Mg.l, x2: Mg.l + pw, y1: Y(v), y2: Y(v), "class": "gl" }, g);
+      txt(g, Mg.l - 7, Y(v) + 3.5, v + "x", "tk", "end");
+    }
+    mk("line", { x1: Mg.l, x2: Mg.l + pw, y1: Mg.t + ph, y2: Mg.t + ph, "class": "ax" }, g);
+    yearTicks(T0, T1, F.narrow ? 4 : 2).forEach(function(y){
+      txt(g, X(y), Mg.t + ph + 18, F.narrow ? "'" + String(y).slice(2) : String(y), "tk");
+    });
+    txt(g, Mg.l + pw / 2, H - 8, "CALENDAR YEAR", "axlab");
+    var yl = txt(g, 0, 0, F.narrow ? "MULTIPLE" : "REMITTANCE / EXPORTS", "axlab");
+    yl.setAttribute("transform", "translate(12," + (Mg.t + ph / 2) + ") rotate(-90)");
+
+    rRuns.forEach(function(seg){
+      mk("path", { d: path(seg, X, Y, "r"), fill: "none", stroke: "var(--ratio)",
+                   "stroke-width": 1.1, opacity: 0.55, "stroke-linejoin": "round" }, g);
+    });
+
+    /* the fiscal year, as a step across the twelve months it actually covers */
+    var d = [];
+    full.forEach(function(y){
+      var a = X(y.fy + 0.5), b = X(y.fy + 1.5 - 1e-9);
+      d.push("M" + fFix(a, 1) + " " + fFix(Y(y.r), 1) + " L" + fFix(b, 1) + " " + fFix(Y(y.r), 1));
+    });
+    mk("path", { d: d.join(" "), fill: "none", stroke: "var(--ratio)",
+                 "stroke-width": 3.4, "stroke-linecap": "butt" }, g);
+    full.forEach(function(y){
+      var cx = X(y.fy + 1.0);
+      var c = mk("circle", { cx: cx, cy: Y(y.r), r: 3.2, fill: "var(--ratio)",
+                             stroke: "var(--surface)", "stroke-width": 1 }, g);
+      hoverable(c, "<b>Fiscal year " + y.label + "</b><span class=\"v\">Remittance Rs " +
+        fInt(y.rem) + " bn<br>Exports Rs " + fInt(y.exp) + " bn<br>" +
+        fFix(y.r, 2) + " times</span>");
+    });
+
+    if (marks) SHOCKS.forEach(function(s){
+      var ly = Mg.t - 30 + s.row * 16;
+      mk("line", { x1: X(s.t), x2: X(s.t), y1: Y(s.r) - 8, y2: ly + 4,
+                   stroke: "var(--ink-3)", "stroke-width": 1, "stroke-dasharray": "3 3" }, g);
+      var anchor = X(s.t) < Mg.l + 40 ? "start" : X(s.t) > Mg.l + pw - 40 ? "end" : "middle";
+      var lab = txt(g, X(s.t), ly, F.narrow ? s.sub : s.label, "dlab halo", anchor);
+      lab.setAttribute("fill", "var(--ink-2)");
+      mk("circle", { cx: X(s.t), cy: Y(s.r), r: 3.4, fill: "var(--ink)",
+                     stroke: "var(--surface)", "stroke-width": 1.2 }, g);
+    });
+
+    txt(g, Mg.l + 4, Mg.t + ph - 6,
+        "median month " + fFix(D.ratio.median, 2) + "x", "dlab halo", "start");
+
+    var hit = mk("rect", { x: Mg.l, y: Mg.t, width: pw, height: ph, fill: "transparent" }, g);
+    hit.addEventListener("mousemove", function(ev){
+      var b = svg.getBoundingClientRect();
+      var t = T0 + ((ev.clientX - b.left) / b.width * W - Mg.l) / pw * (T1 - T0);
+      var best = null, bd = 1e9;
+      M.forEach(function(r){ var dd = Math.abs(r.t - t); if (dd < bd){ bd = dd; best = r; } });
+      if (best && bd < 0.5) showTip(ev, monthTip(best));
+    });
+    hit.addEventListener("mouseleave", hideTip);
+  }
+  chip("c-mark", function(v){ marks = v; draw(); }, true);
+  return { draw: draw };
+})();
+
+/* ================================================= 4. THE FISCAL YEARS ===== */
+var years = (function(){
+  var svg = el("svg-years");
+  var Y12 = D.years.filter(function(y){ return y.n === 12; });
+
+  function draw(){
+    clear(svg);
+    var F = figSize(svg, 1120, 480, 0.80), W = F.W, H = F.H;
+    var Mg = { l: F.narrow ? 44 : 58, r: 14, t: 34, b: 64 };
+    var pw = W - Mg.l - Mg.r, ph = H - Mg.t - Mg.b;
+    var g = mk("g", null, svg);
+
+    var top = 0;
+    Y12.forEach(function(y){ top = Math.max(top, y.rem); });
+    top *= 1.1;
+    var band = pw / Y12.length;
+    var bw = Math.min(band * 0.34, 34);
+    var Y = function(v){ return Mg.t + ph - v / top * ph; };
+
+    [0, 500, 1000, 1500, 2000].forEach(function(v){
+      if (v > top) return;
+      mk("line", { x1: Mg.l, x2: Mg.l + pw, y1: Y(v), y2: Y(v), "class": "gl" }, g);
+      txt(g, Mg.l - 7, Y(v) + 3.5, fInt(v), "tk", "end");
+    });
+    mk("line", { x1: Mg.l, x2: Mg.l + pw, y1: Mg.t + ph, y2: Mg.t + ph, "class": "ax" }, g);
+    var yl = txt(g, 0, 0, F.narrow ? "RS BN" : "RUPEES BILLION IN THE YEAR", "axlab");
+    yl.setAttribute("transform", "translate(13," + (Mg.t + ph / 2) + ") rotate(-90)");
+
+    Y12.forEach(function(y, i){
+      var cx = Mg.l + band * (i + 0.5);
+      var x1 = cx - bw - 1, x2 = cx + 1;
+      var hr = Mg.t + ph - Y(y.rem), he = Mg.t + ph - Y(y.exp);
+      var a = mk("rect", { x: x1, y: Y(y.rem), width: bw, height: Math.max(1, hr),
+                           fill: "var(--rem)", rx: 1 }, g);
+      var b = mk("rect", { x: x2, y: Y(y.exp), width: bw, height: Math.max(1.5, he),
+                           fill: "var(--exp)", rx: 1 }, g);
+      var tipHtml = "<b>Fiscal year " + y.label + "</b><span class=\"v\">Remittance Rs " +
+        fInt(y.rem) + " bn<br>Exports Rs " + fInt(y.exp) + " bn<br>" +
+        fFix(y.r, 2) + " times</span>";
+      hoverable(a, tipHtml); hoverable(b, tipHtml);
+
+      /* Twelve years across a phone column leaves about twenty-eight units a
+         year, and a label reading "9.1x" wants twenty-six of them.  So the
+         narrow variant labels alternate years and drops the export values
+         into the tooltip rather than printing twelve numbers on top of each
+         other, which is what the first draft did. */
+      var show = !F.narrow || i % 2 === 0;
+      if (show){
+        var m = txt(g, cx, Y(y.rem) - 10, fFix(y.r, 1) + "x", "dlab halo");
+        m.setAttribute("fill", "var(--ratio)");
+        var lb = txt(g, cx, Mg.t + ph + 18, y.label, "tk");
+        lb.setAttribute("transform", "rotate(-40," + cx + "," + (Mg.t + ph + 18) + ")");
+        lb.setAttribute("text-anchor", "end");
+      }
+      /* the export bar is three to twenty per cent of the other one, which is
+         the point; printing its value keeps it readable when it is four
+         pixels tall */
+      if (!F.narrow){
+        var ev = txt(g, x2 + bw / 2, Y(y.exp) - 5, fInt(y.exp), "tk");
+        ev.setAttribute("fill", "var(--exp)");
+      }
+    });
+    /* the year labels are rotated into the bottom margin, so the axis title
+       sits at the right-hand end of them rather than under the middle, where
+       it would land on top of one */
+    txt(g, Mg.l + pw, H - 4, "FISCAL YEAR", "axlab", "end");
+    txt(g, Mg.l, Mg.t - 16, "MULTIPLE ABOVE EACH PAIR", "axlab", "start");
+  }
+  return { draw: draw };
+})();
+
+/* ===================================================== 5. THE TWO CHECKS === */
+var checks = (function(){
+  var svg = el("svg-checks");
+  var Hh = D.checks.pct_hist;
+  var Q = D.checks.quoted_pts;
+  var BINS = ["under 0.05%", "0.05 - 0.1%", "0.1 - 0.2%", "0.2 - 0.5%",
+              "0.5 - 1%", "1 - 2%", "2 - 5%", "over 5%"];
+
+  function draw(){
+    clear(svg);
+    var F = figSize(svg, 1120, 470, 1.45), W = F.W, H = F.H;
+    var g = mk("g", null, svg);
+    var split = Math.round(H * (F.narrow ? 0.46 : 0.56));
+
+    /* --- top: the 311 cross-year checks, binned ------------------------- */
+    var lab = F.narrow ? 82 : 104;
+    var Mg = { l: lab, r: 46, t: 24, b: 14 };
+    var pw = W - Mg.l - Mg.r, ph = split - Mg.t - Mg.b;
+    var rh = ph / BINS.length;
+    var maxc = 0;
+    Hh.counts.forEach(function(c){ maxc = Math.max(maxc, c); });
+
+    txt(g, Mg.l - lab + 2, Mg.t - 10,
+        F.narrow ? "CROSS-YEAR CHECK" : "STATED CHANGE AGAINST THE PREVIOUS YEAR'S OWN BULLETIN",
+        "axlab", "start");
+    Hh.counts.forEach(function(c, i){
+      var y = Mg.t + rh * i;
+      txt(g, Mg.l - 8, y + rh / 2 + 3.5, BINS[i], "tk", "end");
+      var w = maxc ? (c / maxc) * pw : 0;
+      var r = mk("rect", { x: Mg.l, y: y + 2, width: Math.max(c ? 2 : 0, w),
+                           height: Math.max(2, rh - 5), fill: "var(--exp)",
+                           opacity: c ? 0.85 : 0, rx: 1 }, g);
+      if (c) hoverable(r, "<b>" + BINS[i] + "</b><span class=\"v\">" + fInt(c) +
+        " of " + fInt(D.checks.pct_n) + " comparisons</span>");
+      txt(g, Mg.l + Math.max(c ? 2 : 0, w) + 6, y + rh / 2 + 3.5, fInt(c), "tk", "start");
+    });
+
+    /* --- bottom: the 14 months NRB printed on their own ----------------- */
+    var Mb = { l: F.narrow ? 46 : 60, r: 14, t: split + 34, b: 40 };
+    var bw = W - Mb.l - Mb.r, bh = H - Mb.t - Mb.b;
+    var lo = 1e9, hi = 0;
+    Q.forEach(function(p){ lo = Math.min(lo, p.d, p.s); hi = Math.max(hi, p.d, p.s); });
+    var padv = (hi - lo) * 0.12;
+    lo -= padv; hi += padv;
+    var X = function(v){ return Mb.l + (v - lo) / (hi - lo) * bw; };
+    var Y = function(v){ return Mb.t + bh - (v - lo) / (hi - lo) * bh; };
+
+    txt(g, Mb.l - (F.narrow ? 44 : 58) + 2, split + 16,
+        F.narrow ? "MONTH PRINTED BY NRB" : "MONTHS NRB PRINTED ON THEIR OWN, RS BN",
+        "axlab", "start");
+    mk("line", { x1: X(lo), y1: Y(lo), x2: X(hi), y2: Y(hi),
+                 stroke: "var(--rule-2)", "stroke-width": 1, "stroke-dasharray": "4 4" }, g);
+    (F.narrow ? [150, 250] : [150, 200, 250]).forEach(function(v){
+      if (v < lo || v > hi) return;
+      txt(g, X(v), Mb.t + bh + 17, fInt(v), "tk");
+      txt(g, Mb.l - 7, Y(v) + 3.5, fInt(v), "tk", "end");
+      mk("line", { x1: X(v), x2: X(v), y1: Mb.t, y2: Mb.t + bh, "class": "gl" }, g);
+      mk("line", { y1: Y(v), y2: Y(v), x1: Mb.l, x2: Mb.l + bw, "class": "gl" }, g);
+    });
+    mk("line", { x1: Mb.l, x2: Mb.l + bw, y1: Mb.t + bh, y2: Mb.t + bh, "class": "ax" }, g);
+    txt(g, Mb.l + bw / 2, H - 6, "PRINTED BY NRB", "axlab");
+    var yl2 = txt(g, 0, 0, F.narrow ? "DIFFERENCED" : "DIFFERENCED HERE", "axlab");
+    yl2.setAttribute("transform", "translate(13," + (Mb.t + bh / 2) + ") rotate(-90)");
+
+    Q.forEach(function(p){
+      var err = Math.abs(p.d - p.s) / p.s;
+      var c = mk("circle", { cx: X(p.s), cy: Y(p.d), r: 4.2,
+                             fill: err > 0.002 ? "var(--rem)" : "var(--exp)",
+                             stroke: "var(--surface)", "stroke-width": 1.1, opacity: 0.92 }, g);
+      hoverable(c, "<b>" + MONTHS[p.m - 1] + " " + p.fy + "</b><span class=\"v\">NRB printed Rs " +
+        fBn(p.s) + " bn<br>Differenced here Rs " + fBn(p.d) + " bn<br>" +
+        (err < 0.00005 ? "identical" : "off by " + fFix(err * 100, 2) + "%") + "</span>");
+    });
+    /* the dots run bottom-left to top-right along the diagonal, so the only
+       corner that is reliably empty is the top left */
+    txt(g, Mb.l + 6, Mb.t + 13,
+        fInt(D.checks.quoted_exact) + " of " + fInt(D.checks.quoted_n) + " identical",
+        "dlab halo", "start");
+  }
+  return { draw: draw };
+})();
+
+/* ------------------------------------------------------------------ boot */
+fillProse();
+coverage.draw();
+levels.draw();
+ratio.draw();
+years.draw();
+checks.draw();
+
+var figCol = document.querySelector(".wide");
+function colWidth(){ return figCol ? figCol.clientWidth : window.innerWidth; }
+var rt, lastW = colWidth();
+window.addEventListener("resize", function(){
+  clearTimeout(rt);
+  rt = setTimeout(function(){
+    var w = colWidth();
+    if (w === lastW) return;
+    lastW = w;
+    coverage.draw(); levels.draw(); ratio.draw(); years.draw(); checks.draw();
+  }, 160);
+});
+})();
+</script>
+</body>
+</html>

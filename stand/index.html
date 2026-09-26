@@ -1,0 +1,1212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Where Does My Salary Put Me?">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%93%8D%3C%2Ftext%3E%3C%2Fsvg%3E">
+<title>Where Does My Salary Put Me?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..800,0..100,0..1&family=Source+Sans+3:wght@300;400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#EEEEF2; --surface:#FCFCFD; --surface-2:#F5F5F9; --sunk:#E3E3EA;
+  --ink:#15151C; --ink-2:#4E4E5C; --ink-3:#84848F; --rule:#D6D6DE; --rule-2:#C2C2CD;
+  --accent:#c2255c; --alt:#2a78d6;
+  /* One hue for every mark, as on the odds page and for the same reason: the
+     identity of a bar is carried by its position and its label, never by a
+     colour a reader might not separate. */
+  --mark:#c2255c; --mark-soft:rgba(194,37,92,.18); --mark-dim:rgba(194,37,92,.30);
+  --you:#15151C; --pov:#b54708;
+  --grid:rgba(21,21,28,.08);
+  --shadow:0 1px 2px rgba(21,21,28,.05),0 10px 30px -16px rgba(21,21,28,.18);
+  --shadow-lg:0 2px 4px rgba(21,21,28,.06),0 24px 60px -28px rgba(21,21,28,.30);
+  --field:#FFFFFF; --field-rule:#C2C2CD;
+  --measure:65ch; --wide:1120px;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
+    --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
+    --accent:#e64980; --alt:#3987e5;
+    --mark:#e64980; --mark-soft:rgba(230,73,128,.24); --mark-dim:rgba(230,73,128,.40);
+    --you:#EAEAF0; --pov:#f0913a;
+    --grid:rgba(234,234,240,.09);
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+    --shadow-lg:0 2px 4px rgba(0,0,0,.55),0 24px 60px -28px rgba(0,0,0,.85);
+    --field:#15151B; --field-rule:#3A3A46;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
+  --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
+  --accent:#e64980; --alt:#3987e5;
+  --mark:#e64980; --mark-soft:rgba(230,73,128,.24); --mark-dim:rgba(230,73,128,.40);
+  --you:#EAEAF0; --pov:#f0913a;
+  --grid:rgba(234,234,240,.09);
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+  --shadow-lg:0 2px 4px rgba(0,0,0,.55),0 24px 60px -28px rgba(0,0,0,.85);
+  --field:#15151B; --field-rule:#3A3A46;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:400; font-size:18.5px; line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; font-family:"Fraunces","Georgia",serif;
+  font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
+  letter-spacing:-.012em}
+.mono,code{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.wrap{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
+.wide{max-width:var(--wide); margin-inline:auto; padding-inline:24px}
+section{padding-block:clamp(38px,5.5vw,68px)}
+section+section{border-top:1px solid var(--rule)}
+p{margin:0 0 1.1em}
+a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2); text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--alt); outline-offset:3px; border-radius:3px}
+
+.eyebrow{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3);
+  display:flex; align-items:center; gap:12px; margin-bottom:16px}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
+h2{font-size:clamp(26px,3.6vw,36px); line-height:1.08; font-weight:700; margin-bottom:.48em}
+h3{font-size:20px; line-height:1.26; font-weight:600; margin:1.8em 0 .5em}
+.lede{font-size:20px; line-height:1.56; color:var(--ink-2)}
+.small{font-size:15.5px; line-height:1.55; color:var(--ink-2)}
+.tiny{font-size:13.5px; line-height:1.5; color:var(--ink-3)}
+
+header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
+  padding-block:clamp(40px,6.5vw,76px)}
+h1{font-size:clamp(34px,6vw,70px); line-height:.99; font-weight:800;
+   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:14ch; margin-bottom:.3em}
+.sub{max-width:56ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
+.kicker{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:20px}
+.devanagari{font-size:.6em; color:var(--ink-3); letter-spacing:0;
+  font-family:"Source Sans 3",sans-serif; font-weight:400; display:block;
+  margin-top:.55em; font-variation-settings:normal}
+
+.tool{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
+  gap:28px; align-items:start}
+.split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:26px;
+  align-items:start}
+.card{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+  box-shadow:var(--shadow); padding:24px}
+.card h3:first-child{margin-top:0}
+
+.field{margin-bottom:17px}
+.field:last-child{margin-bottom:0}
+label.lab{display:block; font-family:"DM Mono",monospace; font-size:11px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+  margin-bottom:7px}
+input[type=text],input[type=number],select{
+  width:100%; font:inherit; font-size:17px; color:var(--ink);
+  background:var(--field); border:1px solid var(--field-rule); border-radius:9px;
+  padding:10px 12px; appearance:none; -webkit-appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--ink-3) 50%),
+  linear-gradient(135deg,var(--ink-3) 50%,transparent 50%);
+  background-position:calc(100% - 19px) 50%,calc(100% - 13px) 50%;
+  background-size:6px 6px,6px 6px; background-repeat:no-repeat; padding-right:36px}
+input:focus,select:focus{border-color:var(--accent); outline:none;
+  box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 22%,transparent)}
+.two{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px}
+.seg{display:flex; border:1px solid var(--field-rule); border-radius:9px;
+  overflow:hidden; background:var(--field)}
+.seg button{flex:1; font:inherit; font-size:14.5px; padding:8px 4px; border:0;
+  background:transparent; color:var(--ink-2); cursor:pointer;
+  border-right:1px solid var(--field-rule)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--accent); color:#fff; font-weight:600}
+.sizerow{display:flex; align-items:center; gap:13px}
+.sizerow input[type=range]{flex:1; accent-color:var(--accent)}
+.sizerow .num{width:84px; flex-shrink:0}
+
+.answer{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+  box-shadow:var(--shadow-lg); overflow:hidden; position:sticky; top:20px}
+.answer .top{padding:24px 24px 20px; background:linear-gradient(180deg,
+  color-mix(in oklab,var(--accent) 8%,var(--surface)),var(--surface))}
+.big{font-family:"Fraunces",Georgia,serif; font-weight:800; line-height:1;
+  font-size:clamp(40px,5.6vw,58px); letter-spacing:-.022em;
+  font-variant-numeric:tabular-nums; margin:2px 0 6px}
+.big .unit{font-family:"Source Sans 3",sans-serif; font-weight:500;
+  font-size:.30em; letter-spacing:0; color:var(--ink-3); margin-left:.3em}
+.exact{font-size:16px; color:var(--ink-2); line-height:1.45}
+.ppbar{height:11px; border-radius:6px; margin:16px 0 7px; position:relative;
+  background:linear-gradient(90deg,var(--mark-soft),var(--mark))}
+.ppbar i{position:absolute; top:-4px; width:3px; height:19px; background:var(--you);
+  border-radius:2px; transform:translateX(-50%)}
+.ppends{display:flex; justify-content:space-between;
+  font-family:"DM Mono",monospace; font-size:12.5px; color:var(--ink-3)}
+
+.rows{border-top:1px solid var(--rule)}
+.row{display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+  padding:10px 24px; font-size:15.5px; border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}
+.row .k{color:var(--ink-2)}
+.row .k em{font-style:normal; color:var(--ink-3); font-size:13.5px; display:block;
+  line-height:1.35}
+.row .v{font-family:"DM Mono",monospace; font-size:15px; white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.row.tot{background:var(--surface-2); font-weight:600}
+.flag{margin:0 24px 20px; padding:11px 13px; border-radius:9px; font-size:14.5px;
+  line-height:1.48; background:var(--surface-2); border:1px solid var(--rule);
+  color:var(--ink-2)}
+.flag b{color:var(--ink)}
+.flag.warn{background:color-mix(in oklab,var(--pov) 10%,var(--surface));
+  border-color:color-mix(in oklab,var(--pov) 30%,var(--rule))}
+.acts{display:flex; gap:10px; padding:16px 24px 20px; border-top:1px solid var(--rule)}
+.acts .cta{font-size:14.5px; padding:9px 12px}
+#shareOut{margin:0 24px 18px; width:calc(100% - 48px);
+  font-family:"DM Mono",monospace; font-size:12.5px}
+
+.fig{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+  box-shadow:var(--shadow); padding:20px 20px 14px; position:relative}
+.fig h3{margin:0 0 4px; font-size:19px}
+.fig .note{font-size:14.5px; color:var(--ink-2); margin:0 0 12px; line-height:1.45}
+.fig svg{display:block; width:100%; height:auto; overflow:visible}
+.gridline{stroke:var(--grid); stroke-width:1}
+.axisline{stroke:var(--rule-2); stroke-width:1}
+.axistext{font-family:"DM Mono",monospace; font-size:10px; fill:var(--ink-3)}
+.axistitle{font-family:"Source Sans 3",sans-serif; font-size:11.5px; fill:var(--ink-3)}
+.bar{fill:var(--mark-soft)}
+.bar.under{fill:var(--mark-dim)}
+.youline{stroke:var(--you); stroke-width:2}
+.povline{stroke:var(--pov); stroke-width:1.5; stroke-dasharray:4 3}
+.figlab{font-family:"Source Sans 3",sans-serif; font-size:11px; fill:var(--ink-2);
+  paint-order:stroke; stroke:var(--surface); stroke-width:3px; stroke-linejoin:round}
+.figlab.you{fill:var(--ink); font-weight:600}
+.figlab.pov{fill:var(--pov)}
+.hit{fill:transparent; cursor:pointer}
+.tip{position:absolute; pointer-events:none; z-index:20; background:var(--surface);
+  border:1px solid var(--rule-2); border-radius:9px; box-shadow:var(--shadow-lg);
+  padding:9px 11px; font-size:13.5px; line-height:1.45; max-width:230px;
+  opacity:0; transition:opacity .1s}
+.tip.on{opacity:1}
+.tip b{display:block; font-size:14.5px; margin-bottom:2px}
+
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(156px,100%),1fr));
+  gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:11px;
+  overflow:hidden}
+/* Four tiles in a half-width column: two rows of two, never three and a
+   stranded empty cell showing the grid's own background. */
+.stats.pair{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stat{background:var(--surface); padding:15px 16px}
+.stat .n{font-family:"DM Mono",monospace; font-size:23px; line-height:1.1;
+  font-variant-numeric:tabular-nums; margin-bottom:3px}
+.stat .l{font-size:13px; color:var(--ink-3); line-height:1.35}
+
+table{width:100%; border-collapse:collapse; font-size:15px}
+th{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:400; text-align:right;
+  padding:0 0 8px; border-bottom:1px solid var(--rule)}
+th:first-child{text-align:left}
+td{padding:8px 0; border-bottom:1px solid var(--rule); text-align:right;
+  font-family:"DM Mono",monospace; font-variant-numeric:tabular-nums; font-size:14.5px}
+td:first-child{text-align:left; font-family:"Source Sans 3",sans-serif; font-size:15.5px}
+tr:last-child td{border-bottom:0}
+tr.you td{background:color-mix(in oklab,var(--accent) 11%,var(--surface));
+  font-weight:600; color:var(--ink)}
+tr.you td:first-child{border-left:3px solid var(--accent); padding-left:9px}
+
+.offer{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+  padding:24px; box-shadow:var(--shadow)}
+.offer.lead{border-color:color-mix(in oklab,var(--accent) 45%,var(--rule));
+  box-shadow:var(--shadow-lg)}
+ul.ticks{list-style:none; margin:0 0 20px; padding:0; font-size:15.5px}
+ul.ticks li{padding-left:26px; position:relative; margin-bottom:9px; line-height:1.45;
+  color:var(--ink-2)}
+ul.ticks li::before{content:""; position:absolute; left:4px; top:.55em; width:10px;
+  height:6px; border-left:2px solid var(--accent); border-bottom:2px solid var(--accent);
+  transform:rotate(-45deg)}
+button.cta{width:100%; font:inherit; font-size:17px; font-weight:600; padding:13px 18px;
+  border:0; border-radius:10px; background:var(--accent); color:#fff; cursor:pointer;
+  transition:filter .12s}
+button.cta:hover{filter:brightness(1.1)}
+button.cta.ghost{background:transparent; color:var(--ink);
+  border:1px solid var(--rule-2); font-weight:500}
+button.cta.ghost:hover{border-color:var(--accent); filter:none}
+.leadform{margin-top:18px; padding-top:18px; border-top:1px solid var(--rule); display:none}
+.leadform.on{display:block}
+.err{color:var(--accent); font-size:13.5px; margin-top:6px; display:none}
+.err.on{display:block}
+.done{display:none; padding:15px 16px; border-radius:10px; font-size:15.5px;
+  background:var(--surface-2); border:1px solid var(--rule); line-height:1.5}
+.done.on{display:block}
+.demo{margin-top:13px; font-size:13px; color:var(--ink-3); line-height:1.45}
+textarea.raw{width:100%; margin-top:12px; font-family:"DM Mono",monospace;
+  font-size:13px; line-height:1.5; color:var(--ink); background:var(--field);
+  border:1px solid var(--field-rule); border-radius:9px; padding:11px 12px;
+  resize:vertical}
+
+.next{display:grid; grid-template-columns:1fr 1fr; gap:20px}
+a.nextcard{display:block; text-decoration:none; background:var(--surface);
+  border:1px solid var(--rule); border-radius:14px; padding:22px;
+  box-shadow:var(--shadow); transition:transform .16s, border-color .16s}
+a.nextcard:hover{transform:translateY(-2px); border-color:var(--rule-2)}
+a.nextcard h3{margin:0 0 .3em; font-size:21px}
+a.nextcard p{margin:0 0 14px; font-size:15.5px; color:var(--ink-2); line-height:1.45}
+a.nextcard .go{font-family:"DM Mono",monospace; font-size:11.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-3)}
+a.nextcard:hover .go{color:var(--accent)}
+
+footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:46px;
+  font-size:15.5px; color:var(--ink-2)}
+.srcs{font-size:14.5px; color:var(--ink-3)}
+.printonly{display:none}
+
+@media print{
+  :root{color-scheme:light}
+  body{background:#fff; color:#000; font-size:10.5pt}
+  .noprint,.acts,.tip{display:none !important}
+  .printonly{display:block; margin:12px 24px 18px; font-size:9.5pt; color:#444}
+  header.top{background:none; border-bottom:1px solid #999; padding-block:0 14px}
+  h1{font-size:21pt; max-width:none; margin-bottom:.2em}
+  .sub,.devanagari{display:none}
+  section{padding-block:15px !important; border-top:0 !important; break-inside:avoid}
+  .tool{display:block}
+  .answer{position:static; box-shadow:none; border:1px solid #999; break-inside:avoid}
+  .answer .top{background:none}
+  .card,.fig,.stats{box-shadow:none; border-color:#bbb; break-inside:avoid}
+  a[href]::after{content:""}
+}
+@media (max-width:900px){
+  .tool,.split,.next{grid-template-columns:minmax(0,1fr)}
+  .answer{position:static}
+}
+@media (max-width:760px){
+  body{font-size:17.5px}
+  .wrap,.wide{padding-inline:18px}
+  .card,.offer,.fig{padding:19px}
+  .row{padding-inline:19px}
+  .flag,#shareOut{margin-inline:19px}
+  #shareOut{width:calc(100% - 38px)}
+  .acts{flex-direction:column; padding-inline:19px}
+  .row{flex-direction:column; align-items:flex-start; gap:1px}
+  .row .v{white-space:normal}
+  input[type=text],input[type=number],select{font-size:16px}
+  select{padding-right:28px;
+    background-position:calc(100% - 15px) 50%,calc(100% - 9px) 50%}
+  table{font-size:14px}
+  td:first-child{font-size:14.5px}
+}
+</style>
+</head>
+<body>
+<script>window.STAND_DATA={"meta":{"survey":"LSS-IV","survey_priced_in":2022,"welfare":"consumption","pop":29705025,"hh_size":3.999,"gini":0.3002,"median_npr":9172,"mean_npr":10810,"poverty_month":6075.7,"poverty_rate":20.27,"min_wage":19550,"remit_gdp":26.0,"wage_share":21.4,"cpi_latest_year":"2025","deflator":0.899615,"ktm_pc_month":21943.2,"madhesh_pc_month":5985.7,"source":"World Bank PIP and the Nepal Living Standards Survey"},"curve":[{"p":0.5,"npr":2741},{"p":1.0,"npr":2929},{"p":2.0,"npr":3313},{"p":3.0,"npr":3588},{"p":4.0,"npr":3903},{"p":5.0,"npr":4088},{"p":6.0,"npr":4279},{"p":7.0,"npr":4442},{"p":8.0,"npr":4618},{"p":9.0,"npr":4791},{"p":10.0,"npr":4905},{"p":11.0,"npr":4991},{"p":12.0,"npr":5088},{"p":13.0,"npr":5193},{"p":14.0,"npr":5312},{"p":15.0,"npr":5431},{"p":16.0,"npr":5548},{"p":17.0,"npr":5662},{"p":18.0,"npr":5797},{"p":19.0,"npr":5922},{"p":20.0,"npr":6036},{"p":21.0,"npr":6171},{"p":22.0,"npr":6280},{"p":23.0,"npr":6366},{"p":24.0,"npr":6455},{"p":25.0,"npr":6551},{"p":26.0,"npr":6648},{"p":27.0,"npr":6753},{"p":28.0,"npr":6857},{"p":29.0,"npr":6961},{"p":30.0,"npr":7065},{"p":31.0,"npr":7164},{"p":32.0,"npr":7262},{"p":33.0,"npr":7360},{"p":34.0,"npr":7456},{"p":35.0,"npr":7557},{"p":36.0,"npr":7660},{"p":37.0,"npr":7765},{"p":38.0,"npr":7873},{"p":39.0,"npr":7981},{"p":40.0,"npr":8070},{"p":41.0,"npr":8159},{"p":42.0,"npr":8250},{"p":43.0,"npr":8361},{"p":44.0,"npr":8472},{"p":45.0,"npr":8595},{"p":46.0,"npr":8721},{"p":47.0,"npr":8838},{"p":48.0,"npr":8951},{"p":49.0,"npr":9064},{"p":50.0,"npr":9175},{"p":51.0,"npr":9286},{"p":52.0,"npr":9398},{"p":53.0,"npr":9510},{"p":54.0,"npr":9623},{"p":55.0,"npr":9734},{"p":56.0,"npr":9846},{"p":57.0,"npr":9966},{"p":58.0,"npr":10103},{"p":59.0,"npr":10238},{"p":60.0,"npr":10366},{"p":61.0,"npr":10493},{"p":62.0,"npr":10636},{"p":63.0,"npr":10789},{"p":64.0,"npr":10948},{"p":65.0,"npr":11113},{"p":66.0,"npr":11268},{"p":67.0,"npr":11402},{"p":68.0,"npr":11536},{"p":69.0,"npr":11696},{"p":70.0,"npr":11867},{"p":71.0,"npr":12040},{"p":72.0,"npr":12215},{"p":73.0,"npr":12414},{"p":74.0,"npr":12648},{"p":75.0,"npr":12913},{"p":76.0,"npr":13166},{"p":77.0,"npr":13368},{"p":78.0,"npr":13588},{"p":79.0,"npr":13857},{"p":80.0,"npr":14139},{"p":81.0,"npr":14444},{"p":82.0,"npr":14849},{"p":83.0,"npr":15192},{"p":84.0,"npr":15553},{"p":85.0,"npr":15932},{"p":86.0,"npr":16338},{"p":87.0,"npr":16852},{"p":88.0,"npr":17348},{"p":89.0,"npr":17910},{"p":90.0,"npr":18629},{"p":91.0,"npr":19324},{"p":92.0,"npr":19900},{"p":93.0,"npr":20542},{"p":94.0,"npr":21426},{"p":95.0,"npr":22742},{"p":96.0,"npr":24301},{"p":97.0,"npr":26713},{"p":98.0,"npr":29650},{"p":99.0,"npr":35300},{"p":99.5,"npr":45509}],"density":{"band":1000,"top":40000,"bars":[{"lo":0,"hi":1000,"mid":500.0,"share":3.4e-05,"people":1000},{"lo":1000,"hi":2000,"mid":1500.0,"share":0.000526,"people":15636},{"lo":2000,"hi":3000,"mid":2500.0,"share":0.011211,"people":333010},{"lo":3000,"hi":4000,"mid":3500.0,"share":0.033538,"people":996240},{"lo":4000,"hi":5000,"mid":4500.0,"share":0.065727,"people":1952419},{"lo":5000,"hi":6000,"mid":5500.0,"share":0.085817,"people":2549208},{"lo":6000,"hi":7000,"mid":6500.0,"share":0.096845,"people":2876769},{"lo":7000,"hi":8000,"mid":7500.0,"share":0.098373,"people":2922166},{"lo":8000,"hi":9000,"mid":8500.0,"share":0.09223,"people":2739703},{"lo":9000,"hi":10000,"mid":9500.0,"share":0.088161,"people":2618815},{"lo":10000,"hi":11000,"mid":10500.0,"share":0.070708,"people":2100368},{"lo":11000,"hi":12000,"mid":11500.0,"share":0.064516,"people":1916439},{"lo":12000,"hi":13000,"mid":12500.0,"share":0.045462,"people":1350452},{"lo":13000,"hi":14000,"mid":13500.0,"share":0.04202,"people":1248213},{"lo":14000,"hi":15000,"mid":14500.0,"share":0.029245,"people":868711},{"lo":15000,"hi":16000,"mid":15500.0,"share":0.027339,"people":812116},{"lo":16000,"hi":17000,"mid":16500.0,"share":0.021258,"people":631455},{"lo":17000,"hi":18000,"mid":17500.0,"share":0.018235,"people":541672},{"lo":18000,"hi":19000,"mid":18500.0,"share":0.01394,"people":414074},{"lo":19000,"hi":20000,"mid":19500.0,"share":0.01679,"people":498734},{"lo":20000,"hi":21000,"mid":20500.0,"share":0.013284,"people":394599},{"lo":21000,"hi":22000,"mid":21500.0,"share":0.009069,"people":269385},{"lo":22000,"hi":23000,"mid":22500.0,"share":0.007699,"people":228687},{"lo":23000,"hi":24000,"mid":23500.0,"share":0.006558,"people":194809},{"lo":24000,"hi":25000,"mid":24500.0,"share":0.004706,"people":139790},{"lo":25000,"hi":26000,"mid":25500.0,"share":0.003735,"people":110953},{"lo":26000,"hi":27000,"mid":26500.0,"share":0.00383,"people":113777},{"lo":27000,"hi":28000,"mid":27500.0,"share":0.003759,"people":111656},{"lo":28000,"hi":29000,"mid":28500.0,"share":0.003675,"people":109152},{"lo":29000,"hi":30000,"mid":29500.0,"share":0.00255,"people":75751},{"lo":30000,"hi":31000,"mid":30500.0,"share":0.002812,"people":83543},{"lo":31000,"hi":32000,"mid":31500.0,"share":0.001297,"people":38530},{"lo":32000,"hi":33000,"mid":32500.0,"share":0.001223,"people":36329},{"lo":33000,"hi":34000,"mid":33500.0,"share":0.001567,"people":46549},{"lo":34000,"hi":35000,"mid":34500.0,"share":0.001734,"people":51523},{"lo":35000,"hi":36000,"mid":35500.0,"share":0.000971,"people":28846},{"lo":36000,"hi":37000,"mid":36500.0,"share":0.000516,"people":15333},{"lo":37000,"hi":38000,"mid":37500.0,"share":0.000393,"people":11676},{"lo":38000,"hi":39000,"mid":38500.0,"share":0.000509,"people":15108},{"lo":39000,"hi":40000,"mid":39500.0,"share":0.000966,"people":28688}],"above":0.007175,"above_people":213139},"ladder":[{"nominal":19550,"real":17588,"per_person":4398,"label":"Minimum wage","src":"Nepal Gazette, Jul 2025","p":6.73,"below":1999148},{"nominal":17809,"real":23426,"per_person":5858,"label":"Mean employee earnings","src":"NLFS III, 2017/18","p":18.49,"below":5492459},{"nominal":30000,"real":30000,"per_person":7502,"label":"Rs 30,000 a month","src":null,"p":34.45,"below":10233381},{"nominal":73711,"real":66314,"per_person":16583,"label":"Joint secretary","src":"Civil service, FY 2083/84","p":86.48,"below":25688906},{"nominal":98425,"real":88548,"per_person":22142,"label":"Chief secretary","src":"Civil service, FY 2083/84","p":94.54,"below":28083131},{"nominal":100000,"real":100000,"per_person":25006,"label":"Rs 1 lakh a month","src":null,"p":96.29,"below":28602969},{"nominal":200000,"real":200000,"per_person":50013,"label":"Rs 2 lakh a month","src":null,"p":99.5,"below":29556500}],"rounds":[{"year":"1995","survey":"LSS-I","median":2494,"mean":3209,"gini":0.3521},{"year":"2003","survey":"LSS-II","median":3112,"mean":4660,"gini":0.4377},{"year":"2010","survey":"LSS-III","median":5172,"mean":6396,"gini":0.3284},{"year":"2022","survey":"LSS-IV","median":9172,"mean":10810,"gini":0.3002}],"land":{"median_npr_per_aana":4300000,"aana_sqft":342.25,"reference_aana":4.0}};</script>
+
+<header class="top">
+  <div class="wide">
+    <p class="kicker">Nepal Living Standards Survey &middot; 29.7 million people</p>
+    <h1>Where does my salary put me?<!-- "Ma kaha chu?" -- ASCII-only
+      fragment, so the Devanagari is numeric character references. -->
+      <span class="devanagari">&#2350; &#2325;&#2361;&#2366;&#2305; &#2331;&#2369;?</span></h1>
+    <p class="sub">Nepal knows exactly how its money is distributed &mdash; four
+      household surveys, the last of them covering the whole country &mdash; and
+      almost nobody ever sees themselves on that curve. Put in what a household
+      lives on and this finds the place, after the two corrections that decide
+      the answer and that most calculators skip.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wide">
+    <div class="tool">
+
+      <div class="noprint">
+        <div class="card">
+          <h3>Your household</h3>
+
+          <div class="field">
+            <label class="lab" for="incomeNum">Money it lives on, each month</label>
+            <input type="text" id="incomeNum" inputmode="numeric" autocomplete="off"
+                   placeholder="50,000" aria-label="Monthly amount in rupees">
+            <div class="seg" id="scopeSeg" style="margin-top:9px" role="group"
+                 aria-label="Whose money that is">
+              <button type="button" data-scope="household" aria-pressed="true">For the whole household</button>
+              <button type="button" data-scope="person" aria-pressed="false">Per person</button>
+            </div>
+            <p class="tiny" style="margin:8px 0 0">Everything that comes in:
+              salaries, a shop, farm sales, rent, remittance from abroad.</p>
+          </div>
+
+          <div class="field">
+            <label class="lab" for="size">People it supports</label>
+            <div class="sizerow">
+              <input type="range" id="sizeRange" min="1" max="12" step="1" value="4"
+                     aria-label="People in the household">
+              <input type="number" class="num" id="size" min="1" max="20" step="1"
+                     value="4" aria-label="People in the household">
+            </div>
+            <p class="tiny" style="margin:7px 0 0">The average Nepali household is
+              <span id="hhAvg">4.0</span>. This is the correction that moves the
+              answer most: the same money across seven people is a different life
+              from the same money across two.</p>
+          </div>
+
+          <div class="field">
+            <label class="lab">Rupees of which year</label>
+            <div class="seg" id="yearSeg" role="group" aria-label="Which year's rupees">
+              <button type="button" data-year="now" aria-pressed="true">Today's</button>
+              <button type="button" data-year="2022" aria-pressed="false">2022 survey</button>
+            </div>
+            <p class="tiny" style="margin:8px 0 0" id="cpiNote"></p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="answer">
+          <div class="top">
+            <p class="lab mono" style="font-family:'DM Mono',monospace; font-size:11px;
+               letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+               margin:0 0 4px">Better off than</p>
+            <div class="big" id="outPct">&mdash;<span class="unit">of Nepal</span></div>
+            <p class="exact" id="outPeople">&mdash;</p>
+            <div class="ppbar"><i id="outMark"></i></div>
+            <div class="ppends"><span>poorest</span><span>richest</span></div>
+            <p class="tiny" style="margin:9px 0 0" id="outBandNote"></p>
+            <p class="printonly mono" id="printPlan"></p>
+          </div>
+          <div class="rows" id="outRows"></div>
+          <div class="flag" id="outFlag"></div>
+          <div class="acts noprint">
+            <button type="button" class="cta ghost" id="shareBtn">Copy a link to this</button>
+            <button type="button" class="cta ghost" id="printBtn">Print or save as PDF</button>
+          </div>
+          <input type="text" id="shareOut" class="noprint" readonly
+                 aria-label="Link to this result" style="display:none">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">The whole country, in one picture</p>
+    <h2>Everyone, and where you are among them</h2>
+    <div class="split">
+      <div class="fig" id="figDist">
+        <h3>How Nepal's money is spread</h3>
+        <p class="note">Each bar is a thousand-rupee band of monthly spending per
+          person. The dark line is your household. The dashed line is the
+          official poverty line.</p>
+        <div id="distChart"></div>
+        <div class="tip" id="distTip"></div>
+      </div>
+      <div>
+        <div class="stats pair" id="distStats"></div>
+        <p class="small" style="margin-top:18px" id="distNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">Against the salaries everyone quotes</p>
+    <h2>The ladder, with you on it</h2>
+    <p class="lede" style="margin-bottom:26px">These are the reference wages
+      Nepali arguments about money are usually conducted in. Each is converted
+      the same way yours was &mdash; deflated, then divided across a household of
+      <span id="ladderHh">4</span> &mdash; so the comparison is like for like.</p>
+    <div class="card">
+      <table>
+        <thead><tr><th>A month</th><th>Per person</th><th>Percentile</th><th>People below</th></tr></thead>
+        <tbody id="ladderBody"></tbody>
+      </table>
+      <p class="tiny" id="ladderNote" style="margin:14px 0 0"></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">What that income buys of the ground</p>
+    <h2>The number that explains the argument</h2>
+    <div class="split">
+      <div>
+        <div class="stats pair" id="landStats"></div>
+        <p class="small" style="margin-top:18px" id="landNote"></p>
+      </div>
+      <div class="next">
+        <a class="nextcard" href="../worth/">
+          <h3>Value a specific plot</h3>
+          <p>The same land data, fitted to a tole, an area and a road width, with
+            the band around it and every nearby listing it was drawn from.</p>
+          <span class="go">What is my land worth &rarr;</span>
+        </a>
+        <a class="nextcard" href="../income/">
+          <h3>The essay behind this page</h3>
+          <p>What money looks like across 29.7 million Nepalis, percentile by
+            percentile, and how the four surveys since 1995 moved.</p>
+          <span class="go">Nine thousand rupees a month &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">If you are the one setting the salary</p>
+    <h2>For employers</h2>
+    <div class="split">
+      <div class="offer lead">
+        <p class="eyebrow" style="margin-bottom:10px">Pay benchmark</p>
+        <p class="small">Every figure on this page is free and stays free. What it
+          cannot tell you is what a particular role should pay, because a
+          consumption survey has no occupations in it. If you are hiring in
+          Nepal and want that answered properly:</p>
+        <ul class="ticks">
+          <li>Where a proposed salary lands in the national distribution, for the
+            household size your candidate actually supports</li>
+          <li>What the same money is worth against Kathmandu prices rather than
+            the national average, which differ by more than three times</li>
+          <li>The band you would need to offer to clear a given percentile, and
+            what that costs across a whole team</li>
+        </ul>
+        <button type="button" class="cta" id="openBench">Request a benchmark</button>
+        <div class="leadform" id="leadForm">
+          <div class="two">
+            <div class="field">
+              <label class="lab" for="leadName">Your name</label>
+              <input type="text" id="leadName" autocomplete="name" placeholder="Full name">
+            </div>
+            <div class="field">
+              <label class="lab" for="leadEmail">Work email</label>
+              <input type="text" id="leadEmail" autocomplete="email" placeholder="you@company.com">
+            </div>
+          </div>
+          <div class="two">
+            <div class="field">
+              <label class="lab" for="leadOrg">Organisation</label>
+              <input type="text" id="leadOrg" autocomplete="organization" placeholder="Company name">
+            </div>
+            <div class="field">
+              <label class="lab" for="leadRoles">Roles to benchmark</label>
+              <select id="leadRoles">
+                <option value="1">A single role</option>
+                <option value="2to5">Two to five roles</option>
+                <option value="team">A whole team</option>
+                <option value="company">The whole payroll</option>
+              </select>
+            </div>
+          </div>
+          <p class="err" id="leadErr"></p>
+          <button type="button" class="cta" id="leadSubmit">Send request</button>
+          <p class="demo" id="leadDemo"></p>
+        </div>
+        <div class="done" id="leadDone" style="margin-top:16px"></div>
+      </div>
+      <div>
+        <div class="stats pair" id="ctxStats"></div>
+        <p class="small" style="margin-top:18px" id="ctxNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Read this part</p>
+    <h2>Four things that bound every number above</h2>
+    <p><b>The survey measures spending, not earning.</b> Nepal's living standards
+      survey records what households consume, because in an economy where much of
+      the income is a farm, a shop and money sent from the Gulf, consumption is
+      the thing that can actually be measured. Your salary has been treated as if
+      all of it were spent. A household that saves heavily will show up lower on
+      this curve than its income alone would suggest.</p>
+    <p><b>It is priced in <span id="limYear">2022</span> rupees.</b> A wage quoted
+      today buys less, so today's figure is deflated by
+      <span id="limDefl">&mdash;</span> before the lookup. Skip that step, as most
+      calculators do, and everyone is flattered by several percentile points.</p>
+    <p><b>The country is not one place.</b> Per-person consumption in the
+      Kathmandu Valley runs about <span id="limKtm">&mdash;</span> a month against
+      about <span id="limMad">&mdash;</span> in Madhesh. A single national curve
+      puts a modest Kathmandu household high and a comfortable Madhesh household
+      higher still, and neither would recognise the description.</p>
+    <p><b>The tail is thin and the top is missing.</b> Household surveys
+      systematically fail to reach the very rich, who decline them and whose
+      income is hardest to measure. Everything above about the 99th percentile
+      here should be read as "very high" and not as a number.</p>
+    <p class="small" id="limStats"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="srcs" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs" id="srcs"></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+var D = window.STAND_DATA;
+var M = D.meta, CURVE = D.curve, DENS = D.density;
+function el(id){ return document.getElementById(id); }
+
+/* ------------------------------------------------------------- contact
+   As on the other two tools: with no server, a request is delivered by
+   handing the reader one already written.  Fill these in before publishing;
+   assemble.py prints a warning for each left blank. */
+var CONTACT = {whatsapp: "", email: "", pay_link: ""};
+
+/* ------------------------------------------------------------- numbers */
+
+function group(n){
+  n = Math.round(n);
+  var neg = n < 0, s = String(Math.abs(n)), out;
+  if (s.length <= 3) { out = s; }
+  else {
+    var head = s.slice(0, -3), tail = s.slice(-3), parts = [];
+    while (head.length > 2) { parts.unshift(head.slice(-2)); head = head.slice(0, -2); }
+    if (head) parts.unshift(head);
+    out = parts.join(",") + "," + tail;
+  }
+  return (neg ? "-" : "") + out;
+}
+
+function dp(v){ var a = Math.abs(v); return a >= 100 ? 0 : a >= 10 ? 1 : 2; }
+
+function words(n){
+  var a = Math.abs(n);
+  if (a >= 1e7) { var c = n / 1e7; return c.toFixed(dp(c)) + " crore"; }
+  if (a >= 1e5) { var l = n / 1e5; return l.toFixed(dp(l)) + " lakh"; }
+  return group(n);
+}
+
+function npr(n){ return "NPR " + words(n); }
+function esc(s){
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+/* ---------------------------------------------------------------- state */
+
+var state = {
+  amount: 50000,
+  scope: "household",   // whether that figure covers everyone or one person
+  size: 4,
+  year: "now"           // today's rupees, or the survey's own
+};
+
+/* ------------------------------------------------------- the two fixes
+   Everything below turns a household's monthly figure into the quantity the
+   survey actually measured: per-person monthly consumption in 2022 rupees.
+   Both steps are the whole reason this page exists. */
+
+function perPerson(){
+  var v = state.scope === "person" ? state.amount : state.amount / Math.max(1, state.size);
+  return state.year === "now" ? v * M.deflator : v;
+}
+
+function percentile(x){
+  // Linear interpolation along the survey's own percentile curve, flat at
+  // both ends rather than extrapolated -- the tail is exactly where a
+  // household survey stops being able to see.
+  if (x <= CURVE[0].npr) return CURVE[0].p;
+  var last = CURVE[CURVE.length - 1];
+  if (x >= last.npr) return last.p;
+  for (var i = 1; i < CURVE.length; i++) {
+    if (x <= CURVE[i].npr) {
+      var a = CURVE[i - 1], b = CURVE[i];
+      if (b.npr === a.npr) return b.p;
+      return a.p + (b.p - a.p) * (x - a.npr) / (b.npr - a.npr);
+    }
+  }
+  return last.p;
+}
+
+function atPercentile(p){
+  if (p <= CURVE[0].p) return CURVE[0].npr;
+  var last = CURVE[CURVE.length - 1];
+  if (p >= last.p) return last.npr;
+  for (var i = 1; i < CURVE.length; i++) {
+    if (p <= CURVE[i].p) {
+      var a = CURVE[i - 1], b = CURVE[i];
+      if (b.p === a.p) return b.npr;
+      return a.npr + (b.npr - a.npr) * (p - a.p) / (b.p - a.p);
+    }
+  }
+  return last.npr;
+}
+
+function pctText(p){
+  // "Better off than 96.4% of Nepal" is a different claim from "than 96%",
+  // and at the top of this curve the decimal is the only thing moving.
+  if (p >= 99) return p.toFixed(1) + "%";
+  return p.toFixed(0) + "%";
+}
+
+/* ================================================================ answer */
+
+var answer = (function(){
+
+  function draw(){
+    var pp = perPerson(), p = percentile(pp);
+    var below = Math.round(M.pop * p / 100);
+
+    // The space matters: without it a screen reader says "66%of Nepal".
+    el("outPct").innerHTML = pctText(p) + ' <span class="unit">of Nepal</span>';
+    el("outPeople").textContent = group(below) + " of " + group(M.pop) +
+      " people live on less per head than this household does.";
+    el("outMark").style.left = Math.min(99, Math.max(1, p)) + "%";
+    el("outBandNote").textContent = "Per person, " + npr(pp) + " a month in " +
+      M.survey_priced_in + " rupees" +
+      (state.year === "now" ? ", after deflating today's figure." : ".");
+    el("printPlan").textContent = npr(state.amount) + " a month, " +
+      (state.scope === "person" ? "per person" : "for " + state.size + " people") +
+      ", " + (state.year === "now" ? "today's rupees" : "2022 rupees") +
+      "  /  " + pctText(p) + " of Nepal below";
+
+    rows(pp, p);
+    flag(pp, p);
+  }
+
+  function rows(pp, p){
+    var r = [];
+    function row(k, sub, v, cls){
+      r.push('<div class="row' + (cls ? " " + cls : "") + '"><span class="k">' + k +
+             (sub ? '<em>' + sub + '</em>' : '') + '</span><span class="v">' + v + '</span></div>');
+    }
+    row("Entered", state.scope === "person" ? "per person, per month"
+        : "for the whole household, per month", npr(state.amount));
+    if (state.scope !== "person")
+      row("Divided by " + state.size, "what one person in it lives on",
+          npr(state.amount / Math.max(1, state.size)));
+    if (state.year === "now")
+      row("Deflated to " + M.survey_priced_in, "a rupee today is " +
+          (100 * M.deflator).toFixed(0) + " paisa of " + M.survey_priced_in,
+          npr(pp));
+    row("The national median", "half of Nepal lives on less than this",
+        npr(M.median_npr) + " / person");
+    row("The poverty line", M.poverty_rate + "% of the country is under it",
+        npr(M.poverty_month) + " / person");
+    row("Multiple of the poverty line", null,
+        (pp / M.poverty_month).toFixed(1) + "x", "tot");
+    el("outRows").innerHTML = r.join("");
+  }
+
+  function flag(pp, p){
+    var msgs = [], warn = false;
+    if (pp < M.poverty_month) {
+      msgs.push("<b>This household is under the official poverty line.</b> " +
+        "It is one of the " + M.poverty_rate + "% of Nepal that is, which is " +
+        "about " + words(Math.round(M.pop * M.poverty_rate / 100)) + " people.");
+      warn = true;
+    }
+    if (p >= 99) {
+      msgs.push("<b>Above the 99th percentile the survey stops being able to " +
+        "see.</b> Household surveys miss the very rich systematically, so read " +
+        "this as <em>very high</em> rather than as a number. The curve's own " +
+        "top point is " + npr(CURVE[CURVE.length - 1].npr) + " per person.");
+      warn = true;
+    }
+    if (state.size >= 8) {
+      msgs.push("<b>Large households are a small part of the survey.</b> The " +
+        "division by " + state.size + " is arithmetic, not a measured group.");
+    }
+    if (!msgs.length) {
+      el("outFlag").className = "flag";
+      el("outFlag").innerHTML = "This is a position in a national consumption " +
+        "distribution, not a judgement about a standard of living. Kathmandu " +
+        "and Madhesh sit on the same curve and do not resemble each other.";
+    } else {
+      el("outFlag").className = "flag" + (warn ? " warn" : "");
+      el("outFlag").innerHTML = msgs.join("<br><br>");
+    }
+  }
+
+  return {draw: draw};
+})();
+
+/* ================================================================= chart */
+
+var REDRAW = [];
+
+function fig(host, build){
+  function go(){
+    var w = Math.max(240, host.clientWidth || 480);
+    host.innerHTML = build(w);
+  }
+  REDRAW.push(go);
+  return go;
+}
+
+var dist = (function(){
+
+  var host, tip, bars = DENS.bars;
+
+  function build(w){
+    var h = Math.round(Math.max(220, Math.min(300, w * 0.62)));
+    var L = 14, R = 14, T = 42, B = 38;   // T leaves room for two stacked labels
+    var iw = w - L - R, ih = h - T - B;
+    var top = 0, i;
+    for (i = 0; i < bars.length; i++) top = Math.max(top, bars[i].share);
+    var lo = 0, hi = DENS.top;
+    var X = function(v){ return L + Math.min(1, Math.max(0, (v - lo) / (hi - lo))) * iw; };
+    var Y = function(v){ return T + ih - v / top * ih; };
+
+    var s = ['<svg viewBox="0 0 ' + w + ' ' + h +
+             '" role="img" aria-label="Distribution of monthly spending per person across Nepal">'];
+    var pp = perPerson();
+    for (i = 0; i < bars.length; i++) {
+      var b = bars[i];
+      var x0 = X(b.lo), x1 = X(b.hi);
+      s.push('<rect class="bar' + (b.hi <= pp ? " under" : "") + '" x="' +
+             x0.toFixed(1) + '" y="' + Y(b.share).toFixed(1) + '" width="' +
+             Math.max(1, x1 - x0 - 1).toFixed(1) + '" height="' +
+             (T + ih - Y(b.share)).toFixed(1) + '"/>');
+    }
+    s.push('<line class="axisline" x1="' + L + '" y1="' + (T + ih) + '" x2="' +
+           (L + iw) + '" y2="' + (T + ih) + '"/>');
+    [0, 10000, 20000, 30000, 40000].forEach(function(v){
+      if (v > hi) return;
+      s.push('<text class="axistext" x="' + X(v).toFixed(1) + '" y="' + (T + ih + 15) +
+             '" text-anchor="middle">' + (v ? (v / 1000) + "k" : "0") + '</text>');
+    });
+    s.push('<text class="axistitle" x="' + (L + iw / 2) + '" y="' + (h - 4) +
+           '" text-anchor="middle">rupees a month, per person</text>');
+
+    // The poverty line, then the household, so the household sits on top.
+    // Both annotations live in the top margin on their own lines. Inside the
+    // plot they would sit across the tallest bars, which is exactly where the
+    // poverty line falls.
+    var px = X(M.poverty_month);
+    s.push('<line class="povline" x1="' + px.toFixed(1) + '" y1="' + (T - 12) +
+           '" x2="' + px.toFixed(1) + '" y2="' + (T + ih) + '"/>');
+    var pAnchor = px > L + iw - 80 ? "end" : "start";
+    s.push('<text class="figlab pov" x="' + (px + (pAnchor === "end" ? -5 : 5)).toFixed(1) +
+           '" y="' + (T - 16) + '" text-anchor="' + pAnchor + '">poverty line</text>');
+
+    var over = pp > hi;
+    var yx = X(Math.min(pp, hi));
+    s.push('<line class="youline" x1="' + yx.toFixed(1) + '" y1="' + (T - 28) +
+           '" x2="' + yx.toFixed(1) + '" y2="' + (T + ih) + '"/>');
+    var anchor = yx > L + iw - 110 ? "end" : "start";
+    s.push('<text class="figlab you" x="' + (yx + (anchor === "end" ? -5 : 5)).toFixed(1) +
+           '" y="' + (T - 32) + '" text-anchor="' + anchor + '">' +
+           (over ? "your household, off the chart at " + words(pp) : "your household") +
+           '</text>');
+
+    for (i = 0; i < bars.length; i++) {
+      s.push('<rect class="hit" data-i="' + i + '" x="' + X(bars[i].lo).toFixed(1) +
+             '" y="' + T + '" width="' + Math.max(2, X(bars[i].hi) - X(bars[i].lo)).toFixed(1) +
+             '" height="' + ih + '"/>');
+    }
+    s.push('</svg>');
+    return s.join("");
+  }
+
+  function stats(){
+    var pp = perPerson(), p = percentile(pp);
+    var tiles = [
+      [pctText(p), "of Nepal lives on less per head"],
+      [words(M.median_npr), "is the national median, per person"],
+      [M.gini.toFixed(2), "Gini, down from " + D.rounds[0].gini.toFixed(2) + " in " + D.rounds[0].year],
+      [(pp / M.median_npr).toFixed(1) + "x", "the median, for this household"]
+    ];
+    el("distStats").innerHTML = tiles.map(function(t){
+      return '<div class="stat"><div class="n">' + t[0] + '</div>' +
+             '<div class="l">' + t[1] + '</div></div>';
+    }).join("");
+    el("distNote").innerHTML = "The shape is the finding. Nepal's distribution is " +
+      "not a pyramid with a wide base of destitution; it is a single crowded " +
+      "hump between about " + words(atPercentile(20)) + " and " +
+      words(atPercentile(80)) + " per person per month, with a long thin tail " +
+      "to the right. Sixty per cent of the country lives inside that band, which " +
+      "is why a few thousand rupees either way moves a household so many " +
+      "percentile points, and why arguments about money in Nepal are so sharp.";
+  }
+
+  function wire(){
+    host.addEventListener("mousemove", function(ev){
+      var t = ev.target.closest(".hit");
+      if (!t) { tip.classList.remove("on"); return; }
+      var b = bars[+t.dataset.i];
+      tip.innerHTML = "<b>" + group(b.lo) + " to " + group(b.hi) + "</b>" +
+        group(b.people) + " people, " + (100 * b.share).toFixed(1) + "% of Nepal";
+      tip.classList.add("on");
+      var box = host.getBoundingClientRect();
+      var x = ev.clientX - box.left + 14, y = ev.clientY - box.top - 10;
+      tip.style.left = Math.min(box.width - tip.offsetWidth - 6, Math.max(4, x)) + "px";
+      tip.style.top = Math.max(4, y) + "px";
+    });
+    host.addEventListener("mouseleave", function(){ tip.classList.remove("on"); });
+  }
+
+  var go = null;
+  function draw(){
+    if (!go) { host = el("distChart"); tip = el("distTip"); go = fig(host, build); wire(); }
+    go();
+    stats();
+  }
+
+  return {draw: draw};
+})();
+
+/* ================================================================ ladder */
+
+var ladder = (function(){
+
+  function draw(){
+    var pp = perPerson();
+    var rows = D.ladder.map(function(r){
+      return {label: r.label, nominal: r.nominal, per: r.per_person,
+              p: r.p, below: r.below, you: false};
+    });
+    rows.push({label: "Your household", nominal: state.scope === "person"
+                 ? state.amount * state.size : state.amount,
+               per: pp, p: percentile(pp),
+               below: Math.round(M.pop * percentile(pp) / 100), you: true});
+    rows.sort(function(a, b){ return a.per - b.per; });
+    el("ladderBody").innerHTML = rows.map(function(r){
+      return '<tr' + (r.you ? ' class="you"' : '') + '><td>' + esc(r.label) +
+        '</td><td>' + group(r.per) + '</td><td>' + r.p.toFixed(1) + '</td><td>' +
+        words(r.below) + '</td></tr>';
+    }).join("");
+    el("ladderNote").textContent = "Each row is a monthly figure divided across " +
+      M.hh_size.toFixed(1) + " people, the national average household, except " +
+      "yours which uses the " + state.size + " you entered. The civil service " +
+      "rows are basic pay for FY 2083/84; the two round numbers are there because " +
+      "they are the ones people actually argue about.";
+  }
+
+  return {draw: draw};
+})();
+
+/* ================================================================== land */
+
+var land = (function(){
+
+  function draw(){
+    if (!D.land) { el("landStats").innerHTML = ""; el("landNote").textContent = ""; return; }
+    var yearly = (state.scope === "person" ? state.amount * state.size : state.amount) * 12;
+    var plot = D.land.median_npr_per_aana * D.land.reference_aana;
+    var years = plot / yearly;
+    var tiles = [
+      [npr(D.land.median_npr_per_aana), "the median aana in the valley"],
+      [npr(plot), D.land.reference_aana + " aana, about " +
+        group(D.land.reference_aana * D.land.aana_sqft) + " sq ft"],
+      [years >= 100 ? "100+" : years.toFixed(0),
+       (Math.round(years) === 1 && years < 100 ? "year" : "years") +
+       " of this household's entire income"],
+      [group(Math.round(yearly)), "NPR it earns in a year"]
+    ];
+    el("landStats").innerHTML = tiles.map(function(t){
+      return '<div class="stat"><div class="n">' + t[0] + '</div>' +
+             '<div class="l">' + t[1] + '</div></div>';
+    }).join("");
+    el("landNote").innerHTML = "That third figure is the one worth sitting with. " +
+      "It assumes the household spends nothing at all &mdash; no food, no rent, " +
+      "no school fees &mdash; and puts every rupee it earns toward " +
+      D.land.reference_aana + " aana of ground at the valley's median asking " +
+      "price. On those terms it takes <b>" +
+      (years >= 100 ? "over a century" : years.toFixed(0) + " years") + "</b>. " +
+      "A household saving a tenth of its income would need " +
+      (years * 10 >= 1000 ? "more than a thousand" : Math.round(years * 10)) +
+      " years. This is the arithmetic underneath every conversation about " +
+      "housing in Kathmandu, and it is why so much of the valley is bought with " +
+      "money earned abroad: remittance is " + M.remit_gdp + "% of national income.";
+  }
+
+  return {draw: draw};
+})();
+
+/* ================================================================= share */
+
+var share = (function(){
+
+  function params(){
+    return ["a=" + Math.round(state.amount), "s=" + state.size,
+            "sc=" + state.scope, "y=" + state.year].join("&");
+  }
+  function url(){ return location.origin + location.pathname + "#" + params(); }
+
+  function restore(){
+    var h = location.hash.replace(/^#/, "");
+    if (!h) return false;
+    var q = {};
+    h.split("&").forEach(function(kv){
+      var i = kv.indexOf("=");
+      if (i > 0) q[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1));
+    });
+    if (!isFinite(+q.a) || +q.a <= 0) return false;
+    state.amount = Math.min(1e9, Math.max(100, Math.round(+q.a)));
+    if (isFinite(+q.s)) state.size = Math.min(20, Math.max(1, Math.round(+q.s)));
+    state.scope = q.sc === "person" ? "person" : "household";
+    state.year = q.y === "2022" ? "2022" : "now";
+    return true;
+  }
+
+  function copy(){
+    var text = url(), btn = el("shareBtn"), was = btn.textContent, box = el("shareOut");
+    function say(m){
+      btn.textContent = m;
+      setTimeout(function(){ btn.textContent = was; }, 2200);
+    }
+    function fallback(){
+      box.value = text; box.style.display = ""; box.select(); say("Copy it below");
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){
+        box.style.display = "none"; say("Link copied");
+      }, fallback);
+    } else { fallback(); }
+  }
+
+  function draw(){
+    try { history.replaceState(null, "", "#" + params()); } catch (err) {}
+  }
+
+  el("shareBtn").addEventListener("click", copy);
+  el("printBtn").addEventListener("click", function(){ window.print(); });
+  window.addEventListener("hashchange", function(){
+    if (location.hash.replace(/^#/, "") === params()) return;
+    if (restore()) { reflect(); render(); }
+  });
+
+  return {draw: draw, url: url, restore: restore};
+})();
+
+/* ================================================================== lead */
+
+var lead = (function(){
+
+  function bad(msg){
+    var b = el("leadErr");
+    b.textContent = msg; b.classList.add("on");
+    return false;
+  }
+
+  function validate(){
+    el("leadErr").classList.remove("on");
+    var name = el("leadName").value.trim();
+    var mail = el("leadEmail").value.trim();
+    var org = el("leadOrg").value.trim();
+    if (name.length < 2) return bad("Please enter the name we should use.");
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail))
+      return bad("That email address is not quite right.");
+    if (org.length < 2) return bad("Which organisation is this for?");
+    return {name: name, mail: mail, org: org};
+  }
+
+  function wording(v, ref){
+    var pp = perPerson();
+    return [
+      "Pay benchmark request " + ref,
+      "Name: " + v.name,
+      "Email: " + v.mail,
+      "Organisation: " + v.org,
+      "Scope: " + el("leadRoles").selectedOptions[0].text,
+      "Figure explored on the page: " + npr(state.amount) + " a month, " +
+        (state.scope === "person" ? "per person" : "across " + state.size + " people"),
+      "Which lands at the " + percentile(pp).toFixed(1) + "th percentile",
+      "Link: " + share.url()
+    ].join("\n");
+  }
+
+  function deliver(msg, ref){
+    if (CONTACT.email) {
+      window.location.href = "mailto:" + CONTACT.email + "?subject=" +
+        encodeURIComponent("Pay benchmark request " + ref) +
+        "&body=" + encodeURIComponent(msg);
+      return "email";
+    }
+    if (CONTACT.whatsapp) {
+      window.open("https://wa.me/" + CONTACT.whatsapp + "?text=" +
+                  encodeURIComponent(msg), "_blank", "noopener");
+      return "whatsapp";
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText)
+        navigator.clipboard.writeText(msg).catch(function(){});
+    } catch (err) { /* the text is printed below either way */ }
+    return "clipboard";
+  }
+
+  var SENT = {
+    email: "Your mail app should have opened with the request already written. " +
+      "Press send there and it reaches us.",
+    whatsapp: "WhatsApp should have opened with the request already written. " +
+      "Press send there and it reaches us.",
+    clipboard: "No inbox is wired up on this build yet, so the request has been " +
+      "copied to your clipboard instead of sent."
+  };
+
+  function submit(){
+    var v = validate();
+    if (!v) return;
+    var ref = "PAY-" + String(Date.now()).slice(-6);
+    try {
+      var all = JSON.parse(localStorage.getItem("stand.leads") || "[]");
+      all.push({ref: ref, at: new Date().toISOString(), name: v.name,
+                email: v.mail, org: v.org, roles: el("leadRoles").value,
+                amount: state.amount, size: state.size, scope: state.scope});
+      localStorage.setItem("stand.leads", JSON.stringify(all));
+    } catch (err) { /* private window, or storage off -- not fatal */ }
+
+    var msg = wording(v, ref);
+    var how = deliver(msg, ref);
+    el("leadForm").classList.remove("on");
+    var done = el("leadDone");
+    done.innerHTML = "<b>Request " + ref + "</b><br>" + esc(v.name) + ", the " +
+      "benchmark comes back by email, usually within three working days at " +
+      esc(v.mail) + '.<p class="demo" style="margin-top:11px">' + SENT[how] +
+      " Nothing has been charged.</p>" +
+      (how === "clipboard"
+        ? '<textarea class="raw" readonly rows="9" aria-label="Your request, to copy">' +
+          esc(msg) + '</textarea>'
+        : "");
+    done.classList.add("on");
+    done.scrollIntoView({behavior: "smooth", block: "center"});
+  }
+
+  function draw(){ /* nothing on this panel depends on the figures */ }
+
+  el("openBench").addEventListener("click", function(){
+    el("leadForm").classList.add("on");
+    el("leadDone").classList.remove("on");
+    el("leadName").focus({preventScroll: true});
+    el("leadForm").scrollIntoView({behavior: "smooth", block: "center"});
+  });
+  el("leadSubmit").addEventListener("click", submit);
+  el("leadDemo").textContent = CONTACT.email || CONTACT.whatsapp
+    ? "Sending opens your own mail or WhatsApp with the request already " +
+      "written; you press send. Nothing is charged here."
+    : "No inbox is wired up on this build yet: sending copies the request to " +
+      "your clipboard instead. Nothing is charged and nothing leaves the page.";
+
+  return {draw: draw};
+})();
+
+/* ================================================================ wiring */
+
+function press(segId, key, value){
+  var btns = el(segId).querySelectorAll("button"), i;
+  for (i = 0; i < btns.length; i++)
+    btns[i].setAttribute("aria-pressed", String(btns[i].dataset[key] === value));
+}
+
+function reflect(){
+  el("incomeNum").value = group(state.amount);
+  el("size").value = state.size;
+  el("sizeRange").value = Math.min(12, state.size);
+  press("scopeSeg", "scope", state.scope);
+  press("yearSeg", "year", state.year);
+}
+
+function render(){
+  answer.draw();
+  dist.draw();
+  ladder.draw();
+  land.draw();
+  lead.draw();
+  share.draw();
+}
+
+(function(){
+  el("incomeNum").addEventListener("input", function(){
+    var box = el("incomeNum"), digits = box.value.replace(/[^0-9]/g, "");
+    state.amount = digits ? Math.min(1e9, +digits) : 0;
+    var at = box.selectionStart, before = box.value.length;
+    box.value = digits ? group(+digits) : "";
+    var moved = box.value.length - before;
+    try { box.setSelectionRange(at + moved, at + moved); } catch (err) {}
+    if (state.amount > 0) render();
+  });
+  el("sizeRange").addEventListener("input", function(){
+    state.size = +el("sizeRange").value; el("size").value = state.size; render();
+  });
+  el("size").addEventListener("input", function(){
+    var v = parseInt(el("size").value, 10);
+    if (!isFinite(v)) return;
+    state.size = Math.min(20, Math.max(1, v));
+    el("sizeRange").value = Math.min(12, state.size);
+    render();
+  });
+  el("scopeSeg").addEventListener("click", function(ev){
+    var b = ev.target.closest("button[data-scope]");
+    if (!b || b.dataset.scope === state.scope) return;
+    // Convert rather than reinterpret, as the area switch on the land tool
+    // does: flipping the unit must not change the household being described.
+    state.amount = b.dataset.scope === "person"
+      ? Math.round(state.amount / Math.max(1, state.size))
+      : Math.round(state.amount * state.size);
+    state.scope = b.dataset.scope;
+    el("incomeNum").value = group(state.amount);
+    press("scopeSeg", "scope", state.scope);
+    render();
+  });
+  el("yearSeg").addEventListener("click", function(ev){
+    var b = ev.target.closest("button[data-year]");
+    if (!b) return;
+    state.year = b.dataset.year;
+    press("yearSeg", "year", state.year);
+    render();
+  });
+
+  var t = null;
+  window.addEventListener("resize", function(){
+    clearTimeout(t);
+    t = setTimeout(function(){ REDRAW.forEach(function(f){ f(); }); }, 120);
+  });
+
+  share.restore();
+  reflect();
+
+  el("hhAvg").textContent = M.hh_size.toFixed(1);
+  el("ladderHh").textContent = M.hh_size.toFixed(1);
+  el("cpiNote").textContent = "The survey is priced in " + M.survey_priced_in +
+    " rupees. A figure entered as today's is deflated by " +
+    (100 * M.deflator).toFixed(0) + "% before it is looked up, using CPI to " +
+    M.cpi_latest_year + ".";
+  el("limYear").textContent = M.survey_priced_in;
+  el("limDefl").textContent = (100 * (1 - M.deflator)).toFixed(0) + "%";
+  el("limKtm").textContent = npr(M.ktm_pc_month);
+  el("limMad").textContent = npr(M.madhesh_pc_month);
+  el("limStats").textContent = "The curve is " + M.survey + ", the latest of " +
+    D.rounds.length + " rounds, covering " + group(M.pop) + " people. Median " +
+    "per-person consumption was " + npr(M.median_npr) + " a month and the mean " +
+    npr(M.mean_npr) + "; the gap between those two is what inequality looks " +
+    "like in one line. Only " + M.wage_share + "% of Nepali workers hold a wage " +
+    "job at all.";
+  el("ctxStats").innerHTML = [
+    [M.wage_share + "%", "of workers hold a wage job at all"],
+    [M.remit_gdp + "%", "of national income arrives as remittance"],
+    [words(M.min_wage), "NPR is the monthly minimum wage"],
+    [M.poverty_rate + "%", "of the country is under the poverty line"]
+  ].map(function(t2){
+    return '<div class="stat"><div class="n">' + t2[0] + '</div>' +
+           '<div class="l">' + t2[1] + '</div></div>';
+  }).join("");
+  el("ctxNote").textContent = "Those four numbers are the context any Nepali " +
+    "pay decision sits inside. A salaried job is already unusual; the money " +
+    "that competes with yours for land and rent is often not a salary at all.";
+  el("srcs").innerHTML = "Distribution from the World Bank's Poverty and " +
+    "Inequality Platform and the Nepal Living Standards Survey; the reference " +
+    "wages from the Nepal Gazette, the Labour Force Survey and the civil " +
+    "service pay scale; land from the " +
+    '<a href="../land/">valley price surface</a>. The essay this page is ' +
+    'built on is <a href="../income/">Nine Thousand Rupees a Month</a>. ' +
+    "Everything runs in your browser; nothing you type leaves it.";
+
+  render();
+})();
+
+})();
+</script>
+</body>
+</html>

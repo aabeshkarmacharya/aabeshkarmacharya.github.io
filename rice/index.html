@@ -1,0 +1,1380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="The Rice We Grow and Still Buy">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%8C%BE%3C%2Ftext%3E%3C%2Fsvg%3E">
+<title>The Rice We Grow and Still Buy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..800,0..100,0..1&family=Source+Sans+3:wght@300;400;500;600&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#EFEEEA; --surface:#FCFCFA; --surface-2:#F5F4F0; --sunk:#E4E2DC;
+  --ink:#1A1913; --ink-2:#53514A; --ink-3:#86847C; --rule:#D8D6CE; --rule-2:#C3C1B7;
+
+  /* Four series, one of which is the subject. This is a categorical scale,
+     not a ramp: Nepal carries the only saturated hue, the two neighbours get
+     hues of their own at lower chroma, and the regional aggregate is drawn in
+     neutral grey because it is a background against which the countries are
+     read rather than a country itself. The hues are ordered around the wheel
+     far enough apart to survive being printed grey or seen by a reader with
+     deuteranopia; the grey is the only one carrying a dash pattern, so the
+     aggregate is separable by shape as well. */
+  --nep:#9C2B1F; --ind:#2F6FAE; --ban:#2E7D4F; --sas:#6E6C64;
+  --nep-soft:#E4C8C2; --ind-soft:#C8D8EA; --ban-soft:#C6DDCE;
+
+  /* Chrome sits outside the four, so nothing in the furniture can be mistaken
+     for a series. */
+  --accent:#8A5A12; --alt:#2F6FAE;
+  --warn:#9C2B1F;
+
+  --shadow:0 1px 2px rgba(26,25,19,.05),0 10px 30px -16px rgba(26,25,19,.2);
+  --grid:rgba(26,25,19,.07);
+  --measure:65ch; --wide:1120px;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --ground:#15150F; --surface:#1D1C16; --surface-2:#24231C; --sunk:#0D0D09;
+    --ink:#EDEBE2; --ink-2:#A8A69B; --ink-3:#75736A; --rule:#312F27; --rule-2:#403E34;
+    /* Re-lightened for the dark surface rather than inverted: each series
+       keeps its hue and only its lightness moves, so a reader switching
+       themes mid-page does not have to relearn the legend. */
+    --nep:#F0795F; --ind:#6FAEE8; --ban:#63C08D; --sas:#A3A196;
+    --nep-soft:#4A2419; --ind-soft:#1E3A55; --ban-soft:#1C3F2C;
+    --accent:#D9A441; --alt:#6FAEE8;
+    --warn:#F0795F;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.75);
+    --grid:rgba(237,235,226,.09);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --ground:#15150F; --surface:#1D1C16; --surface-2:#24231C; --sunk:#0D0D09;
+  --ink:#EDEBE2; --ink-2:#A8A69B; --ink-3:#75736A; --rule:#312F27; --rule-2:#403E34;
+  --nep:#F0795F; --ind:#6FAEE8; --ban:#63C08D; --sas:#A3A196;
+  --nep-soft:#4A2419; --ind-soft:#1E3A55; --ban-soft:#1C3F2C;
+  --accent:#D9A441; --alt:#6FAEE8;
+  --warn:#F0795F;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.75);
+  --grid:rgba(237,235,226,.09);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:400; font-size:18.5px; line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; font-family:"Fraunces","Georgia",serif;
+  font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
+  letter-spacing:-.012em}
+.mono,code{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.tnum{font-variant-numeric:tabular-nums}
+
+.wrap{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
+.wide{max-width:var(--wide); margin-inline:auto; padding-inline:24px}
+section{padding-block:clamp(40px,6vw,74px)}
+section+section{border-top:1px solid var(--rule)}
+p{margin:0 0 1.1em}
+a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2); text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--alt); outline-offset:3px; border-radius:2px}
+
+.eyebrow{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3);
+  display:flex; align-items:center; gap:12px; margin-bottom:16px}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
+h2{font-size:clamp(28px,4vw,40px); line-height:1.06; font-weight:700; margin-bottom:.48em}
+h3{font-size:21px; line-height:1.24; font-weight:600; margin:2em 0 .5em}
+.lede{font-size:20.5px; line-height:1.56; color:var(--ink-2)}
+.small{font-size:16px; color:var(--ink-2)}
+
+header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
+  padding-block:clamp(52px,9vw,104px)}
+h1{font-size:clamp(40px,7.2vw,88px); line-height:.97; font-weight:800;
+   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:14ch; margin-bottom:.3em}
+.sub{max-width:52ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
+.kicker{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:22px}
+
+figure{margin:0; background:var(--surface); border:1px solid var(--rule);
+  border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.fig-head{padding:20px 22px 0}
+.fig-title{font-family:"Fraunces",Georgia,serif; font-weight:600; font-size:17px;
+  font-variation-settings:"SOFT" 0,"WONK" 0,"opsz" 24; margin-bottom:4px}
+.fig-note{font-size:14px; color:var(--ink-2); line-height:1.45; max-width:80ch}
+.fig-body{padding:14px 22px 20px}
+figcaption{padding:14px 22px 18px; border-top:1px solid var(--rule);
+  font-size:13.5px; color:var(--ink-3); line-height:1.5; background:var(--surface-2)}
+.figspace{margin-block:clamp(28px,3.6vw,46px)}
+svg{display:block; width:100%; height:auto; overflow:visible}
+.gl{stroke:var(--grid); stroke-width:1; fill:none}
+.ax{stroke:var(--rule-2); stroke-width:1; fill:none}
+.tk{font-family:"DM Mono",monospace; font-size:10.5px; fill:var(--ink-3);
+    font-variant-numeric:tabular-nums}
+.axlab{font-family:"DM Mono",monospace; font-size:10px; fill:var(--ink-3);
+    letter-spacing:.14em; text-transform:uppercase}
+.dlab{font-family:"DM Mono",monospace; font-size:11px; fill:var(--ink-2);
+    font-variant-numeric:tabular-nums}
+.halo{paint-order:stroke; stroke:var(--surface); stroke-width:3.5px;
+      stroke-linejoin:round}
+
+.ctl{display:flex; flex-wrap:wrap; gap:9px 16px; align-items:center; padding:12px 22px;
+  border-bottom:1px solid var(--rule); background:var(--surface-2);
+  font-family:"DM Mono",monospace; font-size:11.5px; color:var(--ink-2)}
+.chip{border:1px solid var(--rule-2); background:transparent; color:var(--ink-2);
+  font:inherit; padding:4px 11px; border-radius:3px; cursor:pointer; display:inline-flex;
+  align-items:center; gap:7px; transition:background .15s,border-color .15s,color .15s}
+.chip[aria-pressed="true"]{border-color:var(--ink-2); background:var(--surface); color:var(--ink)}
+.chip:hover{border-color:var(--ink-3)}
+
+.legend{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center;
+  font-family:"DM Mono",monospace; font-size:11.5px; color:var(--ink-2);
+  padding:0 22px 14px}
+.legend span{display:inline-flex; align-items:center; gap:7px}
+.legend i{width:18px; height:3px; border-radius:2px; flex:none; font-style:normal}
+.legend i.n{background:var(--nep)} .legend i.i{background:var(--ind)}
+.legend i.b{background:var(--ban)}
+.legend i.s{background:repeating-linear-gradient(to right,var(--sas) 0 5px,transparent 5px 9px)}
+
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); border-radius:3px; overflow:hidden;
+  margin-block:30px}
+.stat{background:var(--surface); padding:16px 18px}
+.stat b{display:block; font-family:"Source Sans 3",sans-serif; font-weight:600;
+  font-size:clamp(25px,3.1vw,33px); line-height:1.05; margin-bottom:5px; letter-spacing:-.02em}
+.stat span{font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); line-height:1.4; display:block}
+.stat.n b{color:var(--nep)} .stat.a b{color:var(--accent)}
+
+#tip{position:fixed; z-index:40; pointer-events:none; opacity:0; transition:opacity .11s;
+  background:var(--surface); border:1px solid var(--rule-2); border-radius:3px;
+  box-shadow:var(--shadow); padding:9px 12px; font-size:13px; line-height:1.45;
+  max-width:300px; color:var(--ink)}
+#tip.on{opacity:1}
+#tip b{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--ink-3); font-weight:400; display:block; margin-bottom:3px}
+#tip .v{font-variant-numeric:tabular-nums}
+#tip .nm{font-weight:600; letter-spacing:-.01em}
+
+details{border:1px solid var(--rule); border-radius:3px; background:var(--surface);
+  padding:0 18px; margin-block:26px}
+summary{cursor:pointer; padding:14px 0; font-family:"DM Mono",monospace;
+  font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2)}
+summary:hover{color:var(--ink)}
+.tablewrap{overflow-x:auto; padding-bottom:18px}
+table{border-collapse:collapse; font-size:14px; width:100%; min-width:460px}
+th,td{text-align:right; padding:6px 10px; border-bottom:1px solid var(--rule);
+  font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left; font-variant-numeric:normal}
+thead th{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:400; white-space:nowrap}
+
+/* The limitation block leads the page, so it is set as a panel rather than a
+   footnote: a reader who stops after the first screen should have read it. */
+.caveat{background:var(--surface); border:1px solid var(--rule-2);
+  border-left:3px solid var(--warn); border-radius:3px; padding:22px 24px;
+  margin-block:30px}
+.caveat h3{margin:0 0 .55em; font-size:19px}
+.caveat h3+p{margin-top:0}
+.caveat p:last-child{margin-bottom:0}
+.caveat .lbl{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--warn); display:block; margin-bottom:10px}
+.flagtag{font-family:"DM Mono",monospace; font-size:12px; border:1px solid var(--rule-2);
+  border-radius:2px; padding:1px 6px; background:var(--surface-2); white-space:nowrap}
+
+.srcs{font-size:14px; color:var(--ink-3); line-height:1.6}
+.srcs a{text-decoration-color:var(--rule-2)}
+footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:44px}
+.note{border-left:2px solid var(--rule-2); padding-left:16px; margin-block:1.5em;
+  color:var(--ink-2); font-size:16.5px}
+
+@media (max-width:760px){
+  body{font-size:17px}
+  .fig-head,.fig-body,.ctl,.legend,figcaption{padding-left:16px; padding-right:16px}
+  .wrap,.wide{padding-inline:18px}
+  .caveat{padding:18px 18px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important; transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+<script>window.RICE_DATA={"meta":{"retrieved":"26 September 2026","source":"FAOSTAT bulk downloads","domain_qcl":"QCL, Production: Crops and livestock products","domain_fbs":"FBS and FBSH, Food Balances","first":1961,"last":2024,"n_years":64,"item":"Rice (paddy), FAOSTAT item 27","areas":["Nepal","India","Bangladesh","Southern Asia"],"identity_kg":0.05,"nepal_share_sasia_area":2.05,"nepal_share_sasia_prod":1.93},"years":[1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],"yield":{"nepal":[1937.5,1934.2,1934.9,1999.1,1986.5,1824.8,1836.1,1874.5,1910.4,1948.6,1952.0,1763.3,1969.0,1977.9,2074.2,1891.4,1805.6,1852.7,1642.4,1932.0,1974.6,1448.9,2066.4,1967.8,2016.1,1779.0,2095.0,2263.5,2365.7,2406.7,2048.1,2410.0,2123.7,2391.0,2455.4,2417.0,2443.4,2472.2,2702.8,2745.4,2675.4,2675.3,2857.3,2782.5,2716.6,2557.0,2775.0,2907.4,2716.4,2980.5,3312.0,3170.9,3394.2,3359.6,3154.3,3369.0,3505.8,3760.7,3804.8,3815.3,3472.8,3789.6,3978.0,4192.2],"india":[1541.9,1395.9,1549.8,1617.1,1293.6,1295.2,1548.4,1613.4,1609.4,1684.9,1711.0,1604.6,1725.9,1574.4,1858.2,1637.2,1961.3,1991.2,1610.5,2000.2,1962.3,1849.7,2183.3,2127.2,2329.2,2205.2,2199.1,2548.6,2616.0,2612.5,2619.0,2629.7,2797.2,2877.3,2700.9,2523.6,2827.6,2815.5,3008.1,2838.0,3116.4,2690.1,3092.6,2952.7,3119.6,3199.5,3292.5,3279.7,3194.1,3323.0,3606.0,3677.4,3616.5,3590.0,3601.8,3752.6,3811.7,3976.1,4052.1,4059.4,4203.3,4238.8,4313.5,4313.2],"bangladesh":[1700.5,1530.2,1769.0,1707.0,1682.7,1582.7,1694.4,1746.6,1745.9,1686.2,1602.2,1571.6,1808.3,1728.9,1853.1,1783.9,1939.8,1938.5,1880.9,2019.7,1954.5,2014.5,2234.5,2145.4,2169.3,2178.3,2239.9,2280.5,2556.2,2566.1,2627.7,2725.3,2724.7,2603.2,2585.8,2755.7,2685.9,2768.3,3202.4,3395.9,3447.0,3468.3,3577.3,3535.9,3762.3,3802.1,3834.2,4199.2,4188.4,4315.4,4406.8,4421.3,4514.2,4557.2,4581.5,4611.3,4637.4,4713.6,4787.4,4793.9,4866.4,4980.4,5207.2,5290.6],"southasia":[1583.3,1448.4,1607.9,1652.0,1406.4,1384.9,1601.5,1674.0,1682.3,1722.7,1727.8,1643.2,1783.1,1651.9,1888.4,1717.5,1980.0,2012.1,1716.1,2033.5,2007.9,1929.9,2220.3,2158.9,2315.4,2228.1,2237.1,2494.7,2597.6,2602.8,2614.3,2648.3,2778.3,2811.1,2695.5,2598.9,2807.8,2827.3,3047.1,2954.3,3159.5,2877.6,3190.3,3073.2,3244.8,3303.9,3390.7,3457.8,3407.8,3518.1,3743.2,3807.1,3796.9,3774.9,3795.0,3917.3,3965.6,4110.3,4190.4,4205.0,4303.5,4322.2,4442.3,4441.0]},"units":{"yield":"kg/ha","area":"ha","production":"t"},"levels":{"nepal_first":1938.0,"nepal_last":4192.0,"india_first":1542.0,"india_last":4313.0,"bangladesh_first":1700.0,"bangladesh_last":5291.0,"southasia_first":1583.0,"southasia_last":4441.0,"nepal_area_last":1420.6,"nepal_area_last_mha":1.42,"nepal_prod_first":2108.0,"nepal_prod_last":5956.0},"ratio":{"india":[125.66,138.56,124.85,123.62,153.56,140.89,118.58,116.18,118.7,115.65,114.09,109.89,114.09,125.63,111.62,115.53,92.06,93.04,101.98,96.59,100.63,78.33,94.65,92.51,86.56,80.67,95.27,88.81,90.43,92.12,78.2,91.65,75.92,83.1,90.91,95.78,86.41,87.81,89.85,96.74,85.85,99.45,92.39,94.24,87.08,79.92,84.28,88.65,85.04,89.69,91.85,86.23,93.85,93.58,87.58,89.78,91.97,94.58,93.9,93.99,82.62,89.4,92.22,97.19],"bangladesh":[113.94,126.4,109.38,117.11,118.05,115.3,108.36,107.32,109.42,115.56,121.83,112.2,108.89,114.4,111.93,106.03,93.08,95.57,87.32,95.66,101.03,71.92,92.48,91.72,92.94,81.67,93.53,99.25,92.55,93.79,77.94,88.43,77.94,91.85,94.96,87.71,90.97,89.3,84.4,80.84,77.62,77.14,79.87,78.69,72.21,67.25,72.37,69.24,64.86,69.07,75.16,71.72,75.19,73.72,68.85,73.06,75.6,79.78,79.48,79.59,71.36,76.09,76.39,79.24],"southasia":[122.37,133.54,120.34,121.01,141.25,131.76,114.65,111.98,113.56,113.11,112.98,107.31,110.43,119.73,109.84,110.13,91.19,92.08,95.71,95.01,98.34,75.08,93.07,91.15,87.07,79.84,93.65,90.73,91.07,92.47,78.34,91.0,76.44,85.06,91.09,93.0,87.02,87.44,88.7,92.93,84.68,92.97,89.56,90.54,83.72,77.39,81.84,84.08,79.71,84.72,88.48,83.29,89.39,89.0,83.12,86.0,88.41,91.49,90.8,90.73,80.7,87.68,89.55,94.4]},"ratio_stat":{"india":{"min":75.9,"min_year":1993,"max":153.6,"max_year":1965,"now":97.2,"first":125.7},"bangladesh":{"min":64.9,"min_year":2009,"max":126.4,"max_year":1962,"now":79.2,"first":113.9},"southasia":{"min":75.1,"min_year":1982,"max":141.2,"max_year":1965,"now":94.4,"first":122.4}},"overtaken":{"india":{"first":1977,"forgood":1982,"years_below":46},"bangladesh":{"first":1977,"forgood":1982,"years_below":47},"southasia":{"first":1977,"forgood":1977,"years_below":48}},"eras":[{"from":1961,"to":1990,"by":{"nepal":{"fit":0.32,"endpoint":0.75},"india":{"fit":2.03,"endpoint":1.83},"bangladesh":{"fit":1.46,"endpoint":1.43},"southasia":{"fit":1.87,"endpoint":1.73}}},{"from":1990,"to":2024,"by":{"nepal":{"fit":1.76,"endpoint":1.65},"india":{"fit":1.58,"endpoint":1.49},"bangladesh":{"fit":2.3,"endpoint":2.15},"southasia":{"fit":1.7,"endpoint":1.58}}}],"whole":{"nepal":{"fit":1.29,"endpoint":1.23},"india":{"fit":1.86,"endpoint":1.65},"bangladesh":{"fit":2.14,"endpoint":1.82},"southasia":{"fit":1.87,"endpoint":1.65}},"lost":{"start":1961,"last_below":1986,"n":14,"y0":1938.0,"trough":1449.0,"trough_year":1982,"span":25},"grow":{"production":2.825,"area":1.306,"yield":2.164,"share_area":25.7,"share_yield":74.3,"early":{"to":1986,"production":1.125,"area":1.226,"yield":0.918}},"index":{"production":[100.0,100.02,100.05,104.41,104.7,95.22,100.54,103.33,106.32,109.31,111.19,95.37,114.61,116.33,123.57,113.2,108.27,110.97,97.72,116.9,121.45,86.94,130.79,128.53,133.04,112.52,141.45,155.75,160.8,166.14,122.62,165.82,137.86,169.77,176.03,172.72,175.51,181.89,200.02,197.57,196.04,196.04,211.37,203.5,199.68,174.61,203.95,214.6,190.88,211.59,240.62,213.69,239.42,227.16,203.94,248.12,244.4,266.13,263.32,266.68,243.39,260.27,271.55,282.52],"area":[100.0,100.18,100.18,101.19,102.11,101.1,106.09,106.8,107.83,108.68,110.36,104.79,112.78,113.96,115.42,115.96,116.18,116.05,115.28,117.24,119.17,116.25,122.63,126.55,127.85,122.55,130.82,133.32,131.7,133.75,116.0,133.31,125.77,137.57,138.9,138.45,139.17,142.55,143.39,139.43,141.97,141.97,143.33,141.7,142.41,132.31,142.4,143.01,136.15,137.54,140.76,130.57,136.67,131.01,125.27,142.69,135.07,137.11,134.09,135.43,135.79,133.07,132.26,130.57],"yield":[100.0,99.83,99.87,103.18,102.53,94.18,94.77,96.75,98.6,100.57,100.75,91.01,101.63,102.09,107.06,97.62,93.19,95.62,84.77,99.72,101.91,74.78,106.65,101.56,104.06,91.82,108.13,116.83,122.1,124.22,105.71,124.39,109.61,123.41,126.73,124.75,126.11,127.6,139.5,141.7,138.09,138.08,147.47,143.61,140.21,131.97,143.23,150.06,140.2,153.83,170.94,163.66,175.18,173.4,162.8,173.88,180.94,194.1,196.38,196.92,179.24,195.59,205.32,216.37]},"vary":{"nepal":9.26,"india":8.51,"bangladesh":4.92,"southasia":6.58,"worst_year":1982,"worst_drop":-26.6},"imports":{"hist":[[1961,0.0],[1962,0.0],[1963,0.0],[1964,0.0],[1965,0.0],[1966,0.0],[1967,0.0],[1968,0.0],[1969,0.0],[1970,0.0],[1971,0.0],[1972,0.0],[1973,0.0],[1974,0.0],[1975,0.0],[1976,0.0],[1977,0.0],[1978,0.0],[1979,0.0],[1980,0.0],[1981,1.425],[1982,1.862],[1983,2.013],[1984,0.706],[1985,0.429],[1986,0.28],[1987,1.551],[1988,0.93],[1989,0.302],[1990,0.562],[1991,0.14],[1992,1.246],[1993,1.808],[1994,2.812],[1995,1.762],[1996,2.889],[1997,1.202],[1998,0.44],[1999,1.567],[2000,7.533],[2001,1.675],[2002,0.69],[2003,2.083],[2004,1.198],[2005,1.982],[2006,5.663],[2007,8.26],[2008,3.095],[2009,3.492],[2010,3.407],[2011,5.372],[2012,12.552],[2013,12.96]],"curr":[[2010,3.163],[2011,4.96],[2012,11.502],[2013,12.25],[2014,14.276],[2015,14.78],[2016,15.475],[2017,14.756],[2018,16.521],[2019,15.36],[2020,21.957],[2021,26.001],[2022,17.322],[2023,10.057]],"hist_from":1961,"hist_to":2013,"curr_from":2010,"curr_to":2023,"overlap":[2010,2011,2012,2013],"basis_ratio":1.499,"overlap_gap":1.05,"net_export_last":1986,"net_export_n":25,"peak":26.0,"peak_year":2021,"now":10.1,"now_year":2023,"now_kt":640.0,"first_over_ten":2012},"perhead":[[1961,217.1],[1962,213.3],[1963,209.6],[1964,214.8],[1965,211.3],[1966,188.5],[1967,195.1],[1968,196.5],[1969,198.0],[1970,199.3],[1971,198.5],[1972,166.7],[1973,196.1],[1974,194.7],[1975,202.4],[1976,181.4],[1977,169.7],[1978,170.1],[1979,146.5],[1980,171.3],[1981,173.9],[1982,121.7],[1983,178.8],[1984,171.7],[1985,173.7],[1986,143.6],[1987,176.6],[1988,190.1],[1989,191.7],[1990,193.4],[1991,139.2],[1992,183.5],[1993,148.6],[1994,178.4],[1995,180.2],[1996,172.4],[1997,170.9],[1998,172.9],[1999,185.8],[2000,179.6],[2001,174.7],[2002,171.5],[2003,181.7],[2004,172.1],[2005,166.4],[2006,143.6],[2007,165.7],[2008,172.3],[2009,151.6],[2010,163.1],[2011,184.7],[2012,163.6],[2013,182.9],[2014,173.0],[2015,154.5],[2016,187.1],[2017,183.9],[2018,199.8],[2019,195.4],[2020,194.1],[2021,174.1],[2022,184.6],[2023,192.8]],"perhead_stat":{"first":1961,"last":2023,"v_first":217.1,"v_last":192.8,"trough":121.7,"trough_year":1982,"change":-11.2,"pop_first":9.71,"pop_last":29.69,"pop_mult":3.06},"gapwork":{"india":{"per_ha":121.0,"tonnes":172000,"pct":2.8},"bangladesh":{"per_ha":1098.0,"tonnes":1560000,"pct":20.8},"southasia":{"per_ha":249.0,"tonnes":353000,"pct":5.6}},"flags":{"qcl":{"nepal":{"counts":{"A":63,"E":1},"estimated":[2024],"official":63},"india":{"counts":{"A":64},"estimated":[],"official":64},"bangladesh":{"counts":{"A":64},"estimated":[],"official":64},"southasia":{"counts":{"A":64},"estimated":[],"official":64}},"nepal_yield_estimated":[2024],"nepal_area_estimated":[2024],"nepal_prod_estimated":[],"fb":{"hist":{"I":212},"curr":{"I":54}},"fb_total":266,"fb_imputed":266,"fb_official":0,"meaning":{"A":"official figure","E":"FAO estimate","I":"imputed by FAO","X":"external organisation","M":"missing; cannot exist","":"unflagged"}}};</script>
+
+<header class="top">
+  <div class="wrap">
+    <p class="kicker">FAOSTAT &middot; rice, <span data-n="meta.first" data-fmt="yr"></span>&ndash;<span data-n="meta.last" data-fmt="yr"></span>
+      &middot; Nepal, India, Bangladesh, Southern Asia</p>
+    <h1>The Rice We Grow and Still Buy</h1>
+    <p class="sub">In 1961 a hectare of Nepali paddy yielded more than a
+      hectare of Indian, Bangladeshi or South Asian paddy. It has yielded less
+      than all three for most of the years since. The ground was lost early,
+      and it has been closing since 1990. The imports have not.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Read this first</p>
+    <h2>Three reasons to hold these numbers loosely</h2>
+    <p class="lede">FAOSTAT is a reporting system, not a measuring instrument.
+      Almost everything below is a number Nepal sent to Rome, and the way Nepal
+      arrived at it changed over the period the chart covers.</p>
+
+    <div class="caveat">
+      <span class="lbl">Limitation</span>
+      <h3>1. The numbers are Nepal&rsquo;s own, from a survey whose method moved</h3>
+      <p>FAO does not go and weigh the harvest. Nepal&rsquo;s area, production
+        and yield come from the national statistics office&rsquo;s crop survey,
+        and that survey&rsquo;s sampling frame, crop-cutting protocol and
+        district coverage were not the same in 1965, 1995 and 2020. A change in
+        how a thing is counted looks exactly like a change in the thing. Nothing
+        in the archive separates the two.</p>
+
+      <h3>2. The country was rebuilt in 2015</h3>
+      <p>Nepal&rsquo;s constitution replaced 14 zones and 75 districts with 7
+        provinces and 753 local units. The enumeration areas the crop survey
+        runs on were redrawn on top of that. A series that runs
+        <span data-n="meta.first" data-fmt="yr"></span> to
+        <span data-n="meta.last" data-fmt="yr"></span> under one label is
+        therefore reporting two different administrative definitions of the same
+        country, and the join is not marked anywhere in the data.</p>
+
+      <h3>3. Some of these values are not reported at all</h3>
+      <p>FAOSTAT flags every cell, and most charts of it drop the flag. Here is
+        what the flags say. Of Nepal&rsquo;s
+        <span data-n="meta.n_years" data-fmt="int"></span> annual rice yields,
+        <span data-n="flags.qcl.nepal.counts.A" data-fmt="int"></span> are
+        marked <span class="flagtag">A</span>, an official figure, and
+        <b data-n="flags.nepal_yield_estimated.0" data-fmt="yr"></b> is marked
+        <span class="flagtag">E</span>, an FAO estimate &mdash; the most recent
+        year, which is also the highest. On the import side it is worse:
+        <b data-n="flags.fb_imputed" data-fmt="int"></b> of the
+        <span data-n="flags.fb_total" data-fmt="int"></span> supply-line values
+        in Nepal&rsquo;s food balance sheet carry <span class="flagtag">I</span>,
+        imputed by FAO, and
+        <span data-n="flags.fb_official" data-fmt="int"></span> carry
+        <span class="flagtag">A</span>. Not one figure in the import series on
+        this page was reported by Nepal. They are FAO&rsquo;s reconstruction of
+        a balance that has to add up.</p>
+    </div>
+
+    <p>None of that makes the archive useless. It makes it a record of what was
+      reported, which is a different object from a record of what was grown. The
+      yield comparison below survives it reasonably well, because the
+      methodological drift is small next to a factor of two. The import series
+      survives it less well, and the page says so where it matters.</p>
+
+    <p class="note">One arithmetic check the page does make. FAOSTAT publishes
+      yield as its own column and also publishes the production and the area it
+      was divided by. Recomputing yield from those two columns reproduces the
+      published figure to
+      <span data-n="meta.identity_kg" data-fmt="2"></span> kg per hectare across
+      all four areas and all
+      <span data-n="meta.n_years" data-fmt="int"></span> years, which is the
+      rounding and nothing else. The build fails if it ever stops doing so.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The record</p>
+    <h2>Nepal started ahead and finished behind</h2>
+    <p class="lede">In <span data-n="meta.first" data-fmt="yr"></span> Nepal
+      harvested <b data-n="levels.nepal_first" data-fmt="int"></b> kilograms of
+      paddy per hectare. India harvested
+      <span data-n="levels.india_first" data-fmt="int"></span>. Nepal was
+      <span data-n="ratio_stat.india.first" data-fmt="0"></span> per cent of
+      India&rsquo;s figure &mdash; which is to say a quarter more.</p>
+
+    <p>India passed Nepal in
+      <b data-n="overtaken.india.first" data-fmt="yr"></b> and has been above it
+      in <span data-n="overtaken.india.years_below" data-fmt="int"></span> of the
+      years since. Bangladesh passed it the same year. The Southern Asia region
+      passed it in <span data-n="overtaken.southasia.forgood" data-fmt="yr"></span>
+      and never fell back. At the widest, in
+      <span data-n="ratio_stat.southasia.min_year" data-fmt="yr"></span>, Nepal
+      was at <span data-n="ratio_stat.southasia.min" data-fmt="0"></span> per
+      cent of the regional yield, down from
+      <span data-n="ratio_stat.southasia.max" data-fmt="0"></span> per cent in
+      <span data-n="ratio_stat.southasia.max_year" data-fmt="yr"></span>.</p>
+
+    <p>It has not stayed there. In
+      <span data-n="meta.last" data-fmt="yr"></span> Nepal is at
+      <b data-n="ratio_stat.india.now" data-fmt="1"></b> per cent of India,
+      <b data-n="ratio_stat.southasia.now" data-fmt="1"></b> per cent of the
+      region and <b data-n="ratio_stat.bangladesh.now" data-fmt="1"></b> per
+      cent of Bangladesh. Two of those three gaps are now small. The third is
+      not.</p>
+
+    <div class="stats">
+      <div class="stat n"><b data-n="levels.nepal_last" data-fmt="int"></b><span>Nepal, kg per hectare, <span data-n="meta.last" data-fmt="yr"></span></span></div>
+      <div class="stat"><b data-n="levels.india_last" data-fmt="int"></b><span>India</span></div>
+      <div class="stat"><b data-n="levels.bangladesh_last" data-fmt="int"></b><span>Bangladesh</span></div>
+      <div class="stat"><b data-n="levels.southasia_last" data-fmt="int"></b><span>Southern Asia</span></div>
+    </div>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Rice yield, <span data-n="meta.first" data-fmt="yr"></span>&ndash;<span data-n="meta.last" data-fmt="yr"></span></p>
+        <p class="fig-note">Kilograms of paddy per hectare harvested. Southern
+          Asia is the FAO region and contains Nepal, which is about
+          <span data-n="meta.nepal_share_sasia_area" data-fmt="1"></span> per
+          cent of its rice area. The final Nepali point is hollow because
+          FAOSTAT flags it as an estimate rather than a reported figure.</p>
+      </div>
+      <div class="ctl">
+        <button class="chip" id="c-zero" aria-pressed="true">Axis from zero</button>
+      </div>
+      <div class="legend">
+        <span><i class="n"></i>Nepal</span>
+        <span><i class="i"></i>India</span>
+        <span><i class="b"></i>Bangladesh</span>
+        <span><i class="s"></i>Southern Asia</span>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-yields" role="img"
+             aria-label="Rice yield per hectare for Nepal, India, Bangladesh and Southern Asia, 1961 to 2024"></svg>
+      </div>
+      <figcaption>FAOSTAT domain QCL, item 27 (Rice), element 5412 (Yield).
+        Paddy, not milled rice. Retrieved <span data-n="meta.retrieved"></span>.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">When it happened</p>
+    <h2>The stagnation was the first thirty years, not the last</h2>
+    <p class="lede">Split the record at 1990 and the story reverses. Nepal was
+      the slowest of the four before that year and is not the slowest after it.</p>
+
+    <p>From <span data-n="meta.first" data-fmt="yr"></span> to
+      <span data-n="eras.0.to" data-fmt="yr"></span>, Nepal&rsquo;s yield grew
+      at <b data-n="eras.0.by.nepal.fit" data-fmt="2"></b> per cent a year.
+      India managed <span data-n="eras.0.by.india.fit" data-fmt="2"></span>,
+      Bangladesh <span data-n="eras.0.by.bangladesh.fit" data-fmt="2"></span>,
+      the region <span data-n="eras.0.by.southasia.fit" data-fmt="2"></span>.
+      Nepal was not growing slowly. It was not growing.</p>
+
+    <p>From <span data-n="eras.1.from" data-fmt="yr"></span> to
+      <span data-n="eras.1.to" data-fmt="yr"></span>, Nepal grew at
+      <b data-n="eras.1.by.nepal.fit" data-fmt="2"></b> per cent a year against
+      India&rsquo;s <span data-n="eras.1.by.india.fit" data-fmt="2"></span> and
+      the region&rsquo;s <span data-n="eras.1.by.southasia.fit" data-fmt="2"></span>.
+      Faster, not slower. Only Bangladesh, at
+      <span data-n="eras.1.by.bangladesh.fit" data-fmt="2"></span>, pulled
+      further ahead.</p>
+
+    <p>Over the whole record the averages still favour everyone else &mdash;
+      Nepal <span data-n="whole.nepal.fit" data-fmt="2"></span> per cent a year
+      against the region&rsquo;s
+      <span data-n="whole.southasia.fit" data-fmt="2"></span> &mdash; but that
+      average is carrying a quarter century in which nothing moved. Nepal&rsquo;s
+      yield was still below its
+      <span data-n="lost.start" data-fmt="yr"></span> level of
+      <span data-n="lost.y0" data-fmt="int"></span> kilograms as late as
+      <b data-n="lost.last_below" data-fmt="yr"></b>, in
+      <span data-n="lost.n" data-fmt="int"></span> separate years. That is the
+      whole of the gap.</p>
+
+    <p class="note">These growth rates are least-squares lines through the logs
+      of every year in the window, not the first year against the last. Nepal&rsquo;s
+      yield fell <span data-n="vary.worst_drop" data-fmt="abs1"></span> per cent
+      in a single year in <span data-n="vary.worst_year" data-fmt="yr"></span>,
+      and its year-to-year spread is
+      <span data-n="vary.nepal" data-fmt="1"></span> per cent against
+      Bangladesh&rsquo;s <span data-n="vary.bangladesh" data-fmt="1"></span>, so
+      an endpoint-to-endpoint rate would be at the mercy of which year you
+      stopped on. Both versions are in the payload; they differ by a few tenths.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Growth in yield per year, before and after 1990</p>
+        <p class="fig-note">Per cent a year, fitted through the logs. The left
+          bar of each pair is <span data-n="eras.0.from" data-fmt="yr"></span>&ndash;<span data-n="eras.0.to" data-fmt="yr"></span>,
+          the right is <span data-n="eras.1.from" data-fmt="yr"></span>&ndash;<span data-n="eras.1.to" data-fmt="yr"></span>.</p>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-eras" role="img"
+             aria-label="Yield growth per year in two eras for four areas"></svg>
+      </div>
+      <figcaption>The break at 1990 is chosen from Nepal&rsquo;s own series: it
+        is the first round year after the recovery starts. All four areas are
+        split at the same place so the break can be seen not to be doing the
+        work.</figcaption>
+    </figure>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Nepal&rsquo;s yield as a share of each comparator</p>
+        <p class="fig-note">Above the line, Nepal harvests more per hectare than
+          they do. Below it, less.</p>
+      </div>
+      <div class="legend">
+        <span><i class="i"></i>Against India</span>
+        <span><i class="b"></i>Against Bangladesh</span>
+        <span><i class="s"></i>Against Southern Asia</span>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-gap" role="img"
+             aria-label="Nepal's rice yield as a percentage of India, Bangladesh and Southern Asia"></svg>
+      </div>
+      <figcaption>The 1982 trough is a single bad harvest, not a structural
+        break: Nepal&rsquo;s yield fell by a quarter that year and recovered the
+        next.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Where the extra rice came from</p>
+    <h2>More land first, then better land use</h2>
+    <p class="lede">Nepal&rsquo;s paddy harvest grew from
+      <span data-n="levels.nepal_prod_first" data-fmt="int"></span> thousand
+      tonnes to <span data-n="levels.nepal_prod_last" data-fmt="int"></span>
+      thousand &mdash; a factor of
+      <b data-n="grow.production" data-fmt="2"></b>. Area harvested grew by a
+      factor of <span data-n="grow.area" data-fmt="2"></span>, yield by
+      <span data-n="grow.yield" data-fmt="2"></span>.</p>
+
+    <p>Over the whole record, then,
+      <span data-n="grow.share_yield" data-fmt="0"></span> per cent of the
+      growth in output came from yield and the rest from planting more. But the
+      two halves are not alike. Up to
+      <span data-n="grow.early.to" data-fmt="yr"></span>, production rose by a
+      factor of <span data-n="grow.early.production" data-fmt="2"></span> while
+      yield <em>fell</em> to
+      <span data-n="grow.early.yield" data-fmt="2"></span> times its starting
+      value. Every extra tonne in that quarter century came from area, which
+      grew <span data-n="grow.early.area" data-fmt="2"></span>-fold. Nepal fed
+      more people by ploughing more of the Tarai, not by getting more out of it.</p>
+
+    <p>Land ran out. Yield had to do the work after that, and since
+      <span data-n="grow.early.to" data-fmt="yr"></span> it has, more than
+      doubling. It has still not caught the population.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Nepal&rsquo;s production, area and yield, <span data-n="meta.first" data-fmt="yr"></span> = 100</p>
+        <p class="fig-note">All three indexed to their own
+          <span data-n="meta.first" data-fmt="yr"></span> value, so the
+          vertical distance between area and yield is the story.</p>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-index" role="img"
+             aria-label="Nepal rice production, area harvested and yield indexed to 1961"></svg>
+      </div>
+      <figcaption>Production is the product of the other two, so the three lines
+        are not independent. Area is harvested area, which counts a
+        double-cropped hectare twice.</figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <p>Per head of population, Nepal grows less rice now than it did in
+      <span data-n="perhead_stat.first" data-fmt="yr"></span>. The population
+      went up <b data-n="perhead_stat.pop_mult" data-fmt="2"></b>-fold over the
+      record; the harvest went up
+      <span data-n="grow.production" data-fmt="2"></span>-fold. Paddy per head
+      has fallen from <span data-n="perhead_stat.v_first" data-fmt="int"></span>
+      kilograms a year to <b data-n="perhead_stat.v_last" data-fmt="int"></b> in
+      <span data-n="perhead_stat.last" data-fmt="yr"></span>, a fall of
+      <span data-n="perhead_stat.change" data-fmt="abs0"></span> per cent. The
+      lowest year in the series is
+      <span data-n="perhead_stat.trough_year" data-fmt="yr"></span>, at
+      <span data-n="perhead_stat.trough" data-fmt="int"></span> kilograms, and
+      that is the crop failure rather than the trend: yield fell
+      <span data-n="vary.worst_drop" data-fmt="abs0"></span> per cent that year
+      and recovered the next.</p>
+
+    <p>That is the connection between the two halves of this page. The imports
+      are not filling a hole left by falling output. Output rose. They are
+      filling the gap between output and a population that rose faster.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Paddy grown per head of population</p>
+        <p class="fig-note">Kilograms a year. The dashed line is the
+          <span data-n="perhead_stat.first" data-fmt="yr"></span> figure.</p>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-perhead" role="img"
+             aria-label="Nepal paddy production per head of population, 1961 onwards"></svg>
+      </div>
+      <figcaption>Production from the crop archive, population from the food
+        balance sheets. This is paddy grown, not rice eaten: milling takes
+        roughly a third of the weight off, and the food balance accounts for
+        that separately.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The other side</p>
+    <h2>A net exporter until 1986, a tenth imported now</h2>
+    <p class="lede">For <span data-n="imports.net_export_n" data-fmt="int"></span>
+      of the years between <span data-n="imports.hist_from" data-fmt="yr"></span>
+      and <span data-n="imports.net_export_last" data-fmt="yr"></span>, Nepal
+      sent out more rice than it brought in. The last such year was
+      <b data-n="imports.net_export_last" data-fmt="yr"></b>.</p>
+
+    <p>Imports first passed a tenth of domestic supply in
+      <span data-n="imports.first_over_ten" data-fmt="yr"></span>. They peaked
+      at <b data-n="imports.peak" data-fmt="1"></b> per cent in
+      <span data-n="imports.peak_year" data-fmt="yr"></span> and were
+      <b data-n="imports.now" data-fmt="1"></b> per cent &mdash;
+      <span data-n="imports.now_kt" data-fmt="int"></span> thousand tonnes
+      &mdash; in <span data-n="imports.now_year" data-fmt="yr"></span>. The
+      series is volatile because it is a residual: it moves with the monsoon,
+      with the Indian export ban of 2023, and with whatever the border trade did
+      that year.</p>
+
+    <p class="note"><b>Two vintages, plotted separately and on purpose.</b> FAO
+      rebuilt the food balance methodology, so the archive holds an old series
+      for <span data-n="imports.hist_from" data-fmt="yr"></span>&ndash;<span data-n="imports.hist_to" data-fmt="yr"></span>
+      and a new one from <span data-n="imports.curr_from" data-fmt="yr"></span>.
+      Over the four years they overlap, every Nepali rice tonnage in the new
+      series is <b data-n="imports.basis_ratio" data-fmt="3"></b> times the old
+      one &mdash; a change of commodity basis, milled against paddy equivalent,
+      not a change in what was shipped. Splicing the tonnages would put a fifty
+      per cent step into 2010 that never happened. The <em>share</em> survives
+      the change: the two vintages agree on it to
+      <span data-n="imports.overlap_gap" data-fmt="2"></span> percentage points
+      across the overlap, and the build refuses to draw them on one axis if that
+      ever exceeds two. Both are still drawn as separate lines.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Imports as a share of domestic rice supply</p>
+        <p class="fig-note">Import quantity divided by domestic supply quantity,
+          from the food balance sheets. The grey line is the old methodology,
+          the coloured line the current one. They overlap for four years.</p>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-imports" role="img"
+             aria-label="Rice imports as a share of Nepal's domestic supply, 1961 onwards"></svg>
+      </div>
+      <figcaption>Every value in this figure carries FAOSTAT&rsquo;s
+        <span class="flagtag">I</span> flag: imputed by FAO, not reported by
+        Nepal. Read the level with that in mind. The shape &mdash; nothing, then
+        something, then a lot &mdash; is more trustworthy than any single year.</figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <p>What would close the remaining gap? At Southern Asia&rsquo;s
+      <span data-n="meta.last" data-fmt="yr"></span> yield, Nepal&rsquo;s own
+      <span data-n="levels.nepal_area_last_mha" data-fmt="2"></span> million
+      hectares would have produced about
+      <b data-n="gapwork.southasia.tonnes" data-fmt="int"></b> tonnes more paddy.
+      At Bangladesh&rsquo;s, about
+      <b data-n="gapwork.bangladesh.tonnes" data-fmt="int"></b> tonnes more
+      &mdash; roughly
+      <span data-n="gapwork.bangladesh.per_ha" data-fmt="int"></span> kilograms
+      on every hectare. That is arithmetic, not a forecast: Bangladesh grows
+      rice on a delta with three crops a year, and Nepal does not have that
+      country&rsquo;s land or water.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">What this does not show</p>
+    <h2>Five limits</h2>
+    <p><b>The reporting is the measurement.</b> Stated at the top and it does
+      not go away: every Nepali number here came through a national crop survey
+      whose method and whose country both changed during the period. Where the
+      archive flags an estimate, this page says so; where it flags an imputation,
+      this page says so. It cannot flag a methodology that drifted quietly.</p>
+    <p><b>Southern Asia contains Nepal.</b> The regional aggregate is not an
+      independent comparator. Nepal is about
+      <span data-n="meta.nepal_share_sasia_area" data-fmt="1"></span> per cent of
+      its rice area, so the contamination is small, but it is not zero and it
+      flatters the comparison slightly in Nepal&rsquo;s direction.</p>
+    <p><b>Harvested area is not land.</b> A hectare cropped twice counts twice.
+      Cropping intensity rose over this period, so part of what reads as more
+      area is the same ground used harder &mdash; and yield per harvested hectare
+      is not yield per hectare of ground.</p>
+    <p><b>No cause is established anywhere on this page.</b> Irrigation,
+      fertiliser, seed variety, land fragmentation, labour leaving for the Gulf:
+      all of these are offered as explanations of Nepali yields and none of them
+      is in this archive. The page reports what was harvested from how much land,
+      and stops.</p>
+    <p><b>The two archives do not share a calendar.</b> The crop domain and the
+      food balance domain attribute the same harvest to different years, because
+      one is a crop year and the other a supply year. Nothing here divides a
+      number from one by a number from the other except the per-head series,
+      which uses only population from the food balance and says so.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="srcs" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs">
+      <b>Sources.</b> <a href="https://www.fao.org/faostat/">FAOSTAT</a> bulk
+      downloads, retrieved <span data-n="meta.retrieved"></span>.
+      <span data-n="meta.domain_qcl"></span> for area harvested, production and
+      yield, item 27 (Rice, paddy), <span data-n="meta.first" data-fmt="yr"></span>&ndash;<span data-n="meta.last" data-fmt="yr"></span>.
+      <span data-n="meta.domain_fbs"></span> for imports, domestic supply and
+      population. Files:
+      <code>Production_Crops_Livestock_E_All_Data_(Normalized).zip</code>,
+      <code>FoodBalanceSheets_E_Asia.zip</code>,
+      <code>FoodBalanceSheetsHistoric_E_Asia.zip</code>, all from
+      <code>bulks-faostat.fao.org/production/</code>.
+    </p>
+    <p class="srcs" style="margin-top:1em">
+      <b>Method.</b> Growth rates are ordinary least squares on the logarithm of
+      yield against year, over every year in the window. Yield is checked
+      against production divided by area harvested for all four areas and all
+      <span data-n="meta.n_years" data-fmt="int"></span> years before the page is
+      written, and the build fails if the two disagree by more than the
+      rounding. The two food balance vintages are checked for a constant
+      commodity-basis ratio and are never spliced. Flags are carried through from
+      the archive rather than discarded. Everything is computed from the bulk
+      files by <code>fetch.py</code> and <code>analyze.py</code>; no figure on
+      this page is quoted from a secondary source.
+    </p>
+  </div>
+</footer>
+
+<div id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+var D = window.RICE_DATA;
+if (!D) { return; }
+
+/* ------------------------------------------------------------------ basics */
+function el(id){ return document.getElementById(id); }
+var NS = "http://www.w3.org/2000/svg";
+function mk(tag, attrs, parent){
+  var n = document.createElementNS(NS, tag);
+  if (attrs) for (var k in attrs) if (attrs[k] !== null && attrs[k] !== undefined)
+    n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+function txt(parent, x, y, s, cls, anchor){
+  var t = mk("text", { x: x, y: y, "class": cls || "tk",
+                       "text-anchor": anchor || "middle" }, parent);
+  t.textContent = s;
+  return t;
+}
+function clear(node){ while (node.firstChild) node.removeChild(node.firstChild); }
+
+var MINUS = "\u2212";
+function fInt(v){ return Math.round(v).toLocaleString("en-GB"); }
+function fFix(v, n){ return Number(v).toFixed(n); }
+function fPct(v){ return Math.round(v * 100) + "%"; }
+function fSgn(v, n){ return (v >= 0 ? "+" : MINUS) + Math.abs(v).toFixed(n); }
+function fAbs(v, n){ return Math.abs(Number(v)).toFixed(n); }
+
+function dig(path){
+  var node = D, parts = path.split(".");
+  for (var i = 0; i < parts.length; i++){
+    if (node === null || node === undefined) return undefined;
+    node = node[parts[i]];
+  }
+  return node;
+}
+function fillProse(){
+  var nodes = document.querySelectorAll("[data-n]"), missing = [];
+  for (var i = 0; i < nodes.length; i++){
+    var n = nodes[i], v = dig(n.getAttribute("data-n")), f = n.getAttribute("data-fmt");
+    if (v === undefined || v === null){ missing.push(n.getAttribute("data-n")); continue; }
+    /* "yr" exists because "int" groups thousands, and 1961 is not 1,961.
+       Both are four-digit integers on this page -- 1,938 kg a hectare wants
+       the comma and 1938 the year does not -- so the distinction has to be
+       made at the binding rather than guessed from the value. */
+    n.textContent = f === "yr" ? String(Math.round(v))
+                  : f === "int" ? fInt(v)
+                  : f === "pct" ? fPct(v)
+                  : (f && /^abs\d$/.test(f)) ? fAbs(v, +f.charAt(3))
+                  : (f && /^sgn\d$/.test(f)) ? fSgn(v, +f.charAt(3))
+                  : (f && /^\d$/.test(f)) ? fFix(v, +f)
+                  : String(v);
+  }
+  if (missing.length) console.warn("unresolved data-n paths:", missing);
+}
+
+var tip = el("tip");
+function showTip(ev, html){
+  tip.innerHTML = html;
+  tip.classList.add("on");
+  var pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  var x = ev.clientX + pad, y = ev.clientY + pad;
+  if (x + w > innerWidth - 8) x = ev.clientX - w - pad;
+  if (y + h > innerHeight - 8) y = ev.clientY - h - pad;
+  tip.style.left = Math.max(8, x) + "px";
+  tip.style.top = Math.max(8, y) + "px";
+}
+function hideTip(){ tip.classList.remove("on"); }
+function hoverable(node, html){
+  node.addEventListener("mouseenter", function(ev){ showTip(ev, html); });
+  node.addEventListener("mousemove", function(ev){ showTip(ev, html); });
+  node.addEventListener("mouseleave", hideTip);
+}
+function chip(id, onToggle, initial){
+  var b = el(id);
+  if (!b) return { on: function(){ return !!initial; } };
+  if (initial !== undefined) b.setAttribute("aria-pressed", initial ? "true" : "false");
+  b.addEventListener("click", function(){
+    var now = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", now ? "true" : "false");
+    onToggle(now);
+  });
+  return { on: function(){ return b.getAttribute("aria-pressed") === "true"; }, node: b };
+}
+
+/* Each figure sizes its coordinate system to the column it is sitting in.
+   A fixed 1120-unit box scaled into a 340-pixel phone column renders an
+   11-pixel label at three and a half pixels, which is not a label. */
+function figSize(svg, baseW, baseH, maxAspect){
+  var avail = Math.round(svg.parentNode.clientWidth || baseW);
+  var W = Math.max(300, Math.min(baseW, avail));
+  var grow = W >= baseW ? 1 : Math.min(1.6, Math.pow(baseW / W, 0.45));
+  var H = Math.round(Math.min(baseH * grow, W * (maxAspect || 1.0)));
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  return { W: W, H: H, narrow: W < 640 };
+}
+
+/* Nice round gridline steps, so an axis never prints 1637.4 */
+function ticks(lo, hi, want){
+  var span = hi - lo;
+  if (span <= 0) return [lo];
+  var raw = span / (want || 5);
+  var mag = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
+  var norm = raw / mag, step;
+  step = norm >= 5 ? 10 * mag : norm >= 2 ? 5 * mag : norm >= 1 ? 2 * mag : mag;
+  var out = [], v = Math.ceil(lo / step) * step;
+  for (; v <= hi + step * 1e-6; v += step) out.push(Math.round(v * 1e6) / 1e6);
+  return out;
+}
+
+/* End-of-line labels are the legend a reader actually uses, and three of the
+   four series finish within a few hundred kilograms of each other, so left
+   at their true heights the labels sit on top of one another.  Push them
+   apart downward, then slide the whole stack back up if it has run off the
+   bottom.  The line ends are not moved; only the words are. */
+function placeLabels(items, minGap, lo, hi){
+  items.sort(function(a, b){ return a.y - b.y; });
+  var i, n = items.length;
+  for (i = 1; i < n; i++)
+    if (items[i].y - items[i - 1].y < minGap) items[i].y = items[i - 1].y + minGap;
+  if (n){
+    var shift = Math.max(0, items[n - 1].y - hi);
+    shift = Math.min(shift, Math.max(0, items[0].y - lo));
+    if (shift > 0) for (i = 0; i < n; i++) items[i].y -= shift;
+  }
+  return items;
+}
+/* The margins below are sized for the longest label each figure can produce,
+   but the reader's fonts are not ours to guarantee: a wider fallback face
+   would push a label off the edge of the figure, where it is simply gone.
+   So each one is measured once it exists and pulled back inside if it did
+   not fit.  Measuring beats arithmetic here because the text is already on
+   the page by the time we ask. */
+function drawLabels(g, items, W){
+  items.forEach(function(L){
+    var t = txt(g, L.x, L.y, L.t, "dlab halo", "start");
+    t.setAttribute("fill", L.c);
+    var len = 0;
+    try { len = t.getComputedTextLength(); } catch (e) { len = 0; }
+    if (len && L.x + len > W - 2){
+      t.setAttribute("x", W - 2);
+      t.setAttribute("text-anchor", "end");
+    }
+  });
+}
+
+function path(pts){
+  var s = "", i;
+  for (i = 0; i < pts.length; i++)
+    s += (i ? "L" : "M") + fFix(pts[i][0], 1) + " " + fFix(pts[i][1], 1);
+  return s;
+}
+
+/* The four areas, in one place: colour, label and the key they go under in
+   the payload.  Everything below reads this rather than repeating it. */
+var SERIES = [
+  { key: "nepal",      name: "Nepal",         colour: "var(--nep)", w: 2.4, dash: null },
+  { key: "india",      name: "India",         colour: "var(--ind)", w: 1.6, dash: null },
+  { key: "bangladesh", name: "Bangladesh",    colour: "var(--ban)", w: 1.6, dash: null },
+  { key: "southasia",  name: "Southern Asia", colour: "var(--sas)", w: 1.5, dash: "5 4" }
+];
+var SHORT = { nepal: "Nepal", india: "India", bangladesh: "Bangl.", southasia: "S. Asia" };
+var YEARS = D.years;
+var T0 = YEARS[0], T1 = YEARS[YEARS.length - 1];
+/* The last Nepali yield is an FAO estimate, not a reported figure; the
+   figures draw it differently rather than quietly averaging it in. */
+var EST = {};
+(D.flags.nepal_yield_estimated || []).forEach(function(y){ EST[y] = true; });
+
+function yearTicks(narrow){
+  var step = narrow ? 20 : 10, out = [], y;
+  for (y = Math.ceil(T0 / step) * step; y <= T1; y += step) out.push(y);
+  if (out[0] - T0 > step / 2) out.unshift(T0);
+  if (T1 - out[out.length - 1] > step / 2) out.push(T1);
+  return out;
+}
+
+/* ====================================================== 1. THE YIELDS ===== */
+var yields = (function(){
+  var svg = el("svg-yields");
+  var ctl = chip("c-zero", function(){ draw(); }, true);
+
+  function draw(){
+    clear(svg);
+    /* the chip is the single source of truth for the axis, so a resize
+       redraw cannot silently disagree with the button the reader pressed */
+    var zero = ctl.on();
+    var F = figSize(svg, 1120, 560, 0.78), W = F.W, H = F.H;
+    var M = { l: F.narrow ? 44 : 62, r: F.narrow ? 62 : 104, t: 22, b: 46 };
+    var pw = W - M.l - M.r, ph = H - M.t - M.b;
+    var g = mk("g", null, svg);
+
+    var all = [];
+    SERIES.forEach(function(s){ all = all.concat(D["yield"][s.key]); });
+    var vmax = Math.max.apply(null, all);
+    var vmin = zero ? 0 : Math.min.apply(null, all);
+    var pad = (vmax - vmin) * 0.06;
+    var lo = zero ? 0 : vmin - pad, hi = vmax + pad;
+    var X = function(t){ return M.l + (t - T0) / (T1 - T0) * pw; };
+    var Y = function(v){ return M.t + ph - (v - lo) / (hi - lo) * ph; };
+
+    ticks(lo, hi, F.narrow ? 4 : 6).forEach(function(v){
+      mk("line", { x1: M.l, x2: M.l + pw, y1: Y(v), y2: Y(v), "class": "gl" }, g);
+      txt(g, M.l - 8, Y(v) + 4, fInt(v), "tk", "end");
+    });
+    mk("line", { x1: M.l, x2: M.l + pw, y1: M.t + ph, y2: M.t + ph, "class": "ax" }, g);
+    yearTicks(F.narrow).forEach(function(y){
+      txt(g, X(y), M.t + ph + 18, String(y), "tk");
+    });
+    txt(g, M.l + pw / 2, H - 8, F.narrow ? "YEAR" : "YEAR OF HARVEST", "axlab");
+    var yl = txt(g, 0, 0, F.narrow ? "KG/HA" : "KILOGRAMS PER HECTARE", "axlab");
+    yl.setAttribute("transform", "translate(13," + (M.t + ph / 2) + ") rotate(-90)");
+
+    var labels = [];
+    SERIES.forEach(function(s){
+      var v = D["yield"][s.key];
+      var pts = YEARS.map(function(y, i){ return [X(y), Y(v[i])]; });
+      mk("path", { d: path(pts), fill: "none", stroke: s.colour,
+                   "stroke-width": s.w, "stroke-linejoin": "round",
+                   "stroke-dasharray": s.dash }, g);
+      var last = pts[pts.length - 1];
+      labels.push({ x: last[0] + 7, y: last[1] + 4, c: s.colour,
+                    t: F.narrow ? SHORT[s.key] : s.name });
+    });
+    drawLabels(g, placeLabels(labels, 14, M.t + 10, M.t + ph), W);
+
+    /* the estimated Nepali year, drawn hollow */
+    var nv = D["yield"].nepal;
+    YEARS.forEach(function(y, i){
+      if (!EST[y]) return;
+      mk("circle", { cx: X(y), cy: Y(nv[i]), r: 4.2, fill: "var(--surface)",
+                     stroke: "var(--nep)", "stroke-width": 2 }, g);
+    });
+
+    /* the year Nepal was overtaken */
+    var ot = D.overtaken.southasia.forgood;
+    if (ot){
+      mk("line", { x1: X(ot), x2: X(ot), y1: M.t, y2: M.t + ph,
+                   stroke: "var(--ink-3)", "stroke-width": 1,
+                   "stroke-dasharray": "3 4" }, g);
+      txt(g, X(ot) + 6, M.t + 14,
+          F.narrow ? String(ot) : ot + ": the region passes Nepal",
+          "dlab halo", "start");
+    }
+
+    /* one crosshair reading all four series at the nearest year */
+    var hit = mk("rect", { x: M.l, y: M.t, width: pw, height: ph,
+                           fill: "transparent" }, g);
+    var cross = mk("line", { x1: 0, x2: 0, y1: M.t, y2: M.t + ph,
+                             stroke: "var(--ink-3)", "stroke-width": 1,
+                             opacity: 0 }, g);
+    hit.addEventListener("mousemove", function(ev){
+      var b = svg.getBoundingClientRect();
+      var fx = (ev.clientX - b.left) / b.width * W;
+      var yr = Math.round(T0 + (fx - M.l) / pw * (T1 - T0));
+      if (yr < T0) yr = T0;
+      if (yr > T1) yr = T1;
+      var i = YEARS.indexOf(yr);
+      if (i < 0) return;
+      cross.setAttribute("x1", X(yr));
+      cross.setAttribute("x2", X(yr));
+      cross.setAttribute("opacity", 0.55);
+      var rows = SERIES.map(function(s){
+        return s.name + " " + fInt(D["yield"][s.key][i]);
+      }).join("<br>");
+      showTip(ev, "<b>" + yr + (EST[yr] ? "  \u00b7  Nepal estimated" : "") + "</b>" +
+        '<span class="v">' + rows + " kg/ha</span>");
+    });
+    hit.addEventListener("mouseleave", function(){
+      cross.setAttribute("opacity", 0);
+      hideTip();
+    });
+  }
+  return { draw: draw };
+})();
+
+/* ======================================================== 2. THE ERAS ===== */
+var eras = (function(){
+  var svg = el("svg-eras");
+
+  function draw(){
+    clear(svg);
+    var F = figSize(svg, 1120, 420, 0.62), W = F.W, H = F.H;
+    var M = { l: F.narrow ? 42 : 60, r: 18, t: 26, b: 60 };
+    var pw = W - M.l - M.r, ph = H - M.t - M.b;
+    var g = mk("g", null, svg);
+
+    var E = D.eras;
+    var vals = [];
+    E.forEach(function(e){ SERIES.forEach(function(s){ vals.push(e.by[s.key].fit); }); });
+    var hi = Math.max.apply(null, vals) * 1.18;
+    var Y = function(v){ return M.t + ph - v / hi * ph; };
+
+    ticks(0, hi, 5).forEach(function(v){
+      mk("line", { x1: M.l, x2: M.l + pw, y1: Y(v), y2: Y(v), "class": "gl" }, g);
+      txt(g, M.l - 8, Y(v) + 4, fFix(v, 1), "tk", "end");
+    });
+    mk("line", { x1: M.l, x2: M.l + pw, y1: Y(0), y2: Y(0), "class": "ax" }, g);
+    var yl = txt(g, 0, 0, F.narrow ? "% / YR" : "PER CENT A YEAR", "axlab");
+    yl.setAttribute("transform", "translate(13," + (M.t + ph / 2) + ") rotate(-90)");
+
+    var groupW = pw / SERIES.length;
+    var barW = Math.min(46, groupW / (E.length + 1.4));
+    SERIES.forEach(function(s, gi){
+      var cx = M.l + (gi + 0.5) * groupW;
+      E.forEach(function(e, ei){
+        var x = cx - (E.length * barW) / 2 + ei * barW + barW * 0.1;
+        var w = barW * 0.8;
+        var v = e.by[s.key].fit;
+        var r = mk("rect", { x: x, y: Y(v), width: w, height: Y(0) - Y(v),
+                             fill: s.colour,
+                             opacity: ei === 0 ? 0.42 : 1 }, g);
+        hoverable(r, '<span class="nm">' + s.name + "</span><br>" +
+          "<b>" + e.from + MINUS + e.to + "</b>" +
+          '<span class="v">' + fFix(v, 2) + "% a year, fitted<br>" +
+          fFix(e.by[s.key].endpoint, 2) + "% end to end</span>");
+        txt(g, x + w / 2, Y(v) - 7, fFix(v, 2), "dlab")
+          .setAttribute("fill", s.colour);
+      });
+      txt(g, cx, M.t + ph + 20, F.narrow ? SHORT[s.key] : s.name, "dlab");
+    });
+
+    /* which bar is which era, said once rather than in a colour key */
+    var legY = H - 14;
+    var lx = M.l;
+    E.forEach(function(e, ei){
+      mk("rect", { x: lx, y: legY - 9, width: 14, height: 10,
+                   fill: "var(--ink-2)", opacity: ei === 0 ? 0.42 : 1 }, g);
+      txt(g, lx + 19, legY, e.from + MINUS + e.to, "dlab", "start");
+      lx += F.narrow ? 96 : 124;
+    });
+  }
+  return { draw: draw };
+})();
+
+/* ========================================================= 3. THE GAP ===== */
+var gap = (function(){
+  var svg = el("svg-gap");
+  var against = SERIES.slice(1);
+
+  function draw(){
+    clear(svg);
+    var F = figSize(svg, 1120, 440, 0.62), W = F.W, H = F.H;
+    /* The right margin holds an end label of up to fifteen monospaced
+       characters at 11px, which is a shade over ninety units; anything
+       tighter clips the word "Bangladesh" off the edge of the figure. */
+    var M = { l: F.narrow ? 42 : 58, r: F.narrow ? 74 : 112, t: 22, b: 46 };
+    var pw = W - M.l - M.r, ph = H - M.t - M.b;
+    var g = mk("g", null, svg);
+
+    var all = [];
+    against.forEach(function(s){ all = all.concat(D.ratio[s.key]); });
+    var lo = Math.min.apply(null, all) - 4, hi = Math.max.apply(null, all) + 4;
+    var X = function(t){ return M.l + (t - T0) / (T1 - T0) * pw; };
+    var Y = function(v){ return M.t + ph - (v - lo) / (hi - lo) * ph; };
+
+    ticks(lo, hi, F.narrow ? 4 : 6).forEach(function(v){
+      mk("line", { x1: M.l, x2: M.l + pw, y1: Y(v), y2: Y(v), "class": "gl" }, g);
+      txt(g, M.l - 8, Y(v) + 4, fInt(v) + "%", "tk", "end");
+    });
+    /* parity, which is the only value on this axis that means anything */
+    mk("line", { x1: M.l, x2: M.l + pw, y1: Y(100), y2: Y(100),
+                 stroke: "var(--ink-2)", "stroke-width": 1.3 }, g);
+    txt(g, M.l + 6, Y(100) - 7, F.narrow ? "parity" : "same yield as them",
+        "dlab halo", "start");
+
+    mk("line", { x1: M.l, x2: M.l + pw, y1: M.t + ph, y2: M.t + ph, "class": "ax" }, g);
+    yearTicks(F.narrow).forEach(function(y){
+      txt(g, X(y), M.t + ph + 18, String(y), "tk");
+    });
+    txt(g, M.l + pw / 2, H - 8, F.narrow ? "YEAR" : "YEAR OF HARVEST", "axlab");
+
+    var labels = [];
+    against.forEach(function(s){
+      var v = D.ratio[s.key];
+      var pts = YEARS.map(function(y, i){ return [X(y), Y(v[i])]; });
+      mk("path", { d: path(pts), fill: "none", stroke: s.colour,
+                   "stroke-width": s.w, "stroke-linejoin": "round",
+                   "stroke-dasharray": s.dash }, g);
+      var last = pts[pts.length - 1];
+      /* short names at both widths here: the label carries a value as well
+         as a name, and the legend above the figure already spells the
+         countries out in full */
+      labels.push({ x: last[0] + 7, y: last[1] + 4, c: s.colour,
+                    t: SHORT[s.key] + " " + fFix(v[v.length - 1], 0) + "%" });
+    });
+    drawLabels(g, placeLabels(labels, 14, M.t + 10, M.t + ph), W);
+
+    var hit = mk("rect", { x: M.l, y: M.t, width: pw, height: ph,
+                           fill: "transparent" }, g);
+    hit.addEventListener("mousemove", function(ev){
+      var b = svg.getBoundingClientRect();
+      var fx = (ev.clientX - b.left) / b.width * W;
+      var yr = Math.round(T0 + (fx - M.l) / pw * (T1 - T0));
+      var i = YEARS.indexOf(Math.max(T0, Math.min(T1, yr)));
+      if (i < 0) return;
+      showTip(ev, "<b>" + YEARS[i] + "</b>" + '<span class="v">' +
+        against.map(function(s){
+          return "vs " + s.name + " " + fFix(D.ratio[s.key][i], 1) + "%";
+        }).join("<br>") + "</span>");
+    });
+    hit.addEventListener("mouseleave", hideTip);
+  }
+  return { draw: draw };
+})();
+
+/* ================================================= 4. THE DECOMPOSITION === */
+var index = (function(){
+  var svg = el("svg-index");
+  var LINES = [
+    { key: "production", name: "Production", colour: "var(--nep)", w: 2.4, dash: null },
+    { key: "yield",      name: "Yield",      colour: "var(--ind)", w: 1.8, dash: null },
+    { key: "area",       name: "Area",       colour: "var(--ban)", w: 1.8, dash: "5 4" }
+  ];
+
+  function draw(){
+    clear(svg);
+    var F = figSize(svg, 1120, 460, 0.66), W = F.W, H = F.H;
+    var M = { l: F.narrow ? 40 : 56, r: F.narrow ? 76 : 112, t: 22, b: 46 };
+    var pw = W - M.l - M.r, ph = H - M.t - M.b;
+    var g = mk("g", null, svg);
+
+    var all = [];
+    LINES.forEach(function(s){ all = all.concat(D.index[s.key]); });
+    var hi = Math.max.apply(null, all) * 1.05;
+    var X = function(t){ return M.l + (t - T0) / (T1 - T0) * pw; };
+    var Y = function(v){ return M.t + ph - v / hi * ph; };
+
+    ticks(0, hi, F.narrow ? 4 : 6).forEach(function(v){
+      mk("line", { x1: M.l, x2: M.l + pw, y1: Y(v), y2: Y(v), "class": "gl" }, g);
+      txt(g, M.l - 8, Y(v) + 4, fInt(v), "tk", "end");
+    });
+    mk("line", { x1: M.l, x2: M.l + pw, y1: Y(100), y2: Y(100),
+                 stroke: "var(--ink-2)", "stroke-width": 1.2 }, g);
+    mk("line", { x1: M.l, x2: M.l + pw, y1: M.t + ph, y2: M.t + ph, "class": "ax" }, g);
+    yearTicks(F.narrow).forEach(function(y){
+      txt(g, X(y), M.t + ph + 18, String(y), "tk");
+    });
+    txt(g, M.l + pw / 2, H - 8, F.narrow ? "YEAR" : "YEAR OF HARVEST", "axlab");
+    var yl = txt(g, 0, 0, T0 + " = 100", "axlab");
+    yl.setAttribute("transform", "translate(13," + (M.t + ph / 2) + ") rotate(-90)");
+
+    /* the stagnation, shaded: area carries the whole of the growth here */
+    var mid = D.grow.early.to;
+    mk("rect", { x: X(T0), y: M.t, width: X(mid) - X(T0), height: ph,
+                 fill: "var(--ink-3)", opacity: 0.07 }, g);
+    txt(g, (X(T0) + X(mid)) / 2, M.t + 14,
+        F.narrow ? "yield flat" : "yield flat, area growing",
+        "dlab halo");
+
+    var labels = [];
+    LINES.forEach(function(s){
+      var v = D.index[s.key];
+      var pts = YEARS.map(function(y, i){ return [X(y), Y(v[i])]; });
+      mk("path", { d: path(pts), fill: "none", stroke: s.colour,
+                   "stroke-width": s.w, "stroke-linejoin": "round",
+                   "stroke-dasharray": s.dash }, g);
+      var last = pts[pts.length - 1];
+      labels.push({ x: last[0] + 7, y: last[1] + 4, c: s.colour,
+                    t: s.name + " " + fFix(v[v.length - 1], 0) });
+    });
+    drawLabels(g, placeLabels(labels, 14, M.t + 10, M.t + ph), W);
+
+    var hit = mk("rect", { x: M.l, y: M.t, width: pw, height: ph,
+                           fill: "transparent" }, g);
+    hit.addEventListener("mousemove", function(ev){
+      var b = svg.getBoundingClientRect();
+      var fx = (ev.clientX - b.left) / b.width * W;
+      var yr = Math.round(T0 + (fx - M.l) / pw * (T1 - T0));
+      var i = YEARS.indexOf(Math.max(T0, Math.min(T1, yr)));
+      if (i < 0) return;
+      showTip(ev, "<b>" + YEARS[i] + "</b>" + '<span class="v">' +
+        LINES.map(function(s){
+          return s.name + " " + fFix(D.index[s.key][i], 0);
+        }).join("<br>") + "</span>");
+    });
+    hit.addEventListener("mouseleave", hideTip);
+  }
+  return { draw: draw };
+})();
+
+/* ==================================================== 5. PADDY PER HEAD === */
+var perhead = (function(){
+  var svg = el("svg-perhead");
+  var P = D.perhead;
+
+  function draw(){
+    clear(svg);
+    var F = figSize(svg, 1120, 380, 0.56), W = F.W, H = F.H;
+    var M = { l: F.narrow ? 40 : 58, r: F.narrow ? 16 : 30, t: 24, b: 46 };
+    var pw = W - M.l - M.r, ph = H - M.t - M.b;
+    var g = mk("g", null, svg);
+
+    var t0 = P[0][0], t1 = P[P.length - 1][0];
+    var vals = P.map(function(p){ return p[1]; });
+    var hi = Math.max.apply(null, vals) * 1.08;
+    var X = function(t){ return M.l + (t - t0) / (t1 - t0) * pw; };
+    var Y = function(v){ return M.t + ph - v / hi * ph; };
+
+    ticks(0, hi, F.narrow ? 4 : 5).forEach(function(v){
+      mk("line", { x1: M.l, x2: M.l + pw, y1: Y(v), y2: Y(v), "class": "gl" }, g);
+      txt(g, M.l - 8, Y(v) + 4, fInt(v), "tk", "end");
+    });
+    mk("line", { x1: M.l, x2: M.l + pw, y1: M.t + ph, y2: M.t + ph, "class": "ax" }, g);
+    yearTicks(F.narrow).forEach(function(y){
+      if (y < t0 || y > t1) return;
+      txt(g, X(y), M.t + ph + 18, String(y), "tk");
+    });
+    txt(g, M.l + pw / 2, H - 8, F.narrow ? "YEAR" : "YEAR OF HARVEST", "axlab");
+    var yl = txt(g, 0, 0, F.narrow ? "KG/HEAD" : "KILOGRAMS PER HEAD", "axlab");
+    yl.setAttribute("transform", "translate(13," + (M.t + ph / 2) + ") rotate(-90)");
+
+    var base = D.perhead_stat.v_first;
+    mk("line", { x1: M.l, x2: M.l + pw, y1: Y(base), y2: Y(base),
+                 stroke: "var(--ink-2)", "stroke-width": 1.2,
+                 "stroke-dasharray": "5 4" }, g);
+    txt(g, M.l + pw - 4, Y(base) - 7,
+        F.narrow ? String(Math.round(base)) + " kg"
+                 : D.perhead_stat.first + ": " + Math.round(base) + " kg a head",
+        "dlab halo", "end");
+
+    var pts = P.map(function(p){ return [X(p[0]), Y(p[1])]; });
+    mk("path", { d: path(pts) + "L" + fFix(X(t1), 1) + " " + fFix(Y(0), 1) +
+                 "L" + fFix(X(t0), 1) + " " + fFix(Y(0), 1) + "Z",
+                 fill: "var(--nep)", opacity: 0.1, stroke: "none" }, g);
+    mk("path", { d: path(pts), fill: "none", stroke: "var(--nep)",
+                 "stroke-width": 2.2, "stroke-linejoin": "round" }, g);
+
+    var tr = D.perhead_stat.trough_year;
+    P.forEach(function(p){
+      if (p[0] !== tr) return;
+      mk("circle", { cx: X(p[0]), cy: Y(p[1]), r: 4, fill: "var(--nep)" }, g);
+      /* named for what it is: the lowest year is a failed harvest, and
+         calling it "the trough" would read as the bottom of a trend */
+      txt(g, X(p[0]), Y(p[1]) + 20,
+          F.narrow ? String(Math.round(p[1])) + " kg"
+                   : tr + " crop failure: " + Math.round(p[1]) + " kg",
+          "dlab halo");
+    });
+
+    var hit = mk("rect", { x: M.l, y: M.t, width: pw, height: ph,
+                           fill: "transparent" }, g);
+    hit.addEventListener("mousemove", function(ev){
+      var b = svg.getBoundingClientRect();
+      var fx = (ev.clientX - b.left) / b.width * W;
+      var yr = Math.round(t0 + (fx - M.l) / pw * (t1 - t0));
+      var best = null, bd = 1e9;
+      P.forEach(function(p){
+        var d = Math.abs(p[0] - yr);
+        if (d < bd){ bd = d; best = p; }
+      });
+      if (!best) return;
+      showTip(ev, "<b>" + best[0] + "</b>" + '<span class="v">' +
+        fFix(best[1], 0) + " kg of paddy per head</span>");
+    });
+    hit.addEventListener("mouseleave", hideTip);
+  }
+  return { draw: draw };
+})();
+
+/* ===================================================== 6. THE IMPORTS ===== */
+var imports = (function(){
+  var svg = el("svg-imports");
+  var I = D.imports;
+
+  function draw(){
+    clear(svg);
+    var F = figSize(svg, 1120, 440, 0.62), W = F.W, H = F.H;
+    var M = { l: F.narrow ? 42 : 58, r: F.narrow ? 18 : 34, t: 24, b: 48 };
+    var pw = W - M.l - M.r, ph = H - M.t - M.b;
+    var g = mk("g", null, svg);
+
+    var both = I.hist.concat(I.curr);
+    var t0 = I.hist_from, t1 = Math.max(I.hist_to, I.curr_to);
+    var hi = Math.max.apply(null, both.map(function(p){ return p[1]; })) * 1.14;
+    var X = function(t){ return M.l + (t - t0) / (t1 - t0) * pw; };
+    var Y = function(v){ return M.t + ph - v / hi * ph; };
+
+    ticks(0, hi, F.narrow ? 4 : 6).forEach(function(v){
+      mk("line", { x1: M.l, x2: M.l + pw, y1: Y(v), y2: Y(v), "class": "gl" }, g);
+      txt(g, M.l - 8, Y(v) + 4, fInt(v) + "%", "tk", "end");
+    });
+    mk("line", { x1: M.l, x2: M.l + pw, y1: M.t + ph, y2: M.t + ph, "class": "ax" }, g);
+    yearTicks(F.narrow).forEach(function(y){
+      if (y < t0 || y > t1) return;
+      txt(g, X(y), M.t + ph + 18, String(y), "tk");
+    });
+    txt(g, M.l + pw / 2, H - 8, F.narrow ? "YEAR" : "SUPPLY YEAR", "axlab");
+    var yl = txt(g, 0, 0, F.narrow ? "% SUPPLY" : "SHARE OF DOMESTIC SUPPLY", "axlab");
+    yl.setAttribute("transform", "translate(13," + (M.t + ph / 2) + ") rotate(-90)");
+
+    /* the overlap, shaded, because it is the honest part of the join */
+    if (I.overlap.length){
+      var a = I.overlap[0], b2 = I.overlap[I.overlap.length - 1];
+      mk("rect", { x: X(a), y: M.t, width: Math.max(2, X(b2) - X(a)), height: ph,
+                   fill: "var(--accent)", opacity: 0.1 }, g);
+      txt(g, X(a) - 6, M.t + 14,
+          F.narrow ? "both" : "both methodologies", "dlab halo", "end");
+    }
+
+    function line(rows, colour, width, dash){
+      var pts = rows.map(function(p){ return [X(p[0]), Y(p[1])]; });
+      mk("path", { d: path(pts), fill: "none", stroke: colour,
+                   "stroke-width": width, "stroke-linejoin": "round",
+                   "stroke-dasharray": dash }, g);
+      return pts;
+    }
+    line(I.hist, "var(--sas)", 1.6, "5 4");
+    line(I.curr, "var(--nep)", 2.4, null);
+
+    /* The old series is labelled at its own highest point before the two
+       vintages meet: put at its last year the label lands on top of the
+       current line, which is exactly where the two must not be confused,
+       and a local peak is the one place on a wiggly line with clear air
+       above it. */
+    var alone = I.hist[0];
+    I.hist.forEach(function(p){
+      if (p[0] < I.curr_from && p[1] > alone[1]) alone = p;
+    });
+    txt(g, X(alone[0]), Y(alone[1]) - 14,
+        F.narrow ? "old" : "old methodology", "dlab halo", "middle")
+      .setAttribute("fill", "var(--sas)");
+    var lastC = I.curr[I.curr.length - 1];
+    txt(g, X(lastC[0]) - 6, Y(lastC[1]) - 10,
+        F.narrow ? fFix(lastC[1], 0) + "%"
+                 : lastC[0] + ": " + fFix(lastC[1], 1) + "%",
+        "dlab halo", "end")
+      .setAttribute("fill", "var(--nep)");
+
+    /* the last year Nepal sent out more rice than it took in */
+    var ne = I.net_export_last;
+    if (ne){
+      mk("line", { x1: X(ne), x2: X(ne), y1: M.t, y2: M.t + ph,
+                   stroke: "var(--ink-3)", "stroke-width": 1,
+                   "stroke-dasharray": "3 4" }, g);
+      /* to the left of the rule, into the quarter century where the line is
+         flat on zero and nothing else is competing for the space */
+      txt(g, X(ne) - 6, M.t + ph - 30,
+          F.narrow ? String(ne) : ne + ": last year as a net exporter",
+          "dlab halo", "end");
+    }
+
+    var peak = I.curr.filter(function(p){ return p[0] === I.peak_year; })[0];
+    if (peak){
+      mk("circle", { cx: X(peak[0]), cy: Y(peak[1]), r: 4, fill: "var(--nep)" }, g);
+      txt(g, X(peak[0]) - 8, Y(peak[1]) + 4,
+          F.narrow ? fFix(peak[1], 0) + "%"
+                   : peak[0] + ": " + fFix(peak[1], 1) + "%",
+          "dlab halo", "end")
+        .setAttribute("fill", "var(--nep)");
+    }
+
+    var hit = mk("rect", { x: M.l, y: M.t, width: pw, height: ph,
+                           fill: "transparent" }, g);
+    hit.addEventListener("mousemove", function(ev){
+      var b = svg.getBoundingClientRect();
+      var fx = (ev.clientX - b.left) / b.width * W;
+      var yr = Math.round(t0 + (fx - M.l) / pw * (t1 - t0));
+      function at(rows){
+        var f = rows.filter(function(p){ return p[0] === yr; });
+        return f.length ? fFix(f[0][1], 1) + "%" : null;
+      }
+      var h = at(I.hist), c = at(I.curr);
+      if (!h && !c) return;
+      var rows = [];
+      if (c) rows.push("current " + c);
+      if (h) rows.push("old " + h);
+      showTip(ev, "<b>" + yr + "  \u00b7  imputed</b>" +
+        '<span class="v">' + rows.join("<br>") + " of supply</span>");
+    });
+    hit.addEventListener("mouseleave", hideTip);
+  }
+  return { draw: draw };
+})();
+
+/* ------------------------------------------------------------------ boot */
+fillProse();
+yields.draw();
+eras.draw();
+gap.draw();
+index.draw();
+perhead.draw();
+imports.draw();
+
+function redraw(){
+  yields.draw(); eras.draw(); gap.draw();
+  index.draw(); perhead.draw(); imports.draw();
+}
+
+/* The first draw happens before the web fonts arrive, so every label is
+   measured in the fallback face and then silently gets wider when DM Mono
+   loads -- which is how a label that fitted at draw time ends up off the
+   edge of the figure.  Draw once more when the fonts have settled. */
+if (document.fonts && document.fonts.ready && document.fonts.ready.then)
+  document.fonts.ready.then(redraw);
+
+var figCol = document.querySelector(".wide");
+function colWidth(){ return figCol ? figCol.clientWidth : window.innerWidth; }
+var rt, lastW = colWidth();
+window.addEventListener("resize", function(){
+  clearTimeout(rt);
+  rt = setTimeout(function(){
+    var w = colWidth();
+    if (w === lastW) return;
+    lastW = w;
+    yields.draw(); eras.draw(); gap.draw();
+    index.draw(); perhead.draw(); imports.draw();
+  }, 160);
+});
+})();
+</script>
+</body>
+</html>

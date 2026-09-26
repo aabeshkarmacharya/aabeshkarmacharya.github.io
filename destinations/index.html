@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="One Hundred Forty-Four Destinations, Six Countries">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%9B%AB%3C%2Ftext%3E%3C%2Fsvg%3E">
+<title>One Hundred Forty-Four Destinations, Six Countries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..800,0..100,0..1&family=Source+Sans+3:wght@300;400;500;600&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#EFEEEA; --surface:#FCFCFA; --surface-2:#F5F4F0; --sunk:#E4E2DC;
+  --ink:#1A1915; --ink-2:#52504A; --ink-3:#86847C; --rule:#D8D6CE; --rule-2:#C3C1B7;
+
+  /* The quantity here is a share of a whole, with no meaningful zero and no
+     two poles, so nothing diverges.  What the page needs instead is a set of
+     hues that stay apart from each other when eight destinations are drawn on
+     one axis, and one pair -- the six that take most of it, and everything
+     else -- that reads at a glance.  Hues are spaced around the wheel and
+     held to a similar lightness so no destination looks more important than
+     another for a reason that is not in the data. */
+  --c1:#1f5f8b; --c2:#b0502a; --c3:#3d7a50; --c4:#75498a;
+  --c5:#a1761b; --c6:#1f8a86; --c7:#8a3d58; --c8:#5a6270;
+
+  /* The six, and the hundred-odd others. */
+  --six:#b0502a; --rest:#9b998f;
+
+  --accent:#1f5f8b; --alt:#b0502a;
+  --shadow:0 1px 2px rgba(26,25,21,.05),0 10px 30px -16px rgba(26,25,21,.18);
+  --grid:rgba(26,25,21,.07);
+  --measure:65ch; --wide:1060px;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --ground:#16161A; --surface:#1E1E23; --surface-2:#25252B; --sunk:#0E0E11;
+    --ink:#ECEBE6; --ink-2:#A6A49C; --ink-3:#74726B; --rule:#2F2F36; --rule-2:#3E3E47;
+    /* Lifted, not inverted: each hue keeps its identity and gains the
+       lightness it needs to sit on a dark surface. */
+    --c1:#6aa8d8; --c2:#e08a63; --c3:#6fb586; --c4:#b28fc4;
+    --c5:#d4ab55; --c6:#5fc3bf; --c7:#cc7d97; --c8:#98a1b0;
+    --six:#e08a63; --rest:#63625C;
+    --accent:#6aa8d8; --alt:#e08a63;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+    --grid:rgba(236,235,230,.08);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --ground:#16161A; --surface:#1E1E23; --surface-2:#25252B; --sunk:#0E0E11;
+  --ink:#ECEBE6; --ink-2:#A6A49C; --ink-3:#74726B; --rule:#2F2F36; --rule-2:#3E3E47;
+  --c1:#6aa8d8; --c2:#e08a63; --c3:#6fb586; --c4:#b28fc4;
+  --c5:#d4ab55; --c6:#5fc3bf; --c7:#cc7d97; --c8:#98a1b0;
+  --six:#e08a63; --rest:#63625C;
+  --accent:#6aa8d8; --alt:#e08a63;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+  --grid:rgba(236,235,230,.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:400; font-size:18.5px; line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; font-family:"Fraunces","Georgia",serif;
+  font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
+  letter-spacing:-.012em}
+.mono,code{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.tnum{font-variant-numeric:tabular-nums}
+
+.wrap{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
+.wide{max-width:var(--wide); margin-inline:auto; padding-inline:24px}
+section{padding-block:clamp(40px,6vw,74px)}
+section+section{border-top:1px solid var(--rule)}
+p{margin:0 0 1.1em}
+a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2); text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
+
+.eyebrow{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3);
+  display:flex; align-items:center; gap:12px; margin-bottom:16px}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
+h2{font-size:clamp(28px,4vw,40px); line-height:1.06; font-weight:700; margin-bottom:.48em}
+h3{font-size:21px; line-height:1.24; font-weight:600; margin:2em 0 .5em}
+.lede{font-size:20.5px; line-height:1.56; color:var(--ink-2)}
+.small{font-size:16px; color:var(--ink-2)}
+
+header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
+  padding-block:clamp(52px,9vw,104px)}
+h1{font-size:clamp(38px,6.6vw,80px); line-height:.98; font-weight:800;
+   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:15ch; margin-bottom:.3em}
+.sub{max-width:54ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
+.kicker{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:22px}
+
+figure{margin:0; background:var(--surface); border:1px solid var(--rule);
+  border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.fig-head{padding:20px 22px 0}
+.fig-title{font-family:"Fraunces",Georgia,serif; font-weight:600; font-size:17px;
+  font-variation-settings:"SOFT" 0,"WONK" 0,"opsz" 24; margin-bottom:4px}
+.fig-note{font-size:14px; color:var(--ink-2); line-height:1.45; max-width:80ch}
+.fig-body{padding:14px 22px 20px}
+figcaption{padding:14px 22px 18px; border-top:1px solid var(--rule);
+  font-size:13.5px; color:var(--ink-3); line-height:1.5; background:var(--surface-2)}
+.figspace{margin-block:clamp(28px,3.6vw,46px)}
+svg{display:block; width:100%; height:auto; overflow:visible}
+.gl{stroke:var(--grid); stroke-width:1; fill:none}
+.ax{stroke:var(--rule-2); stroke-width:1; fill:none}
+.tk{font-family:"DM Mono",monospace; font-size:11px; fill:var(--ink-3);
+    font-variant-numeric:tabular-nums}
+.axlab{font-family:"DM Mono",monospace; font-size:10.5px; fill:var(--ink-3);
+    letter-spacing:.14em; text-transform:uppercase}
+.dlab{font-family:"DM Mono",monospace; font-size:11.5px; fill:var(--ink-2);
+    font-variant-numeric:tabular-nums}
+.nlab{font-family:"Source Sans 3",sans-serif; font-size:12.5px; fill:var(--ink-2)}
+.halo{paint-order:stroke; stroke:var(--surface); stroke-width:3.5px;
+      stroke-linejoin:round}
+.hit{fill:transparent; cursor:default}
+
+.legend{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center;
+  font-family:"DM Mono",monospace; font-size:11.5px; color:var(--ink-2);
+  padding:0 22px 14px}
+.legend span{display:inline-flex; align-items:center; gap:7px}
+.legend i{width:16px; height:3px; border-radius:2px; flex:none; font-style:normal}
+
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); border-radius:3px; overflow:hidden;
+  margin-block:30px}
+.stat{background:var(--surface); padding:16px 18px}
+.stat b{display:block; font-family:"Source Sans 3",sans-serif; font-weight:600;
+  font-size:clamp(25px,3.1vw,33px); line-height:1.05; margin-bottom:5px; letter-spacing:-.02em}
+.stat span{font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); line-height:1.4; display:block}
+.stat.s b{color:var(--six)}
+
+#tip{position:fixed; z-index:40; pointer-events:none; opacity:0; transition:opacity .11s;
+  background:var(--surface); border:1px solid var(--rule-2); border-radius:3px;
+  box-shadow:var(--shadow); padding:9px 12px; font-size:13px; line-height:1.45;
+  max-width:300px; color:var(--ink)}
+#tip.on{opacity:1}
+#tip b{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--ink-3); font-weight:400; display:block; margin-bottom:3px}
+#tip .v{font-variant-numeric:tabular-nums}
+
+details{border:1px solid var(--rule); border-radius:3px; background:var(--surface);
+  padding:0 18px; margin-block:26px}
+summary{cursor:pointer; padding:14px 0; font-family:"DM Mono",monospace;
+  font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2)}
+summary:hover{color:var(--ink)}
+.tablewrap{overflow-x:auto; padding-bottom:18px}
+table{border-collapse:collapse; font-size:14px; width:100%; min-width:460px}
+th,td{text-align:right; padding:6px 10px; border-bottom:1px solid var(--rule);
+  font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left; font-variant-numeric:normal}
+thead th{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:400; white-space:nowrap}
+
+.srcs{font-size:14px; color:var(--ink-3); line-height:1.6}
+.srcs a{text-decoration-color:var(--rule-2)}
+footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:44px}
+.note{border-left:2px solid var(--rule-2); padding-left:16px; margin-block:1.5em;
+  color:var(--ink-2); font-size:16.5px}
+.warn{border-left:3px solid var(--six); padding:2px 0 2px 18px; margin-block:1.6em;
+  font-size:18px; color:var(--ink)}
+
+@media (max-width:760px){
+  body{font-size:17px}
+  .fig-head,.fig-body,.legend,figcaption{padding-left:16px; padding-right:16px}
+  .wrap,.wide{padding-inline:18px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important; transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+<script>window.LEAVE_DATA={"meta":{"retrieved":"2026-09-26","years":["2019/20","2020/21","2021/22","2022/23","2023/24"],"series_years":["2017/18","2018/19","2019/20","2020/21","2021/22","2022/23","2023/24"],"n_years":5,"n_series_years":7,"destinations_ever":154,"destinations_every_year":99,"destinations_once":5,"not_states":["Bermuda","British Virgin Islands","Cayman","Cook Islands","French Polynesia","Hong Kong SAR, China","Macau SAR, China","Malabo","Palau","Republic of Kosovo","Saipan","Sint Maarten","Taiwan","Turks and Caicos Islands","West-Indies"],"n_not_states":15,"permits_total":2677757,"permits_new":1565644,"permits_renew":1112113,"first_year":"2017/18","last_year":"2023/24","sources":[{"title":"Nepal Labour Migration Report 2022","annexes":"Annexes 9, 10 and 11","url":"https://giwmscdnone.gov.np/media/app/public/298/posts/1715249334_10.pdf"},{"title":"Nepal Labour Migration Report 2024","annexes":"Annexes 3 and 4","url":"https://giwmscdnone.gov.np/media/pdf_upload/Nepal%20Labour%20Migration%202024_Final-Version%20for%20Approval%20(1)_peesvxa.pdf"}]},"headline":{"first_year":"2017/18","last_year":"2023/24","top6_first":0.9348427765319898,"top6_last":0.8029828492687412,"drop_points":13.185992726324859,"top6_first_pct":93.48427765319897,"top6_last_pct":80.29828492687412,"destinations_last":144,"destinations_new_last":133,"top1_last":0.28477907919416995,"top1_last_pct":28.477907919416996,"top1_last_name":"UAE","sixth_last":"Croatia","sixth_last_pct":3.0949995327072335,"sixth_first":"Bahrain","tail_n":127,"tail_share":0.1970171507312588,"tail_share_pct":19.701715073125882,"tail_from":7,"hhi_first_exact":0.1873002808508768,"hhi_last":0.15344856273848625,"hhi_peak":0.23834675174194878,"hhi_peak_year":"2022/23","female_first_pct":7.717470383199592,"female_last_pct":10.814901550266292},"series":[{"year":"2017/18","top6":0.9348427765319898,"exact":false,"new":354082,"destinations":null},{"year":"2018/19","top6":0.9081160487868897,"exact":false,"new":236211,"destinations":null},{"year":"2019/20","top6":0.9064776541154349,"exact":true,"new":190393,"destinations":123},{"year":"2020/21","top6":0.8840326340326339,"exact":true,"new":72072,"destinations":113},{"year":"2021/22","top6":0.8957708690442749,"exact":true,"new":348866,"destinations":141},{"year":"2022/23","top6":0.8662002039594024,"exact":true,"new":494216,"destinations":139},{"year":"2023/24","top6":0.8029828492687412,"exact":true,"new":460097,"destinations":144}],"years":{"2019/20":{"year":"2019/20","new":190393,"renew":177979,"total":368372,"female":28429,"female_share":0.07717470383199591,"destinations":123,"destinations_new":113,"top":{"1":0.27341866560220174,"2":0.4796237256621829,"3":0.6852983040342869,"4":0.8420057460095697,"5":0.8891240749397299,"6":0.9064776541154349,"8":0.9294301786305169,"10":0.948327932224399,"15":0.9756766267667403,"20":0.9882821322212475},"top6_pct":90.64776541154349,"top1_pct":27.341866560220176,"female_pct":7.717470383199592,"hhi":0.1873002808508768,"cum":[0.273419,0.479624,0.685298,0.842006,0.889124,0.906478,0.918947,0.92943,0.939567,0.948328,0.955986,0.961238,0.96617,0.971023,0.975677,0.979064,0.982358,0.985362,0.986848,0.988282,0.989249,0.990199,0.990987,0.991659,0.992295],"ranked":[{"name":"UAE","new":52057,"share":0.27341866560220174},{"name":"Saudi Arabia","new":39260,"share":0.2062050600599812},{"name":"Malaysia","new":39159,"share":0.205674578372104},{"name":"Qatar","new":29836,"share":0.15670744197528272},{"name":"Kuwait","new":8971,"share":0.04711832893016025},{"name":"Bahrain","new":3304,"share":0.01735357917570499},{"name":"Jordan","new":2374,"share":0.012468945812083427},{"name":"Oman","new":1996,"share":0.010483578702998535},{"name":"Romania","new":1930,"share":0.010136927302999586},{"name":"Malta","new":1668,"share":0.008760826290882543},{"name":"Cyprus","new":1458,"share":0.007657844563613158},{"name":"Turkey","new":1000,"share":0.005252293939378023},{"name":"Japan","new":939,"share":0.004931904009075964},{"name":"Afghanistan","new":924,"share":0.004853119599985294},{"name":"Maldives","new":886,"share":0.004653532430288929},{"name":"Croatia","new":645,"share":0.003387729590898825},{"name":"Portugal","new":627,"share":0.0032931882999900205},{"name":"Macau SAR, China","new":572,"share":0.0030043121333242296},{"name":"USA","new":283,"share":0.0014863991848439806},{"name":"Seychelles","new":273,"share":0.0014338762454502005}],"new_of":{"UAE":52057,"Saudi Arabia":39260,"Malaysia":39159,"Qatar":29836,"Kuwait":8971,"Bahrain":3304,"Jordan":2374,"Oman":1996,"Romania":1930,"Malta":1668,"Cyprus":1458,"Turkey":1000,"Japan":939,"Afghanistan":924,"Maldives":886,"Croatia":645,"Portugal":627,"Macau SAR, China":572,"USA":283,"Seychelles":273,"Poland":184,"Azerbaijan":181,"China":150,"New Zealand":128,"Brunei Darussalam":121,"Hong Kong SAR, China":91,"Singapore":85,"Mauritius":74,"Panama":73,"Sri Lanka":68,"Canada":61,"Czech Republic":61,"Australia":57,"France":56,"Cayman":53,"Russia":51,"South Korea":50,"Papua New Guinea":46,"Cambodia":40,"United Kingdom":38,"Germany":36,"Finland":32,"Hungary":32,"Netherlands":28,"Spain":27,"Estonia":26,"Italy":26,"Ukraine":24,"Republic of Congo":22,"Slovakia (Republic of Slovak)":22,"Ireland":14,"Israel":14,"Nigeria":14,"Egypt":13,"Indonesia":13,"Somalia":12,"Greece":11,"Kenya":10,"Lithuania":10,"Tanzania":10,"Bermuda":9,"Ghana":7,"Morocco":7,"Philippines":7,"Zambia":7,"Belgium":6,"Mozambique":6,"Turks and Caicos Islands":6,"Uganda":6,"Colombia":5,"Equatorial Guinea":5,"Lebanon":5,"Thailand":5,"Angola":4,"Denmark":4,"Lao PDR":4,"Latvia":4,"Luxembourg":4,"Norway":4,"Slovenia":4,"Sweden":4,"Algeria":3,"Gabon":3,"Jamaica":3,"Senegal":3,"South Africa":3,"Uzbekistan":3,"Vietnam":3,"Albania":2,"Bahamas":2,"Cameroon":2,"Mali":2,"Palau":2,"Peru":2,"Sudan":2,"Trinidad and Tobago":2,"Chile":1,"Djibouti":1,"Dominican Republic":1,"Eritrea":1,"Ethiopia":1,"Georgia":1,"Guyana":1,"Malabo":1,"Malawi":1,"Mexico":1,"Mongolia":1,"Rwanda":1,"Sierra Leone":1,"Sint Maarten":1,"Tajikistan":1,"Uruguay":1,"West-Indies":1},"share_of":{"UAE":0.27341866560220174,"Saudi Arabia":0.2062050600599812,"Malaysia":0.205674578372104,"Qatar":0.15670744197528272,"Kuwait":0.04711832893016025,"Bahrain":0.01735357917570499,"Jordan":0.012468945812083427,"Oman":0.010483578702998535,"Romania":0.010136927302999586,"Malta":0.008760826290882543,"Cyprus":0.007657844563613158,"Turkey":0.005252293939378023,"Japan":0.004931904009075964,"Afghanistan":0.004853119599985294,"Maldives":0.004653532430288929,"Croatia":0.003387729590898825,"Portugal":0.0032931882999900205,"Macau SAR, China":0.0030043121333242296,"USA":0.0014863991848439806,"Seychelles":0.0014338762454502005,"Poland":0.0009664220848455563,"Azerbaijan":0.0009506652030274222,"China":0.0007878440909067035,"New Zealand":0.0006722936242403869,"Brunei Darussalam":0.0006355275666647408,"Hong Kong SAR, China":0.0004779587484834001,"Singapore":0.000446444984847132,"Mauritius":0.00038866975151397373,"Panama":0.0003834174575745957,"Sri Lanka":0.0003571559878777056,"Canada":0.0003203899303020594,"Czech Republic":0.0003203899303020594,"Australia":0.0002993807545445473,"France":0.0002941284606051693,"Cayman":0.00027837157878703525,"Russia":0.0002678669909082792,"South Korea":0.00026261469696890115,"Papua New Guinea":0.0002416055212113891,"Cambodia":0.00021009175757512094,"United Kingdom":0.00019958716969636488,"Germany":0.00018908258181760885,"Finland":0.00016807340606009674,"Hungary":0.00016807340606009674,"Netherlands":0.00014706423030258465,"Spain":0.00014181193636320663,"Estonia":0.00013655964242382862,"Italy":0.00013655964242382862,"Ukraine":0.00012605505454507256,"Republic of Congo":0.00011555046666631651,"Slovakia (Republic of Slovak)":0.00011555046666631651,"Ireland":7.353211515129232e-05,"Israel":7.353211515129232e-05,"Nigeria":7.353211515129232e-05,"Egypt":6.827982121191431e-05,"Indonesia":6.827982121191431e-05,"Somalia":6.302752727253628e-05,"Greece":5.777523333315826e-05,"Kenya":5.2522939393780235e-05,"Lithuania":5.2522939393780235e-05,"Tanzania":5.2522939393780235e-05,"Bermuda":4.727064545440221e-05,"Ghana":3.676605757564616e-05,"Morocco":3.676605757564616e-05,"Philippines":3.676605757564616e-05,"Zambia":3.676605757564616e-05,"Belgium":3.151376363626814e-05,"Mozambique":3.151376363626814e-05,"Turks and Caicos Islands":3.151376363626814e-05,"Uganda":3.151376363626814e-05,"Colombia":2.6261469696890118e-05,"Equatorial Guinea":2.6261469696890118e-05,"Lebanon":2.6261469696890118e-05,"Thailand":2.6261469696890118e-05,"Angola":2.1009175757512092e-05,"Denmark":2.1009175757512092e-05,"Lao PDR":2.1009175757512092e-05,"Latvia":2.1009175757512092e-05,"Luxembourg":2.1009175757512092e-05,"Norway":2.1009175757512092e-05,"Slovenia":2.1009175757512092e-05,"Sweden":2.1009175757512092e-05,"Algeria":1.575688181813407e-05,"Gabon":1.575688181813407e-05,"Jamaica":1.575688181813407e-05,"Senegal":1.575688181813407e-05,"South Africa":1.575688181813407e-05,"Uzbekistan":1.575688181813407e-05,"Vietnam":1.575688181813407e-05,"Albania":1.0504587878756046e-05,"Bahamas":1.0504587878756046e-05,"Cameroon":1.0504587878756046e-05,"Mali":1.0504587878756046e-05,"Palau":1.0504587878756046e-05,"Peru":1.0504587878756046e-05,"Sudan":1.0504587878756046e-05,"Trinidad and Tobago":1.0504587878756046e-05,"Chile":5.252293939378023e-06,"Djibouti":5.252293939378023e-06,"Dominican Republic":5.252293939378023e-06,"Eritrea":5.252293939378023e-06,"Ethiopia":5.252293939378023e-06,"Georgia":5.252293939378023e-06,"Guyana":5.252293939378023e-06,"Malabo":5.252293939378023e-06,"Malawi":5.252293939378023e-06,"Mexico":5.252293939378023e-06,"Mongolia":5.252293939378023e-06,"Rwanda":5.252293939378023e-06,"Sierra Leone":5.252293939378023e-06,"Sint Maarten":5.252293939378023e-06,"Tajikistan":5.252293939378023e-06,"Uruguay":5.252293939378023e-06,"West-Indies":5.252293939378023e-06},"exact":true},"2020/21":{"year":"2020/21","new":72072,"renew":94617,"total":166689,"female":11456,"female_share":0.06872679061005825,"destinations":113,"destinations_new":102,"top":{"1":0.3235514485514486,"2":0.6306055056055055,"3":0.7916805416805416,"4":0.8353313353313352,"5":0.8624431124431123,"6":0.8840326340326339,"8":0.9140026640026638,"10":0.9420163170163168,"15":0.983100233100233,"20":0.9887612387612386},"top6_pct":88.4032634032634,"top1_pct":32.35514485514486,"female_pct":6.872679061005825,"hhi":0.22925309865453056,"cum":[0.323551,0.630606,0.791681,0.835331,0.862443,0.884033,0.899115,0.914003,0.928044,0.942016,0.95492,0.964771,0.972444,0.97873,0.9831,0.984585,0.98582,0.986971,0.987873,0.988761,0.98958,0.990371,0.991106,0.9918,0.992438],"ranked":[{"name":"Saudi Arabia","new":23319,"share":0.3235514485514486},{"name":"Qatar","new":22130,"share":0.30705405705405703},{"name":"UAE","new":11609,"share":0.16107503607503607},{"name":"Bahrain","new":3146,"share":0.04365079365079365},{"name":"Romania","new":1954,"share":0.027111777111777112},{"name":"Oman","new":1556,"share":0.021589521589521588},{"name":"Croatia","new":1087,"share":0.015082140082140082},{"name":"Afghanistan","new":1073,"share":0.014887889887889888},{"name":"Cyprus","new":1012,"share":0.014041514041514042},{"name":"Maldives","new":1007,"share":0.013972138972138972},{"name":"Jordan","new":930,"share":0.012903762903762904},{"name":"Turkey","new":710,"share":0.009851259851259852},{"name":"Japan","new":553,"share":0.007672882672882673},{"name":"Poland","new":453,"share":0.006285381285381285},{"name":"United Kingdom","new":315,"share":0.004370629370629371},{"name":"Malaysia","new":107,"share":0.0014846264846264847},{"name":"USA","new":89,"share":0.001234876234876235},{"name":"Egypt","new":83,"share":0.0011516261516261517},{"name":"Canada","new":65,"share":0.0009018759018759019},{"name":"Malta","new":64,"share":0.000888000888000888}],"new_of":{"Saudi Arabia":23319,"Qatar":22130,"UAE":11609,"Bahrain":3146,"Romania":1954,"Oman":1556,"Croatia":1087,"Afghanistan":1073,"Cyprus":1012,"Maldives":1007,"Jordan":930,"Turkey":710,"Japan":553,"Poland":453,"United Kingdom":315,"Malaysia":107,"USA":89,"Egypt":83,"Canada":65,"Malta":64,"Netherlands":59,"Portugal":57,"Ukraine":53,"Seychelles":50,"Mauritius":46,"Papua New Guinea":40,"Singapore":28,"Comoros":27,"France":26,"Nigeria":26,"China":24,"Ireland":21,"Germany":19,"Albania":18,"Italy":18,"Republic of Congo":18,"Spain":17,"South Korea":16,"Belgium":13,"Sri Lanka":12,"Ghana":11,"Sierra Leone":11,"Kenya":10,"Norway":10,"Czech Republic":9,"Djibouti":9,"Finland":8,"Uganda":8,"Greece":7,"Zambia":7,"Denmark":6,"Dominican Republic":6,"Estonia":6,"Australia":5,"Brunei Darussalam":5,"Iceland":5,"Mozambique":5,"South Africa":5,"Sweden":5,"Cayman":4,"Ethiopia":4,"New Zealand":4,"Somalia":4,"South Sudan":4,"Angola":3,"Cambodia":3,"Hungary":3,"Mali":3,"Sudan":3,"Turks and Caicos Islands":3,"Bulgaria":2,"Central African Republic":2,"Jamaica":2,"Kuwait":2,"Lebanon":2,"Lithuania":2,"Luxembourg":2,"Mexico":2,"Morocco":2,"Panama":2,"Russia":2,"Tajikistan":2,"Tanzania":2,"Thailand":2,"Algeria":1,"Austria":1,"Bangladesh":1,"Bermuda":1,"Brazil":1,"Burkina Faso":1,"Colombia":1,"Equatorial Guinea":1,"Indonesia":1,"Israel":1,"Kazakhstan":1,"Latvia":1,"Philippines":1,"Rwanda":1,"Sint Maarten":1,"Slovenia":1,"Switzerland":1,"Togo":1},"share_of":{"Saudi Arabia":0.3235514485514486,"Qatar":0.30705405705405703,"UAE":0.16107503607503607,"Bahrain":0.04365079365079365,"Romania":0.027111777111777112,"Oman":0.021589521589521588,"Croatia":0.015082140082140082,"Afghanistan":0.014887889887889888,"Cyprus":0.014041514041514042,"Maldives":0.013972138972138972,"Jordan":0.012903762903762904,"Turkey":0.009851259851259852,"Japan":0.007672882672882673,"Poland":0.006285381285381285,"United Kingdom":0.004370629370629371,"Malaysia":0.0014846264846264847,"USA":0.001234876234876235,"Egypt":0.0011516261516261517,"Canada":0.0009018759018759019,"Malta":0.000888000888000888,"Netherlands":0.0008186258186258186,"Portugal":0.0007908757908757909,"Ukraine":0.0007353757353757354,"Seychelles":0.0006937506937506938,"Mauritius":0.0006382506382506383,"Papua New Guinea":0.000555000555000555,"Singapore":0.0003885003885003885,"Comoros":0.0003746253746253746,"France":0.00036075036075036075,"Nigeria":0.00036075036075036075,"China":0.000333000333000333,"Ireland":0.0002913752913752914,"Germany":0.0002636252636252636,"Albania":0.00024975024975024975,"Italy":0.00024975024975024975,"Republic of Congo":0.00024975024975024975,"Spain":0.00023587523587523588,"South Korea":0.000222000222000222,"Belgium":0.00018037518037518038,"Sri Lanka":0.0001665001665001665,"Ghana":0.00015262515262515263,"Sierra Leone":0.00015262515262515263,"Kenya":0.00013875013875013875,"Norway":0.00013875013875013875,"Czech Republic":0.00012487512487512488,"Djibouti":0.00012487512487512488,"Finland":0.000111000111000111,"Uganda":0.000111000111000111,"Greece":9.712509712509713e-05,"Zambia":9.712509712509713e-05,"Denmark":8.325008325008325e-05,"Dominican Republic":8.325008325008325e-05,"Estonia":8.325008325008325e-05,"Australia":6.937506937506938e-05,"Brunei Darussalam":6.937506937506938e-05,"Iceland":6.937506937506938e-05,"Mozambique":6.937506937506938e-05,"South Africa":6.937506937506938e-05,"Sweden":6.937506937506938e-05,"Cayman":5.55000555000555e-05,"Ethiopia":5.55000555000555e-05,"New Zealand":5.55000555000555e-05,"Somalia":5.55000555000555e-05,"South Sudan":5.55000555000555e-05,"Angola":4.1625041625041625e-05,"Cambodia":4.1625041625041625e-05,"Hungary":4.1625041625041625e-05,"Mali":4.1625041625041625e-05,"Sudan":4.1625041625041625e-05,"Turks and Caicos Islands":4.1625041625041625e-05,"Bulgaria":2.775002775002775e-05,"Central African Republic":2.775002775002775e-05,"Jamaica":2.775002775002775e-05,"Kuwait":2.775002775002775e-05,"Lebanon":2.775002775002775e-05,"Lithuania":2.775002775002775e-05,"Luxembourg":2.775002775002775e-05,"Mexico":2.775002775002775e-05,"Morocco":2.775002775002775e-05,"Panama":2.775002775002775e-05,"Russia":2.775002775002775e-05,"Tajikistan":2.775002775002775e-05,"Tanzania":2.775002775002775e-05,"Thailand":2.775002775002775e-05,"Algeria":1.3875013875013875e-05,"Austria":1.3875013875013875e-05,"Bangladesh":1.3875013875013875e-05,"Bermuda":1.3875013875013875e-05,"Brazil":1.3875013875013875e-05,"Burkina Faso":1.3875013875013875e-05,"Colombia":1.3875013875013875e-05,"Equatorial Guinea":1.3875013875013875e-05,"Indonesia":1.3875013875013875e-05,"Israel":1.3875013875013875e-05,"Kazakhstan":1.3875013875013875e-05,"Latvia":1.3875013875013875e-05,"Philippines":1.3875013875013875e-05,"Rwanda":1.3875013875013875e-05,"Sint Maarten":1.3875013875013875e-05,"Slovenia":1.3875013875013875e-05,"Switzerland":1.3875013875013875e-05,"Togo":1.3875013875013875e-05},"exact":true},"2021/22":{"year":"2021/22","new":348866,"renew":281221,"total":630087,"female":49128,"female_share":0.07797018506968086,"destinations":141,"destinations_new":131,"top":{"1":0.35935860760291916,"2":0.5795663664558885,"3":0.7339064282561213,"4":0.8086944557509187,"5":0.8740089317961625,"6":0.8957708690442749,"8":0.9290902524178338,"10":0.9487195656785127,"15":0.9796512127865714,"20":0.988620272540173},"top6_pct":89.57708690442749,"top1_pct":35.93586076029192,"female_pct":7.797018506968086,"hhi":0.21276909382025883,"cum":[0.359359,0.579566,0.733906,0.808694,0.874009,0.895771,0.914168,0.92909,0.939484,0.94872,0.956769,0.964608,0.971711,0.976017,0.979651,0.982308,0.984751,0.986453,0.987743,0.98862,0.989437,0.990182,0.990753,0.991292,0.991813],"ranked":[{"name":"Saudi Arabia","new":125368,"share":0.35935860760291916},{"name":"Qatar","new":76823,"share":0.22020775885296934},{"name":"UAE","new":53844,"share":0.15434006180023274},{"name":"Malaysia","new":26091,"share":0.07478802749479743},{"name":"Kuwait","new":22786,"share":0.06531447604524374},{"name":"Bahrain","new":7592,"share":0.021761937248112456},{"name":"Romania","new":6418,"share":0.01839674832170518},{"name":"Croatia","new":5206,"share":0.014922635051853721},{"name":"Oman","new":3626,"share":0.01039367550864802},{"name":"Cyprus","new":3222,"share":0.009235637752030866},{"name":"United Kingdom","new":2808,"share":0.008048935694507346},{"name":"Maldives","new":2735,"share":0.00783968629789088},{"name":"Japan","new":2478,"share":0.007103013764597295},{"name":"Poland","new":1502,"share":0.004305377996136052},{"name":"Malta","new":1268,"share":0.0036346333549271068},{"name":"Jordan","new":927,"share":0.0026571806940200535},{"name":"Turkey","new":852,"share":0.002442198437222315},{"name":"Seychelles","new":594,"share":0.0017026594738380925},{"name":"USA","new":450,"share":0.0012898935407864337},{"name":"Israel","new":306,"share":0.000877127607734775}],"new_of":{"Saudi Arabia":125368,"Qatar":76823,"UAE":53844,"Malaysia":26091,"Kuwait":22786,"Bahrain":7592,"Romania":6418,"Croatia":5206,"Oman":3626,"Cyprus":3222,"United Kingdom":2808,"Maldives":2735,"Japan":2478,"Poland":1502,"Malta":1268,"Jordan":927,"Turkey":852,"Seychelles":594,"USA":450,"Israel":306,"Brunei Darussalam":285,"Mauritius":260,"Albania":199,"Singapore":188,"Cayman":182,"South Korea":173,"France":162,"Ireland":152,"Ukraine":151,"Austria":145,"Afghanistan":125,"Canada":99,"Italy":99,"Norway":98,"Serbia":96,"Papua New Guinea":91,"Netherlands":85,"Portugal":77,"Belgium":72,"Australia":60,"Greece":60,"Spain":55,"Russia":51,"Germany":49,"Bosnia and Herzegovina":46,"Bulgaria":44,"Republic of Congo":43,"Denmark":42,"Senegal":41,"Sri Lanka":39,"Comoros":38,"Egypt":34,"New Zealand":34,"Nigeria":33,"Brazil":29,"Cambodia":28,"Finland":27,"Dominican Republic":26,"Hungary":25,"Mexico":21,"Togo":20,"Mali":19,"Zambia":18,"Morocco":16,"Czech Republic":15,"Ghana":15,"Mozambique":14,"Slovenia":14,"Turks and Caicos Islands":14,"Kenya":13,"Mauritania":13,"South Africa":13,"Thailand":12,"Sierra Leone":11,"Uganda":11,"Cameroon":9,"Lithuania":9,"North Macedonia":9,"Iceland":8,"Tanzania":8,"Estonia":7,"Jamaica":7,"Barbados":6,"Bermuda":6,"Colombia":6,"Djibouti":6,"Latvia":6,"Sudan":6,"Panama":5,"Slovakia (Republic of Slovak)":5,"South Sudan":5,"Swaziland":5,"Sweden":5,"Peru":4,"Philippines":4,"Bangladesh":3,"British Virgin Islands":3,"Equatorial Guinea":3,"Ethiopia":3,"Kazakhstan":3,"Lebanon":3,"Luxembourg":3,"Pakistan":3,"Azerbaijan":2,"Bahamas":2,"Fiji":2,"Kosovo":2,"Lao PDR":2,"Saint Lucia":2,"Sint Maarten":2,"Somalia":2,"Timor-Leste":2,"Vietnam":2,"Angola":1,"Antigua and Barbuda":1,"Benin":1,"Burkina Faso":1,"Chile":1,"China":1,"Cook Islands":1,"French Polynesia":1,"Gabon":1,"Indonesia":1,"Iran":1,"Madagascar":1,"Malawi":1,"Myanmar":1,"Trinidad and Tobago":1,"Tunisia":1,"Uruguay":1,"Uzbekistan":1},"share_of":{"Saudi Arabia":0.35935860760291916,"Qatar":0.22020775885296934,"UAE":0.15434006180023274,"Malaysia":0.07478802749479743,"Kuwait":0.06531447604524374,"Bahrain":0.021761937248112456,"Romania":0.01839674832170518,"Croatia":0.014922635051853721,"Oman":0.01039367550864802,"Cyprus":0.009235637752030866,"United Kingdom":0.008048935694507346,"Maldives":0.00783968629789088,"Japan":0.007103013764597295,"Poland":0.004305377996136052,"Malta":0.0036346333549271068,"Jordan":0.0026571806940200535,"Turkey":0.002442198437222315,"Seychelles":0.0017026594738380925,"USA":0.0012898935407864337,"Israel":0.000877127607734775,"Brunei Darussalam":0.0008169325758314081,"Mauritius":0.000745271823565495,"Albania":0.0005704195880366674,"Singapore":0.0005388888570396656,"Cayman":0.0005216902764958465,"South Korea":0.0004958924056801179,"France":0.0004643616746831162,"Ireland":0.00043569737377675095,"Ukraine":0.00043283094368611443,"Austria":0.00041563236314229535,"Afghanistan":0.00035830376132956496,"Canada":0.00028377657897301543,"Italy":0.00028377657897301543,"Norway":0.0002809101488823789,"Serbia":0.00027517728870110587,"Papua New Guinea":0.00026084513824792326,"Netherlands":0.00024364655770410415,"Portugal":0.000220715116979012,"Belgium":0.0002063829665258294,"Australia":0.00017198580543819117,"Greece":0.00017198580543819117,"Spain":0.00015765365498500856,"Russia":0.0001461879346224625,"Germany":0.00014045507444118946,"Bosnia and Herzegovina":0.0001318557841692799,"Bulgaria":0.00012612292398800684,"Republic of Congo":0.00012325649389737035,"Denmark":0.00012039006380673381,"Senegal":0.0001175236337160973,"Sri Lanka":0.00011179077353482426,"Comoros":0.00010892434344418774,"Egypt":9.745862308164166e-05,"New Zealand":9.745862308164166e-05,"Nigeria":9.459219299100514e-05,"Brazil":8.312647262845906e-05,"Cambodia":8.026004253782254e-05,"Finland":7.739361244718602e-05,"Dominican Republic":7.452718235654951e-05,"Hungary":7.166075226591299e-05,"Mexico":6.0195031903366907e-05,"Togo":5.732860181273039e-05,"Mali":5.446217172209387e-05,"Zambia":5.159574163145735e-05,"Morocco":4.586288145018431e-05,"Czech Republic":4.299645135954779e-05,"Ghana":4.299645135954779e-05,"Mozambique":4.013002126891127e-05,"Slovenia":4.013002126891127e-05,"Turks and Caicos Islands":4.013002126891127e-05,"Kenya":3.7263591178274756e-05,"Mauritania":3.7263591178274756e-05,"South Africa":3.7263591178274756e-05,"Thailand":3.439716108763823e-05,"Sierra Leone":3.153073099700171e-05,"Uganda":3.153073099700171e-05,"Cameroon":2.5797870815728677e-05,"Lithuania":2.5797870815728677e-05,"North Macedonia":2.5797870815728677e-05,"Iceland":2.2931440725092154e-05,"Tanzania":2.2931440725092154e-05,"Estonia":2.0065010634455636e-05,"Jamaica":2.0065010634455636e-05,"Barbados":1.7198580543819117e-05,"Bermuda":1.7198580543819117e-05,"Colombia":1.7198580543819117e-05,"Djibouti":1.7198580543819117e-05,"Latvia":1.7198580543819117e-05,"Sudan":1.7198580543819117e-05,"Panama":1.4332150453182598e-05,"Slovakia (Republic of Slovak)":1.4332150453182598e-05,"South Sudan":1.4332150453182598e-05,"Swaziland":1.4332150453182598e-05,"Sweden":1.4332150453182598e-05,"Peru":1.1465720362546077e-05,"Philippines":1.1465720362546077e-05,"Bangladesh":8.599290271909558e-06,"British Virgin Islands":8.599290271909558e-06,"Equatorial Guinea":8.599290271909558e-06,"Ethiopia":8.599290271909558e-06,"Kazakhstan":8.599290271909558e-06,"Lebanon":8.599290271909558e-06,"Luxembourg":8.599290271909558e-06,"Pakistan":8.599290271909558e-06,"Azerbaijan":5.732860181273039e-06,"Bahamas":5.732860181273039e-06,"Fiji":5.732860181273039e-06,"Kosovo":5.732860181273039e-06,"Lao PDR":5.732860181273039e-06,"Saint Lucia":5.732860181273039e-06,"Sint Maarten":5.732860181273039e-06,"Somalia":5.732860181273039e-06,"Timor-Leste":5.732860181273039e-06,"Vietnam":5.732860181273039e-06,"Angola":2.8664300906365193e-06,"Antigua and Barbuda":2.8664300906365193e-06,"Benin":2.8664300906365193e-06,"Burkina Faso":2.8664300906365193e-06,"Chile":2.8664300906365193e-06,"China":2.8664300906365193e-06,"Cook Islands":2.8664300906365193e-06,"French Polynesia":2.8664300906365193e-06,"Gabon":2.8664300906365193e-06,"Indonesia":2.8664300906365193e-06,"Iran":2.8664300906365193e-06,"Madagascar":2.8664300906365193e-06,"Malawi":2.8664300906365193e-06,"Myanmar":2.8664300906365193e-06,"Trinidad and Tobago":2.8664300906365193e-06,"Tunisia":2.8664300906365193e-06,"Uruguay":2.8664300906365193e-06,"Uzbekistan":2.8664300906365193e-06},"exact":true},"2022/23":{"year":"2022/23","new":494216,"renew":277101,"total":771317,"female":72133,"female_share":0.09351926639760307,"destinations":139,"destinations_new":132,"top":{"1":0.44384236851902814,"2":0.5635309257490653,"3":0.6764167894200108,"4":0.7583971380934653,"5":0.8219482979102256,"6":0.8662002039594024,"8":0.9073218997361479,"10":0.9304737199928776,"15":0.9706403677744146,"20":0.9819471648024348},"top6_pct":86.62002039594024,"top1_pct":44.38423685190281,"female_pct":9.351926639760306,"hhi":0.23834675174194878,"cum":[0.443842,0.563531,0.676417,0.758397,0.821948,0.8662,0.892782,0.907322,0.919137,0.930474,0.940419,0.949069,0.957148,0.965145,0.97064,0.975189,0.977136,0.97888,0.98047,0.981947,0.983242,0.984499,0.985719,0.98684,0.98789],"ranked":[{"name":"Malaysia","new":219354,"share":0.44384236851902814},{"name":"UAE","new":59152,"share":0.11968855723003707},{"name":"Saudi Arabia","new":55790,"share":0.1128858636709455},{"name":"Qatar","new":40516,"share":0.08198034867345452},{"name":"Kuwait","new":31408,"share":0.06355115981676028},{"name":"South Korea","new":21870,"share":0.04425190604917688},{"name":"Romania","new":13137,"share":0.02658149473104877},{"name":"Croatia","new":7186,"share":0.01454020104569662},{"name":"Japan","new":5839,"share":0.011814672127167069},{"name":"Malta","new":5603,"share":0.011337148129562782},{"name":"Poland","new":4915,"share":0.009945044272140116},{"name":"Cyprus","new":4275,"share":0.008650063939653917},{"name":"Maldives","new":3993,"share":0.008079463230652185},{"name":"Bahrain","new":3952,"share":0.007996503553102286},{"name":"Oman","new":2716,"share":0.005495572785988312},{"name":"United Kingdom","new":2248,"share":0.004548618417857779},{"name":"Serbia","new":962,"share":0.00194651731226832},{"name":"Brunei Darussalam","new":862,"share":0.001744176635317351},{"name":"Israel","new":786,"share":0.0015903977208346148},{"name":"Portugal","new":730,"share":0.0014770869417420722}],"new_of":{"Malaysia":219354,"UAE":59152,"Saudi Arabia":55790,"Qatar":40516,"Kuwait":31408,"South Korea":21870,"Romania":13137,"Croatia":7186,"Japan":5839,"Malta":5603,"Poland":4915,"Cyprus":4275,"Maldives":3993,"Bahrain":3952,"Oman":2716,"United Kingdom":2248,"Serbia":962,"Brunei Darussalam":862,"Israel":786,"Portugal":730,"Canada":640,"Jordan":621,"Macau SAR, China":603,"New Zealand":554,"Mauritius":519,"Australia":456,"Albania":435,"Cayman":425,"USA":379,"Austria":350,"Seychelles":304,"Russia":292,"Singapore":220,"Uzbekistan":216,"Papua New Guinea":210,"Mexico":199,"Slovenia":183,"Hungary":176,"Bulgaria":152,"France":133,"Bosnia and Herzegovina":117,"Turkey":115,"Norway":99,"Ireland":90,"Finland":87,"Lithuania":81,"China":74,"Italy":74,"Spain":69,"Hong Kong SAR, China":59,"Cambodia":57,"Germany":51,"Egypt":46,"Belgium":44,"Czech Republic":44,"Republic of Congo":42,"Greece":38,"Nigeria":38,"Sri Lanka":35,"Turks and Caicos Islands":35,"Comoros":30,"Belarus":29,"Netherlands":29,"Thailand":29,"Brazil":26,"Sweden":23,"Dominican Republic":21,"Colombia":17,"Denmark":17,"Palau":16,"Chile":15,"Republic of Kosovo":14,"Sierra Leone":14,"Slovakia":14,"Zambia":14,"Latvia":13,"Kenya":12,"Lao PDR":12,"South Sudan":12,"Tanzania":12,"Uganda":12,"Bermuda":9,"Mozambique":9,"Barbados":8,"Mali":8,"Ethiopia":7,"Lebanon":7,"North Macedonia":7,"Fiji":6,"Iceland":6,"Kosovo":6,"Luxembourg":6,"Morocco":6,"South Africa":6,"Ghana":5,"Mauritania":5,"Vietnam":5,"Azerbaijan":4,"Cote d'Ivoire":4,"Estonia":4,"Indonesia":4,"Jamaica":4,"Algeria":3,"Angola":3,"Cook Islands":3,"Djibouti":3,"Philippines":3,"Timor-Leste":3,"Trinidad and Tobago":3,"Bangladesh":2,"British Virgin Islands":2,"Cameroon":2,"Equatorial Guinea":2,"Mongolia":2,"Peru":2,"Rwanda":2,"Senegal":2,"Somalia":2,"Antigua and Barbuda":1,"Benin":1,"Burkina Faso":1,"Central African Republic":1,"Madagascar":1,"Malawi":1,"Pakistan":1,"Panama":1,"Saint Lucia":1,"Switzerland":1,"Taiwan":1,"Uruguay":1,"Vanuatu":1,"West-Indies":1},"share_of":{"Malaysia":0.44384236851902814,"UAE":0.11968855723003707,"Saudi Arabia":0.1128858636709455,"Qatar":0.08198034867345452,"Kuwait":0.06355115981676028,"South Korea":0.04425190604917688,"Romania":0.02658149473104877,"Croatia":0.01454020104569662,"Japan":0.011814672127167069,"Malta":0.011337148129562782,"Poland":0.009945044272140116,"Cyprus":0.008650063939653917,"Maldives":0.008079463230652185,"Bahrain":0.007996503553102286,"Oman":0.005495572785988312,"United Kingdom":0.004548618417857779,"Serbia":0.00194651731226832,"Brunei Darussalam":0.001744176635317351,"Israel":0.0015903977208346148,"Portugal":0.0014770869417420722,"Canada":0.0012949803324862003,"Jordan":0.0012565356038655162,"Macau SAR, China":0.001220114282014342,"New Zealand":0.0011209673503083672,"Mauritius":0.001050148113375528,"Australia":0.0009226734868964178,"Albania":0.0008801819447367143,"Cayman":0.0008599478770416174,"USA":0.0007668711656441718,"Austria":0.0007081923693283909,"Seychelles":0.0006151156579309451,"Russia":0.000590834776696829,"Singapore":0.0004451494892921314,"Uzbekistan":0.0004370558622140926,"Papua New Guinea":0.0004249154215970345,"Mexico":0.00040265794713242794,"Slovenia":0.00037028343882027293,"Hungary":0.0003561195914337051,"Bulgaria":0.00030755782896547257,"France":0.0002691131003447885,"Bosnia and Herzegovina":0.0002367385920326335,"Turkey":0.00023269177849361412,"Norway":0.00020031727018145911,"Ireland":0.00018210660925587193,"Finland":0.00017603638894734286,"Lithuania":0.00016389594833028474,"China":0.00014973210094371692,"Italy":0.00014973210094371692,"Spain":0.0001396150670961685,"Hong Kong SAR, China":0.0001193809994010716,"Cambodia":0.00011533418586205222,"Germany":0.00010319374524499409,"Egypt":9.307671139744565e-05,"Belgium":8.902989785842627e-05,"Czech Republic":8.902989785842627e-05,"Republic of Congo":8.49830843194069e-05,"Greece":7.688945724136814e-05,"Nigeria":7.688945724136814e-05,"Sri Lanka":7.081923693283909e-05,"Turks and Caicos Islands":7.081923693283909e-05,"Comoros":6.0702203085290646e-05,"Belarus":5.867879631578095e-05,"Netherlands":5.867879631578095e-05,"Thailand":5.867879631578095e-05,"Brazil":5.260857600725189e-05,"Sweden":4.653835569872282e-05,"Dominican Republic":4.249154215970345e-05,"Colombia":3.4397915081664695e-05,"Denmark":3.4397915081664695e-05,"Palau":3.237450831215501e-05,"Chile":3.0351101542645323e-05,"Republic of Kosovo":2.832769477313563e-05,"Sierra Leone":2.832769477313563e-05,"Slovakia":2.832769477313563e-05,"Zambia":2.832769477313563e-05,"Latvia":2.6304288003625943e-05,"Kenya":2.4280881234116255e-05,"Lao PDR":2.4280881234116255e-05,"South Sudan":2.4280881234116255e-05,"Tanzania":2.4280881234116255e-05,"Uganda":2.4280881234116255e-05,"Bermuda":1.821066092558719e-05,"Mozambique":1.821066092558719e-05,"Barbados":1.6187254156077504e-05,"Mali":1.6187254156077504e-05,"Ethiopia":1.4163847386567816e-05,"Lebanon":1.4163847386567816e-05,"North Macedonia":1.4163847386567816e-05,"Fiji":1.2140440617058128e-05,"Iceland":1.2140440617058128e-05,"Kosovo":1.2140440617058128e-05,"Luxembourg":1.2140440617058128e-05,"Morocco":1.2140440617058128e-05,"South Africa":1.2140440617058128e-05,"Ghana":1.011703384754844e-05,"Mauritania":1.011703384754844e-05,"Vietnam":1.011703384754844e-05,"Azerbaijan":8.093627078038752e-06,"Cote d'Ivoire":8.093627078038752e-06,"Estonia":8.093627078038752e-06,"Indonesia":8.093627078038752e-06,"Jamaica":8.093627078038752e-06,"Algeria":6.070220308529064e-06,"Angola":6.070220308529064e-06,"Cook Islands":6.070220308529064e-06,"Djibouti":6.070220308529064e-06,"Philippines":6.070220308529064e-06,"Timor-Leste":6.070220308529064e-06,"Trinidad and Tobago":6.070220308529064e-06,"Bangladesh":4.046813539019376e-06,"British Virgin Islands":4.046813539019376e-06,"Cameroon":4.046813539019376e-06,"Equatorial Guinea":4.046813539019376e-06,"Mongolia":4.046813539019376e-06,"Peru":4.046813539019376e-06,"Rwanda":4.046813539019376e-06,"Senegal":4.046813539019376e-06,"Somalia":4.046813539019376e-06,"Antigua and Barbuda":2.023406769509688e-06,"Benin":2.023406769509688e-06,"Burkina Faso":2.023406769509688e-06,"Central African Republic":2.023406769509688e-06,"Madagascar":2.023406769509688e-06,"Malawi":2.023406769509688e-06,"Pakistan":2.023406769509688e-06,"Panama":2.023406769509688e-06,"Saint Lucia":2.023406769509688e-06,"Switzerland":2.023406769509688e-06,"Taiwan":2.023406769509688e-06,"Uruguay":2.023406769509688e-06,"Vanuatu":2.023406769509688e-06,"West-Indies":2.023406769509688e-06},"exact":true},"2023/24":{"year":"2023/24","new":460097,"renew":281195,"total":741292,"female":80170,"female_share":0.10814901550266291,"destinations":144,"destinations_new":133,"top":{"1":0.28477907919416995,"2":0.46165917187027955,"3":0.6205256717605201,"4":0.7094895206880288,"5":0.7720328539416689,"6":0.8029828492687412,"8":0.858486362658309,"10":0.8973846819257678,"15":0.9510146773397783,"20":0.972066759835426},"top6_pct":80.29828492687412,"top1_pct":28.477907919416996,"female_pct":10.814901550266292,"hhi":0.15344856273848625,"cum":[0.284779,0.461659,0.620526,0.70949,0.772033,0.802983,0.830883,0.858486,0.881308,0.897385,0.910334,0.923223,0.934342,0.944701,0.951015,0.956381,0.960676,0.964838,0.968483,0.972067,0.974268,0.975816,0.977231,0.978583,0.979891],"ranked":[{"name":"UAE","new":131026,"share":0.28477907919416995},{"name":"Malaysia","new":81382,"share":0.1768800926761096},{"name":"Saudi Arabia","new":73094,"share":0.15886649989024054},{"name":"Qatar","new":40932,"share":0.08896384892750876},{"name":"Kuwait","new":28776,"share":0.06254333325363999},{"name":"Croatia","new":14240,"share":0.030949995327072335},{"name":"South Korea","new":12837,"share":0.02790063834365362},{"name":"Romania","new":12700,"share":0.02760287504591423},{"name":"Japan","new":10500,"share":0.022821274644259797},{"name":"Mauritius","new":7397,"share":0.016077044623199022},{"name":"Maldives","new":5958,"share":0.012949443269571417},{"name":"Cyprus","new":5930,"share":0.012888586537186724},{"name":"Bahrain","new":5116,"share":0.011119394388574583},{"name":"Malta","new":4766,"share":0.010358685233765923},{"name":"Oman","new":2905,"share":0.006313885984911877},{"name":"United Kingdom","new":2469,"share":0.005366259723493089},{"name":"Jordan","new":1976,"share":0.004294746542576892},{"name":"Serbia","new":1915,"share":0.004162165804167382},{"name":"Bulgaria","new":1677,"share":0.0036448835788974935},{"name":"Poland","new":1649,"share":0.0035840268465128005}],"new_of":{"UAE":131026,"Malaysia":81382,"Saudi Arabia":73094,"Qatar":40932,"Kuwait":28776,"Croatia":14240,"South Korea":12837,"Romania":12700,"Japan":10500,"Mauritius":7397,"Maldives":5958,"Cyprus":5930,"Bahrain":5116,"Malta":4766,"Oman":2905,"United Kingdom":2469,"Jordan":1976,"Serbia":1915,"Bulgaria":1677,"Poland":1649,"Macau SAR, China":1013,"Austria":712,"Canada":651,"Portugal":622,"Cayman":602,"Brunei Darussalam":484,"New Zealand":470,"North Macedonia":468,"Russia":427,"Seychelles":401,"USA":399,"Slovakia (Republic of Slovak)":389,"Hungary":383,"Australia":375,"Bosnia and Herzegovina":375,"Israel":333,"Slovenia":332,"Albania":304,"Turkey":275,"Greece":211,"Azerbaijan":207,"Singapore":207,"Uzbekistan":190,"Belarus":183,"Ireland":182,"China":165,"Mongolia":164,"Papua New Guinea":163,"Egypt":156,"Lithuania":151,"France":119,"Hong Kong SAR, China":118,"Finland":116,"Dominican Republic":109,"Germany":107,"Spain":97,"Sri Lanka":91,"Italy":79,"Czech Republic":78,"Denmark":76,"Cambodia":70,"Netherlands":65,"Norway":46,"Sweden":43,"Belgium":37,"Comoros":37,"Republic of Congo":35,"Thailand":34,"Afghanistan":28,"Nigeria":28,"Mexico":24,"Chile":21,"Sierra Leone":21,"Tanzania":20,"Turks and Caicos Islands":20,"Republic of Kosovo":17,"Moldova":16,"Kosovo":14,"Lebanon":14,"Palau":14,"South Africa":14,"Zambia":14,"Kenya":13,"Brazil":12,"Indonesia":11,"Lao PDR":11,"Latvia":11,"Djibouti":10,"Iceland":10,"Luxembourg":10,"Estonia":9,"Morocco":9,"Somalia":9,"Barbados":8,"Philippines":8,"Angola":6,"Bangladesh":6,"Ghana":6,"Madagascar":6,"Jamaica":5,"Mozambique":5,"Uganda":5,"Cote d'Ivoire":4,"Mali":4,"Saint Lucia":4,"South Sudan":4,"Timor-Leste":4,"Togo":4,"Uruguay":4,"Vietnam":4,"Bahamas":3,"Trinidad and Tobago":3,"Antigua and Barbuda":2,"Bermuda":2,"Central African Republic":2,"Myanmar":2,"Panama":2,"Switzerland":2,"Taiwan":2,"British Virgin Islands":1,"Burkina Faso":1,"Cameroon":1,"Cook Islands":1,"Equatorial Guinea":1,"Eritrea":1,"Ethiopia":1,"Gabon":1,"Guyana":1,"Rwanda":1,"Sint Maarten":1,"Tunisia":1,"Vanuatu":1,"West-Indies":1},"share_of":{"UAE":0.28477907919416995,"Malaysia":0.1768800926761096,"Saudi Arabia":0.15886649989024054,"Qatar":0.08896384892750876,"Kuwait":0.06254333325363999,"Croatia":0.030949995327072335,"South Korea":0.02790063834365362,"Romania":0.02760287504591423,"Japan":0.022821274644259797,"Mauritius":0.016077044623199022,"Maldives":0.012949443269571417,"Cyprus":0.012888586537186724,"Bahrain":0.011119394388574583,"Malta":0.010358685233765923,"Oman":0.006313885984911877,"United Kingdom":0.005366259723493089,"Jordan":0.004294746542576892,"Serbia":0.004162165804167382,"Bulgaria":0.0036448835788974935,"Poland":0.0035840268465128005,"Macau SAR, China":0.002201709639489064,"Austria":0.0015474997663536168,"Canada":0.0014149190279441075,"Portugal":0.0013518888408313898,"Cayman":0.001308419746270895,"Brunei Darussalam":0.0010519520883639755,"New Zealand":0.001021523722171629,"North Macedonia":0.0010171768127155796,"Russia":0.0009280651688665651,"Seychelles":0.0008715553459379217,"USA":0.0008672084364818723,"Slovakia (Republic of Slovak)":0.0008454738892016249,"Hungary":0.0008324331608334765,"Australia":0.0008150455230092785,"Bosnia and Herzegovina":0.0008150455230092785,"Israel":0.0007237604244322393,"Slovenia":0.0007215869697042146,"Albania":0.0006607302373195218,"Turkey":0.0005977000502068043,"Greece":0.0004585989476132207,"Azerbaijan":0.0004499051287011217,"Singapore":0.0004499051287011217,"Uzbekistan":0.0004129563983247011,"Belarus":0.0003977422152285279,"Ireland":0.0003955687605005032,"China":0.0003586200301240825,"Mongolia":0.0003564465753960578,"Papua New Guinea":0.000354273120668033,"Egypt":0.0003390589375718598,"Lithuania":0.0003281916639317361,"France":0.0002586411126349444,"Hong Kong SAR, China":0.0002564676579069196,"Finland":0.0002521207484508701,"Dominican Republic":0.00023690656535469695,"Germany":0.00023255965589864745,"Spain":0.00021082510861840004,"Sri Lanka":0.0001977843802502516,"Italy":0.00017170292351395466,"Czech Republic":0.0001695294687859299,"Denmark":0.00016518255932988044,"Cambodia":0.000152141830961732,"Netherlands":0.00014127455732160826,"Norway":9.997891748913815e-05,"Sweden":9.345855330506393e-05,"Belgium":8.041782493691548e-05,"Comoros":8.041782493691548e-05,"Republic of Congo":7.6070915480866e-05,"Thailand":7.389746075284125e-05,"Afghanistan":6.085673238469279e-05,"Nigeria":6.085673238469279e-05,"Mexico":5.2162913472593824e-05,"Chile":4.56425492885196e-05,"Sierra Leone":4.56425492885196e-05,"Tanzania":4.346909456049485e-05,"Turks and Caicos Islands":4.346909456049485e-05,"Republic of Kosovo":3.6948730376420625e-05,"Moldova":3.4775275648395885e-05,"Kosovo":3.0428366192346395e-05,"Lebanon":3.0428366192346395e-05,"Palau":3.0428366192346395e-05,"South Africa":3.0428366192346395e-05,"Zambia":3.0428366192346395e-05,"Kenya":2.8254911464321655e-05,"Brazil":2.6081456736296912e-05,"Indonesia":2.390800200827217e-05,"Lao PDR":2.390800200827217e-05,"Latvia":2.390800200827217e-05,"Djibouti":2.1734547280247426e-05,"Iceland":2.1734547280247426e-05,"Luxembourg":2.1734547280247426e-05,"Estonia":1.9561092552222682e-05,"Morocco":1.9561092552222682e-05,"Somalia":1.9561092552222682e-05,"Barbados":1.7387637824197942e-05,"Philippines":1.7387637824197942e-05,"Angola":1.3040728368148456e-05,"Bangladesh":1.3040728368148456e-05,"Ghana":1.3040728368148456e-05,"Madagascar":1.3040728368148456e-05,"Jamaica":1.0867273640123713e-05,"Mozambique":1.0867273640123713e-05,"Uganda":1.0867273640123713e-05,"Cote d'Ivoire":8.693818912098971e-06,"Mali":8.693818912098971e-06,"Saint Lucia":8.693818912098971e-06,"South Sudan":8.693818912098971e-06,"Timor-Leste":8.693818912098971e-06,"Togo":8.693818912098971e-06,"Uruguay":8.693818912098971e-06,"Vietnam":8.693818912098971e-06,"Bahamas":6.520364184074228e-06,"Trinidad and Tobago":6.520364184074228e-06,"Antigua and Barbuda":4.346909456049486e-06,"Bermuda":4.346909456049486e-06,"Central African Republic":4.346909456049486e-06,"Myanmar":4.346909456049486e-06,"Panama":4.346909456049486e-06,"Switzerland":4.346909456049486e-06,"Taiwan":4.346909456049486e-06,"British Virgin Islands":2.173454728024743e-06,"Burkina Faso":2.173454728024743e-06,"Cameroon":2.173454728024743e-06,"Cook Islands":2.173454728024743e-06,"Equatorial Guinea":2.173454728024743e-06,"Eritrea":2.173454728024743e-06,"Ethiopia":2.173454728024743e-06,"Gabon":2.173454728024743e-06,"Guyana":2.173454728024743e-06,"Rwanda":2.173454728024743e-06,"Sint Maarten":2.173454728024743e-06,"Tunisia":2.173454728024743e-06,"Vanuatu":2.173454728024743e-06,"West-Indies":2.173454728024743e-06},"exact":true}},"bound":{"2017/18":{"year":"2017/18","new":354082,"top":{"1":0.29430753328325077,"2":0.5857061358668331,"3":0.7558475155472462,"4":0.8715325828480408,"5":0.9211114939477296,"6":0.9348427765319898,"8":0.9537084630113929,"10":0.9632062629560384,"15":0.9681401483272236},"named":15,"sixth":"Bahrain","sixth_new":4862,"others":11281,"ranked":[{"name":"Malaysia","new":104209,"share":0.29430753328325077},{"name":"Qatar","new":103179,"share":0.29139860258358236},{"name":"UAE","new":60244,"share":0.170141379680413},{"name":"Saudi Arabia","new":40962,"share":0.11568506730079472},{"name":"Kuwait","new":17555,"share":0.049578911099688774},{"name":"Bahrain","new":4862,"share":0.013731282584260143},{"name":"Poland","new":3621,"share":0.010226444721844093},{"name":"Oman","new":3059,"share":0.008639241757558983},{"name":"Maldives","new":1789,"share":0.005052501962822171},{"name":"Cyprus","new":1574,"share":0.004445297981823419}],"exact":false},"2018/19":{"year":"2018/19","new":236211,"top":{"1":0.317614336334887,"2":0.5833767267400756,"3":0.7784565494409659,"4":0.8461714314744021,"5":0.8885022289393805,"6":0.9081160487868897,"8":0.9279965793294978,"10":0.9425894645041932,"15":0.9566108267608198},"named":15,"sixth":"Bahrain","sixth_new":4633,"others":10249,"ranked":[{"name":"Qatar","new":75024,"share":0.317614336334887},{"name":"UAE","new":62776,"share":0.26576239040518856},{"name":"Saudi Arabia","new":46080,"share":0.1950798227008903},{"name":"Kuwait","new":15995,"share":0.0677148820334362},{"name":"Malaysia","new":9999,"share":0.042330797464978344},{"name":"Bahrain","new":4633,"share":0.01961381984750922},{"name":"Oman","new":2722,"share":0.011523595429510057},{"name":"Maldives","new":1974,"share":0.008356935113098036},{"name":"Cyprus","new":1730,"share":0.007323960357477001},{"name":"Malta","new":1717,"share":0.007268924817218504}],"exact":false}},"destinations":[{"name":"Malaysia","years":5,"state":true,"by_year":{"2019/20":[39159,20546,1123],"2020/21":[107,1028,16],"2021/22":[26091,10553,1464],"2022/23":[219354,40237,7299],"2023/24":[81382,22060,2442]},"new_total":366093},{"name":"Saudi Arabia","years":5,"state":true,"by_year":{"2019/20":[39260,43878,623],"2020/21":[23319,23633,208],"2021/22":[125368,63323,726],"2022/23":[55790,56986,933],"2023/24":[73094,68407,836]},"new_total":316831},{"name":"UAE","years":5,"state":true,"by_year":{"2019/20":[52057,41338,12440],"2020/21":[11609,28866,5076],"2021/22":[53844,68791,21139],"2022/23":[59152,57007,24091],"2023/24":[131026,62412,27434]},"new_total":307688},{"name":"Qatar","years":5,"state":true,"by_year":{"2019/20":[29836,51742,3563],"2020/21":[22130,32787,1443],"2021/22":[76823,108103,7138],"2022/23":[40516,92744,6699],"2023/24":[40932,93737,10815]},"new_total":210237},{"name":"Kuwait","years":5,"state":true,"by_year":{"2019/20":[8971,7886,2247],"2020/21":[2,1012,168],"2021/22":[22786,12755,5365],"2022/23":[31408,12097,11815],"2023/24":[28776,11592,10075]},"new_total":91943},{"name":"Romania","years":5,"state":true,"by_year":{"2019/20":[1930,98,207],"2020/21":[1954,193,226],"2021/22":[6418,1057,901],"2022/23":[13137,1088,1773],"2023/24":[12700,2321,2179]},"new_total":36139},{"name":"South Korea","years":5,"state":true,"by_year":{"2019/20":[50,79,0],"2020/21":[16,18,1],"2021/22":[173,108,1],"2022/23":[21870,163,1622],"2023/24":[12837,189,1009]},"new_total":34946},{"name":"Croatia","years":5,"state":true,"by_year":{"2019/20":[645,1,66],"2020/21":[1087,7,138],"2021/22":[5206,138,1103],"2022/23":[7186,255,1529],"2023/24":[14240,1124,3567]},"new_total":28364},{"name":"Bahrain","years":5,"state":true,"by_year":{"2019/20":[3304,2884,663],"2020/21":[3146,1794,309],"2021/22":[7592,4470,1007],"2022/23":[3952,3738,1176],"2023/24":[5116,4690,1152]},"new_total":23110},{"name":"Japan","years":5,"state":true,"by_year":{"2019/20":[939,2789,181],"2020/21":[553,1526,116],"2021/22":[2478,3178,653],"2022/23":[5839,3805,1458],"2023/24":[10500,3364,2896]},"new_total":20309},{"name":"Cyprus","years":5,"state":true,"by_year":{"2019/20":[1458,548,1799],"2020/21":[1012,243,1132],"2021/22":[3222,959,3653],"2022/23":[4275,1042,4346],"2023/24":[5930,1020,5102]},"new_total":15897},{"name":"Maldives","years":5,"state":true,"by_year":{"2019/20":[886,649,432],"2020/21":[1007,621,539],"2021/22":[2735,1121,1165],"2022/23":[3993,871,1529],"2023/24":[5958,1497,2908]},"new_total":14579},{"name":"Malta","years":5,"state":true,"by_year":{"2019/20":[1668,182,613],"2020/21":[64,251,87],"2021/22":[1268,647,513],"2022/23":[5603,700,1735],"2023/24":[4766,902,1345]},"new_total":13369},{"name":"Oman","years":5,"state":true,"by_year":{"2019/20":[1996,2143,472],"2020/21":[1556,1577,267],"2021/22":[3626,3223,885],"2022/23":[2716,2578,1339],"2023/24":[2905,3005,1303]},"new_total":12799},{"name":"Poland","years":5,"state":true,"by_year":{"2019/20":[184,264,71],"2020/21":[453,252,72],"2021/22":[1502,353,249],"2022/23":[4915,197,714],"2023/24":[1649,320,302]},"new_total":8703},{"name":"Mauritius","years":5,"state":true,"by_year":{"2019/20":[74,7,0],"2020/21":[46,1,0],"2021/22":[260,10,0],"2022/23":[519,17,15],"2023/24":[7397,11,91]},"new_total":8296},{"name":"United Kingdom","years":5,"state":true,"by_year":{"2019/20":[38,0,13],"2020/21":[315,2,108],"2021/22":[2808,6,547],"2022/23":[2248,16,669],"2023/24":[2469,75,1000]},"new_total":7878},{"name":"Jordan","years":5,"state":true,"by_year":{"2019/20":[2374,253,2457],"2020/21":[930,49,939],"2021/22":[927,252,933],"2022/23":[621,398,858],"2023/24":[1976,227,2041]},"new_total":6828},{"name":"Serbia","years":3,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[96,0,39],"2022/23":[962,0,233],"2023/24":[1915,5,493]},"new_total":2973},{"name":"Turkey","years":5,"state":true,"by_year":{"2019/20":[1000,55,576],"2020/21":[710,65,461],"2021/22":[852,143,408],"2022/23":[115,143,92],"2023/24":[275,226,156]},"new_total":2952},{"name":"Macau SAR, China","years":5,"state":false,"by_year":{"2019/20":[572,965,54],"2020/21":[0,23,0],"2021/22":[0,2,0],"2022/23":[603,961,72],"2023/24":[1013,1026,116]},"new_total":2188},{"name":"Afghanistan","years":4,"state":true,"by_year":{"2019/20":[924,0,1],"2020/21":[1073,0,3],"2021/22":[125,0,0],"2022/23":null,"2023/24":[28,417,0]},"new_total":2150},{"name":"Portugal","years":5,"state":true,"by_year":{"2019/20":[627,0,54],"2020/21":[57,1,0],"2021/22":[77,2,11],"2022/23":[730,2,64],"2023/24":[622,5,66]},"new_total":2113},{"name":"Bulgaria","years":4,"state":true,"by_year":{"2019/20":null,"2020/21":[2,0,0],"2021/22":[44,0,3],"2022/23":[152,0,31],"2023/24":[1677,2,309]},"new_total":1875},{"name":"Brunei Darussalam","years":5,"state":true,"by_year":{"2019/20":[121,310,23],"2020/21":[5,35,1],"2021/22":[285,313,32],"2022/23":[862,493,127],"2023/24":[484,278,107]},"new_total":1757},{"name":"Seychelles","years":5,"state":true,"by_year":{"2019/20":[273,221,36],"2020/21":[50,82,8],"2021/22":[594,425,204],"2022/23":[304,241,59],"2023/24":[401,385,82]},"new_total":1622},{"name":"USA","years":5,"state":true,"by_year":{"2019/20":[283,29,65],"2020/21":[89,9,19],"2021/22":[450,47,95],"2022/23":[379,20,75],"2023/24":[399,59,91]},"new_total":1600},{"name":"Canada","years":5,"state":true,"by_year":{"2019/20":[61,3,12],"2020/21":[65,2,11],"2021/22":[99,4,45],"2022/23":[640,6,121],"2023/24":[651,7,167]},"new_total":1516},{"name":"Israel","years":5,"state":true,"by_year":{"2019/20":[14,328,241],"2020/21":[1,26,22],"2021/22":[306,292,415],"2022/23":[786,298,785],"2023/24":[333,672,701]},"new_total":1440},{"name":"Cayman","years":5,"state":false,"by_year":{"2019/20":[53,55,24],"2020/21":[4,11,3],"2021/22":[182,46,45],"2022/23":[425,92,91],"2023/24":[602,91,159]},"new_total":1266},{"name":"Austria","years":4,"state":true,"by_year":{"2019/20":null,"2020/21":[1,0,0],"2021/22":[145,0,25],"2022/23":[350,4,96],"2023/24":[712,80,297]},"new_total":1208},{"name":"New Zealand","years":5,"state":true,"by_year":{"2019/20":[128,71,31],"2020/21":[4,3,1],"2021/22":[34,42,9],"2022/23":[554,42,89],"2023/24":[470,13,90]},"new_total":1190},{"name":"Albania","years":5,"state":true,"by_year":{"2019/20":[2,0,0],"2020/21":[18,1,4],"2021/22":[199,2,100],"2022/23":[435,0,201],"2023/24":[304,7,82]},"new_total":958},{"name":"Australia","years":5,"state":true,"by_year":{"2019/20":[57,12,5],"2020/21":[5,0,1],"2021/22":[60,17,5],"2022/23":[456,25,32],"2023/24":[375,11,39]},"new_total":953},{"name":"Russia","years":5,"state":true,"by_year":{"2019/20":[51,55,3],"2020/21":[2,7,0],"2021/22":[51,31,2],"2022/23":[292,94,16],"2023/24":[427,49,5]},"new_total":823},{"name":"Singapore","years":5,"state":true,"by_year":{"2019/20":[85,0,3],"2020/21":[28,0,0],"2021/22":[188,1,9],"2022/23":[220,0,7],"2023/24":[207,3,18]},"new_total":728},{"name":"Hungary","years":5,"state":true,"by_year":{"2019/20":[32,0,1],"2020/21":[3,0,1],"2021/22":[25,3,1],"2022/23":[176,3,31],"2023/24":[383,5,25]},"new_total":619},{"name":"Papua New Guinea","years":5,"state":true,"by_year":{"2019/20":[46,30,7],"2020/21":[40,8,0],"2021/22":[91,57,6],"2022/23":[210,60,17],"2023/24":[163,103,16]},"new_total":550},{"name":"Bosnia and Herzegovina","years":3,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[46,0,0],"2022/23":[117,0,12],"2023/24":[375,3,39]},"new_total":538},{"name":"Slovenia","years":5,"state":true,"by_year":{"2019/20":[4,1,0],"2020/21":[1,3,0],"2021/22":[14,0,1],"2022/23":[183,2,25],"2023/24":[332,1,47]},"new_total":534},{"name":"France","years":5,"state":true,"by_year":{"2019/20":[56,1,3],"2020/21":[26,1,4],"2021/22":[162,2,15],"2022/23":[133,1,5],"2023/24":[119,6,11]},"new_total":496},{"name":"North Macedonia","years":4,"state":true,"by_year":{"2019/20":null,"2020/21":[0,1,0],"2021/22":[9,1,3],"2022/23":[7,0,5],"2023/24":[468,1,129]},"new_total":484},{"name":"Ireland","years":5,"state":true,"by_year":{"2019/20":[14,6,2],"2020/21":[21,2,2],"2021/22":[152,7,9],"2022/23":[90,2,9],"2023/24":[182,11,13]},"new_total":459},{"name":"Slovakia (Republic of Slovak)","years":3,"state":true,"by_year":{"2019/20":[22,0,3],"2020/21":null,"2021/22":[5,1,0],"2022/23":null,"2023/24":[389,1,11]},"new_total":416},{"name":"China","years":5,"state":true,"by_year":{"2019/20":[150,40,17],"2020/21":[24,40,1],"2021/22":[1,4,1],"2022/23":[74,66,8],"2023/24":[165,76,38]},"new_total":414},{"name":"Uzbekistan","years":4,"state":true,"by_year":{"2019/20":[3,0,0],"2020/21":null,"2021/22":[1,3,0],"2022/23":[216,0,0],"2023/24":[190,0,0]},"new_total":410},{"name":"Azerbaijan","years":4,"state":true,"by_year":{"2019/20":[181,4,167],"2020/21":null,"2021/22":[2,5,4],"2022/23":[4,3,4],"2023/24":[207,4,44]},"new_total":394},{"name":"Egypt","years":5,"state":true,"by_year":{"2019/20":[13,8,1],"2020/21":[83,4,2],"2021/22":[34,4,3],"2022/23":[46,11,4],"2023/24":[156,8,5]},"new_total":332},{"name":"Greece","years":5,"state":true,"by_year":{"2019/20":[11,0,1],"2020/21":[7,1,0],"2021/22":[60,5,7],"2022/23":[38,5,1],"2023/24":[211,0,49]},"new_total":327},{"name":"Italy","years":5,"state":true,"by_year":{"2019/20":[26,3,4],"2020/21":[18,0,2],"2021/22":[99,3,24],"2022/23":[74,0,8],"2023/24":[79,7,18]},"new_total":296},{"name":"Finland","years":5,"state":true,"by_year":{"2019/20":[32,15,2],"2020/21":[8,4,1],"2021/22":[27,5,3],"2022/23":[87,8,6],"2023/24":[116,8,9]},"new_total":270},{"name":"Hong Kong SAR, China","years":4,"state":false,"by_year":{"2019/20":[91,7,16],"2020/21":null,"2021/22":[0,5,4],"2022/23":[59,10,5],"2023/24":[118,3,10]},"new_total":268},{"name":"Netherlands","years":5,"state":true,"by_year":{"2019/20":[28,3,4],"2020/21":[59,6,9],"2021/22":[85,8,4],"2022/23":[29,4,2],"2023/24":[65,11,6]},"new_total":266},{"name":"Spain","years":5,"state":true,"by_year":{"2019/20":[27,2,3],"2020/21":[17,1,2],"2021/22":[55,0,4],"2022/23":[69,2,10],"2023/24":[97,0,12]},"new_total":265},{"name":"Germany","years":5,"state":true,"by_year":{"2019/20":[36,8,10],"2020/21":[19,5,3],"2021/22":[49,9,9],"2022/23":[51,9,15],"2023/24":[107,13,29]},"new_total":262},{"name":"Norway","years":5,"state":true,"by_year":{"2019/20":[4,0,0],"2020/21":[10,0,0],"2021/22":[98,8,3],"2022/23":[99,11,3],"2023/24":[46,4,2]},"new_total":257},{"name":"Lithuania","years":5,"state":true,"by_year":{"2019/20":[10,3,0],"2020/21":[2,3,0],"2021/22":[9,10,0],"2022/23":[81,6,1],"2023/24":[151,3,8]},"new_total":253},{"name":"Mexico","years":5,"state":true,"by_year":{"2019/20":[1,0,0],"2020/21":[2,0,1],"2021/22":[21,0,3],"2022/23":[199,0,8],"2023/24":[24,0,5]},"new_total":247},{"name":"Sri Lanka","years":5,"state":true,"by_year":{"2019/20":[68,3,7],"2020/21":[12,0,2],"2021/22":[39,1,5],"2022/23":[35,2,7],"2023/24":[91,7,6]},"new_total":245},{"name":"Ukraine","years":3,"state":true,"by_year":{"2019/20":[24,0,0],"2020/21":[53,0,7],"2021/22":[151,1,16],"2022/23":null,"2023/24":null},"new_total":228},{"name":"Belarus","years":2,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":null,"2022/23":[29,0,11],"2023/24":[183,0,4]},"new_total":212},{"name":"Czech Republic","years":5,"state":true,"by_year":{"2019/20":[61,125,19],"2020/21":[9,149,16],"2021/22":[15,170,26],"2022/23":[44,93,27],"2023/24":[78,83,15]},"new_total":207},{"name":"Cambodia","years":5,"state":true,"by_year":{"2019/20":[40,25,9],"2020/21":[3,1,1],"2021/22":[28,36,4],"2022/23":[57,25,11],"2023/24":[70,43,8]},"new_total":198},{"name":"Belgium","years":5,"state":true,"by_year":{"2019/20":[6,2,0],"2020/21":[13,0,0],"2021/22":[72,3,0],"2022/23":[44,1,6],"2023/24":[37,2,2]},"new_total":172},{"name":"Mongolia","years":5,"state":true,"by_year":{"2019/20":[1,0,0],"2020/21":[0,1,0],"2021/22":[0,3,0],"2022/23":[2,1,0],"2023/24":[164,0,4]},"new_total":167},{"name":"Dominican Republic","years":5,"state":true,"by_year":{"2019/20":[1,0,0],"2020/21":[6,0,0],"2021/22":[26,0,0],"2022/23":[21,0,0],"2023/24":[109,0,3]},"new_total":163},{"name":"Republic of Congo","years":5,"state":true,"by_year":{"2019/20":[22,13,0],"2020/21":[18,31,0],"2021/22":[43,31,0],"2022/23":[42,32,0],"2023/24":[35,48,0]},"new_total":160},{"name":"Denmark","years":5,"state":true,"by_year":{"2019/20":[4,1,1],"2020/21":[6,0,0],"2021/22":[42,4,13],"2022/23":[17,2,0],"2023/24":[76,10,14]},"new_total":145},{"name":"Nigeria","years":5,"state":true,"by_year":{"2019/20":[14,22,1],"2020/21":[26,18,1],"2021/22":[33,30,3],"2022/23":[38,26,5],"2023/24":[28,32,1]},"new_total":139},{"name":"Comoros","years":5,"state":true,"by_year":{"2019/20":[0,2,0],"2020/21":[27,2,0],"2021/22":[38,3,0],"2022/23":[30,6,0],"2023/24":[37,4,0]},"new_total":132},{"name":"Panama","years":5,"state":true,"by_year":{"2019/20":[73,0,0],"2020/21":[2,0,0],"2021/22":[5,0,1],"2022/23":[1,0,0],"2023/24":[2,0,1]},"new_total":83},{"name":"Thailand","years":5,"state":true,"by_year":{"2019/20":[5,11,0],"2020/21":[2,3,0],"2021/22":[12,27,2],"2022/23":[29,17,4],"2023/24":[34,22,7]},"new_total":82},{"name":"Sweden","years":5,"state":true,"by_year":{"2019/20":[4,0,0],"2020/21":[5,3,0],"2021/22":[5,4,2],"2022/23":[23,5,2],"2023/24":[43,13,1]},"new_total":80},{"name":"Turks and Caicos Islands","years":5,"state":false,"by_year":{"2019/20":[6,12,0],"2020/21":[3,4,0],"2021/22":[14,19,0],"2022/23":[35,7,0],"2023/24":[20,23,0]},"new_total":78},{"name":"Brazil","years":4,"state":true,"by_year":{"2019/20":null,"2020/21":[1,0,1],"2021/22":[29,0,2],"2022/23":[26,0,3],"2023/24":[12,0,2]},"new_total":68},{"name":"Zambia","years":5,"state":true,"by_year":{"2019/20":[7,11,1],"2020/21":[7,15,3],"2021/22":[18,23,0],"2022/23":[14,20,2],"2023/24":[14,29,2]},"new_total":60},{"name":"Kenya","years":5,"state":true,"by_year":{"2019/20":[10,13,0],"2020/21":[10,10,0],"2021/22":[13,23,0],"2022/23":[12,16,2],"2023/24":[13,28,3]},"new_total":58},{"name":"Sierra Leone","years":5,"state":true,"by_year":{"2019/20":[1,1,0],"2020/21":[11,4,0],"2021/22":[11,4,0],"2022/23":[14,2,1],"2023/24":[21,11,0]},"new_total":58},{"name":"Estonia","years":5,"state":true,"by_year":{"2019/20":[26,0,0],"2020/21":[6,1,0],"2021/22":[7,9,0],"2022/23":[4,4,0],"2023/24":[9,4,0]},"new_total":52},{"name":"Tanzania","years":5,"state":true,"by_year":{"2019/20":[10,8,0],"2020/21":[2,10,0],"2021/22":[8,17,0],"2022/23":[12,22,1],"2023/24":[20,21,0]},"new_total":52},{"name":"Senegal","years":5,"state":true,"by_year":{"2019/20":[3,3,0],"2020/21":[0,6,0],"2021/22":[41,1,0],"2022/23":[2,3,0],"2023/24":[0,3,0]},"new_total":46},{"name":"Ghana","years":5,"state":true,"by_year":{"2019/20":[7,2,0],"2020/21":[11,1,0],"2021/22":[15,9,0],"2022/23":[5,7,0],"2023/24":[6,11,0]},"new_total":44},{"name":"Uganda","years":5,"state":true,"by_year":{"2019/20":[6,11,0],"2020/21":[8,9,0],"2021/22":[11,25,1],"2022/23":[12,25,0],"2023/24":[5,19,0]},"new_total":42},{"name":"South Africa","years":5,"state":true,"by_year":{"2019/20":[3,3,0],"2020/21":[5,0,0],"2021/22":[13,3,2],"2022/23":[6,1,2],"2023/24":[14,1,2]},"new_total":41},{"name":"Morocco","years":5,"state":true,"by_year":{"2019/20":[7,6,3],"2020/21":[2,11,1],"2021/22":[16,12,2],"2022/23":[6,10,3],"2023/24":[9,6,1]},"new_total":40},{"name":"Mozambique","years":5,"state":true,"by_year":{"2019/20":[6,8,3],"2020/21":[5,11,3],"2021/22":[14,13,6],"2022/23":[9,14,4],"2023/24":[5,22,0]},"new_total":39},{"name":"Chile","years":4,"state":true,"by_year":{"2019/20":[1,0,0],"2020/21":null,"2021/22":[1,0,0],"2022/23":[15,0,1],"2023/24":[21,0,2]},"new_total":38},{"name":"Mali","years":5,"state":true,"by_year":{"2019/20":[2,6,0],"2020/21":[3,10,0],"2021/22":[19,8,0],"2022/23":[8,14,0],"2023/24":[4,7,0]},"new_total":36},{"name":"Latvia","years":5,"state":true,"by_year":{"2019/20":[4,3,0],"2020/21":[1,4,0],"2021/22":[6,4,0],"2022/23":[13,3,0],"2023/24":[11,5,0]},"new_total":35},{"name":"Palau","years":3,"state":false,"by_year":{"2019/20":[2,2,1],"2020/21":null,"2021/22":null,"2022/23":[16,2,2],"2023/24":[14,3,2]},"new_total":32},{"name":"Lebanon","years":5,"state":true,"by_year":{"2019/20":[5,63,39],"2020/21":[2,9,8],"2021/22":[3,54,36],"2022/23":[7,47,37],"2023/24":[14,47,40]},"new_total":31},{"name":"Republic of Kosovo","years":2,"state":false,"by_year":{"2019/20":null,"2020/21":null,"2021/22":null,"2022/23":[14,0,14],"2023/24":[17,1,10]},"new_total":31},{"name":"Indonesia","years":5,"state":true,"by_year":{"2019/20":[13,4,0],"2020/21":[1,4,0],"2021/22":[1,4,0],"2022/23":[4,4,1],"2023/24":[11,5,3]},"new_total":30},{"name":"Colombia","years":5,"state":true,"by_year":{"2019/20":[5,0,0],"2020/21":[1,2,0],"2021/22":[6,2,0],"2022/23":[17,3,0],"2023/24":[0,5,0]},"new_total":29},{"name":"Djibouti","years":5,"state":true,"by_year":{"2019/20":[1,4,0],"2020/21":[9,9,0],"2021/22":[6,8,0],"2022/23":[3,2,0],"2023/24":[10,9,0]},"new_total":29},{"name":"Iceland","years":4,"state":true,"by_year":{"2019/20":null,"2020/21":[5,0,0],"2021/22":[8,0,1],"2022/23":[6,0,0],"2023/24":[10,5,3]},"new_total":29},{"name":"Lao PDR","years":5,"state":true,"by_year":{"2019/20":[4,4,0],"2020/21":[0,1,0],"2021/22":[2,4,0],"2022/23":[12,7,0],"2023/24":[11,5,0]},"new_total":29},{"name":"Somalia","years":5,"state":true,"by_year":{"2019/20":[12,15,0],"2020/21":[4,15,0],"2021/22":[2,24,0],"2022/23":[2,18,0],"2023/24":[9,14,1]},"new_total":29},{"name":"Bermuda","years":5,"state":false,"by_year":{"2019/20":[9,14,0],"2020/21":[1,9,0],"2021/22":[6,19,2],"2022/23":[9,7,2],"2023/24":[2,18,1]},"new_total":27},{"name":"Luxembourg","years":5,"state":true,"by_year":{"2019/20":[4,1,0],"2020/21":[2,1,1],"2021/22":[3,2,0],"2022/23":[6,1,0],"2023/24":[10,2,4]},"new_total":25},{"name":"South Sudan","years":5,"state":true,"by_year":{"2019/20":[0,1,0],"2020/21":[4,2,0],"2021/22":[5,1,0],"2022/23":[12,3,0],"2023/24":[4,9,1]},"new_total":25},{"name":"Togo","years":3,"state":true,"by_year":{"2019/20":null,"2020/21":[1,0,0],"2021/22":[20,0,0],"2022/23":null,"2023/24":[4,0,0]},"new_total":25},{"name":"Philippines","years":5,"state":true,"by_year":{"2019/20":[7,2,1],"2020/21":[1,0,0],"2021/22":[4,6,0],"2022/23":[3,4,0],"2023/24":[8,5,3]},"new_total":23},{"name":"Barbados","years":3,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[6,0,1],"2022/23":[8,1,1],"2023/24":[8,0,2]},"new_total":22},{"name":"Kosovo","years":5,"state":true,"by_year":{"2019/20":[0,1,0],"2020/21":[0,1,0],"2021/22":[2,1,2],"2022/23":[6,0,6],"2023/24":[14,0,9]},"new_total":22},{"name":"Jamaica","years":5,"state":true,"by_year":{"2019/20":[3,0,1],"2020/21":[2,0,0],"2021/22":[7,1,1],"2022/23":[4,2,0],"2023/24":[5,0,1]},"new_total":21},{"name":"Mauritania","years":3,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[13,0,0],"2022/23":[5,0,0],"2023/24":[0,1,0]},"new_total":18},{"name":"Angola","years":5,"state":true,"by_year":{"2019/20":[4,12,2],"2020/21":[3,14,4],"2021/22":[1,14,3],"2022/23":[3,15,5],"2023/24":[6,10,3]},"new_total":17},{"name":"Ethiopia","years":5,"state":true,"by_year":{"2019/20":[1,0,0],"2020/21":[4,1,0],"2021/22":[3,0,1],"2022/23":[7,2,0],"2023/24":[1,1,0]},"new_total":16},{"name":"Moldova","years":1,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":null,"2022/23":null,"2023/24":[16,0,4]},"new_total":16},{"name":"Cameroon","years":5,"state":true,"by_year":{"2019/20":[2,0,0],"2020/21":[0,1,0],"2021/22":[9,0,0],"2022/23":[2,0,0],"2023/24":[1,1,0]},"new_total":14},{"name":"Slovakia","years":1,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":null,"2022/23":[14,0,1],"2023/24":null},"new_total":14},{"name":"Vietnam","years":4,"state":true,"by_year":{"2019/20":[3,4,0],"2020/21":null,"2021/22":[2,4,0],"2022/23":[5,3,0],"2023/24":[4,3,1]},"new_total":14},{"name":"Bangladesh","years":4,"state":true,"by_year":{"2019/20":null,"2020/21":[1,1,0],"2021/22":[3,0,0],"2022/23":[2,1,0],"2023/24":[6,2,0]},"new_total":12},{"name":"Equatorial Guinea","years":5,"state":true,"by_year":{"2019/20":[5,2,0],"2020/21":[1,3,0],"2021/22":[3,1,0],"2022/23":[2,6,0],"2023/24":[1,2,0]},"new_total":12},{"name":"Sudan","years":4,"state":true,"by_year":{"2019/20":[2,10,0],"2020/21":[3,4,0],"2021/22":[6,5,0],"2022/23":[0,7,0],"2023/24":null},"new_total":11},{"name":"Timor-Leste","years":3,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[2,0,0],"2022/23":[3,0,1],"2023/24":[4,0,0]},"new_total":9},{"name":"Trinidad and Tobago","years":4,"state":true,"by_year":{"2019/20":[2,0,0],"2020/21":null,"2021/22":[1,1,0],"2022/23":[3,1,0],"2023/24":[3,2,0]},"new_total":9},{"name":"Cote d'Ivoire","years":4,"state":true,"by_year":{"2019/20":[0,2,0],"2020/21":null,"2021/22":[0,2,0],"2022/23":[4,0,0],"2023/24":[4,2,0]},"new_total":8},{"name":"Fiji","years":4,"state":true,"by_year":{"2019/20":[0,1,0],"2020/21":null,"2021/22":[2,2,0],"2022/23":[6,0,0],"2023/24":[0,3,0]},"new_total":8},{"name":"Madagascar","years":4,"state":true,"by_year":{"2019/20":[0,4,0],"2020/21":null,"2021/22":[1,2,0],"2022/23":[1,7,0],"2023/24":[6,2,0]},"new_total":8},{"name":"Peru","years":3,"state":true,"by_year":{"2019/20":[2,0,0],"2020/21":null,"2021/22":[4,0,0],"2022/23":[2,0,0],"2023/24":null},"new_total":8},{"name":"Algeria","years":5,"state":true,"by_year":{"2019/20":[3,1,0],"2020/21":[1,0,0],"2021/22":[0,4,0],"2022/23":[3,2,0],"2023/24":[0,1,0]},"new_total":7},{"name":"Bahamas","years":3,"state":true,"by_year":{"2019/20":[2,0,0],"2020/21":null,"2021/22":[2,2,0],"2022/23":null,"2023/24":[3,2,0]},"new_total":7},{"name":"Saint Lucia","years":3,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[2,0,0],"2022/23":[1,0,0],"2023/24":[4,0,0]},"new_total":7},{"name":"Uruguay","years":5,"state":true,"by_year":{"2019/20":[1,1,1],"2020/21":[0,1,0],"2021/22":[1,0,0],"2022/23":[1,0,0],"2023/24":[4,0,1]},"new_total":7},{"name":"British Virgin Islands","years":3,"state":false,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[3,0,0],"2022/23":[2,2,0],"2023/24":[1,2,0]},"new_total":6},{"name":"Central African Republic","years":3,"state":true,"by_year":{"2019/20":null,"2020/21":[2,0,0],"2021/22":null,"2022/23":[1,2,0],"2023/24":[2,0,1]},"new_total":5},{"name":"Cook Islands","years":3,"state":false,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[1,0,0],"2022/23":[3,0,0],"2023/24":[1,0,0]},"new_total":5},{"name":"Gabon","years":5,"state":true,"by_year":{"2019/20":[3,2,0],"2020/21":[0,5,0],"2021/22":[1,3,0],"2022/23":[0,5,0],"2023/24":[1,4,0]},"new_total":5},{"name":"Rwanda","years":5,"state":true,"by_year":{"2019/20":[1,1,0],"2020/21":[1,6,0],"2021/22":[0,4,0],"2022/23":[2,4,0],"2023/24":[1,3,0]},"new_total":5},{"name":"Sint Maarten","years":4,"state":false,"by_year":{"2019/20":[1,0,1],"2020/21":[1,0,0],"2021/22":[2,0,0],"2022/23":null,"2023/24":[1,0,0]},"new_total":5},{"name":"Swaziland","years":1,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[5,0,0],"2022/23":null,"2023/24":null},"new_total":5},{"name":"Antigua and Barbuda","years":3,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[1,1,0],"2022/23":[1,1,0],"2023/24":[2,1,0]},"new_total":4},{"name":"Burkina Faso","years":5,"state":true,"by_year":{"2019/20":[0,2,0],"2020/21":[1,3,0],"2021/22":[1,1,0],"2022/23":[1,1,0],"2023/24":[1,2,0]},"new_total":4},{"name":"Kazakhstan","years":5,"state":true,"by_year":{"2019/20":[0,2,0],"2020/21":[1,7,0],"2021/22":[3,4,0],"2022/23":[0,7,0],"2023/24":[0,5,0]},"new_total":4},{"name":"Pakistan","years":3,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[3,1,2],"2022/23":[1,0,0],"2023/24":[0,1,0]},"new_total":4},{"name":"Switzerland","years":3,"state":true,"by_year":{"2019/20":null,"2020/21":[1,0,0],"2021/22":null,"2022/23":[1,0,0],"2023/24":[2,0,0]},"new_total":4},{"name":"Malawi","years":5,"state":true,"by_year":{"2019/20":[1,3,0],"2020/21":[0,5,1],"2021/22":[1,0,0],"2022/23":[1,1,0],"2023/24":[0,1,0]},"new_total":3},{"name":"Myanmar","years":3,"state":true,"by_year":{"2019/20":[0,2,0],"2020/21":null,"2021/22":[1,1,0],"2022/23":null,"2023/24":[2,0,0]},"new_total":3},{"name":"Taiwan","years":2,"state":false,"by_year":{"2019/20":null,"2020/21":null,"2021/22":null,"2022/23":[1,0,0],"2023/24":[2,0,1]},"new_total":3},{"name":"Tajikistan","years":5,"state":true,"by_year":{"2019/20":[1,1,0],"2020/21":[2,4,0],"2021/22":[0,2,0],"2022/23":[0,4,0],"2023/24":[0,1,0]},"new_total":3},{"name":"West-Indies","years":3,"state":false,"by_year":{"2019/20":[1,2,0],"2020/21":null,"2021/22":null,"2022/23":[1,0,0],"2023/24":[1,0,0]},"new_total":3},{"name":"Benin","years":3,"state":true,"by_year":{"2019/20":null,"2020/21":[0,1,0],"2021/22":[1,0,0],"2022/23":[1,1,0],"2023/24":null},"new_total":2},{"name":"Eritrea","years":4,"state":true,"by_year":{"2019/20":[1,1,0],"2020/21":null,"2021/22":[0,1,0],"2022/23":[0,2,0],"2023/24":[1,1,0]},"new_total":2},{"name":"Guyana","years":2,"state":true,"by_year":{"2019/20":[1,0,0],"2020/21":null,"2021/22":null,"2022/23":null,"2023/24":[1,0,0]},"new_total":2},{"name":"Tunisia","years":2,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[1,0,0],"2022/23":null,"2023/24":[1,0,0]},"new_total":2},{"name":"Vanuatu","years":2,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":null,"2022/23":[1,3,1],"2023/24":[1,0,0]},"new_total":2},{"name":"French Polynesia","years":1,"state":false,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[1,0,0],"2022/23":null,"2023/24":null},"new_total":1},{"name":"Georgia","years":2,"state":true,"by_year":{"2019/20":[1,1,0],"2020/21":null,"2021/22":null,"2022/23":[0,1,0],"2023/24":null},"new_total":1},{"name":"Iran","years":2,"state":true,"by_year":{"2019/20":[0,1,0],"2020/21":null,"2021/22":[1,0,0],"2022/23":null,"2023/24":null},"new_total":1},{"name":"Malabo","years":3,"state":false,"by_year":{"2019/20":[1,0,0],"2020/21":null,"2021/22":[0,2,0],"2022/23":null,"2023/24":[0,2,0]},"new_total":1},{"name":"Saipan","years":2,"state":false,"by_year":{"2019/20":null,"2020/21":null,"2021/22":null,"2022/23":[0,1,0],"2023/24":[0,1,0]},"new_total":0},{"name":"Samoa","years":1,"state":true,"by_year":{"2019/20":null,"2020/21":null,"2021/22":[0,1,1],"2022/23":null,"2023/24":null},"new_total":0}],"top_ns":[1,2,3,4,5,6,8,10,15,20]};</script>
+
+<header class="top">
+  <div class="wrap">
+    <p class="kicker">Department of Foreign Employment &middot;
+      <span data-n="meta.permits_total" data-fmt="int"></span> labour permits,
+      <span data-n="meta.destinations_ever" data-fmt="int"></span> destinations</p>
+    <h1>One Hundred Forty-Four Destinations, Six Countries</h1>
+    <p class="sub">Nepal issued labour permits for
+      <span data-n="headline.destinations_last" data-fmt="int"></span> places last
+      fiscal year. Six of them took four permits in every five. That is less
+      concentrated than it used to be, and the six are not the six they were.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Before anything else</p>
+    <h2>This archive cannot see India</h2>
+
+    <p class="warn"><b>It counts permits issued, not people who went, and not
+      people who stayed.</b> And because Nepali citizens may work in India
+      without a permit, no permit is issued, no row is written, and the
+      largest destination for Nepali workers does not appear in the only
+      official record of where Nepali workers go. Every share on this page is
+      a share of the permitted destinations alone. The denominator is wrong by
+      an amount nobody here can measure.</p>
+
+    <p>That is not a small correction to apply afterwards. Nepal and India
+      have kept an open border since 1950; a worker from Kailali crossing to
+      Uttar Pradesh for the sugarcane season fills in nothing and is counted by
+      nobody. The surveys that have tried to size that flow put it in the
+      hundreds of thousands to millions, which would make India comparable to
+      everything on this page put together or larger. This page does not use
+      those estimates, because they are not in this archive and mixing a
+      survey estimate into a permit count would produce a number with no
+      meaning at all.</p>
+
+    <p>Three more things the record is not. A permit is a document, not a
+      departure &mdash; some are issued and never used. A permit is not a
+      person, because a worker who goes twice appears twice. And a permit
+      expiring says nothing about whether the worker came home, so nothing
+      here measures how many Nepalis are abroad right now. What it does
+      measure, it measures completely: every destination, including the ones
+      with a single permit in a year.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The archive</p>
+    <h2>Every country, not the top ten</h2>
+    <p class="lede">The Ministry of Labour publishes a table most statistical
+      annexes do not bother with: the full list. Not the Gulf plus Malaysia
+      plus &ldquo;others&rdquo;, but every destination a permit was issued
+      for, down to the one permit for Burkina Faso.</p>
+
+    <p>Five fiscal years are available at that resolution, from 2019/20 to
+      2023/24 &mdash; Nepal&rsquo;s fiscal year runs from mid-July, so 2023/24
+      is 2080/81 in the Bikram Sambat calendar. Across them the record holds
+      <span data-n="meta.permits_total" data-fmt="int"></span> permits:
+      <span data-n="meta.permits_new" data-fmt="int"></span> new ones and
+      <span data-n="meta.permits_renew" data-fmt="int"></span> renewals for
+      workers already abroad. Everything that follows counts new permits only,
+      because a renewal tells you where somebody already is, not where anybody
+      chose to go.</p>
+
+    <p><span data-n="meta.destinations_ever" data-fmt="int"></span> distinct
+      destinations appear over the five years.
+      <span data-n="meta.destinations_every_year" data-fmt="int"></span> of
+      them appear in all five. The column is headed &ldquo;destination
+      country&rdquo;, but
+      <span data-n="meta.n_not_states" data-fmt="int"></span> of the entries
+      are not countries: Hong Kong and Macau, the Cayman Islands, Bermuda,
+      Saipan, and Malabo, which is a city. The page says destinations for that
+      reason.</p>
+
+    <div class="stats">
+      <div class="stat"><b data-n="headline.destinations_last" data-fmt="int"></b><span>Destinations in 2023/24</span></div>
+      <div class="stat s"><b data-n="headline.top6_last" data-fmt="pct1"></b><span>Of new permits to the top six</span></div>
+      <div class="stat"><b data-n="headline.tail_n" data-fmt="int"></b><span>Destinations outside the six</span></div>
+      <div class="stat"><b data-n="headline.tail_share" data-fmt="pct1"></b><span>Of new permits between them</span></div>
+    </div>
+
+    <p>In 2023/24, <span data-n="headline.destinations_new_last" data-fmt="int"></span>
+      destinations received at least one new permit and
+      <span data-n="headline.destinations_last" data-fmt="int"></span> received
+      at least one permit of any kind. The largest was
+      <b data-n="headline.top1_last_name"></b>, with
+      <span data-n="headline.top1_last_pct" data-fmt="1"></span> per cent of
+      every new permit issued. The
+      <span data-n="headline.tail_n" data-fmt="int"></span> destinations below
+      the sixth shared <span data-n="headline.tail_share_pct" data-fmt="1"></span>
+      per cent between them.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">New labour permits by destination, 2023/24</p>
+        <p class="fig-note">Every destination with at least one new permit,
+          largest first. The bar at the bottom is all of the remaining ones
+          added together.</p>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-ladder" role="img"
+             aria-label="Ranked bar chart of new labour permits by destination in 2023/24"></svg>
+      </div>
+      <figcaption>Nepal Labour Migration Report 2024, Annex 4. Hover a bar for
+        the count.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The finding</p>
+    <h2>The concentration is falling</h2>
+    <p class="lede">The expectation going in was that a handful of countries
+      take almost everything and always have. The first half is true. The
+      second is not.</p>
+
+    <p>The six largest destinations took
+      <span data-n="headline.top6_first_pct" data-fmt="1"></span> per cent of
+      new permits in <span data-n="headline.first_year"></span> and
+      <b><span data-n="headline.top6_last_pct" data-fmt="1"></span> per
+      cent</b> in <span data-n="headline.last_year"></span>. That is a fall of
+      <span data-n="headline.drop_points" data-fmt="1"></span> percentage
+      points across the
+      <span data-n="meta.n_series_years" data-fmt="int"></span> fiscal years
+      the record covers. The Herfindahl index &mdash; the sum of the squared shares,
+      which is the standard way of asking how concentrated a market is &mdash;
+      went the same way, from
+      <span data-n="headline.hhi_first_exact" data-fmt="3"></span> in 2019/20
+      to <span data-n="headline.hhi_last" data-fmt="3"></span> in
+      <span data-n="headline.last_year"></span>, after peaking at
+      <span data-n="headline.hhi_peak" data-fmt="3"></span> in
+      <span data-n="headline.hhi_peak_year"></span>.</p>
+
+    <p>Eighty per cent to six destinations is still an extraordinary
+      concentration. A worker choosing where to go is choosing between six
+      places and a rounding error. But it is thirteen points less
+      extraordinary than it was, and the direction has been consistent enough
+      through a pandemic and a recovery to be worth taking seriously.</p>
+
+    <p class="note">The first two years are a floor, not a measurement. For
+      2017/18 and 2018/19 the full annex does not exist and the published
+      table names only fifteen destinations, with
+      <span data-n="bound.2017/18.others" data-fmt="int"></span> permits
+      collapsed into &ldquo;others&rdquo;. The six largest of the named ones
+      are used. If a destination hiding inside that residual were bigger than
+      the sixth named one &mdash;
+      <span data-n="headline.sixth_first"></span>, on
+      <span data-n="bound.2017/18.sixth_new" data-fmt="int"></span> permits
+      &mdash; it would replace it and push the share <em>up</em>. So the real
+      fall is at least as large as the one drawn here, and possibly larger.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Share of new labour permits taken by the six largest destinations</p>
+        <p class="fig-note">Solid where the full destination list exists.
+          Hollow for the two years where only the largest fifteen are
+          published and the value is a lower bound.</p>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-trend" role="img"
+             aria-label="Top six destination share of new labour permits by fiscal year"></svg>
+      </div>
+      <figcaption>Fiscal years 2017/18 to 2023/24. New permits only; renewals
+        excluded.</figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <p>The same thing shows up in the shape of the whole distribution rather
+      than one number from it. Stack the destinations largest first and read
+      off how much of the total you have after each one: the curve reaches the
+      top later every year.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">How much of the year is accounted for, after the largest <i>n</i> destinations</p>
+        <p class="fig-note">One line per fiscal year. A steeper line is a more
+          concentrated year. The five years with a full destination list are
+          shown; the two bounded years are not, because a partial list would
+          bend the curve for a reason that is not real.</p>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-conc" role="img"
+             aria-label="Cumulative share of new permits against destination rank, by fiscal year"></svg>
+      </div>
+      <div class="legend" id="leg-conc"></div>
+      <figcaption>Destinations ranked within each year separately, so the
+        third-largest is not the same country in every line.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Who the six are</p>
+    <h2>The sixth seat changed hands</h2>
+    <p class="lede">A falling concentration would be a quiet story if the same
+      six countries were simply losing a little each year. They are not. The
+      membership of the top six has changed, and one of the six is now in
+      Europe.</p>
+
+    <p>In <span data-n="headline.first_year"></span> the six were Malaysia and
+      five Gulf states, and the sixth was
+      <span data-n="headline.sixth_first"></span>. In
+      <span data-n="headline.last_year"></span> the sixth is
+      <b data-n="headline.sixth_last"></b>, on
+      <span data-n="headline.sixth_last_pct" data-fmt="1"></span> per cent
+      &mdash; a country that issued almost no permits to Nepali workers before
+      2019/20. South Korea and Romania sit just below it. The Gulf has not
+      collapsed; something else has been added beside it.</p>
+
+    <p>The individual series are violent. Malaysia took
+      <span data-n="years.2019/20.share_of.Malaysia" data-fmt="pct1"></span> of
+      new permits in 2019/20 and
+      <span data-n="years.2020/21.new_of.Malaysia" data-fmt="int"></span> in
+      2020/21, when it closed to foreign workers. Then
+      <b><span data-n="years.2022/23.share_of.Malaysia" data-fmt="pct1"></span></b>
+      in 2022/23, when it reopened and the backlog went through at once
+      &mdash; the largest share any destination has taken in these five years
+      &mdash; and <span data-n="years.2023/24.share_of.Malaysia" data-fmt="pct1"></span>
+      the year after. Saudi Arabia absorbed the gap in 2021/22, going from
+      <span data-n="years.2019/20.share_of.Saudi Arabia" data-fmt="pct1"></span>
+      to <span data-n="years.2021/22.share_of.Saudi Arabia" data-fmt="pct1"></span>
+      and back down to
+      <span data-n="years.2023/24.share_of.Saudi Arabia" data-fmt="pct1"></span>.
+      None of this looks like workers slowly changing their minds. It looks
+      like a queue being redirected by whichever government opened a door.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Share of new labour permits, by destination and year</p>
+        <p class="fig-note">The eight largest destinations over the five years
+          with a full list. Each line is that destination&rsquo;s share of all
+          new permits issued that year.</p>
+      </div>
+      <div class="fig-body">
+        <svg id="svg-flows" role="img"
+             aria-label="Share of new labour permits over time for the eight largest destinations"></svg>
+      </div>
+      <div class="legend" id="leg-flows"></div>
+      <figcaption>Hover a line for the year-by-year counts.</figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <p>One number moved steadily while all of that was happening. Women were
+      <span data-n="headline.female_first_pct" data-fmt="1"></span> per cent of
+      permits in 2019/20 and
+      <span data-n="headline.female_last_pct" data-fmt="1"></span> per cent in
+      <span data-n="headline.last_year"></span>. Nepal has restricted women&rsquo;s
+      migration to several destinations at various times, usually after a
+      death or an abuse case, so this series is a record of policy as much as
+      of choice.</p>
+
+    <details>
+      <summary>Every destination, every year</summary>
+      <div class="tablewrap">
+        <table id="tbl-all">
+          <thead><tr><th>Destination</th><th>2019/20</th><th>2020/21</th>
+            <th>2021/22</th><th>2022/23</th><th>2023/24</th></tr></thead>
+          <tbody id="tbody-all"></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">What this does not show</p>
+    <h2>Four limits</h2>
+    <p><b>India is absent, and it is probably the largest destination.</b>
+      Stated at the top and repeated here, because it is the one thing that
+      could make every share on this page misleading. Nothing in this archive
+      can be adjusted for it.</p>
+    <p><b>Five years is a short series, and three of them are a pandemic.</b>
+      2020/21 has <span data-n="years.2020/21.new" data-fmt="int"></span> new
+      permits against <span data-n="years.2021/22.new" data-fmt="int"></span>
+      the following year. A trend fitted through that would be a trend fitted
+      through a border closing and reopening. Nothing here is fitted; the
+      years are shown as they are.</p>
+    <p><b>The two editions do not record the same routes.</b> The 2022 report
+      splits permits into individual, regularisation, recruitment agency and
+      renewal; the 2024 report drops regularisation and adds
+      government-to-government. The new-against-renewal split survives that
+      change and reproduces both reports&rsquo; own totals exactly, which is
+      why the page uses it and does not compare routes across the boundary.</p>
+    <p><b>The reports do not quite add up to themselves.</b> Summing every row
+      of each annex lands within five permits of the grand total the same
+      report prints, out of three-quarters of a million. The difference is in
+      the published tables, not in the parsing; <code>analyze.py</code> refuses
+      to write a payload if it grows past ten.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="srcs" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs">
+      <b>Sources.</b> Government of Nepal, Ministry of Labour, Employment and
+      Social Security, <a href="https://giwmscdnone.gov.np/media/app/public/298/posts/1715249334_10.pdf"><i>Nepal
+      Labour Migration Report 2022</i></a>, Annexes 9, 10 and 11 and Table 3.2;
+      and <a href="https://giwmscdnone.gov.np/media/pdf_upload/Nepal%20Labour%20Migration%202024_Final-Version%20for%20Approval%20(1)_peesvxa.pdf"><i>Nepal
+      Labour Migration Report 2024</i></a>, Annexes 3 and 4 and Table 3.1.
+      Both are compiled from the Department of Foreign Employment&rsquo;s
+      Foreign Employment Information Management System. Retrieved
+      <span data-n="meta.retrieved"></span>.
+    </p>
+    <p class="srcs" style="margin-top:1em">
+      <b>Method.</b> The annex tables are read out of the PDFs with
+      <code>pypdf</code> and summed by destination. Destination names are
+      reconciled between the two editions, which spell a dozen of them
+      differently and misspell Cambodia. A permit counts as new if it is not a
+      renewal. The parse is checked twice before the page is written: the
+      per-year totals must land within ten permits of the totals the reports
+      print for themselves, and the destinations named in Table 3.2 must match
+      the annex row by row for the three fiscal years both cover &mdash; they
+      agree exactly. <code>assemble.py</code> then recomputes the headline
+      share from the per-destination counts in the payload and refuses to
+      write a page that disagrees with itself. Everything is computed from the
+      two reports by <code>fetch.py</code> and <code>analyze.py</code>; no
+      figure is quoted from a secondary source.
+    </p>
+  </div>
+</footer>
+
+<div id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+var D = window.LEAVE_DATA;
+if (!D) { return; }
+
+/* ------------------------------------------------------------------ basics */
+function el(id){ return document.getElementById(id); }
+var NS = "http://www.w3.org/2000/svg";
+function mk(tag, attrs, parent){
+  var n = document.createElementNS(NS, tag);
+  if (attrs) for (var k in attrs) if (attrs[k] !== null && attrs[k] !== undefined)
+    n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+function txt(parent, x, y, s, cls, anchor){
+  var t = mk("text", { x: x, y: y, "class": cls || "tk",
+                       "text-anchor": anchor || "middle" }, parent);
+  t.textContent = s;
+  return t;
+}
+function clear(node){ while (node.firstChild) node.removeChild(node.firstChild); }
+/* Built from a single-quoted string rather than written as a regex literal:
+   assemble.py scans this file line by line for a string that never closes,
+   and a literal holding a lone double quote reads to that scanner as an
+   unterminated string.  Cheaper to write it this way than to teach a line
+   scanner about regex literals. */
+var QUOTE = new RegExp('"', "g");
+function esc(s){
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+                  .replace(/>/g, "&gt;").replace(QUOTE, "&quot;");
+}
+
+function fInt(v){ return Math.round(v).toLocaleString("en-US"); }
+function fFix(v, n){ return Number(v).toFixed(n); }
+function fPct(v){ return Math.round(v * 100) + "%"; }
+function fPct1(v){ return (v * 100).toFixed(1) + "%"; }
+
+function dig(path){
+  var node = D, parts = path.split(".");
+  for (var i = 0; i < parts.length; i++){
+    if (node === null || node === undefined) return undefined;
+    node = node[parts[i]];
+  }
+  return node;
+}
+function fillProse(){
+  var nodes = document.querySelectorAll("[data-n]"), missing = [];
+  for (var i = 0; i < nodes.length; i++){
+    var n = nodes[i], v = dig(n.getAttribute("data-n")), f = n.getAttribute("data-fmt");
+    if (v === undefined || v === null){ missing.push(n.getAttribute("data-n")); continue; }
+    n.textContent = f === "int" ? fInt(v)
+                  : f === "pct" ? fPct(v)
+                  : f === "pct1" ? fPct1(v)
+                  : (f && /^\d$/.test(f)) ? fFix(v, +f)
+                  : String(v);
+  }
+  if (missing.length) console.warn("unresolved data-n paths:", missing);
+}
+
+var tip = el("tip");
+function showTip(ev, html){
+  tip.innerHTML = html;
+  tip.classList.add("on");
+  var pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  var x = ev.clientX + pad, y = ev.clientY + pad;
+  if (x + w > innerWidth - 8) x = ev.clientX - w - pad;
+  if (y + h > innerHeight - 8) y = ev.clientY - h - pad;
+  tip.style.left = Math.max(8, x) + "px";
+  tip.style.top = Math.max(8, y) + "px";
+}
+function hideTip(){ tip.classList.remove("on"); }
+function hoverable(node, html){
+  node.addEventListener("mouseenter", function(ev){ showTip(ev, html); });
+  node.addEventListener("mousemove", function(ev){ showTip(ev, html); });
+  node.addEventListener("mouseleave", hideTip);
+}
+
+/* Each figure sizes its coordinate system to the column it is actually in,
+   rather than drawing into a fixed box and letting the browser scale eleven
+   pixel type down to six on a phone.  A narrow column also gets a taller
+   plot, because the thing that runs out on a phone is width, not height. */
+function figSize(svg, baseW, baseH, maxAspect){
+  var own = svg.getBoundingClientRect().width;
+  var avail = Math.round(own || (svg.parentNode && svg.parentNode.clientWidth) || baseW);
+  var W = Math.max(300, Math.min(baseW, avail));
+  var grow = W >= baseW ? 1 : Math.min(1.5, Math.pow(baseW / W, 0.4));
+  var H = Math.round(Math.min(baseH * grow, W * (maxAspect || 1.05)));
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  return { W: W, H: H, narrow: W < 640 };
+}
+
+function ticks(lo, hi, want){
+  var span = hi - lo, raw = span / want;
+  var mag = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
+  var step = [1, 2, 2.5, 5, 10].map(function(m){ return m * mag; })
+    .filter(function(s){ return s >= raw; })[0] || mag * 10;
+  var out = [];
+  for (var v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) out.push(v);
+  return out;
+}
+
+/* Fiscal years are written 2019/20.  On a narrow column only the tail fits. */
+function shortYear(y){ return y.slice(2); }
+
+var YEARS = D.meta.years;                       /* the five with a full list */
+var LAST = YEARS[YEARS.length - 1];
+
+/* The eight destinations with the most new permits across the five years.
+   D.destinations is already sorted by that total. */
+var TOP8 = D.destinations.slice(0, 8);
+var HUE = ["--c1", "--c2", "--c3", "--c4", "--c5", "--c6", "--c7", "--c8"];
+
+function newIn(rec, year){
+  var v = rec.by_year[year];
+  return v ? v[0] : 0;
+}
+function shareIn(rec, year){
+  return newIn(rec, year) / D.years[year].new;
+}
+
+/* ============================================================ the headline
+   Top-six share, seven fiscal years.  Two of the seven are lower bounds and
+   are drawn hollow with a broken line into them, because a reader who cannot
+   see which points are measured and which are floors will read the slope as
+   if all seven were the same kind of number. */
+var trend = (function(){
+  var svg = el("svg-trend");
+
+  function draw(){
+    clear(svg);
+    var g = figSize(svg, 1000, 400, 0.62);
+    var W = g.W, H = g.H, narrow = g.narrow;
+    var L = narrow ? 44 : 58, R = narrow ? 16 : 26, T = 34, B = narrow ? 46 : 40;
+    var iw = W - L - R, ih = H - T - B;
+    var S = D.series;
+    var lo = 0.75, hi = 1.0;
+    var X = function(i){ return L + (S.length === 1 ? iw / 2
+                        : i * iw / (S.length - 1)); };
+    var Y = function(v){ return T + ih - (v - lo) / (hi - lo) * ih; };
+
+    ticks(lo, hi, 5).forEach(function(v){
+      mk("line", { "class": "gl", x1: L, y1: Y(v).toFixed(1),
+                   x2: L + iw, y2: Y(v).toFixed(1) }, svg);
+      txt(svg, L - 8, Y(v) + 4, Math.round(v * 100) + "%", "tk", "end");
+    });
+    mk("line", { "class": "ax", x1: L, y1: T + ih, x2: L + iw, y2: T + ih }, svg);
+
+    var pts = S.map(function(s, i){
+      return { x: X(i), y: Y(s.top6), s: s };
+    });
+    function path(from, to){
+      return pts.slice(from, to + 1).map(function(p, k){
+        return (k ? "L" : "M") + p.x.toFixed(1) + " " + p.y.toFixed(1);
+      }).join(" ");
+    }
+    var firstExact = 0;
+    while (firstExact < S.length && !S[firstExact].exact) firstExact++;
+
+    if (firstExact > 0) {
+      mk("path", { d: path(0, firstExact), fill: "none",
+                   stroke: "var(--six)", "stroke-width": 2,
+                   "stroke-dasharray": "5 5", "stroke-opacity": .55 }, svg);
+    }
+    mk("path", { d: path(firstExact, S.length - 1), fill: "none",
+                 stroke: "var(--six)", "stroke-width": 2.4,
+                 "stroke-linejoin": "round" }, svg);
+
+    pts.forEach(function(p, i){
+      var c = mk("circle", { cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: 5,
+                             fill: p.s.exact ? "var(--six)" : "var(--surface)",
+                             stroke: "var(--six)", "stroke-width": 2 }, svg);
+      var label = i === 0 || i === pts.length - 1 || !narrow;
+      if (label) {
+        // The end labels are centred on a point sitting on the axis, so
+        // centring them too would push the first one over the y-axis ticks
+        // and the last one off the right edge.
+        var anchor = i === 0 ? "start" : i === pts.length - 1 ? "end" : "middle";
+        txt(svg, p.x + (i === 0 ? -4 : i === pts.length - 1 ? 4 : 0), p.y - 13,
+            (p.s.exact ? "" : "\u2265") + (p.s.top6 * 100).toFixed(1) + "%",
+            "dlab halo", anchor);
+      }
+      txt(svg, p.x, T + ih + (narrow ? 18 : 20),
+          narrow ? shortYear(p.s.year) : p.s.year, "tk");
+      var hit = mk("circle", { "class": "hit", cx: p.x.toFixed(1),
+                               cy: p.y.toFixed(1), r: 16 }, svg);
+      hoverable(hit, "<b>" + esc(p.s.year) + "</b>" +
+        '<span class="v">' + (p.s.exact ? "" : "at least ") +
+        (p.s.top6 * 100).toFixed(1) + "% of " + fInt(p.s.new) +
+        " new permits<br>" + (p.s.destinations
+          ? fInt(p.s.destinations) + " destinations in the record"
+          : "full destination list not published") + "</span>");
+      c.setAttribute("pointer-events", "none");
+    });
+
+    /* No axis title: the figure's own heading already says what the line is,
+       and repeating it inside the plot costs a row of vertical space that the
+       first value label needs. */
+  }
+  return { draw: draw };
+})();
+
+/* =========================================================== the curve
+   Cumulative share against rank.  Earlier years are faded and the latest is
+   in the accent, so the figure reads as a thing moving rather than as five
+   equal categories. */
+var conc = (function(){
+  var svg = el("svg-conc"), leg = el("leg-conc");
+  var NMAX = 20;
+
+  function draw(){
+    clear(svg);
+    var g = figSize(svg, 1000, 420, 0.66);
+    var W = g.W, H = g.H, narrow = g.narrow;
+    var L = narrow ? 44 : 58, R = narrow ? 18 : 30, T = 30, B = narrow ? 44 : 44;
+    var iw = W - L - R, ih = H - T - B;
+    var X = function(n){ return L + (n - 1) / (NMAX - 1) * iw; };
+    var Y = function(v){ return T + ih - v * ih; };
+
+    ticks(0, 1, 5).forEach(function(v){
+      mk("line", { "class": "gl", x1: L, y1: Y(v).toFixed(1),
+                   x2: L + iw, y2: Y(v).toFixed(1) }, svg);
+      txt(svg, L - 8, Y(v) + 4, Math.round(v * 100) + "%", "tk", "end");
+    });
+    (narrow ? [1, 5, 10, 15, 20] : [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20])
+      .forEach(function(n){
+        txt(svg, X(n), T + ih + 18, String(n), "tk");
+      });
+    mk("line", { "class": "ax", x1: L, y1: T + ih, x2: L + iw, y2: T + ih }, svg);
+
+    /* The six the page is about. */
+    mk("line", { x1: X(6).toFixed(1), y1: T, x2: X(6).toFixed(1), y2: T + ih,
+                 stroke: "var(--rule-2)", "stroke-width": 1,
+                 "stroke-dasharray": "4 4" }, svg);
+    txt(svg, X(6), T - 8, "six", "axlab");
+
+    clear(leg);
+    YEARS.forEach(function(y, i){
+      var last = y === LAST;
+      var cum = D.years[y].cum;
+      var d = [];
+      for (var n = 1; n <= Math.min(NMAX, cum.length); n++){
+        d.push((n === 1 ? "M" : "L") + X(n).toFixed(1) + " " + Y(cum[n - 1]).toFixed(1));
+      }
+      mk("path", { d: d.join(" "), fill: "none",
+                   stroke: last ? "var(--six)" : "var(--accent)",
+                   "stroke-width": last ? 2.6 : 1.7,
+                   "stroke-opacity": last ? 1 : 0.22 + 0.16 * i,
+                   "stroke-linejoin": "round" }, svg);
+      var at6 = cum[5];
+      /* No labels at the right-hand end: every curve is within a point of
+         100% by the twentieth destination, so five labels land on top of each
+         other.  The legend below carries the years, and carries the number
+         that separates them -- where each year stood after six. */
+      var sw = document.createElement("span");
+      sw.innerHTML = '<i style="background:' +
+        (last ? "var(--six)" : "var(--accent)") + ";opacity:" +
+        (last ? 1 : 0.22 + 0.16 * i) + '"></i>' + esc(y) + " &middot; " +
+        fPct1(at6) + " by six";
+      leg.appendChild(sw);
+    });
+
+    txt(svg, L + iw / 2, H - 6, narrow ? "destinations, largest first"
+        : "number of destinations, largest first", "axlab");
+  }
+  return { draw: draw };
+})();
+
+/* ============================================================== the ladder
+   Every destination in the latest year, ranked, with the whole tail added
+   into one bar at the bottom.  The point is the cliff: the gap between the
+   sixth bar and the seventh. */
+var ladder = (function(){
+  var svg = el("svg-ladder");
+
+  function rows(){
+    var out = D.destinations.map(function(r){
+      return { name: r.name, n: newIn(r, LAST) };
+    }).filter(function(r){ return r.n > 0; });
+    out.sort(function(a, b){ return b.n - a.n || (a.name < b.name ? -1 : 1); });
+    return out;
+  }
+
+  function draw(){
+    clear(svg);
+    var all = rows();
+    var probe = figSize(svg, 1000, 300, 3);
+    var narrow = probe.narrow;
+    var show = narrow ? 10 : 16;
+    var shown = all.slice(0, show);
+    var rest = all.slice(show);
+    var restN = rest.reduce(function(a, r){ return a + r.n; }, 0);
+    var rowH = narrow ? 21 : 23;
+    var T = 26, B = 34, L = narrow ? 96 : 148, R = narrow ? 64 : 96;
+    var H = T + B + (shown.length + 1) * rowH;
+    var W = probe.W;
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    var iw = W - L - R;
+    var total = D.years[LAST].new;
+    var max = shown[0].n;
+    var X = function(v){ return v / max * iw; };
+
+    function bar(i, name, n, colour, note){
+      var y = T + i * rowH;
+      var w = Math.max(1, X(n));
+      mk("rect", { x: L, y: y + 2, width: w.toFixed(1), height: rowH - 7,
+                   fill: colour, rx: 1 }, svg);
+      var t = txt(svg, L - 8, y + rowH / 2 + 1, name, "nlab", "end");
+      t.setAttribute("dominant-baseline", "middle");
+      var v = txt(svg, L + w + 7, y + rowH / 2 + 1,
+                  narrow ? fPct1(n / total) : fInt(n) + "  " + fPct1(n / total),
+                  "dlab", "start");
+      v.setAttribute("dominant-baseline", "middle");
+      var hit = mk("rect", { "class": "hit", x: 0, y: y, width: W,
+                             height: rowH }, svg);
+      hoverable(hit, "<b>" + esc(name) + "</b>" + '<span class="v">' +
+        fInt(n) + " new permits in " + esc(LAST) + "<br>" +
+        fPct1(n / total) + " of the year" + (note ? "<br>" + note : "") +
+        "</span>");
+    }
+
+    shown.forEach(function(r, i){
+      bar(i, r.name, r.n, i < 6 ? "var(--six)" : "var(--rest)", null);
+    });
+    bar(shown.length, (narrow ? "other " : "the other ") + rest.length,
+        restN, "var(--rest)",
+        "every destination below the " + (show + 1) + "th, added together");
+
+    mk("line", { "class": "ax", x1: L, y1: T - 4, x2: L, y2: H - B + 4 }, svg);
+    txt(svg, L, T - 12, "new labour permits, " + LAST, "axlab", "start");
+    txt(svg, L, H - 12,
+        narrow ? "top six in colour" : "the six largest in colour", "axlab", "start");
+  }
+  return { draw: draw };
+})();
+
+/* =============================================================== the churn
+   Eight destinations, five years, share of that year's new permits.  Drawn
+   as lines rather than a stack, because the question is what each one did,
+   not what they add to. */
+var flows = (function(){
+  var svg = el("svg-flows"), leg = el("leg-flows");
+
+  function draw(){
+    clear(svg);
+    var g = figSize(svg, 1000, 430, 0.68);
+    var W = g.W, H = g.H, narrow = g.narrow;
+    var L = narrow ? 44 : 58, R = narrow ? 18 : 128, T = 28, B = narrow ? 46 : 42;
+    var iw = W - L - R, ih = H - T - B;
+    var max = 0;
+    TOP8.forEach(function(r){
+      YEARS.forEach(function(y){ max = Math.max(max, shareIn(r, y)); });
+    });
+    max = Math.min(1, max * 1.12);
+    var X = function(i){ return L + i * iw / (YEARS.length - 1); };
+    var Y = function(v){ return T + ih - v / max * ih; };
+
+    ticks(0, max, 4).forEach(function(v){
+      mk("line", { "class": "gl", x1: L, y1: Y(v).toFixed(1),
+                   x2: L + iw, y2: Y(v).toFixed(1) }, svg);
+      txt(svg, L - 8, Y(v) + 4, Math.round(v * 100) + "%", "tk", "end");
+    });
+    mk("line", { "class": "ax", x1: L, y1: T + ih, x2: L + iw, y2: T + ih }, svg);
+    YEARS.forEach(function(y, i){
+      txt(svg, X(i), T + ih + 18, narrow ? shortYear(y) : y, "tk");
+    });
+
+    clear(leg);
+    var labels = [];
+    TOP8.forEach(function(r, k){
+      var colour = "var(" + HUE[k] + ")";
+      var d = YEARS.map(function(y, i){
+        return (i ? "L" : "M") + X(i).toFixed(1) + " " + Y(shareIn(r, y)).toFixed(1);
+      }).join(" ");
+      mk("path", { d: d, fill: "none", stroke: colour, "stroke-width": 2.2,
+                   "stroke-linejoin": "round" }, svg);
+      YEARS.forEach(function(y, i){
+        mk("circle", { cx: X(i).toFixed(1), cy: Y(shareIn(r, y)).toFixed(1),
+                       r: 3, fill: colour }, svg);
+        var hit = mk("circle", { "class": "hit", cx: X(i).toFixed(1),
+                                 cy: Y(shareIn(r, y)).toFixed(1), r: 13 }, svg);
+        hoverable(hit, "<b>" + esc(r.name) + " &middot; " + esc(y) + "</b>" +
+          '<span class="v">' + fInt(newIn(r, y)) + " new permits<br>" +
+          fPct1(shareIn(r, y)) + " of that year</span>");
+      });
+      if (!narrow) {
+        labels.push({ y: Y(shareIn(r, YEARS[YEARS.length - 1])),
+                      name: r.name, colour: colour });
+      }
+      var sw = document.createElement("span");
+      sw.innerHTML = '<i style="background:' + colour + '"></i>' + esc(r.name);
+      leg.appendChild(sw);
+    });
+
+    /* Three of the eight end the last year within half a point of each other,
+       so their labels land on the same line and print over one another.
+       Spread them: sort by where the line actually ends, then push each one
+       down until it clears the one above.  The label may then sit a little
+       off its line, which is the lesser problem -- an unreadable stack of
+       three names is not a label at all. */
+    if (labels.length) {
+      var GAP = 16;          /* .nlab is 12.5px; 16 clears its descenders */
+      labels.sort(function(a, b){ return a.y - b.y; });
+      for (var i = 1; i < labels.length; i++) {
+        if (labels[i].y - labels[i - 1].y < GAP) labels[i].y = labels[i - 1].y + GAP;
+      }
+      var overflow = labels[labels.length - 1].y - (T + ih);
+      if (overflow > 0) {
+        for (var j = labels.length - 1; j >= 0; j--) {
+          labels[j].y -= overflow;
+          if (j && labels[j].y - labels[j - 1].y >= GAP) break;
+          overflow = j ? labels[j - 1].y - (labels[j].y - GAP) : 0;
+          if (overflow <= 0) break;
+        }
+      }
+      labels.forEach(function(lb){
+        var t = txt(svg, L + iw + 9, lb.y + 4, lb.name, "nlab", "start");
+        t.setAttribute("fill", lb.colour);
+      });
+    }
+  }
+  return { draw: draw };
+})();
+
+/* ---------------------------------------------------------------- the table
+   Every destination and every year, for a reader who wants the archive rather
+   than the argument. */
+function fillTable(){
+  var body = el("tbody-all");
+  if (!body) return;
+  clear(body);
+  var html = [];
+  D.destinations.forEach(function(r){
+    var cells = YEARS.map(function(y){
+      var v = r.by_year[y];
+      return "<td>" + (v ? fInt(v[0]) : "&mdash;") + "</td>";
+    }).join("");
+    html.push("<tr><td>" + esc(r.name) + "</td>" + cells + "</tr>");
+  });
+  body.innerHTML = html.join("");
+}
+
+/* ------------------------------------------------------------------ boot */
+fillProse();
+fillTable();
+trend.draw();
+conc.draw();
+ladder.draw();
+flows.draw();
+
+var figCol = document.querySelector(".wide");
+function colWidth(){ return figCol ? figCol.clientWidth : window.innerWidth; }
+var rt, lastW = colWidth();
+window.addEventListener("resize", function(){
+  clearTimeout(rt);
+  rt = setTimeout(function(){
+    var w = colWidth();
+    if (w === lastW) return;
+    lastW = w;
+    trend.draw(); conc.draw(); ladder.draw(); flows.draw();
+  }, 160);
+});
+})();
+</script>
+</body>
+</html>
