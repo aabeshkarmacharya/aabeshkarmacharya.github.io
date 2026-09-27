@@ -1,0 +1,1305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Is Nepal Due for a Great Earthquake?">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%8F%B3%3C%2Ftext%3E%3C%2Fsvg%3E">
+<title>Is Nepal Due for a Great Earthquake?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..800,0..100,0..1&family=Source+Sans+3:wght@300;400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#EEEEF2; --surface:#FCFCFD; --surface-2:#F5F5F9; --sunk:#E3E3EA;
+  --ink:#15151C; --ink-2:#4E4E5C; --ink-3:#84848F; --rule:#D6D6DE; --rule-2:#C2C2CD;
+  --accent:#a02c5b; --alt:#2a78d6;
+  /* One hue for every mark, as on shake and odds: a line is told apart by
+     its dash and its label, never by a colour a reader might not separate. */
+  --mark:#a02c5b; --mark-soft:rgba(160,44,91,.16); --mark-dim:rgba(160,44,91,.32);
+  --you:#15151C; --warnc:#b54708;
+  --grid:rgba(21,21,28,.08);
+  --shadow:0 1px 2px rgba(21,21,28,.05),0 10px 30px -16px rgba(21,21,28,.18);
+  --shadow-lg:0 2px 4px rgba(21,21,28,.06),0 24px 60px -28px rgba(21,21,28,.30);
+  --field:#FFFFFF; --field-rule:#C2C2CD;
+  --measure:65ch; --wide:1120px;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
+    --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
+    --accent:#e5648f; --alt:#3987e5;
+    --mark:#e5648f; --mark-soft:rgba(229,100,143,.22); --mark-dim:rgba(229,100,143,.40);
+    --you:#EAEAF0; --warnc:#f0913a;
+    --grid:rgba(234,234,240,.09);
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+    --shadow-lg:0 2px 4px rgba(0,0,0,.55),0 24px 60px -28px rgba(0,0,0,.85);
+    --field:#15151B; --field-rule:#3A3A46;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
+  --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
+  --accent:#e5648f; --alt:#3987e5;
+  --mark:#e5648f; --mark-soft:rgba(229,100,143,.22); --mark-dim:rgba(229,100,143,.40);
+  --you:#EAEAF0; --warnc:#f0913a;
+  --grid:rgba(234,234,240,.09);
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+  --shadow-lg:0 2px 4px rgba(0,0,0,.55),0 24px 60px -28px rgba(0,0,0,.85);
+  --field:#15151B; --field-rule:#3A3A46;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:400; font-size:18.5px; line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; font-family:"Fraunces","Georgia",serif;
+  font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
+  letter-spacing:-.012em}
+.mono,code{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.wrap{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
+.wide{max-width:var(--wide); margin-inline:auto; padding-inline:24px}
+section{padding-block:clamp(38px,5.5vw,68px)}
+section+section{border-top:1px solid var(--rule)}
+p{margin:0 0 1.1em}
+a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2); text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--alt); outline-offset:3px; border-radius:3px}
+
+.eyebrow{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3);
+  display:flex; align-items:center; gap:12px; margin-bottom:16px}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
+h2{font-size:clamp(26px,3.6vw,36px); line-height:1.08; font-weight:700; margin-bottom:.48em}
+h3{font-size:20px; line-height:1.26; font-weight:600; margin:1.8em 0 .5em}
+.lede{font-size:20px; line-height:1.56; color:var(--ink-2)}
+.small{font-size:15.5px; line-height:1.55; color:var(--ink-2)}
+.tiny{font-size:13.5px; line-height:1.5; color:var(--ink-3)}
+
+header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
+  padding-block:clamp(40px,6.5vw,76px)}
+h1{font-size:clamp(34px,6vw,70px); line-height:.99; font-weight:800;
+   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:14ch; margin-bottom:.3em}
+.sub{max-width:56ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
+.kicker{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:20px}
+.devanagari{font-size:.6em; color:var(--ink-3); letter-spacing:0;
+  font-family:"Source Sans 3",sans-serif; font-weight:400; display:block;
+  margin-top:.55em; font-variation-settings:normal}
+
+.tool{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
+  gap:28px; align-items:start}
+.split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:26px;
+  align-items:start}
+.card{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+  box-shadow:var(--shadow); padding:24px}
+.card h3:first-child{margin-top:0}
+
+.field{margin-bottom:17px}
+.field:last-child{margin-bottom:0}
+label.lab{display:block; font-family:"DM Mono",monospace; font-size:11px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+  margin-bottom:7px}
+input[type=text],input[type=number],select{
+  width:100%; font:inherit; font-size:17px; color:var(--ink);
+  background:var(--field); border:1px solid var(--field-rule); border-radius:9px;
+  padding:10px 12px; appearance:none; -webkit-appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--ink-3) 50%),
+  linear-gradient(135deg,var(--ink-3) 50%,transparent 50%);
+  background-position:calc(100% - 19px) 50%,calc(100% - 13px) 50%;
+  background-size:6px 6px,6px 6px; background-repeat:no-repeat; padding-right:36px}
+input:focus,select:focus{border-color:var(--accent); outline:none;
+  box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 22%,transparent)}
+.two{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px}
+.seg{display:flex; border:1px solid var(--field-rule); border-radius:9px;
+  overflow:hidden; background:var(--field)}
+.seg button{flex:1; font:inherit; font-size:14.5px; padding:8px 4px; border:0;
+  background:transparent; color:var(--ink-2); cursor:pointer;
+  border-right:1px solid var(--field-rule)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--accent); color:#fff; font-weight:600}
+.sizerow{display:flex; align-items:center; gap:13px}
+.sizerow input[type=range]{flex:1; accent-color:var(--accent)}
+.sizerow .num{width:84px; flex-shrink:0}
+
+.answer{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+  box-shadow:var(--shadow-lg); overflow:hidden; position:sticky; top:20px}
+.answer .top{padding:24px 24px 20px; background:linear-gradient(180deg,
+  color-mix(in oklab,var(--accent) 8%,var(--surface)),var(--surface))}
+.big{font-family:"Fraunces",Georgia,serif; font-weight:800; line-height:1;
+  font-size:clamp(40px,5.6vw,58px); letter-spacing:-.022em;
+  font-variant-numeric:tabular-nums; margin:2px 0 6px}
+.big .unit{font-family:"Source Sans 3",sans-serif; font-weight:500;
+  font-size:.30em; letter-spacing:0; color:var(--ink-3); margin-left:.3em}
+.exact{font-size:16px; color:var(--ink-2); line-height:1.45}
+.ppbar{height:11px; border-radius:6px; margin:16px 0 7px; position:relative;
+  background:linear-gradient(90deg,var(--mark-soft),var(--mark))}
+.ppbar i{position:absolute; top:-4px; width:3px; height:19px; background:var(--you);
+  border-radius:2px; transform:translateX(-50%)}
+.ppends{display:flex; justify-content:space-between;
+  font-family:"DM Mono",monospace; font-size:12.5px; color:var(--ink-3)}
+
+.rows{border-top:1px solid var(--rule)}
+.row{display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+  padding:10px 24px; font-size:15.5px; border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}
+.row .k{color:var(--ink-2)}
+.row .k em{font-style:normal; color:var(--ink-3); font-size:13.5px; display:block;
+  line-height:1.35}
+.row .v{font-family:"DM Mono",monospace; font-size:15px; white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.row.tot{background:var(--surface-2); font-weight:600}
+.flag{margin:0 24px 20px; padding:11px 13px; border-radius:9px; font-size:14.5px;
+  line-height:1.48; background:var(--surface-2); border:1px solid var(--rule);
+  color:var(--ink-2)}
+.flag b{color:var(--ink)}
+.flag.warn{background:color-mix(in oklab,var(--warnc) 12%,var(--surface));
+  border-color:color-mix(in oklab,var(--warnc) 34%,var(--rule))}
+.acts{display:flex; gap:10px; padding:16px 24px 20px; border-top:1px solid var(--rule)}
+.acts .cta{font-size:14.5px; padding:9px 12px}
+#shareOut{margin:0 24px 18px; width:calc(100% - 48px);
+  font-family:"DM Mono",monospace; font-size:12.5px}
+
+.fig{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+  box-shadow:var(--shadow); padding:20px 20px 14px; position:relative}
+.fig h3{margin:0 0 4px; font-size:19px}
+.fig .note{font-size:14.5px; color:var(--ink-2); margin:0 0 12px; line-height:1.45}
+.fig svg{display:block; width:100%; height:auto; overflow:visible}
+.gridline{stroke:var(--grid); stroke-width:1}
+.axisline{stroke:var(--rule-2); stroke-width:1}
+.axistext{font-family:"DM Mono",monospace; font-size:10px; fill:var(--ink-3)}
+.axistitle{font-family:"Source Sans 3",sans-serif; font-size:11.5px; fill:var(--ink-3)}
+/* The magnitude-frequency points. Derived from a page that drew bars, so
+   this rule has to exist on its own or the circles fall back to black. */
+.dot{fill:var(--mark-soft); stroke:var(--mark); stroke-width:1.6}
+.bar{fill:var(--mark-soft)}
+.bar.under{fill:var(--mark-dim)}
+.youline{stroke:var(--you); stroke-width:2}
+.refline{stroke:var(--ink-3); stroke-width:1.5; stroke-dasharray:4 3}
+.figlab{font-family:"Source Sans 3",sans-serif; font-size:11px; fill:var(--ink-2);
+  paint-order:stroke; stroke:var(--surface); stroke-width:3px; stroke-linejoin:round}
+.figlab.you{fill:var(--ink); font-weight:600}
+.figlab.warnc{fill:var(--warnc)}
+.hit{fill:transparent; cursor:pointer}
+.tip{position:absolute; pointer-events:none; z-index:20; background:var(--surface);
+  border:1px solid var(--rule-2); border-radius:9px; box-shadow:var(--shadow-lg);
+  padding:9px 11px; font-size:13.5px; line-height:1.45; max-width:230px;
+  opacity:0; transition:opacity .1s}
+.tip.on{opacity:1}
+.tip b{display:block; font-size:14.5px; margin-bottom:2px}
+
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(156px,100%),1fr));
+  gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:11px;
+  overflow:hidden}
+/* Four tiles in a half-width column: two rows of two, never three and a
+   stranded empty cell showing the grid's own background. */
+.stats.pair{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stat{background:var(--surface); padding:15px 16px}
+.stat .n{font-family:"DM Mono",monospace; font-size:23px; line-height:1.1;
+  font-variant-numeric:tabular-nums; margin-bottom:3px}
+.stat .l{font-size:13px; color:var(--ink-3); line-height:1.35}
+
+table{width:100%; border-collapse:collapse; font-size:15px}
+th{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:400; text-align:right;
+  padding:0 0 8px; border-bottom:1px solid var(--rule)}
+th:first-child{text-align:left}
+td{padding:8px 0; border-bottom:1px solid var(--rule); text-align:right;
+  font-family:"DM Mono",monospace; font-variant-numeric:tabular-nums; font-size:14.5px}
+td:first-child{text-align:left; font-family:"Source Sans 3",sans-serif; font-size:15.5px}
+tr:last-child td{border-bottom:0}
+tr.you td{background:color-mix(in oklab,var(--accent) 11%,var(--surface));
+  font-weight:600; color:var(--ink)}
+tr.you td:first-child{border-left:3px solid var(--accent); padding-left:9px}
+
+button.cta{width:100%; font:inherit; font-size:17px; font-weight:600; padding:13px 18px;
+  border:0; border-radius:10px; background:var(--accent); color:#fff; cursor:pointer;
+  transition:filter .12s}
+button.cta:hover{filter:brightness(1.1)}
+button.cta.ghost{background:transparent; color:var(--ink);
+  border:1px solid var(--rule-2); font-weight:500}
+button.cta.ghost:hover{border-color:var(--accent); filter:none}
+
+.next{display:grid; grid-template-columns:1fr 1fr; gap:20px}
+a.nextcard{display:block; text-decoration:none; background:var(--surface);
+  border:1px solid var(--rule); border-radius:14px; padding:22px;
+  box-shadow:var(--shadow); transition:transform .16s, border-color .16s}
+a.nextcard:hover{transform:translateY(-2px); border-color:var(--rule-2)}
+a.nextcard h3{margin:0 0 .3em; font-size:21px}
+a.nextcard p{margin:0 0 14px; font-size:15.5px; color:var(--ink-2); line-height:1.45}
+a.nextcard .go{font-family:"DM Mono",monospace; font-size:11.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-3)}
+a.nextcard:hover .go{color:var(--accent)}
+
+/* ------------------------------------------------------ this page's own */
+.seg.wrapit{flex-wrap:wrap}
+.seg.wrapit button{flex:1 1 30%}
+.sizerow .num{width:74px; text-align:right}
+.hint{margin:6px 0 0}
+.custom{display:none; margin-top:10px}
+.custom.on{display:block}
+.band{fill:var(--mark-soft)}
+.bandedge{stroke:var(--mark); stroke-width:1; stroke-dasharray:2 3; fill:none}
+.load{stroke:var(--ink); stroke-width:2.2; fill:none}
+.load.ahead{stroke-dasharray:5 4; stroke-width:1.6}
+.pline{stroke:var(--mark); stroke-width:2.6; fill:none}
+.pfixed{stroke:var(--ink-2); stroke-width:1.6; stroke-dasharray:6 4; fill:none}
+.ppois{stroke:var(--ink-3); stroke-width:1.4; stroke-dasharray:1.5 4; fill:none;
+  stroke-linecap:round}
+.nowdot{fill:var(--you); stroke:var(--surface); stroke-width:2}
+.meter{height:8px; border-radius:4px; background:var(--surface-2); position:relative;
+  overflow:hidden; min-width:80px}
+.meter i{position:absolute; left:0; top:0; bottom:0; background:var(--mark)}
+td.metercell{width:42%; padding-left:14px}
+.hist td:nth-child(2){white-space:nowrap}
+.hist td.note{font-family:"Source Sans 3",sans-serif; font-size:14.5px; color:var(--ink-2);
+  text-align:left; padding-left:14px}
+
+footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:46px;
+  font-size:15.5px; color:var(--ink-2)}
+.srcs{font-size:14.5px; color:var(--ink-3)}
+.printonly{display:none}
+
+@media print{
+  :root{color-scheme:light}
+  body{background:#fff; color:#000; font-size:10.5pt}
+  .noprint,.acts,.tip{display:none !important}
+  .printonly{display:block; margin:12px 24px 18px; font-size:9.5pt; color:#444}
+  header.top{background:none; border-bottom:1px solid #999; padding-block:0 14px}
+  h1{font-size:21pt; max-width:none; margin-bottom:.2em}
+  .sub,.devanagari{display:none}
+  section{padding-block:15px !important; border-top:0 !important; break-inside:avoid}
+  .tool{display:block}
+  .answer{position:static; box-shadow:none; border:1px solid #999; break-inside:avoid}
+  .answer .top{background:none}
+  .card,.fig,.stats{box-shadow:none; border-color:#bbb; break-inside:avoid}
+  a[href]::after{content:""}
+}
+@media (max-width:900px){
+  .tool,.split,.next{grid-template-columns:minmax(0,1fr)}
+  .answer{position:static}
+}
+@media (max-width:760px){
+  body{font-size:17.5px}
+  .wrap,.wide{padding-inline:18px}
+  .card,.offer,.fig{padding:19px}
+  .row{padding-inline:19px}
+  .flag,#shareOut{margin-inline:19px}
+  #shareOut{width:calc(100% - 38px)}
+  td.metercell{width:34%}
+  .hist td.note{display:none}
+  .acts{flex-direction:column; padding-inline:19px}
+  .row{flex-direction:column; align-items:flex-start; gap:1px}
+  .row .v{white-space:normal}
+  input[type=text],input[type=number],select{font-size:16px}
+  select{padding-right:28px;
+    background-position:calc(100% - 15px) 50%,calc(100% - 9px) 50%}
+  table{font-size:14px}
+  td:first-child{font-size:14.5px}
+}
+</style>
+</head>
+<body>
+<script>window.DUE_DATA={"meta":{"now":2026,"year_min":1976,"year_max":2026,"years":51,"box":[26.0,80.0,31.0,88.5],"min_mag":4.5,"arc_km":850.0,"width_km":100.0,"mu_gpa":30.0,"rate_half":2.0,"slip_sigma":0.35,"alpha_half":0.2,"source":"USGS ComCat"},"catalogue":{"events":654,"max_mag":7.8,"max_year":2015,"released":9.427634555045973e+20,"loaded":2.47095e+21,"paid":0.38153886379918545,"mainshocks":296,"b":1.014,"b_err":0.059,"every_m7":59.0,"every_m8":609.0,"arc_every_physics":173.4,"budget":[[7.0,0.0273],[7.5,0.0491],[8.0,0.0872],[8.5,0.1539],[9.0,0.2708],[9.5,0.4752]]},"defaults":{"preset":"west","rate_mm":19.0,"slip_m":8.0,"alpha":0.5,"horizon":50},"presets":[{"id":"west","name":"Western Nepal","last":1505,"length_km":350,"note":"The central seismic gap. The 1505 earthquake is known from accounts in Tibet and India and from trenches; how far east it ran is argued over, and nothing that size has broken here since."},{"id":"east","name":"East-central Nepal","last":1934,"length_km":250,"note":"The 1934 Bihar-Nepal earthquake broke this stretch to the surface. Ninety-odd years of loading since is a fraction of what it released."},{"id":"gorkha","name":"Gorkha to Kathmandu","last":2015,"length_km":150,"note":"Where 2015 slipped at depth. It did not reach the surface, so the shallow part south of Kathmandu kept its load -- this preset treats the deep part only, which 2015 did reset."}],"history":[{"year":1255,"mag":7.8,"approx":true,"name":"Kathmandu","note":"killed perhaps a third of the valley, and King Abhaya Malla"},{"year":1505,"mag":8.2,"approx":true,"name":"Western Nepal","note":"the last great rupture of the central gap"},{"year":1833,"mag":7.7,"approx":true,"name":"Kathmandu","note":"deep, like 2015; did not reach the surface"},{"year":1934,"mag":8.0,"approx":false,"name":"Bihar-Nepal","note":"ruptured the surface for 150 km"},{"year":2015,"mag":7.8,"approx":false,"name":"Gorkha","note":"unzipped 150 km east; stopped short of the surface"}]};</script>
+
+<script>
+/* Port of model.py, line for line.  assemble.py runs this file under node
+   against the Python over a spread of settings and refuses to build if any
+   answer differs, so change the two together or not at all. */
+(function (root) {
+"use strict";
+
+var MU = 3.0e10;
+var WIDTH_KM = 100.0;
+
+var RATE_HALF = 2.0;
+var SLIP_SIGMA = 0.35;
+var ALPHA_HALF = 0.2;
+var ALPHA_MIN = 0.1;
+
+var Z9 = [-1.593219, -0.967422, -0.589456, -0.282216, 0.0,
+          0.282216, 0.589456, 0.967422, 1.593219];
+var N_UNIFORM = 5;
+
+// log erfc(x), Numerical Recipes erfcc
+function erfc(x) {
+  var z = Math.abs(x);
+  var t = 1.0 / (1.0 + 0.5 * z);
+  var lg = Math.log(t) + (-z * z - 1.26551223 + t * (1.00002368 + t * (0.37409196 + t * (
+    0.09678418 + t * (-0.18628806 + t * (0.27886807 + t * (-1.13520398 + t * (
+      1.48851587 + t * (-0.82215223 + t * 0.17087277)))))))));
+  if (x >= 0) return lg;
+  return Math.log(2.0 - Math.exp(lg));
+}
+
+function logPhi(x) {
+  return Math.log(0.5) + erfc(-x / Math.sqrt(2.0));
+}
+
+function bptSurvival(t, mean, alpha) {
+  if (t <= 0) return 1.0;
+  var r = Math.sqrt(t / mean);
+  var q = Math.sqrt(mean / t);
+  var u1 = (r - q) / alpha;
+  var u2 = (r + q) / alpha;
+  var a = logPhi(-u1);
+  var b = 2.0 / (alpha * alpha) + logPhi(-u2);
+  if (b >= a) return 0.0;
+  return Math.min(1.0, Math.exp(a) * -Math.expm1(b - a));
+}
+
+function grid(rateMm, slipM, alpha) {
+  var out = [], i, k, j;
+  for (i = 0; i < N_UNIFORM; i++) {
+    var f = (i + 0.5) / N_UNIFORM * 2.0 - 1.0;
+    var rate = (rateMm + f * RATE_HALF) / 1000.0;
+    for (k = 0; k < Z9.length; k++) {
+      var slip = slipM * Math.exp(SLIP_SIGMA * Z9[k]);
+      for (j = 0; j < N_UNIFORM; j++) {
+        var g = (j + 0.5) / N_UNIFORM * 2.0 - 1.0;
+        var a = Math.max(ALPHA_MIN, alpha + g * ALPHA_HALF);
+        out.push([slip / rate, a]);
+      }
+    }
+  }
+  return out;
+}
+
+function conditional(nodes, elapsed, horizon) {
+  var num = 0.0, den = 0.0, i;
+  for (i = 0; i < nodes.length; i++) {
+    var s0 = bptSurvival(elapsed, nodes[i][0], nodes[i][1]);
+    var s1 = bptSurvival(elapsed + horizon, nodes[i][0], nodes[i][1]);
+    num += s0 - s1;
+    den += s0;
+  }
+  return den > 0 ? num / den : NaN;
+}
+
+function fixed(mean, alpha, elapsed, horizon) {
+  var s0 = bptSurvival(elapsed, mean, alpha);
+  if (s0 <= 0) return NaN;
+  return (s0 - bptSurvival(elapsed + horizon, mean, alpha)) / s0;
+}
+
+function weightedQuantile(pairs, q) {
+  pairs = pairs.slice().sort(function (a, b) { return a[0] - b[0] || a[1] - b[1]; });
+  var tot = 0, acc = 0, i;
+  for (i = 0; i < pairs.length; i++) tot += pairs[i][1];
+  for (i = 0; i < pairs.length; i++) {
+    acc += pairs[i][1];
+    if (acc >= q * tot - 1e-12) return pairs[i][0];
+  }
+  return pairs[pairs.length - 1][0];
+}
+
+function mwFromMoment(m0) {
+  return (Math.log10(m0) - 9.1) / 1.5;
+}
+
+function forecast(s) {
+  var elapsed = s.now - s.last;
+  var rate = s.rate_mm / 1000.0;
+  var deficit = rate * elapsed;
+  var stress = MU * rate * elapsed / (WIDTH_KM * 1000.0) / 1e6;
+  var moment = MU * s.length_km * 1000.0 * WIDTH_KM * 1000.0 * deficit;
+  var nodes = grid(s.rate_mm, s.slip_m, s.alpha);
+  var mean = s.slip_m / rate;
+
+  var prior = nodes.map(function (n) { return [n[0], 1.0]; });
+  var post = nodes.map(function (n) { return [n[0], bptSurvival(elapsed, n[0], n[1])]; });
+  var postW = 0, postM = 0, i;
+  for (i = 0; i < post.length; i++) { postW += post[i][1]; postM += post[i][0] * post[i][1]; }
+  return {
+    elapsed: elapsed,
+    deficit_m: deficit,
+    stress_mpa: stress,
+    mw: moment > 0 ? mwFromMoment(moment) : null,
+    mean_central: mean,
+    mean_lo: weightedQuantile(prior, 0.05),
+    mean_hi: weightedQuantile(prior, 0.95),
+    mean_post: postW > 0 ? postM / postW : null,
+    p: conditional(nodes, elapsed, s.horizon),
+    p_fixed: fixed(mean, s.alpha, elapsed, s.horizon),
+    p_poisson: 1.0 - Math.exp(-s.horizon / mean),
+    slip_lo: s.slip_m * Math.exp(SLIP_SIGMA * -1.6448536),
+    slip_hi: s.slip_m * Math.exp(SLIP_SIGMA * 1.6448536)
+  };
+}
+
+function curve(s, tMax, step) {
+  tMax = tMax === undefined ? 1500 : tMax;
+  step = step === undefined ? 25 : step;
+  var nodes = grid(s.rate_mm, s.slip_m, s.alpha);
+  var mean = s.slip_m / (s.rate_mm / 1000.0);
+  var out = [], t;
+  for (t = 0; t <= tMax; t += step) {
+    out.push([t, conditional(nodes, t, s.horizon), fixed(mean, s.alpha, t, s.horizon)]);
+  }
+  return out;
+}
+
+var M = {MU: MU, WIDTH_KM: WIDTH_KM, RATE_HALF: RATE_HALF, SLIP_SIGMA: SLIP_SIGMA,
+         ALPHA_HALF: ALPHA_HALF, bptSurvival: bptSurvival, forecast: forecast,
+         curve: curve};
+if (typeof module !== "undefined" && module.exports) module.exports = M;
+else root.DUE_MODEL = M;
+})(this);
+</script>
+
+<header class="top">
+  <div class="wide">
+    <p class="kicker">GPS slip rates &middot; a renewal model &middot; USGS ComCat as the cross-check</p>
+    <h1>Is Nepal due for a great earthquake?<!-- "Ke Nepalma thulo bhukampa aaune bela bhayo?"
+      -- ASCII-only fragment, so the Devanagari is numeric character references. -->
+      <span class="devanagari">&#2325;&#2375; &#2344;&#2375;&#2346;&#2366;&#2354;&#2350;&#2366; &#2336;&#2370;&#2354;&#2379; &#2349;&#2370;&#2325;&#2350;&#2381;&#2346; &#2310;&#2313;&#2344;&#2375; &#2348;&#2375;&#2354;&#2366; &#2349;&#2351;&#2379;?</span></h1>
+    <p class="sub">India slides under Nepal about two centimetres a year, and the
+      fault between them is stuck. This works out how much slip each stretch of
+      it owes since it last broke, what that does to the stress on it, and the
+      chance it breaks within a span of years you choose &mdash; with every
+      assumption on a slider, because none of them is known well enough to
+      hide.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wide">
+    <div class="tool">
+
+      <div class="noprint">
+        <div class="card">
+          <h3>Which stretch of the fault</h3>
+          <div class="field">
+            <div class="seg wrapit" id="presetSeg" role="group" aria-label="Fault segment"></div>
+            <p class="tiny hint" id="presetNote"></p>
+            <div class="custom" id="customBox">
+              <div class="two">
+                <div class="field">
+                  <label class="lab" for="lastIn">Last great rupture, year</label>
+                  <input type="number" id="lastIn" min="1000" step="1">
+                </div>
+                <div class="field">
+                  <label class="lab" for="lenIn">Length of the stretch, km</label>
+                  <input type="number" id="lenIn" min="50" max="850" step="10">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="lab">Chance within the next</label>
+            <div class="seg" id="horizonSeg" role="group" aria-label="Forecast span">
+              <button type="button" data-h="10" aria-pressed="false">10 yr</button>
+              <button type="button" data-h="30" aria-pressed="false">30 yr</button>
+              <button type="button" data-h="50" aria-pressed="true">50 yr</button>
+              <button type="button" data-h="100" aria-pressed="false">100 yr</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3 style="margin-top:0">The assumptions</h3>
+          <p class="small" style="margin-bottom:16px">Each is a best guess with a
+            spread around it; the page averages over the spread, so moving a
+            slider moves the middle of a range, not a single number.</p>
+
+          <div class="field">
+            <label class="lab" for="rateIn">Convergence across Nepal, mm a year</label>
+            <div class="sizerow">
+              <input type="range" id="rateIn" min="14" max="24" step="0.5">
+              <span class="num mono" id="rateOut"></span>
+            </div>
+            <p class="tiny hint" id="rateNote"></p>
+          </div>
+
+          <div class="field">
+            <label class="lab" for="slipIn">Slip in one great rupture, metres</label>
+            <div class="sizerow">
+              <input type="range" id="slipIn" min="3" max="16" step="0.5">
+              <span class="num mono" id="slipOut"></span>
+            </div>
+            <p class="tiny hint" id="slipNote"></p>
+          </div>
+
+          <div class="field">
+            <label class="lab" for="alphaIn">How regular the fault is (aperiodicity)</label>
+            <div class="sizerow">
+              <input type="range" id="alphaIn" min="0.2" max="1.0" step="0.05">
+              <span class="num mono" id="alphaOut"></span>
+            </div>
+            <p class="tiny hint" id="alphaNote"></p>
+          </div>
+
+          <button type="button" class="cta ghost" id="resetBtn">Back to the defaults</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="answer">
+          <div class="top">
+            <p class="mono" style="font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+               color:var(--ink-3); margin:0 0 4px" id="outWhere">&mdash;</p>
+            <div class="big" id="outBig">&mdash;</div>
+            <p class="exact" id="outLead">&mdash;</p>
+            <div class="ppbar" aria-hidden="true"><i id="outMark"></i></div>
+            <div class="ppends"><span>0%</span><span>50%</span><span>100%</span></div>
+            <p class="tiny" style="margin:11px 0 0" id="outSub"></p>
+            <p class="printonly mono" id="printPlan"></p>
+          </div>
+          <div class="rows" id="outRows"></div>
+          <div class="flag warn" id="outFlag"></div>
+          <div class="acts noprint">
+            <button type="button" class="cta ghost" id="shareBtn">Copy a link to this</button>
+            <button type="button" class="cta ghost" id="printBtn">Print or save as PDF</button>
+          </div>
+          <input type="text" id="shareOut" class="noprint" readonly
+                 aria-label="Link to this result" style="display:none">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">Stress, building</p>
+    <h2>The load since the fault last broke</h2>
+    <p class="lede" style="margin-bottom:26px">The line is slip the fault owes: the
+      plates keep moving and the locked fault does not, so the debt grows at the
+      convergence rate, every year, without pause. The band is how much slip
+      great Himalayan ruptures have released. Where the line enters the band,
+      a rupture of the familiar size becomes possible &mdash; not scheduled.</p>
+    <div class="fig" id="figLoad">
+      <h3 id="loadTitle">Slip owed, and the stress it adds</h3>
+      <p class="note" id="loadNote"></p>
+      <div id="loadChart"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">What waiting does</p>
+    <h2>The odds rise, and then stop rising</h2>
+    <div class="split">
+      <div class="fig" id="figCurve">
+        <h3>Chance in the next <span id="curveH">50</span> years, by years already waited</h3>
+        <p class="note">Solid: this page's answer, averaged over the uncertainty.
+          Dashed: the same model with every assumption fixed at its middle value.
+          Dotted: a fault with no memory at all.</p>
+        <div id="curveChart"></div>
+      </div>
+      <div>
+        <p>A locked fault ought to get more dangerous every year it holds, and
+          for a while the model agrees: straight after a rupture the chance of
+          another is close to nothing, and it climbs as the load does.</p>
+        <p>Then it levels off. The model does not know how much slip this fault
+          can hold, only a range, and every silent year is evidence about which
+          part of the range is right. A fault that has waited
+          <span id="curveT">521</span> years is more likely to be one that
+          normally waits that long &mdash; so the silence pushes the estimated
+          interval out from <b id="curvePrior">&mdash;</b> to
+          <b id="curvePost">&mdash;</b> years, and the rising load and the
+          lengthening estimate cancel.</p>
+        <p class="small" id="curveGap"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">What the catalogue says</p>
+    <h2>Small earthquakes cannot pay for great ones</h2>
+    <p class="lede" style="margin-bottom:26px">The instrumental record is too
+      short to contain a single great Himalayan rupture, so it cannot be the
+      forecast. It can still test one. If the steady rain of small and moderate
+      earthquakes were releasing the load, there would be nothing owed.</p>
+    <div class="split">
+      <div>
+        <div class="stats pair" id="catStats"></div>
+        <p class="small" style="margin-top:18px" id="catNote"></p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Extend the line, and see what it pays</h3>
+        <p class="small" style="margin-bottom:14px" id="budgetNote"></p>
+        <table>
+          <thead><tr><th>Line runs up to</th><th>Share of the load</th><th></th></tr></thead>
+          <tbody id="budgetBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">The record before the record</p>
+    <h2>Eight centuries of the ones that mattered</h2>
+    <div class="card">
+      <table class="hist">
+        <thead><tr><th>Year</th><th>Magnitude</th><th>Where</th><th style="text-align:left; padding-left:14px">What it did</th></tr></thead>
+        <tbody id="histBody"></tbody>
+      </table>
+      <p class="tiny" style="margin:14px 0 0" id="histNote"></p>
+    </div>
+  </div>
+</section>
+
+<section class="noprint">
+  <div class="wide">
+    <div class="next">
+      <a class="nextcard" href="../shake/">
+        <h3>What has actually happened near you</h3>
+        <p>The counting this page refuses to forecast from: every earthquake the
+          catalogue has put near a Nepali town since 1976.</p>
+        <span class="go">How often does it shake here &rarr;</span>
+      </a>
+      <a class="nextcard" href="../earthquakes/">
+        <h3>The essay behind both</h3>
+        <p>Fifty years of the world catalogue: the laws that hold exactly,
+          and the places where the archive quietly misleads.</p>
+        <span class="go">Four hundred thousand earthquakes &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Read this part first, not last</p>
+    <h2>A probability, not a prediction</h2>
+    <p><b>Nobody can say when.</b> No method has ever predicted the date of a
+      large earthquake, and this is not one. What it gives is the chance over a
+      span of decades, which is what building codes and insurers use. Kathmandu
+      was called overdue for years before 2015; that was right about the kind
+      of earthquake and the region, and could not have said April.</p>
+    <p><b>The answer is mostly assumptions, and they are on sliders.</b> The
+      slip a great rupture releases, the length of each stretch, and how
+      regularly the fault breaks are each known to perhaps a factor of two.
+      The segment lengths are rounded hard. How far east the 1505 rupture ran
+      is argued over, and if it stopped short, part of western Nepal has been
+      loading for longer still.</p>
+    <p><b>The stress figure is an order of magnitude.</b> It divides the slip
+      owed by the width of the locked fault, which is the simplest physics
+      that gives the right size; a real stress model needs the fault's shape
+      and the rock around it. Its use here is to show the load is in the range
+      where great ruptures have happened, not to say exactly where in it.</p>
+    <p><b>Great earthquakes are not the only danger.</b> This forecasts the
+      rare ruptures that break a whole stretch of the fault. A magnitude 6 or 7
+      can happen anywhere in Nepal in any year, and the catalogue says one of
+      magnitude 7 happens somewhere in this box about every
+      <span id="limM7">59</span> years.</p>
+    <p><b>Nothing here is about your building.</b> How hard the ground moves
+      under a house depends on the rupture, the distance and the soil, and what
+      happens next depends on how the house was built. That is the question
+      worth spending money on.</p>
+    <p class="small" id="limStats"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="srcs" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs" id="srcs"></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+var D = window.DUE_DATA;
+var M = D.meta, C = D.catalogue, MODEL = window.DUE_MODEL;
+function el(id){ return document.getElementById(id); }
+
+/* ------------------------------------------------------------- numbers */
+
+function group(n){ return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+function esc(s){
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function pct(p){
+  if (!isFinite(p)) return "n/a";
+  if (p < 0.005) return "under 1%";
+  if (p > 0.995) return "over 99%";
+  return Math.round(p * 100) + "%";
+}
+function oneIn(p){
+  // "about 1 in 6" is how a reader weighs a chance; a percentage is how they quote it.
+  if (!isFinite(p) || p < 0.005) return "less than 1 in 200";
+  if (p > 0.6) return "better than even";
+  return "about 1 in " + Math.max(2, Math.round(1 / p));
+}
+function yrs(y){ return group(y) + " yr"; }
+
+/* ---------------------------------------------------------------- state */
+
+var PRESETS = {};
+D.presets.forEach(function(p){ PRESETS[p.id] = p; });
+
+var state = {};
+function defaults(){
+  var d = D.defaults, p = PRESETS[d.preset];
+  state = {preset: d.preset, last: p.last, length_km: p.length_km,
+           rate_mm: d.rate_mm, slip_m: d.slip_m, alpha: d.alpha, horizon: d.horizon};
+}
+
+function settings(){
+  return {last: state.last, now: M.now, rate_mm: state.rate_mm, slip_m: state.slip_m,
+          alpha: state.alpha, horizon: state.horizon, length_km: state.length_km};
+}
+
+var F = null;          // the current forecast, recomputed on every change
+function compute(){ F = MODEL.forecast(settings()); }
+
+function segName(){
+  return state.preset === "custom" ? "Your own segment" : PRESETS[state.preset].name;
+}
+
+/* ================================================================ answer */
+
+var answer = (function(){
+
+  function row(k, sub, v, cls){
+    return '<div class="row' + (cls ? " " + cls : "") + '"><span class="k">' + k +
+      (sub ? "<em>" + sub + "</em>" : "") + '</span><span class="v">' + v + "</span></div>";
+  }
+
+  function draw(){
+    var h = state.horizon;
+    el("outWhere").textContent = segName() + "  /  last broke " + state.last +
+      "  /  next " + h + " years";
+    el("outBig").textContent = pct(F.p);
+    el("outLead").textContent = "chance of a great rupture on this stretch of the fault " +
+      "in the next " + h + " years: " + oneIn(F.p) + ".";
+    el("outMark").style.left = Math.max(0, Math.min(100, F.p * 100)) + "%";
+
+    var owed = F.deficit_m, lo = F.slip_lo, med = state.slip_m;
+    el("outSub").textContent = owed < lo
+      ? "It owes " + owed.toFixed(1) + " m of slip, less than even a small great " +
+        "rupture releases. The chance is low because the load is."
+      : owed < med
+        ? "It owes " + owed.toFixed(1) + " m of slip: inside the range great ruptures " +
+          "release, below the typical one."
+        : "It owes " + owed.toFixed(1) + " m of slip, more than a typical great rupture " +
+          "releases. The chance is not higher still because a fault that has held " +
+          "this long is probably one that can.";
+
+    el("printPlan").textContent = segName() + ", last rupture " + state.last +
+      ", " + state.length_km + " km  /  " + state.rate_mm + " mm/yr, " + state.slip_m +
+      " m per rupture, aperiodicity " + state.alpha.toFixed(2);
+
+    var s = [];
+    s.push(row("Years since the last great rupture", null, group(F.elapsed)));
+    s.push(row("Slip owed", "at " + state.rate_mm + " mm a year, never released",
+               F.deficit_m.toFixed(1) + " m"));
+    s.push(row("Stress added", "great ruptures typically release 1 to 10 MPa",
+               "~" + F.stress_mpa.toFixed(1) + " MPa"));
+    s.push(row("All of it released at once", "over " + state.length_km + " km of fault",
+               F.mw ? "one Mw " + F.mw.toFixed(1) : "none yet"));
+    s.push(row("Typical interval between great ruptures", "90% range " +
+               group(F.mean_lo) + " to " + group(F.mean_hi) + " yr",
+               yrs(F.mean_central)));
+    s.push(row("That interval, after the silence", "what " + group(F.elapsed) +
+               " quiet years say about it", F.mean_post ? yrs(F.mean_post) : "n/a"));
+    s.push(row("With every assumption fixed", "overstates it: ignores what waiting teaches",
+               pct(F.p_fixed)));
+    s.push(row("A fault with no memory", "the same average rate, but load never builds",
+               pct(F.p_poisson)));
+    s.push(row("This page's answer", "averaged over " + (5 * 9 * 5) + " settings, " +
+               "weighted by the silence", pct(F.p), "tot"));
+    el("outRows").innerHTML = s.join("");
+
+    el("outFlag").innerHTML = "<b>A chance over " + h + " years, not a date.</b> " +
+      "Nothing, including this, can say which year. And this is only the rare " +
+      "rupture that breaks a whole stretch: a magnitude 7 happens somewhere in " +
+      "Nepal about every " + Math.round(C.every_m7) + " years whatever this says.";
+  }
+
+  return {draw: draw};
+})();
+
+/* ================================================================ figures */
+
+var REDRAW = [];
+
+function fig(host, build){
+  function go(){
+    var w = Math.max(260, host.clientWidth || 520);
+    host.innerHTML = build(w);
+  }
+  REDRAW.push(go);
+  return go;
+}
+
+function niceStep(span, want){
+  var raw = span / want, p = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
+  var n = raw / p;
+  return (n < 1.5 ? 1 : n < 3.5 ? 2 : n < 7.5 ? 5 : 10) * p;
+}
+
+function f1(v){ return v.toFixed(1); }
+
+/* The load: slip owed against the band great ruptures release. */
+
+var load = (function(){
+
+  var go;
+
+  function build(w){
+    var narrow = w < 560;
+    var h = Math.round(Math.max(230, Math.min(330, w * 0.5)));
+    var L = narrow ? 40 : 50, R = narrow ? 44 : 58, T = 16, B = 38;
+    var iw = w - L - R, ih = h - T - B;
+    var rate = state.rate_mm / 1000;
+    var x0 = state.last;
+    // Far enough to show the line entering the band, and always past the horizon.
+    var x1 = Math.max(M.now + state.horizon, Math.min(state.last + 1.08 * F.slip_hi / rate,
+                      M.now + 600));
+    x1 = Math.ceil(x1 / 25) * 25;
+    var yMax = Math.max(F.slip_hi, rate * (x1 - x0)) * 1.1;
+    var X = function(y){ return L + (y - x0) / (x1 - x0) * iw; };
+    var Y = function(m){ return T + ih - m / yMax * ih; };
+    var mpaPerM = MODEL.MU / (MODEL.WIDTH_KM * 1000) / 1e6;
+
+    var s = ['<svg viewBox="0 0 ' + w + " " + h + '" role="img" aria-label="Slip owed on the fault since its last great rupture, against the slip great ruptures release">'];
+    var st = niceStep(yMax, 5), v;
+    for (v = 0; v <= yMax + 1e-9; v += st) {
+      s.push('<line class="gridline" x1="' + L + '" y1="' + f1(Y(v)) + '" x2="' + (L + iw) +
+             '" y2="' + f1(Y(v)) + '"/>');
+      s.push('<text class="axistext" x="' + (L - 7) + '" y="' + f1(Y(v) + 3.5) +
+             '" text-anchor="end">' + (st < 1 ? v.toFixed(1) : Math.round(v)) + '</text>');
+    }
+    var mst = niceStep(yMax * mpaPerM, 5);
+    for (v = 0; v <= yMax * mpaPerM + 1e-9; v += mst) {
+      s.push('<text class="axistext" x="' + (L + iw + 7) + '" y="' + f1(Y(v / mpaPerM) + 3.5) +
+             '">' + (mst < 1 ? v.toFixed(1) : Math.round(v)) + '</text>');
+    }
+    var xs = niceStep(x1 - x0, narrow ? 4 : 7), x;
+    for (x = Math.ceil(x0 / xs) * xs; x <= x1; x += xs) {
+      s.push('<text class="axistext" x="' + f1(X(x)) + '" y="' + (T + ih + 15) +
+             '" text-anchor="middle">' + x + '</text>');
+    }
+    s.push('<line class="axisline" x1="' + L + '" y1="' + (T + ih) + '" x2="' + (L + iw) +
+           '" y2="' + (T + ih) + '"/>');
+    s.push('<text class="axistitle" transform="translate(11,' + (T + ih / 2) +
+           ') rotate(-90)" text-anchor="middle">slip owed, m</text>');
+    s.push('<text class="axistitle" transform="translate(' + (w - 6) + ',' + (T + ih / 2) +
+           ') rotate(-90)" text-anchor="middle">stress added, MPa</text>');
+
+    // the band: 5th to 95th percentile of slip per great rupture
+    s.push('<rect class="band" x="' + L + '" y="' + f1(Y(F.slip_hi)) + '" width="' + iw +
+           '" height="' + f1(Y(F.slip_lo) - Y(F.slip_hi)) + '"/>');
+    s.push('<line class="bandedge" x1="' + L + '" y1="' + f1(Y(state.slip_m)) + '" x2="' +
+           (L + iw) + '" y2="' + f1(Y(state.slip_m)) + '"/>');
+    s.push('<text class="figlab" x="' + (L + 8) + '" y="' + f1(Y(F.slip_hi) + 14) + '">' +
+           (narrow ? "one great rupture" : "what one great rupture releases, 90% range") +
+           '</text>');
+
+    var yNow = rate * (M.now - x0), yEnd = rate * (x1 - x0);
+    s.push('<line class="load" x1="' + f1(X(x0)) + '" y1="' + f1(Y(0)) + '" x2="' +
+           f1(X(M.now)) + '" y2="' + f1(Y(yNow)) + '"/>');
+    s.push('<line class="load ahead" x1="' + f1(X(M.now)) + '" y1="' + f1(Y(yNow)) + '" x2="' +
+           f1(X(x1)) + '" y2="' + f1(Y(yEnd)) + '"/>');
+    s.push('<circle class="nowdot" cx="' + f1(X(M.now)) + '" cy="' + f1(Y(yNow)) + '" r="5"/>');
+    var right = X(M.now) > L + iw * 0.7;
+    s.push('<text class="figlab you" x="' + f1(X(M.now) + (right ? -9 : 9)) + '" y="' +
+           f1(Y(yNow) - 9) + '" text-anchor="' + (right ? "end" : "start") + '">' + M.now +
+           ": " + yNow.toFixed(1) + " m</text>");
+    s.push('<text class="figlab" x="' + f1(X(x0) + 6) + '" y="' + f1(Y(0) - 8) + '">' +
+           state.last + " rupture</text>");
+    s.push("</svg>");
+    return s.join("");
+  }
+
+  function draw(){
+    if (!go) go = fig(el("loadChart"), build);
+    go();
+    var rate = state.rate_mm / 1000;
+    var reach = function(m){ return Math.round(state.last + m / rate); };
+    var a = reach(F.slip_lo), b = reach(state.slip_m);
+    function when(y){ return (y <= M.now ? " in " : " around ") + y; }
+    var verbA = a <= M.now ? "passed" : "reaches", verbB = b <= M.now ? "passed" : "reaches";
+    el("loadNote").textContent = "At " + state.rate_mm + " mm a year the debt " + verbA +
+      " the smallest great-rupture slip" + when(a) + " and " +
+      (verbB === verbA ? "" : verbB + " ") + "the typical one" + when(b) +
+      ". The right-hand axis is the same line as stress: " +
+      (MODEL.MU / (MODEL.WIDTH_KM * 1000) / 1e6).toFixed(1) + " MPa for every metre owed.";
+  }
+
+  return {draw: draw};
+})();
+
+/* What waiting does: the conditional chance against years already waited. */
+
+var curve = (function(){
+
+  var go, pts = [];
+
+  function build(w){
+    var narrow = w < 520;
+    var h = Math.round(Math.max(220, Math.min(300, w * 0.66)));
+    var L = 44, R = 14, T = 14, B = 38;
+    var iw = w - L - R, ih = h - T - B;
+    var tMax = Math.max(1500, Math.ceil((F.elapsed + 200) / 250) * 250);
+    pts = MODEL.curve(settings(), tMax, 25);
+    var yMax = 0;
+    pts.forEach(function(p){
+      if (isFinite(p[1])) yMax = Math.max(yMax, p[1]);
+      if (isFinite(p[2])) yMax = Math.max(yMax, p[2]);
+    });
+    yMax = Math.max(yMax, F.p_poisson, 0.05) * 1.15;
+    var X = function(t){ return L + t / tMax * iw; };
+    var Y = function(p){ return T + ih - p / yMax * ih; };
+
+    var s = ['<svg viewBox="0 0 ' + w + " " + h + '" role="img" aria-label="Chance of a great rupture against years since the last one">'];
+    var st = niceStep(yMax * 100, 5), v;
+    for (v = 0; v <= yMax * 100 + 1e-9; v += st) {
+      s.push('<line class="gridline" x1="' + L + '" y1="' + f1(Y(v / 100)) + '" x2="' +
+             (L + iw) + '" y2="' + f1(Y(v / 100)) + '"/>');
+      s.push('<text class="axistext" x="' + (L - 7) + '" y="' + f1(Y(v / 100) + 3.5) +
+             '" text-anchor="end">' + Math.round(v) + '%</text>');
+    }
+    var xs = niceStep(tMax, narrow ? 4 : 6), t;
+    for (t = 0; t <= tMax; t += xs) {
+      s.push('<text class="axistext" x="' + f1(X(t)) + '" y="' + (T + ih + 15) +
+             '" text-anchor="middle">' + t + '</text>');
+    }
+    s.push('<line class="axisline" x1="' + L + '" y1="' + (T + ih) + '" x2="' + (L + iw) +
+           '" y2="' + (T + ih) + '"/>');
+    s.push('<text class="axistitle" x="' + (L + iw / 2) + '" y="' + (h - 4) +
+           '" text-anchor="middle">years since the last great rupture</text>');
+
+    function path(i){
+      var d = "", pen = false;
+      pts.forEach(function(p){
+        if (!isFinite(p[i])) { pen = false; return; }
+        d += (pen ? "L" : "M") + f1(X(p[0])) + "," + f1(Y(p[i]));
+        pen = true;
+      });
+      return d;
+    }
+    s.push('<line class="ppois" x1="' + L + '" y1="' + f1(Y(F.p_poisson)) + '" x2="' +
+           (L + iw) + '" y2="' + f1(Y(F.p_poisson)) + '"/>');
+    s.push('<path class="pfixed" d="' + path(2) + '"/>');
+    s.push('<path class="pline" d="' + path(1) + '"/>');
+    s.push('<circle class="nowdot" cx="' + f1(X(F.elapsed)) + '" cy="' + f1(Y(F.p)) + '" r="5.5"/>');
+    var right = X(F.elapsed) > L + iw * 0.6;
+    s.push('<text class="figlab you" x="' + f1(X(F.elapsed) + (right ? -9 : 9)) + '" y="' +
+           f1(Y(F.p) + (F.p > yMax * 0.75 ? 18 : -10)) + '" text-anchor="' +
+           (right ? "end" : "start") + '">now: ' + pct(F.p) + "</text>");
+    s.push('<text class="figlab" x="' + (L + iw - 4) + '" y="' + f1(Y(F.p_poisson) - 6) +
+           '" text-anchor="end">no memory</text>');
+    s.push("</svg>");
+    return s.join("");
+  }
+
+  function draw(){
+    if (!go) go = fig(el("curveChart"), build);
+    go();
+    el("curveH").textContent = state.horizon;
+    el("curveT").textContent = group(F.elapsed);
+    el("curvePrior").textContent = group(F.mean_central);
+    el("curvePost").textContent = F.mean_post ? group(F.mean_post) : "n/a";
+    var peak = 0, at = 0;
+    pts.forEach(function(p){ if (isFinite(p[1]) && p[1] > peak) { peak = p[1]; at = p[0]; } });
+    el("curveGap").textContent = "On these settings the chance peaks at " + pct(peak) +
+      " around " + group(at) + " years of waiting. With every assumption fixed it would " +
+      "be " + pct(F.p_fixed) + " today instead of " + pct(F.p) +
+      ": the gap is what the uncertainty is worth, and ignoring it overstates the danger.";
+  }
+
+  return {draw: draw};
+})();
+
+/* ============================================================== catalogue */
+
+var catalogue = (function(){
+
+  function tile(n, l){ return '<div class="stat"><div class="n">' + n + '</div><div class="l">' + l + "</div></div>"; }
+
+  function draw(){
+    el("catStats").innerHTML = [
+      tile(group(C.events), "earthquakes of M" + M.min_mag + "+ in and around Nepal, " +
+           M.year_min + " to " + M.year_max),
+      tile(Math.round(C.paid * 100) + "%", "of the load those " + M.years +
+           " years added was released by them, most of it in " + C.max_year),
+      tile("b = " + C.b.toFixed(2), "the size law's slope on " + group(C.mainshocks) +
+           " mainshocks, &plusmn;" + C.b_err.toFixed(2) + ": the textbook value"),
+      tile(group(C.every_m8) + " v " + group(C.arc_every_physics),
+           "years between M8s: the line from small earthquakes, against what the " +
+           "plates need somewhere on the arc")
+    ].join("");
+    el("catNote").textContent = "The catalogue obeys the law every catalogue does: ten " +
+      "times fewer earthquakes for every step up in magnitude. Extend that line and it " +
+      "offers a magnitude 8 somewhere in Nepal once every " + group(C.every_m8) +
+      " years. The slip rate asks for a great rupture about every " +
+      group(C.arc_every_physics) + ". The two do not agree, and the disagreement is " +
+      "the finding.";
+    el("budgetNote").textContent = "Each row lets the line run up to a largest " +
+      "possible earthquake and adds up the energy (seismic moment) it would release, " +
+      "as a share of what " + M.arc_km + " km of locked fault loads at " +
+      D.defaults.rate_mm + " mm a year.";
+    el("budgetBody").innerHTML = C.budget.map(function(b){
+      return "<tr><td>M" + b[0].toFixed(1) + "</td><td>" + Math.round(b[1] * 100) +
+        '%</td><td class="metercell"><div class="meter"><i style="width:' +
+        Math.min(100, b[1] * 100).toFixed(1) + '%"></i></div></td></tr>';
+    }).join("") + '<tr><td colspan="3" class="tiny" style="text-align:left; ' +
+      'font-family:inherit; padding-top:12px">Even allowed to reach magnitude ' +
+      C.budget[C.budget.length - 1][0].toFixed(1) + ", the line pays about half. The " +
+      "rest has to come from great ruptures far more common than the line predicts " +
+      "&mdash; or from slip that makes no earthquake, which the GPS, showing the fault " +
+      "locked, argues against. That is why the forecast above is built from slip, " +
+      "not from counting.</td></tr>";
+  }
+
+  return {draw: draw};
+})();
+
+/* ================================================================ history */
+
+var past = (function(){
+  function draw(){
+    el("histBody").innerHTML = D.history.map(function(e){
+      return "<tr><td>" + e.year + "</td><td>" + (e.approx ? "~" : "") + e.mag.toFixed(1) +
+        "</td><td>" + esc(e.name) + '</td><td class="note">' + esc(e.note) + "</td></tr>";
+    }).join("");
+    el("histNote").textContent = "Only 2015 is in the instrumental catalogue. The rest " +
+      "are from chronicles, damage accounts and trenches dug across the frontal fault; " +
+      "magnitudes marked ~ are estimates from damage and could be off by half a unit " +
+      "either way.";
+  }
+  return {draw: draw};
+})();
+
+/* ============================================================== controls */
+
+var controls = (function(){
+
+  function paintPresets(){
+    var b = D.presets.map(function(p){
+      return '<button type="button" data-p="' + p.id + '" aria-pressed="' +
+        (state.preset === p.id) + '">' + esc(p.name) + " (" + p.last + ")</button>";
+    });
+    b.push('<button type="button" data-p="custom" aria-pressed="' +
+           (state.preset === "custom") + '">Choose my own</button>');
+    el("presetSeg").innerHTML = b.join("");
+  }
+
+  function draw(){
+    paintPresets();
+    el("presetNote").textContent = state.preset === "custom"
+      ? "Any year and length you like. The length only changes the magnitude the debt " +
+        "adds up to; the chance depends on the years and the slip."
+      : PRESETS[state.preset].note;
+    el("customBox").classList.toggle("on", state.preset === "custom");
+    el("lastIn").max = M.now;
+    if (document.activeElement !== el("lastIn")) el("lastIn").value = state.last;
+    if (document.activeElement !== el("lenIn")) el("lenIn").value = state.length_km;
+    var hb = el("horizonSeg").querySelectorAll("button"), i;
+    for (i = 0; i < hb.length; i++)
+      hb[i].setAttribute("aria-pressed", String(+hb[i].dataset.h === state.horizon));
+
+    el("rateIn").value = state.rate_mm;
+    el("rateOut").textContent = state.rate_mm.toFixed(1);
+    el("rateNote").textContent = "GPS puts it at 17 to 21 across Nepal. The page spreads " +
+      "the slider by \u00b1" + MODEL.RATE_HALF + ": " + (state.rate_mm - MODEL.RATE_HALF) +
+      " to " + (state.rate_mm + MODEL.RATE_HALF) + ".";
+    el("slipIn").value = state.slip_m;
+    el("slipOut").textContent = state.slip_m.toFixed(1);
+    el("slipNote").textContent = "Trenches across the frontal fault find several metres to " +
+      "more than ten per great rupture. Spread: " + F.slip_lo.toFixed(1) + " to " +
+      F.slip_hi.toFixed(1) + " m, 90% of the time.";
+    el("alphaIn").value = state.alpha;
+    el("alphaOut").textContent = state.alpha.toFixed(2);
+    var a = state.alpha;
+    el("alphaNote").textContent = (a < 0.35
+      ? "Nearly clockwork: ruptures close to the average interval. No real fault has shown this."
+      : a < 0.65
+        ? "Moderately regular. 0.5 is the value most renewal forecasts adopt."
+        : "Irregular: long waits and short ones both common, so waiting says little.") +
+      " Spread \u00b1" + MODEL.ALPHA_HALF + ".";
+  }
+
+  function wire(){
+    el("presetSeg").addEventListener("click", function(ev){
+      var b = ev.target.closest("button[data-p]");
+      if (!b) return;
+      var id = b.dataset.p;
+      state.preset = id;
+      if (id !== "custom") {
+        state.last = PRESETS[id].last;
+        state.length_km = PRESETS[id].length_km;
+      }
+      render();
+    });
+    el("horizonSeg").addEventListener("click", function(ev){
+      var b = ev.target.closest("button[data-h]");
+      if (!b) return;
+      state.horizon = +b.dataset.h;
+      render();
+    });
+    function slider(id, key){
+      el(id).addEventListener("input", function(){
+        state[key] = +el(id).value;
+        render();
+      });
+    }
+    slider("rateIn", "rate_mm");
+    slider("slipIn", "slip_m");
+    slider("alphaIn", "alpha");
+    function num(id, key, lo, hi){
+      el(id).addEventListener("input", function(){
+        var v = Math.round(+el(id).value);
+        if (!isFinite(v) || v < lo || v > hi) return;   // wait for a whole number in range
+        state[key] = v;
+        render();
+      });
+    }
+    num("lastIn", "last", 1000, M.now);
+    num("lenIn", "length_km", 50, 850);
+    el("resetBtn").addEventListener("click", function(){ defaults(); render(); });
+  }
+
+  return {draw: draw, wire: wire};
+})();
+
+/* ================================================================= share */
+
+var share = (function(){
+
+  function params(){
+    return "p=" + state.preset + "&y=" + state.last + "&k=" + state.length_km +
+      "&r=" + state.rate_mm + "&s=" + state.slip_m + "&a=" + state.alpha +
+      "&h=" + state.horizon;
+  }
+  function url(){ return location.origin + location.pathname + "#" + params(); }
+
+  function restore(){
+    var h = location.hash.replace(/^#/, "");
+    if (!h) return false;
+    var q = {};
+    h.split("&").forEach(function(kv){
+      var i = kv.indexOf("=");
+      if (i > 0) q[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1));
+    });
+    function n(k, lo, hi){
+      var v = +q[k];
+      return isFinite(v) && v >= lo && v <= hi ? v : null;
+    }
+    var p = q.p === "custom" || PRESETS[q.p] ? q.p : null;
+    if (!p) return false;
+    defaults();
+    state.preset = p;
+    if (p !== "custom") {
+      state.last = PRESETS[p].last;
+      state.length_km = PRESETS[p].length_km;
+    } else {
+      state.last = n("y", 1000, M.now) || state.last;
+      state.length_km = n("k", 50, 850) || state.length_km;
+    }
+    state.rate_mm = n("r", 14, 24) || state.rate_mm;
+    state.slip_m = n("s", 3, 16) || state.slip_m;
+    state.alpha = n("a", 0.2, 1.0) || state.alpha;
+    var hz = n("h", 10, 100);
+    if ([10, 30, 50, 100].indexOf(hz) >= 0) state.horizon = hz;
+    return true;
+  }
+
+  function copy(){
+    var u = url(), out = el("shareOut");
+    function say(m){ el("shareBtn").textContent = m; }
+    function fallback(){
+      out.style.display = "block";
+      out.value = u;
+      out.select();
+      say("Copy the link below");
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(u).then(function(){ say("Link copied"); }, fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  function draw(){
+    try { window.history.replaceState(null, "", "#" + params()); } catch (e) { /* file:// or sandbox */ }
+    el("shareBtn").textContent = "Copy a link to this";
+    el("shareOut").style.display = "none";
+  }
+
+  function wire(){
+    el("shareBtn").addEventListener("click", copy);
+    el("printBtn").addEventListener("click", function(){ window.print(); });
+  }
+
+  return {draw: draw, restore: restore, wire: wire};
+})();
+
+/* ================================================================ wiring */
+
+var busy = false;
+function render(){
+  // A slider fires input dozens of times a second; one redraw per frame is plenty.
+  if (busy) return;
+  busy = true;
+  // A hidden tab never fires animation frames, and a page left in the
+  // background must not sit on a stale answer until someone looks at it.
+  var later = document.hidden || !window.requestAnimationFrame
+    ? function(f){ setTimeout(f, 0); } : window.requestAnimationFrame.bind(window);
+  later(function(){
+    busy = false;
+    compute();
+    controls.draw();
+    answer.draw();
+    load.draw();
+    curve.draw();
+    share.draw();
+  });
+}
+
+(function(){
+  if (!share.restore()) defaults();
+  controls.wire();
+  share.wire();
+
+  var t = null;
+  window.addEventListener("resize", function(){
+    clearTimeout(t);
+    t = setTimeout(function(){ REDRAW.forEach(function(f){ f(); }); }, 120);
+  });
+
+  // the parts that never change with the settings
+  compute();
+  catalogue.draw();
+  past.draw();
+  el("limM7").textContent = Math.round(C.every_m7);
+  el("limStats").textContent = "The catalogue holds " + group(C.events) +
+    " earthquakes of magnitude " + M.min_mag + " and above between " + M.year_min +
+    " and " + M.year_max + ", inside a box running " + M.box[0] + " to " + M.box[2] +
+    " north and " + M.box[1] + " to " + M.box[3] + " east. The fault is modelled as " +
+    M.width_km + " km wide down-dip with a shear modulus of " + M.mu_gpa + " GPa; the " +
+    "renewal model is Brownian passage time, averaged over " + (5 * 9 * 5) +
+    " combinations of rate, slip and regularity.";
+  el("srcs").innerHTML = "Earthquakes from " + esc(M.source) + ", the United States " +
+    "Geological Survey's combined catalogue, declustered as in " +
+    '<a href="../earthquakes/">Four Hundred Thousand Earthquakes</a>. Convergence ' +
+    "rates are the range published from GPS across Nepal; historical earthquakes " +
+    "from chronicles and palaeoseismic trenches. The renewal model is Matthews, " +
+    "Ellsworth and Reasenberg (2002). Everything on this page runs in your browser.";
+
+  render();
+})();
+
+})();
+</script>
+</body>
+</html>

@@ -15,7 +15,7 @@
   color-scheme: light;
   --ground:#F2F1EF; --surface:#FCFCFB; --surface-2:#F7F6F4; --sunk:#E6E4E0;
   --ink:#16171A; --ink-2:#4F5257; --ink-3:#85888E; --rule:#DAD8D4; --rule-2:#C6C3BE;
-  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6; --keys:#8b5cf6; --income:#c2255c; --land:#0e9594; --worth:#c25a1c; --odds:#0b7285; --stand:#a61e4d; --shake:#c1470f; --coast:#1b4f8a; --shells:#2a78d6; --warmed:#b5281b; --worlds:#4a3aa7; --himalaya:#0b7285; --tides:#1b4f8a; --sent:#15803d; --rates:#7e22ce; --rice:#a16207; --leave:#0891b2; --lakes:#0e7490;
+  --quake:#eb6834; --nuclide:#1baf7a; --sun:#eda100; --orbit:#2a78d6; --keys:#8b5cf6; --income:#c2255c; --land:#0e9594; --worth:#c25a1c; --odds:#0b7285; --stand:#a61e4d; --shake:#c1470f; --coast:#1b4f8a; --shells:#2a78d6; --warmed:#b5281b; --worlds:#4a3aa7; --himalaya:#0b7285; --tides:#1b4f8a; --sent:#15803d; --rates:#7e22ce; --rice:#a16207; --leave:#0891b2; --lakes:#0e7490; --due:#a02c5b;
   --shadow:0 1px 2px rgba(22,23,26,.05),0 12px 32px -18px rgba(22,23,26,.22);
   --measure:64ch; --wide:1080px;
 }
@@ -24,7 +24,7 @@
     color-scheme: dark;
     --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
     --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6; --worth:#e17a37; --odds:#2b9fb3; --stand:#f06595; --shake:#eb6834; --coast:#6fb2f0; --shells:#5596e0; --warmed:#f0776a; --worlds:#9085e9; --himalaya:#2b9fb3; --tides:#6fb2f0; --sent:#22a55a; --rates:#a855f7; --rice:#d4a017; --leave:#22b8d4; --lakes:#2ba3c0;
+    --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6; --worth:#e17a37; --odds:#2b9fb3; --stand:#f06595; --shake:#eb6834; --coast:#6fb2f0; --shells:#5596e0; --warmed:#f0776a; --worlds:#9085e9; --himalaya:#2b9fb3; --tides:#6fb2f0; --sent:#22a55a; --rates:#a855f7; --rice:#d4a017; --leave:#22b8d4; --lakes:#2ba3c0; --due:#e5648f;
     --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
   }
 }
@@ -32,7 +32,7 @@
   color-scheme: dark;
   --ground:#121214; --surface:#1A1A1D; --surface-2:#202024; --sunk:#0B0B0D;
   --ink:#EAEAEC; --ink-2:#A3A5AA; --ink-3:#71747A; --rule:#2A2B2F; --rule-2:#3A3C41;
-  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6; --worth:#e17a37; --odds:#2b9fb3; --stand:#f06595; --shake:#eb6834; --coast:#6fb2f0; --shells:#5596e0; --warmed:#f0776a; --worlds:#9085e9; --himalaya:#2b9fb3; --tides:#6fb2f0; --sent:#22a55a; --rates:#a855f7; --rice:#d4a017; --leave:#22b8d4; --lakes:#2ba3c0;
+  --quake:#d95926; --nuclide:#199e70; --sun:#c98500; --orbit:#3987e5; --keys:#a78bfa; --income:#e64980; --land:#14b8a6; --worth:#e17a37; --odds:#2b9fb3; --stand:#f06595; --shake:#eb6834; --coast:#6fb2f0; --shells:#5596e0; --warmed:#f0776a; --worlds:#9085e9; --himalaya:#2b9fb3; --tides:#6fb2f0; --sent:#22a55a; --rates:#a855f7; --rice:#d4a017; --leave:#22b8d4; --lakes:#2ba3c0; --due:#e5648f;
   --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -18px rgba(0,0,0,.75);
 }
 *{box-sizing:border-box}
@@ -62,8 +62,9 @@ main{padding-block:clamp(36px,6vw,64px)}
    minimum even when the container is narrower, so cards overflow the viewport
    and the page scrolls sideways on a phone. */
 .grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
-/* Ten essay cards, which fill the two-up grid exactly; the estimator is a
-   tool rather than an archive and takes the full width above them. */
+/* Full width, for whenever the card count is odd: now the earthquake
+   forecast, which sits between the two earthquake pages' neighbours and
+   leaves every other row a pair. */
 .card.span{grid-column:1/-1}
 .card{display:block; text-decoration:none; background:var(--surface);
   border:1px solid var(--rule); border-radius:2px; box-shadow:var(--shadow);
@@ -161,8 +162,9 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
       <h2 class="sech">Selected work &mdash; fifteen public archives</h2>
       <p class="secnote">Each of these begins with an archive anyone can download and computes
         everything on the page from it: the fetch, the analysis and the figures are all in the
-        repository. Nine are interactive essays; eight are tools &mdash; you point them at your
-        own writing, your own land, your own pay packet, the ground under your house, the sea
+        repository. Nine are interactive essays; nine are tools &mdash; you point them at your
+        own writing, your own land, your own pay packet, the ground under your house, the fault
+        beneath it, the sea
         at the end of your street, the thermometer nearest it, a mountain you are thinking of
         climbing, or an orbit you are thinking of buying.</p>
     <div class="grid">
@@ -225,6 +227,22 @@ footer{padding:40px 0 72px; color:var(--ink-3); font-size:14.5px}
           <li><b>1934</b><span>was Nepal's last great earthquake, four decades before the record starts</span></li>
         </ul>
         <span class="go">Count them where you live &rarr;</span>
+      </a>
+
+      <a class="card span" style="--accent:var(--due)" href="due/">
+        <span class="src">Tool &middot; GPS slip rates, checked against 654 Nepal earthquakes</span>
+        <h3>Is Nepal Due for a Great Earthquake?</h3>
+        <p class="sub">The catalogue is too short to hold a single great Himalayan rupture,
+          so this forecasts from the fault instead: how much slip each stretch owes since it
+          last broke, the stress that adds, and the chance it breaks within a span you choose
+          &mdash; every assumption on a slider, and the reason the odds stop rising the longer
+          it waits.</p>
+        <ul class="finds">
+          <li><b>1 in 6</b><span>chance of a great rupture in western Nepal in the next fifty years</span></li>
+          <li><b>10 m</b><span>of slip owed there since 1505 &mdash; more than a typical great rupture releases</span></li>
+          <li><b>48%</b><span>of the plates' load is all the catalogue's own size law pays, even run to M9.5</span></li>
+        </ul>
+        <span class="go">Work out the odds &rarr;</span>
       </a>
 
       <a class="card" style="--accent:var(--stand)" href="stand/">
