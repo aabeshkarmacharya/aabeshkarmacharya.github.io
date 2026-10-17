@@ -5,21 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#121212">
-<meta name="description" content="Fifteen Public Datasets, Taken Seriously">
+<meta name="description" content="Aabesh Karmacharya, a software engineer in Kathmandu, Nepal: experience, skills and data projects.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23121212%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2743%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23F5C11A%27%3EAK%3C%2Ftext%3E%3C%2Fsvg%3E">
-<title>Aabesh Karmacharya &mdash; Backend &amp; Data Engineering</title>
+<title>Aabesh Karmacharya | Software Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600&family=Teko:wght@400;500;600;700&display=swap">
 <style>
-/* The home page is a signboard, after the hand-painted shop signs of Asan
-   and Indrachowk: flat enamel panels outlined in black, condensed lettering,
-   and every page on the wall announced by one Nepali word.  The colours say
-   what a page is: red for Nepal, green for the Earth, blue for the sky, atoms
-   and letters, and yellow for the tools you point at your own data.  Each
-   page behind a sign has a look of its own, taken from its subject; this is
-   the board they all hang from.  It commits to one light look, as a sign
-   does. */
 :root{
   color-scheme: light;
   --white:#FFFFFF; --black:#121212; --ink-2:#3A3A3A; --ink-3:#6B6B6B; --plaster:#EFEDE8;
@@ -36,63 +28,30 @@ p{margin:0 0 1em}
 .band{padding-left:max(var(--gutter),env(safe-area-inset-left,0px)); padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
 .in{max-width:1180px; margin:0 auto}
 
-/* black bar across the top */
-.bar{background:var(--black); color:var(--white); font-family:var(--f-sign); font-size:19px; letter-spacing:.04em;
-  text-transform:uppercase; padding-block:7px 4px}
-.bar .in{display:flex; justify-content:space-between; align-items:center; gap:8px 18px; flex-wrap:wrap}
+/* top bar */
+.bar{background:var(--black); padding-block:7px 4px}
+.bar .in{display:flex; justify-content:flex-end}
 .plates{display:flex; flex-wrap:wrap; gap:6px}
 .plates a{background:var(--white); color:var(--black); text-decoration:none; font-family:var(--f-sign); font-size:19px;
   letter-spacing:.03em; padding:3px 11px 0; text-transform:uppercase; line-height:1.3}
 .plates a:hover{background:var(--yellow)}
 
-/* the sign itself */
+/* header */
 .hero{background:var(--yellow); padding-block:clamp(26px,5vw,56px) 0; border-bottom:4px solid var(--black)}
-.hero .k{font-weight:600; font-size:16px; margin:0}
 h1{font-family:var(--f-sign); font-weight:700; text-transform:uppercase; font-size:clamp(48px,14vw,196px);
-  line-height:.8; letter-spacing:.005em; margin:12px 0 6px}
+  line-height:.8; letter-spacing:.005em; margin:0 0 10px}
 .hero .role{font-family:var(--f-sign); font-weight:500; text-transform:uppercase; font-size:clamp(24px,3vw,34px);
-  line-height:1; margin:0 0 clamp(22px,4vw,40px)}
+  line-height:1.05; margin:0 0 clamp(22px,4vw,40px); text-wrap:balance}
 .strip{background:var(--black); color:var(--yellow); font-family:var(--f-sign); font-weight:500; text-transform:uppercase;
   font-size:clamp(20px,2.4vw,28px); letter-spacing:.03em; padding-block:8px 3px}
 
-.intro{display:grid; gap:10px 48px; padding-block:40px 6px; grid-template-columns:minmax(0,1fr)}
-@media(min-width:900px){.intro{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.intro .big{font-size:21px; line-height:1.5}
-.intro .plates a{background:var(--black); color:var(--white); font-size:21px; padding:6px 14px 2px}
-.intro .plates a:hover{background:var(--blue)}
-
 h2{text-wrap:balance; font-family:var(--f-sign); font-weight:600; text-transform:uppercase; font-size:clamp(36px,4.6vw,56px);
-  line-height:.95; margin:44px 0 8px}
-.note{max-width:70ch; color:var(--ink-2); font-size:17px}
-.key{display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--f-sign); font-size:20px; text-transform:uppercase; margin:0 0 18px}
-.key i{display:inline-block; width:16px; height:16px; border:2px solid var(--black); margin-right:6px; vertical-align:-1px}
+  line-height:.95; margin:44px 0 10px}
+.summary{padding-block:4px 30px}
+.summary p{max-width:66ch}
+.summary .lead{font-size:21px; line-height:1.5}
 
-/* the wall */
-.signs{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr)); padding-bottom:20px}
-.sign{border:3px solid var(--black); padding:14px 16px 16px; text-decoration:none; display:flex; flex-direction:column;
-  gap:2px; min-height:250px; transition:transform .12s, box-shadow .12s}
-.sign:hover{transform:translate(-3px,-3px); box-shadow:6px 6px 0 var(--black)}
-.sign.nepal{background:var(--red); color:var(--white)}
-.sign.earth{background:var(--green); color:var(--white)}
-.sign.sky{background:var(--blue); color:var(--white)}
-.sign.tool{background:var(--yellow); color:var(--black)}
-.sign .dev{font-family:var(--f-sign); font-weight:600; font-size:58px; line-height:1.15}
-.sign .t{font-family:var(--f-sign); font-weight:500; text-transform:uppercase; font-size:26px; line-height:.98; margin:0 0 6px; text-wrap:balance}
-.sign .s{font-size:13px; font-weight:600; margin:0 0 10px; line-height:1.35}
-.sign .f{margin-top:auto; font-size:15px; line-height:1.4}
-.sign .f b{display:block; font-family:var(--f-sign); font-weight:600; font-size:36px; line-height:1}
-/* the look the page behind the sign is set in */
-.sign .look{font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; border-top:2px solid currentColor;
-  padding-top:6px; margin-top:12px}
-@media(prefers-reduced-motion:reduce){.sign{transition:none}}
-
-.method{display:grid; gap:10px 48px; grid-template-columns:minmax(0,1fr); padding-bottom:40px}
-@media(min-width:900px){.method{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
-.method ul{margin:0; padding:0; list-style:none}
-.method li{position:relative; padding-left:28px; margin-bottom:.7em; color:var(--ink-2)}
-.method li::before{content:""; position:absolute; left:0; top:.45em; width:14px; height:14px; background:var(--red); border:2px solid var(--black)}
-
-/* the notice board: work and education */
+/* experience and education */
 .board{background:var(--black); color:var(--white); padding-block:40px 46px}
 .board h2{color:var(--yellow); margin-top:0}
 .board h2.next{margin-top:36px}
@@ -105,250 +64,69 @@ h2{text-wrap:balance; font-family:var(--f-sign); font-weight:600; text-transform
 .job li{margin-bottom:.4em}
 .job li b{color:var(--white)}
 
-.skills{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr)); padding-bottom:44px}
+/* skills */
+.skills{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr)); padding-bottom:12px}
 .plate{border:3px solid var(--black); padding:12px 14px}
 .plate b{display:block; font-family:var(--f-sign); font-weight:600; font-size:24px; text-transform:uppercase; line-height:1}
 .plate span{color:var(--ink-2); font-size:16px}
+
+/* projects */
+#projects{scroll-margin-top:16px}
+.note{max-width:70ch; color:var(--ink-2); font-size:17px}
+.key{display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--f-sign); font-size:20px; text-transform:uppercase; margin:0 0 18px}
+.key i{display:inline-block; width:16px; height:16px; border:2px solid var(--black); margin-right:6px; vertical-align:-1px}
+.signs{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr)); padding-bottom:48px}
+.sign{border:3px solid var(--black); padding:14px 16px 16px; text-decoration:none; display:flex; flex-direction:column;
+  gap:2px; min-height:250px; transition:transform .12s, box-shadow .12s}
+.sign:hover{transform:translate(-3px,-3px); box-shadow:6px 6px 0 var(--black)}
+.sign.nepal{background:var(--red); color:var(--white)}
+.sign.earth{background:var(--green); color:var(--white)}
+.sign.sky{background:var(--blue); color:var(--white)}
+.sign.tool{background:var(--yellow); color:var(--black)}
+.sign .dev{font-family:var(--f-sign); font-weight:600; font-size:58px; line-height:1.15}
+.sign .t{font-family:var(--f-sign); font-weight:500; text-transform:uppercase; font-size:26px; line-height:.98; margin:0 0 6px; text-wrap:balance}
+.sign .s{font-size:13px; font-weight:600; margin:0 0 10px; line-height:1.35}
+.sign .f{margin-top:auto; font-size:15px; line-height:1.4}
+.sign .f b{display:block; font-family:var(--f-sign); font-weight:600; font-size:36px; line-height:1}
+@media(prefers-reduced-motion:reduce){.sign{transition:none}}
+
 footer{background:var(--plaster); border-top:4px solid var(--black); padding-block:22px 34px; font-size:14.5px; color:var(--ink-2)}
 footer .plates{margin-bottom:14px}
 footer .plates a{background:var(--black); color:var(--white)}
 @media(max-width:700px){:root{--gutter:16px} body{font-size:17px} .sign{min-height:0}}
-/* Printed, the board keeps its lettering and its outlines and drops its paint:
-   white panels and black type, on any printer. */
+
 @media print{
   .bar,.hero,.strip,.board,footer,.sign,.plates a{background:#FFFFFF !important; color:#121212 !important}
   .bar,.strip{border-bottom:2px solid #121212}
   .board h2,.job .when,.job .org,.job ul,.job li b{color:#121212 !important}
   .job{border-top-color:#999999}
   .sign{min-height:0; break-inside:avoid; box-shadow:none !important; transform:none !important}
-  .method li::before{background:#121212}
 }
 </style>
 </head>
 <body>
 <div class="bar band"><div class="in">
-  <span lang="ne">&#2325;&#2366;&#2336;&#2350;&#2366;&#2337;&#2380;&#2306;</span>
   <span class="plates"><a href="mailto:aabesh.karmacharya@gmail.com">Email</a><a href="https://github.com/aabeshkarmacharya">GitHub</a><a href="resume.pdf">R&eacute;sum&eacute;</a></span>
 </div></div>
 
 <header class="hero band"><div class="in">
-  <p class="k">Software Engineer at Maitri Services &middot; Kathmandu, Nepal</p>
   <h1>Aabesh Karmacharya</h1>
-  <p class="role">Backend &amp; data engineering</p>
+  <p class="role">Software Engineer at Maitri Services &middot; Kathmandu, Nepal</p>
 </div></header>
-<div class="strip band"><div class="in">Selected work &middot; fifteen public archives &middot; every number computed from the archive it names</div></div>
+<div class="strip band"><div class="in">Python &middot; Django &middot; FastAPI &middot; Dagster &middot; PostgreSQL &middot; BigQuery &middot; AWS &middot; GCP</div></div>
 
 <main>
-  <div class="band"><div class="in">
-    <div class="intro">
-      <p class="big">I build backend systems and the data pipelines that feed them &mdash; nine years of it, mostly in Python.
-        Django and FastAPI at the front, Dagster doing the orchestration, PostgreSQL and BigQuery underneath, and language
-        models wired in where they actually earn their place.</p>
-      <div>
-        <p>Everything below is the same instinct pointed at public archives: take something anyone can download, compute
-          every number on the page from it, and pay attention to where the record stops describing the world and starts
-          describing the people who measured it.</p>
-        <p class="plates"><a href="mailto:aabesh.karmacharya@gmail.com">aabesh.karmacharya@gmail.com</a><a href="https://github.com/aabeshkarmacharya">GitHub</a><a href="resume.pdf">R&eacute;sum&eacute; (PDF)</a></p>
-      </div>
-    </div>
+  <section class="band"><div class="in summary">
+    <h2>Summary</h2>
+    <p class="lead">I&rsquo;m a software engineer with nine years of experience, mostly in Python. Most of my work is
+      backend and data engineering: APIs in Django and FastAPI, data pipelines in Dagster, and databases like PostgreSQL
+      and BigQuery. I&rsquo;ve also built LLM features into products where they were useful.</p>
+    <p>Outside work I build data projects from public datasets, many of them about Nepal. Some are long reads with
+      interactive charts and some are tools you can try with your own numbers. They&rsquo;re listed
+      <a href="#projects">further down</a>.</p>
+  </div></section>
 
-    <h2>The work</h2>
-    <p class="note">Each of these begins with an archive anyone can download and computes everything on the page from it:
-      the fetch, the analysis and the figures are all in the repository. Fifteen are interactive essays; nine are tools
-      &mdash; you point them at your own writing, your own land, your own pay packet, the ground under your house, the
-      fault beneath it, the sea at the end of your street, the thermometer nearest it, a mountain you are thinking of
-      climbing, or an orbit you are thinking of buying. Every page wears a look taken from its own subject.</p>
-    <p class="key"><span><i style="background:var(--red)"></i>Nepal</span><span><i style="background:var(--green)"></i>The Earth</span><span><i style="background:var(--blue)"></i>Sky, atoms &amp; letters</span><span><i style="background:var(--yellow)"></i>Tools you point at your own data</span></p>
-    <div class="signs">
-      <a class="sign nepal" href="income/">
-        <span class="dev" lang="ne">&#2310;&#2350;&#2381;&#2342;&#2366;&#2344;&#2368;</span>
-        <span class="t">Nine Thousand Rupees a Month</span>
-        <span class="s">World Bank PIP + NSO Nepal &#183; four survey rounds</span>
-        <span class="f"><b>Rs 9,175</b>a month per person is the median Nepali&#8217;s share of household spending</span>
-        <span class="look">Set as a household survey form</span>
-      </a>
-      <a class="sign tool" href="stand/">
-        <span class="dev" lang="ne">&#2340;&#2354;&#2348;</span>
-        <span class="t">Where Does My Salary Put Me?</span>
-        <span class="s">built on the four Nepal Living Standards Surveys</span>
-        <span class="f"><b>Rs 9,172</b>a month per person is the national median &#8212; the line half the country is under</span>
-        <span class="look">Set as a household survey form</span>
-      </a>
-      <a class="sign nepal" href="land/">
-        <span class="dev" lang="ne">&#2332;&#2327;&#2381;&#2327;&#2366;</span>
-        <span class="t">Four Million Rupees an Aana</span>
-        <span class="s">nepalhomes.com + OpenStreetMap &#183; 2,115 plots</span>
-        <span class="f"><b>Rs 4.3m</b>is the median asking price for one aana &#8212; 342 square feet &#8212; of valley land</span>
-        <span class="look">Set as a lalpurja</span>
-      </a>
-      <a class="sign tool" href="worth/">
-        <span class="dev" lang="ne">&#2350;&#2370;&#2354;&#2381;&#2351;</span>
-        <span class="t">What Is My Land Worth?</span>
-        <span class="s">built on the 2,115-plot land model</span>
-        <span class="f"><b>313 toles</b>across Kathmandu, Lalitpur and Bhaktapur, priced from one fit</span>
-        <span class="look">Set as a lalpurja</span>
-      </a>
-      <a class="sign nepal" href="remittances/">
-        <span class="dev" lang="ne">&#2357;&#2367;&#2346;&#2381;&#2352;&#2375;&#2359;&#2339;</span>
-        <span class="t">Six Times What We Sell</span>
-        <span class="s">Nepal Rastra Bank &#183; 212 monthly bulletins</span>
-        <span class="f"><b>6.22&#215;</b>remittance to exports in FY2024/25 &#8212; the year exports grew 81.8%</span>
-        <span class="look">Set as a transfer receipt</span>
-      </a>
-      <a class="sign nepal" href="spread/">
-        <span class="dev" lang="ne">&#2348;&#2381;&#2351;&#2366;&#2332;&#2342;&#2352;</span>
-        <span class="t">The Spread That Closed</span>
-        <span class="s">Nepal Rastra Bank &#183; 107 months of rates</span>
-        <span class="f"><b>51%</b>the spread is half what it was: 6.84 points down to 3.49</span>
-        <span class="look">Set as a bank rate board</span>
-      </a>
-      <a class="sign nepal" href="asar/">
-        <span class="dev" lang="ne">&#2309;&#2360;&#2366;&#2352;</span>
-        <span class="t">One Rupee in Three, Spent in Asar</span>
-        <span class="s">Nepal Rastra Bank &#183; 154 fiscal months of government spending</span>
-        <span class="f"><b>36.4%</b>of capital spending is paid in Asar in the median year, 4.4 times an even month</span>
-        <span class="look">Set as the Red Book</span>
-      </a>
-      <a class="sign nepal" href="rice/">
-        <span class="dev" lang="ne">&#2343;&#2366;&#2344;</span>
-        <span class="t">The Rice We Grow and Still Buy</span>
-        <span class="s">FAOSTAT &#183; 64 years, four areas</span>
-        <span class="f"><b>125.7%</b>of India&#8217;s yield in 1961 &#8212; Nepal was ahead, then stopped</span>
-        <span class="look">Set as a ration card</span>
-      </a>
-      <a class="sign nepal" href="destinations/">
-        <span class="dev" lang="ne">&#2346;&#2352;&#2342;&#2375;&#2358;</span>
-        <span class="t">One Hundred Forty-Four Destinations, Six Countries</span>
-        <span class="s">Govt of Nepal &#183; 741,292 labour permits</span>
-        <span class="f"><b>80.3%</b>the top six&#8217;s share in 2023/24, down 13.2 points from 2017/18</span>
-        <span class="look">Set as a passport</span>
-      </a>
-      <a class="sign nepal" href="lakes/">
-        <span class="dev" lang="ne">&#2361;&#2367;&#2350;&#2340;&#2366;&#2354;</span>
-        <span class="t">Two Hundred and Eighty Lakes</span>
-        <span class="s">Glacial Lake Observatory &#183; 4,150 lakes</span>
-        <span class="f"><b>280</b>grew beyond their own uncertainty; 84% did not move at all</span>
-        <span class="look">Set as a topographic sheet</span>
-      </a>
-      <a class="sign nepal" href="himalaya/">
-        <span class="dev" lang="ne">&#2361;&#2367;&#2350;&#2366;&#2354;</span>
-        <span class="t">Twelve Hundred Metres Lower</span>
-        <span class="s">The Himalayan Database &#183; 76,519 people on the mountain</span>
-        <span class="f"><b>1,225 m</b>separates where hired staff die from where members die</span>
-        <span class="look">Set as typed expedition cards</span>
-      </a>
-      <a class="sign tool" href="odds/">
-        <span class="dev" lang="ne">&#2358;&#2367;&#2326;&#2352;</span>
-        <span class="t">What Are My Odds Up There?</span>
-        <span class="s">built on the 40,605-climber Himalayan record</span>
-        <span class="f"><b>75% v 10%</b>summit odds on Everest at 38 with bottled oxygen, against without</span>
-        <span class="look">Set as typed expedition cards</span>
-      </a>
-      <a class="sign tool" href="shake/">
-        <span class="dev" lang="ne">&#2325;&#2350;&#2381;&#2346;&#2344;</span>
-        <span class="t">How Often Does It Shake Here?</span>
-        <span class="s">built on the USGS catalogue, 8,811 Himalayan earthquakes</span>
-        <span class="f"><b>157</b>earthquakes on record within 100 km of Kathmandu; six of magnitude 6 or more</span>
-        <span class="look">Set as a seismogram</span>
-      </a>
-      <a class="sign tool" href="due/">
-        <span class="dev" lang="ne">&#2350;&#2361;&#2366;&#2349;&#2370;&#2325;&#2350;&#2381;&#2346;</span>
-        <span class="t">Is Nepal Due for a Great Earthquake?</span>
-        <span class="s">GPS slip rates, checked against 654 Nepal earthquakes</span>
-        <span class="f"><b>1 in 6</b>chance of a great rupture in western Nepal in the next fifty years</span>
-        <span class="look">Set as a seismogram</span>
-      </a>
-      <a class="sign earth" href="earthquakes/">
-        <span class="dev" lang="ne">&#2349;&#2370;&#2325;&#2350;&#2381;&#2346;</span>
-        <span class="t">Four Hundred Thousand Earthquakes</span>
-        <span class="s">USGS &#183; 457,408 earthquakes</span>
-        <span class="f"><b>b = 1.078</b>Gutenberg&#8211;Richter holds across four orders of magnitude</span>
-        <span class="look">Set as a seismogram</span>
-      </a>
-      <a class="sign earth" href="sealevel/">
-        <span class="dev" lang="ne">&#2360;&#2350;&#2369;&#2342;&#2381;&#2352;</span>
-        <span class="t">Where the Sea Is Falling</span>
-        <span class="s">PSMSL &#183; 1,609 tide gauges since 1807</span>
-        <span class="f"><b>19%</b>of gauges show the sea falling, almost all of them on coasts still rising out of the last ice age</span>
-        <span class="look">Set as a nautical chart</span>
-      </a>
-      <a class="sign tool" href="coast/">
-        <span class="dev" lang="ne">&#2340;&#2335;</span>
-        <span class="t">How Fast Is The Sea Coming?</span>
-        <span class="s">built on 659 tide gauges with forty years or more</span>
-        <span class="f"><b>76%</b>of gauges are steeper over their last thirty years than over their whole record</span>
-        <span class="look">Set as a nautical chart</span>
-      </a>
-      <a class="sign tool" href="warmed/">
-        <span class="dev" lang="ne">&#2340;&#2366;&#2346;&#2325;&#2381;&#2352;&#2350;</span>
-        <span class="t">How Much Has It Warmed Here?</span>
-        <span class="s">NOAA GHCN-Monthly, 3,243 long thermometer records</span>
-        <span class="f"><b>+0.13 v +0.30</b>degrees a decade: the median station over its whole life, against since 1970</span>
-        <span class="look">Set as a weather register</span>
-      </a>
-      <a class="sign sky" href="sunspots/">
-        <span class="dev" lang="ne">&#2360;&#2370;&#2352;&#2381;&#2351;</span>
-        <span class="t">Eleven Years, Roughly</span>
-        <span class="s">SILSO &#183; 277 years of counts</span>
-        <span class="f"><b>11.107 yr</b>the dominant period, from a periodogram of 3,332 months</span>
-        <span class="look">Set as an observatory logbook</span>
-      </a>
-      <a class="sign sky" href="orbits/">
-        <span class="dev" lang="ne">&#2325;&#2325;&#2381;&#2359;</span>
-        <span class="t">The Shells Above Us</span>
-        <span class="s">CelesTrak &#183; 70,580 objects</span>
-        <span class="f"><b>86.6%</b>of everything at 800&#8211;900 km is debris; at 400&#8211;500 km it is 1%</span>
-        <span class="look">Set as a green-bar printout</span>
-      </a>
-      <a class="sign tool" href="shells/">
-        <span class="dev" lang="ne">&#2313;&#2330;&#2366;&#2311;</span>
-        <span class="t">What Else Is At My Altitude?</span>
-        <span class="s">built on 34,328 objects on orbit</span>
-        <span class="f"><b>9% v 83%</b>debris in the busiest shell against the junkiest &#8212; the difference is air</span>
-        <span class="look">Set as a green-bar printout</span>
-      </a>
-      <a class="sign sky" href="worlds/">
-        <span class="dev" lang="ne">&#2327;&#2381;&#2352;&#2361;</span>
-        <span class="t">The Gap at Twice the Earth</span>
-        <span class="s">NASA Exoplanet Archive &#183; 6,366 planets</span>
-        <span class="f"><b>1.81 R&#8853;</b>is where the gap sits, 38% below the two peaks either side of it</span>
-        <span class="look">Set as a space poster</span>
-      </a>
-      <a class="sign sky" href="nuclides/">
-        <span class="dev" lang="ne">&#2346;&#2352;&#2350;&#2366;&#2339;&#2369;</span>
-        <span class="t">The Valley of Stability</span>
-        <span class="s">IAEA &#183; 3,383 nuclides</span>
-        <span class="f"><b>244</b>are stable &#8212; and only four have odd counts of both</span>
-        <span class="look">Set as a nuclide wall chart</span>
-      </a>
-      <a class="sign sky" href="keyboards/">
-        <span class="dev" lang="ne">&#2309;&#2325;&#2381;&#2359;&#2352;</span>
-        <span class="t">The Layout Under Your Hands</span>
-        <span class="s">Project Gutenberg + Python stdlib &#183; 10.5M keystrokes</span>
-        <span class="f"><b>6.53%</b>of QWERTY letter pairs land on one finger; Colemak manages 1.52%</span>
-        <span class="look">Set as a set of keycaps</span>
-      </a>
-    </div>
-
-    <h2>What these have in common</h2>
-    <div class="method"><div><p>Each essay starts from a public archive that anyone can download, and computes
-        everything on the page from it. That constraint turns out to matter more than the
-        subject, because the same problem appears in all of them:</p><p style="margin-top:1.2em">In every case the archive is partly a record of the world and
-        partly a record of the people measuring it, and the interesting work is separating the
-        two. Where that could not be done &mdash; whether great earthquakes have genuinely become
-        more frequent, for instance &mdash; the essays say so rather than picking a side.</p></div><div><ul>
-        <li>The seismic catalogue records twice as many earthquakes as it did in 1976. The Earth
-          did not change; the network did.</li>
-        <li>&ldquo;Stable&rdquo; nuclides become unstable when instruments improve. Bismuth
-          crossed that line in 2003.</li>
-        <li>The sunspot record was recalibrated end to end in 2015, moving historical values by
-          roughly 45 per cent.</li>
-        <li>The satellite catalogue stores each object's most recent orbit, which quietly ruins
-          any analysis of how long things last at a given altitude.</li>
-      </ul></div></div>
-  </div></div>
-
-  <div class="board band"><div class="in">
+  <section class="board band"><div class="in">
     <h2>Experience</h2>
     <div class="exp">
 
@@ -366,38 +144,32 @@ footer .plates a{background:var(--black); color:var(--white)}
             <h3>Full-Stack Developer</h3>
             <p class="org">Onaroll Inc.</p>
             <ul>
-              <li>Built the <b>data pipelines</b> in Dagster that fetched, cleaned and processed
-                customer data from several sources, generating the analytics and performance
-                metrics a rewards system ran on.</li>
-              <li>Architected <b>microservices</b> around Redis for caching, AWS SQS and Google
-                Pub/Sub for queuing, Django-Q for asynchronous work and Dagster for
-                scheduling.</li>
-              <li>Designed the schema on both sides of the house: <b>BigQuery</b> for
-                warehousing, <b>PostgreSQL</b> for transactional work.</li>
-              <li>Shipped an <b>AI chatbot</b> that answered natural-language questions about
-                employee performance, grounding the model&rsquo;s answers in the actual metrics
-                rather than letting it improvise.</li>
-              <li>Cut technical debt by introducing <b>static typing</b> across the Python
-                codebase and writing the API and service-development standards the team worked
-                to.</li>
+              <li>Built <b>data pipelines</b> in Dagster that pulled customer data from several sources, cleaned it
+                and calculated the metrics our rewards system was based on.</li>
+              <li>Designed <b>microservices</b> using Redis for caching, AWS SQS and Google Pub/Sub for queues,
+                Django-Q for background jobs and Dagster for scheduling.</li>
+              <li>Designed the database schemas: <b>BigQuery</b> for the data warehouse and <b>PostgreSQL</b> for the
+                application itself.</li>
+              <li>Built an <b>AI chatbot</b> that answered questions about employee performance using our real
+                metrics, so its answers came from the data instead of guesswork.</li>
+              <li>Reduced technical debt by adding <b>static typing</b> across the Python codebase, and wrote the
+                team&rsquo;s standards for building APIs and services.</li>
             </ul>
           </div>
         </div>
 
         <div class="job">
-          <div class="when">2016 &ndash; 2021<br>Remote, global clients</div>
+          <div class="when">2016 &ndash; 2021<br>Remote</div>
           <div>
             <h3>Freelance Developer</h3>
-            <p class="org">Upwork and independent projects</p>
+            <p class="org">Upwork and independent clients</p>
             <ul>
-              <li>Full-stack delivery for startups and businesses across the US, Europe and
-                Asia, working directly with clients to turn a rough requirement into something
-                shipped.</li>
-              <li>Built <b>data-mining tools</b> that extracted and processed millions of
-                records from thousands of sites.</li>
-              <li>Developed admin dashboards and APIs to visualise, transform and serve large
-                datasets, and <b>flexible API architectures</b> that served the same data in
-                whatever shape each client needed.</li>
+              <li>Built full-stack web applications for startups and businesses in the US, Europe and Asia,
+                working directly with each client from the first requirements to launch.</li>
+              <li>Wrote <b>data-mining tools</b> that collected and processed millions of records from thousands of
+                websites.</li>
+              <li>Made admin dashboards and APIs for exploring, transforming and serving large datasets, set up so
+                each client could get the same data in the format they needed.</li>
             </ul>
           </div>
         </div>
@@ -413,27 +185,179 @@ footer .plates a{background:var(--black); color:var(--white)}
           </div>
         </div>
       </div>
-  </div></div>
+  </div></section>
 
-  <div class="band"><div class="in">
-    <h2>What I work with</h2>
+  <section class="band"><div class="in">
+    <h2>Skills</h2>
     <div class="skills">
       <div class="plate"><b>Languages</b><span>Python, TypeScript, JavaScript, Kotlin, Java</span></div>
       <div class="plate"><b>Frameworks</b><span>Django, FastAPI, React</span></div>
       <div class="plate"><b>Data &amp; AI</b><span>Dagster, Polars, Pandas, LangChain, OpenAI API, Hugging Face Transformers</span></div>
-      <div class="plate"><b>Databases</b><span>PostgreSQL, MySQL, Redis, MongoDB, Neo4j</span></div>
+      <div class="plate"><b>Databases</b><span>PostgreSQL, MySQL, Redis, MongoDB, Neo4j, BigQuery</span></div>
       <div class="plate"><b>Cloud &amp; DevOps</b><span>AWS, GCP, Docker, Heroku</span></div>
-      <div class="plate"><b>Practice</b><span>LLM integration, prompt engineering, data pipelines, model deployment, microservice architecture</span></div>
+      <div class="plate"><b>Other</b><span>LLM integration, prompt engineering, data pipelines, model deployment, microservices</span></div>
     </div>
-  </div></div>
+  </div></section>
+
+  <section class="band" id="projects"><div class="in">
+    <h2>Projects</h2>
+    <p class="note">Side projects built from public datasets. For each one I wrote the code that downloads the raw
+      data, analyses it and builds the page. Fifteen are long reads with interactive charts, and nine are tools you
+      can try with your own numbers, like your salary, your plot of land or your nearest weather station. A lot of
+      the work turned out to be separating real changes from changes in how things were measured.</p>
+    <p class="key"><span><i style="background:var(--red)"></i>Nepal</span><span><i style="background:var(--green)"></i>Earth</span><span><i style="background:var(--blue)"></i>Science</span><span><i style="background:var(--yellow)"></i>Tools</span></p>
+    <div class="signs">
+      <a class="sign nepal" href="income/">
+        <span class="dev" lang="ne">&#2310;&#2350;&#2381;&#2342;&#2366;&#2344;&#2368;</span>
+        <span class="t">Nine Thousand Rupees a Month</span>
+        <span class="s">World Bank PIP + NSO Nepal &#183; four survey rounds</span>
+        <span class="f"><b>Rs 9,175</b>a month per person is the median Nepali&#8217;s share of household spending</span>
+      </a>
+      <a class="sign tool" href="stand/">
+        <span class="dev" lang="ne">&#2340;&#2354;&#2348;</span>
+        <span class="t">Where Does My Salary Put Me?</span>
+        <span class="s">built on the four Nepal Living Standards Surveys</span>
+        <span class="f"><b>Rs 9,172</b>a month per person is the national median. Half the country lives on less.</span>
+      </a>
+      <a class="sign nepal" href="land/">
+        <span class="dev" lang="ne">&#2332;&#2327;&#2381;&#2327;&#2366;</span>
+        <span class="t">Four Million Rupees an Aana</span>
+        <span class="s">nepalhomes.com + OpenStreetMap &#183; 2,115 plots</span>
+        <span class="f"><b>Rs 4.3m</b>is the median asking price for one aana (342 sq ft) of land in the valley</span>
+      </a>
+      <a class="sign tool" href="worth/">
+        <span class="dev" lang="ne">&#2350;&#2370;&#2354;&#2381;&#2351;</span>
+        <span class="t">What Is My Land Worth?</span>
+        <span class="s">built on the 2,115-plot land model</span>
+        <span class="f"><b>313 toles</b>across Kathmandu, Lalitpur and Bhaktapur, priced by one model</span>
+      </a>
+      <a class="sign nepal" href="remittances/">
+        <span class="dev" lang="ne">&#2357;&#2367;&#2346;&#2381;&#2352;&#2375;&#2359;&#2339;</span>
+        <span class="t">Six Times What We Sell</span>
+        <span class="s">Nepal Rastra Bank &#183; 212 monthly bulletins</span>
+        <span class="f"><b>6.22&#215;</b>remittance compared with exports in FY2024/25, a year when exports grew 81.8%</span>
+      </a>
+      <a class="sign nepal" href="spread/">
+        <span class="dev" lang="ne">&#2348;&#2381;&#2351;&#2366;&#2332;&#2342;&#2352;</span>
+        <span class="t">The Spread That Closed</span>
+        <span class="s">Nepal Rastra Bank &#183; 107 months of rates</span>
+        <span class="f"><b>51%</b>the spread is half what it was: 6.84 points down to 3.49</span>
+      </a>
+      <a class="sign nepal" href="asar/">
+        <span class="dev" lang="ne">&#2309;&#2360;&#2366;&#2352;</span>
+        <span class="t">One Rupee in Three, Spent in Asar</span>
+        <span class="s">Nepal Rastra Bank &#183; 154 fiscal months of government spending</span>
+        <span class="f"><b>36.4%</b>of a typical year&#8217;s capital spending is paid in Asar, the last month of the fiscal year</span>
+      </a>
+      <a class="sign nepal" href="rice/">
+        <span class="dev" lang="ne">&#2343;&#2366;&#2344;</span>
+        <span class="t">The Rice We Grow and Still Buy</span>
+        <span class="s">FAOSTAT &#183; 64 years, four areas</span>
+        <span class="f"><b>125.7%</b>of India&#8217;s rice yield in 1961. Nepal has trailed India for most years since.</span>
+      </a>
+      <a class="sign nepal" href="destinations/">
+        <span class="dev" lang="ne">&#2346;&#2352;&#2342;&#2375;&#2358;</span>
+        <span class="t">One Hundred Forty-Four Destinations, Six Countries</span>
+        <span class="s">Govt of Nepal &#183; 741,292 labour permits</span>
+        <span class="f"><b>80.3%</b>of new permits went to the top six countries in 2023/24, down from 93.5% in 2017/18</span>
+      </a>
+      <a class="sign nepal" href="lakes/">
+        <span class="dev" lang="ne">&#2361;&#2367;&#2350;&#2340;&#2366;&#2354;</span>
+        <span class="t">Two Hundred and Eighty Lakes</span>
+        <span class="s">Glacial Lake Observatory &#183; 4,150 lakes</span>
+        <span class="f"><b>280</b>glacial lakes grew by more than the measurement error. 84% showed no change.</span>
+      </a>
+      <a class="sign nepal" href="himalaya/">
+        <span class="dev" lang="ne">&#2361;&#2367;&#2350;&#2366;&#2354;</span>
+        <span class="t">Twelve Hundred Metres Lower</span>
+        <span class="s">The Himalayan Database &#183; 76,519 people on the mountain</span>
+        <span class="f"><b>1,225 m</b>is the gap between where hired staff die and where paying members die</span>
+      </a>
+      <a class="sign tool" href="odds/">
+        <span class="dev" lang="ne">&#2358;&#2367;&#2326;&#2352;</span>
+        <span class="t">What Are My Odds Up There?</span>
+        <span class="s">built on the 40,605-climber Himalayan record</span>
+        <span class="f"><b>75% vs 10%</b>chance of summiting Everest at 38, with and without bottled oxygen</span>
+      </a>
+      <a class="sign tool" href="shake/">
+        <span class="dev" lang="ne">&#2325;&#2350;&#2381;&#2346;&#2344;</span>
+        <span class="t">How Often Does It Shake Here?</span>
+        <span class="s">built on the USGS catalogue, 8,811 Himalayan earthquakes</span>
+        <span class="f"><b>157</b>earthquakes of magnitude 4.5 or more within 100 km of Kathmandu since 1976, six of them 6 or above</span>
+      </a>
+      <a class="sign tool" href="due/">
+        <span class="dev" lang="ne">&#2350;&#2361;&#2366;&#2349;&#2370;&#2325;&#2350;&#2381;&#2346;</span>
+        <span class="t">Is Nepal Due for a Great Earthquake?</span>
+        <span class="s">GPS slip rates, checked against 654 Nepal earthquakes</span>
+        <span class="f"><b>1 in 6</b>chance of a great rupture in western Nepal in the next fifty years</span>
+      </a>
+      <a class="sign earth" href="earthquakes/">
+        <span class="dev" lang="ne">&#2349;&#2370;&#2325;&#2350;&#2381;&#2346;</span>
+        <span class="t">Four Hundred Thousand Earthquakes</span>
+        <span class="s">USGS &#183; 457,408 earthquakes</span>
+        <span class="f"><b>b = 1.078</b>the Gutenberg&#8211;Richter b-value, which holds across four orders of magnitude</span>
+      </a>
+      <a class="sign earth" href="sealevel/">
+        <span class="dev" lang="ne">&#2360;&#2350;&#2369;&#2342;&#2381;&#2352;</span>
+        <span class="t">Where the Sea Is Falling</span>
+        <span class="s">PSMSL &#183; 1,609 tide gauges since 1807</span>
+        <span class="f"><b>19%</b>of tide gauges show the sea falling, mostly on coasts still rising after the last ice age</span>
+      </a>
+      <a class="sign tool" href="coast/">
+        <span class="dev" lang="ne">&#2340;&#2335;</span>
+        <span class="t">How Fast Is The Sea Coming?</span>
+        <span class="s">built on 659 tide gauges with forty years or more</span>
+        <span class="f"><b>76%</b>of gauges show a faster rise over the last thirty years than over their whole record</span>
+      </a>
+      <a class="sign tool" href="warmed/">
+        <span class="dev" lang="ne">&#2340;&#2366;&#2346;&#2325;&#2381;&#2352;&#2350;</span>
+        <span class="t">How Much Has It Warmed Here?</span>
+        <span class="s">NOAA GHCN-Monthly, 3,243 long thermometer records</span>
+        <span class="f"><b>+0.13 vs +0.30</b>&#176;C per decade at the median station, over its whole record vs since 1970</span>
+      </a>
+      <a class="sign sky" href="sunspots/">
+        <span class="dev" lang="ne">&#2360;&#2370;&#2352;&#2381;&#2351;</span>
+        <span class="t">Eleven Years, Roughly</span>
+        <span class="s">SILSO &#183; 277 years of counts</span>
+        <span class="f"><b>11.107 yr</b>the strongest cycle in 3,332 months of sunspot counts</span>
+      </a>
+      <a class="sign sky" href="orbits/">
+        <span class="dev" lang="ne">&#2325;&#2325;&#2381;&#2359;</span>
+        <span class="t">The Shells Above Us</span>
+        <span class="s">CelesTrak &#183; 70,580 objects</span>
+        <span class="f"><b>86.6%</b>of objects at 800&#8211;900 km are debris, against 1% at 400&#8211;500 km</span>
+      </a>
+      <a class="sign tool" href="shells/">
+        <span class="dev" lang="ne">&#2313;&#2330;&#2366;&#2311;</span>
+        <span class="t">What Else Is At My Altitude?</span>
+        <span class="s">built on 34,328 objects on orbit</span>
+        <span class="f"><b>9% vs 83%</b>debris in the busiest orbit shell vs the most cluttered. Air drag keeps the lower one clean.</span>
+      </a>
+      <a class="sign sky" href="worlds/">
+        <span class="dev" lang="ne">&#2327;&#2381;&#2352;&#2361;</span>
+        <span class="t">The Gap at Twice the Earth</span>
+        <span class="s">NASA Exoplanet Archive &#183; 6,366 planets</span>
+        <span class="f"><b>1.81 R&#8853;</b>is where the gap in planet sizes sits, 38% below the peaks on either side</span>
+      </a>
+      <a class="sign sky" href="nuclides/">
+        <span class="dev" lang="ne">&#2346;&#2352;&#2350;&#2366;&#2339;&#2369;</span>
+        <span class="t">The Valley of Stability</span>
+        <span class="s">IAEA &#183; 3,383 nuclides</span>
+        <span class="f"><b>244</b>are stable, and only four of them have odd numbers of both protons and neutrons</span>
+      </a>
+      <a class="sign sky" href="keyboards/">
+        <span class="dev" lang="ne">&#2309;&#2325;&#2381;&#2359;&#2352;</span>
+        <span class="t">The Layout Under Your Hands</span>
+        <span class="s">Project Gutenberg + Python stdlib &#183; 10.5M keystrokes</span>
+        <span class="f"><b>6.53%</b>of letter pairs on QWERTY are typed with the same finger, compared with 1.52% on Colemak</span>
+      </a>
+    </div>
+  </div></section>
 </main>
 
 <footer class="band"><div class="in">
   <p class="plates"><a href="mailto:aabesh.karmacharya@gmail.com">aabesh.karmacharya@gmail.com</a><a href="https://github.com/aabeshkarmacharya">github.com/aabeshkarmacharya</a><a href="resume.pdf">R&eacute;sum&eacute; (PDF)</a></p>
-  Essay sources: USGS ComCat &middot; IAEA Nuclear Data Services &middot; SILSO, Royal
-    Observatory of Belgium &middot; CelesTrak &middot; NASA Exoplanet Archive &middot; The
-    Himalayan Database &middot; PSMSL &middot; World Bank PIP &middot; OpenStreetMap &middot;
-    Project Gutenberg. Plate boundaries after Bird (2003).
+  &copy; 2026 Aabesh Karmacharya. Data for the projects comes from public sources, credited on each project page.
 </div></footer>
 </body>
 </html>

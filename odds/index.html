@@ -311,26 +311,11 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
 }
 </style>
 <style>
-/* ===================================================================== base
-   What every page's look is built on.  build_site.py appends this, then the
-   page's own look from theme/looks/, after the page's own stylesheet, so
-   both win any tie with it.
 
-   It does two things.  It bridges the tokens every page already uses
-   (--ground, --surface, --ink, --rule ...) to a small set of theme tokens
-   (--t-*), so a look recolours a whole page by setting a dozen values.  And
-   it turns off what made every page look alike -- the Fraunces display face,
-   the small monospaced labels with a rule running off them, the soft shadows
-   and the rounded cards -- and points the same components at the theme's own
-   faces and lines instead.
-
-   Each look is a single deliberate appearance, light or dark as its subject
-   asks, so the bridge is written at a specificity (:root three times) that
-   beats the dark-mode token blocks inside every page's own stylesheet. */
 
 :root:root:root{
   color-scheme: var(--t-scheme, light);
-  /* defaults, which a look overrides */
+  
   --t-bg:#FFFFFF; --t-paper:#FFFFFF; --t-paper-2:#F4F4F2;
   --t-ink:#151515; --t-ink-2:#444444; --t-ink-3:#777777;
   --t-line:#DCDCDC; --t-line-2:#8A8A8A; --t-grid:rgba(0,0,0,.08);
@@ -352,7 +337,7 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --t-tip-border:1px solid var(--t-line-2);
   --t-chip-on-bg:var(--t-ink); --t-chip-on-ink:var(--t-bg);
 
-  /* the bridge */
+  
   --ground:var(--t-bg); --surface:var(--t-paper); --surface-2:var(--t-paper-2); --sunk:var(--t-hero-bg);
   --ink:var(--t-ink); --ink-2:var(--t-ink-2); --ink-3:var(--t-ink-3);
   --rule:var(--t-line); --rule-2:var(--t-line-2); --grid:var(--t-grid);
@@ -361,9 +346,6 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
 }
 
-/* Several looks are set in faces cut in one weight (a typewriter, a terminal's
-   pixel face, a seventeenth-century roman); asked for bold, a browser smears a fake one.
-   It may still slant a face that has no italic, but never fakes a weight. */
 html{background:var(--t-bg); font-synthesis:style}
 body{background:var(--t-bg); color:var(--t-ink); font-family:var(--t-f-body);
   font-size:var(--t-body-size); line-height:var(--t-body-lh)}
@@ -384,8 +366,6 @@ a:hover{text-decoration-color:var(--t-accent)}
   color:var(--t-label-ink)}
 .eyebrow::after{background:var(--t-eyebrow-rule)}
 
-/* Headers: the house header, the canvas hero of the four oldest pages, and
-   the keyboards page's own. */
 header.top,header.hero{background:var(--t-head-bg); color:var(--t-head-ink); border-bottom:var(--t-head-rule)}
 header.top .kicker,header.hero .eyebrow{color:var(--t-head-kick)}
 header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
@@ -393,13 +373,9 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-sub{color:var(--t-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
-/* Devanagari hangs vowel signs above and below the line, so a subtitle that
-   inherits a display face's tight leading collides with itself when it wraps.
-   A look whose faces have no Devanagari names one second in its body stack,
-   so it supplies only those glyphs. */
+
 .devanagari{font-family:var(--t-f-body); line-height:1.32}
 
-/* Surfaces lose their shadows and their rounding together. */
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -412,13 +388,9 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .chip{font-family:var(--t-f-label)}
 .chip[aria-pressed="true"]{background:var(--t-chip-on-bg); color:var(--t-chip-on-ink); border-color:var(--t-chip-on-bg)}
 
-/* Chart text, in every naming the pages use. */
 .tk,.axlab,.dlab,.axistext,.axistitle,.figlab,.gl-lab,svg text{font-family:var(--t-f-chart)}
 .halo{stroke:var(--t-paper)}
 
-/* Stat tiles draw their own hairlines, so a row the last tile does not fill
-   shows paper, not a grey block.  220px puts four tiles two by two in a
-   reading column and five across in a wide one. */
 .stats{border:0; background:transparent; gap:1px;
   grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
@@ -435,22 +407,17 @@ details{background:var(--t-paper); border-color:var(--t-line)}
 summary{font-family:var(--t-f-label)}
 
 footer{background:var(--t-foot-bg); color:var(--t-foot-ink); border-top:var(--t-head-rule)}
-/* Inside a coloured footer, and in a chart drawn straight onto a coloured
-   header, the paper inks become the band's own, so a page's inline var(--ink)
-   or var(--ink-3) -- a highlighted tick, a muted closing line -- stays legible
-   on a dark band.  Only the header's charts: a header can also hold paper
-   cards (the apartments stats), whose text must keep the paper inks. */
+
 header.top svg,header.hero svg{--ink:var(--t-head-ink); --ink-2:var(--t-head-ink-2); --ink-3:var(--t-head-ink-2)}
 footer{--ink:var(--t-foot-ink); --ink-2:var(--t-foot-ink-2); --ink-3:var(--t-foot-ink-2)}
 footer .srcs{color:var(--t-foot-ink-2)}
 
-/* Tools: the form, the answer panel and the lead form. */
 .card,.answer,.offer,a.nextcard{background:var(--t-paper); border-color:var(--t-line)}
 .answer .top{background:var(--t-paper-2)}
 .big .unit{font-family:var(--t-f-body)}
 .row .v,.ppends,td{font-variant-numeric:tabular-nums}
 .row .v,.ppends{font-family:var(--t-f-label)}
-/* background-color, not the shorthand: a select draws its chevron with background-image */
+
 input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea{
   font-family:var(--t-f-body); background-color:var(--t-paper); border-color:var(--t-line-2); color:var(--t-ink)}
 input:focus,select:focus,textarea:focus{border-color:var(--t-accent); box-shadow:0 0 0 2px var(--t-accent)}
@@ -459,40 +426,23 @@ button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid va
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
 .seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
-/* The segmented control clips its buttons to its own outline, which clipped
-   the focus ring with them: draw it inside the button, in the ink that shows
-   on the pressed one too. */
+
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
 .flag{background:var(--t-paper-2); border-color:var(--t-line)}
 a.nextcard .go,.go{font-family:var(--t-f-label)}
 
-/* A note a script fills later (the layout optimiser's, say) is empty until
-   then, and a look that gives notes a rule or a fill would draw a stray one. */
 .note:empty{display:none}
 
-/* The way home that build_site.py adds to every footer. */
 .back-home{font-family:var(--t-f-label)}
 
-/* Inline code holds the bulletins' mangled fragments, some of them long
-   unbroken strings; on a phone they may break anywhere rather than push the
-   page sideways. */
 @media(max-width:700px){code{white-space:normal; overflow-wrap:anywhere}}
-/* A source note can carry a formula held together with non-breaking spaces
-   (the sunspot smoothing), wider than any phone column: it may break anywhere
-   rather than push the page sideways.  On the narrowest phones a tool card's
-   table scrolls inside its card for the same reason. */
+
 @media(max-width:700px){.srcs{overflow-wrap:anywhere}}
 @media(max-width:380px){.card table{display:block; overflow-x:auto; max-width:100%}}
 
-/* Code inside a coloured footer takes the footer's ink rather than a paper
-   box, which on a dark band reads as a hole in it. */
 footer code{background:transparent; border-color:currentColor; color:inherit}
 
-/* Print.  Several tools promise a single clean printed page, and their own
-   print rules would lose to a look's coloured covers and patterned paper,
-   which come later in the cascade.  So in print every look keeps its type and
-   drops its paint: white paper, black ink, no art layers, no textures. */
 @media print{
   html,body{background:#FFFFFF !important; border:0 !important; margin:0 !important}
   body::before,body::after,.look-art,header.top::before,header.top::after,header.hero::before{display:none !important}
@@ -502,32 +452,17 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   header.top,header.hero{border-bottom:1px solid #999999 !important}
   header.top *,header.hero *,footer *{color:#000000 !important; text-shadow:none !important}
   .eyebrow{background:none !important; color:#000000 !important; transform:none !important}
-  /* Backgrounds that survive the reset are small -- a section number's cell,
-     a pressed key, a pill -- and often carry white type, which would print as
-     nothing if the browser dropped them.  Glows go; figures in a look's
-     coloured lettering (the rate board's LEDs) print black. */
+  
   html{-webkit-print-color-adjust:exact; print-color-adjust:exact}
   *,*::before,*::after{text-shadow:none !important}
   .stat b,.stat span,.stat .n,.stat small{color:#000000 !important}
-  /* a chart drawn for a coloured header goes to the paper's black and greys */
+  
   header.top svg text,header.hero svg text{fill:#000000 !important}
   header.top svg .sunk-halo,header.hero svg .sunk-halo{stroke:#FFFFFF !important}
   header.top svg .bar,header.hero svg .bar{fill:#BBBBBB !important}
   header.top svg .bar.cap,header.hero svg .bar.cap{fill:#000000 !important}
   header.top svg .ax,header.top svg .ln,header.hero svg .ax,header.hero svg .ln{stroke:#666666 !important}
 }
-
-/* look: hawley -- Twelve Hundred Metres Lower; What Are My Odds Up There?
-   fonts: https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap
-   chart-font: "Cutive Mono"
-
-   The Himalayan Database began as typed records: every expedition to a
-   Nepali peak, interviewed in Kathmandu and written up on a typewriter, on
-   cards and forms, for half a century.  So these pages are typed index
-   cards on a desk: card stock with a red top line and blue rules, headings
-   in a worn typewriter face, labels on a clean one, and the essay itself in
-   a book face that holds up for a long read.  Members print in a carbon
-   blue, hired staff in the card's red. */
 
 :root:root:root{
   --t-bg:#E9E4D8; --t-paper:#FFFDF5; --t-paper-2:#F4F0E3;
@@ -552,16 +487,16 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --mark:#34559A; --mark-soft:rgba(52,85,154,.16); --mark-line:rgba(52,85,154,.55);
   --up:#34559A; --down:#C8463D; --warn:#B5671A; --axis:#8A8579; --field:#FFFDF5; --field-rule:#1F1F1F;
 }
-/* the header is an index card on the desk */
+
 header.top{padding-block:clamp(30px,5vw,60px)}
 header.top > .wrap,header.top > .wide{position:relative; overflow:hidden; background:#FFFDF5;
   padding-block:22px 28px; box-shadow:0 1px 2px rgba(0,0,0,.18),0 10px 24px -14px rgba(0,0,0,.35);
   transform:rotate(-.4deg)}
 header.top .kicker{font-family:"Cutive Mono",monospace; letter-spacing:.02em; color:#C8463D; text-transform:uppercase;
   position:relative; padding-bottom:9px}
-/* the card's red line runs under the kicker however many lines it wraps to, edge to edge of the card */
+
 header.top .kicker::after{content:""; position:absolute; left:-200px; right:-200px; bottom:0; height:1.5px; background:#C8463D}
-/* square once it fills the width: a full-width card turned even a little pokes past the screen */
+
 @media(max-width:980px){header.top > .wrap{transform:none}}
 @media(max-width:1200px){header.top > .wide{transform:none}}
 header.top h1{margin-top:16px}
@@ -578,18 +513,15 @@ figure{background:#FFFDF5; border:1px solid #D6D0C1; border-top:2px solid #C8463
 .card,.answer,.offer,a.nextcard,.fig{background:#FFFDF5; border:1px solid #D6D0C1; border-top:2px solid #C8463D}
 .big{font-family:"Special Elite",monospace; font-weight:400}
 
-/* every section is its own typed card on the desk, red line along its top */
 section{background:#FFFDF5; max-width:900px; margin:28px auto 0; border-top:2px solid #C8463D;
   box-shadow:0 1px 2px rgba(0,0,0,.14),0 12px 26px -16px rgba(0,0,0,.35)}
 section+section{border-top:2px solid #C8463D}
 section:nth-of-type(even){transform:rotate(.25deg)} section:nth-of-type(odd){transform:rotate(-.2deg)}
 @media(max-width:760px){section{margin-top:16px}}
-/* a card turned even a quarter degree pokes past the screen once it fills the width */
+
 @media(max-width:980px){section{transform:none !important}}
 @media (prefers-reduced-motion: reduce){section{transform:none !important}}
-/* A typewriter has one weight.  Special Elite and Cutive Mono were cut that way,
-   so headings and buttons stay at it, and a typed emphasis is underlined, as a
-   typist would have done it, rather than smeared into a fake bold. */
+
 h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[aria-pressed=true],button.cta{font-weight:400}
 .note b,.note strong{font-weight:400; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.18em}
 
@@ -889,7 +821,7 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
 
 <footer>
   <div class="wrap">
-    <p class="srcs back-home" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs back-home" style="margin-bottom:1.2em"><a href="../#projects" style="text-decoration-color:currentColor">&larr; All projects</a></p>
     <p class="srcs" id="srcs"></p>
   </div>
 </footer>
