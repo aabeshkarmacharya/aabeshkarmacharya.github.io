@@ -434,6 +434,10 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 table{font-family:var(--t-f-body)}
 th,thead th{font-family:var(--t-f-label)}
 td{font-family:var(--t-f-body)}
+
+:where(thead th){position:sticky; top:0; z-index:2; background-color:var(--t-paper);
+  box-shadow:0 1px 0 var(--t-line)}
+.tablewrap{max-height:min(72vh,620px); overflow:auto}
 details{background:var(--t-paper); border-color:var(--t-line)}
 summary{font-family:var(--t-f-label)}
 

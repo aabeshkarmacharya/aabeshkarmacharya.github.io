@@ -100,7 +100,8 @@ h2{text-wrap:balance; font-family:var(--f-sign); font-weight:600; text-transform
 .note{max-width:70ch; color:var(--ink-2); font-size:17px}
 .key{display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--f-sign); font-size:20px; text-transform:uppercase; margin:0 0 18px}
 .key i{display:inline-block; width:16px; height:16px; border:2px solid var(--rim); margin-right:6px; vertical-align:-1px}
-.signs{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr)); padding-bottom:48px}
+.signs{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr)); padding-bottom:48px;
+  grid-auto-flow:row dense}
 .sign{border:3px solid var(--sign-rim); padding:14px 16px 16px; text-decoration:none; display:flex; flex-direction:column;
   gap:2px; min-height:250px; transition:transform .12s, box-shadow .12s}
 .sign:hover{transform:translate(-3px,-3px); box-shadow:6px 6px 0 var(--lift)}
@@ -112,6 +113,16 @@ h2{text-wrap:balance; font-family:var(--f-sign); font-weight:600; text-transform
 .sign .s{font-size:13px; font-weight:600; margin:0 0 10px; line-height:1.35}
 .sign .f{margin-top:auto; font-size:15px; line-height:1.4}
 .sign .f b{display:block; font-family:var(--f-sign); font-weight:600; font-size:36px; line-height:1}
+/* The directory is a long board across the wall rather than one more square
+   sign: it is a different kind of project, and a full-width row keeps every
+   row of the wall full whether it holds four, three or two signs. */
+.sign.wide{grid-column:1/-1; min-height:0; display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
+  align-items:end; gap:2px 40px; padding:18px 22px 20px}
+.sign.wide .t{font-size:clamp(36px,4vw,50px); margin:0}
+.sign.wide .s{grid-column:1; margin:0}
+.sign.wide .f{grid-column:2; grid-row:1 / span 2; margin:0}
+@media(max-width:700px){.sign.wide{display:flex; flex-direction:column; align-items:stretch; padding:14px 16px 16px}
+  .sign.wide .t{font-size:36px; margin:0 0 8px} .sign.wide .s{margin:0 0 10px} .sign.wide .f{margin-top:auto}}
 @media(prefers-reduced-motion:reduce){.sign{transition:none}}
 
 footer{background:var(--foot); border-top:4px solid var(--foot-rule); padding-block:22px 34px; font-size:14.5px; color:var(--ink-2)}
@@ -222,10 +233,12 @@ footer .plates a{background:var(--foot-plate); color:var(--foot-plate-ink)}
 
   <section class="band" id="projects"><div class="in">
     <h2>Projects</h2>
-    <p class="note">Side projects built from public datasets. For each one I wrote the code that downloads the raw
-      data, analyses it and builds the page. Fifteen are long reads with interactive charts, and nine are tools you
-      can try with your own numbers, like your salary, your plot of land or your nearest weather station. A lot of
-      the work turned out to be separating real changes from changes in how things were measured.</p>
+    <p class="note">Side projects, most of them built from public datasets: for each of those I wrote the code that
+      downloads the raw data, analyses it and builds the page. Fifteen are long reads with interactive charts, and nine
+      are tools you can try with your own numbers, like your salary, your plot of land or your nearest weather station.
+      The wide sign is a directory of the valley&#8217;s apartment buildings, pieced together source by source from
+      newspapers, developers and listing sites. A lot of the work turned out to be separating real changes from
+      changes in how things were measured.</p>
     <p class="key"><span><i style="background:var(--red)"></i>Nepal</span><span><i style="background:var(--green)"></i>Earth</span><span><i style="background:var(--blue)"></i>Science</span><span><i style="background:var(--yellow)"></i>Tools</span></p>
     <div class="signs">
       <a class="sign nepal" href="income/">
@@ -247,6 +260,11 @@ footer .plates a{background:var(--foot-plate); color:var(--foot-plate-ink)}
         <span class="t">What Is My Land Worth?</span>
         <span class="s">built on the 2,115-plot land model</span>
         <span class="f"><b>313 toles</b>across Kathmandu, Lalitpur and Bhaktapur, priced by one model</span>
+      </a>
+      <a class="sign nepal wide" href="apartments/">
+        <span class="t">The Valley&#8217;s Apartment Complexes, One by One</span>
+        <span class="s">newspapers, developers and listing sites &#183; 427 sources</span>
+        <span class="f"><b>99 complexes</b>profiled one by one, every claim linked to the page it came from</span>
       </a>
       <a class="sign nepal" href="remittances/">
         <span class="t">Six Times What We Sell</span>
