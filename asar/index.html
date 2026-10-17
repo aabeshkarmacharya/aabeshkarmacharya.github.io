@@ -1,0 +1,1743 @@
+<!doctype html>
+<html lang="en" data-look="redbook" data-page="asar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#A3131B">
+<meta name="description" content="One Rupee in Three, Spent in Asar">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%85%3C%2Ftext%3E%3C%2Fsvg%3E">
+<title>One Rupee in Three, Spent in Asar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=Tiro+Devanagari+Hindi:ital@0;1&amp;display=swap">
+<style>
+/* An essay column with wide figures, in the house layout: a sunk header band,
+   ruled sections, prose at a 65ch measure and figures at 1120px. */
+:root{
+  color-scheme: light;
+  --ground:#EFEDE9; --surface:#FDFCFA; --surface-2:#F6F4F0; --sunk:#E4E1DB;
+  --ink:#1A1813; --ink-2:#55514A; --ink-3:#8A857C; --rule:#DAD6CE; --rule-2:#C5C0B5;
+
+  /* Two kinds of spending, and one reference.  Capital spending is the
+     subject, so it takes the one strong hue: a monsoon blue, deep enough to
+     carry Asar's bar on its own.  Recurrent spending -- salaries, grants,
+     the bills that arrive every month -- is the control, in ochre, the same
+     weight but never the emphasis.  The even pace a twelve-month year would
+     have is a dashed rule in the ink's own grey, because it is a reference,
+     not a third series.  Both hues were checked for colour-blind separation
+     against this surface. */
+  --cap:#2F4FA2; --cap-2:#8EA2DA; --cap-wash:rgba(47,79,162,.10);
+  --rec:#A8741A;
+  --even:#8A857C;
+  --unspent:#E4E1DB; --unspent-edge:#C5C0B5;
+  --accent:#2F4FA2;
+
+  --shadow:0 1px 2px rgba(26,24,19,.05),0 10px 30px -16px rgba(26,24,19,.2);
+  --grid:rgba(26,24,19,.075);
+  --miss:#E4E1DB; --have:#2F4FA2;
+  --measure:65ch; --wide:1120px;
+  --gutter:24px;
+}
+@media not all{
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --ground:#15140F; --surface:#1D1B16; --surface-2:#24221C; --sunk:#0D0C09;
+    --ink:#EFEBE2; --ink-2:#A9A499; --ink-3:#77726A; --rule:#302D26; --rule-2:#403C33;
+    /* Re-stepped for the dark surface rather than inverted: both hues sit in
+       the band where they hold their separation against it. */
+    --cap:#6C87DD; --cap-2:#3D518F; --cap-wash:rgba(108,135,221,.13);
+    --rec:#BC882C;
+    --even:#77726A;
+    --unspent:#2A2822; --unspent-edge:#403C33;
+    --accent:#6C87DD;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.72);
+    --grid:rgba(239,235,226,.085);
+    --miss:#2A2822; --have:#6C87DD;
+  }
+}
+:root[data-theme="dark"][data-look-off]{
+  color-scheme: dark;
+  --ground:#15140F; --surface:#1D1B16; --surface-2:#24221C; --sunk:#0D0C09;
+  --ink:#EFEBE2; --ink-2:#A9A499; --ink-3:#77726A; --rule:#302D26; --rule-2:#403C33;
+  --cap:#6C87DD; --cap-2:#3D518F; --cap-wash:rgba(108,135,221,.13);
+  --rec:#BC882C;
+  --even:#77726A;
+  --unspent:#2A2822; --unspent-edge:#403C33;
+  --accent:#6C87DD;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.72);
+  --grid:rgba(239,235,226,.085);
+  --miss:#2A2822; --have:#6C87DD;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--t-f-body);
+  font-weight:400; font-size:18.5px; line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; font-family:var(--t-f-display);
+  font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
+  letter-spacing:-.012em}
+.mono,code{font-family:var(--t-f-label)}
+code{font-size:.88em; background:var(--surface-2); border:1px solid var(--rule);
+  border-radius:2px; padding:.08em .34em; white-space:nowrap}
+.tnum{font-variant-numeric:tabular-nums}
+.np{font-style:italic}
+
+.wrap,.wide{margin-inline:auto;
+  padding-left:max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right:max(var(--gutter), env(safe-area-inset-right, 0px))}
+.wrap{max-width:calc(var(--measure) + 2 * var(--gutter))}
+.wide{max-width:calc(var(--wide) + 2 * var(--gutter))}
+section{padding-block:clamp(40px,6vw,74px)}
+section+section{border-top:1px solid var(--rule)}
+p{margin:0 0 1.1em}
+a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2); text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
+
+.eyebrow{font-family:var(--t-f-label); font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3);
+  display:flex; align-items:center; gap:12px; margin-bottom:16px}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
+h2{font-size:clamp(28px,4vw,40px); line-height:1.06; font-weight:700; margin-bottom:.48em}
+h3{font-size:21px; line-height:1.24; font-weight:600; margin:2em 0 .5em}
+.lede{font-size:20.5px; line-height:1.56; color:var(--ink-2)}
+.small{font-size:16px; color:var(--ink-2)}
+
+header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
+  padding-block:clamp(52px,9vw,104px) clamp(36px,6vw,64px)}
+h1{font-size:clamp(40px,7.2vw,88px); line-height:.97; font-weight:800;
+   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:12ch; margin-bottom:.3em}
+.sub{max-width:54ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
+.kicker{font-family:var(--t-f-label); font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:22px}
+
+/* The year in twelve bars, under the headline: the thesis drawn once,
+   before anything is argued. */
+.hero-year{margin-top:clamp(28px,4vw,44px); max-width:760px}
+.hero-cap{font-family:var(--t-f-label); font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); margin:0 0 8px}
+
+figure{margin:0; background:var(--surface); border:1px solid var(--rule);
+  border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.fig-head{padding:20px 22px 0}
+.fig-title{font-family:var(--t-f-display); font-weight:600; font-size:17px;
+  font-variation-settings:"SOFT" 0,"WONK" 0,"opsz" 24; margin-bottom:4px}
+.fig-note{font-size:14px; color:var(--ink-2); line-height:1.45; max-width:80ch; margin:0}
+.fig-body{padding:14px 22px 20px}
+figcaption{padding:14px 22px 18px; border-top:1px solid var(--rule);
+  font-size:13.5px; color:var(--ink-3); line-height:1.5; background:var(--surface-2)}
+.figspace{margin-block:clamp(28px,3.6vw,46px)}
+svg{display:block; width:100%; height:auto; overflow:visible}
+.gl{stroke:var(--grid); stroke-width:1; fill:none}
+.ax{stroke:var(--rule-2); stroke-width:1; fill:none}
+.tk{font-family:var(--t-f-label); font-size:10.5px; fill:var(--ink-3);
+    font-variant-numeric:tabular-nums}
+.axlab{font-family:var(--t-f-label); font-size:10px; fill:var(--ink-3);
+    letter-spacing:.14em; text-transform:uppercase}
+.dlab{font-family:var(--t-f-label); font-size:11px; fill:var(--ink-2);
+    font-variant-numeric:tabular-nums}
+.dlab.strong{fill:var(--ink); font-weight:500}
+.halo{paint-order:stroke; stroke:var(--surface); stroke-width:3.5px;
+      stroke-linejoin:round}
+.sunk-halo{paint-order:stroke; stroke:var(--sunk); stroke-width:3.5px;
+      stroke-linejoin:round}
+
+.bar.cap{fill:var(--cap)} .bar.cap-2{fill:var(--cap-2)}
+.bar.unspent{fill:var(--unspent); stroke:var(--unspent-edge); stroke-width:1}
+.ln{fill:none; stroke-width:2; stroke-linejoin:round; stroke-linecap:round}
+.ln.cap{stroke:var(--cap)} .ln.rec{stroke:var(--rec)}
+.ln.year{stroke:var(--cap); stroke-width:1.2; opacity:.28}
+.ln.year.on{opacity:1; stroke-width:2.4}
+.ln.med{stroke-width:3}
+.ln.even{stroke:var(--even); stroke-width:1.3; stroke-dasharray:5 4}
+.dot.cap{fill:var(--cap); stroke:var(--surface); stroke-width:2}
+.dot.rec{fill:var(--rec); stroke:var(--surface); stroke-width:2}
+.dot.hollow{fill:var(--surface); stroke:var(--cap); stroke-width:2}
+.rule-v{stroke:var(--ink-3); stroke-width:1; stroke-dasharray:3 3}
+.band{fill:var(--cap-wash)}
+.hit{fill:transparent; stroke:none}
+.cell{shape-rendering:crispEdges}
+.cell.own{fill:var(--have)}
+.cell.later{fill:var(--surface); stroke:var(--have); stroke-width:1.5}
+.cell.implied{fill:var(--surface); stroke:var(--have); stroke-width:1.5; stroke-dasharray:2 2}
+.cell.none{fill:var(--miss)}
+
+.ctl{display:flex; flex-wrap:wrap; gap:9px 16px; align-items:center; padding:12px 22px;
+  border-bottom:1px solid var(--rule); background:var(--surface-2);
+  font-family:var(--t-f-label); font-size:11.5px; color:var(--ink-2)}
+.chip{border:1px solid var(--rule-2); background:transparent; color:var(--ink-2);
+  font:inherit; padding:4px 11px; border-radius:3px; cursor:pointer; display:inline-flex;
+  align-items:center; gap:7px; transition:background .15s,border-color .15s,color .15s}
+.chip[aria-pressed="true"]{border-color:var(--ink-2); background:var(--surface); color:var(--ink)}
+.chip:hover{border-color:var(--ink-3)}
+
+.legend{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center;
+  font-family:var(--t-f-label); font-size:11.5px; color:var(--ink-2);
+  padding:0 22px 14px}
+.legend span{display:inline-flex; align-items:center; gap:7px}
+.legend i{width:16px; height:3px; border-radius:2px; flex:none; font-style:normal}
+.legend i.sw{height:11px; width:14px; border-radius:2px}
+.legend i.dash{height:0; border-top:2px dashed var(--even); border-radius:0; background:none}
+.legend i.ring{width:11px; height:11px; border-radius:50%; background:var(--surface);
+  border:2px solid var(--cap)}
+.legend i.disc{width:11px; height:11px; border-radius:50%}
+.legend i.box{width:12px; height:12px; border-radius:1px}
+
+/* Four figures in a measure-width column: 190px forces two per row rather
+   than three and an empty cell. */
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); border-radius:3px; overflow:hidden;
+  margin-block:30px}
+.stat{background:var(--surface); padding:16px 18px; min-width:0}
+.stat b{display:block; font-family:var(--t-f-body); font-weight:600;
+  font-size:clamp(25px,3.1vw,33px); line-height:1.05; margin-bottom:5px; letter-spacing:-.02em}
+.stat span{font-family:var(--t-f-label); font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); line-height:1.4; display:block}
+.stat.c b{color:var(--cap)} .stat.r b{color:var(--rec)}
+
+blockquote{margin:1.6em 0; padding:2px 0 2px 18px; border-left:2px solid var(--cap);
+  color:var(--ink-2); font-size:17px}
+blockquote p{margin:0 0 .5em}
+blockquote cite{display:block; font-style:normal; font-family:var(--t-f-label);
+  font-size:11px; letter-spacing:.08em; color:var(--ink-3)}
+
+#tip{position:fixed; z-index:40; pointer-events:none; opacity:0; transition:opacity .11s;
+  background:var(--surface); border:1px solid var(--rule-2); border-radius:3px;
+  box-shadow:var(--shadow); padding:9px 12px; font-size:13px; line-height:1.45;
+  max-width:300px; color:var(--ink)}
+#tip.on{opacity:1}
+#tip b{font-family:var(--t-f-label); font-size:11px; letter-spacing:.1em;
+  color:var(--ink-3); font-weight:400; display:block; margin-bottom:3px}
+#tip .v{font-variant-numeric:tabular-nums}
+#tip .r{display:flex; justify-content:space-between; gap:18px}
+#tip .n{color:var(--ink-3); font-size:12px; margin-top:4px}
+
+details{border:1px solid var(--rule); border-radius:3px; background:var(--surface);
+  padding:0 18px; margin-block:26px}
+summary{cursor:pointer; padding:14px 0; font-family:var(--t-f-label);
+  font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2)}
+summary:hover{color:var(--ink)}
+.tablewrap{overflow-x:auto; padding-bottom:18px}
+table{border-collapse:collapse; font-size:14px; width:100%; min-width:640px}
+th,td{text-align:right; padding:6px 10px; border-bottom:1px solid var(--rule);
+  font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+td.p{font-family:var(--t-f-label); font-size:11px; color:var(--ink-3); text-align:left}
+thead th{font-family:var(--t-f-label); font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:400; white-space:nowrap}
+
+.srcs{font-size:14px; color:var(--ink-3); line-height:1.6}
+.srcs a{text-decoration-color:var(--rule-2)}
+footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:44px}
+.note{border-left:2px solid var(--rule-2); padding-left:16px; margin-block:1.5em;
+  color:var(--ink-2); font-size:16.5px}
+.warn{border-left-color:var(--rec)}
+
+@media (max-width:760px){
+  body{font-size:17px}
+  :root{--gutter:16px}
+  .fig-head,.fig-body,.ctl,.legend,figcaption{padding-left:16px; padding-right:16px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important; transition-duration:.01ms !important}
+}
+</style>
+<style>
+/* ===================================================================== base
+   What every page's look is built on.  build_site.py appends this, then the
+   page's own look from theme/looks/, after the page's own stylesheet, so
+   both win any tie with it.
+
+   It does two things.  It bridges the tokens every page already uses
+   (--ground, --surface, --ink, --rule ...) to a small set of theme tokens
+   (--t-*), so a look recolours a whole page by setting a dozen values.  And
+   it turns off what made every page look alike -- the Fraunces display face,
+   the small monospaced labels with a rule running off them, the soft shadows
+   and the rounded cards -- and points the same components at the theme's own
+   faces and lines instead.
+
+   Each look is a single deliberate appearance, light or dark as its subject
+   asks, so the bridge is written at a specificity (:root three times) that
+   beats the dark-mode token blocks inside every page's own stylesheet. */
+
+:root:root:root{
+  color-scheme: var(--t-scheme, light);
+  /* defaults, which a look overrides */
+  --t-bg:#FFFFFF; --t-paper:#FFFFFF; --t-paper-2:#F4F4F2;
+  --t-ink:#151515; --t-ink-2:#444444; --t-ink-3:#777777;
+  --t-line:#DCDCDC; --t-line-2:#8A8A8A; --t-grid:rgba(0,0,0,.08);
+  --t-accent:#151515; --t-accent-2:#555555; --t-accent-ink:#FFFFFF;
+  --t-head-bg:var(--t-paper-2); --t-head-ink:var(--t-ink); --t-head-ink-2:var(--t-ink-2);
+  --t-head-kick:var(--t-ink-3); --t-head-rule:1px solid var(--t-line);
+  --t-hero-bg:var(--t-paper-2);
+  --t-foot-bg:var(--t-paper-2); --t-foot-ink:var(--t-ink-2); --t-foot-ink-2:var(--t-ink-3);
+  --t-f-display:Georgia,serif; --t-f-body:system-ui,sans-serif; --t-f-label:var(--t-f-body);
+  --t-f-num:var(--t-f-display); --t-f-chart:var(--t-f-label);
+  --t-f-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --t-body-size:18px; --t-body-lh:1.62;
+  --t-h1-size:clamp(38px,6.4vw,80px); --t-h1-weight:700; --t-h1-case:none; --t-h1-track:-.01em; --t-h1-lh:1;
+  --t-h2-size:clamp(28px,3.8vw,40px); --t-h2-weight:700; --t-h2-case:none; --t-h2-track:-.005em; --t-h2-lh:1.08;
+  --t-h3-weight:600;
+  --t-label-size:12px; --t-label-case:uppercase; --t-label-track:.12em; --t-label-weight:600;
+  --t-label-ink:var(--t-ink-3); --t-eyebrow-rule:var(--t-line);
+  --t-radius:0; --t-fig-border:1px solid var(--t-line); --t-cap-rule:1px solid var(--t-line);
+  --t-tip-border:1px solid var(--t-line-2);
+  --t-chip-on-bg:var(--t-ink); --t-chip-on-ink:var(--t-bg);
+
+  /* the bridge */
+  --ground:var(--t-bg); --surface:var(--t-paper); --surface-2:var(--t-paper-2); --sunk:var(--t-hero-bg);
+  --ink:var(--t-ink); --ink-2:var(--t-ink-2); --ink-3:var(--t-ink-3);
+  --rule:var(--t-line); --rule-2:var(--t-line-2); --grid:var(--t-grid);
+  --accent:var(--t-accent); --alt:var(--t-accent-2);
+  --shadow:none; --shadow-lg:none;
+  --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+}
+
+/* Several looks are set in faces cut in one weight (a typewriter, a terminal's
+   pixel face, a seventeenth-century roman); asked for bold, a browser smears a fake one.
+   It may still slant a face that has no italic, but never fakes a weight. */
+html{background:var(--t-bg); font-synthesis:style}
+body{background:var(--t-bg); color:var(--t-ink); font-family:var(--t-f-body);
+  font-size:var(--t-body-size); line-height:var(--t-body-lh)}
+h1,h2,h3{font-family:var(--t-f-display); font-variation-settings:normal}
+h1{font-size:var(--t-h1-size); font-weight:var(--t-h1-weight); text-transform:var(--t-h1-case);
+  letter-spacing:var(--t-h1-track); line-height:var(--t-h1-lh)}
+h2{font-size:var(--t-h2-size); font-weight:var(--t-h2-weight); text-transform:var(--t-h2-case);
+  letter-spacing:var(--t-h2-track); line-height:var(--t-h2-lh)}
+h3{font-weight:var(--t-h3-weight); letter-spacing:0}
+h1,h2,h3,.fig-title{text-wrap:balance}
+.mono{font-family:var(--t-f-label)}
+code,kbd,samp,pre{font-family:var(--t-f-mono)}
+a:hover{text-decoration-color:var(--t-accent)}
+:focus-visible{outline-color:var(--t-accent)}
+
+.eyebrow,.kicker,.sech,label.lab{font-family:var(--t-f-label); font-size:var(--t-label-size);
+  text-transform:var(--t-label-case); letter-spacing:var(--t-label-track); font-weight:var(--t-label-weight);
+  color:var(--t-label-ink)}
+.eyebrow::after{background:var(--t-eyebrow-rule)}
+
+/* Headers: the house header, the canvas hero of the four oldest pages, and
+   the keyboards page's own. */
+header.top,header.hero{background:var(--t-head-bg); color:var(--t-head-ink); border-bottom:var(--t-head-rule)}
+header.top .kicker,header.hero .eyebrow{color:var(--t-head-kick)}
+header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
+#hero{background:var(--t-hero-bg); border-bottom:var(--t-head-rule)}
+.hero-sub{color:var(--t-ink-2)}
+.hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
+.look-art,.look-tag{display:none}
+/* Devanagari hangs vowel signs above and below the line, so a subtitle that
+   inherits a display face's tight leading collides with itself when it wraps.
+   A look whose faces have no Devanagari names one second in its body stack,
+   so it supplies only those glyphs. */
+.devanagari{font-family:var(--t-f-body); line-height:1.32}
+
+/* Surfaces lose their shadows and their rounding together. */
+figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
+.seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
+button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
+figure{background:var(--t-paper); border:var(--t-fig-border)}
+figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(--t-ink-3)}
+.fig-title{font-family:var(--t-f-display); font-variation-settings:normal}
+.fig-note{color:var(--t-ink-2)}
+.ctl{background:var(--t-paper-2); border-bottom:var(--t-cap-rule); font-family:var(--t-f-label)}
+.legend{font-family:var(--t-f-label)}
+.chip{font-family:var(--t-f-label)}
+.chip[aria-pressed="true"]{background:var(--t-chip-on-bg); color:var(--t-chip-on-ink); border-color:var(--t-chip-on-bg)}
+
+/* Chart text, in every naming the pages use. */
+.tk,.axlab,.dlab,.axistext,.axistitle,.figlab,.gl-lab,svg text{font-family:var(--t-f-chart)}
+.halo{stroke:var(--t-paper)}
+
+/* Stat tiles draw their own hairlines, so a row the last tile does not fill
+   shows paper, not a grey block.  220px puts four tiles two by two in a
+   reading column and five across in a wide one. */
+.stats{border:0; background:transparent; gap:1px;
+  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+.stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
+.stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
+.stat span,.stat .l{font-family:var(--t-f-label)}
+
+#tip,.tip{font-family:var(--t-f-body); border:var(--t-tip-border); background:var(--t-paper); color:var(--t-ink)}
+#tip b,.tip b{font-family:var(--t-f-label)}
+
+table{font-family:var(--t-f-body)}
+th,thead th{font-family:var(--t-f-label)}
+td{font-family:var(--t-f-body)}
+details{background:var(--t-paper); border-color:var(--t-line)}
+summary{font-family:var(--t-f-label)}
+
+footer{background:var(--t-foot-bg); color:var(--t-foot-ink); border-top:var(--t-head-rule)}
+/* Inside a coloured footer, and in a chart drawn straight onto a coloured
+   header, the paper inks become the band's own, so a page's inline var(--ink)
+   or var(--ink-3) -- a highlighted tick, a muted closing line -- stays legible
+   on a dark band.  Only the header's charts: a header can also hold paper
+   cards (the apartments stats), whose text must keep the paper inks. */
+header.top svg,header.hero svg{--ink:var(--t-head-ink); --ink-2:var(--t-head-ink-2); --ink-3:var(--t-head-ink-2)}
+footer{--ink:var(--t-foot-ink); --ink-2:var(--t-foot-ink-2); --ink-3:var(--t-foot-ink-2)}
+footer .srcs{color:var(--t-foot-ink-2)}
+
+/* Tools: the form, the answer panel and the lead form. */
+.card,.answer,.offer,a.nextcard{background:var(--t-paper); border-color:var(--t-line)}
+.answer .top{background:var(--t-paper-2)}
+.big .unit{font-family:var(--t-f-body)}
+.row .v,.ppends,td{font-variant-numeric:tabular-nums}
+.row .v,.ppends{font-family:var(--t-f-label)}
+/* background-color, not the shorthand: a select draws its chevron with background-image */
+input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea{
+  font-family:var(--t-f-body); background-color:var(--t-paper); border-color:var(--t-line-2); color:var(--t-ink)}
+input:focus,select:focus,textarea:focus{border-color:var(--t-accent); box-shadow:0 0 0 2px var(--t-accent)}
+button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:var(--t-f-label)}
+button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
+.seg{border-color:var(--t-line-2); background:var(--t-paper)}
+.seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
+.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+/* The segmented control clips its buttons to its own outline, which clipped
+   the focus ring with them: draw it inside the button, in the ink that shows
+   on the pressed one too. */
+.seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
+.seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
+.flag{background:var(--t-paper-2); border-color:var(--t-line)}
+a.nextcard .go,.go{font-family:var(--t-f-label)}
+
+/* A note a script fills later (the layout optimiser's, say) is empty until
+   then, and a look that gives notes a rule or a fill would draw a stray one. */
+.note:empty{display:none}
+
+/* The way home that build_site.py adds to every footer. */
+.back-home{font-family:var(--t-f-label)}
+
+/* Inline code holds the bulletins' mangled fragments, some of them long
+   unbroken strings; on a phone they may break anywhere rather than push the
+   page sideways. */
+@media(max-width:700px){code{white-space:normal; overflow-wrap:anywhere}}
+/* A source note can carry a formula held together with non-breaking spaces
+   (the sunspot smoothing), wider than any phone column: it may break anywhere
+   rather than push the page sideways.  On the narrowest phones a tool card's
+   table scrolls inside its card for the same reason. */
+@media(max-width:700px){.srcs{overflow-wrap:anywhere}}
+@media(max-width:380px){.card table{display:block; overflow-x:auto; max-width:100%}}
+
+/* Code inside a coloured footer takes the footer's ink rather than a paper
+   box, which on a dark band reads as a hole in it. */
+footer code{background:transparent; border-color:currentColor; color:inherit}
+
+/* Print.  Several tools promise a single clean printed page, and their own
+   print rules would lose to a look's coloured covers and patterned paper,
+   which come later in the cascade.  So in print every look keeps its type and
+   drops its paint: white paper, black ink, no art layers, no textures. */
+@media print{
+  html,body{background:#FFFFFF !important; border:0 !important; margin:0 !important}
+  body::before,body::after,.look-art,header.top::before,header.top::after,header.hero::before{display:none !important}
+  header.top,header.hero,#hero,footer,section,figure,.fig,.card,.answer,.offer,.stat,.stats,.answer .top,
+  header.top > .wrap,header.top > .wide,section .wrap{background:#FFFFFF !important; box-shadow:none !important;
+    transform:none !important; color:#000000 !important}
+  header.top,header.hero{border-bottom:1px solid #999999 !important}
+  header.top *,header.hero *,footer *{color:#000000 !important; text-shadow:none !important}
+  .eyebrow{background:none !important; color:#000000 !important; transform:none !important}
+  /* Backgrounds that survive the reset are small -- a section number's cell,
+     a pressed key, a pill -- and often carry white type, which would print as
+     nothing if the browser dropped them.  Glows go; figures in a look's
+     coloured lettering (the rate board's LEDs) print black. */
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  *,*::before,*::after{text-shadow:none !important}
+  .stat b,.stat span,.stat .n,.stat small{color:#000000 !important}
+  /* a chart drawn for a coloured header goes to the paper's black and greys */
+  header.top svg text,header.hero svg text{fill:#000000 !important}
+  header.top svg .sunk-halo,header.hero svg .sunk-halo{stroke:#FFFFFF !important}
+  header.top svg .bar,header.hero svg .bar{fill:#BBBBBB !important}
+  header.top svg .bar.cap,header.hero svg .bar.cap{fill:#000000 !important}
+  header.top svg .ax,header.top svg .ln,header.hero svg .ax,header.hero svg .ln{stroke:#666666 !important}
+}
+
+/* look: redbook -- One Rupee in Three, Spent in Asar
+   fonts: https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap
+   chart-font: "PT Sans"
+
+   The Ministry of Finance prints its budget estimates in a red book, and
+   Nepal calls it that: the Red Book.  So the page is one.  A red cloth cover
+   with gold lettering and a seal, then ledger paper inside: sections numbered
+   as budget heads, figures ruled like a statement of account, and the two
+   kinds of spending in the book's own two inks, red for capital and a
+   blue-black for recurrent. */
+
+:root:root:root{
+  --t-bg:#FBFAF6; --t-paper:#FFFFFF; --t-paper-2:#F5F1E8;
+  --t-ink:#1C1A17; --t-ink-2:#4A4540; --t-ink-3:#726C64;
+  --t-line:#E4DDCF; --t-line-2:#9C9283; --t-grid:rgba(28,26,23,.07);
+  --t-accent:#A3131B; --t-accent-2:#2B4C9B; --t-accent-ink:#FFF8E8;
+  --rb-red:#A3131B; --rb-red-2:#7D0E14; --rb-gold:#D9B64E; --rb-gold-2:#F1DD9B; --rb-cream:#FFF6DF;
+  --t-head-bg:#A3131B; --t-head-ink:var(--rb-gold-2); --t-head-ink-2:rgba(255,246,223,.92);
+  --t-head-kick:#EACB6A; --t-head-rule:6px solid var(--rb-red-2); --t-hero-bg:#A3131B;
+  --t-foot-bg:#7D0E14; --t-foot-ink:rgba(255,246,223,.92); --t-foot-ink-2:rgba(255,246,223,.72);
+  --t-f-display:"Tiro Devanagari Hindi","PT Serif",Georgia,serif;
+  --t-f-body:"PT Serif",Georgia,serif; --t-f-label:"PT Sans",Arial,sans-serif;
+  --t-f-num:"PT Sans",Arial,sans-serif; --t-f-chart:"PT Sans",Arial,sans-serif;
+  --t-body-size:18.5px; --t-body-lh:1.65;
+  --t-h1-size:clamp(40px,6.6vw,82px); --t-h1-weight:400; --t-h1-track:-.005em; --t-h1-lh:1.02;
+  --t-h2-size:clamp(28px,3.8vw,42px); --t-h2-weight:400; --t-h2-lh:1.1;
+  --t-label-size:12.5px; --t-label-track:.14em; --t-label-weight:700; --t-label-ink:var(--rb-red);
+  --t-fig-border:1px solid #E4DDCF; --t-cap-rule:1px solid #E4DDCF; --t-tip-border:2px solid #A3131B;
+  --t-chip-on-bg:#A3131B; --t-chip-on-ink:#FFF6DF;
+
+  /* the page's own data tokens, in the book's inks */
+  --cap:#A3131B; --cap-2:#E2A9A0; --cap-wash:rgba(163,19,27,.08); --rec:#2B4C9B;
+  --even:#9C9283; --unspent:#EFE9DC; --unspent-edge:#C9BFAE; --have:#A3131B; --miss:#EFE9DC;
+}
+
+/* The cover: red cloth, a gold rule inset from its edge, and a seal. */
+header.top{position:relative; overflow:hidden;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,.035) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 3px),
+    #A3131B}
+header.top::before{content:""; position:absolute; inset:14px; border:3px double var(--rb-gold); pointer-events:none}
+header.top .look-art{display:block; position:absolute; right:clamp(22px,5vw,64px); top:clamp(26px,4vw,40px);
+  width:clamp(84px,11vw,124px); aspect-ratio:1; border:2px solid var(--rb-gold); border-radius:50%;
+  box-shadow:inset 0 0 0 5px #A3131B, inset 0 0 0 6px var(--rb-gold)}
+header.top .look-art::after{content:"\0930\093E\0924\094B\0020\0915\093F\0924\093E\092C"; position:absolute; inset:0;
+  display:grid; place-items:center; font-family:"Tiro Devanagari Hindi",serif; font-size:clamp(14px,1.7vw,19px);
+  color:var(--rb-gold); text-align:center; line-height:1.1; padding:0 14px}
+header.top .wrap{position:relative}
+header.top h1{color:var(--rb-gold-2); text-shadow:0 1px 0 rgba(0,0,0,.25)}
+header.top .kicker{letter-spacing:.2em}
+@media(max-width:760px){header.top::before{inset:8px}}
+/* the seal sits on the kicker's first line until the cover is wide enough to clear it */
+@media(max-width:920px){header.top .look-art{display:none}}
+/* The Asar bars on the cover, in gold. */
+header.top .bar.cap{fill:var(--rb-gold)} header.top .bar.cap-2{fill:rgba(255,246,223,.38)}
+header.top .ln.even{stroke:rgba(255,246,223,.7)}
+header.top .tk{fill:rgba(255,246,223,.8)} header.top .dlab{fill:var(--rb-cream)}
+header.top .dlab.strong{fill:var(--rb-gold-2)} header.top .ax{stroke:rgba(255,246,223,.55)}
+header.top .hero-cap{color:#E0C470; font-family:var(--t-f-label)}
+
+/* Inside: sections numbered as budget heads. */
+body{counter-reset:head}
+section .eyebrow{counter-increment:head}
+section .eyebrow::before{content:"Head " counter(head, decimal-leading-zero) "\00a0\00b7\00a0"; color:var(--t-ink-3)}
+.eyebrow::after{background:linear-gradient(90deg,var(--rb-red) 0 40px,var(--t-line) 40px)}
+h2{color:#7D0E14}
+section+section{border-top:1px solid var(--t-line)}
+.lede{color:var(--t-ink-2)}
+
+/* Figures ruled like a statement of account. */
+figure{border:1px solid var(--t-line); border-top:4px solid var(--rb-red)}
+.fig-title{font-family:var(--t-f-label); font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--rb-red-2)}
+figcaption{font-family:var(--t-f-label); font-size:13px}
+.stats{border:1px solid var(--t-line); background:var(--t-line); gap:1px}
+.stat b{color:var(--rb-red); font-weight:700}
+.stat.c b{color:var(--rb-red)} .stat.r b{color:var(--rec)}
+.note{border-left:3px solid var(--rb-red); background:var(--t-paper); padding:12px 16px}
+.note.warn{border-left-color:var(--rb-gold); background:#FBF3DC}
+blockquote{border-left:3px solid var(--rb-red); font-style:italic; color:var(--t-ink-2)}
+blockquote cite{font-family:var(--t-f-label); letter-spacing:.06em}
+code{background:#F5F1E8; border-color:var(--t-line)}
+.chip{border-color:var(--t-line-2)}
+thead th{color:var(--rb-red); border-bottom:2px solid var(--rb-red)}
+td.p{color:var(--t-ink-3)}
+footer a{color:var(--rb-gold-2)}
+
+/* ledger paper: a red double rule down the margin of the reading column */
+section .wrap{border-left:3px double rgba(163,19,27,.38); padding-left:max(28px,env(safe-area-inset-left,0px))}
+@media(max-width:760px){section .wrap{padding-left:max(18px,env(safe-area-inset-left,0px))}}
+
+</style>
+</head>
+<body>
+<script>window.ASAR_DATA={"meta":{"source":"Nepal Rastra Bank, Current Macroeconomic and Financial Situation (English), fiscal figures on a cash basis from the Financial Comptroller General Office","listed":369,"extracts":212,"slots":210,"stated":154,"silent":56,"n_fy":20,"relabelled":2,"tables_bad":1,"retrieved":"2026-09-26","jestha15_from":"2016/17"},"stats":{"n_own":14,"n_hollow":4,"n_years":18,"missing":["2018/19"],"even":0.0833,"asar_med":0.3641,"asar_lo":0.2961,"asar_lo_at":"2023/24","asar_hi":0.4328,"asar_hi_at":"2008/09","asar_x_even":4.4,"mult_med":6.3,"mult_lo":4.63,"mult_lo_at":"2023/24","mult_hi":8.39,"mult_hi_at":"2008/09","rec_med":0.1715,"rec_n":14,"asar_before":0.3821,"n_before":7,"asar_after":0.3561,"n_after":7,"half_before":0.1523,"half_before_n":7,"half_after":0.2348,"half_after_n":7,"last":"2025/26","last_asar":0.3048,"last_rs":58.17,"last_c11":132.67,"last_c12":190.84,"last_mult":4.82,"first":"2007/08","final":"2026/27","bud_n":11,"bud_own_n":8,"bud_from":"2009/10","bud_to":"2021/22","exec_med":0.665,"by11_med":0.4054,"in12_med":0.2702,"unspent_med":0.335,"n_third":11,"asar_lo_x":3.6,"rec_x_even":2.1,"cap_vs_rec":2.1,"n_hollow_words":"four"},"checks":{"levels":92,"levels_worst":0.0108,"levels_worst_case":{"fy":"2021/22","m":1,"month":"Shrawan","own":0.93,"later":0.94},"within":62,"within_med":0.0004,"within_worst":0.0078,"annual":[{"fy":"2007/08","first":42.7,"later":43.22,"rel":0.0122,"lag":1,"how":"growth","asar_first":0.3396,"asar_restated":0.3521,"rel11":-0.0071},{"fy":"2008/09","first":58.0,"later":62.71,"rel":0.0812,"lag":1,"how":"growth","asar_first":0.4328,"asar_restated":0.4751,"rel11":0.0006},{"fy":"2009/10","first":75.38,"later":75.96,"rel":0.0077,"lag":1,"how":"growth","asar_first":0.3821,"asar_restated":0.387,"rel11":-0.0003},{"fy":"2011/12","first":40.83,"later":45.42,"rel":0.1125,"lag":1,"how":"growth","asar_first":0.3113,"asar_restated":0.3809},{"fy":"2013/14","first":60.95,"later":61.35,"rel":0.0066,"lag":1,"how":"growth","asar_first":0.4034,"asar_restated":0.4073,"rel11":0.0001},{"fy":"2023/24","first":191.75,"later":192.03,"rel":0.0015,"lag":2,"how":"level","asar_first":0.2961,"asar_restated":0.2971,"rel11":0.0},{"fy":"2024/25","first":222.68,"later":223.98,"rel":0.0058,"lag":1,"how":"level","asar_first":0.3561,"asar_restated":0.3598,"rel11":0.0}],"annual_n":7,"annual_up":7,"annual_big":2,"annual_max":0.1125,"both_n":6,"both_11_worst":0.0071,"rev":{"2007_08":{"fy":"2007/08","first":42.7,"later":43.22,"rel":0.0122,"lag":1,"how":"growth","asar_first":0.3396,"asar_restated":0.3521,"rel11":-0.0071},"2008_09":{"fy":"2008/09","first":58.0,"later":62.71,"rel":0.0812,"lag":1,"how":"growth","asar_first":0.4328,"asar_restated":0.4751,"rel11":0.0006},"2009_10":{"fy":"2009/10","first":75.38,"later":75.96,"rel":0.0077,"lag":1,"how":"growth","asar_first":0.3821,"asar_restated":0.387,"rel11":-0.0003},"2011_12":{"fy":"2011/12","first":40.83,"later":45.42,"rel":0.1125,"lag":1,"how":"growth","asar_first":0.3113,"asar_restated":0.3809},"2013_14":{"fy":"2013/14","first":60.95,"later":61.35,"rel":0.0066,"lag":1,"how":"growth","asar_first":0.4034,"asar_restated":0.4073,"rel11":0.0001},"2023_24":{"fy":"2023/24","first":191.75,"later":192.03,"rel":0.0015,"lag":2,"how":"level","asar_first":0.2961,"asar_restated":0.2971,"rel11":0.0},"2024_25":{"fy":"2024/25","first":222.68,"later":223.98,"rel":0.0058,"lag":1,"how":"level","asar_first":0.3561,"asar_restated":0.3598,"rel11":0.0}},"shift_max":0.0696},"years":[{"fy":2007,"label":"2007/08","c":[null,null,2.84,3.39,7.43,10.28,13.93,17.42,19.72,23.36,28.2,42.7],"cp":[0,0,1,3,1,1,1,1,1,1,1,1],"r":[1.24,null,21.32,null,30.95,38.24,44.27,51.1,57.97,64.77,73.0,87.5],"rp":[1,0,1,0,1,1,1,1,1,1,1,1],"after":false,"asar":0.3396,"asar_rs":14.5,"asar_p":1,"mult":5.66,"share":[null,null,0.0665,0.0795,0.174,0.2407,0.3262,0.408,0.4618,0.5471,0.6604,1.0],"rec_asar":0.1657,"rec_asar_p":1,"rshare":[0.0142,null,0.2437,null,0.3537,0.437,0.5059,0.584,0.6625,0.7402,0.8343,1.0]},{"fy":2008,"label":"2008/09","c":[null,null,1.11,2.8,4.9,7.9,11.1,14.7,19.2,26.0,32.9,58.0],"cp":[0,0,3,1,1,1,1,1,1,1,1,1],"r":[1.6,8.4,18.5,23.8,32.3,43.2,52.0,61.4,70.7,81.9,92.8,115.5],"rp":[1,1,1,1,1,1,1,1,1,1,1,1],"after":false,"asar":0.4328,"asar_rs":25.1,"asar_p":1,"mult":8.39,"share":[null,null,0.0192,0.0483,0.0845,0.1362,0.1914,0.2534,0.331,0.4483,0.5672,1.0],"rec_asar":0.1965,"rec_asar_p":1,"rshare":[0.0139,0.0727,0.1602,0.2061,0.2797,0.374,0.4502,0.5316,0.6121,0.7091,0.8035,1.0]},{"fy":2009,"label":"2009/10","c":[null,null,1.93,4.07,5.53,10.55,15.69,22.45,28.35,34.75,46.58,75.38],"cp":[0,0,1,1,1,1,1,1,1,1,1,1],"r":[null,null,28.5,35.85,45.6,60.64,70.95,79.37,90.94,102.3,116.31,144.38],"rp":[0,0,1,1,1,1,1,1,1,1,1,1],"after":false,"asar":0.3821,"asar_rs":28.8,"asar_p":1,"mult":6.8,"share":[null,null,0.0256,0.054,0.0734,0.14,0.2081,0.2978,0.3761,0.461,0.6179,1.0],"rec_asar":0.1944,"rec_asar_p":1,"rshare":[null,null,0.1974,0.2483,0.3158,0.42,0.4914,0.5497,0.6299,0.7085,0.8056,1.0],"be":106.27,"be_how":"implied","exec":0.7093,"by11":0.4383,"in12":0.271},{"fy":2010,"label":"2010/11","c":[null,null,null,null,4.77,8.97,16.33,24.87,33.37,44.36,55.74,87.89],"cp":[0,0,0,0,1,1,1,1,1,1,1,1],"r":[null,null,null,null,42.51,59.87,74.31,89.97,104.55,115.15,133.38,166.01],"rp":[0,0,0,0,1,1,1,1,1,1,1,1],"after":false,"asar":0.3658,"asar_rs":32.15,"asar_p":1,"mult":6.34,"share":[null,null,null,null,0.0543,0.1021,0.1858,0.283,0.3797,0.5047,0.6342,1.0],"rec_asar":0.1966,"rec_asar_p":1,"rshare":[null,null,null,null,0.2561,0.3606,0.4476,0.542,0.6298,0.6936,0.8034,1.0],"be":129.63,"be_how":"implied","exec":0.678,"by11":0.43,"in12":0.248},{"fy":2011,"label":"2011/12","c":[null,null,null,null,null,7.93,10.67,13.76,18.79,23.12,28.12,40.83],"cp":[0,0,0,0,0,1,1,1,1,1,1,1],"r":[null,null,null,null,null,88.61,110.57,127.89,147.77,164.82,188.59,231.79],"rp":[0,0,0,0,0,1,1,1,1,1,1,1],"after":false,"asar":0.3113,"asar_rs":12.71,"asar_p":1,"mult":4.97,"share":[null,null,null,null,null,0.1942,0.2613,0.337,0.4602,0.5663,0.6887,1.0],"rec_asar":0.1864,"rec_asar_p":1,"rshare":[null,null,null,null,null,0.3823,0.477,0.5517,0.6375,0.7111,0.8136,1.0],"be":72.65,"be_how":"implied","exec":0.562,"by11":0.3871,"in12":0.1749},{"fy":2012,"label":"2012/13","c":[null,null,1.52,3.53,5.32,7.05,9.32,12.41,17.03,22.31,27.07,47.15],"cp":[0,0,3,3,3,3,3,3,3,3,3,1],"r":[null,null,null,null,null,null,null,null,null,null,null,237.99],"rp":[0,0,0,0,0,0,0,0,0,0,0,1],"after":false,"asar":0.4258,"asar_rs":20.08,"asar_p":3,"mult":8.16,"share":[null,null,0.0322,0.075,0.1129,0.1494,0.1978,0.2633,0.3612,0.4733,0.5742,1.0],"be":66.13,"be_how":"implied","exec":0.713,"by11":0.4094,"in12":0.3036},{"fy":2013,"label":"2013/14","c":[null,null,2.16,3.92,5.87,9.28,13.11,16.3,22.94,30.66,36.36,60.95],"cp":[0,0,1,1,1,1,1,1,1,1,1,1],"r":[null,null,54.45,67.78,83.0,110.65,141.11,156.55,186.08,213.96,240.37,294.72],"rp":[0,0,1,1,1,1,1,1,1,1,1,1],"after":false,"asar":0.4034,"asar_rs":24.59,"asar_p":1,"mult":7.44,"share":[null,null,0.0354,0.0643,0.0963,0.1523,0.2151,0.2674,0.3764,0.503,0.5966,1.0],"rec_asar":0.1844,"rec_asar_p":1,"rshare":[null,null,0.1848,0.23,0.2816,0.3754,0.4788,0.5312,0.6314,0.726,0.8156,1.0],"be":85.13,"be_how":"implied","exec":0.716,"by11":0.4271,"in12":0.2889},{"fy":2014,"label":"2014/15","c":[null,null,1.81,4.66,8.8,13.84,17.93,22.72,29.07,36.19,46.11,77.67],"cp":[0,0,1,1,1,1,1,1,1,1,1,1],"r":[null,null,52.66,72.54,95.28,116.12,null,167.31,194.5,222.71,260.81,328.98],"rp":[0,0,1,1,1,1,0,1,1,1,1,1],"after":false,"asar":0.4063,"asar_rs":31.56,"asar_p":1,"mult":7.53,"share":[null,null,0.0233,0.06,0.1133,0.1782,0.2308,0.2925,0.3743,0.4659,0.5937,1.0],"rec_asar":0.2072,"rec_asar_p":1,"rshare":[null,null,0.1601,0.2205,0.2896,0.353,null,0.5086,0.5912,0.677,0.7928,1.0],"be":116.8,"be_how":"implied","exec":0.665,"by11":0.3948,"in12":0.2702},{"fy":2015,"label":"2015/16","c":[null,null,2.87,5.74,8.52,null,17.45,22.97,32.44,42.99,55.76,115.71],"cp":[0,0,1,1,1,0,1,1,1,1,1,3],"r":[null,null,41.07,58.05,83.22,null,153.46,179.69,211.44,240.99,276.23,null],"rp":[0,0,1,1,1,0,1,1,1,1,1,0],"after":false,"asar":0.5181,"asar_rs":59.95,"asar_p":3,"mult":11.83,"share":[null,null,0.0248,0.0496,0.0736,null,0.1508,0.1985,0.2803,0.3715,0.4819,1.0],"be":208.88,"be_how":"stated","exec":0.554,"by11":0.267,"in12":0.287},{"fy":2016,"label":"2016/17","c":[null,null,null,null,null,30.97,null,60.23,74.09,90.24,108.43,199.26],"cp":[0,0,0,0,0,2,0,1,2,2,2,3],"r":[null,null,null,null,null,null,null,275.81,null,null,null,null],"rp":[0,0,0,0,0,0,0,1,0,0,0,0],"after":true,"asar":0.4558,"asar_rs":90.83,"asar_p":3,"mult":9.21,"share":[null,null,null,null,null,0.1554,null,0.3023,0.3718,0.4529,0.5442,1.0],"be":311.95,"be_how":"stated","exec":0.6388,"by11":0.3476,"in12":0.2912},{"fy":2017,"label":"2017/18","c":[0.12,1.55,11.64,17.86,24.79,42.72,60.08,86.44,108.96,128.48,151.88,239.91],"cp":[2,2,2,2,2,1,1,1,1,1,1,1],"r":[null,null,null,null,null,303.33,349.75,389.67,491.3,547.22,607.72,680.31],"rp":[0,0,0,0,0,1,1,1,1,1,1,1],"after":true,"asar":0.3669,"asar_rs":88.03,"asar_p":1,"mult":6.38,"share":[0.0005,0.0065,0.0485,0.0744,0.1033,0.1781,0.2504,0.3603,0.4542,0.5355,0.6331,1.0],"rec_asar":0.1067,"rec_asar_p":1,"rshare":[null,null,null,null,null,0.4459,0.5141,0.5728,0.7222,0.8044,0.8933,1.0],"be":335.18,"be_how":"stated","exec":0.7158,"by11":0.4531,"in12":0.2626},{"fy":2018,"label":"2018/19","c":[0.57,4.14,18.78,26.01,34.04,null,null,null,null,null,null,null],"cp":[1,1,1,1,1,0,0,0,0,0,0,0],"r":[10.07,61.51,149.57,173.78,221.96,null,null,null,null,null,null,null],"rp":[1,1,1,1,1,0,0,0,0,0,0,0],"after":true},{"fy":2019,"label":"2019/20","c":[null,null,null,24.84,37.61,63.14,77.28,96.85,105.59,114.64,126.63,191.77],"cp":[0,0,0,2,2,2,2,2,2,3,3,1],"r":[null,null,null,196.91,246.93,309.65,365.75,450.82,495.43,572.39,670.44,786.53],"rp":[0,0,0,2,2,2,2,2,2,3,3,1],"after":true,"asar":0.3397,"asar_rs":65.14,"asar_p":3,"mult":5.66,"share":[null,null,null,0.1295,0.1961,0.3292,0.403,0.505,0.5506,0.5978,0.6603,1.0],"rec_asar":0.1476,"rec_asar_p":3,"rshare":[null,null,null,0.2504,0.3139,0.3937,0.465,0.5732,0.6299,0.7277,0.8524,1.0]},{"fy":2020,"label":"2020/21","c":[0.13,3.77,15.06,29.45,35.94,50.82,62.84,79.7,105.73,125.88,143.09,228.3],"cp":[3,3,3,2,2,1,1,1,1,1,1,1],"r":[1.73,63.27,182.68,230.12,280.74,342.36,406.73,455.82,526.97,630.2,700.61,851.68],"rp":[3,3,3,2,2,1,1,1,1,1,1,1],"after":true,"asar":0.3732,"asar_rs":85.21,"asar_p":1,"mult":6.55,"share":[0.0006,0.0165,0.0659,0.129,0.1574,0.2226,0.2753,0.3491,0.4631,0.5514,0.6268,1.0],"rec_asar":0.1774,"rec_asar_p":1,"rshare":[0.002,0.0743,0.2145,0.2702,0.3296,0.402,0.4776,0.5352,0.6187,0.7399,0.8226,1.0],"be":352.96,"be_how":"implied","exec":0.6468,"by11":0.4054,"in12":0.2414},{"fy":2021,"label":"2021/22","c":[0.93,2.61,14.89,20.79,28.4,50.81,60.79,77.15,103.79,118.27,137.96,216.37],"cp":[1,1,1,1,1,1,1,1,1,1,1,1],"r":[9.56,58.59,186.52,233.51,317.33,406.41,475.62,538.44,625.5,716.87,814.54,961.47],"rp":[1,1,1,1,1,1,1,1,1,1,1,1],"after":true,"asar":0.3624,"asar_rs":78.41,"asar_p":1,"mult":6.25,"share":[0.0043,0.0121,0.0688,0.0961,0.1313,0.2348,0.281,0.3566,0.4797,0.5466,0.6376,1.0],"rec_asar":0.1528,"rec_asar_p":1,"rshare":[0.0099,0.0609,0.194,0.2429,0.33,0.4227,0.4947,0.56,0.6506,0.7456,0.8472,1.0],"be":377.92,"be_how":"implied","exec":0.5725,"by11":0.3651,"in12":0.2075},{"fy":2022,"label":"2022/23","c":[1.48,5.86,19.68,26.3,33.99,53.46,66.3,84.26,107.24,125.68,153.08,233.7],"cp":[1,1,1,1,1,1,1,1,1,1,1,1],"r":[5.66,108.73,223.75,281.39,354.26,455.13,531.5,608.84,706.77,786.74,877.39,1005.76],"rp":[1,1,1,1,1,1,1,1,1,1,1,1],"after":true,"asar":0.345,"asar_rs":80.62,"asar_p":1,"mult":5.79,"share":[0.0063,0.0251,0.0842,0.1125,0.1454,0.2288,0.2837,0.3605,0.4589,0.5378,0.655,1.0],"rec_asar":0.1276,"rec_asar_p":1,"rshare":[0.0056,0.1081,0.2225,0.2798,0.3522,0.4525,0.5285,0.6054,0.7027,0.7822,0.8724,1.0]},{"fy":2023,"label":"2023/24","c":[0.82,8.16,17.83,29.99,36.06,49.24,63.58,81.21,97.38,111.88,134.98,191.75],"cp":[1,1,1,1,1,1,1,1,1,1,1,1],"r":[12.14,87.66,213.39,271.17,360.0,437.38,509.04,582.11,644.03,752.56,822.81,951.64],"rp":[1,1,1,1,1,1,1,1,1,1,1,1],"after":true,"asar":0.2961,"asar_rs":56.77,"asar_p":1,"mult":4.63,"share":[0.0043,0.0426,0.093,0.1564,0.1881,0.2568,0.3316,0.4235,0.5078,0.5835,0.7039,1.0],"rec_asar":0.1354,"rec_asar_p":1,"rshare":[0.0128,0.0921,0.2242,0.285,0.3783,0.4596,0.5349,0.6117,0.6768,0.7908,0.8646,1.0]},{"fy":2024,"label":"2024/25","c":[8.55,14.89,29.37,34.53,40.8,56.94,68.42,82.34,102.9,120.38,143.39,222.68],"cp":[1,1,1,1,1,1,1,1,1,1,1,1],"r":[12.38,82.99,229.85,292.53,363.55,452.0,522.63,584.13,678.09,773.23,851.58,980.38],"rp":[1,1,1,1,1,1,1,1,1,1,1,1],"after":true,"asar":0.3561,"asar_rs":79.29,"asar_p":1,"mult":6.08,"share":[0.0384,0.0669,0.1319,0.1551,0.1832,0.2557,0.3073,0.3698,0.4621,0.5406,0.6439,1.0],"rec_asar":0.1314,"rec_asar_p":1,"rshare":[0.0126,0.0847,0.2344,0.2984,0.3708,0.461,0.5331,0.5958,0.6917,0.7887,0.8686,1.0]},{"fy":2025,"label":"2025/26","c":[0.73,6.35,19.18,25.31,33.87,49.43,63.73,78.49,96.2,113.85,132.67,190.84],"cp":[1,1,1,1,1,1,1,1,1,1,1,1],"r":[18.48,114.19,256.81,320.99,398.05,487.14,562.37,642.15,747.52,814.66,908.27,1043.99],"rp":[1,1,1,1,1,1,1,1,1,1,1,1],"after":true,"asar":0.3048,"asar_rs":58.17,"asar_p":1,"mult":4.82,"share":[0.0038,0.0333,0.1005,0.1326,0.1775,0.259,0.3339,0.4113,0.5041,0.5966,0.6952,1.0],"rec_asar":0.13,"rec_asar_p":1,"rshare":[0.0177,0.1094,0.246,0.3075,0.3813,0.4666,0.5387,0.6151,0.716,0.7803,0.87,1.0]},{"fy":2026,"label":"2026/27","c":[1.33,null,null,null,null,null,null,null,null,null,null,null],"cp":[1,0,0,0,0,0,0,0,0,0,0,0],"r":[21.4,null,null,null,null,null,null,null,null,null,null,null],"rp":[1,0,0,0,0,0,0,0,0,0,0,0],"after":true}],"by":{"2007_08":{"fy":2007,"label":"2007/08","c":[null,null,2.84,3.39,7.43,10.28,13.93,17.42,19.72,23.36,28.2,42.7],"cp":[0,0,1,3,1,1,1,1,1,1,1,1],"r":[1.24,null,21.32,null,30.95,38.24,44.27,51.1,57.97,64.77,73.0,87.5],"rp":[1,0,1,0,1,1,1,1,1,1,1,1],"after":false,"asar":0.3396,"asar_rs":14.5,"asar_p":1,"mult":5.66,"share":[null,null,0.0665,0.0795,0.174,0.2407,0.3262,0.408,0.4618,0.5471,0.6604,1.0],"rec_asar":0.1657,"rec_asar_p":1,"rshare":[0.0142,null,0.2437,null,0.3537,0.437,0.5059,0.584,0.6625,0.7402,0.8343,1.0]},"2008_09":{"fy":2008,"label":"2008/09","c":[null,null,1.11,2.8,4.9,7.9,11.1,14.7,19.2,26.0,32.9,58.0],"cp":[0,0,3,1,1,1,1,1,1,1,1,1],"r":[1.6,8.4,18.5,23.8,32.3,43.2,52.0,61.4,70.7,81.9,92.8,115.5],"rp":[1,1,1,1,1,1,1,1,1,1,1,1],"after":false,"asar":0.4328,"asar_rs":25.1,"asar_p":1,"mult":8.39,"share":[null,null,0.0192,0.0483,0.0845,0.1362,0.1914,0.2534,0.331,0.4483,0.5672,1.0],"rec_asar":0.1965,"rec_asar_p":1,"rshare":[0.0139,0.0727,0.1602,0.2061,0.2797,0.374,0.4502,0.5316,0.6121,0.7091,0.8035,1.0]},"2009_10":{"fy":2009,"label":"2009/10","c":[null,null,1.93,4.07,5.53,10.55,15.69,22.45,28.35,34.75,46.58,75.38],"cp":[0,0,1,1,1,1,1,1,1,1,1,1],"r":[null,null,28.5,35.85,45.6,60.64,70.95,79.37,90.94,102.3,116.31,144.38],"rp":[0,0,1,1,1,1,1,1,1,1,1,1],"after":false,"asar":0.3821,"asar_rs":28.8,"asar_p":1,"mult":6.8,"share":[null,null,0.0256,0.054,0.0734,0.14,0.2081,0.2978,0.3761,0.461,0.6179,1.0],"rec_asar":0.1944,"rec_asar_p":1,"rshare":[null,null,0.1974,0.2483,0.3158,0.42,0.4914,0.5497,0.6299,0.7085,0.8056,1.0],"be":106.27,"be_how":"implied","exec":0.7093,"by11":0.4383,"in12":0.271},"2010_11":{"fy":2010,"label":"2010/11","c":[null,null,null,null,4.77,8.97,16.33,24.87,33.37,44.36,55.74,87.89],"cp":[0,0,0,0,1,1,1,1,1,1,1,1],"r":[null,null,null,null,42.51,59.87,74.31,89.97,104.55,115.15,133.38,166.01],"rp":[0,0,0,0,1,1,1,1,1,1,1,1],"after":false,"asar":0.3658,"asar_rs":32.15,"asar_p":1,"mult":6.34,"share":[null,null,null,null,0.0543,0.1021,0.1858,0.283,0.3797,0.5047,0.6342,1.0],"rec_asar":0.1966,"rec_asar_p":1,"rshare":[null,null,null,null,0.2561,0.3606,0.4476,0.542,0.6298,0.6936,0.8034,1.0],"be":129.63,"be_how":"implied","exec":0.678,"by11":0.43,"in12":0.248},"2011_12":{"fy":2011,"label":"2011/12","c":[null,null,null,null,null,7.93,10.67,13.76,18.79,23.12,28.12,40.83],"cp":[0,0,0,0,0,1,1,1,1,1,1,1],"r":[null,null,null,null,null,88.61,110.57,127.89,147.77,164.82,188.59,231.79],"rp":[0,0,0,0,0,1,1,1,1,1,1,1],"after":false,"asar":0.3113,"asar_rs":12.71,"asar_p":1,"mult":4.97,"share":[null,null,null,null,null,0.1942,0.2613,0.337,0.4602,0.5663,0.6887,1.0],"rec_asar":0.1864,"rec_asar_p":1,"rshare":[null,null,null,null,null,0.3823,0.477,0.5517,0.6375,0.7111,0.8136,1.0],"be":72.65,"be_how":"implied","exec":0.562,"by11":0.3871,"in12":0.1749},"2012_13":{"fy":2012,"label":"2012/13","c":[null,null,1.52,3.53,5.32,7.05,9.32,12.41,17.03,22.31,27.07,47.15],"cp":[0,0,3,3,3,3,3,3,3,3,3,1],"r":[null,null,null,null,null,null,null,null,null,null,null,237.99],"rp":[0,0,0,0,0,0,0,0,0,0,0,1],"after":false,"asar":0.4258,"asar_rs":20.08,"asar_p":3,"mult":8.16,"share":[null,null,0.0322,0.075,0.1129,0.1494,0.1978,0.2633,0.3612,0.4733,0.5742,1.0],"be":66.13,"be_how":"implied","exec":0.713,"by11":0.4094,"in12":0.3036},"2013_14":{"fy":2013,"label":"2013/14","c":[null,null,2.16,3.92,5.87,9.28,13.11,16.3,22.94,30.66,36.36,60.95],"cp":[0,0,1,1,1,1,1,1,1,1,1,1],"r":[null,null,54.45,67.78,83.0,110.65,141.11,156.55,186.08,213.96,240.37,294.72],"rp":[0,0,1,1,1,1,1,1,1,1,1,1],"after":false,"asar":0.4034,"asar_rs":24.59,"asar_p":1,"mult":7.44,"share":[null,null,0.0354,0.0643,0.0963,0.1523,0.2151,0.2674,0.3764,0.503,0.5966,1.0],"rec_asar":0.1844,"rec_asar_p":1,"rshare":[null,null,0.1848,0.23,0.2816,0.3754,0.4788,0.5312,0.6314,0.726,0.8156,1.0],"be":85.13,"be_how":"implied","exec":0.716,"by11":0.4271,"in12":0.2889},"2014_15":{"fy":2014,"label":"2014/15","c":[null,null,1.81,4.66,8.8,13.84,17.93,22.72,29.07,36.19,46.11,77.67],"cp":[0,0,1,1,1,1,1,1,1,1,1,1],"r":[null,null,52.66,72.54,95.28,116.12,null,167.31,194.5,222.71,260.81,328.98],"rp":[0,0,1,1,1,1,0,1,1,1,1,1],"after":false,"asar":0.4063,"asar_rs":31.56,"asar_p":1,"mult":7.53,"share":[null,null,0.0233,0.06,0.1133,0.1782,0.2308,0.2925,0.3743,0.4659,0.5937,1.0],"rec_asar":0.2072,"rec_asar_p":1,"rshare":[null,null,0.1601,0.2205,0.2896,0.353,null,0.5086,0.5912,0.677,0.7928,1.0],"be":116.8,"be_how":"implied","exec":0.665,"by11":0.3948,"in12":0.2702},"2015_16":{"fy":2015,"label":"2015/16","c":[null,null,2.87,5.74,8.52,null,17.45,22.97,32.44,42.99,55.76,115.71],"cp":[0,0,1,1,1,0,1,1,1,1,1,3],"r":[null,null,41.07,58.05,83.22,null,153.46,179.69,211.44,240.99,276.23,null],"rp":[0,0,1,1,1,0,1,1,1,1,1,0],"after":false,"asar":0.5181,"asar_rs":59.95,"asar_p":3,"mult":11.83,"share":[null,null,0.0248,0.0496,0.0736,null,0.1508,0.1985,0.2803,0.3715,0.4819,1.0],"be":208.88,"be_how":"stated","exec":0.554,"by11":0.267,"in12":0.287},"2016_17":{"fy":2016,"label":"2016/17","c":[null,null,null,null,null,30.97,null,60.23,74.09,90.24,108.43,199.26],"cp":[0,0,0,0,0,2,0,1,2,2,2,3],"r":[null,null,null,null,null,null,null,275.81,null,null,null,null],"rp":[0,0,0,0,0,0,0,1,0,0,0,0],"after":true,"asar":0.4558,"asar_rs":90.83,"asar_p":3,"mult":9.21,"share":[null,null,null,null,null,0.1554,null,0.3023,0.3718,0.4529,0.5442,1.0],"be":311.95,"be_how":"stated","exec":0.6388,"by11":0.3476,"in12":0.2912},"2017_18":{"fy":2017,"label":"2017/18","c":[0.12,1.55,11.64,17.86,24.79,42.72,60.08,86.44,108.96,128.48,151.88,239.91],"cp":[2,2,2,2,2,1,1,1,1,1,1,1],"r":[null,null,null,null,null,303.33,349.75,389.67,491.3,547.22,607.72,680.31],"rp":[0,0,0,0,0,1,1,1,1,1,1,1],"after":true,"asar":0.3669,"asar_rs":88.03,"asar_p":1,"mult":6.38,"share":[0.0005,0.0065,0.0485,0.0744,0.1033,0.1781,0.2504,0.3603,0.4542,0.5355,0.6331,1.0],"rec_asar":0.1067,"rec_asar_p":1,"rshare":[null,null,null,null,null,0.4459,0.5141,0.5728,0.7222,0.8044,0.8933,1.0],"be":335.18,"be_how":"stated","exec":0.7158,"by11":0.4531,"in12":0.2626},"2018_19":{"fy":2018,"label":"2018/19","c":[0.57,4.14,18.78,26.01,34.04,null,null,null,null,null,null,null],"cp":[1,1,1,1,1,0,0,0,0,0,0,0],"r":[10.07,61.51,149.57,173.78,221.96,null,null,null,null,null,null,null],"rp":[1,1,1,1,1,0,0,0,0,0,0,0],"after":true},"2019_20":{"fy":2019,"label":"2019/20","c":[null,null,null,24.84,37.61,63.14,77.28,96.85,105.59,114.64,126.63,191.77],"cp":[0,0,0,2,2,2,2,2,2,3,3,1],"r":[null,null,null,196.91,246.93,309.65,365.75,450.82,495.43,572.39,670.44,786.53],"rp":[0,0,0,2,2,2,2,2,2,3,3,1],"after":true,"asar":0.3397,"asar_rs":65.14,"asar_p":3,"mult":5.66,"share":[null,null,null,0.1295,0.1961,0.3292,0.403,0.505,0.5506,0.5978,0.6603,1.0],"rec_asar":0.1476,"rec_asar_p":3,"rshare":[null,null,null,0.2504,0.3139,0.3937,0.465,0.5732,0.6299,0.7277,0.8524,1.0]},"2020_21":{"fy":2020,"label":"2020/21","c":[0.13,3.77,15.06,29.45,35.94,50.82,62.84,79.7,105.73,125.88,143.09,228.3],"cp":[3,3,3,2,2,1,1,1,1,1,1,1],"r":[1.73,63.27,182.68,230.12,280.74,342.36,406.73,455.82,526.97,630.2,700.61,851.68],"rp":[3,3,3,2,2,1,1,1,1,1,1,1],"after":true,"asar":0.3732,"asar_rs":85.21,"asar_p":1,"mult":6.55,"share":[0.0006,0.0165,0.0659,0.129,0.1574,0.2226,0.2753,0.3491,0.4631,0.5514,0.6268,1.0],"rec_asar":0.1774,"rec_asar_p":1,"rshare":[0.002,0.0743,0.2145,0.2702,0.3296,0.402,0.4776,0.5352,0.6187,0.7399,0.8226,1.0],"be":352.96,"be_how":"implied","exec":0.6468,"by11":0.4054,"in12":0.2414},"2021_22":{"fy":2021,"label":"2021/22","c":[0.93,2.61,14.89,20.79,28.4,50.81,60.79,77.15,103.79,118.27,137.96,216.37],"cp":[1,1,1,1,1,1,1,1,1,1,1,1],"r":[9.56,58.59,186.52,233.51,317.33,406.41,475.62,538.44,625.5,716.87,814.54,961.47],"rp":[1,1,1,1,1,1,1,1,1,1,1,1],"after":true,"asar":0.3624,"asar_rs":78.41,"asar_p":1,"mult":6.25,"share":[0.0043,0.0121,0.0688,0.0961,0.1313,0.2348,0.281,0.3566,0.4797,0.5466,0.6376,1.0],"rec_asar":0.1528,"rec_asar_p":1,"rshare":[0.0099,0.0609,0.194,0.2429,0.33,0.4227,0.4947,0.56,0.6506,0.7456,0.8472,1.0],"be":377.92,"be_how":"implied","exec":0.5725,"by11":0.3651,"in12":0.2075},"2022_23":{"fy":2022,"label":"2022/23","c":[1.48,5.86,19.68,26.3,33.99,53.46,66.3,84.26,107.24,125.68,153.08,233.7],"cp":[1,1,1,1,1,1,1,1,1,1,1,1],"r":[5.66,108.73,223.75,281.39,354.26,455.13,531.5,608.84,706.77,786.74,877.39,1005.76],"rp":[1,1,1,1,1,1,1,1,1,1,1,1],"after":true,"asar":0.345,"asar_rs":80.62,"asar_p":1,"mult":5.79,"share":[0.0063,0.0251,0.0842,0.1125,0.1454,0.2288,0.2837,0.3605,0.4589,0.5378,0.655,1.0],"rec_asar":0.1276,"rec_asar_p":1,"rshare":[0.0056,0.1081,0.2225,0.2798,0.3522,0.4525,0.5285,0.6054,0.7027,0.7822,0.8724,1.0]},"2023_24":{"fy":2023,"label":"2023/24","c":[0.82,8.16,17.83,29.99,36.06,49.24,63.58,81.21,97.38,111.88,134.98,191.75],"cp":[1,1,1,1,1,1,1,1,1,1,1,1],"r":[12.14,87.66,213.39,271.17,360.0,437.38,509.04,582.11,644.03,752.56,822.81,951.64],"rp":[1,1,1,1,1,1,1,1,1,1,1,1],"after":true,"asar":0.2961,"asar_rs":56.77,"asar_p":1,"mult":4.63,"share":[0.0043,0.0426,0.093,0.1564,0.1881,0.2568,0.3316,0.4235,0.5078,0.5835,0.7039,1.0],"rec_asar":0.1354,"rec_asar_p":1,"rshare":[0.0128,0.0921,0.2242,0.285,0.3783,0.4596,0.5349,0.6117,0.6768,0.7908,0.8646,1.0]},"2024_25":{"fy":2024,"label":"2024/25","c":[8.55,14.89,29.37,34.53,40.8,56.94,68.42,82.34,102.9,120.38,143.39,222.68],"cp":[1,1,1,1,1,1,1,1,1,1,1,1],"r":[12.38,82.99,229.85,292.53,363.55,452.0,522.63,584.13,678.09,773.23,851.58,980.38],"rp":[1,1,1,1,1,1,1,1,1,1,1,1],"after":true,"asar":0.3561,"asar_rs":79.29,"asar_p":1,"mult":6.08,"share":[0.0384,0.0669,0.1319,0.1551,0.1832,0.2557,0.3073,0.3698,0.4621,0.5406,0.6439,1.0],"rec_asar":0.1314,"rec_asar_p":1,"rshare":[0.0126,0.0847,0.2344,0.2984,0.3708,0.461,0.5331,0.5958,0.6917,0.7887,0.8686,1.0]},"2025_26":{"fy":2025,"label":"2025/26","c":[0.73,6.35,19.18,25.31,33.87,49.43,63.73,78.49,96.2,113.85,132.67,190.84],"cp":[1,1,1,1,1,1,1,1,1,1,1,1],"r":[18.48,114.19,256.81,320.99,398.05,487.14,562.37,642.15,747.52,814.66,908.27,1043.99],"rp":[1,1,1,1,1,1,1,1,1,1,1,1],"after":true,"asar":0.3048,"asar_rs":58.17,"asar_p":1,"mult":4.82,"share":[0.0038,0.0333,0.1005,0.1326,0.1775,0.259,0.3339,0.4113,0.5041,0.5966,0.6952,1.0],"rec_asar":0.13,"rec_asar_p":1,"rshare":[0.0177,0.1094,0.246,0.3075,0.3813,0.4666,0.5387,0.6151,0.716,0.7803,0.87,1.0]},"2026_27":{"fy":2026,"label":"2026/27","c":[1.33,null,null,null,null,null,null,null,null,null,null,null],"cp":[1,0,0,0,0,0,0,0,0,0,0,0],"r":[21.4,null,null,null,null,null,null,null,null,null,null,null],"rp":[1,0,0,0,0,0,0,0,0,0,0,0],"after":true}},"profile":[{"m":1,"med":0.0043,"n":5,"lo":0.0038,"hi":0.0384},{"m":2,"med":0.0333,"n":5,"lo":0.0121,"hi":0.0669},{"m":3,"med":0.0688,"n":9,"lo":0.0233,"hi":0.1319},{"m":4,"med":0.0961,"n":9,"lo":0.0483,"hi":0.1564},{"m":5,"med":0.1313,"n":11,"lo":0.0543,"hi":0.1881},{"m":6,"med":0.2084,"n":14,"lo":0.1021,"hi":0.259},{"m":7,"med":0.2683,"n":14,"lo":0.1858,"hi":0.3339},{"m":8,"med":0.3528,"n":14,"lo":0.2534,"hi":0.4235},{"m":9,"med":0.4595,"n":14,"lo":0.331,"hi":0.5078},{"m":10,"med":0.5392,"n":14,"lo":0.4483,"hi":0.5966},{"m":11,"med":0.6359,"n":14,"lo":0.5672,"hi":0.7039},{"m":12,"med":1.0,"n":14,"lo":1.0,"hi":1.0}],"rprofile":[{"m":1,"med":0.0128,"n":7,"lo":0.0056,"hi":0.0177},{"m":2,"med":0.0884,"n":6,"lo":0.0609,"hi":0.1094},{"m":3,"med":0.2099,"n":10,"lo":0.1601,"hi":0.246},{"m":4,"med":0.2483,"n":9,"lo":0.2061,"hi":0.3075},{"m":5,"med":0.33,"n":11,"lo":0.2561,"hi":0.3813},{"m":6,"med":0.4213,"n":14,"lo":0.353,"hi":0.4666},{"m":7,"med":0.4947,"n":13,"lo":0.4476,"hi":0.5387},{"m":8,"med":0.5559,"n":14,"lo":0.5086,"hi":0.6151},{"m":9,"med":0.644,"n":14,"lo":0.5912,"hi":0.7222},{"m":10,"med":0.7401,"n":14,"lo":0.677,"hi":0.8044},{"m":11,"med":0.8285,"n":14,"lo":0.7928,"hi":0.8933},{"m":12,"med":1.0,"n":14,"lo":1.0,"hi":1.0}]};</script>
+
+<header class="top">
+<div class="look-art" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker">Nepal Rastra Bank bulletins &middot; government capital spending &middot;
+      <span data-n="stats.first"></span>&ndash;<span data-n="stats.last"></span></p>
+    <h1>One Rupee in Three, Spent in Asar</h1>
+    <p class="sub">In the median year, Nepal&rsquo;s government makes
+      <b data-n="stats.asar_med" data-fmt="pct"></b> of its capital payments in
+      Asar, the last month of the fiscal year. That is about
+      <span data-n="stats.mult_med" data-fmt="0"></span> ordinary months of
+      spending in one. Since 2016 the budget has been due seven weeks before
+      the year opens. Spending in the first half of the year has risen since
+      then. The share left for Asar has barely moved.</p>
+    <div class="hero-year">
+      <p class="hero-cap" id="heroCap"></p>
+      <div id="fig-hero"></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Read this first</p>
+    <h2>Asar is a subtraction</h2>
+    <p class="lede">Nepal Rastra Bank&rsquo;s monthly bulletin states what the
+      government has spent so far in the fiscal year. The issue for eleven
+      months and the annual issue come out a month apart. Subtract one from the
+      other and what is left is Asar, mid-June to mid-July. Nothing else in the
+      archive measures that month on its own.</p>
+
+    <p>This page reads the same <span data-n="meta.listed" data-fmt="int"></span>
+      bulletins as the <a href="https://aabeshkarmacharya.github.io/remittances/">remittance</a> and
+      <a href="https://aabeshkarmacharya.github.io/spread/">interest-rate</a> pages.
+      <span data-n="meta.extracts" data-fmt="int"></span> of them are real PDFs
+      with a text layer, and they cover
+      <span data-n="meta.slots" data-fmt="int"></span> months of
+      <span data-n="meta.n_fy" data-fmt="int"></span> fiscal years. <b data-n="meta.stated" data-fmt="int"></b> of those months state
+      the government&rsquo;s capital spending in a form this page could read.
+      The other <span data-n="meta.silent" data-fmt="int"></span> print only
+      total spending, or a percentage change with no level, or nothing on the
+      budget at all. <span data-n="meta.relabelled" data-fmt="int"></span>
+      issues filed under the wrong month were moved to the month their own
+      pages name.</p>
+
+    <p>NRB rewrote the sentence many times. In 2008 it was &ldquo;the capital
+      expenditure went up by 35.8 percent to Rs 28.2 billion&rdquo;. In 2012 it
+      was &ldquo;stood at 40.83 billion&rdquo;, with no currency at all. Since
+      2020 it has been one sentence that lists recurrent, capital and financial
+      spending and then gives three numbers in that order. From 2015 to 2018
+      some issues also print a budget box whose columns the text layer runs
+      together, as <code>capital335176.060084.317.93</code>: a budget, an
+      outturn, and the outturn as a share of the budget. The parser tries every
+      way of cutting such a string and keeps the one whose arithmetic works.</p>
+
+    <p class="note"><b>Later bulletins fill some of the holes.</b> Every issue
+      restates the same months of the year before, as a level or as a percentage
+      change, and since 2021 a small table sets the last three years side by
+      side. A figure is drawn solid when its own bulletin states it, outlined
+      when a later bulletin prints it, and dotted when only a later percentage
+      change implies it. Only solid figures go into the headline numbers.</p>
+
+    <div class="stats">
+      <div class="stat c"><b data-n="meta.stated" data-fmt="int"></b><span>Months with capital spending stated</span></div>
+      <div class="stat c"><b data-n="stats.n_own" data-fmt="int"></b><span>Years with an Asar figure of their own</span></div>
+      <div class="stat"><b data-n="stats.n_hollow" data-fmt="int"></b><span>More recovered from later bulletins</span></div>
+      <div class="stat"><b data-n="checks.levels" data-fmt="int"></b><span>Figures checked against a later issue</span></div>
+    </div>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Which months the archive yields</p>
+        <p class="fig-note">One row per fiscal year and one column per month,
+          Shrawan to Asar. Solid where the month&rsquo;s own bulletin states
+          capital spending, outlined where a later bulletin prints it, dotted
+          where only a later percentage change implies it, and faint where the
+          archive has nothing.</p>
+      </div>
+      <div class="legend" style="padding-top:12px">
+        <span><i class="box" style="background:var(--have)"></i>Its own bulletin</span>
+        <span><i class="box" style="background:var(--surface);border:1.5px solid var(--have)"></i>A later bulletin</span>
+        <span><i class="box" style="background:var(--surface);border:1.5px dashed var(--have)"></i>A later percentage change</span>
+        <span><i class="box" style="background:var(--miss)"></i>Nothing</span>
+      </div>
+      <div class="fig-body">
+        <div id="fig-cover"></div>
+      </div>
+      <figcaption id="coverNote"></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <p>The figures can be tested against each other.
+      <span data-n="checks.levels" data-fmt="int"></span> of them are printed
+      again by a later bulletin. The worst disagreement is
+      <span data-n="checks.levels_worst" data-fmt="pct1"></span>, and it is
+      rounding: Rs <span data-n="checks.levels_worst_case.own" data-fmt="2"></span>
+      billion for <span data-n="checks.levels_worst_case.month"></span>
+      <span data-n="checks.levels_worst_case.fy"></span>, printed a year later
+      as <span data-n="checks.levels_worst_case.later" data-fmt="2"></span>.
+      Inside the year, <span data-n="checks.within" data-fmt="int"></span>
+      running totals are implied by a later percentage change. They land a
+      median <span data-n="checks.within_med" data-fmt="pct1"></span> from the
+      printed figure, and at worst
+      <span data-n="checks.within_worst" data-fmt="pct1"></span>. The build
+      refuses to write this page if any of them is out by more than three per
+      cent. The one figure that does move is the year&rsquo;s total, and it
+      gets its own section below, because it changes the answer.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The limitation that matters</p>
+    <h2>The bulletins count payments, not work</h2>
+    <p class="lede">Every figure here is on a cash basis. Spending is counted
+      when the treasury pays it, so a road finished in Falgun and paid for in
+      Asar is Asar spending.</p>
+
+    <p>So the Asar figure measures when money left the government. It cannot
+      say when the work was done, or how well. Some of what is paid in Asar is
+      work finished earlier and billed late. Some is work hurried to completion
+      before the year&rsquo;s budget lapses. The bulletins cannot tell the two
+      apart, and this page does not try.</p>
+
+    <p>Two other things change underneath the series. From 2017/18, the first
+      year of Nepal&rsquo;s elected provincial and local governments, the
+      bulletins report the federal government alone. What the provinces and
+      municipalities spend, and when, is not in them. And the total a bulletin
+      first prints for a year is not the last word on it, which the section
+      after next takes up.</p>
+
+    <p class="note warn"><b>Read every number below as a statement about
+      payments by the central government.</b> That is a real quantity, and it
+      is the one the budget controls. It is not a measure of construction, and
+      the archive holds nothing that would turn it into one.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The finding</p>
+    <h2>A third of the year&rsquo;s capital spending, in one month</h2>
+    <p class="lede">Take the <span data-n="stats.n_own" data-fmt="int"></span>
+      years whose own bulletins give both figures. In the median one,
+      <b data-n="stats.asar_med" data-fmt="pct1"></b> of the year&rsquo;s
+      capital spending is paid in Asar. A year spent at an even pace would pay
+      <span data-n="stats.even" data-fmt="pct1"></span> in each month, so Asar
+      carries <b data-n="stats.asar_x_even" data-fmt="1"></b> times its even
+      share.</p>
+
+    <p>The lowest share is <span data-n="stats.asar_lo" data-fmt="pct1"></span>,
+      in <span data-n="stats.asar_lo_at"></span>, and the highest
+      <span data-n="stats.asar_hi" data-fmt="pct1"></span>, in
+      <span data-n="stats.asar_hi_at"></span>. In
+      <span data-n="stats.n_third" data-fmt="int"></span> of the
+      <span data-n="stats.n_own" data-fmt="int"></span> years it is more than a
+      third. Measured in months, the median Asar pays out as much as
+      <b data-n="stats.mult_med" data-fmt="1"></b> average months of the rest of
+      the year.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">How much of the year&rsquo;s capital spending has been paid, month by month</p>
+        <p class="fig-note">Cumulative share of each year&rsquo;s total, at the
+          end of each Nepali month. Thin lines are single years, drawn only
+          through months their own bulletins state. The thick line is the median
+          year. Hover a line for its year.</p>
+      </div>
+      <div class="ctl">
+        <button class="chip" id="c-rec" aria-pressed="true">Show recurrent spending</button>
+        <button class="chip" id="c-years" aria-pressed="true">Show single years</button>
+      </div>
+      <div class="legend" style="padding-top:12px">
+        <span><i style="background:var(--cap)"></i>Capital spending, median year</span>
+        <span><i style="background:var(--rec)"></i>Recurrent spending, median year</span>
+        <span><i class="dash"></i>An even pace</span>
+      </div>
+      <div class="fig-body">
+        <div id="fig-curve"></div>
+      </div>
+      <figcaption id="curveNote"></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <p>The curve shows where the year goes. By the end of Poush, half-way
+      through, the median year has paid out
+      <b data-n="profile.5.med" data-fmt="pct"></b> of its capital spending. By
+      the end of Jestha, with one month left, it has paid
+      <b data-n="profile.10.med" data-fmt="pct"></b>. The rest is Asar. In 2009
+      NRB listed the pattern itself among the reasons capital spending had
+      grown:</p>
+
+    <blockquote data-src="2009-09-text-based-on-annual-data-of-2008-09">
+      <p>The trend of increasing capital expenditure in the later months of the
+        year, payment for the contracts, smoothness in public procurement
+        processes &hellip; contributed to such a growth in the capital
+        expenditure in the review year.</p>
+      <cite>NRB, annual bulletin for 2008/09</cite>
+    </blockquote>
+
+    <p>Recurrent spending is the control. It is salaries, running costs and
+      grants, paid on schedules that do not wait for a contract to be finished.
+      It is not spread evenly either:
+      <span data-n="stats.rec_med" data-fmt="pct"></span> of it lands in Asar in
+      the median year, about <span data-n="stats.rec_x_even" data-fmt="1"></span>
+      times an even share. Capital spending is
+      <b data-n="stats.cap_vs_rec" data-fmt="1"></b> times as concentrated. By the
+      end of Poush the median year has paid
+      <span data-n="rprofile.5.med" data-fmt="pct"></span> of its recurrent bill
+      and <span data-n="profile.5.med" data-fmt="pct"></span> of its capital
+      one.</p>
+
+    <p>Nepali has a phrase for the pattern: <span class="np">asare bikas</span>,
+      Asar development. Asar is also the month the monsoon arrives. The
+      Department of Hydrology and Meteorology puts the normal onset in eastern
+      Nepal at 13 June, within days of the month&rsquo;s first day.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Year by year</p>
+    <h2>The rule moved the start of the year, not the end</h2>
+    <p class="lede">Article 119 of the 2015 constitution requires the finance
+      minister to present the budget on Jestha 15, about seven weeks before the
+      fiscal year opens. The first budget presented that way was for
+      <span data-n="meta.jestha15_from"></span>. Before it, budgets could arrive
+      months late, and the bulletins said so.</p>
+
+    <blockquote data-src="2011-09-text-based-on-first-four-month-data-of-2011-12">
+      <p>The implementation of budget was delayed last year as it was only
+        announced in the fifth month of the fiscal year.</p>
+      <cite>NRB, four months of 2011/12, on 2010/11</cite>
+    </blockquote>
+    <blockquote data-src="2070-05-text-based-on-annual-data-of-2069-70">
+      <p>Delay in the tender process including other procedural processes due
+        to the announcement of full budget only in the ninth month of the fiscal
+        year was responsible for the slower growth of capital expenditure.</p>
+      <cite>NRB, annual bulletin for 2012/13</cite>
+    </blockquote>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Share of the year&rsquo;s spending paid in Asar</p>
+        <p class="fig-note">One point per fiscal year. Solid points come from
+          the year&rsquo;s own bulletins; hollow ones from later bulletins. The
+          dashed line is the share an even pace would give the month. Hover a
+          point for the figures behind it.</p>
+      </div>
+      <div class="legend" style="padding-top:12px">
+        <span><i class="disc" style="background:var(--cap)"></i>Capital spending</span>
+        <span><i class="ring"></i>Capital, from a later bulletin</span>
+        <span><i class="disc" style="background:var(--rec)"></i>Recurrent spending</span>
+        <span><i class="dash"></i>An even pace</span>
+      </div>
+      <div class="fig-body">
+        <div id="fig-years"></div>
+      </div>
+      <figcaption id="yearsNote"></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <p>Compare the <span data-n="stats.n_before" data-fmt="int"></span> years
+      before the rule whose own bulletins give an Asar figure with the
+      <span data-n="stats.n_after" data-fmt="int"></span> after it. The share of
+      capital spending paid by the end of Poush rose from a median of
+      <b data-n="stats.half_before" data-fmt="pct"></b> to
+      <b data-n="stats.half_after" data-fmt="pct"></b>. Asar&rsquo;s share fell
+      from <b data-n="stats.asar_before" data-fmt="pct"></b> to
+      <b data-n="stats.asar_after" data-fmt="pct"></b>. The earlier budget
+      brought spending into the first half of the year, and Asar gave up only a
+      little of it. The years after the rule are also the years of federalism,
+      so the archive cannot say which change did the work.</p>
+
+    <p>The hollow points are years a later bulletin had to fill in, and they
+      include the strangest years in the record. In 2012/13, the year the full
+      budget came in its ninth month, Asar took
+      <b data-n="by.2012_13.asar" data-fmt="pct"></b>. In 2015/16, the year
+      after the April 2015 earthquake, when the border with India was blockaded
+      from September to February, it took
+      <b data-n="by.2015_16.asar" data-fmt="pct"></b>: Rs
+      <span data-n="by.2015_16.asar_rs" data-fmt="1"></span> billion in one
+      month, more than the eleven before it together. In 2016/17, the first year
+      under the Jestha 15 rule, it took
+      <b data-n="by.2016_17.asar" data-fmt="pct"></b>. In 2019/20, whose last
+      four months fell under the Covid lockdown that began in March 2020, it
+      took <b data-n="by.2019_20.asar" data-fmt="pct"></b>. The one year the
+      archive cannot measure at all is
+      <span data-n="stats.missing.0"></span>.</p>
+
+    <blockquote data-src="2010-07-text-based-on-first-eleven-months-data-of-2009-10">
+      <p>Delay in the budget approval, lingering in the contract process,
+        absence of representatives in local bodies as well as weak law and order
+        situation in the country are mainly attributed for the lower performance
+        of capital expenditure in the review period.</p>
+      <cite>NRB, eleven months of 2009/10</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The figure that keeps growing</p>
+    <h2>The year&rsquo;s total rises after the year is over</h2>
+    <p class="lede">The annual figure a bulletin prints is a first count. A
+      later bulletin either prints that total again or gives this year&rsquo;s
+      growth against it, which implies what the total had become. In all
+      <b data-n="checks.annual_n" data-fmt="int"></b> years where the archive
+      allows the check, the total had gone up.</p>
+
+    <p>Usually by little. But the total for 2008/09 rose by
+      <b data-n="checks.rev.2008_09.rel" data-fmt="pct1"></b>, from Rs
+      <span data-n="checks.rev.2008_09.first" data-fmt="2"></span> billion to
+      <span data-n="checks.rev.2008_09.later" data-fmt="2"></span>, and the total
+      for 2011/12 by <b data-n="checks.rev.2011_12.rel" data-fmt="pct1"></b>,
+      from <span data-n="checks.rev.2011_12.first" data-fmt="2"></span> to
+      <span data-n="checks.rev.2011_12.later" data-fmt="2"></span>. In
+      <span data-n="checks.both_n" data-fmt="int"></span> of these years the
+      eleven-month figure can be restated the same way, and it never moved by
+      more than <span data-n="checks.both_11_worst" data-fmt="pct1"></span>.
+      If the first eleven months hold still while the year&rsquo;s total grows,
+      the money that was counted late was Asar&rsquo;s.</p>
+
+    <p>The early bulletins say where their figures came from:</p>
+
+    <blockquote data-src="2068-11-text-based-on-six-month-data-of-2068-69">
+      <p>Based on the figures reported by 8 NRB offices, 63 RBBL branches (out
+        of 65 branches conducting govt. transaction), 38 NBL branches (out of 43
+        branches conducting govt. transaction) &hellip;</p>
+      <cite>NRB, six months of 2011/12</cite>
+    </blockquote>
+
+    <p>A count compiled from the branches that had reported is a count that
+      grows when the rest report. So where the first-print figures on this page
+      are wrong, they understate Asar. Replace each first-print total with its
+      restatement and Asar&rsquo;s share rises in every one of these years, by
+      up to <b data-n="checks.shift_max" data-fmt="pp1"></b> points: 2011/12
+      goes from <span data-n="checks.rev.2011_12.asar_first" data-fmt="pct1"></span>
+      to <span data-n="checks.rev.2011_12.asar_restated" data-fmt="pct1"></span>,
+      and 2008/09 from
+      <span data-n="checks.rev.2008_09.asar_first" data-fmt="pct1"></span> to
+      <span data-n="checks.rev.2008_09.asar_restated" data-fmt="pct1"></span>.
+      The headline keeps the first print, because it is the only figure every
+      year has.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">What was budgeted</p>
+    <h2>A third of the capital budget is never spent</h2>
+    <p class="lede">For <span data-n="stats.bud_n" data-fmt="int"></span> years
+      between <span data-n="stats.bud_from"></span> and
+      <span data-n="stats.bud_to"></span> the bulletins also state the capital
+      budget each year began with. Against it, the median year had spent
+      <b data-n="stats.by11_med" data-fmt="pct"></b> by the end of Jestha, spent
+      another <b data-n="stats.in12_med" data-fmt="pct"></b> in Asar, and left
+      <b data-n="stats.unspent_med" data-fmt="pct"></b> unspent.</p>
+
+    <p>Each of those three is the median of its own column, so they need not
+      add to a hundred. Each year&rsquo;s bar in the figure does. The median year
+      spent <span data-n="stats.exec_med" data-fmt="pct"></span> of its capital
+      budget in all. After <span data-n="stats.bud_to"></span> the bulletins
+      stop stating the budget, so the figure stops too.</p>
+  </div>
+
+  <div class="wide figspace">
+    <figure>
+      <div class="fig-head">
+        <p class="fig-title">Each year&rsquo;s capital budget, and when it was spent</p>
+        <p class="fig-note">The whole bar is the budget estimate the year began
+          with. Years marked &#8727; take a figure from a later bulletin.</p>
+      </div>
+      <div class="legend" style="padding-top:12px">
+        <span><i class="sw" style="background:var(--cap-2)"></i>Spent by the end of Jestha</span>
+        <span><i class="sw" style="background:var(--cap)"></i>Spent in Asar</span>
+        <span><i class="sw" style="background:var(--unspent);border:1px solid var(--unspent-edge)"></i>Not spent</span>
+      </div>
+      <div class="fig-body">
+        <div id="fig-budget"></div>
+      </div>
+      <figcaption id="budgetNote"></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <p>NRB sees the result in its own books. Money the government raises
+      and does not spend sits in its account at the central bank:</p>
+    <blockquote data-src="2072-5-text-based-on-annual-data-of-2071-72">
+      <p>The accumulation of cash balance of the government at NRB due to low
+        expenditure relative to resource mobilization implies the existence of
+        entrenched structural problems in the public spending system.</p>
+      <cite>NRB, annual bulletin for 2014/15</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">What is not here</p>
+    <h2>Five things the archive will not support</h2>
+
+    <p><b>What was built.</b> Stated once already, and it is the limit that
+      matters most. These are payments. Nothing in the bulletins measures a road,
+      a bridge or a school, or whether one finished in Asar was any good.</p>
+
+    <p><b>The provinces and municipalities.</b> Since 2017/18 they spend part
+      of the country&rsquo;s budget, much of it received as grants from the
+      federal government. When they spend it is not in these bulletins.</p>
+
+    <p><b>The last week.</b> The Financial Comptroller General Office reports
+      spending day by day, and that would show how much of Asar lands in its
+      final days. The bulletins are monthly, so this page stops at the month.</p>
+
+    <p><b>Freeze accounts.</b> Until 2012/13 the bulletins print a separate
+      line, &ldquo;expenditure from freeze accounts&rdquo;, for money from the
+      previous year&rsquo;s budget spent early in the new one. It is not in the
+      capital figures here, and most issues do not say how much of it was
+      capital.</p>
+
+    <p><b><span data-n="stats.missing.0"></span>.</b> From its sixth month on,
+      that year&rsquo;s bulletins report only total spending &ldquo;based on
+      banking transactions&rdquo;, and no later bulletin restates its capital
+      figures.</p>
+
+    <details>
+      <summary>Every year in the record</summary>
+      <div class="tablewrap">
+        <table id="tbl">
+          <thead><tr><th>Fiscal year</th><th>11 months, Rs bn</th><th>Year, Rs bn</th><th>Asar, Rs bn</th><th>Asar share</th><th>Recurrent share</th><th>Average months</th><th>Budget, Rs bn</th><th>Spent</th><th>Source</th></tr></thead>
+          <tbody id="tblBody"></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="srcs back-home" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs" id="srcs"></p>
+  </div>
+</footer>
+
+<div id="tip"></div>
+
+<script>
+(function(){
+"use strict";
+
+var D = window.ASAR_DATA;
+var M = D.meta, ST = D.stats, Y = D.years;
+var PR = D.profile, RP = D.rprofile;
+
+function el(id){ return document.getElementById(id); }
+
+/* ---------------------------------------------------------------- numbers */
+
+function fFix(v, dp){ return Number(v).toFixed(dp); }
+function fInt(v){ return String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+function fPct(v){ return (100 * v).toFixed(0) + "%"; }
+function fPct1(v){ return (100 * v).toFixed(1) + "%"; }
+function esc(s){
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+var NM = ["Shrawan", "Bhadra", "Ashoj", "Kartik", "Mangsir", "Poush",
+          "Magh", "Falgun", "Chaitra", "Baisakh", "Jestha", "Asar"];
+var NM3 = ["Shr", "Bha", "Ash", "Kar", "Man", "Pou", "Mag", "Fal", "Cha", "Bai", "Jes", "Asa"];
+var SPAN = ["mid-Jul to mid-Aug", "mid-Aug to mid-Sep", "mid-Sep to mid-Oct",
+            "mid-Oct to mid-Nov", "mid-Nov to mid-Dec", "mid-Dec to mid-Jan",
+            "mid-Jan to mid-Feb", "mid-Feb to mid-Mar", "mid-Mar to mid-Apr",
+            "mid-Apr to mid-May", "mid-May to mid-Jun", "mid-Jun to mid-Jul"];
+var PROV = {1: "its own bulletin", 2: "a later bulletin", 3: "a later percentage change"};
+
+/* A fiscal year opens in mid-July; the Bikram Sambat year it opens in is 57
+   ahead of the Gregorian one. */
+function bs(y){ return (y.fy + 57) + "/" + String((y.fy + 58) % 100).replace(/^(\d)$/, "0$1"); }
+/* A Nepali month and its year: the Bikram Sambat year turns over at Baisakh,
+   the tenth month of the fiscal year, and the Gregorian one in Poush. */
+function monthName(y, m){ return NM[m] + " " + (y.fy + 57 + (m >= 9 ? 1 : 0)); }
+function spanOf(y, m){
+  return SPAN[m] + " " + (m < 5 ? y.fy : m === 5 ? y.fy + "/" + String(y.fy + 1).slice(2) : y.fy + 1);
+}
+function rs(v){ return v === null || v === undefined ? "&mdash;" : "Rs " + v.toFixed(2) + " bn"; }
+
+/* Every number in the prose is written as a path into the payload rather than
+   as a literal, so re-running build_data.py updates the sentences and a
+   renamed field breaks the build instead of blanking a number mid-clause.
+   assemble.py refuses to write the page if any path fails to resolve; this
+   is the runtime half of the same check. */
+
+function dig(path){
+  var node = D, parts = path.split("."), i;
+  for (i = 0; i < parts.length; i++){
+    if (node === null || node === undefined) return undefined;
+    node = node[parts[i]];
+  }
+  return node;
+}
+
+function fillNumbers(){
+  var nodes = document.querySelectorAll("[data-n]"), missing = [], i;
+  for (i = 0; i < nodes.length; i++){
+    var n = nodes[i], v = dig(n.getAttribute("data-n")), f = n.getAttribute("data-fmt");
+    if (v === undefined || v === null){ missing.push(n.getAttribute("data-n")); continue; }
+    n.textContent = f === "int" ? fInt(v)
+                  : f === "pct" ? fPct(v)
+                  : f === "pct1" ? fPct1(v)
+                  : f === "pp1" ? (100 * v).toFixed(1)
+                  : (f && /^\d$/.test(f)) ? fFix(v, +f)
+                  : String(v);
+  }
+  if (missing.length) console.warn("unresolved data-n paths:", missing);
+}
+
+/* ---------------------------------------------------------------- tooltip */
+
+var tip = el("tip");
+function showTip(ev, html){
+  tip.innerHTML = html;
+  tip.classList.add("on");
+  var pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  var x = ev.clientX + pad, y = ev.clientY + pad;
+  if (x + w > innerWidth - 8) x = ev.clientX - w - pad;
+  if (y + h > innerHeight - 8) y = ev.clientY - h - pad;
+  tip.style.left = Math.max(8, x) + "px";
+  tip.style.top = Math.max(8, y) + "px";
+}
+function hideTip(){ tip.classList.remove("on"); }
+function row(k, v){
+  return '<div class="r"><span>' + k + '</span><span class="v">' + v + "</span></div>";
+}
+
+function chip(id, onToggle, initial){
+  var b = el(id);
+  if (!b) return { on: function(){ return !!initial; } };
+  b.setAttribute("aria-pressed", initial ? "true" : "false");
+  b.addEventListener("click", function(){
+    var now = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", now ? "true" : "false");
+    onToggle(now);
+  });
+  return { on: function(){ return b.getAttribute("aria-pressed") === "true"; }, node: b };
+}
+
+/* ============================================================== chart frame
+   Every figure sizes its viewBox to the column it lands in and redraws on
+   resize, rather than drawing into a fixed 1120-unit box and letting the
+   browser shrink eleven-pixel type to four on a phone.  Below 640 units each
+   one drops to a shorter set of labels; the threshold is in viewBox units,
+   which here are CSS pixels, because the SVG is never scaled. */
+
+var REDRAW = [];
+var NARROW = 640;
+
+function fig(hostId, build, wire){
+  var host = el(hostId);
+  function go(){
+    if (!host) return;
+    var w = Math.max(260, Math.round(host.clientWidth || 640));
+    host.innerHTML = build(w);
+    if (wire){ wire(host); }
+  }
+  REDRAW.push(go);
+  return { draw: go };
+}
+
+function ticks(lo, hi, want){
+  var span = hi - lo, raw = span / Math.max(1, want);
+  var mag = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
+  var step = [1, 2, 2.5, 5, 10].map(function(m){ return m * mag; })
+    .filter(function(s){ return s >= raw; })[0] || mag * 10;
+  var out = [], v;
+  for (v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) out.push(+v.toFixed(6));
+  return out;
+}
+
+function svgOpen(w, h, label){
+  return '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="' +
+         esc(label) + '">';
+}
+
+/* A bar with its top corners rounded and its foot square on the baseline. */
+function barPath(x0, top, bw, bh, r){
+  r = Math.max(0, Math.min(r, bw / 2, bh));
+  if (bh <= 0) return "";
+  return "M" + x0.toFixed(1) + "," + (top + bh).toFixed(1) +
+         "V" + (top + r).toFixed(1) +
+         "Q" + x0.toFixed(1) + "," + top.toFixed(1) + " " + (x0 + r).toFixed(1) + "," + top.toFixed(1) +
+         "H" + (x0 + bw - r).toFixed(1) +
+         "Q" + (x0 + bw).toFixed(1) + "," + top.toFixed(1) + " " + (x0 + bw).toFixed(1) + "," + (top + r).toFixed(1) +
+         "V" + (top + bh).toFixed(1) + "Z";
+}
+
+function yearOf(label){
+  for (var i = 0; i < Y.length; i++) if (Y[i].label === label) return Y[i];
+  return null;
+}
+
+/* ================================================================== figures */
+
+/* ---- 0. the latest year in twelve bars ------------------------------------
+   Under the headline: one real year, its own bulletins, month by month.  The
+   latest full year is used rather than a median year because a median of
+   monthly shares is not a year anyone lived through. */
+
+var hero = (function(){
+  var yr = yearOf(ST.last);
+  var inc = [], i;
+  for (i = 0; i < 12; i++){
+    var a = yr.c[i], b = i ? yr.c[i - 1] : 0;
+    var ok = a !== null && (i === 0 || b !== null) && yr.cp[i] === 1 && (i === 0 || yr.cp[i - 1] === 1);
+    inc.push(ok ? a - b : null);
+  }
+  var total = yr.c[11];
+
+  function build(w){
+    var narrow = w < NARROW;
+    var h = narrow ? 132 : 158;
+    var L = 2, R = 2, T = 22, B = 22;
+    var iw = w - L - R, ih = h - T - B;
+    var hi = 0;
+    inc.forEach(function(v){ if (v !== null) hi = Math.max(hi, v); });
+    var Yv = function(v){ return T + ih - v / hi * ih; };
+    var slot = iw / 12, bw = Math.max(6, slot - (narrow ? 4 : 8));
+    var s = [svgOpen(w, h, "Capital spending in each month of " + yr.label)];
+    s.push('<line class="ax" x1="' + L + '" y1="' + (T + ih) + '" x2="' + (w - R) + '" y2="' + (T + ih) + '"/>');
+    for (i = 0; i < 12; i++){
+      var x = L + i * slot + (slot - bw) / 2;
+      if (inc[i] !== null){
+        var y0 = Yv(inc[i]);
+        s.push('<path class="bar ' + (i === 11 ? "cap" : "cap-2") + '" data-i="' + i + '" d="' +
+               barPath(x, y0, bw, T + ih - y0, 3) + '"/>');
+      }
+      s.push('<text class="tk" x="' + (x + bw / 2).toFixed(1) + '" y="' + (h - 6) +
+             '" text-anchor="middle"' + (i === 11 ? ' style="fill:var(--ink)"' : '') + '>' +
+             (narrow ? NM3[i] : NM[i]) + '</text>');
+      s.push('<rect class="hit" data-i="' + i + '" x="' + (L + i * slot).toFixed(1) + '" y="' + T +
+             '" width="' + slot.toFixed(1) + '" height="' + ih + '"/>');
+    }
+    // The even pace: what each month would pay if the year were spread flat.
+    var ev = Yv(total / 12);
+    s.push('<line class="ln even" x1="' + L + '" y1="' + ev.toFixed(1) + '" x2="' +
+           (L + 11 * slot).toFixed(1) + '" y2="' + ev.toFixed(1) + '"/>');
+    s.push('<text class="dlab sunk-halo" x="' + (L + 4) + '" y="' + (ev - 6).toFixed(1) + '">' +
+           (narrow ? "even pace" : "an even month: Rs " + (total / 12).toFixed(1) + " bn") + '</text>');
+    // Asar's bar is the tallest, so its label sits above it, right-aligned to
+    // the bar's own edge so it never runs past the end of the axis.
+    var ax = L + 11 * slot + (slot - bw) / 2 + bw;
+    s.push('<text class="dlab strong sunk-halo" x="' + Math.min(ax, w - R).toFixed(1) + '" y="' +
+           (Yv(inc[11]) - 7).toFixed(1) + '" text-anchor="end">Asar: Rs ' + inc[11].toFixed(1) +
+           ' bn, ' + fPct(inc[11] / total) + '</text>');
+    s.push('</svg>');
+    return s.join("");
+  }
+
+  function wire(host){
+    var svg = host.querySelector("svg");
+    if (!svg) return;
+    svg.addEventListener("mousemove", function(ev){
+      var t = ev.target;
+      if (!t || !t.getAttribute || t.getAttribute("data-i") === null){ hideTip(); return; }
+      var i = +t.getAttribute("data-i");
+      showTip(ev, "<b>" + monthName(yr, i) + "</b>" +
+        '<div class="n" style="margin:0 0 4px">' + spanOf(yr, i) + "</div>" +
+        (inc[i] === null ? row("Spent", "not stated") :
+          row("Spent", "Rs " + inc[i].toFixed(2) + " bn") +
+          row("Share of the year", fPct1(inc[i] / total))));
+    });
+    svg.addEventListener("mouseleave", hideTip);
+  }
+
+  var f = fig("fig-hero", build, wire);
+  return { draw: function(){
+    f.draw();
+    var cap = el("heroCap");
+    if (cap){
+      cap.textContent = yr.label + " (" + bs(yr) + " BS), the latest full year: capital spending by month";
+    }
+  } };
+})();
+
+/* ---- 1. what the archive yields -------------------------------------------
+   The limitation drawn rather than asserted, and first on purpose.  One cell
+   per fiscal month, coded by where its figure comes from. */
+
+var cover = (function(){
+  var rows = Y;
+
+  function build(w){
+    var narrow = w < NARROW;
+    var lab = narrow ? 56 : 64, top = 18, ch = narrow ? 13 : 15, gap = 3;
+    var cw = (w - lab) / 12;
+    var h = top + rows.length * (ch + gap);
+    var s = [svgOpen(w, h, "Which fiscal months state capital spending")];
+    var i, m;
+    for (m = 0; m < 12; m++){
+      s.push('<text class="tk" x="' + (lab + m * cw + cw / 2).toFixed(1) + '" y="11" text-anchor="middle"' +
+             (m === 11 ? ' style="fill:var(--ink)"' : '') + '>' + (narrow ? NM3[m] : NM[m]) + '</text>');
+    }
+    for (i = 0; i < rows.length; i++){
+      var yr = rows[i], y = top + i * (ch + gap);
+      s.push('<text class="tk" x="' + (lab - 8) + '" y="' + (y + ch - 3) + '" text-anchor="end">' +
+             yr.label + '</text>');
+      for (m = 0; m < 12; m++){
+        var p = yr.cp[m];
+        var cls = p === 1 ? "own" : p === 2 ? "later" : p === 3 ? "implied" : "none";
+        var x = lab + m * cw + 1.5, cwi = cw - 3;
+        var inset = (p === 2 || p === 3) ? 0.75 : 0;
+        s.push('<rect class="cell ' + cls + '" data-i="' + i + '" data-m="' + m + '" x="' +
+               (x + inset).toFixed(1) + '" y="' + (y + inset).toFixed(1) + '" width="' +
+               Math.max(1, cwi - 2 * inset).toFixed(1) + '" height="' + (ch - 2 * inset).toFixed(1) +
+               '" rx="1.5"/>');
+      }
+    }
+    s.push('</svg>');
+    return s.join("");
+  }
+
+  function wire(host){
+    var svg = host.querySelector("svg");
+    if (!svg) return;
+    svg.addEventListener("mousemove", function(ev){
+      var t = ev.target;
+      if (!t || !t.getAttribute || t.getAttribute("data-m") === null){ hideTip(); return; }
+      var yr = rows[+t.getAttribute("data-i")], m = +t.getAttribute("data-m");
+      var v = yr.c[m], p = yr.cp[m];
+      showTip(ev, "<b>" + NM[m] + " " + yr.label + "</b>" +
+        (p ? row(m === 11 ? "Whole year" : "Year to date", rs(v)) +
+             '<div class="n">From ' + PROV[p] + "</div>"
+           : '<div class="n">No capital figure in the archive</div>'));
+    });
+    svg.addEventListener("mouseleave", hideTip);
+  }
+
+  var f = fig("fig-cover", build, wire);
+  return { draw: function(){
+    f.draw();
+    var n = [0, 0, 0, 0], total = 0;
+    Y.forEach(function(yr){
+      yr.cp.forEach(function(p, m){
+        if (yr.label === ST.final && m > 0) return;
+        n[p]++; total++;
+      });
+    });
+    var note = el("coverNote");
+    if (note){
+      note.textContent = n[1] + " of the " + total + " fiscal months from " + ST.first +
+        " to the first month of " + ST.final + " state capital spending in their own bulletin; " +
+        "later bulletins print " + n[2] + " more and imply " + n[3] + ". " + ST.missing[0] +
+        " is the one year with no Asar figure at all.";
+    }
+  } };
+})();
+
+/* ---- 2. the year's curve ----------------------------------------------------
+   Cumulative share against month, with the even pace as the diagonal.  The
+   Asar step is the vertical gap at the right-hand end: the further the curve
+   sits under the diagonal, the more is left for the last month. */
+
+var curve = (function(){
+  var showRec = true, showYears = true;
+  var own = Y.filter(function(y){ return y.asar_p === 1; });
+  var last = null;
+
+  function pts(y, key, pkey, X, Yv){
+    // Runs of consecutive months the year's own bulletins state, starting
+    // from zero at the opening of the year when the first month is there.
+    var runs = [], cur = [], m;
+    var share = y[key];
+    for (m = 0; m < 12; m++){
+      var ok = share && share[m] !== null && y[pkey][m] === 1;
+      if (ok){
+        if (!cur.length && m === 0) cur.push([X(0), Yv(0)]);
+        cur.push([X(m + 1), Yv(share[m])]);
+      } else if (cur.length){
+        runs.push(cur); cur = [];
+      }
+    }
+    if (cur.length) runs.push(cur);
+    return runs;
+  }
+
+  function line(p){
+    return p.map(function(q){ return q[0].toFixed(1) + "," + q[1].toFixed(1); }).join(" ");
+  }
+
+  function build(w){
+    var narrow = w < NARROW;
+    var h = Math.round(Math.max(300, Math.min(460, w * 0.5)));
+    var L = narrow ? 34 : 44, R = narrow ? 52 : 92, T = 14, B = 30;
+    var X = function(m){ return L + m / 12 * (w - L - R); };
+    var Yv = function(v){ return T + (1 - v) * (h - T - B); };
+    var s = [svgOpen(w, h, "Cumulative share of the year's capital spending by month")];
+    var i;
+    [0, 0.25, 0.5, 0.75, 1].forEach(function(v){
+      s.push('<line class="gl" x1="' + L + '" y1="' + Yv(v).toFixed(1) + '" x2="' + X(12).toFixed(1) +
+             '" y2="' + Yv(v).toFixed(1) + '"/>');
+      s.push('<text class="tk" x="' + (L - 6) + '" y="' + (Yv(v) + 3.5).toFixed(1) +
+             '" text-anchor="end">' + (100 * v) + '%</text>');
+    });
+    for (i = 0; i < 12; i++){
+      var xm = (X(i) + X(i + 1)) / 2;
+      s.push('<text class="tk" x="' + xm.toFixed(1) + '" y="' + (h - 10) + '" text-anchor="middle"' +
+             (i === 11 ? ' style="fill:var(--ink)"' : '') + '>' + (narrow ? NM3[i] : NM[i]) + '</text>');
+    }
+    // Asar's column, washed, so the step has somewhere to sit.
+    s.push('<rect class="band" x="' + X(11).toFixed(1) + '" y="' + T + '" width="' +
+           (X(12) - X(11)).toFixed(1) + '" height="' + (h - T - B) + '"/>');
+    s.push('<line class="ln even" x1="' + X(0).toFixed(1) + '" y1="' + Yv(0).toFixed(1) +
+           '" x2="' + X(12).toFixed(1) + '" y2="' + Yv(1).toFixed(1) + '"/>');
+    if (!narrow){
+      var ex = X(4.2), ey = Yv(4.2 / 12);
+      s.push('<text class="dlab halo" x="' + (ex - 8).toFixed(1) + '" y="' + (ey - 8).toFixed(1) +
+             '" text-anchor="end">an even pace</text>');
+    }
+
+    if (showYears){
+      own.forEach(function(y, k){
+        pts(y, "share", "cp", X, Yv).forEach(function(p){
+          if (p.length < 2) return;
+          s.push('<polyline class="ln year" data-k="' + k + '" points="' + line(p) + '"/>');
+          s.push('<polyline class="hitline" data-k="' + k + '" points="' + line(p) +
+                 '" style="fill:none;stroke:transparent;stroke-width:12"/>');
+        });
+      });
+    }
+    if (showRec){
+      var rp = [[X(0), Yv(0)]];
+      RP.forEach(function(q){ if (q.med !== null) rp.push([X(q.m), Yv(q.med)]); });
+      s.push('<polyline class="ln rec med" points="' + line(rp) + '"/>');
+    }
+    var cp = [[X(0), Yv(0)]];
+    PR.forEach(function(q){ if (q.med !== null) cp.push([X(q.m), Yv(q.med)]); });
+    s.push('<polyline class="ln cap med" points="' + line(cp) + '"/>');
+    s.push('<g id="curveHi"></g>');
+
+    // Name the Asar step on the median line, in the right margin where the
+    // axis ends and there is always room.
+    var y11 = Yv(PR[10].med), y12 = Yv(1), xr = X(12) + 8;
+    s.push('<line class="ax" x1="' + (xr - 3) + '" y1="' + y11.toFixed(1) + '" x2="' + (xr + 3) +
+           '" y2="' + y11.toFixed(1) + '"/>');
+    s.push('<line class="ax" x1="' + xr + '" y1="' + y11.toFixed(1) + '" x2="' + xr + '" y2="' +
+           y12.toFixed(1) + '"/>');
+    s.push('<line class="ax" x1="' + (xr - 3) + '" y1="' + y12.toFixed(1) + '" x2="' + (xr + 3) +
+           '" y2="' + y12.toFixed(1) + '"/>');
+    s.push('<text class="dlab strong" x="' + (xr + 7) + '" y="' + ((y11 + y12) / 2 + 4).toFixed(1) + '">' +
+           fPct(ST.asar_med) + '</text>');
+    if (!narrow){
+      s.push('<text class="dlab" x="' + (xr + 7) + '" y="' + ((y11 + y12) / 2 + 19).toFixed(1) + '">in Asar</text>');
+    }
+    // The recurrent line is named on the plot, under its own line in the
+    // middle of the year, where it runs well clear of the capital curves.
+    // In the margin its label would land on the Asar figure.  On a phone
+    // the legend carries it.
+    if (showRec && !narrow){
+      var at = 5.2, lo = RP[4].med, hiR = RP[5].med;
+      var ry = lo + (hiR - lo) * (at - 5) + 0.04;
+      s.push('<text class="dlab halo" x="' + X(at).toFixed(1) + '" y="' + (Yv(ry) + 22).toFixed(1) +
+             '" style="fill:var(--rec)">recurrent</text>');
+    }
+    s.push('</svg>');
+    last = {X: X, Yv: Yv};
+    return s.join("");
+  }
+
+  function wire(host){
+    var svg = host.querySelector("svg");
+    var hi = host.querySelector("#curveHi");
+    if (!svg) return;
+    svg.addEventListener("mousemove", function(ev){
+      var t = ev.target;
+      if (!t || !t.getAttribute || t.getAttribute("data-k") === null){
+        hideTip(); if (hi) hi.innerHTML = ""; return;
+      }
+      var y = own[+t.getAttribute("data-k")];
+      if (hi){
+        hi.innerHTML = pts(y, "share", "cp", last.X, last.Yv).map(function(p){
+          return '<polyline class="ln year on" points="' + line(p) + '"/>';
+        }).join("");
+      }
+      showTip(ev, "<b>" + y.label + " &middot; " + bs(y) + " BS</b>" +
+        row("By end of Poush", y.cp[5] === 1 ? fPct(y.share[5]) : "not stated") +
+        row("By end of Jestha", fPct(y.share[10])) +
+        row("In Asar", fPct(y.asar)) +
+        row("Year&rsquo;s total", rs(y.c[11])));
+    });
+    svg.addEventListener("mouseleave", function(){ hideTip(); if (hi) hi.innerHTML = ""; });
+  }
+
+  var f = fig("fig-curve", build, wire);
+  chip("c-rec", function(on){ showRec = on; f.draw(); }, true);
+  chip("c-years", function(on){ showYears = on; f.draw(); }, true);
+
+  return { draw: function(){
+    f.draw();
+    var note = el("curveNote");
+    if (note){
+      note.textContent = "The median line is taken month by month over the years whose own " +
+        "bulletins state that month: all " + PR[5].n + " from Poush on, fewer before (" +
+        PR[0].n + " for Shrawan). An even pace pays a twelfth of the year each month. " +
+        "Recurrent spending is the median of " + ST.rec_n + " years.";
+    }
+  } };
+})();
+
+/* ---- 3. every year --------------------------------------------------------
+   One point per fiscal year, on one axis: the share paid in Asar.  Capital
+   is the subject and recurrent the control; hollow points are the years a
+   later bulletin had to fill in, which is where the extremes are. */
+
+var years = (function(){
+  var rows = Y.filter(function(y){ return y.label <= ST.last; });
+
+  function build(w){
+    var narrow = w < NARROW;
+    var h = Math.round(Math.max(290, Math.min(420, w * 0.42)));
+    var L = narrow ? 34 : 44, R = 14, T = 18, B = 34;
+    var n = rows.length;
+    var X = function(i){ return L + (i + 0.5) / n * (w - L - R); };
+    var hiV = 0.6;
+    var Yv = function(v){ return T + (hiV - v) / hiV * (h - T - B); };
+    var s = [svgOpen(w, h, "Share of each year's spending paid in Asar")];
+    var i;
+    [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6].forEach(function(v){
+      if (narrow && Math.round(v * 100) % 20) return;
+      s.push('<line class="gl" x1="' + L + '" y1="' + Yv(v).toFixed(1) + '" x2="' + (w - R) +
+             '" y2="' + Yv(v).toFixed(1) + '"/>');
+      s.push('<text class="tk" x="' + (L - 6) + '" y="' + (Yv(v) + 3.5).toFixed(1) +
+             '" text-anchor="end">' + Math.round(v * 100) + '%</text>');
+    });
+    s.push('<line class="ax" x1="' + L + '" y1="' + Yv(0).toFixed(1) + '" x2="' + (w - R) +
+           '" y2="' + Yv(0).toFixed(1) + '"/>');
+    var ev = Yv(ST.even);
+    s.push('<line class="ln even" x1="' + L + '" y1="' + ev.toFixed(1) + '" x2="' + (w - R) +
+           '" y2="' + ev.toFixed(1) + '"/>');
+    s.push('<text class="dlab halo" x="' + (w - R - 2) + '" y="' + (ev - 6).toFixed(1) +
+           '" text-anchor="end">even pace, ' + fPct1(ST.even) + '</text>');
+
+    // The rule: Jestha 15 budgets from 2016/17.
+    var k = -1;
+    for (i = 0; i < n; i++) if (rows[i].label === M.jestha15_from){ k = i; break; }
+    if (k > 0){
+      var xr = (X(k - 1) + X(k)) / 2;
+      s.push('<line class="rule-v" x1="' + xr.toFixed(1) + '" y1="' + T + '" x2="' + xr.toFixed(1) +
+             '" y2="' + (h - B) + '"/>');
+      s.push('<text class="dlab halo" x="' + (xr + 6).toFixed(1) + '" y="' + (T + 10) + '">' +
+             (narrow ? "Jestha 15 budget" : "Budget due on Jestha 15 from here") + '</text>');
+    }
+    // The median of each side, drawn as a short rule over its own years.
+    function medRule(a, b, v, lab){
+      if (a < 0 || b < a) return;
+      var x1 = X(a) - 6, x2 = X(b) + 6;
+      s.push('<line x1="' + x1.toFixed(1) + '" y1="' + Yv(v).toFixed(1) + '" x2="' + x2.toFixed(1) +
+             '" y2="' + Yv(v).toFixed(1) + '" style="stroke:var(--cap);stroke-width:1.2;opacity:.45"/>');
+      if (!narrow){
+        s.push('<text class="dlab halo" x="' + x1.toFixed(1) + '" y="' + (Yv(v) - 6).toFixed(1) + '">' +
+               lab + '</text>');
+      }
+    }
+    var firstOwn = -1, lastBefore = -1, firstAfter = -1, lastOwn = -1;
+    for (i = 0; i < n; i++){
+      if (rows[i].asar_p !== 1) continue;
+      if (firstOwn < 0) firstOwn = i;
+      if (!rows[i].after) lastBefore = i;
+      if (rows[i].after && firstAfter < 0) firstAfter = i;
+      lastOwn = i;
+    }
+    medRule(firstOwn, lastBefore, ST.asar_before, "median " + fPct(ST.asar_before));
+    medRule(firstAfter, lastOwn, ST.asar_after, "median " + fPct(ST.asar_after));
+
+    for (i = 0; i < n; i++){
+      var y = rows[i], x = X(i);
+      if (y.rec_asar !== undefined){
+        s.push('<circle class="dot rec" cx="' + x.toFixed(1) + '" cy="' + Yv(y.rec_asar).toFixed(1) +
+               '" r="' + (narrow ? 3.4 : 4) + '"/>');
+      }
+      if (y.asar !== undefined){
+        s.push('<circle class="dot ' + (y.asar_p === 1 ? "cap" : "hollow") + '" cx="' + x.toFixed(1) +
+               '" cy="' + Yv(y.asar).toFixed(1) + '" r="' + (narrow ? 4.6 : 5.6) + '"/>');
+      }
+      var lab = narrow ? ("'" + y.label.slice(2, 4)) : y.label;
+      if (!narrow || i % 3 === 0){
+        s.push('<text class="tk" x="' + x.toFixed(1) + '" y="' + (h - 14) + '" text-anchor="middle">' +
+               (narrow ? lab : y.label.slice(0, 4)) + '</text>');
+        if (!narrow){
+          s.push('<text class="tk" x="' + x.toFixed(1) + '" y="' + (h - 2) + '" text-anchor="middle">/' +
+                 y.label.slice(5) + '</text>');
+        }
+      }
+      if (y.asar === undefined){
+        s.push('<text class="tk" x="' + x.toFixed(1) + '" y="' + (Yv(0) - 6).toFixed(1) +
+               '" text-anchor="middle">&ndash;</text>');
+      }
+      s.push('<rect class="hit" data-i="' + i + '" x="' + (x - (w - L - R) / n / 2).toFixed(1) + '" y="' + T +
+             '" width="' + ((w - L - R) / n).toFixed(1) + '" height="' + (h - T - B) + '"/>');
+    }
+    // Name the extreme: the one year Asar took more than half.
+    if (!narrow){
+      var top = null;
+      rows.forEach(function(y, j){ if (y.asar !== undefined && (!top || y.asar > top.y.asar)) top = {y: y, j: j}; });
+      if (top){
+        s.push('<text class="dlab halo" x="' + (X(top.j) + 10).toFixed(1) + '" y="' +
+               (Yv(top.y.asar) + 4).toFixed(1) + '">' + top.y.label + ', ' + fPct(top.y.asar) + '</text>');
+      }
+    }
+    s.push('</svg>');
+    return s.join("");
+  }
+
+  function wire(host){
+    var svg = host.querySelector("svg");
+    if (!svg) return;
+    svg.addEventListener("mousemove", function(ev){
+      var t = ev.target;
+      if (!t || !t.getAttribute || t.getAttribute("data-i") === null){ hideTip(); return; }
+      var y = rows[+t.getAttribute("data-i")];
+      if (y.asar === undefined){
+        showTip(ev, "<b>" + y.label + "</b>" +
+          '<div class="n">No capital figure for Jestha or Asar anywhere in the archive</div>');
+        return;
+      }
+      showTip(ev, "<b>" + y.label + " &middot; " + bs(y) + " BS</b>" +
+        row("Paid in Asar", fPct1(y.asar)) +
+        row("Rupees in Asar", rs(y.asar_rs)) +
+        row("First 11 months", rs(y.c[10])) +
+        row("Whole year", rs(y.c[11])) +
+        (y.rec_asar !== undefined ? row("Recurrent in Asar", fPct1(y.rec_asar)) : "") +
+        '<div class="n">' + (y.asar_p === 1 ? "Both figures from the year&rsquo;s own bulletins" :
+          "11 months from " + PROV[y.cp[10]] + "; the year from " + PROV[y.cp[11]]) + "</div>");
+    });
+    svg.addEventListener("mouseleave", hideTip);
+  }
+
+  var f = fig("fig-years", build, wire);
+  return { draw: function(){
+    f.draw();
+    var note = el("yearsNote");
+    if (note){
+      note.textContent = "Asar's share is one minus the eleven-month figure over the year's " +
+        "total, both as first printed. The faint rules are the medians of the solid points on " +
+        "each side of the rule: " + fPct(ST.asar_before) + " over " + ST.n_before + " years before, " +
+        fPct(ST.asar_after) + " over " + ST.n_after + " after.";
+    }
+  } };
+})();
+
+/* ---- 4. the budget --------------------------------------------------------
+   Part to whole, one bar per year: what was spent by the end of Jestha, what
+   was spent in Asar, and what was never spent, as shares of the estimate
+   the year began with.  Two steps of one hue for the two kinds of spent,
+   and the page's neutral for the money that never moved. */
+
+var budget = (function(){
+  var rows = Y.filter(function(y){ return y.by11 !== undefined; });
+
+  function build(w){
+    var narrow = w < NARROW;
+    // R leaves room for half of the "100%" tick, which is centred on the end.
+    var lab = narrow ? 64 : 78, R = 18, T = 6, rh = narrow ? 22 : 24, gap = 8, B = 26;
+    var iw = w - lab - R;
+    var h = T + rows.length * (rh + gap) + B;
+    var X = function(v){ return lab + v * iw; };
+    var s = [svgOpen(w, h, "Each year's capital budget split by when it was spent")];
+    [0, 0.25, 0.5, 0.75, 1].forEach(function(v){
+      s.push('<line class="gl" x1="' + X(v).toFixed(1) + '" y1="' + T + '" x2="' + X(v).toFixed(1) +
+             '" y2="' + (h - B + 4) + '"/>');
+      s.push('<text class="tk" x="' + X(v).toFixed(1) + '" y="' + (h - 8) + '" text-anchor="middle">' +
+             (100 * v) + '%</text>');
+    });
+    rows.forEach(function(y, i){
+      var yy = T + i * (rh + gap);
+      var hollow = y.cp[10] !== 1 || y.cp[11] !== 1;
+      s.push('<text class="tk" x="' + (lab - 8) + '" y="' + (yy + rh / 2 + 4) + '" text-anchor="end">' +
+             y.label + (hollow ? "&#8727;" : "") + '</text>');
+      var segs = [["cap-2", y.by11], ["cap", y.in12], ["unspent", 1 - y.exec]];
+      var x0 = 0;
+      segs.forEach(function(sg, j){
+        var a = X(x0) + (j ? 1 : 0), b = X(x0 + sg[1]) - (j < 2 ? 1 : 0);
+        if (b > a){
+          s.push('<rect class="bar ' + sg[0] + '" x="' + a.toFixed(1) + '" y="' + yy + '" width="' +
+                 (b - a).toFixed(1) + '" height="' + rh + '" rx="1.5"/>');
+          if (b - a > (narrow ? 34 : 40)){
+            var ink = sg[0] === "cap" ? "var(--surface)" : "var(--ink)";
+            s.push('<text class="dlab" x="' + ((a + b) / 2).toFixed(1) + '" y="' + (yy + rh / 2 + 4) +
+                   '" text-anchor="middle" style="fill:' + ink + '">' + fPct(sg[1]) + '</text>');
+          }
+        }
+        x0 += sg[1];
+      });
+      s.push('<rect class="hit" data-i="' + i + '" x="' + lab + '" y="' + (yy - gap / 2) + '" width="' + iw +
+             '" height="' + (rh + gap) + '"/>');
+    });
+    s.push('</svg>');
+    return s.join("");
+  }
+
+  function wire(host){
+    var svg = host.querySelector("svg");
+    if (!svg) return;
+    svg.addEventListener("mousemove", function(ev){
+      var t = ev.target;
+      if (!t || !t.getAttribute || t.getAttribute("data-i") === null){ hideTip(); return; }
+      var y = rows[+t.getAttribute("data-i")];
+      showTip(ev, "<b>" + y.label + " &middot; " + bs(y) + " BS</b>" +
+        row("Budget", rs(y.be)) +
+        row("Spent by end of Jestha", fPct(y.by11)) +
+        row("Spent in Asar", fPct(y.in12)) +
+        row("Not spent", fPct(1 - y.exec)) +
+        '<div class="n">' + (y.be_how === "stated" ? "Budget as the bulletins print it" :
+          "Budget implied by the percentage the bulletins print") + "</div>");
+    });
+    svg.addEventListener("mouseleave", hideTip);
+  }
+
+  var f = fig("fig-budget", build, wire);
+  return { draw: function(){
+    f.draw();
+    var note = el("budgetNote");
+    if (note){
+      note.textContent = "Budget estimates as the bulletins state them, or as a percentage they " +
+        "state implies. Spending is first print. Medians: " + fPct(ST.by11_med) + " by Jestha, " +
+        fPct(ST.in12_med) + " in Asar, " + fPct(ST.unspent_med) + " unspent.";
+    }
+  } };
+})();
+
+/* ------------------------------------------------------------------ table */
+
+function buildTable(){
+  var body = el("tblBody");
+  if (!body) return;
+  var out = [], i;
+  for (i = Y.length - 1; i >= 0; i--){
+    var y = Y[i];
+    if (y.label > ST.last) continue;
+    var cell = function(v, dp){ return v === null || v === undefined ? "&mdash;" : v.toFixed(dp); };
+    var src = y.asar === undefined ? "none" :
+      y.asar_p === 1 ? "own" : (y.cp[10] === 1 ? "own" : PROV[y.cp[10]].replace("a later ", "later ")) +
+      " / " + (y.cp[11] === 1 ? "own" : PROV[y.cp[11]].replace("a later ", "later "));
+    out.push("<tr><td>" + y.label + "</td><td>" + cell(y.c[10], 2) + "</td><td>" + cell(y.c[11], 2) +
+      "</td><td>" + cell(y.asar_rs, 2) + "</td><td>" + (y.asar === undefined ? "&mdash;" : fPct1(y.asar)) +
+      "</td><td>" + (y.rec_asar === undefined ? "&mdash;" : fPct1(y.rec_asar)) +
+      "</td><td>" + cell(y.mult, 1) + "</td><td>" + cell(y.be, 2) +
+      "</td><td>" + (y.exec === undefined ? "&mdash;" : fPct(y.exec)) +
+      '</td><td class="p">' + src + "</td></tr>");
+  }
+  body.innerHTML = out.join("");
+}
+
+/* ------------------------------------------------------------------- wire */
+
+fillNumbers();
+buildTable();
+
+el("srcs").innerHTML = "Every spending figure computed from " + esc(M.source) +
+  ", read out of the bulletin PDFs themselves: " + fInt(M.listed) + " bulletins listed, " +
+  fInt(M.extracts) + " with a usable text layer, " + fInt(M.stated) +
+  " fiscal months with capital spending stated; archive last refreshed " + esc(M.retrieved) +
+  ". The bulletins were downloaded for <a href=\"https://aabeshkarmacharya.github.io/remittances/\">the remittance essay</a> " +
+  "and are also read by <a href=\"https://aabeshkarmacharya.github.io/spread/\">the interest-rate page</a>; this page fetches " +
+  "nothing of its own. The Jestha 15 budget date is Article 119 of the Constitution of Nepal " +
+  "(2015); the first budget presented on it was for 2073/74, on 28 May 2016. The monsoon onset " +
+  "date is the Department of Hydrology and Meteorology&rsquo;s normal for eastern Nepal. Parser, " +
+  "checks and figures are in <code>asar/</code>.";
+
+var t = null;
+window.addEventListener("resize", function(){
+  clearTimeout(t);
+  t = setTimeout(function(){ REDRAW.forEach(function(f){ f(); }); }, 120);
+});
+
+hero.draw();
+cover.draw();
+curve.draw();
+years.draw();
+budget.draw();
+})();
+</script>
+</body>
+</html>

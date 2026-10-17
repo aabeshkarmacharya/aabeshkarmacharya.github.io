@@ -1,15 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-look="hawley" data-page="odds">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#E9E4D8">
 <meta name="description" content="What Are My Odds Up There?">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%9B%B0%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3E%E0%A4%B6%E0%A4%BF%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>What Are My Odds Up There?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..800,0..100,0..1&family=Source+Sans+3:wght@300;400;500;600;700&display=swap">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cutive+Mono&amp;family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Special+Elite&amp;display=swap">
 <style>
 :root{
   color-scheme: light;
@@ -28,7 +30,7 @@
   --field:#FFFFFF; --field-rule:#C2C2CD;
   --measure:65ch; --wide:1120px;
 }
-@media (prefers-color-scheme: dark){
+@media not all{
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -42,7 +44,7 @@
     --field:#15151B; --field-rule:#3A3A46;
   }
 }
-:root[data-theme="dark"]{
+:root[data-theme="dark"][data-look-off]{
   color-scheme: dark;
   --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
   --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
@@ -57,14 +59,14 @@
 *{box-sizing:border-box}
 body{
   margin:0; background:var(--ground); color:var(--ink);
-  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:var(--t-f-body);
   font-weight:400; font-size:18.5px; line-height:1.66;
   -webkit-font-smoothing:antialiased;
 }
-h1,h2,h3{margin:0; font-family:"Fraunces","Georgia",serif;
+h1,h2,h3{margin:0; font-family:var(--t-f-display);
   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
   letter-spacing:-.012em}
-.mono,code{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.mono,code{font-family:var(--t-f-label)}
 .wrap{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
 .wide{max-width:var(--wide); margin-inline:auto; padding-inline:24px}
 section{padding-block:clamp(38px,5.5vw,68px)}
@@ -74,7 +76,7 @@ a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2);
 a:hover{text-decoration-color:var(--accent)}
 :focus-visible{outline:2px solid var(--alt); outline-offset:3px; border-radius:3px}
 
-.eyebrow{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.2em;
+.eyebrow{font-family:var(--t-f-label); font-size:11px; letter-spacing:.2em;
   text-transform:uppercase; color:var(--ink-3);
   display:flex; align-items:center; gap:12px; margin-bottom:16px}
 .eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
@@ -89,7 +91,7 @@ header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
 h1{font-size:clamp(34px,5.8vw,68px); line-height:.99; font-weight:800;
    font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:15ch; margin-bottom:.3em}
 .sub{max-width:56ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
-.kicker{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.18em;
+.kicker{font-family:var(--t-f-label); font-size:11px; letter-spacing:.18em;
   text-transform:uppercase; color:var(--ink-3); margin-bottom:20px}
 
 /* ------------------------------------------------------------ the form */
@@ -104,7 +106,7 @@ h1{font-size:clamp(34px,5.8vw,68px); line-height:.99; font-weight:800;
 
 .field{margin-bottom:17px}
 .field:last-child{margin-bottom:0}
-label.lab{display:block; font-family:"DM Mono",monospace; font-size:11px;
+label.lab{display:block; font-family:var(--t-f-label); font-size:11px;
   letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
   margin-bottom:7px}
 input[type=text],input[type=number],select{
@@ -135,18 +137,18 @@ input:focus,select:focus{border-color:var(--accent); outline:none;
 .odds{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 .odd{padding:22px 22px 20px}
 .odd+.odd{border-left:1px solid var(--rule)}
-.odd .cap{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.14em;
+.odd .cap{font-family:var(--t-f-label); font-size:10.5px; letter-spacing:.14em;
   text-transform:uppercase; color:var(--ink-3); margin-bottom:6px; display:block}
-.odd .big{font-family:"Fraunces",Georgia,serif; font-weight:800; line-height:1;
+.odd .big{font-family:var(--t-f-display); font-weight:800; line-height:1;
   font-size:clamp(34px,4.6vw,50px); letter-spacing:-.022em;
   font-variant-numeric:tabular-nums}
 /* The unit rides with the number rather than wrapping under it: "25.4 in
    1,000" set at 50px breaks across two lines in a half-width panel. */
-.odd .big .unit{font-family:"Source Sans 3",sans-serif; font-weight:500;
+.odd .big .unit{font-family:var(--t-f-body); font-weight:500;
   font-size:.34em; letter-spacing:0; color:var(--ink-3); margin-left:.35em;
   white-space:nowrap}
 .odd .sub2{font-size:14.5px; color:var(--ink-2); margin-top:7px; line-height:1.4}
-.odd .ci{font-family:"DM Mono",monospace; font-size:12.5px; color:var(--ink-3);
+.odd .ci{font-family:var(--t-f-label); font-size:12.5px; color:var(--ink-3);
   margin-top:3px}
 
 .rows{border-top:1px solid var(--rule)}
@@ -156,7 +158,7 @@ input:focus,select:focus{border-color:var(--accent); outline:none;
 .row .k{color:var(--ink-2)}
 .row .k em{font-style:normal; color:var(--ink-3); font-size:13.5px; display:block;
   line-height:1.35}
-.row .v{font-family:"DM Mono",monospace; font-size:15px; white-space:nowrap;
+.row .v{font-family:var(--t-f-label); font-size:15px; white-space:nowrap;
   font-variant-numeric:tabular-nums}
 .rows.tight{border-top:1px solid var(--rule); margin-top:14px}
 .rows.tight .row{padding-inline:0}
@@ -166,7 +168,7 @@ input:focus,select:focus{border-color:var(--accent); outline:none;
 .dual{display:grid; grid-template-columns:auto auto; gap:1px 7px;
   justify-items:end; align-items:baseline}
 .dual em{font-style:normal; font-size:11.5px; color:var(--ink-3);
-  font-family:"Source Sans 3",sans-serif; justify-self:start}
+  font-family:var(--t-f-body); justify-self:start}
 
 .flag{margin:0 22px 20px; padding:11px 13px; border-radius:9px; font-size:14.5px;
   line-height:1.48; background:var(--surface-2); border:1px solid var(--rule);
@@ -177,7 +179,7 @@ input:focus,select:focus{border-color:var(--accent); outline:none;
 .acts{display:flex; gap:10px; padding:16px 22px 20px; border-top:1px solid var(--rule)}
 .acts .cta{font-size:14.5px; padding:9px 12px}
 #shareOut{margin:0 22px 18px; width:calc(100% - 44px);
-  font-family:"DM Mono",monospace; font-size:12.5px}
+  font-family:var(--t-f-label); font-size:12.5px}
 .printonly{display:none}
 
 /* --------------------------------------------------------------- charts */
@@ -188,11 +190,11 @@ input:focus,select:focus{border-color:var(--accent); outline:none;
 .fig svg{display:block; width:100%; height:auto; overflow:visible}
 .gridline{stroke:var(--grid); stroke-width:1}
 .axisline{stroke:var(--rule-2); stroke-width:1}
-.axistext{font-family:"DM Mono",monospace; font-size:10px; fill:var(--ink-3)}
-.axistitle{font-family:"Source Sans 3",sans-serif; font-size:11.5px; fill:var(--ink-3)}
+.axistext{font-family:var(--t-f-label); font-size:10px; fill:var(--ink-3)}
+.axistitle{font-family:var(--t-f-body); font-size:11.5px; fill:var(--ink-3)}
 .dot{fill:var(--mark-soft); stroke:var(--mark); stroke-width:1.5}
 .dot.on{fill:var(--mark); stroke:var(--ink); stroke-width:2}
-.dotlab{font-family:"Source Sans 3",sans-serif; font-size:11px; fill:var(--ink-2);
+.dotlab{font-family:var(--t-f-body); font-size:11px; fill:var(--ink-2);
   paint-order:stroke; stroke:var(--surface); stroke-width:3px; stroke-linejoin:round}
 .dotlab.on{fill:var(--ink); font-weight:600}
 .refline{stroke:var(--ink-3); stroke-width:1.5; stroke-dasharray:4 4}
@@ -210,18 +212,18 @@ input:focus,select:focus{border-color:var(--accent); outline:none;
   overflow:hidden}
 .stats.pair{grid-template-columns:repeat(2,minmax(0,1fr))}
 .stat{background:var(--surface); padding:15px 16px}
-.stat .n{font-family:"DM Mono",monospace; font-size:23px; line-height:1.1;
+.stat .n{font-family:var(--t-f-label); font-size:23px; line-height:1.1;
   font-variant-numeric:tabular-nums; margin-bottom:3px}
 .stat .l{font-size:13px; color:var(--ink-3); line-height:1.35}
 
 table{width:100%; border-collapse:collapse; font-size:15px}
-th{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+th{font-family:var(--t-f-label); font-size:10.5px; letter-spacing:.12em;
   text-transform:uppercase; color:var(--ink-3); font-weight:400; text-align:right;
   padding:0 0 8px; border-bottom:1px solid var(--rule)}
 th:first-child{text-align:left}
 td{padding:7px 0; border-bottom:1px solid var(--rule); text-align:right;
-  font-family:"DM Mono",monospace; font-variant-numeric:tabular-nums; font-size:14.5px}
-td:first-child{text-align:left; font-family:"Source Sans 3",sans-serif; font-size:15.5px}
+  font-family:var(--t-f-label); font-variant-numeric:tabular-nums; font-size:14.5px}
+td:first-child{text-align:left; font-family:var(--t-f-body); font-size:15.5px}
 tr:last-child td{border-bottom:0}
 tr.on td{background:var(--surface-2); font-weight:600}
 
@@ -232,7 +234,7 @@ tr.on td{background:var(--surface-2); font-weight:600}
 .offer.lead{border-color:color-mix(in oklab,var(--accent) 45%,var(--rule));
   box-shadow:var(--shadow-lg)}
 .price{display:flex; align-items:baseline; gap:9px; margin:2px 0 14px}
-.price .amt{font-family:"Fraunces",Georgia,serif; font-weight:800; font-size:33px;
+.price .amt{font-family:var(--t-f-display); font-weight:800; font-size:33px;
   line-height:1; letter-spacing:-.02em}
 .price .per{font-size:14.5px; color:var(--ink-3)}
 ul.ticks{list-style:none; margin:0 0 20px; padding:0; font-size:15.5px}
@@ -259,7 +261,7 @@ a.cta.paylink{display:block; margin-top:10px; text-align:center; text-decoration
   border:1px solid color-mix(in oklab,var(--up) 34%,var(--rule)); line-height:1.5}
 .done.on{display:block}
 .demo{margin-top:13px; font-size:13px; color:var(--ink-3); line-height:1.45}
-textarea.raw{width:100%; margin-top:12px; font-family:"DM Mono",monospace;
+textarea.raw{width:100%; margin-top:12px; font-family:var(--t-f-label);
   font-size:13px; line-height:1.5; color:var(--ink); background:var(--field);
   border:1px solid var(--field-rule); border-radius:9px; padding:11px 12px;
   resize:vertical}
@@ -308,11 +310,296 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   td:first-child{font-size:14.5px}
 }
 </style>
+<style>
+/* ===================================================================== base
+   What every page's look is built on.  build_site.py appends this, then the
+   page's own look from theme/looks/, after the page's own stylesheet, so
+   both win any tie with it.
+
+   It does two things.  It bridges the tokens every page already uses
+   (--ground, --surface, --ink, --rule ...) to a small set of theme tokens
+   (--t-*), so a look recolours a whole page by setting a dozen values.  And
+   it turns off what made every page look alike -- the Fraunces display face,
+   the small monospaced labels with a rule running off them, the soft shadows
+   and the rounded cards -- and points the same components at the theme's own
+   faces and lines instead.
+
+   Each look is a single deliberate appearance, light or dark as its subject
+   asks, so the bridge is written at a specificity (:root three times) that
+   beats the dark-mode token blocks inside every page's own stylesheet. */
+
+:root:root:root{
+  color-scheme: var(--t-scheme, light);
+  /* defaults, which a look overrides */
+  --t-bg:#FFFFFF; --t-paper:#FFFFFF; --t-paper-2:#F4F4F2;
+  --t-ink:#151515; --t-ink-2:#444444; --t-ink-3:#777777;
+  --t-line:#DCDCDC; --t-line-2:#8A8A8A; --t-grid:rgba(0,0,0,.08);
+  --t-accent:#151515; --t-accent-2:#555555; --t-accent-ink:#FFFFFF;
+  --t-head-bg:var(--t-paper-2); --t-head-ink:var(--t-ink); --t-head-ink-2:var(--t-ink-2);
+  --t-head-kick:var(--t-ink-3); --t-head-rule:1px solid var(--t-line);
+  --t-hero-bg:var(--t-paper-2);
+  --t-foot-bg:var(--t-paper-2); --t-foot-ink:var(--t-ink-2); --t-foot-ink-2:var(--t-ink-3);
+  --t-f-display:Georgia,serif; --t-f-body:system-ui,sans-serif; --t-f-label:var(--t-f-body);
+  --t-f-num:var(--t-f-display); --t-f-chart:var(--t-f-label);
+  --t-f-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --t-body-size:18px; --t-body-lh:1.62;
+  --t-h1-size:clamp(38px,6.4vw,80px); --t-h1-weight:700; --t-h1-case:none; --t-h1-track:-.01em; --t-h1-lh:1;
+  --t-h2-size:clamp(28px,3.8vw,40px); --t-h2-weight:700; --t-h2-case:none; --t-h2-track:-.005em; --t-h2-lh:1.08;
+  --t-h3-weight:600;
+  --t-label-size:12px; --t-label-case:uppercase; --t-label-track:.12em; --t-label-weight:600;
+  --t-label-ink:var(--t-ink-3); --t-eyebrow-rule:var(--t-line);
+  --t-radius:0; --t-fig-border:1px solid var(--t-line); --t-cap-rule:1px solid var(--t-line);
+  --t-tip-border:1px solid var(--t-line-2);
+  --t-chip-on-bg:var(--t-ink); --t-chip-on-ink:var(--t-bg);
+
+  /* the bridge */
+  --ground:var(--t-bg); --surface:var(--t-paper); --surface-2:var(--t-paper-2); --sunk:var(--t-hero-bg);
+  --ink:var(--t-ink); --ink-2:var(--t-ink-2); --ink-3:var(--t-ink-3);
+  --rule:var(--t-line); --rule-2:var(--t-line-2); --grid:var(--t-grid);
+  --accent:var(--t-accent); --alt:var(--t-accent-2);
+  --shadow:none; --shadow-lg:none;
+  --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+}
+
+/* Several looks are set in faces cut in one weight (a typewriter, a terminal's
+   pixel face, a seventeenth-century roman); asked for bold, a browser smears a fake one.
+   It may still slant a face that has no italic, but never fakes a weight. */
+html{background:var(--t-bg); font-synthesis:style}
+body{background:var(--t-bg); color:var(--t-ink); font-family:var(--t-f-body);
+  font-size:var(--t-body-size); line-height:var(--t-body-lh)}
+h1,h2,h3{font-family:var(--t-f-display); font-variation-settings:normal}
+h1{font-size:var(--t-h1-size); font-weight:var(--t-h1-weight); text-transform:var(--t-h1-case);
+  letter-spacing:var(--t-h1-track); line-height:var(--t-h1-lh)}
+h2{font-size:var(--t-h2-size); font-weight:var(--t-h2-weight); text-transform:var(--t-h2-case);
+  letter-spacing:var(--t-h2-track); line-height:var(--t-h2-lh)}
+h3{font-weight:var(--t-h3-weight); letter-spacing:0}
+h1,h2,h3,.fig-title{text-wrap:balance}
+.mono{font-family:var(--t-f-label)}
+code,kbd,samp,pre{font-family:var(--t-f-mono)}
+a:hover{text-decoration-color:var(--t-accent)}
+:focus-visible{outline-color:var(--t-accent)}
+
+.eyebrow,.kicker,.sech,label.lab{font-family:var(--t-f-label); font-size:var(--t-label-size);
+  text-transform:var(--t-label-case); letter-spacing:var(--t-label-track); font-weight:var(--t-label-weight);
+  color:var(--t-label-ink)}
+.eyebrow::after{background:var(--t-eyebrow-rule)}
+
+/* Headers: the house header, the canvas hero of the four oldest pages, and
+   the keyboards page's own. */
+header.top,header.hero{background:var(--t-head-bg); color:var(--t-head-ink); border-bottom:var(--t-head-rule)}
+header.top .kicker,header.hero .eyebrow{color:var(--t-head-kick)}
+header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
+#hero{background:var(--t-hero-bg); border-bottom:var(--t-head-rule)}
+.hero-sub{color:var(--t-ink-2)}
+.hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
+.look-art,.look-tag{display:none}
+/* Devanagari hangs vowel signs above and below the line, so a subtitle that
+   inherits a display face's tight leading collides with itself when it wraps.
+   A look whose faces have no Devanagari names one second in its body stack,
+   so it supplies only those glyphs. */
+.devanagari{font-family:var(--t-f-body); line-height:1.32}
+
+/* Surfaces lose their shadows and their rounding together. */
+figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
+.seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
+button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
+figure{background:var(--t-paper); border:var(--t-fig-border)}
+figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(--t-ink-3)}
+.fig-title{font-family:var(--t-f-display); font-variation-settings:normal}
+.fig-note{color:var(--t-ink-2)}
+.ctl{background:var(--t-paper-2); border-bottom:var(--t-cap-rule); font-family:var(--t-f-label)}
+.legend{font-family:var(--t-f-label)}
+.chip{font-family:var(--t-f-label)}
+.chip[aria-pressed="true"]{background:var(--t-chip-on-bg); color:var(--t-chip-on-ink); border-color:var(--t-chip-on-bg)}
+
+/* Chart text, in every naming the pages use. */
+.tk,.axlab,.dlab,.axistext,.axistitle,.figlab,.gl-lab,svg text{font-family:var(--t-f-chart)}
+.halo{stroke:var(--t-paper)}
+
+/* Stat tiles draw their own hairlines, so a row the last tile does not fill
+   shows paper, not a grey block.  220px puts four tiles two by two in a
+   reading column and five across in a wide one. */
+.stats{border:0; background:transparent; gap:1px;
+  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+.stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
+.stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
+.stat span,.stat .l{font-family:var(--t-f-label)}
+
+#tip,.tip{font-family:var(--t-f-body); border:var(--t-tip-border); background:var(--t-paper); color:var(--t-ink)}
+#tip b,.tip b{font-family:var(--t-f-label)}
+
+table{font-family:var(--t-f-body)}
+th,thead th{font-family:var(--t-f-label)}
+td{font-family:var(--t-f-body)}
+details{background:var(--t-paper); border-color:var(--t-line)}
+summary{font-family:var(--t-f-label)}
+
+footer{background:var(--t-foot-bg); color:var(--t-foot-ink); border-top:var(--t-head-rule)}
+/* Inside a coloured footer, and in a chart drawn straight onto a coloured
+   header, the paper inks become the band's own, so a page's inline var(--ink)
+   or var(--ink-3) -- a highlighted tick, a muted closing line -- stays legible
+   on a dark band.  Only the header's charts: a header can also hold paper
+   cards (the apartments stats), whose text must keep the paper inks. */
+header.top svg,header.hero svg{--ink:var(--t-head-ink); --ink-2:var(--t-head-ink-2); --ink-3:var(--t-head-ink-2)}
+footer{--ink:var(--t-foot-ink); --ink-2:var(--t-foot-ink-2); --ink-3:var(--t-foot-ink-2)}
+footer .srcs{color:var(--t-foot-ink-2)}
+
+/* Tools: the form, the answer panel and the lead form. */
+.card,.answer,.offer,a.nextcard{background:var(--t-paper); border-color:var(--t-line)}
+.answer .top{background:var(--t-paper-2)}
+.big .unit{font-family:var(--t-f-body)}
+.row .v,.ppends,td{font-variant-numeric:tabular-nums}
+.row .v,.ppends{font-family:var(--t-f-label)}
+/* background-color, not the shorthand: a select draws its chevron with background-image */
+input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea{
+  font-family:var(--t-f-body); background-color:var(--t-paper); border-color:var(--t-line-2); color:var(--t-ink)}
+input:focus,select:focus,textarea:focus{border-color:var(--t-accent); box-shadow:0 0 0 2px var(--t-accent)}
+button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:var(--t-f-label)}
+button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
+.seg{border-color:var(--t-line-2); background:var(--t-paper)}
+.seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
+.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+/* The segmented control clips its buttons to its own outline, which clipped
+   the focus ring with them: draw it inside the button, in the ink that shows
+   on the pressed one too. */
+.seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
+.seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
+.flag{background:var(--t-paper-2); border-color:var(--t-line)}
+a.nextcard .go,.go{font-family:var(--t-f-label)}
+
+/* A note a script fills later (the layout optimiser's, say) is empty until
+   then, and a look that gives notes a rule or a fill would draw a stray one. */
+.note:empty{display:none}
+
+/* The way home that build_site.py adds to every footer. */
+.back-home{font-family:var(--t-f-label)}
+
+/* Inline code holds the bulletins' mangled fragments, some of them long
+   unbroken strings; on a phone they may break anywhere rather than push the
+   page sideways. */
+@media(max-width:700px){code{white-space:normal; overflow-wrap:anywhere}}
+/* A source note can carry a formula held together with non-breaking spaces
+   (the sunspot smoothing), wider than any phone column: it may break anywhere
+   rather than push the page sideways.  On the narrowest phones a tool card's
+   table scrolls inside its card for the same reason. */
+@media(max-width:700px){.srcs{overflow-wrap:anywhere}}
+@media(max-width:380px){.card table{display:block; overflow-x:auto; max-width:100%}}
+
+/* Code inside a coloured footer takes the footer's ink rather than a paper
+   box, which on a dark band reads as a hole in it. */
+footer code{background:transparent; border-color:currentColor; color:inherit}
+
+/* Print.  Several tools promise a single clean printed page, and their own
+   print rules would lose to a look's coloured covers and patterned paper,
+   which come later in the cascade.  So in print every look keeps its type and
+   drops its paint: white paper, black ink, no art layers, no textures. */
+@media print{
+  html,body{background:#FFFFFF !important; border:0 !important; margin:0 !important}
+  body::before,body::after,.look-art,header.top::before,header.top::after,header.hero::before{display:none !important}
+  header.top,header.hero,#hero,footer,section,figure,.fig,.card,.answer,.offer,.stat,.stats,.answer .top,
+  header.top > .wrap,header.top > .wide,section .wrap{background:#FFFFFF !important; box-shadow:none !important;
+    transform:none !important; color:#000000 !important}
+  header.top,header.hero{border-bottom:1px solid #999999 !important}
+  header.top *,header.hero *,footer *{color:#000000 !important; text-shadow:none !important}
+  .eyebrow{background:none !important; color:#000000 !important; transform:none !important}
+  /* Backgrounds that survive the reset are small -- a section number's cell,
+     a pressed key, a pill -- and often carry white type, which would print as
+     nothing if the browser dropped them.  Glows go; figures in a look's
+     coloured lettering (the rate board's LEDs) print black. */
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  *,*::before,*::after{text-shadow:none !important}
+  .stat b,.stat span,.stat .n,.stat small{color:#000000 !important}
+  /* a chart drawn for a coloured header goes to the paper's black and greys */
+  header.top svg text,header.hero svg text{fill:#000000 !important}
+  header.top svg .sunk-halo,header.hero svg .sunk-halo{stroke:#FFFFFF !important}
+  header.top svg .bar,header.hero svg .bar{fill:#BBBBBB !important}
+  header.top svg .bar.cap,header.hero svg .bar.cap{fill:#000000 !important}
+  header.top svg .ax,header.top svg .ln,header.hero svg .ax,header.hero svg .ln{stroke:#666666 !important}
+}
+
+/* look: hawley -- Twelve Hundred Metres Lower; What Are My Odds Up There?
+   fonts: https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap
+   chart-font: "Cutive Mono"
+
+   The Himalayan Database began as typed records: every expedition to a
+   Nepali peak, interviewed in Kathmandu and written up on a typewriter, on
+   cards and forms, for half a century.  So these pages are typed index
+   cards on a desk: card stock with a red top line and blue rules, headings
+   in a worn typewriter face, labels on a clean one, and the essay itself in
+   a book face that holds up for a long read.  Members print in a carbon
+   blue, hired staff in the card's red. */
+
+:root:root:root{
+  --t-bg:#E9E4D8; --t-paper:#FFFDF5; --t-paper-2:#F4F0E3;
+  --t-ink:#1F1F1F; --t-ink-2:#464542; --t-ink-3:#67645C;
+  --t-line:#D6D0C1; --t-line-2:#1F1F1F; --t-grid:rgba(31,31,31,.08);
+  --t-accent:#C8463D; --t-accent-2:#34559A; --t-accent-ink:#FFFFFF;
+  --hw-red:#C8463D; --hw-blue:#A9C1DF;
+  --t-head-bg:#E9E4D8; --t-head-ink:#1F1F1F; --t-head-ink-2:#464542; --t-head-kick:#A8352D;
+  --t-head-rule:0; --t-hero-bg:#E9E4D8;
+  --t-foot-bg:#E9E4D8; --t-foot-ink:#464542; --t-foot-ink-2:#67645D;
+  --t-f-display:"Special Elite","Courier New",monospace; --t-f-body:"Libre Baskerville",Georgia,serif;
+  --t-f-label:"Cutive Mono","Courier New",monospace; --t-f-num:"Special Elite","Courier New",monospace;
+  --t-f-chart:"Cutive Mono","Courier New",monospace;
+  --t-body-size:17px; --t-body-lh:1.78;
+  --t-h1-size:clamp(34px,5.8vw,70px); --t-h1-weight:400; --t-h1-track:-.01em; --t-h1-lh:1.06;
+  --t-h2-size:clamp(25px,3.4vw,36px); --t-h2-weight:400; --t-h2-track:-.01em; --t-h2-lh:1.16;
+  --t-label-size:14px; --t-label-track:.04em; --t-label-weight:400; --t-label-ink:#A8352D;
+  --t-fig-border:1px solid #D6D0C1; --t-cap-rule:1px solid #D6D0C1; --t-tip-border:1px solid #1F1F1F;
+  --t-chip-on-bg:#1F1F1F; --t-chip-on-ink:#FFFDF5;
+  --member:#34559A; --hired:#C8463D; --member-soft:rgba(52,85,154,.18); --hired-soft:rgba(200,70,61,.18);
+  --zone:rgba(31,31,31,.05); --zone-2:rgba(31,31,31,.09); --zoneink:rgba(31,31,31,.66);
+  --mark:#34559A; --mark-soft:rgba(52,85,154,.16); --mark-line:rgba(52,85,154,.55);
+  --up:#34559A; --down:#C8463D; --warn:#B5671A; --axis:#8A8579; --field:#FFFDF5; --field-rule:#1F1F1F;
+}
+/* the header is an index card on the desk */
+header.top{padding-block:clamp(30px,5vw,60px)}
+header.top > .wrap,header.top > .wide{position:relative; overflow:hidden; background:#FFFDF5;
+  padding-block:22px 28px; box-shadow:0 1px 2px rgba(0,0,0,.18),0 10px 24px -14px rgba(0,0,0,.35);
+  transform:rotate(-.4deg)}
+header.top .kicker{font-family:"Cutive Mono",monospace; letter-spacing:.02em; color:#C8463D; text-transform:uppercase;
+  position:relative; padding-bottom:9px}
+/* the card's red line runs under the kicker however many lines it wraps to, edge to edge of the card */
+header.top .kicker::after{content:""; position:absolute; left:-200px; right:-200px; bottom:0; height:1.5px; background:#C8463D}
+/* square once it fills the width: a full-width card turned even a little pokes past the screen */
+@media(max-width:980px){header.top > .wrap{transform:none}}
+@media(max-width:1200px){header.top > .wide{transform:none}}
+header.top h1{margin-top:16px}
+section .eyebrow::before{content:"EXPED. FILE \2014 "; color:#1F1F1F}
+.eyebrow::after{background:#C8463D; height:1px}
+h2{color:#1F1F1F}
+figure{background:#FFFDF5; border:1px solid #D6D0C1; border-top:2px solid #C8463D}
+.fig-title{font-family:"Special Elite",monospace; font-size:19px}
+.stats{gap:8px}
+.stat{box-shadow:0 1px 2px rgba(0,0,0,.12); border:1px solid #D6D0C1; background:#FFFDF5}
+.stat b{color:#1F1F1F}
+.note{border-left:0; border-top:1.5px solid #C8463D; background:#FFFDF5; padding:12px 16px; font-family:"Cutive Mono",monospace}
+.pull{font-family:"Special Elite",monospace}
+.card,.answer,.offer,a.nextcard,.fig{background:#FFFDF5; border:1px solid #D6D0C1; border-top:2px solid #C8463D}
+.big{font-family:"Special Elite",monospace; font-weight:400}
+
+/* every section is its own typed card on the desk, red line along its top */
+section{background:#FFFDF5; max-width:900px; margin:28px auto 0; border-top:2px solid #C8463D;
+  box-shadow:0 1px 2px rgba(0,0,0,.14),0 12px 26px -16px rgba(0,0,0,.35)}
+section+section{border-top:2px solid #C8463D}
+section:nth-of-type(even){transform:rotate(.25deg)} section:nth-of-type(odd){transform:rotate(-.2deg)}
+@media(max-width:760px){section{margin-top:16px}}
+/* a card turned even a quarter degree pokes past the screen once it fills the width */
+@media(max-width:980px){section{transform:none !important}}
+@media (prefers-reduced-motion: reduce){section{transform:none !important}}
+/* A typewriter has one weight.  Special Elite and Cutive Mono were cut that way,
+   so headings and buttons stay at it, and a typed emphasis is underlined, as a
+   typist would have done it, rather than smeared into a fake bold. */
+h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[aria-pressed=true],button.cta{font-weight:400}
+.note b,.note strong{font-weight:400; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.18em}
+
+</style>
 </head>
 <body>
 <script>window.ODDS_DATA={"meta":{"modern_from":2000,"people":40605,"expeditions":5838,"peaks":17,"summits":19689,"deaths":332,"year_max":2019,"dropped_no_age":811,"age0":38.0,"year0":2015.0,"source":"The Himalayan Database"},"columns":["peak=AMAD","peak=CHOY","peak=MANA","peak=LHOT","peak=BARU","peak=HIML","peak=MAKA","peak=DHA1","peak=PUMO","peak=ANN1","peak=KANG","peak=PUTH","peak=TILI","peak=ANN4","peak=TUKU","peak=GYAJ","season=Autumn","season=Winter","season=Summer","oxygen","hired","female","age","age_sq","year"],"peak_order":["EVER","AMAD","CHOY","MANA","LHOT","BARU","HIML","MAKA","DHA1","PUMO","ANN1","KANG","PUTH","TILI","ANN4","TUKU","GYAJ"],"seasons":["Spring","Autumn","Winter","Summer"],"age_bands":[{"lo":0,"hi":25,"label":"under 25"},{"lo":25,"hi":35,"label":"25 to 34"},{"lo":35,"hi":45,"label":"35 to 44"},{"lo":45,"hi":55,"label":"45 to 54"},{"lo":55,"hi":65,"label":"55 to 64"},{"lo":65,"hi":200,"label":"65 and over"}],"models":{"summit":{"intercept":-2.247514,"coef":{"peak=AMAD":2.169875,"peak=CHOY":1.260497,"peak=MANA":0.624142,"peak=LHOT":0.299772,"peak=BARU":1.196684,"peak=HIML":1.750015,"peak=MAKA":0.132447,"peak=DHA1":0.151676,"peak=PUMO":0.837158,"peak=ANN1":0.699011,"peak=KANG":0.383413,"peak=PUTH":1.851237,"peak=TILI":0.527268,"peak=ANN4":-0.273389,"peak=TUKU":0.535718,"peak=GYAJ":1.387826,"season=Autumn":0.206746,"season=Winter":-0.747091,"season=Summer":0.749066,"oxygen":3.356174,"hired":0.815502,"female":-0.156652,"age":-0.194666,"age_sq":-0.077249,"year":0.029004}},"death":{"intercept":-4.627576,"coef":{"peak=AMAD":-0.569643,"peak=CHOY":-0.488593,"peak=MANA":0.215835,"peak=LHOT":-0.108006,"peak=BARU":-0.313768,"peak=HIML":-0.602639,"peak=MAKA":0.628474,"peak=DHA1":1.077874,"peak=PUMO":0.677893,"peak=ANN1":0.989218,"peak=KANG":0.626854,"peak=PUTH":-1.147171,"peak=TILI":0.119679,"peak=ANN4":-0.506032,"peak=TUKU":-1.13278,"peak=GYAJ":-1.146617,"season=Autumn":-0.253957,"season=Winter":-0.306282,"season=Summer":-1.38067,"oxygen":-0.306604,"hired":0.066788,"female":-0.555953,"age":0.121601,"age_sq":0.027502,"year":-0.033062}}},"fit":{"summit":{"lambda":10.0,"auc":0.8409,"brier":0.16077,"base_rate":0.484891,"calibration":[{"n":5076,"pred":0.08029,"obs":0.05753},{"n":5077,"pred":0.14897,"obs":0.16663},{"n":5074,"pred":0.25144,"obs":0.22093},{"n":5076,"pred":0.38748,"obs":0.39578},{"n":5076,"pred":0.54861,"obs":0.58964},{"n":5077,"pred":0.72636,"obs":0.75556},{"n":5077,"pred":0.83164,"obs":0.83258},{"n":5072,"pred":0.90516,"obs":0.86061}]},"death":{"lambda":100.0,"auc":0.6559,"brier":0.008094,"base_rate":0.008176,"calibration":[{"n":5076,"pred":0.00331,"obs":0.00433},{"n":5076,"pred":0.00461,"obs":0.00473},{"n":5075,"pred":0.00554,"obs":0.00394},{"n":5076,"pred":0.00661,"obs":0.00493},{"n":5075,"pred":0.00735,"obs":0.00473},{"n":5076,"pred":0.00837,"obs":0.01221},{"n":5076,"pred":0.01029,"obs":0.0132},{"n":5075,"pred":0.01937,"obs":0.01734}]}},"peaks":[{"id":"EVER","name":"Everest","height":8850,"n":14855,"summits":8709,"deaths":131,"oxygen_share":0.701,"hired_share":0.3848},{"id":"KANG","name":"Kangchenjunga","height":8586,"n":622,"summits":292,"deaths":11,"oxygen_share":0.4614,"hired_share":0.3071},{"id":"LHOT","name":"Lhotse","height":8516,"n":1728,"summits":727,"deaths":13,"oxygen_share":0.4201,"hired_share":0.2274},{"id":"MAKA","name":"Makalu","height":8485,"n":1174,"summits":409,"deaths":21,"oxygen_share":0.3382,"hired_share":0.2496},{"id":"CHOY","name":"Cho Oyu","height":8188,"n":5784,"summits":2647,"deaths":23,"oxygen_share":0.2367,"hired_share":0.2125},{"id":"DHA1","name":"Dhaulagiri I","height":8167,"n":1087,"summits":251,"deaths":31,"oxygen_share":0.1546,"hired_share":0.2125},{"id":"MANA","name":"Manaslu","height":8163,"n":3334,"summits":1538,"deaths":33,"oxygen_share":0.3809,"hired_share":0.308},{"id":"ANN1","name":"Annapurna I","height":8091,"n":632,"summits":189,"deaths":17,"oxygen_share":0.1535,"hired_share":0.2278},{"id":"ANN4","name":"Annapurna IV","height":7525,"n":250,"summits":24,"deaths":1,"oxygen_share":0.02,"hired_share":0.164},{"id":"PUTH","name":"Putha Hiunchuli","height":7246,"n":524,"summits":224,"deaths":0,"oxygen_share":0.0191,"hired_share":0.2099},{"id":"BARU","name":"Baruntse","height":7152,"n":1466,"summits":440,"deaths":8,"oxygen_share":0.0082,"hired_share":0.1999},{"id":"PUMO","name":"Pumori","height":7138,"n":743,"summits":160,"deaths":14,"oxygen_share":0.0027,"hired_share":0.1265},{"id":"TILI","name":"Tilicho","height":7134,"n":307,"summits":53,"deaths":3,"oxygen_share":0.0,"hired_share":0.1433},{"id":"HIML","name":"Himlung Himal","height":7126,"n":1266,"summits":546,"deaths":4,"oxygen_share":0.0174,"hired_share":0.2567},{"id":"GYAJ","name":"Gyajikang","height":7074,"n":154,"summits":50,"deaths":0,"oxygen_share":0.0065,"hired_share":0.1883},{"id":"TUKU","name":"Tukuche","height":6920,"n":214,"summits":37,"deaths":0,"oxygen_share":0.0093,"hired_share":0.1308},{"id":"AMAD","name":"Ama Dablam","height":6814,"n":6465,"summits":3393,"deaths":22,"oxygen_share":0.004,"hired_share":0.2116}],"cells":[[1,1,0,0,1,0,27,14,0],[1,1,0,0,1,1,203,102,0],[1,1,0,0,1,2,249,128,0],[1,1,0,0,1,3,139,61,0],[1,1,0,0,1,4,35,13,0],[1,1,0,0,1,5,6,0,0],[1,1,0,0,0,0,108,66,0],[1,1,0,0,0,1,898,540,3],[1,1,0,0,0,2,1163,631,4],[1,1,0,0,0,3,945,462,4],[1,1,0,0,0,4,422,163,1],[1,1,0,0,0,5,70,12,0],[1,1,0,1,1,1,1,0,0],[1,1,0,1,1,2,4,1,0],[1,1,0,1,1,5,1,0,0],[1,1,0,1,0,0,2,1,0],[1,1,0,1,0,1,2,0,0],[1,1,0,1,0,2,3,1,0],[1,1,0,1,0,3,5,3,0],[1,1,0,1,0,4,1,0,0],[1,1,1,0,1,0,2,2,0],[1,1,1,0,1,1,2,2,0],[1,1,1,0,0,0,149,121,0],[1,1,1,0,0,1,577,446,2],[1,1,1,0,0,2,401,280,3],[1,1,1,0,0,3,83,44,1],[1,1,1,0,0,4,8,3,0],[1,1,1,1,0,1,1,1,0],[1,0,0,0,1,0,3,1,0],[1,0,0,0,1,1,31,6,0],[1,0,0,0,1,2,20,6,0],[1,0,0,0,1,3,9,1,0],[1,0,0,0,1,4,3,1,0],[1,0,0,0,1,5,1,0,0],[1,0,0,0,0,0,29,11,0],[1,0,0,0,0,1,168,56,0],[1,0,0,0,0,2,180,57,1],[1,0,0,0,0,3,128,33,2],[1,0,0,0,0,4,48,5,0],[1,0,0,0,0,5,8,3,0],[1,0,0,1,0,1,1,0,0],[1,0,0,1,0,3,1,0,0],[1,0,0,1,0,4,1,0,0],[1,0,0,1,0,5,1,0,0],[1,0,1,0,0,0,12,2,0],[1,0,1,0,0,1,42,14,0],[1,0,1,0,0,2,40,9,0],[1,0,1,0,0,3,9,3,0],[1,0,1,0,0,4,4,0,0],[1,2,0,0,1,0,5,3,0],[1,2,0,0,1,1,9,3,0],[1,2,0,0,1,2,9,4,0],[1,2,0,0,1,3,4,1,0],[1,2,0,0,1,4,3,0,0],[1,2,0,0,0,0,23,6,0],[1,2,0,0,0,1,48,25,0],[1,2,0,0,0,2,41,14,0],[1,2,0,0,0,3,32,8,1],[1,2,0,0,0,4,4,0,0],[1,2,0,0,0,5,1,0,0],[1,2,0,1,0,2,1,1,0],[1,2,0,1,0,3,1,0,0],[1,2,1,0,0,0,6,6,0],[1,2,1,0,0,1,19,10,0],[1,2,1,0,0,2,13,7,0],[10,1,0,0,1,1,1,0,0],[10,1,0,0,1,2,3,0,0],[10,1,0,0,1,3,1,0,0],[10,1,0,0,0,0,3,0,0],[10,1,0,0,0,1,26,0,1],[10,1,0,0,0,2,51,5,2],[10,1,0,0,0,3,25,1,4],[10,1,0,0,0,4,11,0,0],[10,1,0,0,0,5,1,0,0],[10,1,0,1,0,2,1,0,0],[10,1,1,0,0,0,2,0,0],[10,1,1,0,0,1,8,1,0],[10,1,1,0,0,2,4,0,1],[10,1,1,0,0,3,1,0,0],[10,1,1,0,0,4,1,0,0],[10,0,0,0,1,1,7,2,0],[10,0,0,0,1,2,9,2,0],[10,0,0,0,1,3,6,1,0],[10,0,0,0,1,4,1,1,0],[10,0,0,0,0,0,7,2,0],[10,0,0,0,0,1,91,24,1],[10,0,0,0,0,2,116,23,5],[10,0,0,0,0,3,53,15,0],[10,0,0,0,0,4,17,5,0],[10,0,0,0,0,5,5,0,0],[10,0,0,1,1,1,4,2,0],[10,0,0,1,1,2,2,2,0],[10,0,0,1,1,3,2,2,0],[10,0,0,1,1,4,1,1,0],[10,0,0,1,0,1,3,2,0],[10,0,0,1,0,2,12,9,0],[10,0,0,1,0,3,16,14,1],[10,0,0,1,0,4,9,3,0],[10,0,0,1,0,5,1,1,0],[10,0,1,0,0,0,8,4,0],[10,0,1,0,0,1,40,19,0],[10,0,1,0,0,2,16,3,0],[10,0,1,0,0,3,8,4,1],[10,0,1,0,0,4,1,0,0],[10,0,1,1,0,0,1,1,0],[10,0,1,1,0,1,32,28,0],[10,0,1,1,0,2,12,11,1],[10,0,1,1,0,3,1,1,0],[10,2,0,0,0,1,1,0,0],[10,2,0,0,0,2,1,0,0],[10,2,0,0,0,5,1,0,0],[10,2,1,0,0,1,4,0,0],[10,2,1,0,0,2,4,0,0],[10,2,1,0,0,3,1,0,0],[14,1,0,0,1,0,1,0,0],[14,1,0,0,1,1,9,0,0],[14,1,0,0,1,2,2,0,0],[14,1,0,0,1,3,9,0,0],[14,1,0,0,1,4,2,0,0],[14,1,0,0,0,0,2,0,0],[14,1,0,0,0,1,22,1,0],[14,1,0,0,0,2,40,0,0],[14,1,0,0,0,3,37,1,0],[14,1,0,0,0,4,27,0,1],[14,1,0,0,0,5,1,0,0],[14,1,0,1,0,5,1,1,0],[14,1,1,0,0,0,1,0,0],[14,1,1,0,0,1,7,2,0],[14,1,1,0,0,2,10,1,0],[14,1,1,0,0,3,1,1,0],[14,0,0,0,1,1,1,0,0],[14,0,0,0,1,2,6,0,0],[14,0,0,0,1,3,2,0,0],[14,0,0,0,1,4,2,0,0],[14,0,0,0,1,5,1,0,0],[14,0,0,0,0,1,9,0,0],[14,0,0,0,0,2,6,1,0],[14,0,0,0,0,3,9,0,0],[14,0,0,0,0,4,6,0,0],[14,0,0,0,0,5,3,0,0],[14,0,0,1,1,0,1,1,0],[14,0,0,1,1,1,3,3,0],[14,0,1,0,0,1,6,1,0],[14,0,1,0,0,2,8,4,0],[14,0,1,0,0,3,4,1,0],[14,0,1,0,0,4,1,0,0],[14,3,0,0,0,1,3,3,0],[14,3,1,0,0,1,1,1,0],[14,3,1,0,0,3,2,2,0],[14,2,0,0,0,0,3,0,0],[14,2,0,0,0,2,1,0,0],[5,1,0,0,1,0,6,4,0],[5,1,0,0,1,1,55,14,0],[5,1,0,0,1,2,39,7,0],[5,1,0,0,1,3,47,12,0],[5,1,0,0,1,4,16,0,0],[5,1,0,0,1,5,2,0,0],[5,1,0,0,0,0,27,12,0],[5,1,0,0,0,1,147,56,1],[5,1,0,0,0,2,225,69,1],[5,1,0,0,0,3,210,59,0],[5,1,0,0,0,4,98,16,0],[5,1,0,0,0,5,28,3,0],[5,1,0,1,1,1,1,0,0],[5,1,0,1,1,3,1,0,0],[5,1,0,1,0,1,2,1,0],[5,1,0,1,0,3,1,0,0],[5,1,1,0,1,0,1,0,0],[5,1,1,0,1,1,2,1,0],[5,1,1,0,0,0,27,14,0],[5,1,1,0,0,1,96,61,0],[5,1,1,0,0,2,82,43,2],[5,1,1,0,0,3,33,15,1],[5,1,1,0,0,4,1,1,0],[5,1,1,1,0,1,2,0,1],[5,0,0,0,1,0,2,0,0],[5,0,0,0,1,1,11,1,0],[5,0,0,0,1,2,14,1,0],[5,0,0,0,1,3,5,0,0],[5,0,0,0,1,4,3,0,0],[5,0,0,0,1,5,1,0,0],[5,0,0,0,0,0,6,1,0],[5,0,0,0,0,1,65,10,0],[5,0,0,0,0,2,77,11,1],[5,0,0,0,0,3,47,9,0],[5,0,0,0,0,4,27,5,0],[5,0,0,0,0,5,5,0,0],[5,0,0,1,0,2,3,1,0],[5,0,0,1,0,3,2,0,0],[5,0,1,0,0,0,1,1,0],[5,0,1,0,0,1,26,7,1],[5,0,1,0,0,2,20,5,0],[5,0,1,0,0,3,1,0,0],[5,0,1,0,0,4,1,0,0],[2,1,0,0,1,0,8,2,0],[2,1,0,0,1,1,85,25,0],[2,1,0,0,1,2,99,18,0],[2,1,0,0,1,3,63,8,0],[2,1,0,0,1,4,21,1,0],[2,1,0,0,1,5,2,0,0],[2,1,0,0,0,0,61,18,1],[2,1,0,0,0,1,490,151,1],[2,1,0,0,0,2,699,225,2],[2,1,0,0,0,3,500,116,1],[2,1,0,0,0,4,207,28,1],[2,1,0,0,0,5,27,1,0],[2,1,0,1,1,0,15,14,0],[2,1,0,1,1,1,40,34,0],[2,1,0,1,1,2,50,42,0],[2,1,0,1,1,3,31,27,0],[2,1,0,1,1,4,16,15,0],[2,1,0,1,1,5,3,3,0],[2,1,0,1,0,0,31,25,0],[2,1,0,1,0,1,157,130,1],[2,1,0,1,0,2,253,224,0],[2,1,0,1,0,3,186,158,2],[2,1,0,1,0,4,98,74,0],[2,1,0,1,0,5,19,15,1],[2,1,1,0,1,1,2,1,0],[2,1,1,0,0,0,134,111,0],[2,1,1,0,0,1,313,225,0],[2,1,1,0,0,2,211,134,0],[2,1,1,0,0,3,34,21,0],[2,1,1,0,0,4,2,2,0],[2,1,1,1,0,0,27,26,0],[2,1,1,1,0,1,90,82,0],[2,1,1,1,0,2,96,91,0],[2,1,1,1,0,3,28,28,0],[2,1,1,1,0,4,1,1,0],[2,0,0,0,1,0,4,0,0],[2,0,0,0,1,1,35,11,1],[2,0,0,0,1,2,41,5,0],[2,0,0,0,1,3,27,5,0],[2,0,0,0,1,4,6,1,0],[2,0,0,0,1,5,1,0,0],[2,0,0,0,0,0,33,11,0],[2,0,0,0,0,1,271,73,2],[2,0,0,0,0,2,391,100,2],[2,0,0,0,0,3,279,43,3],[2,0,0,0,0,4,111,13,2],[2,0,0,0,0,5,11,1,0],[2,0,0,1,1,1,6,5,0],[2,0,0,1,1,2,6,3,0],[2,0,0,1,1,3,6,5,0],[2,0,0,1,1,4,2,0,0],[2,0,0,1,0,0,5,3,0],[2,0,0,1,0,1,40,30,0],[2,0,0,1,0,2,50,34,1],[2,0,0,1,0,3,40,25,0],[2,0,0,1,0,4,22,14,0],[2,0,0,1,0,5,4,4,0],[2,0,1,0,0,0,27,20,0],[2,0,1,0,0,1,97,68,0],[2,0,1,0,0,2,89,39,2],[2,0,1,0,0,3,29,9,0],[2,0,1,0,0,4,2,1,0],[2,0,1,1,0,0,9,9,0],[2,0,1,1,0,1,21,20,0],[2,0,1,1,0,2,12,12,0],[2,0,1,1,0,3,5,5,0],[2,2,0,0,0,1,2,2,0],[2,2,0,0,0,2,1,0,0],[8,1,0,0,1,1,8,0,0],[8,1,0,0,1,2,3,0,0],[8,1,0,0,1,3,8,0,0],[8,1,0,0,1,4,2,0,0],[8,1,0,0,1,5,1,0,0],[8,1,0,0,0,0,4,0,0],[8,1,0,0,0,1,55,3,4],[8,1,0,0,0,2,77,7,3],[8,1,0,0,0,3,58,4,1],[8,1,0,0,0,4,18,0,2],[8,1,0,0,0,5,3,0,0],[8,1,0,1,0,1,2,0,0],[8,1,0,1,0,2,5,2,0],[8,1,0,1,0,3,4,2,0],[8,1,0,1,0,4,1,1,0],[8,1,0,1,0,5,2,0,0],[8,1,1,0,0,0,4,0,1],[8,1,1,0,0,1,30,0,0],[8,1,1,0,0,2,18,1,1],[8,1,1,0,0,3,6,1,1],[8,1,1,0,0,4,1,0,0],[8,1,1,1,0,0,1,0,0],[8,1,1,1,0,1,5,2,0],[8,1,1,1,0,2,1,0,0],[8,0,0,0,1,0,2,0,0],[8,0,0,0,1,1,21,6,0],[8,0,0,0,1,2,30,6,0],[8,0,0,0,1,3,11,2,0],[8,0,0,0,1,4,5,0,0],[8,0,0,0,0,0,13,4,0],[8,0,0,0,0,1,120,26,2],[8,0,0,0,0,2,171,32,5],[8,0,0,0,0,3,106,21,4],[8,0,0,0,0,4,27,1,0],[8,0,0,0,0,5,8,0,0],[8,0,0,1,1,0,1,0,0],[8,0,0,1,1,2,3,2,0],[8,0,0,1,1,3,7,6,0],[8,0,0,1,1,4,2,2,0],[8,0,0,1,1,5,1,0,1],[8,0,0,1,0,0,3,1,0],[8,0,0,1,0,1,18,11,1],[8,0,0,1,0,2,28,18,1],[8,0,0,1,0,3,19,13,1],[8,0,0,1,0,4,5,1,1],[8,0,0,1,0,5,2,0,0],[8,0,1,0,0,0,14,6,0],[8,0,1,0,0,1,45,9,0],[8,0,1,0,0,2,34,7,0],[8,0,1,0,0,3,4,1,0],[8,0,1,0,0,4,4,0,0],[8,0,1,1,0,0,8,7,0],[8,0,1,1,0,1,31,27,1],[8,0,1,1,0,2,17,14,1],[8,0,1,1,0,3,2,2,0],[8,3,0,0,1,2,1,1,0],[8,3,0,0,0,3,1,1,0],[8,3,1,0,0,0,2,0,0],[8,3,1,0,0,1,3,1,0],[8,3,1,0,0,2,1,0,0],[0,1,0,0,1,0,2,0,0],[0,1,0,0,1,1,8,0,0],[0,1,0,0,1,2,5,0,0],[0,1,0,0,0,0,9,0,0],[0,1,0,0,0,1,75,0,0],[0,1,0,0,0,2,54,0,1],[0,1,0,0,0,3,31,0,0],[0,1,0,0,0,4,6,0,0],[0,1,0,0,0,5,1,0,0],[0,1,0,1,1,2,1,1,0],[0,1,0,1,0,0,4,3,1],[0,1,0,1,0,1,19,7,0],[0,1,0,1,0,2,15,5,0],[0,1,0,1,0,3,4,1,0],[0,1,0,1,0,4,2,0,0],[0,1,1,0,0,0,3,0,0],[0,1,1,0,0,1,18,0,0],[0,1,1,0,0,2,11,0,0],[0,1,1,0,0,3,3,0,0],[0,1,1,1,0,0,5,4,0],[0,1,1,1,0,1,18,10,0],[0,1,1,1,0,2,8,3,0],[0,1,1,1,0,3,2,2,0],[0,0,0,0,1,0,29,0,0],[0,0,0,0,1,1,143,3,1],[0,0,0,0,1,2,147,1,0],[0,0,0,0,1,3,111,1,0],[0,0,0,0,1,4,31,0,1],[0,0,0,0,1,5,13,0,0],[0,0,0,0,0,0,127,1,0],[0,0,0,0,0,1,679,25,7],[0,0,0,0,0,2,965,38,7],[0,0,0,0,0,3,789,11,5],[0,0,0,0,0,4,359,1,3],[0,0,0,0,0,5,86,0,2],[0,0,0,1,1,0,91,76,0],[0,0,0,1,1,1,250,212,2],[0,0,0,1,1,2,264,208,1],[0,0,0,1,1,3,139,99,2],[0,0,0,1,1,4,37,25,1],[0,0,0,1,1,5,7,2,0],[0,0,0,1,0,0,260,196,0],[0,0,0,1,0,1,1145,907,11],[0,0,0,1,0,2,1676,1304,18],[0,0,0,1,0,3,1120,842,11],[0,0,0,1,0,4,371,247,10],[0,0,0,1,0,5,56,31,1],[0,0,1,0,0,0,105,1,6],[0,0,1,0,0,1,290,15,18],[0,0,1,0,0,2,227,9,9],[0,0,1,0,0,3,83,1,6],[0,0,1,0,0,4,10,0,2],[0,0,1,1,1,0,3,3,0],[0,0,1,1,1,1,2,1,0],[0,0,1,1,0,0,871,775,0],[0,0,1,1,0,1,2312,2081,2],[0,0,1,1,0,2,1388,1261,2],[0,0,1,1,0,3,320,282,1],[0,0,1,1,0,4,18,14,0],[0,3,0,0,0,1,3,0,0],[0,3,0,0,0,3,1,0,0],[0,3,1,0,0,1,1,0,0],[0,3,1,0,0,2,1,0,0],[0,2,0,0,0,1,1,0,0],[0,2,0,0,0,2,3,0,0],[0,2,1,0,0,0,1,0,0],[0,2,1,0,0,1,8,0,0],[0,2,1,0,0,2,3,0,0],[0,2,1,1,0,1,3,0,0],[0,2,1,1,0,2,2,0,0],[16,1,0,0,1,1,8,2,0],[16,1,0,0,1,2,5,1,0],[16,1,0,0,1,3,4,1,0],[16,1,0,0,0,0,1,0,0],[16,1,0,0,0,1,13,4,0],[16,1,0,0,0,2,17,5,0],[16,1,0,0,0,3,23,9,0],[16,1,0,0,0,4,19,6,0],[16,1,0,0,0,5,4,3,0],[16,1,0,1,0,5,1,0,0],[16,1,1,0,0,0,6,4,0],[16,1,1,0,0,1,11,4,0],[16,1,1,0,0,2,7,5,0],[16,1,1,0,0,3,1,0,0],[16,0,0,0,1,1,2,0,0],[16,0,0,0,1,2,1,0,0],[16,0,0,0,1,3,1,0,0],[16,0,0,0,0,1,2,1,0],[16,0,0,0,0,2,6,3,0],[16,0,0,0,0,3,11,2,0],[16,0,0,0,0,4,7,0,0],[16,0,1,0,0,0,1,0,0],[16,0,1,0,0,1,2,0,0],[16,0,1,0,0,2,1,0,0],[6,1,0,0,1,0,3,0,0],[6,1,0,0,1,1,35,9,0],[6,1,0,0,1,2,45,14,0],[6,1,0,0,1,3,47,16,0],[6,1,0,0,1,4,24,6,0],[6,1,0,0,0,0,12,4,0],[6,1,0,0,0,1,89,37,0],[6,1,0,0,0,2,169,65,0],[6,1,0,0,0,3,203,72,0],[6,1,0,0,0,4,133,33,0],[6,1,0,0,0,5,18,4,0],[6,1,0,1,1,1,2,2,0],[6,1,0,1,0,0,1,1,0],[6,1,0,1,0,1,6,6,0],[6,1,0,1,0,2,6,4,0],[6,1,0,1,0,3,3,3,0],[6,1,0,1,0,4,3,3,0],[6,1,1,0,0,0,27,20,0],[6,1,1,0,0,1,120,83,0],[6,1,1,0,0,2,98,63,4],[6,1,1,0,0,3,22,16,0],[6,1,1,0,0,4,3,3,0],[6,1,1,1,0,2,1,0,0],[6,0,0,0,1,1,8,5,0],[6,0,0,0,1,2,3,3,0],[6,0,0,0,1,3,2,1,0],[6,0,0,0,1,4,2,0,0],[6,0,0,0,1,5,1,0,0],[6,0,0,0,0,0,6,5,0],[6,0,0,0,0,1,16,10,0],[6,0,0,0,0,2,43,15,0],[6,0,0,0,0,3,26,9,0],[6,0,0,0,0,4,21,7,0],[6,0,0,0,0,5,5,3,0],[6,0,1,0,1,1,1,0,0],[6,0,1,0,0,0,7,2,0],[6,0,1,0,0,1,27,16,0],[6,0,1,0,0,2,11,6,0],[6,0,1,0,0,3,3,0,0],[6,3,0,0,1,2,2,0,0],[6,3,0,0,0,3,1,0,0],[6,3,1,0,0,1,2,0,0],[6,3,1,0,0,2,1,0,0],[6,2,0,0,0,2,5,0,0],[6,2,0,0,0,3,1,0,0],[6,2,1,0,0,1,1,0,0],[6,2,1,0,0,2,1,0,0],[11,1,0,0,1,1,1,0,0],[11,1,0,0,0,1,8,0,0],[11,1,0,0,0,2,9,0,0],[11,1,0,0,0,3,1,0,0],[11,1,0,1,0,1,2,2,0],[11,1,0,1,0,2,4,4,0],[11,1,1,0,0,2,1,0,0],[11,1,1,1,0,1,4,4,0],[11,0,0,0,1,1,7,1,0],[11,0,0,0,1,2,10,2,0],[11,0,0,0,1,3,3,1,0],[11,0,0,0,0,0,10,1,0],[11,0,0,0,0,1,53,13,1],[11,0,0,0,0,2,103,29,2],[11,0,0,0,0,3,61,15,2],[11,0,0,0,0,4,14,1,0],[11,0,0,0,0,5,1,0,0],[11,0,0,1,1,0,1,1,0],[11,0,0,1,1,1,6,4,0],[11,0,0,1,1,2,14,8,0],[11,0,0,1,1,3,8,4,0],[11,0,0,1,1,4,1,0,0],[11,0,0,1,0,0,1,1,0],[11,0,0,1,0,1,32,23,0],[11,0,0,1,0,2,38,29,0],[11,0,0,1,0,3,32,20,3],[11,0,0,1,0,4,7,4,0],[11,0,0,1,0,5,4,2,0],[11,0,1,0,0,0,10,4,1],[11,0,1,0,0,1,32,11,1],[11,0,1,0,0,2,9,0,0],[11,0,1,0,0,3,2,1,0],[11,0,1,1,0,0,9,6,1],[11,0,1,1,0,1,65,53,0],[11,0,1,1,0,2,47,39,0],[11,0,1,1,0,3,12,9,0],[4,1,0,0,1,0,1,0,0],[4,1,0,0,1,1,3,0,0],[4,1,0,0,1,3,1,0,0],[4,1,0,0,0,0,8,0,0],[4,1,0,0,0,1,34,1,1],[4,1,0,0,0,2,38,1,0],[4,1,0,0,0,3,31,0,0],[4,1,0,0,0,4,4,0,0],[4,1,0,1,1,3,1,1,0],[4,1,0,1,0,0,3,3,0],[4,1,0,1,0,1,12,12,0],[4,1,0,1,0,2,3,3,0],[4,1,0,1,0,3,1,1,0],[4,1,1,0,0,0,3,0,0],[4,1,1,0,0,1,13,0,0],[4,1,1,0,0,2,7,0,0],[4,1,1,0,0,3,4,0,0],[4,1,1,1,0,0,2,1,0],[4,1,1,1,0,1,7,6,0],[4,1,1,1,0,2,2,1,1],[4,1,1,1,0,3,2,1,0],[4,0,0,0,1,0,2,0,0],[4,0,0,0,1,1,23,1,0],[4,0,0,0,1,2,37,7,0],[4,0,0,0,1,3,18,0,0],[4,0,0,0,1,4,4,0,0],[4,0,0,0,1,5,1,0,0],[4,0,0,0,0,0,19,0,0],[4,0,0,0,0,1,163,27,0],[4,0,0,0,0,2,234,42,3],[4,0,0,0,0,3,189,23,2],[4,0,0,0,0,4,62,2,0],[4,0,0,0,0,5,10,0,0],[4,0,0,1,1,0,4,4,0],[4,0,0,1,1,1,26,19,0],[4,0,0,1,1,2,30,25,1],[4,0,0,1,1,3,15,14,0],[4,0,0,1,1,4,1,1,0],[4,0,0,1,1,5,1,1,0],[4,0,0,1,0,0,20,16,0],[4,0,0,1,0,1,93,69,0],[4,0,0,1,0,2,112,99,2],[4,0,0,1,0,3,71,63,0],[4,0,0,1,0,4,29,19,1],[4,0,0,1,0,5,5,3,0],[4,0,1,0,0,0,7,2,0],[4,0,1,0,0,1,40,13,1],[4,0,1,0,0,2,27,1,0],[4,0,1,0,0,3,8,0,0],[4,0,1,1,1,1,2,0,0],[4,0,1,1,0,0,31,31,0],[4,0,1,1,0,1,136,128,1],[4,0,1,1,0,2,77,69,0],[4,0,1,1,0,3,20,16,0],[4,0,1,1,0,4,1,1,0],[4,2,0,0,1,3,1,0,0],[4,2,0,0,0,1,2,0,0],[4,2,0,0,0,2,8,0,0],[4,2,0,1,0,1,9,0,0],[4,2,0,1,0,2,3,0,0],[4,2,0,1,0,3,2,0,0],[4,2,0,1,0,4,1,0,0],[4,2,1,1,0,0,1,0,0],[4,2,1,1,0,1,3,0,0],[7,1,0,0,1,0,1,0,0],[7,1,0,0,1,2,7,0,0],[7,1,0,0,1,3,6,0,0],[7,1,0,0,0,1,25,3,0],[7,1,0,0,0,2,21,0,0],[7,1,0,0,0,3,15,1,0],[7,1,0,0,0,4,4,0,0],[7,1,0,0,0,5,1,0,0],[7,1,0,1,1,1,1,0,0],[7,1,0,1,1,2,1,0,0],[7,1,0,1,0,1,1,0,0],[7,1,0,1,0,2,2,0,0],[7,1,0,1,0,3,1,0,0],[7,1,1,0,1,1,1,0,0],[7,1,1,0,0,0,3,0,0],[7,1,1,0,0,1,17,0,0],[7,1,1,0,0,2,10,0,0],[7,1,1,1,0,0,1,0,0],[7,1,1,1,0,1,1,0,0],[7,1,1,1,0,2,3,0,0],[7,1,1,1,0,3,1,0,0],[7,0,0,0,1,0,2,0,0],[7,0,0,0,1,1,23,6,1],[7,0,0,0,1,2,26,5,0],[7,0,0,0,1,3,15,1,0],[7,0,0,0,1,4,4,0,0],[7,0,0,0,1,5,1,0,0],[7,0,0,0,0,0,17,1,0],[7,0,0,0,0,1,117,30,1],[7,0,0,0,0,2,192,42,2],[7,0,0,0,0,3,126,24,3],[7,0,0,0,0,4,30,0,1],[7,0,0,0,0,5,5,1,0],[7,0,0,1,1,0,1,0,0],[7,0,0,1,1,1,9,6,0],[7,0,0,1,1,2,18,9,0],[7,0,0,1,1,3,15,11,0],[7,0,0,1,1,4,1,1,0],[7,0,0,1,1,5,1,1,0],[7,0,0,1,0,0,6,4,0],[7,0,0,1,0,1,42,26,1],[7,0,0,1,0,2,55,38,2],[7,0,0,1,0,3,49,30,2],[7,0,0,1,0,4,15,10,0],[7,0,0,1,0,5,4,0,0],[7,0,1,0,0,0,21,6,0],[7,0,1,0,0,1,27,10,1],[7,0,1,0,0,2,28,10,3],[7,0,1,0,0,3,10,2,1],[7,0,1,0,0,4,1,0,0],[7,0,1,1,0,0,15,14,0],[7,0,1,1,0,1,71,58,2],[7,0,1,1,0,2,62,45,0],[7,0,1,1,0,3,19,10,0],[7,0,1,1,0,4,2,2,0],[7,2,0,0,1,3,2,0,0],[7,2,0,0,0,0,1,0,0],[7,2,0,0,0,1,3,0,0],[7,2,0,0,0,2,6,2,1],[7,2,0,0,0,3,9,0,0],[3,1,0,0,1,0,4,0,0],[3,1,0,0,1,1,26,11,0],[3,1,0,0,1,2,58,16,0],[3,1,0,0,1,3,42,10,0],[3,1,0,0,1,4,7,0,0],[3,1,0,0,1,5,2,0,0],[3,1,0,0,0,0,24,3,0],[3,1,0,0,0,1,190,50,2],[3,1,0,0,0,2,308,79,4],[3,1,0,0,0,3,273,48,4],[3,1,0,0,0,4,117,13,2],[3,1,0,0,0,5,26,2,2],[3,1,0,1,1,0,6,5,0],[3,1,0,1,1,1,41,36,0],[3,1,0,1,1,2,61,50,0],[3,1,0,1,1,3,32,29,1],[3,1,0,1,1,4,14,12,0],[3,1,0,1,1,5,3,2,0],[3,1,0,1,0,0,13,11,1],[3,1,0,1,0,1,91,71,0],[3,1,0,1,0,2,173,133,1],[3,1,0,1,0,3,161,130,3],[3,1,0,1,0,4,61,54,1],[3,1,0,1,0,5,22,16,0],[3,1,1,0,0,0,42,21,0],[3,1,1,0,0,1,180,73,1],[3,1,1,0,0,2,116,51,0],[3,1,1,0,0,3,36,14,0],[3,1,1,1,1,1,1,1,0],[3,1,1,1,0,0,86,70,0],[3,1,1,1,0,1,230,194,0],[3,1,1,1,0,2,160,137,0],[3,1,1,1,0,3,45,40,0],[3,1,1,1,0,4,3,2,0],[3,0,0,0,1,0,1,0,0],[3,0,0,0,1,1,9,4,0],[3,0,0,0,1,2,13,1,1],[3,0,0,0,1,3,13,0,0],[3,0,0,0,1,4,3,0,0],[3,0,0,0,1,5,1,0,0],[3,0,0,0,0,0,9,2,0],[3,0,0,0,0,1,103,23,3],[3,0,0,0,0,2,164,34,3],[3,0,0,0,0,3,128,25,1],[3,0,0,0,0,4,50,6,1],[3,0,0,0,0,5,5,0,0],[3,0,0,1,1,1,2,1,0],[3,0,0,1,1,2,2,2,0],[3,0,0,1,1,3,2,0,0],[3,0,0,1,1,4,2,0,0],[3,0,0,1,0,1,14,11,0],[3,0,0,1,0,2,8,4,0],[3,0,0,1,0,3,6,3,0],[3,0,0,1,0,4,7,1,0],[3,0,0,1,0,5,2,1,0],[3,0,1,0,0,0,14,6,0],[3,0,1,0,0,1,52,12,1],[3,0,1,0,0,2,26,7,0],[3,0,1,0,0,3,11,3,0],[3,0,1,0,0,4,2,0,0],[3,0,1,1,0,0,6,1,0],[3,0,1,1,0,1,9,4,0],[3,0,1,1,0,2,5,2,0],[3,0,1,1,0,3,2,1,1],[3,2,0,0,1,1,1,0,0],[3,2,0,0,1,2,1,0,0],[3,2,0,0,0,1,1,0,0],[3,2,0,0,0,2,3,0,0],[3,2,0,0,0,3,2,0,0],[3,2,1,0,0,1,1,0,0],[9,1,0,0,1,1,17,3,0],[9,1,0,0,1,2,7,0,0],[9,1,0,0,1,3,5,0,0],[9,1,0,0,1,4,2,0,0],[9,1,0,0,1,5,1,0,0],[9,1,0,0,0,0,28,4,4],[9,1,0,0,0,1,93,14,2],[9,1,0,0,0,2,109,22,0],[9,1,0,0,0,3,83,15,0],[9,1,0,0,0,4,31,1,0],[9,1,0,0,0,5,2,0,0],[9,1,0,1,1,2,1,0,0],[9,1,0,1,0,0,1,0,0],[9,1,1,0,0,0,4,0,0],[9,1,1,0,0,1,19,6,3],[9,1,1,0,0,2,21,5,0],[9,1,1,0,0,3,6,2,1],[9,0,0,0,1,1,15,7,0],[9,0,0,0,1,2,5,0,0],[9,0,0,0,1,3,4,0,0],[9,0,0,0,1,4,1,0,0],[9,0,0,0,0,0,11,5,0],[9,0,0,0,0,1,66,18,1],[9,0,0,0,0,2,80,12,1],[9,0,0,0,0,3,42,11,1],[9,0,0,0,0,4,27,4,0],[9,0,0,0,0,5,3,0,0],[9,0,1,0,1,1,1,1,0],[9,0,1,0,0,0,8,7,0],[9,0,1,0,0,1,9,6,1],[9,0,1,0,0,2,10,6,0],[9,0,1,0,0,3,2,1,0],[9,0,1,0,0,4,1,0,0],[9,2,0,0,1,1,1,0,0],[9,2,0,0,1,2,1,0,0],[9,2,0,0,1,3,1,0,0],[9,2,0,0,0,1,4,0,0],[9,2,0,0,0,2,4,2,0],[9,2,0,0,0,3,3,1,0],[9,2,0,0,0,4,1,0,0],[9,2,1,0,0,0,3,1,0],[9,2,1,0,0,1,5,3,0],[9,2,1,0,0,2,4,3,0],[9,2,1,0,0,3,1,0,0],[12,1,0,0,1,0,5,2,0],[12,1,0,0,1,1,7,4,0],[12,1,0,0,1,2,20,7,0],[12,1,0,0,1,3,23,8,0],[12,1,0,0,1,4,11,4,0],[12,1,0,0,1,5,4,0,0],[12,1,0,0,0,0,6,3,0],[12,1,0,0,0,1,30,12,0],[12,1,0,0,0,2,67,24,0],[12,1,0,0,0,3,87,26,0],[12,1,0,0,0,4,60,24,0],[12,1,0,0,0,5,21,4,0],[12,1,0,1,1,3,1,1,0],[12,1,0,1,1,4,1,1,0],[12,1,0,1,0,0,1,1,0],[12,1,0,1,0,2,1,1,0],[12,1,0,1,0,3,2,2,0],[12,1,0,1,0,4,2,1,0],[12,1,0,1,0,5,1,1,0],[12,1,1,0,0,0,11,9,0],[12,1,1,0,0,1,40,22,0],[12,1,1,0,0,2,28,14,0],[12,1,1,0,0,3,8,5,0],[12,0,0,0,1,1,3,2,0],[12,0,0,0,1,2,2,2,0],[12,0,0,0,1,3,3,0,0],[12,0,0,0,1,4,1,1,0],[12,0,0,0,0,0,1,0,0],[12,0,0,0,0,1,14,4,0],[12,0,0,0,0,2,6,5,0],[12,0,0,0,0,3,13,9,0],[12,0,0,0,0,4,16,9,0],[12,0,0,0,0,5,4,1,0],[12,0,0,1,1,3,1,0,0],[12,0,1,0,1,0,1,0,0],[12,0,1,0,1,1,2,0,0],[12,0,1,0,0,0,4,4,0],[12,0,1,0,0,1,5,4,0],[12,0,1,0,0,2,8,5,0],[12,0,1,0,0,3,3,2,0],[13,1,0,0,1,1,8,3,0],[13,1,0,0,1,2,14,2,0],[13,1,0,0,1,3,8,1,0],[13,1,0,0,1,4,1,0,0],[13,1,0,0,1,5,1,0,0],[13,1,0,0,0,0,16,8,0],[13,1,0,0,0,1,36,6,1],[13,1,0,0,0,2,51,7,2],[13,1,0,0,0,3,72,3,0],[13,1,0,0,0,4,25,1,0],[13,1,0,0,0,5,9,0,0],[13,1,1,0,0,0,6,1,0],[13,1,1,0,0,1,22,6,0],[13,1,1,0,0,2,11,5,0],[13,1,1,0,0,3,1,0,0],[13,1,1,0,0,4,1,0,0],[13,0,0,0,1,1,4,0,0],[13,0,0,0,1,3,2,1,0],[13,0,0,0,0,1,2,1,0],[13,0,0,0,0,2,5,2,0],[13,0,0,0,0,3,6,3,0],[13,0,0,0,0,4,3,1,0],[13,0,1,0,0,1,2,2,0],[13,0,1,0,0,2,1,0,0],[15,1,0,0,1,0,1,0,0],[15,1,0,0,1,1,1,1,0],[15,1,0,0,1,2,6,1,0],[15,1,0,0,1,3,10,0,0],[15,1,0,0,1,4,2,0,0],[15,1,0,0,0,0,7,1,0],[15,1,0,0,0,1,30,15,0],[15,1,0,0,0,2,26,9,0],[15,1,0,0,0,3,27,2,0],[15,1,0,0,0,4,10,0,0],[15,1,0,0,0,5,5,0,0],[15,1,0,1,0,1,1,0,0],[15,1,0,1,0,5,1,0,0],[15,1,1,0,0,0,5,1,0],[15,1,1,0,0,1,5,2,0],[15,1,1,0,0,2,7,1,0],[15,1,1,0,0,3,2,1,0],[15,1,1,0,0,4,1,0,0],[15,1,1,0,0,5,1,0,0],[15,0,0,0,1,1,1,0,0],[15,0,0,0,1,2,4,0,0],[15,0,0,0,1,3,3,0,0],[15,0,0,0,1,4,1,0,0],[15,0,0,0,0,0,1,0,0],[15,0,0,0,0,1,12,0,0],[15,0,0,0,0,2,15,1,0],[15,0,0,0,0,3,7,0,0],[15,0,0,0,0,4,9,2,0],[15,0,0,0,0,5,1,0,0],[15,0,1,0,0,1,3,0,0],[15,0,1,0,0,2,4,0,0],[15,2,0,0,1,1,1,0,0],[15,2,0,0,0,0,4,0,0]]};</script>
 
 <header class="top">
+<div class="look-art" aria-hidden="true"></div>
   <div class="wide">
     <p class="kicker">The Himalayan Database &middot; 40,605 people since 2000</p>
     <h1>What are my odds up there?</h1>
@@ -389,7 +676,7 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
 
       <div>
         <div class="answer">
-          <p class="cap mono" style="font-family:'DM Mono',monospace; font-size:11px;
+          <p class="cap mono" style="font-family:'Cutive Mono',monospace; font-size:11px;
              letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
              margin:0; padding:18px 22px 0" id="outWho">&mdash;</p>
           <div class="odds">
@@ -602,7 +889,7 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
 
 <footer>
   <div class="wrap">
-    <p class="srcs" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs back-home" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
     <p class="srcs" id="srcs"></p>
   </div>
 </footer>

@@ -1,15 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-look="hawley" data-page="himalaya">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#E9E4D8">
 <meta name="description" content="Twelve Hundred Metres Lower">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%8F%94%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%B9%E0%A4%BF%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>Twelve Hundred Metres Lower</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..800,0..100,0..1&family=Source+Sans+3:wght@300;400;500;600&display=swap">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cutive+Mono&amp;family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Special+Elite&amp;display=swap">
 <style>
 :root{
   color-scheme: light;
@@ -39,7 +41,7 @@
   --grid:rgba(21,21,28,.07);
   --measure:65ch; --wide:1120px;
 }
-@media (prefers-color-scheme: dark){
+@media not all{
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -55,7 +57,7 @@
     --grid:rgba(234,234,240,.08);
   }
 }
-:root[data-theme="dark"]{
+:root[data-theme="dark"][data-look-off]{
   color-scheme: dark;
   --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
   --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
@@ -70,14 +72,14 @@
 *{box-sizing:border-box}
 body{
   margin:0; background:var(--ground); color:var(--ink);
-  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:var(--t-f-body);
   font-weight:400; font-size:18.5px; line-height:1.66;
   -webkit-font-smoothing:antialiased;
 }
-h1,h2,h3{margin:0; font-family:"Fraunces","Georgia",serif;
+h1,h2,h3{margin:0; font-family:var(--t-f-display);
   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
   letter-spacing:-.012em}
-.mono,code{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.mono,code{font-family:var(--t-f-label)}
 .tnum{font-variant-numeric:tabular-nums}
 
 .wrap{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
@@ -89,7 +91,7 @@ a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2);
 a:hover{text-decoration-color:var(--accent)}
 :focus-visible{outline:2px solid var(--alt); outline-offset:3px; border-radius:2px}
 
-.eyebrow{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.2em;
+.eyebrow{font-family:var(--t-f-label); font-size:11px; letter-spacing:.2em;
   text-transform:uppercase; color:var(--ink-3);
   display:flex; align-items:center; gap:12px; margin-bottom:16px}
 .eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
@@ -103,13 +105,13 @@ header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
 h1{font-size:clamp(40px,7.2vw,88px); line-height:.97; font-weight:800;
    font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:13ch; margin-bottom:.3em}
 .sub{max-width:52ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
-.kicker{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.18em;
+.kicker{font-family:var(--t-f-label); font-size:11px; letter-spacing:.18em;
   text-transform:uppercase; color:var(--ink-3); margin-bottom:22px}
 
 figure{margin:0; background:var(--surface); border:1px solid var(--rule);
   border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
 .fig-head{padding:20px 22px 0}
-.fig-title{font-family:"Fraunces",Georgia,serif; font-weight:600; font-size:17px;
+.fig-title{font-family:var(--t-f-display); font-weight:600; font-size:17px;
   font-variation-settings:"SOFT" 0,"WONK" 0,"opsz" 24; margin-bottom:4px}
 .fig-note{font-size:14px; color:var(--ink-2); line-height:1.45; max-width:80ch}
 .fig-body{padding:14px 22px 20px}
@@ -119,20 +121,20 @@ figcaption{padding:14px 22px 18px; border-top:1px solid var(--rule);
 svg{display:block; width:100%; height:auto; overflow:visible}
 .gl{stroke:var(--grid); stroke-width:1; fill:none}
 .ax{stroke:var(--rule-2); stroke-width:1; fill:none}
-.tk{font-family:"DM Mono",monospace; font-size:10.5px; fill:var(--ink-3);
+.tk{font-family:var(--t-f-label); font-size:10.5px; fill:var(--ink-3);
     font-variant-numeric:tabular-nums}
-.axlab{font-family:"DM Mono",monospace; font-size:10px; fill:var(--ink-3);
+.axlab{font-family:var(--t-f-label); font-size:10px; fill:var(--ink-3);
     letter-spacing:.14em; text-transform:uppercase}
-.dlab{font-family:"DM Mono",monospace; font-size:11px; fill:var(--ink-2);
+.dlab{font-family:var(--t-f-label); font-size:11px; fill:var(--ink-2);
     font-variant-numeric:tabular-nums}
-.zonelab{font-family:"DM Mono",monospace; font-size:10px; fill:var(--zoneink);
+.zonelab{font-family:var(--t-f-label); font-size:10px; fill:var(--zoneink);
     letter-spacing:.1em; text-transform:uppercase}
 .halo{paint-order:stroke; stroke:var(--surface); stroke-width:3.5px;
       stroke-linejoin:round}
 
 .ctl{display:flex; flex-wrap:wrap; gap:9px 16px; align-items:center; padding:12px 22px;
   border-bottom:1px solid var(--rule); background:var(--surface-2);
-  font-family:"DM Mono",monospace; font-size:11.5px; color:var(--ink-2)}
+  font-family:var(--t-f-label); font-size:11.5px; color:var(--ink-2)}
 .chip{border:1px solid var(--rule-2); background:transparent; color:var(--ink-2);
   font:inherit; padding:4px 11px; border-radius:3px; cursor:pointer; display:inline-flex;
   align-items:center; gap:7px; transition:background .15s,border-color .15s,color .15s}
@@ -141,7 +143,7 @@ svg{display:block; width:100%; height:auto; overflow:visible}
 .swatch{width:11px; height:3px; border-radius:2px; flex:none}
 
 .legend{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center;
-  font-family:"DM Mono",monospace; font-size:11.5px; color:var(--ink-2);
+  font-family:var(--t-f-label); font-size:11.5px; color:var(--ink-2);
   padding:0 22px 14px}
 .legend span{display:inline-flex; align-items:center; gap:7px}
 .legend i{width:16px; height:3px; border-radius:2px; flex:none; font-style:normal}
@@ -150,9 +152,9 @@ svg{display:block; width:100%; height:auto; overflow:visible}
   background:var(--rule); border:1px solid var(--rule); border-radius:3px; overflow:hidden;
   margin-block:30px}
 .stat{background:var(--surface); padding:16px 18px}
-.stat b{display:block; font-family:"Source Sans 3",sans-serif; font-weight:600;
+.stat b{display:block; font-family:var(--t-f-body); font-weight:600;
   font-size:clamp(25px,3.1vw,33px); line-height:1.05; margin-bottom:5px; letter-spacing:-.02em}
-.stat span{font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.12em;
+.stat span{font-family:var(--t-f-label); font-size:10px; letter-spacing:.12em;
   text-transform:uppercase; color:var(--ink-3); line-height:1.4; display:block}
 .stat.m b{color:var(--member)} .stat.h b{color:var(--hired)}
 
@@ -161,14 +163,14 @@ svg{display:block; width:100%; height:auto; overflow:visible}
   box-shadow:var(--shadow); padding:9px 12px; font-size:13px; line-height:1.45;
   max-width:300px; color:var(--ink)}
 #tip.on{opacity:1}
-#tip b{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.1em;
+#tip b{font-family:var(--t-f-label); font-size:11px; letter-spacing:.1em;
   color:var(--ink-3); font-weight:400; display:block; margin-bottom:3px}
 #tip .v{font-variant-numeric:tabular-nums}
 #tip .nm{font-weight:600; letter-spacing:-.01em}
 
 details{border:1px solid var(--rule); border-radius:3px; background:var(--surface);
   padding:0 18px; margin-block:26px}
-summary{cursor:pointer; padding:14px 0; font-family:"DM Mono",monospace;
+summary{cursor:pointer; padding:14px 0; font-family:var(--t-f-label);
   font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2)}
 summary:hover{color:var(--ink)}
 .tablewrap{overflow-x:auto; padding-bottom:18px}
@@ -176,7 +178,7 @@ table{border-collapse:collapse; font-size:14px; width:100%; min-width:460px}
 th,td{text-align:right; padding:6px 10px; border-bottom:1px solid var(--rule);
   font-variant-numeric:tabular-nums}
 th:first-child,td:first-child{text-align:left; font-variant-numeric:normal}
-thead th{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+thead th{font-family:var(--t-f-label); font-size:10.5px; letter-spacing:.1em;
   text-transform:uppercase; color:var(--ink-3); font-weight:400; white-space:nowrap}
 
 .srcs{font-size:14px; color:var(--ink-3); line-height:1.6}
@@ -194,11 +196,296 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   *{animation-duration:.01ms !important; transition-duration:.01ms !important}
 }
 </style>
+<style>
+/* ===================================================================== base
+   What every page's look is built on.  build_site.py appends this, then the
+   page's own look from theme/looks/, after the page's own stylesheet, so
+   both win any tie with it.
+
+   It does two things.  It bridges the tokens every page already uses
+   (--ground, --surface, --ink, --rule ...) to a small set of theme tokens
+   (--t-*), so a look recolours a whole page by setting a dozen values.  And
+   it turns off what made every page look alike -- the Fraunces display face,
+   the small monospaced labels with a rule running off them, the soft shadows
+   and the rounded cards -- and points the same components at the theme's own
+   faces and lines instead.
+
+   Each look is a single deliberate appearance, light or dark as its subject
+   asks, so the bridge is written at a specificity (:root three times) that
+   beats the dark-mode token blocks inside every page's own stylesheet. */
+
+:root:root:root{
+  color-scheme: var(--t-scheme, light);
+  /* defaults, which a look overrides */
+  --t-bg:#FFFFFF; --t-paper:#FFFFFF; --t-paper-2:#F4F4F2;
+  --t-ink:#151515; --t-ink-2:#444444; --t-ink-3:#777777;
+  --t-line:#DCDCDC; --t-line-2:#8A8A8A; --t-grid:rgba(0,0,0,.08);
+  --t-accent:#151515; --t-accent-2:#555555; --t-accent-ink:#FFFFFF;
+  --t-head-bg:var(--t-paper-2); --t-head-ink:var(--t-ink); --t-head-ink-2:var(--t-ink-2);
+  --t-head-kick:var(--t-ink-3); --t-head-rule:1px solid var(--t-line);
+  --t-hero-bg:var(--t-paper-2);
+  --t-foot-bg:var(--t-paper-2); --t-foot-ink:var(--t-ink-2); --t-foot-ink-2:var(--t-ink-3);
+  --t-f-display:Georgia,serif; --t-f-body:system-ui,sans-serif; --t-f-label:var(--t-f-body);
+  --t-f-num:var(--t-f-display); --t-f-chart:var(--t-f-label);
+  --t-f-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --t-body-size:18px; --t-body-lh:1.62;
+  --t-h1-size:clamp(38px,6.4vw,80px); --t-h1-weight:700; --t-h1-case:none; --t-h1-track:-.01em; --t-h1-lh:1;
+  --t-h2-size:clamp(28px,3.8vw,40px); --t-h2-weight:700; --t-h2-case:none; --t-h2-track:-.005em; --t-h2-lh:1.08;
+  --t-h3-weight:600;
+  --t-label-size:12px; --t-label-case:uppercase; --t-label-track:.12em; --t-label-weight:600;
+  --t-label-ink:var(--t-ink-3); --t-eyebrow-rule:var(--t-line);
+  --t-radius:0; --t-fig-border:1px solid var(--t-line); --t-cap-rule:1px solid var(--t-line);
+  --t-tip-border:1px solid var(--t-line-2);
+  --t-chip-on-bg:var(--t-ink); --t-chip-on-ink:var(--t-bg);
+
+  /* the bridge */
+  --ground:var(--t-bg); --surface:var(--t-paper); --surface-2:var(--t-paper-2); --sunk:var(--t-hero-bg);
+  --ink:var(--t-ink); --ink-2:var(--t-ink-2); --ink-3:var(--t-ink-3);
+  --rule:var(--t-line); --rule-2:var(--t-line-2); --grid:var(--t-grid);
+  --accent:var(--t-accent); --alt:var(--t-accent-2);
+  --shadow:none; --shadow-lg:none;
+  --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+}
+
+/* Several looks are set in faces cut in one weight (a typewriter, a terminal's
+   pixel face, a seventeenth-century roman); asked for bold, a browser smears a fake one.
+   It may still slant a face that has no italic, but never fakes a weight. */
+html{background:var(--t-bg); font-synthesis:style}
+body{background:var(--t-bg); color:var(--t-ink); font-family:var(--t-f-body);
+  font-size:var(--t-body-size); line-height:var(--t-body-lh)}
+h1,h2,h3{font-family:var(--t-f-display); font-variation-settings:normal}
+h1{font-size:var(--t-h1-size); font-weight:var(--t-h1-weight); text-transform:var(--t-h1-case);
+  letter-spacing:var(--t-h1-track); line-height:var(--t-h1-lh)}
+h2{font-size:var(--t-h2-size); font-weight:var(--t-h2-weight); text-transform:var(--t-h2-case);
+  letter-spacing:var(--t-h2-track); line-height:var(--t-h2-lh)}
+h3{font-weight:var(--t-h3-weight); letter-spacing:0}
+h1,h2,h3,.fig-title{text-wrap:balance}
+.mono{font-family:var(--t-f-label)}
+code,kbd,samp,pre{font-family:var(--t-f-mono)}
+a:hover{text-decoration-color:var(--t-accent)}
+:focus-visible{outline-color:var(--t-accent)}
+
+.eyebrow,.kicker,.sech,label.lab{font-family:var(--t-f-label); font-size:var(--t-label-size);
+  text-transform:var(--t-label-case); letter-spacing:var(--t-label-track); font-weight:var(--t-label-weight);
+  color:var(--t-label-ink)}
+.eyebrow::after{background:var(--t-eyebrow-rule)}
+
+/* Headers: the house header, the canvas hero of the four oldest pages, and
+   the keyboards page's own. */
+header.top,header.hero{background:var(--t-head-bg); color:var(--t-head-ink); border-bottom:var(--t-head-rule)}
+header.top .kicker,header.hero .eyebrow{color:var(--t-head-kick)}
+header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
+#hero{background:var(--t-hero-bg); border-bottom:var(--t-head-rule)}
+.hero-sub{color:var(--t-ink-2)}
+.hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
+.look-art,.look-tag{display:none}
+/* Devanagari hangs vowel signs above and below the line, so a subtitle that
+   inherits a display face's tight leading collides with itself when it wraps.
+   A look whose faces have no Devanagari names one second in its body stack,
+   so it supplies only those glyphs. */
+.devanagari{font-family:var(--t-f-body); line-height:1.32}
+
+/* Surfaces lose their shadows and their rounding together. */
+figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
+.seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
+button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
+figure{background:var(--t-paper); border:var(--t-fig-border)}
+figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(--t-ink-3)}
+.fig-title{font-family:var(--t-f-display); font-variation-settings:normal}
+.fig-note{color:var(--t-ink-2)}
+.ctl{background:var(--t-paper-2); border-bottom:var(--t-cap-rule); font-family:var(--t-f-label)}
+.legend{font-family:var(--t-f-label)}
+.chip{font-family:var(--t-f-label)}
+.chip[aria-pressed="true"]{background:var(--t-chip-on-bg); color:var(--t-chip-on-ink); border-color:var(--t-chip-on-bg)}
+
+/* Chart text, in every naming the pages use. */
+.tk,.axlab,.dlab,.axistext,.axistitle,.figlab,.gl-lab,svg text{font-family:var(--t-f-chart)}
+.halo{stroke:var(--t-paper)}
+
+/* Stat tiles draw their own hairlines, so a row the last tile does not fill
+   shows paper, not a grey block.  220px puts four tiles two by two in a
+   reading column and five across in a wide one. */
+.stats{border:0; background:transparent; gap:1px;
+  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+.stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
+.stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
+.stat span,.stat .l{font-family:var(--t-f-label)}
+
+#tip,.tip{font-family:var(--t-f-body); border:var(--t-tip-border); background:var(--t-paper); color:var(--t-ink)}
+#tip b,.tip b{font-family:var(--t-f-label)}
+
+table{font-family:var(--t-f-body)}
+th,thead th{font-family:var(--t-f-label)}
+td{font-family:var(--t-f-body)}
+details{background:var(--t-paper); border-color:var(--t-line)}
+summary{font-family:var(--t-f-label)}
+
+footer{background:var(--t-foot-bg); color:var(--t-foot-ink); border-top:var(--t-head-rule)}
+/* Inside a coloured footer, and in a chart drawn straight onto a coloured
+   header, the paper inks become the band's own, so a page's inline var(--ink)
+   or var(--ink-3) -- a highlighted tick, a muted closing line -- stays legible
+   on a dark band.  Only the header's charts: a header can also hold paper
+   cards (the apartments stats), whose text must keep the paper inks. */
+header.top svg,header.hero svg{--ink:var(--t-head-ink); --ink-2:var(--t-head-ink-2); --ink-3:var(--t-head-ink-2)}
+footer{--ink:var(--t-foot-ink); --ink-2:var(--t-foot-ink-2); --ink-3:var(--t-foot-ink-2)}
+footer .srcs{color:var(--t-foot-ink-2)}
+
+/* Tools: the form, the answer panel and the lead form. */
+.card,.answer,.offer,a.nextcard{background:var(--t-paper); border-color:var(--t-line)}
+.answer .top{background:var(--t-paper-2)}
+.big .unit{font-family:var(--t-f-body)}
+.row .v,.ppends,td{font-variant-numeric:tabular-nums}
+.row .v,.ppends{font-family:var(--t-f-label)}
+/* background-color, not the shorthand: a select draws its chevron with background-image */
+input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea{
+  font-family:var(--t-f-body); background-color:var(--t-paper); border-color:var(--t-line-2); color:var(--t-ink)}
+input:focus,select:focus,textarea:focus{border-color:var(--t-accent); box-shadow:0 0 0 2px var(--t-accent)}
+button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:var(--t-f-label)}
+button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
+.seg{border-color:var(--t-line-2); background:var(--t-paper)}
+.seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
+.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+/* The segmented control clips its buttons to its own outline, which clipped
+   the focus ring with them: draw it inside the button, in the ink that shows
+   on the pressed one too. */
+.seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
+.seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
+.flag{background:var(--t-paper-2); border-color:var(--t-line)}
+a.nextcard .go,.go{font-family:var(--t-f-label)}
+
+/* A note a script fills later (the layout optimiser's, say) is empty until
+   then, and a look that gives notes a rule or a fill would draw a stray one. */
+.note:empty{display:none}
+
+/* The way home that build_site.py adds to every footer. */
+.back-home{font-family:var(--t-f-label)}
+
+/* Inline code holds the bulletins' mangled fragments, some of them long
+   unbroken strings; on a phone they may break anywhere rather than push the
+   page sideways. */
+@media(max-width:700px){code{white-space:normal; overflow-wrap:anywhere}}
+/* A source note can carry a formula held together with non-breaking spaces
+   (the sunspot smoothing), wider than any phone column: it may break anywhere
+   rather than push the page sideways.  On the narrowest phones a tool card's
+   table scrolls inside its card for the same reason. */
+@media(max-width:700px){.srcs{overflow-wrap:anywhere}}
+@media(max-width:380px){.card table{display:block; overflow-x:auto; max-width:100%}}
+
+/* Code inside a coloured footer takes the footer's ink rather than a paper
+   box, which on a dark band reads as a hole in it. */
+footer code{background:transparent; border-color:currentColor; color:inherit}
+
+/* Print.  Several tools promise a single clean printed page, and their own
+   print rules would lose to a look's coloured covers and patterned paper,
+   which come later in the cascade.  So in print every look keeps its type and
+   drops its paint: white paper, black ink, no art layers, no textures. */
+@media print{
+  html,body{background:#FFFFFF !important; border:0 !important; margin:0 !important}
+  body::before,body::after,.look-art,header.top::before,header.top::after,header.hero::before{display:none !important}
+  header.top,header.hero,#hero,footer,section,figure,.fig,.card,.answer,.offer,.stat,.stats,.answer .top,
+  header.top > .wrap,header.top > .wide,section .wrap{background:#FFFFFF !important; box-shadow:none !important;
+    transform:none !important; color:#000000 !important}
+  header.top,header.hero{border-bottom:1px solid #999999 !important}
+  header.top *,header.hero *,footer *{color:#000000 !important; text-shadow:none !important}
+  .eyebrow{background:none !important; color:#000000 !important; transform:none !important}
+  /* Backgrounds that survive the reset are small -- a section number's cell,
+     a pressed key, a pill -- and often carry white type, which would print as
+     nothing if the browser dropped them.  Glows go; figures in a look's
+     coloured lettering (the rate board's LEDs) print black. */
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  *,*::before,*::after{text-shadow:none !important}
+  .stat b,.stat span,.stat .n,.stat small{color:#000000 !important}
+  /* a chart drawn for a coloured header goes to the paper's black and greys */
+  header.top svg text,header.hero svg text{fill:#000000 !important}
+  header.top svg .sunk-halo,header.hero svg .sunk-halo{stroke:#FFFFFF !important}
+  header.top svg .bar,header.hero svg .bar{fill:#BBBBBB !important}
+  header.top svg .bar.cap,header.hero svg .bar.cap{fill:#000000 !important}
+  header.top svg .ax,header.top svg .ln,header.hero svg .ax,header.hero svg .ln{stroke:#666666 !important}
+}
+
+/* look: hawley -- Twelve Hundred Metres Lower; What Are My Odds Up There?
+   fonts: https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap
+   chart-font: "Cutive Mono"
+
+   The Himalayan Database began as typed records: every expedition to a
+   Nepali peak, interviewed in Kathmandu and written up on a typewriter, on
+   cards and forms, for half a century.  So these pages are typed index
+   cards on a desk: card stock with a red top line and blue rules, headings
+   in a worn typewriter face, labels on a clean one, and the essay itself in
+   a book face that holds up for a long read.  Members print in a carbon
+   blue, hired staff in the card's red. */
+
+:root:root:root{
+  --t-bg:#E9E4D8; --t-paper:#FFFDF5; --t-paper-2:#F4F0E3;
+  --t-ink:#1F1F1F; --t-ink-2:#464542; --t-ink-3:#67645C;
+  --t-line:#D6D0C1; --t-line-2:#1F1F1F; --t-grid:rgba(31,31,31,.08);
+  --t-accent:#C8463D; --t-accent-2:#34559A; --t-accent-ink:#FFFFFF;
+  --hw-red:#C8463D; --hw-blue:#A9C1DF;
+  --t-head-bg:#E9E4D8; --t-head-ink:#1F1F1F; --t-head-ink-2:#464542; --t-head-kick:#A8352D;
+  --t-head-rule:0; --t-hero-bg:#E9E4D8;
+  --t-foot-bg:#E9E4D8; --t-foot-ink:#464542; --t-foot-ink-2:#67645D;
+  --t-f-display:"Special Elite","Courier New",monospace; --t-f-body:"Libre Baskerville",Georgia,serif;
+  --t-f-label:"Cutive Mono","Courier New",monospace; --t-f-num:"Special Elite","Courier New",monospace;
+  --t-f-chart:"Cutive Mono","Courier New",monospace;
+  --t-body-size:17px; --t-body-lh:1.78;
+  --t-h1-size:clamp(34px,5.8vw,70px); --t-h1-weight:400; --t-h1-track:-.01em; --t-h1-lh:1.06;
+  --t-h2-size:clamp(25px,3.4vw,36px); --t-h2-weight:400; --t-h2-track:-.01em; --t-h2-lh:1.16;
+  --t-label-size:14px; --t-label-track:.04em; --t-label-weight:400; --t-label-ink:#A8352D;
+  --t-fig-border:1px solid #D6D0C1; --t-cap-rule:1px solid #D6D0C1; --t-tip-border:1px solid #1F1F1F;
+  --t-chip-on-bg:#1F1F1F; --t-chip-on-ink:#FFFDF5;
+  --member:#34559A; --hired:#C8463D; --member-soft:rgba(52,85,154,.18); --hired-soft:rgba(200,70,61,.18);
+  --zone:rgba(31,31,31,.05); --zone-2:rgba(31,31,31,.09); --zoneink:rgba(31,31,31,.66);
+  --mark:#34559A; --mark-soft:rgba(52,85,154,.16); --mark-line:rgba(52,85,154,.55);
+  --up:#34559A; --down:#C8463D; --warn:#B5671A; --axis:#8A8579; --field:#FFFDF5; --field-rule:#1F1F1F;
+}
+/* the header is an index card on the desk */
+header.top{padding-block:clamp(30px,5vw,60px)}
+header.top > .wrap,header.top > .wide{position:relative; overflow:hidden; background:#FFFDF5;
+  padding-block:22px 28px; box-shadow:0 1px 2px rgba(0,0,0,.18),0 10px 24px -14px rgba(0,0,0,.35);
+  transform:rotate(-.4deg)}
+header.top .kicker{font-family:"Cutive Mono",monospace; letter-spacing:.02em; color:#C8463D; text-transform:uppercase;
+  position:relative; padding-bottom:9px}
+/* the card's red line runs under the kicker however many lines it wraps to, edge to edge of the card */
+header.top .kicker::after{content:""; position:absolute; left:-200px; right:-200px; bottom:0; height:1.5px; background:#C8463D}
+/* square once it fills the width: a full-width card turned even a little pokes past the screen */
+@media(max-width:980px){header.top > .wrap{transform:none}}
+@media(max-width:1200px){header.top > .wide{transform:none}}
+header.top h1{margin-top:16px}
+section .eyebrow::before{content:"EXPED. FILE \2014 "; color:#1F1F1F}
+.eyebrow::after{background:#C8463D; height:1px}
+h2{color:#1F1F1F}
+figure{background:#FFFDF5; border:1px solid #D6D0C1; border-top:2px solid #C8463D}
+.fig-title{font-family:"Special Elite",monospace; font-size:19px}
+.stats{gap:8px}
+.stat{box-shadow:0 1px 2px rgba(0,0,0,.12); border:1px solid #D6D0C1; background:#FFFDF5}
+.stat b{color:#1F1F1F}
+.note{border-left:0; border-top:1.5px solid #C8463D; background:#FFFDF5; padding:12px 16px; font-family:"Cutive Mono",monospace}
+.pull{font-family:"Special Elite",monospace}
+.card,.answer,.offer,a.nextcard,.fig{background:#FFFDF5; border:1px solid #D6D0C1; border-top:2px solid #C8463D}
+.big{font-family:"Special Elite",monospace; font-weight:400}
+
+/* every section is its own typed card on the desk, red line along its top */
+section{background:#FFFDF5; max-width:900px; margin:28px auto 0; border-top:2px solid #C8463D;
+  box-shadow:0 1px 2px rgba(0,0,0,.14),0 12px 26px -16px rgba(0,0,0,.35)}
+section+section{border-top:2px solid #C8463D}
+section:nth-of-type(even){transform:rotate(.25deg)} section:nth-of-type(odd){transform:rotate(-.2deg)}
+@media(max-width:760px){section{margin-top:16px}}
+/* a card turned even a quarter degree pokes past the screen once it fills the width */
+@media(max-width:980px){section{transform:none !important}}
+@media (prefers-reduced-motion: reduce){section{transform:none !important}}
+/* A typewriter has one weight.  Special Elite and Cutive Mono were cut that way,
+   so headings and buttons stay at it, and a typed emphasis is underlined, as a
+   typist would have done it, rather than smeared into a fake bold. */
+h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[aria-pressed=true],button.cta{font-weight:400}
+.note b,.note strong{font-weight:400; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.18em}
+
+</style>
 </head>
 <body>
 <script>window.HIMALAYA_DATA={"rates":{"overall":{"hired":{"n":15731,"deaths":318,"per1000":20.21,"lo":18.13,"hi":22.53},"member":{"n":60788,"deaths":788,"per1000":12.96,"lo":12.09,"hi":13.89}},"modern":{"hired":{"n":12706,"deaths":129,"per1000":10.15,"lo":8.552,"hi":12.05},"member":{"n":33453,"deaths":283,"per1000":8.46,"lo":7.533,"hi":9.499}},"decades":[{"decade":1950,"hired":{"n":200,"deaths":9,"per1000":45.0,"lo":23.85,"hi":83.3},"member":{"n":753,"deaths":16,"per1000":21.25,"lo":13.12,"hi":34.24},"hired_share":0.2099},{"decade":1960,"hired":{"n":215,"deaths":10,"per1000":46.51,"lo":25.46,"hi":83.49},"member":{"n":946,"deaths":22,"per1000":23.26,"lo":15.41,"hi":34.96},"hired_share":0.1852},{"decade":1970,"hired":{"n":343,"deaths":58,"per1000":169.1,"lo":133.1,"hi":212.4},"member":{"n":3366,"deaths":97,"per1000":28.82,"lo":23.68,"hi":35.03},"hired_share":0.09248},{"decade":1980,"hired":{"n":781,"deaths":47,"per1000":60.18,"lo":45.55,"hi":79.11},"member":{"n":9590,"deaths":200,"per1000":20.86,"lo":18.18,"hi":23.91},"hired_share":0.07531},{"decade":1990,"hired":{"n":1321,"deaths":47,"per1000":35.58,"lo":26.86,"hi":46.99},"member":{"n":12425,"deaths":163,"per1000":13.12,"lo":11.26,"hi":15.28},"hired_share":0.0961},{"decade":2000,"hired":{"n":4518,"deaths":55,"per1000":12.17,"lo":9.365,"hi":15.81},"member":{"n":16809,"deaths":138,"per1000":8.21,"lo":6.954,"hi":9.691},"hired_share":0.2118},{"decade":2010,"hired":{"n":8188,"deaths":74,"per1000":9.038,"lo":7.206,"hi":11.33},"member":{"n":16644,"deaths":145,"per1000":8.712,"lo":7.409,"hi":10.24},"hired_share":0.3297}],"modern_from":2000},"causes":{"rows":[{"cause":"Avalanche","hired":157,"member":212,"hired_mod":64,"member_mod":63,"hired_pct":0.4937,"member_pct":0.269},{"cause":"Fall","hired":48,"member":283,"hired_mod":14,"member_mod":81,"hired_pct":0.1509,"member_pct":0.3591},{"cause":"AMS","hired":24,"member":78,"hired_mod":12,"member_mod":46,"hired_pct":0.07547,"member_pct":0.09898},{"cause":"Illness (non-AMS)","hired":26,"member":34,"hired_mod":11,"member_mod":19,"hired_pct":0.08176,"member_pct":0.04315},{"cause":"Disappearance (unexplained)","hired":3,"member":46,"hired_mod":1,"member_mod":23,"hired_pct":0.009434,"member_pct":0.05838},{"cause":"Exposure / frostbite","hired":3,"member":39,"hired_mod":1,"member_mod":6,"hired_pct":0.009434,"member_pct":0.04949},{"cause":"Exhaustion","hired":3,"member":38,"hired_mod":1,"member_mod":28,"hired_pct":0.009434,"member_pct":0.04822},{"cause":"Other","hired":13,"member":20,"hired_mod":7,"member_mod":3,"hired_pct":0.04088,"member_pct":0.02538},{"cause":"Crevasse","hired":9,"member":18,"hired_mod":5,"member_mod":9,"hired_pct":0.0283,"member_pct":0.02284},{"cause":"Falling rock / ice","hired":11,"member":15,"hired_mod":6,"member_mod":2,"hired_pct":0.03459,"member_pct":0.01904},{"cause":"Icefall collapse","hired":14,"member":2,"hired_mod":4,"member_mod":0,"hired_pct":0.04403,"member_pct":0.002538},{"cause":"Unknown","hired":7,"member":3,"hired_mod":3,"member_mod":3,"hired_pct":0.02201,"member_pct":0.003807}],"objective":{"hired":0.6006,"member":0.3135,"hired_mod":0.6124,"member_mod":0.2615},"falling":["Avalanche","Crevasse","Falling rock / ice","Icefall collapse"],"wearing":["AMS","Disappearance (unexplained)","Exhaustion","Exposure / frostbite","Fall","Illness (non-AMS)"],"n_hired":318,"n_member":788},"heights":{"stats":{"all":{"hired":{"n":300,"median":6000.0,"q1":5350.0,"q3":6800.0,"mean":6037.0},"member":{"n":768,"median":6800.0,"q1":6000.0,"q3":7800.0,"mean":6810.0}},"modern":{"hired":{"n":119,"median":5800.0,"q1":5350.0,"q3":6550.0,"mean":5882.0},"member":{"n":272,"median":7025.0,"q1":6250.0,"q3":8100.0,"mean":7025.0}}},"hist":[{"lo":4000,"hi":4250,"hired":11,"member":7},{"lo":4250,"hi":4500,"hired":2,"member":0},{"lo":4500,"hi":4750,"hired":0,"member":3},{"lo":4750,"hi":5000,"hired":3,"member":2},{"lo":5000,"hi":5250,"hired":1,"member":1},{"lo":5250,"hi":5500,"hired":17,"member":13},{"lo":5500,"hi":5750,"hired":5,"member":11},{"lo":5750,"hi":6000,"hired":21,"member":7},{"lo":6000,"hi":6250,"hired":9,"member":18},{"lo":6250,"hi":6500,"hired":9,"member":20},{"lo":6500,"hi":6750,"hired":11,"member":20},{"lo":6750,"hi":7000,"hired":2,"member":16},{"lo":7000,"hi":7250,"hired":6,"member":18},{"lo":7250,"hi":7500,"hired":3,"member":18},{"lo":7500,"hi":7750,"hired":2,"member":20},{"lo":7750,"hi":8000,"hired":2,"member":18},{"lo":8000,"hi":8250,"hired":4,"member":18},{"lo":8250,"hi":8500,"hired":1,"member":22},{"lo":8500,"hi":8750,"hired":2,"member":28},{"lo":8750,"hi":9000,"hired":1,"member":7}],"under":{"lo":null,"hi":4000,"hired":7,"member":5},"floor":4000,"gap":1225.0,"zones":[{"lo":0,"hi":5400,"name":"Approach and base camp"},{"lo":5400,"hi":6100,"name":"The icefall"},{"lo":6100,"hi":7000,"name":"The western cwm"},{"lo":7000,"hi":8000,"name":"The upper mountain"},{"lo":8000,"hi":8850,"name":"Above 8,000 m"}]},"clusters":{"by_group":{"hired":{"deaths":129,"events":85,"largest":11,"in_threes":0.3566,"alone":0.5194,"hist":[67,8,5,2,0,2,0,0,0,0,1]},"member":{"deaths":283,"events":224,"largest":7,"in_threes":0.1661,"alone":0.6643,"hist":[188,24,7,1,3,0,1,0,0,0,0]}},"worst_years":[{"year":2014,"deaths":24,"n":591,"per1000":40.61},{"year":2005,"deaths":13,"n":441,"per1000":29.48},{"year":2006,"deaths":13,"n":604,"per1000":21.52},{"year":2015,"deaths":12,"n":755,"per1000":15.89},{"year":2018,"deaths":10,"n":1108,"per1000":9.025},{"year":2013,"deaths":10,"n":816,"per1000":12.25}],"year_series":[{"year":2000,"n":255,"deaths":6,"per1000":23.53},{"year":2001,"n":234,"deaths":1,"per1000":4.274},{"year":2002,"n":253,"deaths":7,"per1000":27.67},{"year":2003,"n":379,"deaths":2,"per1000":5.277},{"year":2004,"n":402,"deaths":2,"per1000":4.975},{"year":2005,"n":441,"deaths":13,"per1000":29.48},{"year":2006,"n":604,"deaths":13,"per1000":21.52},{"year":2007,"n":605,"deaths":4,"per1000":6.612},{"year":2008,"n":601,"deaths":4,"per1000":6.656},{"year":2009,"n":744,"deaths":3,"per1000":4.032},{"year":2010,"n":718,"deaths":2,"per1000":2.786},{"year":2011,"n":799,"deaths":1,"per1000":1.252},{"year":2012,"n":762,"deaths":5,"per1000":6.562},{"year":2013,"n":816,"deaths":10,"per1000":12.25},{"year":2014,"n":591,"deaths":24,"per1000":40.61},{"year":2015,"n":755,"deaths":12,"per1000":15.89},{"year":2016,"n":936,"deaths":5,"per1000":5.342},{"year":2017,"n":961,"deaths":2,"per1000":2.081},{"year":2018,"n":1108,"deaths":10,"per1000":9.025},{"year":2019,"n":742,"deaths":3,"per1000":4.043}]},"peaks":[{"peak":"Everest","peak_id":"EVER","height":8850.0,"n":15149,"hired":{"n":5844,"deaths":49,"per1000":8.385,"lo":6.348,"hi":11.07},"member":{"n":9305,"deaths":85,"per1000":9.135,"lo":7.394,"hi":11.28},"summit":0.5857},{"peak":"Ama Dablam","peak_id":"AMAD","height":6814.0,"n":6584,"hired":{"n":1447,"deaths":6,"per1000":4.147,"lo":1.902,"hi":9.017},"member":{"n":5137,"deaths":16,"per1000":3.115,"lo":1.918,"hi":5.054},"summit":0.5249},{"peak":"Cho Oyu","peak_id":"CHOY","height":8188.0,"n":5982,"hired":{"n":1295,"deaths":5,"per1000":3.861,"lo":1.65,"hi":9.007},"member":{"n":4687,"deaths":21,"per1000":4.48,"lo":2.932,"hi":6.84},"summit":0.4592},{"peak":"Manaslu","peak_id":"MANA","height":8163.0,"n":3362,"hired":{"n":1053,"deaths":3,"per1000":2.849,"lo":0.9694,"hi":8.343},"member":{"n":2309,"deaths":30,"per1000":12.99,"lo":9.116,"hi":18.49},"summit":0.4616},{"peak":"Lhotse","peak_id":"LHOT","height":8516.0,"n":1747,"hired":{"n":409,"deaths":3,"per1000":7.335,"lo":2.498,"hi":21.34},"member":{"n":1338,"deaths":10,"per1000":7.474,"lo":4.065,"hi":13.7},"summit":0.4179},{"peak":"Baruntse","peak_id":"BARU","height":7152.0,"n":1495,"hired":{"n":317,"deaths":5,"per1000":15.77,"lo":6.755,"hi":36.39},"member":{"n":1178,"deaths":3,"per1000":2.547,"lo":0.8665,"hi":7.461},"summit":0.299},{"peak":"Himlung Himal","peak_id":"HIML","height":7126.0,"n":1288,"hired":{"n":344,"deaths":4,"per1000":11.63,"lo":4.531,"hi":29.51},"member":{"n":944,"deaths":0,"per1000":0.0,"lo":0.0,"hi":4.053},"summit":0.4293},{"peak":"Makalu","peak_id":"MAKA","height":8485.0,"n":1198,"hired":{"n":315,"deaths":13,"per1000":41.27,"lo":24.27,"hi":69.32},"member":{"n":883,"deaths":14,"per1000":15.86,"lo":9.468,"hi":26.44},"summit":0.3431},{"peak":"Dhaulagiri I","peak_id":"DHA1","height":8167.0,"n":1096,"hired":{"n":239,"deaths":8,"per1000":33.47,"lo":17.06,"hi":64.65},"member":{"n":857,"deaths":26,"per1000":30.34,"lo":20.79,"hi":44.08},"summit":0.2299},{"peak":"Pumori","peak_id":"PUMO","height":7138.0,"n":754,"hired":{"n":105,"deaths":5,"per1000":47.62,"lo":20.51,"hi":106.7},"member":{"n":649,"deaths":9,"per1000":13.87,"lo":7.312,"hi":26.14},"summit":0.2122},{"peak":"Annapurna I","peak_id":"ANN1","height":8091.0,"n":636,"hired":{"n":148,"deaths":3,"per1000":20.27,"lo":6.917,"hi":57.9},"member":{"n":488,"deaths":14,"per1000":28.69,"lo":17.16,"hi":47.58},"summit":0.2972},{"peak":"Kangchenjunga","peak_id":"KANG","height":8586.0,"n":628,"hired":{"n":196,"deaths":3,"per1000":15.31,"lo":5.219,"hi":44.03},"member":{"n":432,"deaths":8,"per1000":18.52,"lo":9.413,"hi":36.11},"summit":0.4666},{"peak":"Putha Hiunchuli","peak_id":"PUTH","height":7246.0,"n":541,"hired":{"n":119,"deaths":0,"per1000":0.0,"lo":3.469e-15,"hi":31.27},"member":{"n":422,"deaths":0,"per1000":0.0,"lo":0.0,"hi":9.021},"summit":0.4233}],"everest":{"hired":{"n":5844,"deaths":49,"per1000":8.385,"lo":6.348,"hi":11.07},"member":{"n":9305,"deaths":85,"per1000":9.135,"lo":7.394,"hi":11.28},"n":15149},"industry":{"series":[{"year":1950,"member":28,"hired":17,"ratio":0.6071},{"year":1951,"member":19,"hired":10,"ratio":0.5263},{"year":1952,"member":72,"hired":27,"ratio":0.375},{"year":1953,"member":114,"hired":38,"ratio":0.3333},{"year":1954,"member":181,"hired":26,"ratio":0.1436},{"year":1955,"member":136,"hired":33,"ratio":0.2426},{"year":1956,"member":51,"hired":21,"ratio":0.4118},{"year":1957,"member":21,"hired":7,"ratio":0.3333},{"year":1958,"member":49,"hired":8,"ratio":0.1633},{"year":1959,"member":82,"hired":13,"ratio":0.1585},{"year":1960,"member":143,"hired":38,"ratio":0.2657},{"year":1961,"member":82,"hired":20,"ratio":0.2439},{"year":1962,"member":121,"hired":43,"ratio":0.3554},{"year":1963,"member":154,"hired":33,"ratio":0.2143},{"year":1964,"member":158,"hired":30,"ratio":0.1899},{"year":1965,"member":103,"hired":29,"ratio":0.2816},{"year":1966,"member":10,"hired":4,"ratio":0.4},{"year":1967,"member":12,"hired":4,"ratio":0.3333},{"year":1968,"member":3,"hired":1,"ratio":0.3333},{"year":1969,"member":160,"hired":13,"ratio":0.08125},{"year":1970,"member":319,"hired":36,"ratio":0.1129},{"year":1971,"member":212,"hired":21,"ratio":0.09906},{"year":1972,"member":195,"hired":29,"ratio":0.1487},{"year":1973,"member":324,"hired":30,"ratio":0.09259},{"year":1974,"member":330,"hired":33,"ratio":0.1},{"year":1975,"member":357,"hired":23,"ratio":0.06443},{"year":1976,"member":252,"hired":19,"ratio":0.0754},{"year":1977,"member":237,"hired":22,"ratio":0.09283},{"year":1978,"member":517,"hired":56,"ratio":0.1083},{"year":1979,"member":623,"hired":74,"ratio":0.1188},{"year":1980,"member":762,"hired":87,"ratio":0.1142},{"year":1981,"member":861,"hired":67,"ratio":0.07782},{"year":1982,"member":880,"hired":97,"ratio":0.1102},{"year":1983,"member":887,"hired":63,"ratio":0.07103},{"year":1984,"member":1024,"hired":97,"ratio":0.09473},{"year":1985,"member":1002,"hired":85,"ratio":0.08483},{"year":1986,"member":908,"hired":47,"ratio":0.05176},{"year":1987,"member":903,"hired":63,"ratio":0.06977},{"year":1988,"member":1141,"hired":91,"ratio":0.07975},{"year":1989,"member":1222,"hired":84,"ratio":0.06874},{"year":1990,"member":1161,"hired":90,"ratio":0.07752},{"year":1991,"member":1319,"hired":95,"ratio":0.07202},{"year":1992,"member":1195,"hired":107,"ratio":0.08954},{"year":1993,"member":1119,"hired":106,"ratio":0.09473},{"year":1994,"member":1086,"hired":108,"ratio":0.09945},{"year":1995,"member":1088,"hired":132,"ratio":0.1213},{"year":1996,"member":1361,"hired":159,"ratio":0.1168},{"year":1997,"member":1467,"hired":146,"ratio":0.09952},{"year":1998,"member":1416,"hired":203,"ratio":0.1434},{"year":1999,"member":1213,"hired":175,"ratio":0.1443},{"year":2000,"member":1643,"hired":255,"ratio":0.1552},{"year":2001,"member":1379,"hired":234,"ratio":0.1697},{"year":2002,"member":1325,"hired":253,"ratio":0.1909},{"year":2003,"member":1626,"hired":379,"ratio":0.2331},{"year":2004,"member":1602,"hired":402,"ratio":0.2509},{"year":2005,"member":1584,"hired":441,"ratio":0.2784},{"year":2006,"member":1894,"hired":604,"ratio":0.3189},{"year":2007,"member":1833,"hired":605,"ratio":0.3301},{"year":2008,"member":1978,"hired":601,"ratio":0.3038},{"year":2009,"member":1945,"hired":744,"ratio":0.3825},{"year":2010,"member":1879,"hired":718,"ratio":0.3821},{"year":2011,"member":1820,"hired":799,"ratio":0.439},{"year":2012,"member":1766,"hired":762,"ratio":0.4315},{"year":2013,"member":1753,"hired":816,"ratio":0.4655},{"year":2014,"member":1624,"hired":591,"ratio":0.3639},{"year":2015,"member":1528,"hired":755,"ratio":0.4941},{"year":2016,"member":1748,"hired":936,"ratio":0.5355},{"year":2017,"member":1782,"hired":961,"ratio":0.5393},{"year":2018,"member":1847,"hired":1108,"ratio":0.5999},{"year":2019,"member":897,"hired":742,"ratio":0.8272}],"partial_year":2019},"who":{"hired":{"age":32.0,"summit":0.6819,"oxygen":0.5231,"female":0.002125,"nepali":0.9556},"member":{"age":41.0,"summit":0.3828,"oxygen":0.255,"female":0.143,"nepali":0.01725}},"meta":{"n_people":76519,"n_expeditions":10364,"n_peaks":468,"year_min":1905,"year_max":2019,"n_hired":15731,"n_member":60788,"nepali_share":0.958,"nepali_members":1064,"modern_from":2000,"total_deaths":1106,"hired_deaths":318,"member_deaths":788,"source":"The Himalayan Database, 2020 CSV export"}};</script>
 
 <header class="top">
+<div class="look-art" aria-hidden="true"></div>
   <div class="wrap">
     <p class="kicker">The Himalayan Database &middot;
       <span data-n="meta.n_people" data-fmt="int"></span> people on the mountain</p>
@@ -261,7 +548,7 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
       <span data-n="rates.decades.6.hired.per1000" data-fmt="1"></span> and
       <span data-n="rates.decades.6.member.per1000" data-fmt="1"></span> per
       thousand: the same number, within the noise. Since
-      <span data-n="meta.modern_from" data-fmt="int"></span> the confidence
+      <span data-n="meta.modern_from"></span> the confidence
       intervals overlap, which means the archive cannot distinguish the two
       rates at all. On Everest alone the ordering actually reverses &mdash;
       members <span data-n="everest.member.per1000" data-fmt="1"></span>,
@@ -439,7 +726,7 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
       member deaths. The worst single expedition in the record lost
       <span data-n="clusters.by_group.hired.largest" data-fmt="int"></span>
       hired staff. Whole years are shaped by single mornings: in
-      <span data-n="clusters.worst_years.0.year" data-fmt="int"></span> the
+      <span data-n="clusters.worst_years.0.year"></span> the
       archive records
       <span data-n="clusters.worst_years.0.deaths" data-fmt="int"></span> hired
       deaths, most of them from one serac collapse in the icefall above base
@@ -588,15 +875,15 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
 
 <footer>
   <div class="wrap">
-    <p class="srcs" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs back-home" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
     <p class="srcs">
       <b>Source.</b> <a href="https://www.himalayandatabase.com/">The Himalayan
       Database</a>, the expedition archives of the Nepal Himalaya, begun by
       Elizabeth Hawley and maintained with Richard Salisbury. The figures here
       come from the flat CSV export published in September 2020 for the
       TidyTuesday project, covering
-      <span data-n="meta.year_min" data-fmt="int"></span> to spring
-      <span data-n="meta.year_max" data-fmt="int"></span>:
+      <span data-n="meta.year_min"></span> to spring
+      <span data-n="meta.year_max"></span>:
       <span data-n="meta.n_people" data-fmt="int"></span> person-expeditions
       across <span data-n="meta.n_expeditions" data-fmt="int"></span>
       expeditions and <span data-n="meta.n_peaks" data-fmt="int"></span> peaks.

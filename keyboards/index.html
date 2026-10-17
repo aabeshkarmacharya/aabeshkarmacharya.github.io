@@ -1,15 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-look="keycaps" data-page="keyboards">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#D9D5CB">
 <meta name="description" content="The Layout Under Your Hands">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%8C%A8%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231C4C9C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%85%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>The Layout Under Your Hands</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600;6..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;0,800;1,400&amp;family=Rubik+Mono+One&amp;display=swap">
 <style>
 :root{
   color-scheme: light;
@@ -20,7 +22,7 @@
   --shadow:0 1px 2px rgba(18,23,27,.05),0 8px 24px -12px rgba(18,23,27,.14);
   --measure:66ch; --wide:1140px;
 }
-@media (prefers-color-scheme: dark){
+@media not all{
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#101315; --surface:#1A1A19; --surface-2:#212423; --sunk:#0B0D0E;
@@ -30,7 +32,7 @@
     --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
   }
 }
-:root[data-theme="dark"]{
+:root[data-theme="dark"][data-look-off]{
   color-scheme: dark;
   --ground:#101315; --surface:#1A1A19; --surface-2:#212423; --sunk:#0B0D0E;
   --ink:#E9ECEE; --ink-2:#A2ABB1; --ink-3:#6D767C; --rule:#2B3136; --rule-2:#394146;
@@ -41,21 +43,21 @@
 *{box-sizing:border-box}
 body{
   margin:0; background:var(--ground); color:var(--ink);
-  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  font-family:var(--t-f-body);
   font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
 }
 .wrap{max-width:var(--measure); margin:0 auto; padding:0 22px}
 .wide{max-width:var(--wide); margin:0 auto; padding:0 22px}
-h1,h2,h3{font-family:"Bodoni Moda",Georgia,serif; font-weight:600; letter-spacing:-.01em; margin:0}
+h1,h2,h3{font-family:var(--t-f-display); font-weight:600; letter-spacing:-.01em; margin:0}
 h1{font-size:clamp(34px,6vw,62px); line-height:1.02}
 h2{font-size:clamp(23px,3vw,31px); line-height:1.15; margin-bottom:.5em}
-h3{font-size:17px; font-family:"IBM Plex Sans",sans-serif; font-weight:600; margin-bottom:.3em}
+h3{font-size:17px; font-family:var(--t-f-body); font-weight:600; margin-bottom:.3em}
 p{margin:0 0 1.1em}
 a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2); text-underline-offset:3px}
 a:hover{text-decoration-color:currentColor}
-.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.mono{font-family:var(--t-f-label)}
 .tnum{font-variant-numeric:tabular-nums}
-.eyebrow{display:flex; align-items:center; gap:12px; font-family:"IBM Plex Mono",monospace;
+.eyebrow{display:flex; align-items:center; gap:12px; font-family:var(--t-f-label);
   font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); margin-bottom:14px}
 .eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
 .lede{font-size:19px; line-height:1.6; color:var(--ink-2)}
@@ -71,12 +73,12 @@ section+section{border-top:1px solid var(--rule)}
 @media (max-width:860px){ .hero-grid{grid-template-columns:1fr} }
 .hero-card{border:1px solid var(--rule); background:var(--surface); border-radius:4px;
   padding:17px 19px; box-shadow:var(--shadow)}
-.hc-l{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.13em;
+.hc-l{font-family:var(--t-f-label); font-size:10px; letter-spacing:.13em;
   text-transform:uppercase; color:var(--ink-3); line-height:1.5; margin-bottom:12px}
 .hc-row{display:grid; grid-template-columns:5.6em 1fr auto; gap:11px; align-items:center; padding:8px 0}
 .hc-row+.hc-row{border-top:1px solid var(--rule)}
-.hc-n{font:500 12.5px/1 "IBM Plex Mono",monospace; color:var(--ink-2); white-space:nowrap}
-.hc-v{font:600 15px/1 "IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; white-space:nowrap}
+.hc-n{font:500 12.5px/1 var(--t-f-label); color:var(--ink-2); white-space:nowrap}
+.hc-v{font:600 15px/1 var(--t-f-label); font-variant-numeric:tabular-nums; white-space:nowrap}
 .hc-t{height:5px; background:var(--rule); border-radius:3px; overflow:hidden}
 .hc-f{height:100%; border-radius:3px; display:block}
 .hc-note{font-size:11.5px; color:var(--ink-3); line-height:1.5; margin:12px 0 0}
@@ -86,11 +88,11 @@ section+section{border-top:1px solid var(--rule)}
 .bar{display:flex; flex-wrap:wrap; gap:18px 26px; align-items:flex-start;
   padding:14px 18px; border-bottom:1px solid var(--rule); background:var(--surface-2)}
 .grp{display:flex; flex-direction:column; gap:7px; min-width:0}
-.grp-l{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.14em;
+.grp-l{font-family:var(--t-f-label); font-size:10px; letter-spacing:.14em;
   text-transform:uppercase; color:var(--ink-3)}
 .chips{display:flex; flex-wrap:wrap; gap:6px}
 .chip{border:1px solid var(--rule-2); background:transparent; color:var(--ink-2);
-  font:500 12px/1 "IBM Plex Mono",monospace; padding:7px 11px; border-radius:999px;
+  font:500 12px/1 var(--t-f-label); padding:7px 11px; border-radius:999px;
   cursor:pointer; white-space:nowrap; transition:border-color .12s,color .12s,background .12s}
 .chip:hover{border-color:var(--ink-3); color:var(--ink)}
 .chip[aria-pressed="true"]{border-color:currentColor; background:var(--surface); color:var(--ink)}
@@ -104,15 +106,15 @@ section+section{border-top:1px solid var(--rule)}
 @media (max-width:900px){ .readout{border-left:none; border-top:1px solid var(--rule)} }
 
 .big{display:flex; align-items:baseline; gap:9px; margin-bottom:2px}
-.big .v{font:600 33px/1 "IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; letter-spacing:-.02em}
-.big .u{font-size:12px; color:var(--ink-3); font-family:"IBM Plex Mono",monospace}
-.bigl{font-size:11.5px; color:var(--ink-3); font-family:"IBM Plex Mono",monospace;
+.big .v{font:600 33px/1 var(--t-f-label); font-variant-numeric:tabular-nums; letter-spacing:-.02em}
+.big .u{font-size:12px; color:var(--ink-3); font-family:var(--t-f-label)}
+.bigl{font-size:11.5px; color:var(--ink-3); font-family:var(--t-f-label);
   letter-spacing:.1em; text-transform:uppercase; margin-bottom:18px}
 
 .mrow{display:grid; grid-template-columns:1fr auto; gap:4px 10px; align-items:center;
   padding:7px 0; border-top:1px solid var(--rule)}
 .mrow .n{font-size:13px; color:var(--ink-2)}
-.mrow .v{font:500 13px/1 "IBM Plex Mono",monospace; font-variant-numeric:tabular-nums}
+.mrow .v{font:500 13px/1 var(--t-f-label); font-variant-numeric:tabular-nums}
 .mrow .bar-t{grid-column:1/-1; height:3px; background:var(--rule); border-radius:2px; overflow:hidden}
 .mrow .bar-f{height:100%; border-radius:2px; transition:width .25s ease}
 
@@ -120,21 +122,21 @@ section+section{border-top:1px solid var(--rule)}
 .fing div{text-align:center}
 .fing .fb{height:44px; display:flex; align-items:flex-end; justify-content:center}
 .fing .fb i{display:block; width:78%; border-radius:2px 2px 0 0; transition:height .25s ease}
-.fing .fl{font:400 9px/1.3 "IBM Plex Mono",monospace; color:var(--ink-3); margin-top:4px}
-.fing .fv{font:500 10px/1.3 "IBM Plex Mono",monospace; color:var(--ink-2); font-variant-numeric:tabular-nums}
+.fing .fl{font:400 9px/1.3 var(--t-f-label); color:var(--ink-3); margin-top:4px}
+.fing .fv{font:500 10px/1.3 var(--t-f-label); color:var(--ink-2); font-variant-numeric:tabular-nums}
 
 .wgrid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:3px 22px}
 @media (max-width:560px){ .wgrid{grid-template-columns:1fr} }
 .wrow{display:grid; grid-template-columns:2.7em 1fr 3.2em; gap:9px; align-items:center; padding:3px 0}
-.wg{font:500 13px/1 "IBM Plex Mono",monospace; color:var(--ink); letter-spacing:.06em}
+.wg{font:500 13px/1 var(--t-f-label); color:var(--ink); letter-spacing:.06em}
 .wt{height:4px; background:var(--rule); border-radius:2px; overflow:hidden}
 .wt i{display:block; height:100%; border-radius:2px; transition:width .25s ease}
-.wp{font:400 11px/1 "IBM Plex Mono",monospace; color:var(--ink-3);
+.wp{font:400 11px/1 var(--t-f-label); color:var(--ink-3);
   font-variant-numeric:tabular-nums; text-align:right}
 
 /* ---------- table ---------- */
 .tbl-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch}
-table{border-collapse:collapse; font-family:"IBM Plex Mono",monospace; font-size:12.5px; width:100%}
+table{border-collapse:collapse; font-family:var(--t-f-label); font-size:12.5px; width:100%}
 th,td{text-align:right; padding:7px 13px 7px 0; border-bottom:1px solid var(--rule); white-space:nowrap}
 th{color:var(--ink-3); font-weight:500; cursor:pointer; user-select:none; position:sticky; top:0;
   background:var(--surface); font-size:11px; letter-spacing:.06em; text-transform:uppercase}
@@ -149,7 +151,7 @@ tbody tr.on td{background:var(--surface-2); font-weight:600}
 /* ---------- type box ---------- */
 textarea{width:100%; min-height:130px; resize:vertical; background:var(--sunk); color:var(--ink);
   border:1px solid var(--rule-2); border-radius:3px; padding:13px 15px;
-  font:400 14px/1.6 "IBM Plex Mono",monospace}
+  font:400 14px/1.6 var(--t-f-label)}
 textarea:focus{outline:2px solid var(--cool); outline-offset:1px; border-color:transparent}
 
 figcaption,.note{font-size:12.5px; color:var(--ink-3); line-height:1.55}
@@ -157,10 +159,281 @@ figcaption,.note{font-size:12.5px; color:var(--ink-3); line-height:1.55}
 footer{padding:44px 0 66px; border-top:1px solid var(--rule); background:var(--surface-2)}
 .tip{position:fixed; z-index:60; pointer-events:none; opacity:0; transition:opacity .1s;
   background:var(--surface); color:var(--ink); border:1px solid var(--rule-2); border-radius:3px;
-  padding:7px 10px; font:400 12px/1.45 "IBM Plex Mono",monospace; box-shadow:var(--shadow); max-width:270px}
+  padding:7px 10px; font:400 12px/1.45 var(--t-f-label); box-shadow:var(--shadow); max-width:270px}
 .tip.on{opacity:1}
 .tip b{font-weight:600}
 @media (prefers-reduced-motion:reduce){ *{transition:none !important; animation:none !important} }
+</style>
+<style>
+/* ===================================================================== base
+   What every page's look is built on.  build_site.py appends this, then the
+   page's own look from theme/looks/, after the page's own stylesheet, so
+   both win any tie with it.
+
+   It does two things.  It bridges the tokens every page already uses
+   (--ground, --surface, --ink, --rule ...) to a small set of theme tokens
+   (--t-*), so a look recolours a whole page by setting a dozen values.  And
+   it turns off what made every page look alike -- the Fraunces display face,
+   the small monospaced labels with a rule running off them, the soft shadows
+   and the rounded cards -- and points the same components at the theme's own
+   faces and lines instead.
+
+   Each look is a single deliberate appearance, light or dark as its subject
+   asks, so the bridge is written at a specificity (:root three times) that
+   beats the dark-mode token blocks inside every page's own stylesheet. */
+
+:root:root:root{
+  color-scheme: var(--t-scheme, light);
+  /* defaults, which a look overrides */
+  --t-bg:#FFFFFF; --t-paper:#FFFFFF; --t-paper-2:#F4F4F2;
+  --t-ink:#151515; --t-ink-2:#444444; --t-ink-3:#777777;
+  --t-line:#DCDCDC; --t-line-2:#8A8A8A; --t-grid:rgba(0,0,0,.08);
+  --t-accent:#151515; --t-accent-2:#555555; --t-accent-ink:#FFFFFF;
+  --t-head-bg:var(--t-paper-2); --t-head-ink:var(--t-ink); --t-head-ink-2:var(--t-ink-2);
+  --t-head-kick:var(--t-ink-3); --t-head-rule:1px solid var(--t-line);
+  --t-hero-bg:var(--t-paper-2);
+  --t-foot-bg:var(--t-paper-2); --t-foot-ink:var(--t-ink-2); --t-foot-ink-2:var(--t-ink-3);
+  --t-f-display:Georgia,serif; --t-f-body:system-ui,sans-serif; --t-f-label:var(--t-f-body);
+  --t-f-num:var(--t-f-display); --t-f-chart:var(--t-f-label);
+  --t-f-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --t-body-size:18px; --t-body-lh:1.62;
+  --t-h1-size:clamp(38px,6.4vw,80px); --t-h1-weight:700; --t-h1-case:none; --t-h1-track:-.01em; --t-h1-lh:1;
+  --t-h2-size:clamp(28px,3.8vw,40px); --t-h2-weight:700; --t-h2-case:none; --t-h2-track:-.005em; --t-h2-lh:1.08;
+  --t-h3-weight:600;
+  --t-label-size:12px; --t-label-case:uppercase; --t-label-track:.12em; --t-label-weight:600;
+  --t-label-ink:var(--t-ink-3); --t-eyebrow-rule:var(--t-line);
+  --t-radius:0; --t-fig-border:1px solid var(--t-line); --t-cap-rule:1px solid var(--t-line);
+  --t-tip-border:1px solid var(--t-line-2);
+  --t-chip-on-bg:var(--t-ink); --t-chip-on-ink:var(--t-bg);
+
+  /* the bridge */
+  --ground:var(--t-bg); --surface:var(--t-paper); --surface-2:var(--t-paper-2); --sunk:var(--t-hero-bg);
+  --ink:var(--t-ink); --ink-2:var(--t-ink-2); --ink-3:var(--t-ink-3);
+  --rule:var(--t-line); --rule-2:var(--t-line-2); --grid:var(--t-grid);
+  --accent:var(--t-accent); --alt:var(--t-accent-2);
+  --shadow:none; --shadow-lg:none;
+  --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+}
+
+/* Several looks are set in faces cut in one weight (a typewriter, a terminal's
+   pixel face, a seventeenth-century roman); asked for bold, a browser smears a fake one.
+   It may still slant a face that has no italic, but never fakes a weight. */
+html{background:var(--t-bg); font-synthesis:style}
+body{background:var(--t-bg); color:var(--t-ink); font-family:var(--t-f-body);
+  font-size:var(--t-body-size); line-height:var(--t-body-lh)}
+h1,h2,h3{font-family:var(--t-f-display); font-variation-settings:normal}
+h1{font-size:var(--t-h1-size); font-weight:var(--t-h1-weight); text-transform:var(--t-h1-case);
+  letter-spacing:var(--t-h1-track); line-height:var(--t-h1-lh)}
+h2{font-size:var(--t-h2-size); font-weight:var(--t-h2-weight); text-transform:var(--t-h2-case);
+  letter-spacing:var(--t-h2-track); line-height:var(--t-h2-lh)}
+h3{font-weight:var(--t-h3-weight); letter-spacing:0}
+h1,h2,h3,.fig-title{text-wrap:balance}
+.mono{font-family:var(--t-f-label)}
+code,kbd,samp,pre{font-family:var(--t-f-mono)}
+a:hover{text-decoration-color:var(--t-accent)}
+:focus-visible{outline-color:var(--t-accent)}
+
+.eyebrow,.kicker,.sech,label.lab{font-family:var(--t-f-label); font-size:var(--t-label-size);
+  text-transform:var(--t-label-case); letter-spacing:var(--t-label-track); font-weight:var(--t-label-weight);
+  color:var(--t-label-ink)}
+.eyebrow::after{background:var(--t-eyebrow-rule)}
+
+/* Headers: the house header, the canvas hero of the four oldest pages, and
+   the keyboards page's own. */
+header.top,header.hero{background:var(--t-head-bg); color:var(--t-head-ink); border-bottom:var(--t-head-rule)}
+header.top .kicker,header.hero .eyebrow{color:var(--t-head-kick)}
+header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
+#hero{background:var(--t-hero-bg); border-bottom:var(--t-head-rule)}
+.hero-sub{color:var(--t-ink-2)}
+.hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
+.look-art,.look-tag{display:none}
+/* Devanagari hangs vowel signs above and below the line, so a subtitle that
+   inherits a display face's tight leading collides with itself when it wraps.
+   A look whose faces have no Devanagari names one second in its body stack,
+   so it supplies only those glyphs. */
+.devanagari{font-family:var(--t-f-body); line-height:1.32}
+
+/* Surfaces lose their shadows and their rounding together. */
+figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
+.seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
+button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
+figure{background:var(--t-paper); border:var(--t-fig-border)}
+figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(--t-ink-3)}
+.fig-title{font-family:var(--t-f-display); font-variation-settings:normal}
+.fig-note{color:var(--t-ink-2)}
+.ctl{background:var(--t-paper-2); border-bottom:var(--t-cap-rule); font-family:var(--t-f-label)}
+.legend{font-family:var(--t-f-label)}
+.chip{font-family:var(--t-f-label)}
+.chip[aria-pressed="true"]{background:var(--t-chip-on-bg); color:var(--t-chip-on-ink); border-color:var(--t-chip-on-bg)}
+
+/* Chart text, in every naming the pages use. */
+.tk,.axlab,.dlab,.axistext,.axistitle,.figlab,.gl-lab,svg text{font-family:var(--t-f-chart)}
+.halo{stroke:var(--t-paper)}
+
+/* Stat tiles draw their own hairlines, so a row the last tile does not fill
+   shows paper, not a grey block.  220px puts four tiles two by two in a
+   reading column and five across in a wide one. */
+.stats{border:0; background:transparent; gap:1px;
+  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+.stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
+.stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
+.stat span,.stat .l{font-family:var(--t-f-label)}
+
+#tip,.tip{font-family:var(--t-f-body); border:var(--t-tip-border); background:var(--t-paper); color:var(--t-ink)}
+#tip b,.tip b{font-family:var(--t-f-label)}
+
+table{font-family:var(--t-f-body)}
+th,thead th{font-family:var(--t-f-label)}
+td{font-family:var(--t-f-body)}
+details{background:var(--t-paper); border-color:var(--t-line)}
+summary{font-family:var(--t-f-label)}
+
+footer{background:var(--t-foot-bg); color:var(--t-foot-ink); border-top:var(--t-head-rule)}
+/* Inside a coloured footer, and in a chart drawn straight onto a coloured
+   header, the paper inks become the band's own, so a page's inline var(--ink)
+   or var(--ink-3) -- a highlighted tick, a muted closing line -- stays legible
+   on a dark band.  Only the header's charts: a header can also hold paper
+   cards (the apartments stats), whose text must keep the paper inks. */
+header.top svg,header.hero svg{--ink:var(--t-head-ink); --ink-2:var(--t-head-ink-2); --ink-3:var(--t-head-ink-2)}
+footer{--ink:var(--t-foot-ink); --ink-2:var(--t-foot-ink-2); --ink-3:var(--t-foot-ink-2)}
+footer .srcs{color:var(--t-foot-ink-2)}
+
+/* Tools: the form, the answer panel and the lead form. */
+.card,.answer,.offer,a.nextcard{background:var(--t-paper); border-color:var(--t-line)}
+.answer .top{background:var(--t-paper-2)}
+.big .unit{font-family:var(--t-f-body)}
+.row .v,.ppends,td{font-variant-numeric:tabular-nums}
+.row .v,.ppends{font-family:var(--t-f-label)}
+/* background-color, not the shorthand: a select draws its chevron with background-image */
+input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea{
+  font-family:var(--t-f-body); background-color:var(--t-paper); border-color:var(--t-line-2); color:var(--t-ink)}
+input:focus,select:focus,textarea:focus{border-color:var(--t-accent); box-shadow:0 0 0 2px var(--t-accent)}
+button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:var(--t-f-label)}
+button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
+.seg{border-color:var(--t-line-2); background:var(--t-paper)}
+.seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
+.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+/* The segmented control clips its buttons to its own outline, which clipped
+   the focus ring with them: draw it inside the button, in the ink that shows
+   on the pressed one too. */
+.seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
+.seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
+.flag{background:var(--t-paper-2); border-color:var(--t-line)}
+a.nextcard .go,.go{font-family:var(--t-f-label)}
+
+/* A note a script fills later (the layout optimiser's, say) is empty until
+   then, and a look that gives notes a rule or a fill would draw a stray one. */
+.note:empty{display:none}
+
+/* The way home that build_site.py adds to every footer. */
+.back-home{font-family:var(--t-f-label)}
+
+/* Inline code holds the bulletins' mangled fragments, some of them long
+   unbroken strings; on a phone they may break anywhere rather than push the
+   page sideways. */
+@media(max-width:700px){code{white-space:normal; overflow-wrap:anywhere}}
+/* A source note can carry a formula held together with non-breaking spaces
+   (the sunspot smoothing), wider than any phone column: it may break anywhere
+   rather than push the page sideways.  On the narrowest phones a tool card's
+   table scrolls inside its card for the same reason. */
+@media(max-width:700px){.srcs{overflow-wrap:anywhere}}
+@media(max-width:380px){.card table{display:block; overflow-x:auto; max-width:100%}}
+
+/* Code inside a coloured footer takes the footer's ink rather than a paper
+   box, which on a dark band reads as a hole in it. */
+footer code{background:transparent; border-color:currentColor; color:inherit}
+
+/* Print.  Several tools promise a single clean printed page, and their own
+   print rules would lose to a look's coloured covers and patterned paper,
+   which come later in the cascade.  So in print every look keeps its type and
+   drops its paint: white paper, black ink, no art layers, no textures. */
+@media print{
+  html,body{background:#FFFFFF !important; border:0 !important; margin:0 !important}
+  body::before,body::after,.look-art,header.top::before,header.top::after,header.hero::before{display:none !important}
+  header.top,header.hero,#hero,footer,section,figure,.fig,.card,.answer,.offer,.stat,.stats,.answer .top,
+  header.top > .wrap,header.top > .wide,section .wrap{background:#FFFFFF !important; box-shadow:none !important;
+    transform:none !important; color:#000000 !important}
+  header.top,header.hero{border-bottom:1px solid #999999 !important}
+  header.top *,header.hero *,footer *{color:#000000 !important; text-shadow:none !important}
+  .eyebrow{background:none !important; color:#000000 !important; transform:none !important}
+  /* Backgrounds that survive the reset are small -- a section number's cell,
+     a pressed key, a pill -- and often carry white type, which would print as
+     nothing if the browser dropped them.  Glows go; figures in a look's
+     coloured lettering (the rate board's LEDs) print black. */
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  *,*::before,*::after{text-shadow:none !important}
+  .stat b,.stat span,.stat .n,.stat small{color:#000000 !important}
+  /* a chart drawn for a coloured header goes to the paper's black and greys */
+  header.top svg text,header.hero svg text{fill:#000000 !important}
+  header.top svg .sunk-halo,header.hero svg .sunk-halo{stroke:#FFFFFF !important}
+  header.top svg .bar,header.hero svg .bar{fill:#BBBBBB !important}
+  header.top svg .bar.cap,header.hero svg .bar.cap{fill:#000000 !important}
+  header.top svg .ax,header.top svg .ln,header.hero svg .ax,header.hero svg .ln{stroke:#666666 !important}
+}
+
+/* look: keycaps -- The Layout Under Your Hands
+   fonts: https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Rubik+Mono+One&display=swap
+   chart-font: "Rubik"
+
+   The page is about where letters sit under the fingers, so it is set on
+   the keys themselves: a warm grey case, legends printed on raised caps with
+   a deeper edge along the bottom, the title cut into a row of keys, and
+   section labels and toggles that press down when they are on.  Escape-key
+   orange for the heavy fingers, a cool blue for the light ones. */
+
+:root:root:root{
+  --t-bg:#ECEAE4; --t-paper:#FBFAF7; --t-paper-2:#E2DFD7;
+  --t-ink:#1E1E1E; --t-ink-2:#4A4844; --t-ink-3:#5E5B56;
+  --t-line:#D2CEC4; --t-line-2:#8E8A80; --t-grid:rgba(30,30,30,.08);
+  --t-accent:#C64C28; --t-accent-2:#2E6BB5; --t-accent-ink:#FFFFFF;
+  --kc-cap:#FBFAF7; --kc-edge:#BDB8AC; --kc-esc:#C64C28;
+  --t-head-bg:#D9D5CB; --t-head-ink:#1E1E1E; --t-head-ink-2:#4A4844; --t-head-kick:#4A4844;
+  --t-head-rule:0; --t-hero-bg:#D9D5CB;
+  --t-foot-bg:#2A2926; --t-foot-ink:#E9E6DE; --t-foot-ink-2:#B8B3A8;
+  --t-f-display:"Rubik",Arial,sans-serif; --t-f-body:"Rubik",Arial,sans-serif;
+  --t-f-label:"Rubik",Arial,sans-serif; --t-f-num:"Rubik Mono One","Rubik",sans-serif; --t-f-chart:"Rubik",Arial,sans-serif;
+  --t-body-size:17.5px; --t-body-lh:1.66;
+  --t-h1-size:clamp(30px,5vw,58px); --t-h1-weight:700; --t-h1-track:-.01em; --t-h1-lh:1.5;
+  --t-h2-size:clamp(26px,3.4vw,36px); --t-h2-weight:700; --t-h2-track:-.015em;
+  --t-label-size:12px; --t-label-track:.08em; --t-label-weight:700; --t-label-ink:#4A4844;
+  --t-radius:7px; --t-fig-border:1px solid #D2CEC4; --t-cap-rule:1px solid #D2CEC4; --t-tip-border:1px solid #8E8A80;
+  --t-chip-on-bg:#C64C28; --t-chip-on-ink:#FFFFFF;
+  /* the keyboard drawing and its heat */
+  --hot:#E4572E; --cool:#2E6BB5; --good:#2E8B57; --warn:#B88400;
+  --cap:#FBFAF7; --cap-edge:#C9C4B8; --cap-ink:#1E1E1E;
+}
+/* The title, cut into keys: every line of it is its own row of caps. */
+header.hero{padding-block:56px 40px; border-bottom:6px solid #BDB8AC}
+header.hero h1{display:inline; background:var(--kc-cap); border:1px solid #BDB8AC; border-bottom:6px solid #BDB8AC;
+  border-radius:8px; padding:.06em .32em .02em; box-decoration-break:clone; -webkit-box-decoration-break:clone}
+header.hero .eyebrow,.eyebrow{display:inline-flex; background:var(--kc-cap); border:1px solid #BDB8AC;
+  border-bottom-width:4px; border-radius:6px; padding:5px 11px 4px; color:#1E1E1E}
+header.hero .eyebrow::after,.eyebrow::after{display:none}
+/* the label is its own key, on its own row above the title's */
+header.hero .eyebrow{display:flex; width:fit-content; margin-bottom:16px}
+section .eyebrow{background:var(--kc-esc); border-color:#9C3A1D; color:#FFFFFF}
+.hero-card{background:var(--kc-cap); border:1px solid #BDB8AC; border-bottom:6px solid #BDB8AC}
+.hero-grid{margin-top:26px}
+
+.chip{background:var(--kc-cap); border:1px solid #BDB8AC; border-bottom-width:4px; transition:transform .08s}
+.chip[aria-pressed="true"]{transform:translateY(2px); border-bottom-width:2px}
+.panel{background:#D9D5CB; border:1px solid #BDB8AC; border-radius:12px}
+figure{border-bottom:5px solid #BDB8AC}
+.fig-title{font-weight:700}
+.stat{box-shadow:none; border:1px solid #BDB8AC; border-bottom-width:5px; border-radius:7px}
+.stats{gap:8px}
+.stat b{font-size:clamp(20px,2.6vw,28px); letter-spacing:-.02em}
+.note{border-left:5px solid var(--kc-esc); background:var(--kc-cap); border-radius:0 7px 7px 0; padding:10px 14px}
+.pull{font-weight:800; letter-spacing:-.02em}
+section+section{border-top:1px solid #D2CEC4}
+footer a{color:#FFFFFF}
+/* The heat colours are for marks.  Where they set text -- the best and
+   worst cells, the self-check, the coverage warning -- they are darkened
+   until they read on the case grey; the drawing keeps the bright ones. */
+td.best{color:#226841} td.worst{color:#A03D20}
+#xcheck{--good:#226841; --hot:#A03D20}
+.note{--warn:#795700}
+
 </style>
 </head>
 <body>
@@ -168,6 +441,7 @@ footer{padding:44px 0 66px; border-top:1px solid var(--rule); background:var(--s
 <div class="tip" id="tip"></div>
 
 <header class="hero">
+<div class="look-art" aria-hidden="true"></div>
   <div class="wide">
     <div class="eyebrow">Keyboard layouts, measured</div>
     <h1>The layout under<br>your hands</h1>
@@ -365,7 +639,7 @@ footer{padding:44px 0 66px; border-top:1px solid var(--rule); background:var(--s
 
 <footer>
   <div class="wrap">
-    <p class="srcs" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs back-home" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
     <p class="srcs">
       <b>Sources.</b> Text: Project Gutenberg (public domain) &mdash; Austen, <i>Pride and
       Prejudice</i>; Melville, <i>Moby-Dick</i>; Carroll, <i>Alice's Adventures in Wonderland</i>;
@@ -594,7 +868,7 @@ function drawKeyboard(){
       fill:mix(capC, edgeC, 0.55), stroke:edgeC, "stroke-width":0.014, opacity:0.5}));
     if (lab){
       const t=el("text",{x:x+0.16,y:r+0.62,"font-size":0.17,fill:inkC,opacity:0.45,
-        "font-family":"IBM Plex Mono, monospace"}); t.textContent=lab; g.appendChild(t);
+        "font-family":"Rubik, monospace"}); t.textContent=lab; g.appendChild(t);
     }
   }
   // space bar
@@ -620,7 +894,7 @@ function drawKeyboard(){
       kg.appendChild(el("rect",{x:x+0.36,y:y+0.78,width:0.28,height:0.035,rx:0.02,
         fill:inkC,opacity:0.5}));
     const t = el("text",{x:x+0.5,y:y+0.63,"text-anchor":"middle","font-size":0.34,
-      fill:inkC,"font-family":"IBM Plex Mono, monospace","font-weight":500,
+      fill:inkC,"font-family":"Rubik, monospace","font-weight":500,
       "pointer-events":"none"});
     t.textContent = ch === " " ? "" : ch;
     kg.appendChild(t);

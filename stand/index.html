@@ -1,15 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-look="survey" data-page="stand">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
 <meta name="description" content="Where Does My Salary Put Me?">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%93%8D%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3E%E0%A4%A4%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>Where Does My Salary Put Me?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..800,0..100,0..1&family=Source+Sans+3:wght@300;400;500;600;700&display=swap">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400;0,600;0,800;1,400&amp;family=Overpass+Mono:wght@400;600&amp;family=Noto+Sans+Devanagari:wght@400;600&amp;display=swap">
 <style>
 :root{
   color-scheme: light;
@@ -27,7 +29,7 @@
   --field:#FFFFFF; --field-rule:#C2C2CD;
   --measure:65ch; --wide:1120px;
 }
-@media (prefers-color-scheme: dark){
+@media not all{
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -41,7 +43,7 @@
     --field:#15151B; --field-rule:#3A3A46;
   }
 }
-:root[data-theme="dark"]{
+:root[data-theme="dark"][data-look-off]{
   color-scheme: dark;
   --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
   --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
@@ -56,14 +58,14 @@
 *{box-sizing:border-box}
 body{
   margin:0; background:var(--ground); color:var(--ink);
-  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:var(--t-f-body);
   font-weight:400; font-size:18.5px; line-height:1.66;
   -webkit-font-smoothing:antialiased;
 }
-h1,h2,h3{margin:0; font-family:"Fraunces","Georgia",serif;
+h1,h2,h3{margin:0; font-family:var(--t-f-display);
   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
   letter-spacing:-.012em}
-.mono,code{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.mono,code{font-family:var(--t-f-label)}
 .wrap{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
 .wide{max-width:var(--wide); margin-inline:auto; padding-inline:24px}
 section{padding-block:clamp(38px,5.5vw,68px)}
@@ -73,7 +75,7 @@ a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2);
 a:hover{text-decoration-color:var(--accent)}
 :focus-visible{outline:2px solid var(--alt); outline-offset:3px; border-radius:3px}
 
-.eyebrow{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.2em;
+.eyebrow{font-family:var(--t-f-label); font-size:11px; letter-spacing:.2em;
   text-transform:uppercase; color:var(--ink-3);
   display:flex; align-items:center; gap:12px; margin-bottom:16px}
 .eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
@@ -88,10 +90,10 @@ header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
 h1{font-size:clamp(34px,6vw,70px); line-height:.99; font-weight:800;
    font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:14ch; margin-bottom:.3em}
 .sub{max-width:56ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
-.kicker{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.18em;
+.kicker{font-family:var(--t-f-label); font-size:11px; letter-spacing:.18em;
   text-transform:uppercase; color:var(--ink-3); margin-bottom:20px}
 .devanagari{font-size:.6em; color:var(--ink-3); letter-spacing:0;
-  font-family:"Source Sans 3",sans-serif; font-weight:400; display:block;
+  font-family:var(--t-f-body); font-weight:400; display:block;
   margin-top:.55em; font-variation-settings:normal}
 
 .tool{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
@@ -104,7 +106,7 @@ h1{font-size:clamp(34px,6vw,70px); line-height:.99; font-weight:800;
 
 .field{margin-bottom:17px}
 .field:last-child{margin-bottom:0}
-label.lab{display:block; font-family:"DM Mono",monospace; font-size:11px;
+label.lab{display:block; font-family:var(--t-f-label); font-size:11px;
   letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
   margin-bottom:7px}
 input[type=text],input[type=number],select{
@@ -133,10 +135,10 @@ input:focus,select:focus{border-color:var(--accent); outline:none;
   box-shadow:var(--shadow-lg); overflow:hidden; position:sticky; top:20px}
 .answer .top{padding:24px 24px 20px; background:linear-gradient(180deg,
   color-mix(in oklab,var(--accent) 8%,var(--surface)),var(--surface))}
-.big{font-family:"Fraunces",Georgia,serif; font-weight:800; line-height:1;
+.big{font-family:var(--t-f-display); font-weight:800; line-height:1;
   font-size:clamp(40px,5.6vw,58px); letter-spacing:-.022em;
   font-variant-numeric:tabular-nums; margin:2px 0 6px}
-.big .unit{font-family:"Source Sans 3",sans-serif; font-weight:500;
+.big .unit{font-family:var(--t-f-body); font-weight:500;
   font-size:.30em; letter-spacing:0; color:var(--ink-3); margin-left:.3em}
 .exact{font-size:16px; color:var(--ink-2); line-height:1.45}
 .ppbar{height:11px; border-radius:6px; margin:16px 0 7px; position:relative;
@@ -144,7 +146,7 @@ input:focus,select:focus{border-color:var(--accent); outline:none;
 .ppbar i{position:absolute; top:-4px; width:3px; height:19px; background:var(--you);
   border-radius:2px; transform:translateX(-50%)}
 .ppends{display:flex; justify-content:space-between;
-  font-family:"DM Mono",monospace; font-size:12.5px; color:var(--ink-3)}
+  font-family:var(--t-f-label); font-size:12.5px; color:var(--ink-3)}
 
 .rows{border-top:1px solid var(--rule)}
 .row{display:flex; justify-content:space-between; align-items:baseline; gap:14px;
@@ -153,7 +155,7 @@ input:focus,select:focus{border-color:var(--accent); outline:none;
 .row .k{color:var(--ink-2)}
 .row .k em{font-style:normal; color:var(--ink-3); font-size:13.5px; display:block;
   line-height:1.35}
-.row .v{font-family:"DM Mono",monospace; font-size:15px; white-space:nowrap;
+.row .v{font-family:var(--t-f-label); font-size:15px; white-space:nowrap;
   font-variant-numeric:tabular-nums}
 .row.tot{background:var(--surface-2); font-weight:600}
 .flag{margin:0 24px 20px; padding:11px 13px; border-radius:9px; font-size:14.5px;
@@ -165,7 +167,7 @@ input:focus,select:focus{border-color:var(--accent); outline:none;
 .acts{display:flex; gap:10px; padding:16px 24px 20px; border-top:1px solid var(--rule)}
 .acts .cta{font-size:14.5px; padding:9px 12px}
 #shareOut{margin:0 24px 18px; width:calc(100% - 48px);
-  font-family:"DM Mono",monospace; font-size:12.5px}
+  font-family:var(--t-f-label); font-size:12.5px}
 
 .fig{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
   box-shadow:var(--shadow); padding:20px 20px 14px; position:relative}
@@ -174,13 +176,13 @@ input:focus,select:focus{border-color:var(--accent); outline:none;
 .fig svg{display:block; width:100%; height:auto; overflow:visible}
 .gridline{stroke:var(--grid); stroke-width:1}
 .axisline{stroke:var(--rule-2); stroke-width:1}
-.axistext{font-family:"DM Mono",monospace; font-size:10px; fill:var(--ink-3)}
-.axistitle{font-family:"Source Sans 3",sans-serif; font-size:11.5px; fill:var(--ink-3)}
+.axistext{font-family:var(--t-f-label); font-size:10px; fill:var(--ink-3)}
+.axistitle{font-family:var(--t-f-body); font-size:11.5px; fill:var(--ink-3)}
 .bar{fill:var(--mark-soft)}
 .bar.under{fill:var(--mark-dim)}
 .youline{stroke:var(--you); stroke-width:2}
 .povline{stroke:var(--pov); stroke-width:1.5; stroke-dasharray:4 3}
-.figlab{font-family:"Source Sans 3",sans-serif; font-size:11px; fill:var(--ink-2);
+.figlab{font-family:var(--t-f-body); font-size:11px; fill:var(--ink-2);
   paint-order:stroke; stroke:var(--surface); stroke-width:3px; stroke-linejoin:round}
 .figlab.you{fill:var(--ink); font-weight:600}
 .figlab.pov{fill:var(--pov)}
@@ -199,18 +201,18 @@ input:focus,select:focus{border-color:var(--accent); outline:none;
    stranded empty cell showing the grid's own background. */
 .stats.pair{grid-template-columns:repeat(2,minmax(0,1fr))}
 .stat{background:var(--surface); padding:15px 16px}
-.stat .n{font-family:"DM Mono",monospace; font-size:23px; line-height:1.1;
+.stat .n{font-family:var(--t-f-label); font-size:23px; line-height:1.1;
   font-variant-numeric:tabular-nums; margin-bottom:3px}
 .stat .l{font-size:13px; color:var(--ink-3); line-height:1.35}
 
 table{width:100%; border-collapse:collapse; font-size:15px}
-th{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+th{font-family:var(--t-f-label); font-size:10.5px; letter-spacing:.12em;
   text-transform:uppercase; color:var(--ink-3); font-weight:400; text-align:right;
   padding:0 0 8px; border-bottom:1px solid var(--rule)}
 th:first-child{text-align:left}
 td{padding:8px 0; border-bottom:1px solid var(--rule); text-align:right;
-  font-family:"DM Mono",monospace; font-variant-numeric:tabular-nums; font-size:14.5px}
-td:first-child{text-align:left; font-family:"Source Sans 3",sans-serif; font-size:15.5px}
+  font-family:var(--t-f-label); font-variant-numeric:tabular-nums; font-size:14.5px}
+td:first-child{text-align:left; font-family:var(--t-f-body); font-size:15.5px}
 tr:last-child td{border-bottom:0}
 tr.you td{background:color-mix(in oklab,var(--accent) 11%,var(--surface));
   font-weight:600; color:var(--ink)}
@@ -241,7 +243,7 @@ button.cta.ghost:hover{border-color:var(--accent); filter:none}
   background:var(--surface-2); border:1px solid var(--rule); line-height:1.5}
 .done.on{display:block}
 .demo{margin-top:13px; font-size:13px; color:var(--ink-3); line-height:1.45}
-textarea.raw{width:100%; margin-top:12px; font-family:"DM Mono",monospace;
+textarea.raw{width:100%; margin-top:12px; font-family:var(--t-f-label);
   font-size:13px; line-height:1.5; color:var(--ink); background:var(--field);
   border:1px solid var(--field-rule); border-radius:9px; padding:11px 12px;
   resize:vertical}
@@ -253,7 +255,7 @@ a.nextcard{display:block; text-decoration:none; background:var(--surface);
 a.nextcard:hover{transform:translateY(-2px); border-color:var(--rule-2)}
 a.nextcard h3{margin:0 0 .3em; font-size:21px}
 a.nextcard p{margin:0 0 14px; font-size:15.5px; color:var(--ink-2); line-height:1.45}
-a.nextcard .go{font-family:"DM Mono",monospace; font-size:11.5px; letter-spacing:.1em;
+a.nextcard .go{font-family:var(--t-f-label); font-size:11.5px; letter-spacing:.1em;
   text-transform:uppercase; color:var(--ink-3)}
 a.nextcard:hover .go{color:var(--accent)}
 
@@ -298,16 +300,292 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   td:first-child{font-size:14.5px}
 }
 </style>
+<style>
+/* ===================================================================== base
+   What every page's look is built on.  build_site.py appends this, then the
+   page's own look from theme/looks/, after the page's own stylesheet, so
+   both win any tie with it.
+
+   It does two things.  It bridges the tokens every page already uses
+   (--ground, --surface, --ink, --rule ...) to a small set of theme tokens
+   (--t-*), so a look recolours a whole page by setting a dozen values.  And
+   it turns off what made every page look alike -- the Fraunces display face,
+   the small monospaced labels with a rule running off them, the soft shadows
+   and the rounded cards -- and points the same components at the theme's own
+   faces and lines instead.
+
+   Each look is a single deliberate appearance, light or dark as its subject
+   asks, so the bridge is written at a specificity (:root three times) that
+   beats the dark-mode token blocks inside every page's own stylesheet. */
+
+:root:root:root{
+  color-scheme: var(--t-scheme, light);
+  /* defaults, which a look overrides */
+  --t-bg:#FFFFFF; --t-paper:#FFFFFF; --t-paper-2:#F4F4F2;
+  --t-ink:#151515; --t-ink-2:#444444; --t-ink-3:#777777;
+  --t-line:#DCDCDC; --t-line-2:#8A8A8A; --t-grid:rgba(0,0,0,.08);
+  --t-accent:#151515; --t-accent-2:#555555; --t-accent-ink:#FFFFFF;
+  --t-head-bg:var(--t-paper-2); --t-head-ink:var(--t-ink); --t-head-ink-2:var(--t-ink-2);
+  --t-head-kick:var(--t-ink-3); --t-head-rule:1px solid var(--t-line);
+  --t-hero-bg:var(--t-paper-2);
+  --t-foot-bg:var(--t-paper-2); --t-foot-ink:var(--t-ink-2); --t-foot-ink-2:var(--t-ink-3);
+  --t-f-display:Georgia,serif; --t-f-body:system-ui,sans-serif; --t-f-label:var(--t-f-body);
+  --t-f-num:var(--t-f-display); --t-f-chart:var(--t-f-label);
+  --t-f-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --t-body-size:18px; --t-body-lh:1.62;
+  --t-h1-size:clamp(38px,6.4vw,80px); --t-h1-weight:700; --t-h1-case:none; --t-h1-track:-.01em; --t-h1-lh:1;
+  --t-h2-size:clamp(28px,3.8vw,40px); --t-h2-weight:700; --t-h2-case:none; --t-h2-track:-.005em; --t-h2-lh:1.08;
+  --t-h3-weight:600;
+  --t-label-size:12px; --t-label-case:uppercase; --t-label-track:.12em; --t-label-weight:600;
+  --t-label-ink:var(--t-ink-3); --t-eyebrow-rule:var(--t-line);
+  --t-radius:0; --t-fig-border:1px solid var(--t-line); --t-cap-rule:1px solid var(--t-line);
+  --t-tip-border:1px solid var(--t-line-2);
+  --t-chip-on-bg:var(--t-ink); --t-chip-on-ink:var(--t-bg);
+
+  /* the bridge */
+  --ground:var(--t-bg); --surface:var(--t-paper); --surface-2:var(--t-paper-2); --sunk:var(--t-hero-bg);
+  --ink:var(--t-ink); --ink-2:var(--t-ink-2); --ink-3:var(--t-ink-3);
+  --rule:var(--t-line); --rule-2:var(--t-line-2); --grid:var(--t-grid);
+  --accent:var(--t-accent); --alt:var(--t-accent-2);
+  --shadow:none; --shadow-lg:none;
+  --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+}
+
+/* Several looks are set in faces cut in one weight (a typewriter, a terminal's
+   pixel face, a seventeenth-century roman); asked for bold, a browser smears a fake one.
+   It may still slant a face that has no italic, but never fakes a weight. */
+html{background:var(--t-bg); font-synthesis:style}
+body{background:var(--t-bg); color:var(--t-ink); font-family:var(--t-f-body);
+  font-size:var(--t-body-size); line-height:var(--t-body-lh)}
+h1,h2,h3{font-family:var(--t-f-display); font-variation-settings:normal}
+h1{font-size:var(--t-h1-size); font-weight:var(--t-h1-weight); text-transform:var(--t-h1-case);
+  letter-spacing:var(--t-h1-track); line-height:var(--t-h1-lh)}
+h2{font-size:var(--t-h2-size); font-weight:var(--t-h2-weight); text-transform:var(--t-h2-case);
+  letter-spacing:var(--t-h2-track); line-height:var(--t-h2-lh)}
+h3{font-weight:var(--t-h3-weight); letter-spacing:0}
+h1,h2,h3,.fig-title{text-wrap:balance}
+.mono{font-family:var(--t-f-label)}
+code,kbd,samp,pre{font-family:var(--t-f-mono)}
+a:hover{text-decoration-color:var(--t-accent)}
+:focus-visible{outline-color:var(--t-accent)}
+
+.eyebrow,.kicker,.sech,label.lab{font-family:var(--t-f-label); font-size:var(--t-label-size);
+  text-transform:var(--t-label-case); letter-spacing:var(--t-label-track); font-weight:var(--t-label-weight);
+  color:var(--t-label-ink)}
+.eyebrow::after{background:var(--t-eyebrow-rule)}
+
+/* Headers: the house header, the canvas hero of the four oldest pages, and
+   the keyboards page's own. */
+header.top,header.hero{background:var(--t-head-bg); color:var(--t-head-ink); border-bottom:var(--t-head-rule)}
+header.top .kicker,header.hero .eyebrow{color:var(--t-head-kick)}
+header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
+#hero{background:var(--t-hero-bg); border-bottom:var(--t-head-rule)}
+.hero-sub{color:var(--t-ink-2)}
+.hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
+.look-art,.look-tag{display:none}
+/* Devanagari hangs vowel signs above and below the line, so a subtitle that
+   inherits a display face's tight leading collides with itself when it wraps.
+   A look whose faces have no Devanagari names one second in its body stack,
+   so it supplies only those glyphs. */
+.devanagari{font-family:var(--t-f-body); line-height:1.32}
+
+/* Surfaces lose their shadows and their rounding together. */
+figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
+.seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
+button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
+figure{background:var(--t-paper); border:var(--t-fig-border)}
+figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(--t-ink-3)}
+.fig-title{font-family:var(--t-f-display); font-variation-settings:normal}
+.fig-note{color:var(--t-ink-2)}
+.ctl{background:var(--t-paper-2); border-bottom:var(--t-cap-rule); font-family:var(--t-f-label)}
+.legend{font-family:var(--t-f-label)}
+.chip{font-family:var(--t-f-label)}
+.chip[aria-pressed="true"]{background:var(--t-chip-on-bg); color:var(--t-chip-on-ink); border-color:var(--t-chip-on-bg)}
+
+/* Chart text, in every naming the pages use. */
+.tk,.axlab,.dlab,.axistext,.axistitle,.figlab,.gl-lab,svg text{font-family:var(--t-f-chart)}
+.halo{stroke:var(--t-paper)}
+
+/* Stat tiles draw their own hairlines, so a row the last tile does not fill
+   shows paper, not a grey block.  220px puts four tiles two by two in a
+   reading column and five across in a wide one. */
+.stats{border:0; background:transparent; gap:1px;
+  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+.stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
+.stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
+.stat span,.stat .l{font-family:var(--t-f-label)}
+
+#tip,.tip{font-family:var(--t-f-body); border:var(--t-tip-border); background:var(--t-paper); color:var(--t-ink)}
+#tip b,.tip b{font-family:var(--t-f-label)}
+
+table{font-family:var(--t-f-body)}
+th,thead th{font-family:var(--t-f-label)}
+td{font-family:var(--t-f-body)}
+details{background:var(--t-paper); border-color:var(--t-line)}
+summary{font-family:var(--t-f-label)}
+
+footer{background:var(--t-foot-bg); color:var(--t-foot-ink); border-top:var(--t-head-rule)}
+/* Inside a coloured footer, and in a chart drawn straight onto a coloured
+   header, the paper inks become the band's own, so a page's inline var(--ink)
+   or var(--ink-3) -- a highlighted tick, a muted closing line -- stays legible
+   on a dark band.  Only the header's charts: a header can also hold paper
+   cards (the apartments stats), whose text must keep the paper inks. */
+header.top svg,header.hero svg{--ink:var(--t-head-ink); --ink-2:var(--t-head-ink-2); --ink-3:var(--t-head-ink-2)}
+footer{--ink:var(--t-foot-ink); --ink-2:var(--t-foot-ink-2); --ink-3:var(--t-foot-ink-2)}
+footer .srcs{color:var(--t-foot-ink-2)}
+
+/* Tools: the form, the answer panel and the lead form. */
+.card,.answer,.offer,a.nextcard{background:var(--t-paper); border-color:var(--t-line)}
+.answer .top{background:var(--t-paper-2)}
+.big .unit{font-family:var(--t-f-body)}
+.row .v,.ppends,td{font-variant-numeric:tabular-nums}
+.row .v,.ppends{font-family:var(--t-f-label)}
+/* background-color, not the shorthand: a select draws its chevron with background-image */
+input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea{
+  font-family:var(--t-f-body); background-color:var(--t-paper); border-color:var(--t-line-2); color:var(--t-ink)}
+input:focus,select:focus,textarea:focus{border-color:var(--t-accent); box-shadow:0 0 0 2px var(--t-accent)}
+button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:var(--t-f-label)}
+button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
+.seg{border-color:var(--t-line-2); background:var(--t-paper)}
+.seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
+.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+/* The segmented control clips its buttons to its own outline, which clipped
+   the focus ring with them: draw it inside the button, in the ink that shows
+   on the pressed one too. */
+.seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
+.seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
+.flag{background:var(--t-paper-2); border-color:var(--t-line)}
+a.nextcard .go,.go{font-family:var(--t-f-label)}
+
+/* A note a script fills later (the layout optimiser's, say) is empty until
+   then, and a look that gives notes a rule or a fill would draw a stray one. */
+.note:empty{display:none}
+
+/* The way home that build_site.py adds to every footer. */
+.back-home{font-family:var(--t-f-label)}
+
+/* Inline code holds the bulletins' mangled fragments, some of them long
+   unbroken strings; on a phone they may break anywhere rather than push the
+   page sideways. */
+@media(max-width:700px){code{white-space:normal; overflow-wrap:anywhere}}
+/* A source note can carry a formula held together with non-breaking spaces
+   (the sunspot smoothing), wider than any phone column: it may break anywhere
+   rather than push the page sideways.  On the narrowest phones a tool card's
+   table scrolls inside its card for the same reason. */
+@media(max-width:700px){.srcs{overflow-wrap:anywhere}}
+@media(max-width:380px){.card table{display:block; overflow-x:auto; max-width:100%}}
+
+/* Code inside a coloured footer takes the footer's ink rather than a paper
+   box, which on a dark band reads as a hole in it. */
+footer code{background:transparent; border-color:currentColor; color:inherit}
+
+/* Print.  Several tools promise a single clean printed page, and their own
+   print rules would lose to a look's coloured covers and patterned paper,
+   which come later in the cascade.  So in print every look keeps its type and
+   drops its paint: white paper, black ink, no art layers, no textures. */
+@media print{
+  html,body{background:#FFFFFF !important; border:0 !important; margin:0 !important}
+  body::before,body::after,.look-art,header.top::before,header.top::after,header.hero::before{display:none !important}
+  header.top,header.hero,#hero,footer,section,figure,.fig,.card,.answer,.offer,.stat,.stats,.answer .top,
+  header.top > .wrap,header.top > .wide,section .wrap{background:#FFFFFF !important; box-shadow:none !important;
+    transform:none !important; color:#000000 !important}
+  header.top,header.hero{border-bottom:1px solid #999999 !important}
+  header.top *,header.hero *,footer *{color:#000000 !important; text-shadow:none !important}
+  .eyebrow{background:none !important; color:#000000 !important; transform:none !important}
+  /* Backgrounds that survive the reset are small -- a section number's cell,
+     a pressed key, a pill -- and often carry white type, which would print as
+     nothing if the browser dropped them.  Glows go; figures in a look's
+     coloured lettering (the rate board's LEDs) print black. */
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  *,*::before,*::after{text-shadow:none !important}
+  .stat b,.stat span,.stat .n,.stat small{color:#000000 !important}
+  /* a chart drawn for a coloured header goes to the paper's black and greys */
+  header.top svg text,header.hero svg text{fill:#000000 !important}
+  header.top svg .sunk-halo,header.hero svg .sunk-halo{stroke:#FFFFFF !important}
+  header.top svg .bar,header.hero svg .bar{fill:#BBBBBB !important}
+  header.top svg .bar.cap,header.hero svg .bar.cap{fill:#000000 !important}
+  header.top svg .ax,header.top svg .ln,header.hero svg .ax,header.hero svg .ln{stroke:#666666 !important}
+}
+
+/* look: survey -- Nine Thousand Rupees a Month; Where Does My Salary Put Me?
+   fonts: https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400;0,600;0,800;1,400&family=Overpass+Mono:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap
+   chart-font: "Overpass Mono"
+
+   Both pages read the Nepal Living Standards Survey, which is a household
+   questionnaire before it is a dataset: an enumerator with a printed form,
+   section bars in the form's blue, numbered questions, boxes to write a
+   figure into, and a red pen for corrections.  So the page is that form.
+   Older survey rounds print in pale blue, the newest in the form's own ink. */
+
+:root:root:root{
+  --t-bg:#FFFFFF; --t-paper:#FFFFFF; --t-paper-2:#EAF1FA;
+  --t-ink:#121A26; --t-ink-2:#3B4757; --t-ink-3:#616D7E;
+  --t-line:#C7D6EA; --t-line-2:#1D4F91; --t-grid:rgba(29,79,145,.09);
+  --t-accent:#1D4F91; --t-accent-2:#D23B30; --t-accent-ink:#FFFFFF;
+  --sv-blue:#1D4F91; --sv-red:#D23B30; --sv-field:#EAF1FA;
+  --t-head-bg:#FFFFFF; --t-head-ink:#121A26; --t-head-ink-2:#3B4757; --t-head-kick:#FFFFFF;
+  --t-head-rule:3px solid #1D4F91; --t-hero-bg:#FFFFFF;
+  --t-foot-bg:#1D4F91; --t-foot-ink:#EAF1FA; --t-foot-ink-2:#BFD1EA;
+  --t-f-display:"Overpass","Noto Sans Devanagari",Arial,sans-serif; --t-f-body:"Overpass","Noto Sans Devanagari",Arial,sans-serif;
+  --t-f-label:"Overpass Mono",ui-monospace,monospace; --t-f-num:"Overpass Mono",ui-monospace,monospace;
+  --t-f-chart:"Overpass Mono",ui-monospace,monospace;
+  --t-body-size:17.5px; --t-body-lh:1.66;
+  --t-h1-size:clamp(36px,6vw,74px); --t-h1-weight:800; --t-h1-track:-.025em; --t-h1-lh:1;
+  --t-h2-size:clamp(26px,3.4vw,36px); --t-h2-weight:800; --t-h2-track:-.02em;
+  --t-label-size:12px; --t-label-track:.06em; --t-label-weight:600; --t-label-ink:#1D4F91;
+  --t-fig-border:1.5px solid #1D4F91; --t-cap-rule:1px solid #C7D6EA; --t-tip-border:1.5px solid #1D4F91;
+  --t-chip-on-bg:#1D4F91; --t-chip-on-ink:#FFFFFF;
+  /* income: survey rounds, oldest palest */
+  --sun:#D23B30; --y1995:#B8CDEA; --y2003:#7FA3D6; --y2010:#3E6FB7; --y2022:#1D4F91;
+  /* the salary tool */
+  --mark:#1D4F91; --mark-soft:rgba(29,79,145,.16); --mark-dim:rgba(29,79,145,.32); --pov:#D23B30;
+  --field:#EAF1FA; --field-rule:#1D4F91;
+}
+/* The header is the form's title block, with a row of code boxes. */
+header.top{position:relative}
+header.top .kicker{display:inline-block; background:#1D4F91; color:#FFFFFF; padding:5px 12px 3px}
+header.top .look-art{display:block; height:30px; margin:0 auto 18px; max-width:var(--wide);
+  padding-inline:24px; background:
+    repeating-linear-gradient(90deg,transparent 0 6px,#1D4F91 6px 7.5px,#EAF1FA 7.5px 30px,#1D4F91 30px 31.5px,transparent 31.5px 32px)
+    24px 0/256px 30px no-repeat}
+header.top .devanagari{color:var(--sv-red); font-weight:400}
+
+/* Sections are the form's sections: a blue bar with the section number. */
+body{counter-reset:sec}
+section .eyebrow{counter-increment:sec; background:#1D4F91; color:#FFFFFF; padding:6px 12px 4px; display:flex}
+section .eyebrow::before{content:"SECTION " counter(sec) "\00a0\00a0"; font-weight:600}
+.eyebrow::after{display:none}
+h2::before{content:counter(sec) ".1\00a0\00a0"; color:var(--sv-red); font-family:var(--t-f-label); font-size:.62em; vertical-align:.2em}
+
+figure{border:1.5px solid #1D4F91}
+.fig-head{background:#EAF1FA; border-bottom:1.5px solid #1D4F91; padding-bottom:14px}
+.fig-title{font-weight:800}
+figcaption{background:#FFFFFF}
+.stats{gap:10px}
+.stat{box-shadow:none; border:1.5px solid #1D4F91; background:#EAF1FA}
+.stat b{color:#1D4F91; font-weight:600}
+.note{border-left:4px solid var(--sv-red); background:#FFFFFF}
+.pull{font-weight:800}
+/* tool: the answer boxes are form fields */
+.card,.answer,.offer,a.nextcard,.fig{border:1.5px solid #1D4F91}
+.answer .top{background:#EAF1FA}
+.big{color:#1D4F91; font-weight:600}
+input[type=text],input[type=number],select{background-color:#EAF1FA; border:1.5px solid #1D4F91}
+label.lab{color:#1D4F91}
+footer a{color:#FFFFFF}
+
+</style>
 </head>
 <body>
 <script>window.STAND_DATA={"meta":{"survey":"LSS-IV","survey_priced_in":2022,"welfare":"consumption","pop":29705025,"hh_size":3.999,"gini":0.3002,"median_npr":9172,"mean_npr":10810,"poverty_month":6075.7,"poverty_rate":20.27,"min_wage":19550,"remit_gdp":26.0,"wage_share":21.4,"cpi_latest_year":"2025","deflator":0.899615,"ktm_pc_month":21943.2,"madhesh_pc_month":5985.7,"source":"World Bank PIP and the Nepal Living Standards Survey"},"curve":[{"p":0.5,"npr":2741},{"p":1.0,"npr":2929},{"p":2.0,"npr":3313},{"p":3.0,"npr":3588},{"p":4.0,"npr":3903},{"p":5.0,"npr":4088},{"p":6.0,"npr":4279},{"p":7.0,"npr":4442},{"p":8.0,"npr":4618},{"p":9.0,"npr":4791},{"p":10.0,"npr":4905},{"p":11.0,"npr":4991},{"p":12.0,"npr":5088},{"p":13.0,"npr":5193},{"p":14.0,"npr":5312},{"p":15.0,"npr":5431},{"p":16.0,"npr":5548},{"p":17.0,"npr":5662},{"p":18.0,"npr":5797},{"p":19.0,"npr":5922},{"p":20.0,"npr":6036},{"p":21.0,"npr":6171},{"p":22.0,"npr":6280},{"p":23.0,"npr":6366},{"p":24.0,"npr":6455},{"p":25.0,"npr":6551},{"p":26.0,"npr":6648},{"p":27.0,"npr":6753},{"p":28.0,"npr":6857},{"p":29.0,"npr":6961},{"p":30.0,"npr":7065},{"p":31.0,"npr":7164},{"p":32.0,"npr":7262},{"p":33.0,"npr":7360},{"p":34.0,"npr":7456},{"p":35.0,"npr":7557},{"p":36.0,"npr":7660},{"p":37.0,"npr":7765},{"p":38.0,"npr":7873},{"p":39.0,"npr":7981},{"p":40.0,"npr":8070},{"p":41.0,"npr":8159},{"p":42.0,"npr":8250},{"p":43.0,"npr":8361},{"p":44.0,"npr":8472},{"p":45.0,"npr":8595},{"p":46.0,"npr":8721},{"p":47.0,"npr":8838},{"p":48.0,"npr":8951},{"p":49.0,"npr":9064},{"p":50.0,"npr":9175},{"p":51.0,"npr":9286},{"p":52.0,"npr":9398},{"p":53.0,"npr":9510},{"p":54.0,"npr":9623},{"p":55.0,"npr":9734},{"p":56.0,"npr":9846},{"p":57.0,"npr":9966},{"p":58.0,"npr":10103},{"p":59.0,"npr":10238},{"p":60.0,"npr":10366},{"p":61.0,"npr":10493},{"p":62.0,"npr":10636},{"p":63.0,"npr":10789},{"p":64.0,"npr":10948},{"p":65.0,"npr":11113},{"p":66.0,"npr":11268},{"p":67.0,"npr":11402},{"p":68.0,"npr":11536},{"p":69.0,"npr":11696},{"p":70.0,"npr":11867},{"p":71.0,"npr":12040},{"p":72.0,"npr":12215},{"p":73.0,"npr":12414},{"p":74.0,"npr":12648},{"p":75.0,"npr":12913},{"p":76.0,"npr":13166},{"p":77.0,"npr":13368},{"p":78.0,"npr":13588},{"p":79.0,"npr":13857},{"p":80.0,"npr":14139},{"p":81.0,"npr":14444},{"p":82.0,"npr":14849},{"p":83.0,"npr":15192},{"p":84.0,"npr":15553},{"p":85.0,"npr":15932},{"p":86.0,"npr":16338},{"p":87.0,"npr":16852},{"p":88.0,"npr":17348},{"p":89.0,"npr":17910},{"p":90.0,"npr":18629},{"p":91.0,"npr":19324},{"p":92.0,"npr":19900},{"p":93.0,"npr":20542},{"p":94.0,"npr":21426},{"p":95.0,"npr":22742},{"p":96.0,"npr":24301},{"p":97.0,"npr":26713},{"p":98.0,"npr":29650},{"p":99.0,"npr":35300},{"p":99.5,"npr":45509}],"density":{"band":1000,"top":40000,"bars":[{"lo":0,"hi":1000,"mid":500.0,"share":3.4e-05,"people":1000},{"lo":1000,"hi":2000,"mid":1500.0,"share":0.000526,"people":15636},{"lo":2000,"hi":3000,"mid":2500.0,"share":0.011211,"people":333010},{"lo":3000,"hi":4000,"mid":3500.0,"share":0.033538,"people":996240},{"lo":4000,"hi":5000,"mid":4500.0,"share":0.065727,"people":1952419},{"lo":5000,"hi":6000,"mid":5500.0,"share":0.085817,"people":2549208},{"lo":6000,"hi":7000,"mid":6500.0,"share":0.096845,"people":2876769},{"lo":7000,"hi":8000,"mid":7500.0,"share":0.098373,"people":2922166},{"lo":8000,"hi":9000,"mid":8500.0,"share":0.09223,"people":2739703},{"lo":9000,"hi":10000,"mid":9500.0,"share":0.088161,"people":2618815},{"lo":10000,"hi":11000,"mid":10500.0,"share":0.070708,"people":2100368},{"lo":11000,"hi":12000,"mid":11500.0,"share":0.064516,"people":1916439},{"lo":12000,"hi":13000,"mid":12500.0,"share":0.045462,"people":1350452},{"lo":13000,"hi":14000,"mid":13500.0,"share":0.04202,"people":1248213},{"lo":14000,"hi":15000,"mid":14500.0,"share":0.029245,"people":868711},{"lo":15000,"hi":16000,"mid":15500.0,"share":0.027339,"people":812116},{"lo":16000,"hi":17000,"mid":16500.0,"share":0.021258,"people":631455},{"lo":17000,"hi":18000,"mid":17500.0,"share":0.018235,"people":541672},{"lo":18000,"hi":19000,"mid":18500.0,"share":0.01394,"people":414074},{"lo":19000,"hi":20000,"mid":19500.0,"share":0.01679,"people":498734},{"lo":20000,"hi":21000,"mid":20500.0,"share":0.013284,"people":394599},{"lo":21000,"hi":22000,"mid":21500.0,"share":0.009069,"people":269385},{"lo":22000,"hi":23000,"mid":22500.0,"share":0.007699,"people":228687},{"lo":23000,"hi":24000,"mid":23500.0,"share":0.006558,"people":194809},{"lo":24000,"hi":25000,"mid":24500.0,"share":0.004706,"people":139790},{"lo":25000,"hi":26000,"mid":25500.0,"share":0.003735,"people":110953},{"lo":26000,"hi":27000,"mid":26500.0,"share":0.00383,"people":113777},{"lo":27000,"hi":28000,"mid":27500.0,"share":0.003759,"people":111656},{"lo":28000,"hi":29000,"mid":28500.0,"share":0.003675,"people":109152},{"lo":29000,"hi":30000,"mid":29500.0,"share":0.00255,"people":75751},{"lo":30000,"hi":31000,"mid":30500.0,"share":0.002812,"people":83543},{"lo":31000,"hi":32000,"mid":31500.0,"share":0.001297,"people":38530},{"lo":32000,"hi":33000,"mid":32500.0,"share":0.001223,"people":36329},{"lo":33000,"hi":34000,"mid":33500.0,"share":0.001567,"people":46549},{"lo":34000,"hi":35000,"mid":34500.0,"share":0.001734,"people":51523},{"lo":35000,"hi":36000,"mid":35500.0,"share":0.000971,"people":28846},{"lo":36000,"hi":37000,"mid":36500.0,"share":0.000516,"people":15333},{"lo":37000,"hi":38000,"mid":37500.0,"share":0.000393,"people":11676},{"lo":38000,"hi":39000,"mid":38500.0,"share":0.000509,"people":15108},{"lo":39000,"hi":40000,"mid":39500.0,"share":0.000966,"people":28688}],"above":0.007175,"above_people":213139},"ladder":[{"nominal":19550,"real":17588,"per_person":4398,"label":"Minimum wage","src":"Nepal Gazette, Jul 2025","p":6.73,"below":1999148},{"nominal":17809,"real":23426,"per_person":5858,"label":"Mean employee earnings","src":"NLFS III, 2017/18","p":18.49,"below":5492459},{"nominal":30000,"real":30000,"per_person":7502,"label":"Rs 30,000 a month","src":null,"p":34.45,"below":10233381},{"nominal":73711,"real":66314,"per_person":16583,"label":"Joint secretary","src":"Civil service, FY 2083/84","p":86.48,"below":25688906},{"nominal":98425,"real":88548,"per_person":22142,"label":"Chief secretary","src":"Civil service, FY 2083/84","p":94.54,"below":28083131},{"nominal":100000,"real":100000,"per_person":25006,"label":"Rs 1 lakh a month","src":null,"p":96.29,"below":28602969},{"nominal":200000,"real":200000,"per_person":50013,"label":"Rs 2 lakh a month","src":null,"p":99.5,"below":29556500}],"rounds":[{"year":"1995","survey":"LSS-I","median":2494,"mean":3209,"gini":0.3521},{"year":"2003","survey":"LSS-II","median":3112,"mean":4660,"gini":0.4377},{"year":"2010","survey":"LSS-III","median":5172,"mean":6396,"gini":0.3284},{"year":"2022","survey":"LSS-IV","median":9172,"mean":10810,"gini":0.3002}],"land":{"median_npr_per_aana":4300000,"aana_sqft":342.25,"reference_aana":4.0}};</script>
 
 <header class="top">
+<div class="look-art" aria-hidden="true"></div>
   <div class="wide">
     <p class="kicker">Nepal Living Standards Survey &middot; 29.7 million people</p>
     <h1>Where does my salary put me?<!-- "Ma kaha chu?" -- ASCII-only
       fragment, so the Devanagari is numeric character references. -->
-      <span class="devanagari">&#2350; &#2325;&#2361;&#2366;&#2305; &#2331;&#2369;?</span></h1>
+      <span class="devanagari" lang="ne">&#2350; &#2325;&#2361;&#2366;&#2305; &#2331;&#2369;?</span></h1>
     <p class="sub">Nepal knows exactly how its money is distributed &mdash; four
       household surveys, the last of them covering the whole country &mdash; and
       almost nobody ever sees themselves on that curve. Put in what a household
@@ -365,7 +643,7 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
       <div>
         <div class="answer">
           <div class="top">
-            <p class="lab mono" style="font-family:'DM Mono',monospace; font-size:11px;
+            <p class="lab mono" style="font-family:'Overpass Mono',monospace; font-size:11px;
                letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
                margin:0 0 4px">Better off than</p>
             <div class="big" id="outPct">&mdash;<span class="unit">of Nepal</span></div>
@@ -545,7 +823,7 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
 
 <footer>
   <div class="wrap">
-    <p class="srcs" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs back-home" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
     <p class="srcs" id="srcs"></p>
   </div>
 </footer>

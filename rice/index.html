@@ -1,15 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-look="rationcard" data-page="rice">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#E3EBD3">
 <meta name="description" content="The Rice We Grow and Still Buy">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%8C%BE%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%A7%E0%A4%BE%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>The Rice We Grow and Still Buy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..800,0..100,0..1&family=Source+Sans+3:wght@300;400;500;600&display=swap">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;family=Public+Sans:ital,wght@0,400;0,600;0,800;1,400&amp;display=swap">
 <style>
 :root{
   color-scheme: light;
@@ -36,7 +38,7 @@
   --grid:rgba(26,25,19,.07);
   --measure:65ch; --wide:1120px;
 }
-@media (prefers-color-scheme: dark){
+@media not all{
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#15150F; --surface:#1D1C16; --surface-2:#24231C; --sunk:#0D0D09;
@@ -52,7 +54,7 @@
     --grid:rgba(237,235,226,.09);
   }
 }
-:root[data-theme="dark"]{
+:root[data-theme="dark"][data-look-off]{
   color-scheme: dark;
   --ground:#15150F; --surface:#1D1C16; --surface-2:#24231C; --sunk:#0D0D09;
   --ink:#EDEBE2; --ink-2:#A8A69B; --ink-3:#75736A; --rule:#312F27; --rule-2:#403E34;
@@ -66,14 +68,14 @@
 *{box-sizing:border-box}
 body{
   margin:0; background:var(--ground); color:var(--ink);
-  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:var(--t-f-body);
   font-weight:400; font-size:18.5px; line-height:1.66;
   -webkit-font-smoothing:antialiased;
 }
-h1,h2,h3{margin:0; font-family:"Fraunces","Georgia",serif;
+h1,h2,h3{margin:0; font-family:var(--t-f-display);
   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
   letter-spacing:-.012em}
-.mono,code{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.mono,code{font-family:var(--t-f-label)}
 .tnum{font-variant-numeric:tabular-nums}
 
 .wrap{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
@@ -85,7 +87,7 @@ a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2);
 a:hover{text-decoration-color:var(--accent)}
 :focus-visible{outline:2px solid var(--alt); outline-offset:3px; border-radius:2px}
 
-.eyebrow{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.2em;
+.eyebrow{font-family:var(--t-f-label); font-size:11px; letter-spacing:.2em;
   text-transform:uppercase; color:var(--ink-3);
   display:flex; align-items:center; gap:12px; margin-bottom:16px}
 .eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
@@ -99,13 +101,13 @@ header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
 h1{font-size:clamp(40px,7.2vw,88px); line-height:.97; font-weight:800;
    font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:14ch; margin-bottom:.3em}
 .sub{max-width:52ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
-.kicker{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.18em;
+.kicker{font-family:var(--t-f-label); font-size:11px; letter-spacing:.18em;
   text-transform:uppercase; color:var(--ink-3); margin-bottom:22px}
 
 figure{margin:0; background:var(--surface); border:1px solid var(--rule);
   border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
 .fig-head{padding:20px 22px 0}
-.fig-title{font-family:"Fraunces",Georgia,serif; font-weight:600; font-size:17px;
+.fig-title{font-family:var(--t-f-display); font-weight:600; font-size:17px;
   font-variation-settings:"SOFT" 0,"WONK" 0,"opsz" 24; margin-bottom:4px}
 .fig-note{font-size:14px; color:var(--ink-2); line-height:1.45; max-width:80ch}
 .fig-body{padding:14px 22px 20px}
@@ -115,18 +117,18 @@ figcaption{padding:14px 22px 18px; border-top:1px solid var(--rule);
 svg{display:block; width:100%; height:auto; overflow:visible}
 .gl{stroke:var(--grid); stroke-width:1; fill:none}
 .ax{stroke:var(--rule-2); stroke-width:1; fill:none}
-.tk{font-family:"DM Mono",monospace; font-size:10.5px; fill:var(--ink-3);
+.tk{font-family:var(--t-f-label); font-size:10.5px; fill:var(--ink-3);
     font-variant-numeric:tabular-nums}
-.axlab{font-family:"DM Mono",monospace; font-size:10px; fill:var(--ink-3);
+.axlab{font-family:var(--t-f-label); font-size:10px; fill:var(--ink-3);
     letter-spacing:.14em; text-transform:uppercase}
-.dlab{font-family:"DM Mono",monospace; font-size:11px; fill:var(--ink-2);
+.dlab{font-family:var(--t-f-label); font-size:11px; fill:var(--ink-2);
     font-variant-numeric:tabular-nums}
 .halo{paint-order:stroke; stroke:var(--surface); stroke-width:3.5px;
       stroke-linejoin:round}
 
 .ctl{display:flex; flex-wrap:wrap; gap:9px 16px; align-items:center; padding:12px 22px;
   border-bottom:1px solid var(--rule); background:var(--surface-2);
-  font-family:"DM Mono",monospace; font-size:11.5px; color:var(--ink-2)}
+  font-family:var(--t-f-label); font-size:11.5px; color:var(--ink-2)}
 .chip{border:1px solid var(--rule-2); background:transparent; color:var(--ink-2);
   font:inherit; padding:4px 11px; border-radius:3px; cursor:pointer; display:inline-flex;
   align-items:center; gap:7px; transition:background .15s,border-color .15s,color .15s}
@@ -134,7 +136,7 @@ svg{display:block; width:100%; height:auto; overflow:visible}
 .chip:hover{border-color:var(--ink-3)}
 
 .legend{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center;
-  font-family:"DM Mono",monospace; font-size:11.5px; color:var(--ink-2);
+  font-family:var(--t-f-label); font-size:11.5px; color:var(--ink-2);
   padding:0 22px 14px}
 .legend span{display:inline-flex; align-items:center; gap:7px}
 .legend i{width:18px; height:3px; border-radius:2px; flex:none; font-style:normal}
@@ -146,9 +148,9 @@ svg{display:block; width:100%; height:auto; overflow:visible}
   background:var(--rule); border:1px solid var(--rule); border-radius:3px; overflow:hidden;
   margin-block:30px}
 .stat{background:var(--surface); padding:16px 18px}
-.stat b{display:block; font-family:"Source Sans 3",sans-serif; font-weight:600;
+.stat b{display:block; font-family:var(--t-f-body); font-weight:600;
   font-size:clamp(25px,3.1vw,33px); line-height:1.05; margin-bottom:5px; letter-spacing:-.02em}
-.stat span{font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.12em;
+.stat span{font-family:var(--t-f-label); font-size:10px; letter-spacing:.12em;
   text-transform:uppercase; color:var(--ink-3); line-height:1.4; display:block}
 .stat.n b{color:var(--nep)} .stat.a b{color:var(--accent)}
 
@@ -157,14 +159,14 @@ svg{display:block; width:100%; height:auto; overflow:visible}
   box-shadow:var(--shadow); padding:9px 12px; font-size:13px; line-height:1.45;
   max-width:300px; color:var(--ink)}
 #tip.on{opacity:1}
-#tip b{font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.1em;
+#tip b{font-family:var(--t-f-label); font-size:11px; letter-spacing:.1em;
   color:var(--ink-3); font-weight:400; display:block; margin-bottom:3px}
 #tip .v{font-variant-numeric:tabular-nums}
 #tip .nm{font-weight:600; letter-spacing:-.01em}
 
 details{border:1px solid var(--rule); border-radius:3px; background:var(--surface);
   padding:0 18px; margin-block:26px}
-summary{cursor:pointer; padding:14px 0; font-family:"DM Mono",monospace;
+summary{cursor:pointer; padding:14px 0; font-family:var(--t-f-label);
   font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2)}
 summary:hover{color:var(--ink)}
 .tablewrap{overflow-x:auto; padding-bottom:18px}
@@ -172,7 +174,7 @@ table{border-collapse:collapse; font-size:14px; width:100%; min-width:460px}
 th,td{text-align:right; padding:6px 10px; border-bottom:1px solid var(--rule);
   font-variant-numeric:tabular-nums}
 th:first-child,td:first-child{text-align:left; font-variant-numeric:normal}
-thead th{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+thead th{font-family:var(--t-f-label); font-size:10.5px; letter-spacing:.1em;
   text-transform:uppercase; color:var(--ink-3); font-weight:400; white-space:nowrap}
 
 /* The limitation block leads the page, so it is set as a panel rather than a
@@ -183,9 +185,9 @@ thead th{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.1em;
 .caveat h3{margin:0 0 .55em; font-size:19px}
 .caveat h3+p{margin-top:0}
 .caveat p:last-child{margin-bottom:0}
-.caveat .lbl{font-family:"DM Mono",monospace; font-size:10.5px; letter-spacing:.14em;
+.caveat .lbl{font-family:var(--t-f-label); font-size:10.5px; letter-spacing:.14em;
   text-transform:uppercase; color:var(--warn); display:block; margin-bottom:10px}
-.flagtag{font-family:"DM Mono",monospace; font-size:12px; border:1px solid var(--rule-2);
+.flagtag{font-family:var(--t-f-label); font-size:12px; border:1px solid var(--rule-2);
   border-radius:2px; padding:1px 6px; background:var(--surface-2); white-space:nowrap}
 
 .srcs{font-size:14px; color:var(--ink-3); line-height:1.6}
@@ -204,11 +206,285 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   *{animation-duration:.01ms !important; transition-duration:.01ms !important}
 }
 </style>
+<style>
+/* ===================================================================== base
+   What every page's look is built on.  build_site.py appends this, then the
+   page's own look from theme/looks/, after the page's own stylesheet, so
+   both win any tie with it.
+
+   It does two things.  It bridges the tokens every page already uses
+   (--ground, --surface, --ink, --rule ...) to a small set of theme tokens
+   (--t-*), so a look recolours a whole page by setting a dozen values.  And
+   it turns off what made every page look alike -- the Fraunces display face,
+   the small monospaced labels with a rule running off them, the soft shadows
+   and the rounded cards -- and points the same components at the theme's own
+   faces and lines instead.
+
+   Each look is a single deliberate appearance, light or dark as its subject
+   asks, so the bridge is written at a specificity (:root three times) that
+   beats the dark-mode token blocks inside every page's own stylesheet. */
+
+:root:root:root{
+  color-scheme: var(--t-scheme, light);
+  /* defaults, which a look overrides */
+  --t-bg:#FFFFFF; --t-paper:#FFFFFF; --t-paper-2:#F4F4F2;
+  --t-ink:#151515; --t-ink-2:#444444; --t-ink-3:#777777;
+  --t-line:#DCDCDC; --t-line-2:#8A8A8A; --t-grid:rgba(0,0,0,.08);
+  --t-accent:#151515; --t-accent-2:#555555; --t-accent-ink:#FFFFFF;
+  --t-head-bg:var(--t-paper-2); --t-head-ink:var(--t-ink); --t-head-ink-2:var(--t-ink-2);
+  --t-head-kick:var(--t-ink-3); --t-head-rule:1px solid var(--t-line);
+  --t-hero-bg:var(--t-paper-2);
+  --t-foot-bg:var(--t-paper-2); --t-foot-ink:var(--t-ink-2); --t-foot-ink-2:var(--t-ink-3);
+  --t-f-display:Georgia,serif; --t-f-body:system-ui,sans-serif; --t-f-label:var(--t-f-body);
+  --t-f-num:var(--t-f-display); --t-f-chart:var(--t-f-label);
+  --t-f-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --t-body-size:18px; --t-body-lh:1.62;
+  --t-h1-size:clamp(38px,6.4vw,80px); --t-h1-weight:700; --t-h1-case:none; --t-h1-track:-.01em; --t-h1-lh:1;
+  --t-h2-size:clamp(28px,3.8vw,40px); --t-h2-weight:700; --t-h2-case:none; --t-h2-track:-.005em; --t-h2-lh:1.08;
+  --t-h3-weight:600;
+  --t-label-size:12px; --t-label-case:uppercase; --t-label-track:.12em; --t-label-weight:600;
+  --t-label-ink:var(--t-ink-3); --t-eyebrow-rule:var(--t-line);
+  --t-radius:0; --t-fig-border:1px solid var(--t-line); --t-cap-rule:1px solid var(--t-line);
+  --t-tip-border:1px solid var(--t-line-2);
+  --t-chip-on-bg:var(--t-ink); --t-chip-on-ink:var(--t-bg);
+
+  /* the bridge */
+  --ground:var(--t-bg); --surface:var(--t-paper); --surface-2:var(--t-paper-2); --sunk:var(--t-hero-bg);
+  --ink:var(--t-ink); --ink-2:var(--t-ink-2); --ink-3:var(--t-ink-3);
+  --rule:var(--t-line); --rule-2:var(--t-line-2); --grid:var(--t-grid);
+  --accent:var(--t-accent); --alt:var(--t-accent-2);
+  --shadow:none; --shadow-lg:none;
+  --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+}
+
+/* Several looks are set in faces cut in one weight (a typewriter, a terminal's
+   pixel face, a seventeenth-century roman); asked for bold, a browser smears a fake one.
+   It may still slant a face that has no italic, but never fakes a weight. */
+html{background:var(--t-bg); font-synthesis:style}
+body{background:var(--t-bg); color:var(--t-ink); font-family:var(--t-f-body);
+  font-size:var(--t-body-size); line-height:var(--t-body-lh)}
+h1,h2,h3{font-family:var(--t-f-display); font-variation-settings:normal}
+h1{font-size:var(--t-h1-size); font-weight:var(--t-h1-weight); text-transform:var(--t-h1-case);
+  letter-spacing:var(--t-h1-track); line-height:var(--t-h1-lh)}
+h2{font-size:var(--t-h2-size); font-weight:var(--t-h2-weight); text-transform:var(--t-h2-case);
+  letter-spacing:var(--t-h2-track); line-height:var(--t-h2-lh)}
+h3{font-weight:var(--t-h3-weight); letter-spacing:0}
+h1,h2,h3,.fig-title{text-wrap:balance}
+.mono{font-family:var(--t-f-label)}
+code,kbd,samp,pre{font-family:var(--t-f-mono)}
+a:hover{text-decoration-color:var(--t-accent)}
+:focus-visible{outline-color:var(--t-accent)}
+
+.eyebrow,.kicker,.sech,label.lab{font-family:var(--t-f-label); font-size:var(--t-label-size);
+  text-transform:var(--t-label-case); letter-spacing:var(--t-label-track); font-weight:var(--t-label-weight);
+  color:var(--t-label-ink)}
+.eyebrow::after{background:var(--t-eyebrow-rule)}
+
+/* Headers: the house header, the canvas hero of the four oldest pages, and
+   the keyboards page's own. */
+header.top,header.hero{background:var(--t-head-bg); color:var(--t-head-ink); border-bottom:var(--t-head-rule)}
+header.top .kicker,header.hero .eyebrow{color:var(--t-head-kick)}
+header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
+#hero{background:var(--t-hero-bg); border-bottom:var(--t-head-rule)}
+.hero-sub{color:var(--t-ink-2)}
+.hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
+.look-art,.look-tag{display:none}
+/* Devanagari hangs vowel signs above and below the line, so a subtitle that
+   inherits a display face's tight leading collides with itself when it wraps.
+   A look whose faces have no Devanagari names one second in its body stack,
+   so it supplies only those glyphs. */
+.devanagari{font-family:var(--t-f-body); line-height:1.32}
+
+/* Surfaces lose their shadows and their rounding together. */
+figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
+.seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
+button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
+figure{background:var(--t-paper); border:var(--t-fig-border)}
+figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(--t-ink-3)}
+.fig-title{font-family:var(--t-f-display); font-variation-settings:normal}
+.fig-note{color:var(--t-ink-2)}
+.ctl{background:var(--t-paper-2); border-bottom:var(--t-cap-rule); font-family:var(--t-f-label)}
+.legend{font-family:var(--t-f-label)}
+.chip{font-family:var(--t-f-label)}
+.chip[aria-pressed="true"]{background:var(--t-chip-on-bg); color:var(--t-chip-on-ink); border-color:var(--t-chip-on-bg)}
+
+/* Chart text, in every naming the pages use. */
+.tk,.axlab,.dlab,.axistext,.axistitle,.figlab,.gl-lab,svg text{font-family:var(--t-f-chart)}
+.halo{stroke:var(--t-paper)}
+
+/* Stat tiles draw their own hairlines, so a row the last tile does not fill
+   shows paper, not a grey block.  220px puts four tiles two by two in a
+   reading column and five across in a wide one. */
+.stats{border:0; background:transparent; gap:1px;
+  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+.stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
+.stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
+.stat span,.stat .l{font-family:var(--t-f-label)}
+
+#tip,.tip{font-family:var(--t-f-body); border:var(--t-tip-border); background:var(--t-paper); color:var(--t-ink)}
+#tip b,.tip b{font-family:var(--t-f-label)}
+
+table{font-family:var(--t-f-body)}
+th,thead th{font-family:var(--t-f-label)}
+td{font-family:var(--t-f-body)}
+details{background:var(--t-paper); border-color:var(--t-line)}
+summary{font-family:var(--t-f-label)}
+
+footer{background:var(--t-foot-bg); color:var(--t-foot-ink); border-top:var(--t-head-rule)}
+/* Inside a coloured footer, and in a chart drawn straight onto a coloured
+   header, the paper inks become the band's own, so a page's inline var(--ink)
+   or var(--ink-3) -- a highlighted tick, a muted closing line -- stays legible
+   on a dark band.  Only the header's charts: a header can also hold paper
+   cards (the apartments stats), whose text must keep the paper inks. */
+header.top svg,header.hero svg{--ink:var(--t-head-ink); --ink-2:var(--t-head-ink-2); --ink-3:var(--t-head-ink-2)}
+footer{--ink:var(--t-foot-ink); --ink-2:var(--t-foot-ink-2); --ink-3:var(--t-foot-ink-2)}
+footer .srcs{color:var(--t-foot-ink-2)}
+
+/* Tools: the form, the answer panel and the lead form. */
+.card,.answer,.offer,a.nextcard{background:var(--t-paper); border-color:var(--t-line)}
+.answer .top{background:var(--t-paper-2)}
+.big .unit{font-family:var(--t-f-body)}
+.row .v,.ppends,td{font-variant-numeric:tabular-nums}
+.row .v,.ppends{font-family:var(--t-f-label)}
+/* background-color, not the shorthand: a select draws its chevron with background-image */
+input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea{
+  font-family:var(--t-f-body); background-color:var(--t-paper); border-color:var(--t-line-2); color:var(--t-ink)}
+input:focus,select:focus,textarea:focus{border-color:var(--t-accent); box-shadow:0 0 0 2px var(--t-accent)}
+button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:var(--t-f-label)}
+button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
+.seg{border-color:var(--t-line-2); background:var(--t-paper)}
+.seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
+.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+/* The segmented control clips its buttons to its own outline, which clipped
+   the focus ring with them: draw it inside the button, in the ink that shows
+   on the pressed one too. */
+.seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
+.seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
+.flag{background:var(--t-paper-2); border-color:var(--t-line)}
+a.nextcard .go,.go{font-family:var(--t-f-label)}
+
+/* A note a script fills later (the layout optimiser's, say) is empty until
+   then, and a look that gives notes a rule or a fill would draw a stray one. */
+.note:empty{display:none}
+
+/* The way home that build_site.py adds to every footer. */
+.back-home{font-family:var(--t-f-label)}
+
+/* Inline code holds the bulletins' mangled fragments, some of them long
+   unbroken strings; on a phone they may break anywhere rather than push the
+   page sideways. */
+@media(max-width:700px){code{white-space:normal; overflow-wrap:anywhere}}
+/* A source note can carry a formula held together with non-breaking spaces
+   (the sunspot smoothing), wider than any phone column: it may break anywhere
+   rather than push the page sideways.  On the narrowest phones a tool card's
+   table scrolls inside its card for the same reason. */
+@media(max-width:700px){.srcs{overflow-wrap:anywhere}}
+@media(max-width:380px){.card table{display:block; overflow-x:auto; max-width:100%}}
+
+/* Code inside a coloured footer takes the footer's ink rather than a paper
+   box, which on a dark band reads as a hole in it. */
+footer code{background:transparent; border-color:currentColor; color:inherit}
+
+/* Print.  Several tools promise a single clean printed page, and their own
+   print rules would lose to a look's coloured covers and patterned paper,
+   which come later in the cascade.  So in print every look keeps its type and
+   drops its paint: white paper, black ink, no art layers, no textures. */
+@media print{
+  html,body{background:#FFFFFF !important; border:0 !important; margin:0 !important}
+  body::before,body::after,.look-art,header.top::before,header.top::after,header.hero::before{display:none !important}
+  header.top,header.hero,#hero,footer,section,figure,.fig,.card,.answer,.offer,.stat,.stats,.answer .top,
+  header.top > .wrap,header.top > .wide,section .wrap{background:#FFFFFF !important; box-shadow:none !important;
+    transform:none !important; color:#000000 !important}
+  header.top,header.hero{border-bottom:1px solid #999999 !important}
+  header.top *,header.hero *,footer *{color:#000000 !important; text-shadow:none !important}
+  .eyebrow{background:none !important; color:#000000 !important; transform:none !important}
+  /* Backgrounds that survive the reset are small -- a section number's cell,
+     a pressed key, a pill -- and often carry white type, which would print as
+     nothing if the browser dropped them.  Glows go; figures in a look's
+     coloured lettering (the rate board's LEDs) print black. */
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  *,*::before,*::after{text-shadow:none !important}
+  .stat b,.stat span,.stat .n,.stat small{color:#000000 !important}
+  /* a chart drawn for a coloured header goes to the paper's black and greys */
+  header.top svg text,header.hero svg text{fill:#000000 !important}
+  header.top svg .sunk-halo,header.hero svg .sunk-halo{stroke:#FFFFFF !important}
+  header.top svg .bar,header.hero svg .bar{fill:#BBBBBB !important}
+  header.top svg .bar.cap,header.hero svg .bar.cap{fill:#000000 !important}
+  header.top svg .ax,header.top svg .ln,header.hero svg .ax,header.hero svg .ln{stroke:#666666 !important}
+}
+
+/* look: rationcard -- The Rice We Grow and Still Buy
+   fonts: https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Public+Sans:ital,wght@0,400;0,600;0,800;1,400&display=swap
+   chart-font: "Courier Prime"
+
+   Rice that a country grows and still buys ends up rationed, and the paper
+   that records a ration is a card: green card stock, boxes printed for the
+   months, entries typed in, and each month's issue stamped in red.  The page
+   is that card.  Nepal's line is in the stamp's red, India's in blue,
+   Bangladesh's in green, and the regional average in the card's own dark
+   ink. */
+
+:root:root:root{
+  --t-bg:#EEF3E4; --t-paper:#F8FAF2; --t-paper-2:#E3EBD3;
+  --t-ink:#1E2A1F; --t-ink-2:#435243; --t-ink-3:#5C6B5A;
+  --t-line:#C3D0B0; --t-line-2:#23452B; --t-grid:rgba(35,69,43,.09);
+  --t-accent:#B8322A; --t-accent-2:#23452B; --t-accent-ink:#FFFFFF;
+  --rcd-green:#23452B; --rcd-red:#B8322A;
+  --t-head-bg:#E3EBD3; --t-head-ink:#1E2A1F; --t-head-ink-2:#435243; --t-head-kick:#23452B;
+  --t-head-rule:3px solid #23452B; --t-hero-bg:#E3EBD3;
+  --t-foot-bg:#23452B; --t-foot-ink:#E8EFDC; --t-foot-ink-2:#B8C7A6;
+  --t-f-display:"Public Sans",Arial,sans-serif; --t-f-body:"Public Sans",Arial,sans-serif;
+  --t-f-label:"Courier Prime",ui-monospace,monospace; --t-f-num:"Courier Prime",ui-monospace,monospace;
+  --t-f-chart:"Courier Prime",ui-monospace,monospace;
+  --t-body-size:17.5px; --t-body-lh:1.68;
+  --t-h1-size:clamp(36px,6.2vw,78px); --t-h1-weight:800; --t-h1-case:uppercase; --t-h1-track:-.025em; --t-h1-lh:.98;
+  --t-h2-size:clamp(26px,3.4vw,38px); --t-h2-weight:800; --t-h2-track:-.02em;
+  --t-label-size:13px; --t-label-track:.04em; --t-label-weight:700; --t-label-ink:#23452B;
+  --t-fig-border:1.5px solid #23452B; --t-cap-rule:1px dashed #23452B; --t-tip-border:1.5px solid #23452B;
+  --t-chip-on-bg:#23452B; --t-chip-on-ink:#F8FAF2;
+  --nep:#B8322A; --ind:#2B5C9E; --ban:#3C7D3A; --sas:#3E3E3A;
+  --nep-soft:#EBC7C2; --ind-soft:#C6D5EA; --ban-soft:#C9DEC6; --warn:#B8322A;
+}
+/* the card: a box per month along the top, some already stamped */
+header.top{position:relative}
+header.top .look-art{display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:4px; max-width:var(--wide);
+  margin:0 auto 26px; padding-inline:24px}
+header.top .look-art{height:42px; background:
+  repeating-linear-gradient(90deg,#23452B 0 1.5px,transparent 1.5px calc((100% - 48px) / 12)) 24px 0/calc(100% - 48px) 100% no-repeat,
+  linear-gradient(#23452B,#23452B) 24px 0/calc(100% - 48px) 1.5px no-repeat,
+  linear-gradient(#23452B,#23452B) 24px 100%/calc(100% - 48px) 1.5px no-repeat}
+header.top .look-art::after{content:"\0927\093E\0928"; position:absolute; right:clamp(24px,8vw,120px); top:clamp(64px,8vw,96px);
+  font-family:"Courier Prime",monospace; font-weight:700; font-size:30px; color:rgba(184,50,42,.85);
+  border:3px solid rgba(184,50,42,.75); border-radius:50%; width:92px; height:92px; display:grid; place-items:center;
+  transform:rotate(-12deg)}
+header.top .kicker::before{content:"CARD NO. "; font-weight:400}
+
+body{counter-reset:entry}
+section .eyebrow{counter-increment:entry}
+section .eyebrow::before{content:"ENTRY " counter(entry, decimal-leading-zero) " / "; color:var(--rcd-red)}
+.eyebrow::after{background:none; border-top:1.5px dashed #23452B}
+figure{border:1.5px solid #23452B; background:#F8FAF2}
+.fig-head{border-bottom:1px dashed #23452B; padding-bottom:12px}
+.fig-title{text-transform:uppercase; font-weight:800}
+.stats{gap:6px}
+.stat{box-shadow:none; border:1.5px solid #23452B; background:#F8FAF2}
+.stat b{color:var(--rcd-red); font-weight:700}
+.note{border:1.5px dashed #23452B; border-left-width:1.5px; padding:10px 14px; background:#F8FAF2}
+.pull{font-weight:800; text-transform:uppercase}
+footer a{color:#FFFFFF}
+@media(max-width:760px){header.top .look-art::after{display:none}}
+
+/* the months already issued, stamped by hand: each ring a little off-centre */
+header.top .look-art{position:relative}
+header.top .look-art::before{content:""; position:absolute; left:24px; right:24px; top:0; bottom:0; background:radial-gradient(circle at 5.07% 58%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px),radial-gradient(circle at 11.30% 44%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px),radial-gradient(circle at 21.73% 44%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px),radial-gradient(circle at 27.97% 58%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px),radial-gradient(circle at 38.40% 44%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px),radial-gradient(circle at 44.63% 44%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px),radial-gradient(circle at 55.07% 58%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px)}
+
+</style>
 </head>
 <body>
 <script>window.RICE_DATA={"meta":{"retrieved":"26 September 2026","source":"FAOSTAT bulk downloads","domain_qcl":"QCL, Production: Crops and livestock products","domain_fbs":"FBS and FBSH, Food Balances","first":1961,"last":2024,"n_years":64,"item":"Rice (paddy), FAOSTAT item 27","areas":["Nepal","India","Bangladesh","Southern Asia"],"identity_kg":0.05,"nepal_share_sasia_area":2.05,"nepal_share_sasia_prod":1.93},"years":[1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],"yield":{"nepal":[1937.5,1934.2,1934.9,1999.1,1986.5,1824.8,1836.1,1874.5,1910.4,1948.6,1952.0,1763.3,1969.0,1977.9,2074.2,1891.4,1805.6,1852.7,1642.4,1932.0,1974.6,1448.9,2066.4,1967.8,2016.1,1779.0,2095.0,2263.5,2365.7,2406.7,2048.1,2410.0,2123.7,2391.0,2455.4,2417.0,2443.4,2472.2,2702.8,2745.4,2675.4,2675.3,2857.3,2782.5,2716.6,2557.0,2775.0,2907.4,2716.4,2980.5,3312.0,3170.9,3394.2,3359.6,3154.3,3369.0,3505.8,3760.7,3804.8,3815.3,3472.8,3789.6,3978.0,4192.2],"india":[1541.9,1395.9,1549.8,1617.1,1293.6,1295.2,1548.4,1613.4,1609.4,1684.9,1711.0,1604.6,1725.9,1574.4,1858.2,1637.2,1961.3,1991.2,1610.5,2000.2,1962.3,1849.7,2183.3,2127.2,2329.2,2205.2,2199.1,2548.6,2616.0,2612.5,2619.0,2629.7,2797.2,2877.3,2700.9,2523.6,2827.6,2815.5,3008.1,2838.0,3116.4,2690.1,3092.6,2952.7,3119.6,3199.5,3292.5,3279.7,3194.1,3323.0,3606.0,3677.4,3616.5,3590.0,3601.8,3752.6,3811.7,3976.1,4052.1,4059.4,4203.3,4238.8,4313.5,4313.2],"bangladesh":[1700.5,1530.2,1769.0,1707.0,1682.7,1582.7,1694.4,1746.6,1745.9,1686.2,1602.2,1571.6,1808.3,1728.9,1853.1,1783.9,1939.8,1938.5,1880.9,2019.7,1954.5,2014.5,2234.5,2145.4,2169.3,2178.3,2239.9,2280.5,2556.2,2566.1,2627.7,2725.3,2724.7,2603.2,2585.8,2755.7,2685.9,2768.3,3202.4,3395.9,3447.0,3468.3,3577.3,3535.9,3762.3,3802.1,3834.2,4199.2,4188.4,4315.4,4406.8,4421.3,4514.2,4557.2,4581.5,4611.3,4637.4,4713.6,4787.4,4793.9,4866.4,4980.4,5207.2,5290.6],"southasia":[1583.3,1448.4,1607.9,1652.0,1406.4,1384.9,1601.5,1674.0,1682.3,1722.7,1727.8,1643.2,1783.1,1651.9,1888.4,1717.5,1980.0,2012.1,1716.1,2033.5,2007.9,1929.9,2220.3,2158.9,2315.4,2228.1,2237.1,2494.7,2597.6,2602.8,2614.3,2648.3,2778.3,2811.1,2695.5,2598.9,2807.8,2827.3,3047.1,2954.3,3159.5,2877.6,3190.3,3073.2,3244.8,3303.9,3390.7,3457.8,3407.8,3518.1,3743.2,3807.1,3796.9,3774.9,3795.0,3917.3,3965.6,4110.3,4190.4,4205.0,4303.5,4322.2,4442.3,4441.0]},"units":{"yield":"kg/ha","area":"ha","production":"t"},"levels":{"nepal_first":1938.0,"nepal_last":4192.0,"india_first":1542.0,"india_last":4313.0,"bangladesh_first":1700.0,"bangladesh_last":5291.0,"southasia_first":1583.0,"southasia_last":4441.0,"nepal_area_last":1420.6,"nepal_area_last_mha":1.42,"nepal_prod_first":2108.0,"nepal_prod_last":5956.0},"ratio":{"india":[125.66,138.56,124.85,123.62,153.56,140.89,118.58,116.18,118.7,115.65,114.09,109.89,114.09,125.63,111.62,115.53,92.06,93.04,101.98,96.59,100.63,78.33,94.65,92.51,86.56,80.67,95.27,88.81,90.43,92.12,78.2,91.65,75.92,83.1,90.91,95.78,86.41,87.81,89.85,96.74,85.85,99.45,92.39,94.24,87.08,79.92,84.28,88.65,85.04,89.69,91.85,86.23,93.85,93.58,87.58,89.78,91.97,94.58,93.9,93.99,82.62,89.4,92.22,97.19],"bangladesh":[113.94,126.4,109.38,117.11,118.05,115.3,108.36,107.32,109.42,115.56,121.83,112.2,108.89,114.4,111.93,106.03,93.08,95.57,87.32,95.66,101.03,71.92,92.48,91.72,92.94,81.67,93.53,99.25,92.55,93.79,77.94,88.43,77.94,91.85,94.96,87.71,90.97,89.3,84.4,80.84,77.62,77.14,79.87,78.69,72.21,67.25,72.37,69.24,64.86,69.07,75.16,71.72,75.19,73.72,68.85,73.06,75.6,79.78,79.48,79.59,71.36,76.09,76.39,79.24],"southasia":[122.37,133.54,120.34,121.01,141.25,131.76,114.65,111.98,113.56,113.11,112.98,107.31,110.43,119.73,109.84,110.13,91.19,92.08,95.71,95.01,98.34,75.08,93.07,91.15,87.07,79.84,93.65,90.73,91.07,92.47,78.34,91.0,76.44,85.06,91.09,93.0,87.02,87.44,88.7,92.93,84.68,92.97,89.56,90.54,83.72,77.39,81.84,84.08,79.71,84.72,88.48,83.29,89.39,89.0,83.12,86.0,88.41,91.49,90.8,90.73,80.7,87.68,89.55,94.4]},"ratio_stat":{"india":{"min":75.9,"min_year":1993,"max":153.6,"max_year":1965,"now":97.2,"first":125.7},"bangladesh":{"min":64.9,"min_year":2009,"max":126.4,"max_year":1962,"now":79.2,"first":113.9},"southasia":{"min":75.1,"min_year":1982,"max":141.2,"max_year":1965,"now":94.4,"first":122.4}},"overtaken":{"india":{"first":1977,"forgood":1982,"years_below":46},"bangladesh":{"first":1977,"forgood":1982,"years_below":47},"southasia":{"first":1977,"forgood":1977,"years_below":48}},"eras":[{"from":1961,"to":1990,"by":{"nepal":{"fit":0.32,"endpoint":0.75},"india":{"fit":2.03,"endpoint":1.83},"bangladesh":{"fit":1.46,"endpoint":1.43},"southasia":{"fit":1.87,"endpoint":1.73}}},{"from":1990,"to":2024,"by":{"nepal":{"fit":1.76,"endpoint":1.65},"india":{"fit":1.58,"endpoint":1.49},"bangladesh":{"fit":2.3,"endpoint":2.15},"southasia":{"fit":1.7,"endpoint":1.58}}}],"whole":{"nepal":{"fit":1.29,"endpoint":1.23},"india":{"fit":1.86,"endpoint":1.65},"bangladesh":{"fit":2.14,"endpoint":1.82},"southasia":{"fit":1.87,"endpoint":1.65}},"lost":{"start":1961,"last_below":1986,"n":14,"y0":1938.0,"trough":1449.0,"trough_year":1982,"span":25},"grow":{"production":2.825,"area":1.306,"yield":2.164,"share_area":25.7,"share_yield":74.3,"early":{"to":1986,"production":1.125,"area":1.226,"yield":0.918}},"index":{"production":[100.0,100.02,100.05,104.41,104.7,95.22,100.54,103.33,106.32,109.31,111.19,95.37,114.61,116.33,123.57,113.2,108.27,110.97,97.72,116.9,121.45,86.94,130.79,128.53,133.04,112.52,141.45,155.75,160.8,166.14,122.62,165.82,137.86,169.77,176.03,172.72,175.51,181.89,200.02,197.57,196.04,196.04,211.37,203.5,199.68,174.61,203.95,214.6,190.88,211.59,240.62,213.69,239.42,227.16,203.94,248.12,244.4,266.13,263.32,266.68,243.39,260.27,271.55,282.52],"area":[100.0,100.18,100.18,101.19,102.11,101.1,106.09,106.8,107.83,108.68,110.36,104.79,112.78,113.96,115.42,115.96,116.18,116.05,115.28,117.24,119.17,116.25,122.63,126.55,127.85,122.55,130.82,133.32,131.7,133.75,116.0,133.31,125.77,137.57,138.9,138.45,139.17,142.55,143.39,139.43,141.97,141.97,143.33,141.7,142.41,132.31,142.4,143.01,136.15,137.54,140.76,130.57,136.67,131.01,125.27,142.69,135.07,137.11,134.09,135.43,135.79,133.07,132.26,130.57],"yield":[100.0,99.83,99.87,103.18,102.53,94.18,94.77,96.75,98.6,100.57,100.75,91.01,101.63,102.09,107.06,97.62,93.19,95.62,84.77,99.72,101.91,74.78,106.65,101.56,104.06,91.82,108.13,116.83,122.1,124.22,105.71,124.39,109.61,123.41,126.73,124.75,126.11,127.6,139.5,141.7,138.09,138.08,147.47,143.61,140.21,131.97,143.23,150.06,140.2,153.83,170.94,163.66,175.18,173.4,162.8,173.88,180.94,194.1,196.38,196.92,179.24,195.59,205.32,216.37]},"vary":{"nepal":9.26,"india":8.51,"bangladesh":4.92,"southasia":6.58,"worst_year":1982,"worst_drop":-26.6},"imports":{"hist":[[1961,0.0],[1962,0.0],[1963,0.0],[1964,0.0],[1965,0.0],[1966,0.0],[1967,0.0],[1968,0.0],[1969,0.0],[1970,0.0],[1971,0.0],[1972,0.0],[1973,0.0],[1974,0.0],[1975,0.0],[1976,0.0],[1977,0.0],[1978,0.0],[1979,0.0],[1980,0.0],[1981,1.425],[1982,1.862],[1983,2.013],[1984,0.706],[1985,0.429],[1986,0.28],[1987,1.551],[1988,0.93],[1989,0.302],[1990,0.562],[1991,0.14],[1992,1.246],[1993,1.808],[1994,2.812],[1995,1.762],[1996,2.889],[1997,1.202],[1998,0.44],[1999,1.567],[2000,7.533],[2001,1.675],[2002,0.69],[2003,2.083],[2004,1.198],[2005,1.982],[2006,5.663],[2007,8.26],[2008,3.095],[2009,3.492],[2010,3.407],[2011,5.372],[2012,12.552],[2013,12.96]],"curr":[[2010,3.163],[2011,4.96],[2012,11.502],[2013,12.25],[2014,14.276],[2015,14.78],[2016,15.475],[2017,14.756],[2018,16.521],[2019,15.36],[2020,21.957],[2021,26.001],[2022,17.322],[2023,10.057]],"hist_from":1961,"hist_to":2013,"curr_from":2010,"curr_to":2023,"overlap":[2010,2011,2012,2013],"basis_ratio":1.499,"overlap_gap":1.05,"net_export_last":1986,"net_export_n":25,"peak":26.0,"peak_year":2021,"now":10.1,"now_year":2023,"now_kt":640.0,"first_over_ten":2012},"perhead":[[1961,217.1],[1962,213.3],[1963,209.6],[1964,214.8],[1965,211.3],[1966,188.5],[1967,195.1],[1968,196.5],[1969,198.0],[1970,199.3],[1971,198.5],[1972,166.7],[1973,196.1],[1974,194.7],[1975,202.4],[1976,181.4],[1977,169.7],[1978,170.1],[1979,146.5],[1980,171.3],[1981,173.9],[1982,121.7],[1983,178.8],[1984,171.7],[1985,173.7],[1986,143.6],[1987,176.6],[1988,190.1],[1989,191.7],[1990,193.4],[1991,139.2],[1992,183.5],[1993,148.6],[1994,178.4],[1995,180.2],[1996,172.4],[1997,170.9],[1998,172.9],[1999,185.8],[2000,179.6],[2001,174.7],[2002,171.5],[2003,181.7],[2004,172.1],[2005,166.4],[2006,143.6],[2007,165.7],[2008,172.3],[2009,151.6],[2010,163.1],[2011,184.7],[2012,163.6],[2013,182.9],[2014,173.0],[2015,154.5],[2016,187.1],[2017,183.9],[2018,199.8],[2019,195.4],[2020,194.1],[2021,174.1],[2022,184.6],[2023,192.8]],"perhead_stat":{"first":1961,"last":2023,"v_first":217.1,"v_last":192.8,"trough":121.7,"trough_year":1982,"change":-11.2,"pop_first":9.71,"pop_last":29.69,"pop_mult":3.06},"gapwork":{"india":{"per_ha":121.0,"tonnes":172000,"pct":2.8},"bangladesh":{"per_ha":1098.0,"tonnes":1560000,"pct":20.8},"southasia":{"per_ha":249.0,"tonnes":353000,"pct":5.6}},"flags":{"qcl":{"nepal":{"counts":{"A":63,"E":1},"estimated":[2024],"official":63},"india":{"counts":{"A":64},"estimated":[],"official":64},"bangladesh":{"counts":{"A":64},"estimated":[],"official":64},"southasia":{"counts":{"A":64},"estimated":[],"official":64}},"nepal_yield_estimated":[2024],"nepal_area_estimated":[2024],"nepal_prod_estimated":[],"fb":{"hist":{"I":212},"curr":{"I":54}},"fb_total":266,"fb_imputed":266,"fb_official":0,"meaning":{"A":"official figure","E":"FAO estimate","I":"imputed by FAO","X":"external organisation","M":"missing; cannot exist","":"unflagged"}}};</script>
 
 <header class="top">
+<div class="look-art" aria-hidden="true"></div>
   <div class="wrap">
     <p class="kicker">FAOSTAT &middot; rice, <span data-n="meta.first" data-fmt="yr"></span>&ndash;<span data-n="meta.last" data-fmt="yr"></span>
       &middot; Nepal, India, Bangladesh, Southern Asia</p>
@@ -632,7 +908,7 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
 
 <footer>
   <div class="wrap">
-    <p class="srcs" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs back-home" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
     <p class="srcs">
       <b>Sources.</b> <a href="https://www.fao.org/faostat/">FAOSTAT</a> bulk
       downloads, retrieved <span data-n="meta.retrieved"></span>.

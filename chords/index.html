@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="en" data-look="cassette" data-page="chords">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="description" content="Nepali Songs, By Their Chords">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%97%E0%A5%80%3C%2Ftext%3E%3C%2Fsvg%3E">
+<title>Nepali Songs, By Their Chords</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&amp;family=Nunito:ital,wght@0,400;0,600;0,800;1,400&amp;display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#EEEEF2; --surface:#FCFCFD; --surface-2:#F5F5F9; --sunk:#E3E3EA;
+  --ink:#15151C; --ink-2:#4E4E5C; --ink-3:#84848F; --rule:#D6D6DE; --rule-2:#C2C2CD;
+  /* One hue for everything that means "this is the thing you are playing":
+     the chosen chord, the pressed button, the dots on a fret diagram. */
+  --accent:#9c4221; --accent-soft:rgba(156,66,33,.12); --alt:#2a78d6;
+  --warn:#b54708;
+  --shadow:0 1px 2px rgba(21,21,28,.05),0 10px 30px -16px rgba(21,21,28,.18);
+  --field:#FFFFFF; --field-rule:#C2C2CD;
+  --measure:65ch; --wide:1120px;
+}
+@media not all{
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
+    --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
+    --accent:#e0875a; --accent-soft:rgba(224,135,90,.16); --alt:#3987e5;
+    --warn:#f0913a;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+    --field:#15151B; --field-rule:#3A3A46;
+  }
+}
+:root[data-theme="dark"][data-look-off]{
+  color-scheme: dark;
+  --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
+  --ink:#EAEAF0; --ink-2:#A2A2B0; --ink-3:#70707E; --rule:#2B2B35; --rule-2:#3A3A46;
+  --accent:#e0875a; --accent-soft:rgba(224,135,90,.16); --alt:#3987e5;
+  --warn:#f0913a;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -16px rgba(0,0,0,.7);
+  --field:#15151B; --field-rule:#3A3A46;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--t-f-body);
+  font-weight:400; font-size:18.5px; line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; font-family:var(--t-f-display);
+  font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 96; text-wrap:balance;
+  letter-spacing:-.012em}
+.mono,code{font-family:var(--t-f-label)}
+.wrap{max-width:var(--measure); margin-inline:auto; padding-inline:24px}
+.wide{max-width:var(--wide); margin-inline:auto; padding-inline:24px}
+section{padding-block:clamp(38px,5.5vw,68px)}
+section+section{border-top:1px solid var(--rule)}
+p{margin:0 0 1.1em}
+a{color:inherit; text-decoration:underline; text-decoration-color:var(--rule-2); text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--alt); outline-offset:3px; border-radius:3px}
+
+h2{font-size:clamp(26px,3.6vw,36px); line-height:1.08; font-weight:700; margin-bottom:.48em}
+h3{font-size:20px; line-height:1.26; font-weight:600; margin:1.6em 0 .5em}
+.small{font-size:15.5px; line-height:1.55; color:var(--ink-2)}
+.tiny{font-size:13.5px; line-height:1.5; color:var(--ink-3)}
+.lede{max-width:60ch; color:var(--ink-2)}
+
+header.top{background:var(--sunk); border-bottom:1px solid var(--rule);
+  padding-block:clamp(40px,6.5vw,76px)}
+h1{font-size:clamp(34px,5.8vw,68px); line-height:.99; font-weight:800;
+   font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; max-width:15ch; margin-bottom:.3em}
+.sub{max-width:56ch; font-size:clamp(16px,1.7vw,19.5px); color:var(--ink-2); line-height:1.55}
+.kicker{font-family:var(--t-f-label); font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:20px}
+
+.card{background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+  box-shadow:var(--shadow); padding:24px}
+.card+.card{margin-top:20px}
+.card h3:first-child{margin-top:0}
+
+/* ------------------------------------------------------------ controls */
+.controls{display:grid; grid-template-columns:minmax(0,2fr) repeat(2,minmax(0,1fr)) auto;
+  gap:14px; align-items:end}
+label.lab{display:block; font-family:var(--t-f-label); font-size:11px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin-bottom:7px}
+input[type=text],select{
+  width:100%; font:inherit; font-size:17px; color:var(--ink);
+  background:var(--field); border:1px solid var(--field-rule); border-radius:9px;
+  padding:10px 12px; appearance:none; -webkit-appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--ink-3) 50%),
+  linear-gradient(135deg,var(--ink-3) 50%,transparent 50%);
+  background-position:calc(100% - 19px) 50%,calc(100% - 13px) 50%;
+  background-size:6px 6px,6px 6px; background-repeat:no-repeat; padding-right:36px}
+input:focus,select:focus{border-color:var(--accent); outline:none;
+  box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 22%,transparent)}
+button.cta{font:inherit; font-size:15.5px; font-weight:600; padding:10px 16px;
+  border-radius:9px; border:1px solid var(--accent); background:var(--accent);
+  color:#fff; cursor:pointer; white-space:nowrap}
+button.cta:hover{filter:brightness(1.08)}
+.check{display:flex; gap:9px; align-items:center; font-size:15.5px; color:var(--ink-2);
+  margin-top:12px}
+.check input{accent-color:var(--accent); width:17px; height:17px}
+
+.note{margin:16px 0 0; padding:11px 13px; border-radius:9px; font-size:15px;
+  line-height:1.48; background:var(--surface-2); border:1px solid var(--rule);
+  color:var(--ink-2)}
+.note b{color:var(--ink)}
+.note.warn{background:color-mix(in oklab,var(--warn) 10%,var(--surface));
+  border-color:color-mix(in oklab,var(--warn) 30%,var(--rule))}
+
+/* ------------------------------------------------------------ the song */
+.meta{display:flex; flex-wrap:wrap; gap:6px 14px; align-items:baseline; margin:22px 0 4px}
+.meta .title{font-family:var(--t-f-display); font-size:28px; font-weight:700;
+  line-height:1.1}
+.meta .artist{color:var(--ink-2)}
+.badge{font-family:var(--t-f-label); font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; padding:3px 8px; border-radius:99px;
+  border:1px solid var(--rule-2); color:var(--ink-3)}
+.badge.ok{border-color:var(--accent); color:var(--accent)}
+
+.section{margin-top:22px}
+.section .name{font-family:var(--t-f-label); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:8px;
+  display:flex; flex-wrap:wrap; gap:4px 12px; align-items:baseline}
+.section .name .prog{letter-spacing:.04em; text-transform:none; color:var(--ink-2)}
+.bar{display:flex; flex-wrap:wrap; gap:10px}
+.chord{min-width:86px; padding:12px 14px 10px; border-radius:11px; background:var(--surface);
+  border:1px solid var(--rule); text-align:center; position:relative}
+.chord .cn{font-family:var(--t-f-display); font-weight:700; font-size:26px; line-height:1.05}
+.chord .rn{font-family:var(--t-f-label); font-size:12.5px; color:var(--ink-3); margin-top:3px}
+.chord .snd{font-size:12px; color:var(--ink-3); margin-top:1px}
+.cad{font-size:14.5px; color:var(--ink-2); margin:9px 0 0}
+.cad b{color:var(--accent); font-weight:600}
+
+/* fret diagrams */
+.shapes{display:flex; flex-wrap:wrap; gap:14px}
+.shape{background:var(--surface); border:1px solid var(--rule); border-radius:11px;
+  padding:10px 10px 8px; text-align:center; width:118px}
+.shape .sn{font-weight:600; font-size:16px}
+.shape .sd{font-size:12px; color:var(--ink-3); line-height:1.3; min-height:1.3em}
+.shape svg{display:block; margin:4px auto 0; color:var(--ink)}
+.shape .hard{color:var(--warn)}
+
+/* ------------------------------------------------------------ the index */
+.progs{display:grid; gap:12px}
+.prog-row{display:grid; grid-template-columns:minmax(0,15em) minmax(0,1fr); gap:6px 20px;
+  padding:14px 0; border-top:1px solid var(--rule)}
+.prog-row .p{font-family:var(--t-f-label); font-size:17px}
+.prog-row .pn{font-size:13.5px; color:var(--ink-3)}
+.songlink{font:inherit; background:none; border:0; padding:0; color:inherit; cursor:pointer;
+  text-decoration:underline; text-decoration-color:var(--rule-2); text-underline-offset:3px}
+.songlink:hover{text-decoration-color:var(--accent)}
+
+.hits{list-style:none; padding:0; margin:16px 0 0}
+.hits li{padding:11px 0; border-top:1px solid var(--rule)}
+.hits .how{display:block; font-size:14.5px; color:var(--ink-2)}
+
+footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:46px;
+  font-size:15.5px; color:var(--ink-2)}
+.srcs{font-size:14.5px; color:var(--ink-3)}
+
+@media (max-width:760px){
+  body{font-size:17.5px}
+  .wrap,.wide{padding-inline:18px}
+  .card{padding:19px}
+  .controls{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .controls .songf{grid-column:1/-1}
+  .controls button{grid-column:1/-1}
+  .prog-row{grid-template-columns:minmax(0,1fr)}
+  .chord{min-width:72px; padding:10px 10px 8px}
+  .chord .cn{font-size:22px}
+  .shape{width:calc(50% - 7px)}
+}
+</style>
+<style>
+/* ===================================================================== base
+   What every page's look is built on.  build_site.py appends this, then the
+   page's own look from theme/looks/, after the page's own stylesheet, so
+   both win any tie with it.
+
+   It does two things.  It bridges the tokens every page already uses
+   (--ground, --surface, --ink, --rule ...) to a small set of theme tokens
+   (--t-*), so a look recolours a whole page by setting a dozen values.  And
+   it turns off what made every page look alike -- the Fraunces display face,
+   the small monospaced labels with a rule running off them, the soft shadows
+   and the rounded cards -- and points the same components at the theme's own
+   faces and lines instead.
+
+   Each look is a single deliberate appearance, light or dark as its subject
+   asks, so the bridge is written at a specificity (:root three times) that
+   beats the dark-mode token blocks inside every page's own stylesheet. */
+
+:root:root:root{
+  color-scheme: var(--t-scheme, light);
+  /* defaults, which a look overrides */
+  --t-bg:#FFFFFF; --t-paper:#FFFFFF; --t-paper-2:#F4F4F2;
+  --t-ink:#151515; --t-ink-2:#444444; --t-ink-3:#777777;
+  --t-line:#DCDCDC; --t-line-2:#8A8A8A; --t-grid:rgba(0,0,0,.08);
+  --t-accent:#151515; --t-accent-2:#555555; --t-accent-ink:#FFFFFF;
+  --t-head-bg:var(--t-paper-2); --t-head-ink:var(--t-ink); --t-head-ink-2:var(--t-ink-2);
+  --t-head-kick:var(--t-ink-3); --t-head-rule:1px solid var(--t-line);
+  --t-hero-bg:var(--t-paper-2);
+  --t-foot-bg:var(--t-paper-2); --t-foot-ink:var(--t-ink-2); --t-foot-ink-2:var(--t-ink-3);
+  --t-f-display:Georgia,serif; --t-f-body:system-ui,sans-serif; --t-f-label:var(--t-f-body);
+  --t-f-num:var(--t-f-display); --t-f-chart:var(--t-f-label);
+  --t-f-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --t-body-size:18px; --t-body-lh:1.62;
+  --t-h1-size:clamp(38px,6.4vw,80px); --t-h1-weight:700; --t-h1-case:none; --t-h1-track:-.01em; --t-h1-lh:1;
+  --t-h2-size:clamp(28px,3.8vw,40px); --t-h2-weight:700; --t-h2-case:none; --t-h2-track:-.005em; --t-h2-lh:1.08;
+  --t-h3-weight:600;
+  --t-label-size:12px; --t-label-case:uppercase; --t-label-track:.12em; --t-label-weight:600;
+  --t-label-ink:var(--t-ink-3); --t-eyebrow-rule:var(--t-line);
+  --t-radius:0; --t-fig-border:1px solid var(--t-line); --t-cap-rule:1px solid var(--t-line);
+  --t-tip-border:1px solid var(--t-line-2);
+  --t-chip-on-bg:var(--t-ink); --t-chip-on-ink:var(--t-bg);
+
+  /* the bridge */
+  --ground:var(--t-bg); --surface:var(--t-paper); --surface-2:var(--t-paper-2); --sunk:var(--t-hero-bg);
+  --ink:var(--t-ink); --ink-2:var(--t-ink-2); --ink-3:var(--t-ink-3);
+  --rule:var(--t-line); --rule-2:var(--t-line-2); --grid:var(--t-grid);
+  --accent:var(--t-accent); --alt:var(--t-accent-2);
+  --shadow:none; --shadow-lg:none;
+  --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+}
+
+/* Several looks are set in faces cut in one weight (a typewriter, a terminal's
+   pixel face, a seventeenth-century roman); asked for bold, a browser smears a fake one.
+   It may still slant a face that has no italic, but never fakes a weight. */
+html{background:var(--t-bg); font-synthesis:style}
+body{background:var(--t-bg); color:var(--t-ink); font-family:var(--t-f-body);
+  font-size:var(--t-body-size); line-height:var(--t-body-lh)}
+h1,h2,h3{font-family:var(--t-f-display); font-variation-settings:normal}
+h1{font-size:var(--t-h1-size); font-weight:var(--t-h1-weight); text-transform:var(--t-h1-case);
+  letter-spacing:var(--t-h1-track); line-height:var(--t-h1-lh)}
+h2{font-size:var(--t-h2-size); font-weight:var(--t-h2-weight); text-transform:var(--t-h2-case);
+  letter-spacing:var(--t-h2-track); line-height:var(--t-h2-lh)}
+h3{font-weight:var(--t-h3-weight); letter-spacing:0}
+h1,h2,h3,.fig-title{text-wrap:balance}
+.mono{font-family:var(--t-f-label)}
+code,kbd,samp,pre{font-family:var(--t-f-mono)}
+a:hover{text-decoration-color:var(--t-accent)}
+:focus-visible{outline-color:var(--t-accent)}
+
+.eyebrow,.kicker,.sech,label.lab{font-family:var(--t-f-label); font-size:var(--t-label-size);
+  text-transform:var(--t-label-case); letter-spacing:var(--t-label-track); font-weight:var(--t-label-weight);
+  color:var(--t-label-ink)}
+.eyebrow::after{background:var(--t-eyebrow-rule)}
+
+/* Headers: the house header, the canvas hero of the four oldest pages, and
+   the keyboards page's own. */
+header.top,header.hero{background:var(--t-head-bg); color:var(--t-head-ink); border-bottom:var(--t-head-rule)}
+header.top .kicker,header.hero .eyebrow{color:var(--t-head-kick)}
+header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
+#hero{background:var(--t-hero-bg); border-bottom:var(--t-head-rule)}
+.hero-sub{color:var(--t-ink-2)}
+.hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
+.look-art,.look-tag{display:none}
+/* Devanagari hangs vowel signs above and below the line, so a subtitle that
+   inherits a display face's tight leading collides with itself when it wraps.
+   A look whose faces have no Devanagari names one second in its body stack,
+   so it supplies only those glyphs. */
+.devanagari{font-family:var(--t-f-body); line-height:1.32}
+
+/* Surfaces lose their shadows and their rounding together. */
+figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
+.seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
+button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
+figure{background:var(--t-paper); border:var(--t-fig-border)}
+figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(--t-ink-3)}
+.fig-title{font-family:var(--t-f-display); font-variation-settings:normal}
+.fig-note{color:var(--t-ink-2)}
+.ctl{background:var(--t-paper-2); border-bottom:var(--t-cap-rule); font-family:var(--t-f-label)}
+.legend{font-family:var(--t-f-label)}
+.chip{font-family:var(--t-f-label)}
+.chip[aria-pressed="true"]{background:var(--t-chip-on-bg); color:var(--t-chip-on-ink); border-color:var(--t-chip-on-bg)}
+
+/* Chart text, in every naming the pages use. */
+.tk,.axlab,.dlab,.axistext,.axistitle,.figlab,.gl-lab,svg text{font-family:var(--t-f-chart)}
+.halo{stroke:var(--t-paper)}
+
+/* Stat tiles draw their own hairlines, so a row the last tile does not fill
+   shows paper, not a grey block.  220px puts four tiles two by two in a
+   reading column and five across in a wide one. */
+.stats{border:0; background:transparent; gap:1px;
+  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+.stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
+.stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
+.stat span,.stat .l{font-family:var(--t-f-label)}
+
+#tip,.tip{font-family:var(--t-f-body); border:var(--t-tip-border); background:var(--t-paper); color:var(--t-ink)}
+#tip b,.tip b{font-family:var(--t-f-label)}
+
+table{font-family:var(--t-f-body)}
+th,thead th{font-family:var(--t-f-label)}
+td{font-family:var(--t-f-body)}
+details{background:var(--t-paper); border-color:var(--t-line)}
+summary{font-family:var(--t-f-label)}
+
+footer{background:var(--t-foot-bg); color:var(--t-foot-ink); border-top:var(--t-head-rule)}
+/* Inside a coloured footer, and in a chart drawn straight onto a coloured
+   header, the paper inks become the band's own, so a page's inline var(--ink)
+   or var(--ink-3) -- a highlighted tick, a muted closing line -- stays legible
+   on a dark band.  Only the header's charts: a header can also hold paper
+   cards (the apartments stats), whose text must keep the paper inks. */
+header.top svg,header.hero svg{--ink:var(--t-head-ink); --ink-2:var(--t-head-ink-2); --ink-3:var(--t-head-ink-2)}
+footer{--ink:var(--t-foot-ink); --ink-2:var(--t-foot-ink-2); --ink-3:var(--t-foot-ink-2)}
+footer .srcs{color:var(--t-foot-ink-2)}
+
+/* Tools: the form, the answer panel and the lead form. */
+.card,.answer,.offer,a.nextcard{background:var(--t-paper); border-color:var(--t-line)}
+.answer .top{background:var(--t-paper-2)}
+.big .unit{font-family:var(--t-f-body)}
+.row .v,.ppends,td{font-variant-numeric:tabular-nums}
+.row .v,.ppends{font-family:var(--t-f-label)}
+/* background-color, not the shorthand: a select draws its chevron with background-image */
+input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea{
+  font-family:var(--t-f-body); background-color:var(--t-paper); border-color:var(--t-line-2); color:var(--t-ink)}
+input:focus,select:focus,textarea:focus{border-color:var(--t-accent); box-shadow:0 0 0 2px var(--t-accent)}
+button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:var(--t-f-label)}
+button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
+.seg{border-color:var(--t-line-2); background:var(--t-paper)}
+.seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
+.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+/* The segmented control clips its buttons to its own outline, which clipped
+   the focus ring with them: draw it inside the button, in the ink that shows
+   on the pressed one too. */
+.seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
+.seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
+.flag{background:var(--t-paper-2); border-color:var(--t-line)}
+a.nextcard .go,.go{font-family:var(--t-f-label)}
+
+/* A note a script fills later (the layout optimiser's, say) is empty until
+   then, and a look that gives notes a rule or a fill would draw a stray one. */
+.note:empty{display:none}
+
+/* The way home that build_site.py adds to every footer. */
+.back-home{font-family:var(--t-f-label)}
+
+/* Inline code holds the bulletins' mangled fragments, some of them long
+   unbroken strings; on a phone they may break anywhere rather than push the
+   page sideways. */
+@media(max-width:700px){code{white-space:normal; overflow-wrap:anywhere}}
+/* A source note can carry a formula held together with non-breaking spaces
+   (the sunspot smoothing), wider than any phone column: it may break anywhere
+   rather than push the page sideways.  On the narrowest phones a tool card's
+   table scrolls inside its card for the same reason. */
+@media(max-width:700px){.srcs{overflow-wrap:anywhere}}
+@media(max-width:380px){.card table{display:block; overflow-x:auto; max-width:100%}}
+
+/* Code inside a coloured footer takes the footer's ink rather than a paper
+   box, which on a dark band reads as a hole in it. */
+footer code{background:transparent; border-color:currentColor; color:inherit}
+
+/* Print.  Several tools promise a single clean printed page, and their own
+   print rules would lose to a look's coloured covers and patterned paper,
+   which come later in the cascade.  So in print every look keeps its type and
+   drops its paint: white paper, black ink, no art layers, no textures. */
+@media print{
+  html,body{background:#FFFFFF !important; border:0 !important; margin:0 !important}
+  body::before,body::after,.look-art,header.top::before,header.top::after,header.hero::before{display:none !important}
+  header.top,header.hero,#hero,footer,section,figure,.fig,.card,.answer,.offer,.stat,.stats,.answer .top,
+  header.top > .wrap,header.top > .wide,section .wrap{background:#FFFFFF !important; box-shadow:none !important;
+    transform:none !important; color:#000000 !important}
+  header.top,header.hero{border-bottom:1px solid #999999 !important}
+  header.top *,header.hero *,footer *{color:#000000 !important; text-shadow:none !important}
+  .eyebrow{background:none !important; color:#000000 !important; transform:none !important}
+  /* Backgrounds that survive the reset are small -- a section number's cell,
+     a pressed key, a pill -- and often carry white type, which would print as
+     nothing if the browser dropped them.  Glows go; figures in a look's
+     coloured lettering (the rate board's LEDs) print black. */
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  *,*::before,*::after{text-shadow:none !important}
+  .stat b,.stat span,.stat .n,.stat small{color:#000000 !important}
+  /* a chart drawn for a coloured header goes to the paper's black and greys */
+  header.top svg text,header.hero svg text{fill:#000000 !important}
+  header.top svg .sunk-halo,header.hero svg .sunk-halo{stroke:#FFFFFF !important}
+  header.top svg .bar,header.hero svg .bar{fill:#BBBBBB !important}
+  header.top svg .bar.cap,header.hero svg .bar.cap{fill:#000000 !important}
+  header.top svg .ax,header.top svg .ln,header.hero svg .ax,header.hero svg .ln{stroke:#666666 !important}
+}
+
+/* look: cassette -- Nepali Songs, By Their Chords
+   fonts: https://fonts.googleapis.com/css2?family=Bungee&family=Nunito:ital,wght@0,400;0,600;0,800;1,400&display=swap
+   chart-font: "Nunito"
+
+   Most of these songs first reached their listeners on cassette, sold from
+   stalls with the track list on a folded paper inlay.  So the page is a
+   J-card: three printed stripes across a white card, a tape window with
+   two reels, the title in a bold display face, and the songs listed like
+   sides of a tape. */
+
+:root:root:root{
+  --t-bg:#FFFFFF; --t-paper:#FFFFFF; --t-paper-2:#F5F3F0;
+  --t-ink:#151515; --t-ink-2:#454545; --t-ink-3:#6E6E6E;
+  --t-line:#E2DFDA; --t-line-2:#151515; --t-grid:rgba(21,21,21,.08);
+  --t-accent:#D72E6B; --t-accent-2:#14A3A0; --t-accent-ink:#FFFFFF;
+  --cs-orange:#FF7A1A; --cs-pink:#E0306F; --cs-teal:#14A3A0;
+  --t-head-bg:#FFFFFF; --t-head-ink:#151515; --t-head-ink-2:#454545; --t-head-kick:#C9235E;
+  --t-head-rule:3px solid #151515; --t-hero-bg:#FFFFFF;
+  --t-foot-bg:#151515; --t-foot-ink:#EDEDED; --t-foot-ink-2:#B5B5B5;
+  --t-f-display:"Bungee",Impact,sans-serif; --t-f-body:"Nunito",Arial,sans-serif;
+  --t-f-label:"Nunito",Arial,sans-serif; --t-f-num:"Bungee",Impact,sans-serif; --t-f-chart:"Nunito",Arial,sans-serif;
+  --t-body-size:18px; --t-body-lh:1.64;
+  --t-h1-size:clamp(34px,6vw,76px); --t-h1-weight:400; --t-h1-track:0; --t-h1-lh:1;
+  --t-h2-size:clamp(24px,3.4vw,36px); --t-h2-weight:400; --t-h2-track:0; --t-h2-lh:1.12;
+  --t-label-size:12.5px; --t-label-track:.12em; --t-label-weight:800; --t-label-ink:#C9235E;
+  --t-radius:6px; --t-fig-border:2px solid #151515; --t-cap-rule:1px solid #E2DFDA; --t-tip-border:2px solid #151515;
+  --t-chip-on-bg:#151515; --t-chip-on-ink:#FFFFFF;
+  --accent-soft:rgba(224,48,111,.14); --warn:#B5471A; --field:#FFFFFF; --field-rule:#151515;
+}
+header.top{position:relative; overflow:hidden; padding-top:calc(clamp(40px,6.5vw,76px) + 30px)}
+header.top::before{content:""; position:absolute; left:0; right:0; top:0; height:30px;
+  background:linear-gradient(180deg,#FF7A1A 0 10px,#E0306F 10px 20px,#14A3A0 20px 30px)}
+/* the tape window */
+header.top .look-art{display:block; position:absolute; right:max(clamp(18px,6vw,90px), calc((100% - var(--wide,1120px)) / 2 + 24px)); top:50%; transform:translateY(-40%);
+  width:clamp(150px,18vw,230px); height:clamp(64px,7.5vw,94px); border:3px solid #151515; border-radius:10px;
+  background:radial-gradient(circle at 25% 50%,#151515 0 14%,#FFFFFF 14.5% 20%,#151515 20.5% 23%,transparent 23.5%),
+             radial-gradient(circle at 75% 50%,#151515 0 14%,#FFFFFF 14.5% 20%,#151515 20.5% 23%,transparent 23.5%),
+             linear-gradient(90deg,transparent 30%,#5A3A2A 30% 70%,transparent 70%) 0 50%/100% 26% no-repeat,#F5F3F0}
+header.top .wrap,header.top .wide{position:relative; padding-right:max(24px,240px)}
+@media(max-width:760px){header.top .look-art{display:none} header.top .wrap,header.top .wide{padding-right:16px}}
+/* Nunito sets wider than the face the key and capo selects were sized for:
+   on a phone, "G (recording)" gets its room back from the padding */
+@media(max-width:760px){
+  select{padding-left:10px; padding-right:26px; background-position:calc(100% - 15px) 50%,calc(100% - 9px) 50%}
+}
+section .eyebrow::before{content:"SIDE A \00b7\00a0"}
+.eyebrow::after{background:linear-gradient(90deg,#FF7A1A 0 33%,#E0306F 33% 66%,#14A3A0 66%); height:3px}
+figure,.fig,.card{border:2px solid #151515}
+.stat b{font-family:"Bungee",sans-serif}
+footer a{color:#FFFFFF}
+/* Bungee comes in one weight */
+h3,.meta .title,.chord .cn{font-weight:400}
+
+</style>
+</head>
+<body>
+<script>window.CHORDS_DATA={"songs":[{"id":"aashish","title":"Aashish","artist":"Bipul Chettri","key":"G","sections":[{"name":"Main loop","chords":["I","vi"],"prog":"I \u2013 vi","named":null},{"name":"Second loop","chords":["IV","I"],"prog":"IV \u2013 I","named":"Two-chord vamp"}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:32 (x19, 69% of the song); second loop from 0:04 (x7).","listen":"https://www.youtube.com/watch?v=mqhyXNj1JVA"},{"id":"allare","title":"Allare","artist":"Deepak Bajracharya","key":"F#","sections":[{"name":"Main loop","chords":["I","IV"],"prog":"I \u2013 IV","named":"Two-chord vamp"},{"name":"Second loop","chords":["I","vi"],"prog":"I \u2013 vi","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:26 (x15, 60% of the song); second loop from 0:23 (x8).","listen":"https://www.youtube.com/watch?v=9SPYhjivNQ8"},{"id":"bardali","title":"Bardali","artist":"Sushant KC ft. Indrakala Rai","key":"C","sections":[{"name":"Main loop","chords":["V","IV","I"],"prog":"V \u2013 IV \u2013 I","named":null},{"name":"Second loop","chords":["I","IV"],"prog":"I \u2013 IV","named":"Two-chord vamp"}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:23 (x8, 51% of the song); second loop from 0:08 (x11). Key and chords agree with published chord sheets.","listen":"https://www.youtube.com/watch?v=HAcLoqZO-Z0"},{"id":"dashain-tihar","title":"Dashain Tihar","artist":"Sugam Pokharel","key":"B","sections":[{"name":"Main loop","chords":["I","vi"],"prog":"I \u2013 vi","named":null},{"name":"Second loop","chords":["II","I"],"prog":"II \u2013 I","named":null},{"name":"Third loop","chords":["IV","V","I"],"prog":"IV \u2013 V \u2013 I","named":"Three-chord progression"}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:27 (x14, 28% of the song); second loop from 0:41 (x5); third loop from 0:13 (x4). Key agrees with published chord sheets; the draft has 5 of their 6 chords.","listen":"https://www.youtube.com/watch?v=LnOajzcjBz4"},{"id":"flirty-maya","title":"Flirty Maya","artist":"Neetesh Jung Kunwar","key":"G","sections":[{"name":"Main loop","chords":["IV","V","I"],"prog":"IV \u2013 V \u2013 I","named":"Three-chord progression"},{"name":"Second loop","chords":["I","V","IV"],"prog":"I \u2013 V \u2013 IV","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:40 (x9, 48% of the song); second loop from 1:29 (x5). Key and chords agree with published chord sheets.","listen":"https://www.youtube.com/watch?v=qRUsBrlhptw"},{"id":"jau-ki-basu","title":"Jau Ki Basu","artist":"Sabin Rai & The Pharaoh","key":"Eb","sections":[{"name":"Main loop","chords":["I","V"],"prog":"I \u2013 V","named":null},{"name":"Second loop","chords":["IV","V"],"prog":"IV \u2013 V","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:28 (x19, 44% of the song); second loop from 0:47 (x14).","listen":"https://www.youtube.com/watch?v=nDvZU1FKdAQ"},{"id":"kalo-seto","title":"Kalo/Seto","artist":"Purna Rai","key":"F#","sections":[{"name":"Main loop","chords":["I","V"],"prog":"I \u2013 V","named":null},{"name":"Second loop","chords":["IV","vi"],"prog":"IV \u2013 vi","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:04 (x15, 54% of the song); second loop from 0:20 (x5). Key and chords agree with published chord sheets.","listen":"https://www.youtube.com/watch?v=9bd2nvAKyMc"},{"id":"kasari","title":"Kasari","artist":"Yabesh Thapa","key":"Ab","sections":[{"name":"Main loop","chords":["I","V"],"prog":"I \u2013 V","named":null},{"name":"Second loop","chords":["I","IV"],"prog":"I \u2013 IV","named":"Two-chord vamp"},{"name":"Third loop","chords":["I","vi"],"prog":"I \u2013 vi","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:50 (x7, 50% of the song); second loop from 0:13 (x4); third loop from 1:46 (x4).","listen":"https://www.youtube.com/watch?v=vnHTrxV7TMc"},{"id":"kholai-khola","title":"Kholai Khola","artist":"Neetesh Jung Kunwar","key":"F","sections":[{"name":"Main loop","chords":["IV","V","I"],"prog":"IV \u2013 V \u2013 I","named":"Three-chord progression"},{"name":"Second loop","chords":["I","vi"],"prog":"I \u2013 vi","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:04 (x9, 59% of the song); second loop from 1:07 (x6).","listen":"https://www.youtube.com/watch?v=ttpO7wNqFv8"},{"id":"ma-bachekai","title":"Ma Bachekai","artist":"Pramod Kharel","key":"Bb","sections":[{"name":"Main loop","chords":["I","vi"],"prog":"I \u2013 vi","named":null},{"name":"Second loop","chords":["I","IV"],"prog":"I \u2013 IV","named":"Two-chord vamp"}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:10 (x18, 65% of the song); second loop from 0:00 (x7).","listen":"https://www.youtube.com/watch?v=IIsDnRjdANI"},{"id":"maile-mayale-diyeko-chino","title":"Maile Mayale Diyeko Chino","artist":"Rajesh Payal Rai","key":"E","sections":[{"name":"Main loop","chords":["I","vi"],"prog":"I \u2013 vi","named":null},{"name":"Second loop","chords":["V","I"],"prog":"V \u2013 I","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:00 (x7, 59% of the song); second loop from 0:25 (x7).","listen":"https://www.youtube.com/watch?v=age7ILJzLM4"},{"id":"najeek","title":"Najeek","artist":"Bartika Eam Rai","key":"Bb","sections":[{"name":"Intro","chords":["I","IVadd9"],"prog":"I \u2013 IV","named":"Two-chord vamp"},{"name":"Chorus","chords":["IV","vi","V","vi"],"prog":"IV \u2013 vi \u2013 V \u2013 vi","named":null}],"verified":false,"source":"Maintainer's transcription, played with G shapes and a capo on fret 3. Key Bb from detect.py on the official upload, which found the same two loops; not yet checked by ear.","notes":"The chorus never returns home: V goes to vi, a deceptive cadence, and the intro's I is the resolution it holds back.","listen":"https://www.youtube.com/watch?v=AMRGmAh2NTk"},{"id":"nogen","title":"Nogen","artist":"Pramod Kharel & Ruksana Limbu","key":"E","sections":[{"name":"Main loop","chords":["I","vi"],"prog":"I \u2013 vi","named":null},{"name":"Second loop","chords":["V","I"],"prog":"V \u2013 I","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:38 (x8, 44% of the song); second loop from 0:41 (x6).","listen":"https://www.youtube.com/watch?v=QMBCNKlNjs4"},{"id":"nyano-ghar","title":"Nyano Ghar","artist":"Arthur Gunn","key":"C","sections":[{"name":"Main loop","chords":["V","I","vi","iii"],"prog":"V \u2013 I \u2013 vi \u2013 iii","named":null},{"name":"Second loop","chords":["I","V","IV"],"prog":"I \u2013 V \u2013 IV","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:00 (x12, 46% of the song); second loop from 0:48 (x5). Key and chords agree with published chord sheets.","listen":"https://www.youtube.com/watch?v=bMqbADBN0Js"},{"id":"parkhaima","title":"Parkhaima","artist":"Raju Lama (Mongolian Heart)","key":"A","sections":[{"name":"Main loop","chords":["IV","I"],"prog":"IV \u2013 I","named":"Two-chord vamp"},{"name":"Second loop","chords":["I","vi","IV"],"prog":"I \u2013 vi \u2013 IV","named":null},{"name":"Third loop","chords":["V","ii"],"prog":"V \u2013 ii","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 1:15 (x13, 33% of the song); second loop from 0:18 (x8); third loop from 0:42 (x12). Key and chords agree with published chord sheets.","listen":"https://www.youtube.com/watch?v=cCxjAMIB0-k"},{"id":"pralaya-a","title":"Pralaya 'A'","artist":"Arthur Gunn","key":"G","sections":[{"name":"Main loop","chords":["IV","I"],"prog":"IV \u2013 I","named":"Two-chord vamp"},{"name":"Second loop","chords":["I","iii","IV"],"prog":"I \u2013 iii \u2013 IV","named":null},{"name":"Third loop","chords":["I","vi","IV"],"prog":"I \u2013 vi \u2013 IV","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:08 (x18, 60% of the song); second loop from 2:20 (x6); third loop from 0:08 (x5).","listen":"https://www.youtube.com/watch?v=lvWnomkTiVY"},{"id":"rail-lai-ma","title":"Rail Lai Ma","artist":"Trishna Gurung","key":"Bb","sections":[{"name":"Main loop","chords":["I","IV","I","V"],"prog":"I \u2013 IV \u2013 I \u2013 V","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:01 (x14, 83% of the song). Key agrees with published chord sheets; the draft has 3 of their 4 chords.","listen":"https://www.youtube.com/watch?v=nSJ6vQ-Uo-s"},{"id":"sarangi","title":"Sarangi","artist":"Sushant KC","key":"Db","sections":[{"name":"Main loop","chords":["I","vi"],"prog":"I \u2013 vi","named":null},{"name":"Second loop","chords":["I","V"],"prog":"I \u2013 V","named":null},{"name":"Third loop","chords":["vi","IV","I"],"prog":"vi \u2013 IV \u2013 I","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 1:11 (x7, 44% of the song); second loop from 0:00 (x6); third loop from 1:03 (x4). Key and chords agree with published chord sheets.","listen":"https://www.youtube.com/watch?v=Sh8ZYHnb86c"},{"id":"sasto-mutu","title":"Sasto Mutu","artist":"Sajjan Raj Vaidya","key":"G","sections":[{"name":"Main loop","chords":["I","V","I","ii"],"prog":"I \u2013 V \u2013 I \u2013 ii","named":null},{"name":"Second loop","chords":["I","IV"],"prog":"I \u2013 IV","named":"Two-chord vamp"}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:58 (x5, 28% of the song); second loop from 0:33 (x8). Key agrees with published chord sheets; the draft has 2 of their 2 chords.","listen":"https://www.youtube.com/watch?v=XcEC2q4CotY"},{"id":"sayad-timro-batoma","title":"Sayad Timro Batoma","artist":"Raju Lama (Mongolian Heart)","key":"A","sections":[{"name":"Main loop","chords":["vi","I"],"prog":"vi \u2013 I","named":null},{"name":"Second loop","chords":["I","ii"],"prog":"I \u2013 ii","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:00 (x17, 48% of the song); second loop from 0:34 (x17). Key agrees with published chord sheets; the draft has 3 of their 4 chords.","listen":"https://www.youtube.com/watch?v=RNOkuiXkmmQ"},{"id":"syndicate","title":"Syndicate","artist":"Bipul Chettri","key":"E","sections":[{"name":"Main loop","chords":["I","V","vi"],"prog":"I \u2013 V \u2013 vi","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:01 (x9, 58% of the song). Key agrees with published chord sheets; the draft has 3 of their 6 chords.","listen":"https://www.youtube.com/watch?v=0bfk90rWV9U"},{"id":"timi-bhane","title":"Timi Bhane","artist":"Albatross","key":"Eb","sections":[{"name":"Main loop","chords":["IV","I"],"prog":"IV \u2013 I","named":"Two-chord vamp"},{"name":"Second loop","chords":["I","II"],"prog":"I \u2013 II","named":null},{"name":"Third loop","chords":["I","vi","V"],"prog":"I \u2013 vi \u2013 V","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:13 (x9, 33% of the song); second loop from 0:00 (x8); third loop from 0:35 (x4). Barahsinghe Acoustic Sessions version.","listen":"https://www.youtube.com/watch?v=UC3k11aJnnU"},{"id":"timro-aankha","title":"Timro Aankha","artist":"Swoopna Suman","key":"D","sections":[{"name":"Main loop","chords":["I","V"],"prog":"I \u2013 V","named":null},{"name":"Second loop","chords":["IV","I"],"prog":"IV \u2013 I","named":"Two-chord vamp"},{"name":"Third loop","chords":["I","vi"],"prog":"I \u2013 vi","named":null}],"verified":false,"source":"Drafted by detect.py from the official upload; the section names are placeholders and nothing here has been checked by ear yet.","notes":"Main loop from 0:46 (x14, 41% of the song); second loop from 0:24 (x12); third loop from 1:45 (x10).","listen":"https://www.youtube.com/watch?v=c1bLvzZYXjM"}],"shapes":{"0|madd9":{"frets":[-1,3,5,5,4,3],"diff":3,"as":"m"},"0|add9":{"frets":[-1,3,2,0,3,3],"diff":1},"0|dim7":{"frets":[-1,3,4,5,4,-1],"diff":2,"as":"dim"},"0|maj7":{"frets":[-1,3,2,0,0,0],"diff":1},"0|sus2":{"frets":[-1,3,5,5,3,3],"diff":3},"0|sus4":{"frets":[-1,3,5,5,6,3],"diff":3},"0|aug":{"frets":null,"diff":4},"0|dim":{"frets":[-1,3,4,5,4,-1],"diff":2},"0|m6":{"frets":[-1,3,5,5,4,3],"diff":3,"as":"m"},"0|m7":{"frets":[-1,3,5,3,4,3],"diff":3},"0|m9":{"frets":[-1,3,5,3,4,3],"diff":3,"as":"m7"},"0|6":{"frets":[-1,3,2,0,1,0],"diff":1,"as":""},"0|7":{"frets":[-1,3,2,3,1,0],"diff":1},"0|9":{"frets":[-1,3,2,3,1,0],"diff":1,"as":"7"},"0|m":{"frets":[-1,3,5,5,4,3],"diff":3},"0|":{"frets":[-1,3,2,0,1,0],"diff":1},"1|madd9":{"frets":[-1,4,6,6,5,4],"diff":3,"as":"m"},"1|add9":{"frets":[-1,4,6,6,6,4],"diff":3,"as":""},"1|dim7":{"frets":[-1,4,5,6,5,-1],"diff":2,"as":"dim"},"1|maj7":{"frets":[-1,4,6,5,6,4],"diff":3},"1|sus2":{"frets":[-1,4,6,6,4,4],"diff":3},"1|sus4":{"frets":[-1,4,6,6,7,4],"diff":3},"1|aug":{"frets":null,"diff":4},"1|dim":{"frets":[-1,4,5,6,5,-1],"diff":2},"1|m6":{"frets":[-1,4,6,6,5,4],"diff":3,"as":"m"},"1|m7":{"frets":[-1,4,6,4,5,4],"diff":3},"1|m9":{"frets":[-1,4,6,4,5,4],"diff":3,"as":"m7"},"1|6":{"frets":[-1,4,6,6,6,4],"diff":3,"as":""},"1|7":{"frets":[-1,4,6,4,6,4],"diff":3},"1|9":{"frets":[-1,4,6,4,6,4],"diff":3,"as":"7"},"1|m":{"frets":[-1,4,6,6,5,4],"diff":3},"1|":{"frets":[-1,4,6,6,6,4],"diff":3},"2|madd9":{"frets":[-1,-1,0,2,3,1],"diff":1,"as":"m"},"2|add9":{"frets":[-1,-1,0,2,3,2],"diff":1,"as":""},"2|dim7":{"frets":[-1,5,6,7,6,-1],"diff":2,"as":"dim"},"2|maj7":{"frets":[-1,-1,0,2,2,2],"diff":1},"2|sus2":{"frets":[-1,-1,0,2,3,0],"diff":1},"2|sus4":{"frets":[-1,-1,0,2,3,3],"diff":1},"2|aug":{"frets":null,"diff":4},"2|dim":{"frets":[-1,5,6,7,6,-1],"diff":2},"2|m6":{"frets":[-1,-1,0,2,3,1],"diff":1,"as":"m"},"2|m7":{"frets":[-1,-1,0,2,1,1],"diff":1},"2|m9":{"frets":[-1,-1,0,2,1,1],"diff":1,"as":"m7"},"2|6":{"frets":[-1,-1,0,2,3,2],"diff":1,"as":""},"2|7":{"frets":[-1,-1,0,2,1,2],"diff":1},"2|9":{"frets":[-1,-1,0,2,1,2],"diff":1,"as":"7"},"2|m":{"frets":[-1,-1,0,2,3,1],"diff":1},"2|":{"frets":[-1,-1,0,2,3,2],"diff":1},"3|madd9":{"frets":[-1,6,8,8,7,6],"diff":3,"as":"m"},"3|add9":{"frets":[-1,6,8,8,8,6],"diff":3,"as":""},"3|dim7":{"frets":[-1,6,7,8,7,-1],"diff":2,"as":"dim"},"3|maj7":{"frets":[-1,6,8,7,8,6],"diff":3},"3|sus2":{"frets":[-1,6,8,8,6,6],"diff":3},"3|sus4":{"frets":[-1,6,8,8,9,6],"diff":3},"3|aug":{"frets":null,"diff":4},"3|dim":{"frets":[-1,6,7,8,7,-1],"diff":2},"3|m6":{"frets":[-1,6,8,8,7,6],"diff":3,"as":"m"},"3|m7":{"frets":[-1,6,8,6,7,6],"diff":3},"3|m9":{"frets":[-1,6,8,6,7,6],"diff":3,"as":"m7"},"3|6":{"frets":[-1,6,8,8,8,6],"diff":3,"as":""},"3|7":{"frets":[-1,6,8,6,8,6],"diff":3},"3|9":{"frets":[-1,6,8,6,8,6],"diff":3,"as":"7"},"3|m":{"frets":[-1,6,8,8,7,6],"diff":3},"3|":{"frets":[-1,6,8,8,8,6],"diff":3},"4|madd9":{"frets":[0,2,2,0,0,0],"diff":1,"as":"m"},"4|add9":{"frets":[0,2,4,1,0,0],"diff":1},"4|dim7":{"frets":[-1,7,8,9,8,-1],"diff":2,"as":"dim"},"4|maj7":{"frets":[-1,7,9,8,9,7],"diff":3},"4|sus2":{"frets":[-1,7,9,9,7,7],"diff":3},"4|sus4":{"frets":[0,2,2,2,0,0],"diff":1},"4|aug":{"frets":null,"diff":4},"4|dim":{"frets":[-1,7,8,9,8,-1],"diff":2},"4|m6":{"frets":[0,2,2,0,0,0],"diff":1,"as":"m"},"4|m7":{"frets":[0,2,2,0,3,3],"diff":1},"4|m9":{"frets":[0,2,2,0,3,3],"diff":1,"as":"m7"},"4|6":{"frets":[0,2,2,1,0,0],"diff":1,"as":""},"4|7":{"frets":[0,2,0,1,0,0],"diff":1},"4|9":{"frets":[0,2,0,1,0,0],"diff":1,"as":"7"},"4|m":{"frets":[0,2,2,0,0,0],"diff":1},"4|":{"frets":[0,2,2,1,0,0],"diff":1},"5|madd9":{"frets":[1,3,3,1,1,1],"diff":3,"as":"m"},"5|add9":{"frets":[-1,-1,3,2,1,1],"diff":2,"as":""},"5|dim7":{"frets":[-1,8,9,10,9,-1],"diff":2,"as":"dim"},"5|maj7":{"frets":[-1,-1,3,2,1,0],"diff":1},"5|sus2":{"frets":[-1,8,10,10,8,8],"diff":3},"5|sus4":{"frets":[-1,8,10,10,11,8],"diff":3},"5|aug":{"frets":null,"diff":4},"5|dim":{"frets":[-1,8,9,10,9,-1],"diff":2},"5|m6":{"frets":[1,3,3,1,1,1],"diff":3,"as":"m"},"5|m7":{"frets":[1,3,1,1,1,1],"diff":3},"5|m9":{"frets":[1,3,1,1,1,1],"diff":3,"as":"m7"},"5|6":{"frets":[-1,-1,3,2,1,1],"diff":2,"as":""},"5|7":{"frets":[1,3,1,2,1,1],"diff":3},"5|9":{"frets":[1,3,1,2,1,1],"diff":3,"as":"7"},"5|m":{"frets":[1,3,3,1,1,1],"diff":3},"5|":{"frets":[-1,-1,3,2,1,1],"diff":2},"6|madd9":{"frets":[2,4,4,2,2,2],"diff":3,"as":"m"},"6|add9":{"frets":[2,4,4,3,2,2],"diff":3,"as":""},"6|dim7":{"frets":[-1,9,10,11,10,-1],"diff":2,"as":"dim"},"6|maj7":{"frets":[-1,9,11,10,11,9],"diff":3},"6|sus2":{"frets":[-1,9,11,11,9,9],"diff":3},"6|sus4":{"frets":[-1,9,11,11,12,9],"diff":3},"6|aug":{"frets":null,"diff":4},"6|dim":{"frets":[-1,9,10,11,10,-1],"diff":2},"6|m6":{"frets":[2,4,4,2,2,2],"diff":3,"as":"m"},"6|m7":{"frets":[2,4,2,2,2,2],"diff":3},"6|m9":{"frets":[2,4,2,2,2,2],"diff":3,"as":"m7"},"6|6":{"frets":[2,4,4,3,2,2],"diff":3,"as":""},"6|7":{"frets":[2,4,2,3,2,2],"diff":3},"6|9":{"frets":[2,4,2,3,2,2],"diff":3,"as":"7"},"6|m":{"frets":[2,4,4,2,2,2],"diff":3},"6|":{"frets":[2,4,4,3,2,2],"diff":3},"7|madd9":{"frets":[3,5,5,3,3,3],"diff":3,"as":"m"},"7|add9":{"frets":[3,2,0,2,0,3],"diff":1},"7|dim7":{"frets":[-1,10,11,12,11,-1],"diff":2,"as":"dim"},"7|maj7":{"frets":[3,2,0,0,0,2],"diff":1},"7|sus2":{"frets":[-1,10,12,12,10,10],"diff":3},"7|sus4":{"frets":[-1,10,12,12,13,10],"diff":3},"7|aug":{"frets":null,"diff":4},"7|dim":{"frets":[-1,10,11,12,11,-1],"diff":2},"7|m6":{"frets":[3,5,5,3,3,3],"diff":3,"as":"m"},"7|m7":{"frets":[3,5,3,3,3,3],"diff":3},"7|m9":{"frets":[3,5,3,3,3,3],"diff":3,"as":"m7"},"7|6":{"frets":[3,2,0,0,0,3],"diff":1,"as":""},"7|7":{"frets":[3,2,0,0,0,1],"diff":1},"7|9":{"frets":[3,2,0,0,0,1],"diff":1,"as":"7"},"7|m":{"frets":[3,5,5,3,3,3],"diff":3},"7|":{"frets":[3,2,0,0,0,3],"diff":1},"8|madd9":{"frets":[4,6,6,4,4,4],"diff":3,"as":"m"},"8|add9":{"frets":[4,6,6,5,4,4],"diff":3,"as":""},"8|dim7":{"frets":[-1,11,12,13,12,-1],"diff":2,"as":"dim"},"8|maj7":{"frets":[-1,11,13,12,13,11],"diff":3},"8|sus2":{"frets":[-1,11,13,13,11,11],"diff":3},"8|sus4":{"frets":[-1,11,13,13,14,11],"diff":3},"8|aug":{"frets":null,"diff":4},"8|dim":{"frets":[-1,11,12,13,12,-1],"diff":2},"8|m6":{"frets":[4,6,6,4,4,4],"diff":3,"as":"m"},"8|m7":{"frets":[4,6,4,4,4,4],"diff":3},"8|m9":{"frets":[4,6,4,4,4,4],"diff":3,"as":"m7"},"8|6":{"frets":[4,6,6,5,4,4],"diff":3,"as":""},"8|7":{"frets":[4,6,4,5,4,4],"diff":3},"8|9":{"frets":[4,6,4,5,4,4],"diff":3,"as":"7"},"8|m":{"frets":[4,6,6,4,4,4],"diff":3},"8|":{"frets":[4,6,6,5,4,4],"diff":3},"9|madd9":{"frets":[-1,0,2,2,1,0],"diff":1,"as":"m"},"9|add9":{"frets":[-1,0,2,2,2,0],"diff":1,"as":""},"9|dim7":{"frets":[-1,0,1,2,1,-1],"diff":1,"as":"dim"},"9|maj7":{"frets":[-1,0,2,1,2,0],"diff":1},"9|sus2":{"frets":[-1,0,2,2,0,0],"diff":1},"9|sus4":{"frets":[-1,0,2,2,3,0],"diff":1},"9|aug":{"frets":null,"diff":4},"9|dim":{"frets":[-1,0,1,2,1,-1],"diff":1},"9|m6":{"frets":[-1,0,2,2,1,0],"diff":1,"as":"m"},"9|m7":{"frets":[-1,0,2,0,1,0],"diff":1},"9|m9":{"frets":[-1,0,2,0,1,0],"diff":1,"as":"m7"},"9|6":{"frets":[-1,0,2,2,2,0],"diff":1,"as":""},"9|7":{"frets":[-1,0,2,0,2,0],"diff":1},"9|9":{"frets":[-1,0,2,0,2,0],"diff":1,"as":"7"},"9|m":{"frets":[-1,0,2,2,1,0],"diff":1},"9|":{"frets":[-1,0,2,2,2,0],"diff":1},"10|madd9":{"frets":[-1,1,3,3,2,1],"diff":3,"as":"m"},"10|add9":{"frets":[-1,1,3,3,3,1],"diff":3,"as":""},"10|dim7":{"frets":[-1,1,2,3,2,-1],"diff":2,"as":"dim"},"10|maj7":{"frets":[-1,1,3,2,3,1],"diff":3},"10|sus2":{"frets":[-1,1,3,3,1,1],"diff":3},"10|sus4":{"frets":[-1,1,3,3,4,1],"diff":3},"10|aug":{"frets":null,"diff":4},"10|dim":{"frets":[-1,1,2,3,2,-1],"diff":2},"10|m6":{"frets":[-1,1,3,3,2,1],"diff":3,"as":"m"},"10|m7":{"frets":[-1,1,3,1,2,1],"diff":3},"10|m9":{"frets":[-1,1,3,1,2,1],"diff":3,"as":"m7"},"10|6":{"frets":[-1,1,3,3,3,1],"diff":3,"as":""},"10|7":{"frets":[-1,1,3,1,3,1],"diff":3},"10|9":{"frets":[-1,1,3,1,3,1],"diff":3,"as":"7"},"10|m":{"frets":[-1,1,3,3,2,1],"diff":3},"10|":{"frets":[-1,1,3,3,3,1],"diff":3},"11|madd9":{"frets":[-1,-1,4,4,3,2],"diff":2,"as":"m"},"11|add9":{"frets":[-1,2,4,4,4,2],"diff":3,"as":""},"11|dim7":{"frets":[-1,2,3,4,3,-1],"diff":2,"as":"dim"},"11|maj7":{"frets":[-1,2,4,3,4,2],"diff":3},"11|sus2":{"frets":[-1,2,4,4,2,2],"diff":3},"11|sus4":{"frets":[-1,2,4,4,5,2],"diff":3},"11|aug":{"frets":null,"diff":4},"11|dim":{"frets":[-1,2,3,4,3,-1],"diff":2},"11|m6":{"frets":[-1,-1,4,4,3,2],"diff":2,"as":"m"},"11|m7":{"frets":[-1,2,4,2,3,2],"diff":3},"11|m9":{"frets":[-1,2,4,2,3,2],"diff":3,"as":"m7"},"11|6":{"frets":[-1,2,4,4,4,2],"diff":3,"as":""},"11|7":{"frets":[-1,2,1,2,0,2],"diff":1},"11|9":{"frets":[-1,2,1,2,0,2],"diff":1,"as":"7"},"11|m":{"frets":[-1,-1,4,4,3,2],"diff":2},"11|":{"frets":[-1,2,4,4,4,2],"diff":3}},"stand_in":{"add9":"","sus2":"","sus4":"","6":"","maj7":"","9":"7","madd9":"m","m6":"m","m9":"m7","dim7":"dim"},"progs":[{"prog":"I \u2013 IV","named":"Two-chord vamp","uses":[{"song":"aashish","section":"Second loop","as":"IV \u2013 I"},{"song":"allare","section":"Main loop","as":null},{"song":"bardali","section":"Second loop","as":null},{"song":"kasari","section":"Second loop","as":null},{"song":"ma-bachekai","section":"Second loop","as":null},{"song":"najeek","section":"Intro","as":null},{"song":"parkhaima","section":"Main loop","as":"IV \u2013 I"},{"song":"pralaya-a","section":"Main loop","as":"IV \u2013 I"},{"song":"sasto-mutu","section":"Second loop","as":null},{"song":"timi-bhane","section":"Main loop","as":"IV \u2013 I"},{"song":"timro-aankha","section":"Second loop","as":"IV \u2013 I"}]},{"prog":"I \u2013 vi","named":null,"uses":[{"song":"aashish","section":"Main loop","as":null},{"song":"allare","section":"Second loop","as":null},{"song":"dashain-tihar","section":"Main loop","as":null},{"song":"kasari","section":"Third loop","as":null},{"song":"kholai-khola","section":"Second loop","as":null},{"song":"ma-bachekai","section":"Main loop","as":null},{"song":"maile-mayale-diyeko-chino","section":"Main loop","as":null},{"song":"nogen","section":"Main loop","as":null},{"song":"sarangi","section":"Main loop","as":null},{"song":"sayad-timro-batoma","section":"Main loop","as":"vi \u2013 I"},{"song":"timro-aankha","section":"Third loop","as":null}]},{"prog":"I \u2013 V","named":null,"uses":[{"song":"jau-ki-basu","section":"Main loop","as":null},{"song":"kalo-seto","section":"Main loop","as":null},{"song":"kasari","section":"Main loop","as":null},{"song":"maile-mayale-diyeko-chino","section":"Second loop","as":"V \u2013 I"},{"song":"nogen","section":"Second loop","as":"V \u2013 I"},{"song":"sarangi","section":"Second loop","as":null},{"song":"timro-aankha","section":"Main loop","as":null}]},{"prog":"I \u2013 IV \u2013 V","named":"Three-chord progression","uses":[{"song":"dashain-tihar","section":"Third loop","as":"IV \u2013 V \u2013 I"},{"song":"flirty-maya","section":"Main loop","as":"IV \u2013 V \u2013 I"},{"song":"kholai-khola","section":"Main loop","as":"IV \u2013 V \u2013 I"}]},{"prog":"I \u2013 V \u2013 IV","named":null,"uses":[{"song":"bardali","section":"Main loop","as":"V \u2013 IV \u2013 I"},{"song":"flirty-maya","section":"Second loop","as":null},{"song":"nyano-ghar","section":"Second loop","as":null}]},{"prog":"I \u2013 vi \u2013 IV","named":null,"uses":[{"song":"parkhaima","section":"Second loop","as":null},{"song":"pralaya-a","section":"Third loop","as":null},{"song":"sarangi","section":"Third loop","as":"vi \u2013 IV \u2013 I"}]},{"prog":"I \u2013 II","named":null,"uses":[{"song":"dashain-tihar","section":"Second loop","as":"II \u2013 I"},{"song":"timi-bhane","section":"Second loop","as":null}]},{"prog":"I \u2013 IV \u2013 I \u2013 V","named":null,"uses":[{"song":"rail-lai-ma","section":"Main loop","as":null}]},{"prog":"I \u2013 V \u2013 I \u2013 ii","named":null,"uses":[{"song":"sasto-mutu","section":"Main loop","as":null}]},{"prog":"I \u2013 V \u2013 vi","named":null,"uses":[{"song":"syndicate","section":"Main loop","as":null}]},{"prog":"I \u2013 ii","named":null,"uses":[{"song":"sayad-timro-batoma","section":"Second loop","as":null}]},{"prog":"I \u2013 iii \u2013 IV","named":null,"uses":[{"song":"pralaya-a","section":"Second loop","as":null}]},{"prog":"I \u2013 vi \u2013 V","named":null,"uses":[{"song":"timi-bhane","section":"Third loop","as":null}]},{"prog":"I \u2013 vi \u2013 iii \u2013 V","named":null,"uses":[{"song":"nyano-ghar","section":"Main loop","as":"V \u2013 I \u2013 vi \u2013 iii"}]},{"prog":"IV \u2013 V","named":null,"uses":[{"song":"jau-ki-basu","section":"Second loop","as":null}]},{"prog":"IV \u2013 vi","named":null,"uses":[{"song":"kalo-seto","section":"Second loop","as":null}]},{"prog":"IV \u2013 vi \u2013 V \u2013 vi","named":null,"uses":[{"song":"najeek","section":"Chorus","as":null}]},{"prog":"V \u2013 ii","named":null,"uses":[{"song":"parkhaima","section":"Third loop","as":null}]}]};</script>
+
+<script>
+/* Port of the parts of theory.py the browser needs.  The shape table is not
+   ported: Python builds it and the page receives it as data.  assemble.py runs
+   this file under node against theory.py over every song and every key, and
+   refuses to build if a single chord name differs. */
+(function (root) {
+"use strict";
+
+var LETTERS = "CDEFGAB";
+var LETTER_PC = {C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11};
+var MAJOR_STEPS = [0, 2, 4, 5, 7, 9, 11];
+var ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII"];
+var TONICS = {
+  maj: ["C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"],
+  min: ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "G#", "A", "Bb", "B"]
+};
+var SHARP_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+var FLAT_NAMES = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
+var AWKWARD = ["Cb", "Fb", "E#", "B#"];
+var NUMERAL = /^([b#]?)(VII|VI|V|IV|III|II|I|vii|vi|v|iv|iii|ii|i)(\u00b0|dim|\+)?(maj7|7|add9|sus2|sus4|6|9)?$/;
+var SUFFIX = {
+  "maj|": "", "maj|7": "7", "maj|maj7": "maj7", "maj|add9": "add9",
+  "maj|sus2": "sus2", "maj|sus4": "sus4", "maj|6": "6", "maj|9": "9",
+  "min|": "m", "min|7": "m7", "min|add9": "madd9", "min|6": "m6", "min|9": "m9",
+  "dim|": "dim", "dim|7": "dim7",
+  "aug|": "aug"
+};
+var SUFFIXES = {};
+Object.keys(SUFFIX).forEach(function (k) { SUFFIXES[SUFFIX[k]] = true; });
+var WEIGHT = {1: 0, 2: 1, 3: 3, 4: 5};
+var MAX_CAPO = 7;
+
+function mod12(n) { return ((n % 12) + 12) % 12; }
+
+function notePc(name) {
+  var pc = LETTER_PC[name.charAt(0)];
+  for (var i = 1; i < name.length; i++) pc += name.charAt(i) === "#" ? 1 : -1;
+  return mod12(pc);
+}
+
+function parseKey(key) {
+  var mode = key.charAt(key.length - 1) === "m" ? "min" : "maj";
+  var tonic = mode === "min" ? key.slice(0, -1) : key;
+  if (TONICS[mode].indexOf(tonic) < 0) throw new Error("unknown key " + key);
+  return {tonic: tonic, mode: mode};
+}
+function keyName(tonic, mode) { return tonic + (mode === "min" ? "m" : ""); }
+function keyAt(pc, mode) { return TONICS[mode][mod12(pc)]; }
+function usesFlats(tonic, mode) {
+  if (tonic.indexOf("b") >= 0) return true;
+  return mode === "maj" ? tonic === "F" : ["C", "D", "F", "G"].indexOf(tonic) >= 0;
+}
+
+function parseNumeral(s) {
+  var m = NUMERAL.exec(s);
+  if (!m) throw new Error("cannot read numeral " + s);
+  var acc = m[1], rn = m[2], q = m[3] || "", ext = m[4] || "";
+  var minor = rn === rn.toLowerCase();
+  var quality;
+  if (q === "\u00b0" || q === "dim") {
+    if (!minor) throw new Error(s + ": diminished is lower case");
+    quality = "dim";
+  } else if (q === "+") {
+    if (minor) throw new Error(s + ": augmented is upper case");
+    quality = "aug";
+  } else {
+    quality = minor ? "min" : "maj";
+  }
+  var suffix = SUFFIX[quality + "|" + ext];
+  if (suffix === undefined) throw new Error(s + ": no such chord");
+  return {degree: ROMAN.indexOf(rn.toUpperCase()), acc: {"": 0, b: -1, "#": 1}[acc],
+          quality: quality, suffix: suffix};
+}
+
+function spellRoot(tonic, mode, degree, acc) {
+  var letter = LETTERS.charAt((LETTERS.indexOf(tonic.charAt(0)) + degree) % 7);
+  var pc = mod12(notePc(tonic) + MAJOR_STEPS[degree] + acc);
+  var gap = mod12(pc - LETTER_PC[letter]);
+  var name = gap === 0 ? letter : gap === 1 ? letter + "#" : gap === 11 ? letter + "b" : null;
+  if (name === null || AWKWARD.indexOf(name) >= 0)
+    name = (usesFlats(tonic, mode) ? FLAT_NAMES : SHARP_NAMES)[pc];
+  return name;
+}
+
+function chord(numeral, key) {
+  var k = parseKey(key), n = parseNumeral(numeral);
+  var rootName = spellRoot(k.tonic, k.mode, n.degree, n.acc);
+  return {name: rootName + n.suffix, pc: notePc(rootName), suffix: n.suffix};
+}
+function chordId(pc, suffix) { return pc + "|" + suffix; }
+
+function parseChordName(s) {
+  s = String(s).trim().replace(/\u266f/g, "#").replace(/\u266d/g, "b");
+  var m = /^([A-Ga-g])([#b]?)(.*)$/.exec(s);
+  if (!m) return null;
+  var alias = {min: "m", maj: "", M7: "maj7", "-": "m", "\u00b0": "dim"};
+  var suffix = alias.hasOwnProperty(m[3]) ? alias[m[3]] : m[3];
+  if (!SUFFIXES.hasOwnProperty(suffix)) return null;
+  return [notePc(m[1].toUpperCase() + m[2]), suffix];
+}
+
+function render(sections, key) {
+  return sections.map(function (s) {
+    return {name: s.name, chords: s.chords.map(function (n) { return chord(n, key); })};
+  });
+}
+
+function difficultyScore(numerals, key, shapes) {
+  var seen = {}, total = 0;
+  numerals.forEach(function (n) {
+    var c = chord(n, key), id = chordId(c.pc, c.suffix);
+    seen[id] = shapes[id].diff;
+  });
+  Object.keys(seen).forEach(function (id) { total += WEIGHT[seen[id]]; });
+  return total;
+}
+
+function shapeKey(key, capo) {
+  var k = parseKey(key);
+  return keyName(keyAt(notePc(k.tonic) - capo, k.mode), k.mode);
+}
+
+function bestCapo(numerals, key, shapes) {
+  var best = null;
+  for (var capo = 0; capo <= MAX_CAPO; capo++) {
+    var sk = shapeKey(key, capo), score = difficultyScore(numerals, sk, shapes);
+    if (best === null || score < best[2]) best = [capo, sk, score];
+  }
+  return best;
+}
+
+function easiestKeys(numerals, mode, shapes) {
+  var ranked = [];
+  for (var pc = 0; pc < 12; pc++) {
+    var k = keyName(keyAt(pc, mode), mode);
+    ranked.push([difficultyScore(numerals, k, shapes), pc, k]);
+  }
+  ranked.sort(function (a, b) { return a[0] - b[0] || a[1] - b[1]; });
+  return ranked.map(function (r) { return [r[2], r[0]]; });
+}
+
+function cadences(numerals) {
+  var parsed = numerals.map(parseNumeral), out = [], count = parsed.length;
+  parsed.forEach(function (a, i) {
+    if (a.acc !== 0) out.push(["borrowed", i]);
+    if (count < 2) return;
+    var b = parsed[(i + 1) % count];
+    var home = b.degree === 0 && b.acc === 0;
+    if (a.degree === 4 && a.acc === 0 && a.quality === "maj") {
+      if (home) out.push(["authentic", i]);
+      else if (b.degree === 5 && b.acc === 0) out.push(["deceptive", i]);
+    } else if (a.degree === 3 && a.acc === 0 && home) {
+      out.push(["plagal", i]);
+    }
+  });
+  return out;
+}
+
+var T = {
+  TONICS: TONICS, MAX_CAPO: MAX_CAPO,
+  parseKey: parseKey, keyName: keyName, keyAt: keyAt, notePc: notePc,
+  parseNumeral: parseNumeral, chord: chord, chordId: chordId,
+  parseChordName: parseChordName, render: render, difficultyScore: difficultyScore,
+  shapeKey: shapeKey, bestCapo: bestCapo, easiestKeys: easiestKeys, cadences: cadences
+};
+if (typeof module !== "undefined" && module.exports) module.exports = T;
+else root.CHORD_THEORY = T;
+})(this);
+</script>
+
+<header class="top">
+<div class="look-art" aria-hidden="true"></div>
+  <div class="wide">
+    <p class="kicker">Nepali songs &middot; guitar &middot; <span id="nSongs">&mdash;</span></p>
+    <h1>Nepali songs, by their chords</h1>
+    <p class="sub">Every song here is written down as numerals &mdash; I, IV, vi,
+      V &mdash; rather than as chord names. That is what lets the page play it in
+      any key, find the capo that turns barre chords into open ones without
+      changing a note you hear, and notice when two songs you never connected are
+      built from the same four moves.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wide">
+    <div class="card">
+      <div class="controls">
+        <div class="songf">
+          <label class="lab" for="song">Song</label>
+          <select id="song"></select>
+        </div>
+        <div>
+          <label class="lab" for="key">Sounds in</label>
+          <select id="key"></select>
+        </div>
+        <div>
+          <label class="lab" for="capo">Capo</label>
+          <select id="capo"></select>
+        </div>
+        <button type="button" class="cta" id="easiest">Easiest capo</button>
+      </div>
+      <p class="note" id="capoNote"></p>
+
+      <div class="meta" id="meta"></div>
+      <p class="tiny" id="source"></p>
+      <div id="sections"></div>
+
+      <h3>Shapes you need</h3>
+      <div class="shapes" id="shapes"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <h2>Songs that share a progression</h2>
+    <p class="lede">Grouped by the numerals, so a song in G and a song in E land
+      side by side when they make the same moves. A loop counts once whichever
+      chord it starts on &mdash; I&ndash;IV and IV&ndash;I are the same two chords
+      rocking back and forth &mdash; and colour chords like add9 and 7 are
+      ignored: Cadd9 is a way of voicing C, not a different step.</p>
+    <div class="progs" id="progs"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <h2>What can I play already?</h2>
+    <p class="lede">Type the chords you can play. The page tries every capo from 0
+      to <span id="maxCapo">&mdash;</span> and lists the songs you can get through
+      at the recording's pitch using only those shapes.</p>
+    <div class="card">
+      <label class="lab" for="known">Chords I know</label>
+      <input type="text" id="known" value="G C D Em" autocomplete="off"
+             spellcheck="false" aria-describedby="knownHelp">
+      <p class="tiny" id="knownHelp" style="margin:7px 0 0">Separate with spaces
+        or commas. Add9, sus and 6 chords count as played if you know the plain
+        chord they are built on.</p>
+      <label class="check"><input type="checkbox" id="anyKey"> I don't mind
+        singing it in a different key</label>
+      <ul class="hits" id="knownOut"></ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="srcs back-home" style="margin-bottom:1.2em"><a href="../" style="text-decoration-color:currentColor">&larr; All fifteen datasets</a></p>
+    <p class="srcs" id="srcs"></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+var D = window.CHORDS_DATA, T = window.CHORD_THEORY;
+var SONGS = D.songs, SHAPES = D.shapes, STAND_IN = D.stand_in;
+var BY_ID = {};
+SONGS.forEach(function (s) { BY_ID[s.id] = s; });
+function el(id){ return document.getElementById(id); }
+function esc(s){
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+                  .replace(/"/g, "&quot;");
+}
+function allNumerals(song){
+  var out = [];
+  song.sections.forEach(function (s) { out = out.concat(s.chords); });
+  return out;
+}
+
+var state = {song: SONGS[0].id, key: SONGS[0].key, capo: 0};
+
+/* ------------------------------------------------------------- the URL
+   The whole state rides in the fragment, so a link sent to a friend opens
+   the same song, key and capo. */
+function readHash(){
+  var h = {};
+  location.hash.replace(/^#/, "").split("&").forEach(function (kv) {
+    var i = kv.indexOf("=");
+    if (i > 0) h[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1));
+  });
+  if (h.song && BY_ID[h.song]) {
+    state.song = h.song;
+    state.key = BY_ID[h.song].key;
+    var mode = T.parseKey(state.key).mode;
+    if (h.key && T.TONICS[mode].some(function (t) { return T.keyName(t, mode) === h.key; }))
+      state.key = h.key;
+    var c = parseInt(h.capo, 10);
+    if (c >= 0 && c <= T.MAX_CAPO) state.capo = c;
+  }
+}
+function writeHash(){
+  var h = "#song=" + encodeURIComponent(state.song) + "&key=" +
+          encodeURIComponent(state.key) + "&capo=" + state.capo;
+  if (location.hash !== h) history.replaceState(null, "", h);
+}
+
+/* ------------------------------------------------------------- diagrams */
+var DIFF_TEXT = {1: "open", 2: "partial barre", 3: "barre", 4: "no stock shape"};
+
+function diagram(frets){
+  var W = 110, x0 = 14, dx = 14, y0 = 24, dy = 18, N = 5;
+  var played = frets.filter(function (f) { return f > 0; });
+  var hi = played.length ? Math.max.apply(null, played) : 0;
+  var base = hi <= N ? 1 : Math.min.apply(null, played);
+  var s = ['<svg width="' + W + '" height="' + (y0 + N * dy + 6) +
+           '" viewBox="0 0 ' + W + ' ' + (y0 + N * dy + 6) + '" aria-hidden="true">'];
+  for (var i = 0; i < 6; i++) {
+    var x = x0 + i * dx;
+    s.push('<line x1="' + x + '" y1="' + y0 + '" x2="' + x + '" y2="' + (y0 + N * dy) +
+           '" stroke="currentColor" stroke-opacity=".55"/>');
+  }
+  for (var f = 0; f <= N; f++) {
+    var y = y0 + f * dy, nut = f === 0 && base === 1;
+    s.push('<line x1="' + x0 + '" y1="' + y + '" x2="' + (x0 + 5 * dx) + '" y2="' + y +
+           '" stroke="currentColor" stroke-opacity="' + (nut ? 1 : .4) +
+           '" stroke-width="' + (nut ? 3.5 : 1) + '"/>');
+  }
+  if (base > 1)
+    s.push('<text x="' + (x0 + 5 * dx + 7) + '" y="' + (y0 + dy * .7) +
+           '" font-size="11" fill="currentColor" font-family="Nunito,monospace">' +
+           base + 'fr</text>');
+  frets.forEach(function (fr, i) {
+    var x = x0 + i * dx;
+    if (fr < 0) {
+      s.push('<text x="' + x + '" y="' + (y0 - 7) + '" font-size="11" text-anchor="middle"' +
+             ' fill="currentColor" fill-opacity=".6" font-family="Nunito,monospace">x</text>');
+    } else if (fr === 0) {
+      s.push('<circle cx="' + x + '" cy="' + (y0 - 10) + '" r="4" fill="none"' +
+             ' stroke="currentColor" stroke-opacity=".75"/>');
+    } else {
+      s.push('<circle cx="' + x + '" cy="' + (y0 + (fr - base + .5) * dy) +
+             '" r="5.5" style="fill:var(--accent)"/>');
+    }
+  });
+  s.push("</svg>");
+  return s.join("");
+}
+
+/* ------------------------------------------------------------- the song */
+var CADENCE_TEXT = {
+  deceptive: "a deceptive cadence: the ear expects home and gets the relative minor instead",
+  authentic: "the strongest pull home there is",
+  plagal: "the softer, \u201camen\u201d resolution",
+  borrowed: "borrowed from outside the major scale, which is where the colour comes from"
+};
+
+function cadenceLine(section){
+  var n = section.chords.length;
+  return T.cadences(section.chords).map(function (c) {
+    var a = section.chords[c[1]], b = section.chords[(c[1] + 1) % n];
+    var label = c[0] === "borrowed" ? a : a + " \u2192 " + b;
+    return "<b>" + esc(label) + "</b>: " + CADENCE_TEXT[c[0]] + ".";
+  }).join(" ");
+}
+
+function fillKeys(song){
+  var mode = T.parseKey(song.key).mode;
+  el("key").innerHTML = T.TONICS[mode].map(function (t) {
+    var k = T.keyName(t, mode);
+    return '<option value="' + k + '"' + (k === state.key ? " selected" : "") + ">" +
+           k + (k === song.key ? " (recording)" : "") + "</option>";
+  }).join("");
+}
+
+function draw(){
+  var song = BY_ID[state.song];
+  var nums = allNumerals(song);
+  var sk = T.shapeKey(state.key, state.capo);
+  var best = T.bestCapo(nums, state.key, SHAPES);
+  var here = T.difficultyScore(nums, sk, SHAPES);
+
+  el("song").value = song.id;
+  fillKeys(song);
+  el("capo").value = String(state.capo);
+
+  var note = state.capo === 0
+    ? "No capo: you finger the chords as written, in <b>" + esc(state.key) + "</b>."
+    : "Capo on fret " + state.capo + ": finger the shapes of <b>" + esc(sk) +
+      "</b>, and it sounds in <b>" + esc(state.key) + "</b>.";
+  if (state.key !== song.key)
+    note += " Moved from the recording\u2019s " + esc(song.key) + ", so it will not play along with it.";
+  if (best[2] < here)
+    note += " Capo " + best[0] + " (shapes of " + esc(best[1]) + ") is easier for the same pitch.";
+  el("capoNote").innerHTML = note;
+  el("capoNote").className = best[2] < here ? "note warn" : "note";
+
+  var listen = song.listen ? ' <a href="' + esc(song.listen) + '" rel="noopener">Listen</a>' : "";
+  el("meta").innerHTML =
+    '<span class="title">' + esc(song.title) + "</span>" +
+    '<span class="artist">' + esc(song.artist) + "</span>" +
+    '<span class="badge' + (song.verified ? " ok" : "") + '">' +
+    (song.verified ? "checked by ear" : "not yet checked") + "</span>" + listen;
+  el("source").textContent = song.source + (song.notes ? " " + song.notes : "");
+
+  var rendered = T.render(song.sections, sk);
+  var sounding = T.render(song.sections, state.key);
+  el("sections").innerHTML = rendered.map(function (sec, si) {
+    var meta = song.sections[si];
+    var named = meta.named ? " &middot; " + esc(meta.named) : "";
+    var chords = sec.chords.map(function (c, ci) {
+      var snd = state.capo ? '<div class="snd">sounds ' + esc(sounding[si].chords[ci].name) + "</div>" : "";
+      return '<div class="chord"><div class="cn">' + esc(c.name) + '</div><div class="rn">' +
+             esc(meta.chords[ci]) + "</div>" + snd + "</div>";
+    }).join("");
+    var cad = cadenceLine(meta);
+    return '<div class="section"><div class="name"><span>' + esc(sec.name) +
+           '</span><span class="prog">' + esc(meta.prog) + named + "</span></div>" +
+           '<div class="bar">' + chords + "</div>" +
+           (cad ? '<p class="cad">' + cad + "</p>" : "") + "</div>";
+  }).join("");
+
+  var seen = {}, cards = [];
+  rendered.forEach(function (sec) {
+    sec.chords.forEach(function (c) {
+      var id = T.chordId(c.pc, c.suffix);
+      if (seen[id]) return;
+      seen[id] = true;
+      var sh = SHAPES[id];
+      var desc = DIFF_TEXT[sh.diff];
+      if (sh.as !== undefined) desc = "play as " + c.name.slice(0, c.name.length - c.suffix.length) + sh.as;
+      cards.push('<div class="shape"><div class="sn">' + esc(c.name) + "</div>" +
+                 '<div class="sd' + (sh.diff >= 3 ? " hard" : "") + '">' + esc(desc) + "</div>" +
+                 (sh.frets ? diagram(sh.frets) : "") + "</div>");
+    });
+  });
+  el("shapes").innerHTML = cards.join("");
+  writeHash();
+}
+
+/* ------------------------------------------------------------- the index */
+function songLink(id, label){
+  return '<button type="button" class="songlink" data-song="' + esc(id) + '">' +
+         esc(label) + "</button>";
+}
+
+function drawIndex(){
+  el("progs").innerHTML = D.progs.map(function (p) {
+    var uses = p.uses.map(function (u) {
+      return songLink(u.song, BY_ID[u.song].title) + " <span class=\"tiny\">(" + esc(u.section) +
+             (u.as ? ", entered as " + esc(u.as) : "") + ")</span>";
+    }).join(", ");
+    return '<div class="prog-row"><div><div class="p">' + esc(p.prog) + "</div>" +
+           (p.named ? '<div class="pn">' + esc(p.named) + "</div>" : "") + "</div>" +
+           "<div>" + uses + "</div></div>";
+  }).join("");
+}
+
+/* ------------------------------------------------------------- chords I know */
+function knownSet(text){
+  var ids = {}, bad = [];
+  text.split(/[\s,]+/).forEach(function (tok) {
+    if (!tok) return;
+    var p = T.parseChordName(tok);
+    if (p) ids[T.chordId(p[0], p[1])] = true;
+    else bad.push(tok);
+  });
+  return {ids: ids, bad: bad};
+}
+
+function playable(c, known){
+  if (known[T.chordId(c.pc, c.suffix)]) return true;
+  return STAND_IN.hasOwnProperty(c.suffix) && known[T.chordId(c.pc, STAND_IN[c.suffix])];
+}
+
+function tryKey(nums, key, known){
+  var names = [], ok = nums.every(function (n) {
+    var c = T.chord(n, key);
+    if (names.indexOf(c.name) < 0) names.push(c.name);
+    return playable(c, known);
+  });
+  return ok ? names : null;
+}
+
+function drawKnown(){
+  var k = knownSet(el("known").value), anyKey = el("anyKey").checked;
+  var hits = [];
+  SONGS.forEach(function (song) {
+    var nums = allNumerals(song), mode = T.parseKey(song.key).mode, found = null;
+    for (var capo = 0; capo <= T.MAX_CAPO && !found; capo++) {
+      var sk = T.shapeKey(song.key, capo), names = tryKey(nums, sk, k.ids);
+      if (names) found = {key: song.key, capo: capo, sk: sk, names: names};
+    }
+    if (!found && anyKey) {
+      T.TONICS[mode].some(function (t) {
+        var key = T.keyName(t, mode), names = tryKey(nums, key, k.ids);
+        if (names) found = {key: key, capo: 0, sk: key, names: names};
+        return !!found;
+      });
+    }
+    if (found) hits.push([song, found]);
+  });
+  var out = hits.map(function (h) {
+    var f = h[1], how;
+    if (f.key !== h[0].key) how = "In " + f.key + " instead of " + h[0].key + ": " + f.names.join(" ");
+    else if (f.capo) how = "Capo " + f.capo + ", shapes of " + f.sk + ": " + f.names.join(" ");
+    else how = "No capo: " + f.names.join(" ");
+    return "<li>" + songLink(h[0].id, h[0].title) + " &mdash; " + esc(h[0].artist) +
+           '<span class="how">' + esc(how) + "</span></li>";
+  });
+  if (!out.length) out.push('<li class="small">Nothing yet with those chords.' +
+    (anyKey ? "" : " Ticking \u201cdifferent key\u201d widens the search.") + "</li>");
+  if (k.bad.length)
+    out.unshift('<li class="small">Not read as chords: ' + esc(k.bad.join(", ")) + "</li>");
+  el("knownOut").innerHTML = out.join("");
+}
+
+/* ------------------------------------------------------------- wiring */
+function pick(id){
+  state.song = id;
+  state.key = BY_ID[id].key;
+  state.capo = 0;
+  draw();
+  el("song").scrollIntoView({behavior: "smooth", block: "center"});
+}
+
+el("song").innerHTML = SONGS.map(function (s) {
+  return '<option value="' + esc(s.id) + '">' + esc(s.title) + " \u2014 " + esc(s.artist) + "</option>";
+}).join("");
+var capos = [];
+for (var c = 0; c <= T.MAX_CAPO; c++) capos.push('<option value="' + c + '">' + (c ? "Fret " + c : "None") + "</option>");
+el("capo").innerHTML = capos.join("");
+
+el("song").addEventListener("change", function () { pick(this.value); });
+el("key").addEventListener("change", function () { state.key = this.value; draw(); });
+el("capo").addEventListener("change", function () { state.capo = parseInt(this.value, 10); draw(); });
+el("easiest").addEventListener("click", function () {
+  state.capo = T.bestCapo(allNumerals(BY_ID[state.song]), state.key, SHAPES)[0];
+  draw();
+});
+el("known").addEventListener("input", drawKnown);
+el("anyKey").addEventListener("change", drawKnown);
+document.addEventListener("click", function (e) {
+  var b = e.target.closest ? e.target.closest(".songlink") : null;
+  if (b) pick(b.getAttribute("data-song"));
+});
+
+var checked = SONGS.filter(function (s) { return s.verified; }).length;
+el("nSongs").textContent = SONGS.length + (SONGS.length === 1 ? " song" : " songs") +
+  " \u00b7 " + checked + " checked by ear";
+el("maxCapo").textContent = T.MAX_CAPO;
+el("srcs").innerHTML = "Chords transcribed by ear and stored as numerals; each song says " +
+  "whether its key has been checked against the recording. No lyrics are stored " +
+  "&mdash; chord progressions are not copyrightable, and the words are. " +
+  "Capo choice, key changes and cadence names are worked out in the page.";
+
+readHash();
+draw();
+drawIndex();
+drawKnown();
+})();
+</script>
+</body>
+</html>
