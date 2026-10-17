@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0F1520">
 <meta name="description" content="Where Does My Salary Put Me?">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3E%E0%A4%A4%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3EST%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>Where Does My Salary Put Me?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400;0,600;0,800;1,400&amp;family=Overpass+Mono:wght@400;600&amp;family=Noto+Sans+Devanagari:wght@400;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400;0,600;0,800;1,400&amp;family=Overpass+Mono:wght@400;600&amp;display=swap">
 <style>
 :root{
   color-scheme: light;
@@ -29,7 +30,7 @@
   --field:#FFFFFF; --field-rule:#C2C2CD;
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -334,6 +335,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -364,8 +367,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -382,7 +383,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -415,7 +416,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -460,10 +461,12 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-line:#C7D6EA; --t-line-2:#1D4F91; --t-grid:rgba(29,79,145,.09);
   --t-accent:#1D4F91; --t-accent-2:#D23B30; --t-accent-ink:#FFFFFF;
   --sv-blue:#1D4F91; --sv-red:#D23B30; --sv-field:#EAF1FA;
+  
+  --sv-bar:#1D4F91; --sv-rule:#1D4F91; --sv-text:#1D4F91;
   --t-head-bg:#FFFFFF; --t-head-ink:#121A26; --t-head-ink-2:#3B4757; --t-head-kick:#FFFFFF;
   --t-head-rule:3px solid #1D4F91; --t-hero-bg:#FFFFFF;
   --t-foot-bg:#1D4F91; --t-foot-ink:#EAF1FA; --t-foot-ink-2:#BFD1EA;
-  --t-f-display:"Overpass","Noto Sans Devanagari",Arial,sans-serif; --t-f-body:"Overpass","Noto Sans Devanagari",Arial,sans-serif;
+  --t-f-display:"Overpass",Arial,sans-serif; --t-f-body:"Overpass",Arial,sans-serif;
   --t-f-label:"Overpass Mono",ui-monospace,monospace; --t-f-num:"Overpass Mono",ui-monospace,monospace;
   --t-f-chart:"Overpass Mono",ui-monospace,monospace;
   --t-body-size:17.5px; --t-body-lh:1.66;
@@ -480,35 +483,55 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
 }
 
 header.top{position:relative}
-header.top .kicker{display:inline-block; background:#1D4F91; color:#FFFFFF; padding:5px 12px 3px}
+header.top .kicker{display:inline-block; background:var(--sv-bar); color:#FFFFFF; padding:5px 12px 3px}
 header.top .look-art{display:block; height:30px; margin:0 auto 18px; max-width:var(--wide);
   padding-inline:24px; background:
-    repeating-linear-gradient(90deg,transparent 0 6px,#1D4F91 6px 7.5px,#EAF1FA 7.5px 30px,#1D4F91 30px 31.5px,transparent 31.5px 32px)
+    repeating-linear-gradient(90deg,transparent 0 6px,var(--sv-rule) 6px 7.5px,var(--sv-field) 7.5px 30px,var(--sv-rule) 30px 31.5px,transparent 31.5px 32px)
     24px 0/256px 30px no-repeat}
-header.top .devanagari{color:var(--sv-red); font-weight:400}
 
 body{counter-reset:sec}
-section .eyebrow{counter-increment:sec; background:#1D4F91; color:#FFFFFF; padding:6px 12px 4px; display:flex}
+section .eyebrow{counter-increment:sec; background:var(--sv-bar); color:#FFFFFF; padding:6px 12px 4px; display:flex}
 section .eyebrow::before{content:"SECTION " counter(sec) "\00a0\00a0"; font-weight:600}
 .eyebrow::after{display:none}
 h2::before{content:counter(sec) ".1\00a0\00a0"; color:var(--sv-red); font-family:var(--t-f-label); font-size:.62em; vertical-align:.2em}
 
-figure{border:1.5px solid #1D4F91}
-.fig-head{background:#EAF1FA; border-bottom:1.5px solid #1D4F91; padding-bottom:14px}
+figure{border:1.5px solid var(--sv-rule)}
+.fig-head{background:var(--sv-field); border-bottom:1.5px solid var(--sv-rule); padding-bottom:14px}
 .fig-title{font-weight:800}
-figcaption{background:#FFFFFF}
+figcaption{background:var(--t-paper)}
 .stats{gap:10px}
-.stat{box-shadow:none; border:1.5px solid #1D4F91; background:#EAF1FA}
-.stat b{color:#1D4F91; font-weight:600}
-.note{border-left:4px solid var(--sv-red); background:#FFFFFF}
+.stat{box-shadow:none; border:1.5px solid var(--sv-rule); background:var(--sv-field)}
+.stat b{color:var(--sv-text); font-weight:600}
+.note{border-left:4px solid var(--sv-red); background:var(--t-paper)}
 .pull{font-weight:800}
 
-.card,.answer,.offer,a.nextcard,.fig{border:1.5px solid #1D4F91}
-.answer .top{background:#EAF1FA}
-.big{color:#1D4F91; font-weight:600}
-input[type=text],input[type=number],select{background-color:#EAF1FA; border:1.5px solid #1D4F91}
-label.lab{color:#1D4F91}
+.card,.answer,.offer,a.nextcard,.fig{border:1.5px solid var(--sv-rule)}
+.answer .top{background:var(--sv-field)}
+.big{color:var(--sv-text); font-weight:600}
+input[type=text],input[type=number],select{background-color:var(--sv-field); border:1.5px solid var(--sv-rule)}
+label.lab{color:var(--sv-text)}
 footer a{color:#FFFFFF}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#0F1520; --t-paper:#141C29; --t-paper-2:#1A2435;
+  --t-ink:#E8EEF6; --t-ink-2:#BFCADA; --t-ink-3:#9AA8BC;
+  --t-line:#2A3A52; --t-line-2:#8FB3E6; --t-grid:rgba(143,179,230,.10);
+  --t-accent:#8FB3E6; --t-accent-2:#F2685D; --t-accent-ink:#0F1520;
+  --sv-blue:#8FB3E6; --sv-red:#F2685D; --sv-field:#18233A;
+  --sv-bar:#2B5FA6; --sv-rule:#4E77B3; --sv-text:#9DBDEB;
+  --t-head-bg:#0F1520; --t-head-ink:#E8EEF6; --t-head-ink-2:#BFCADA; --t-head-kick:#FFFFFF;
+  --t-head-rule:3px solid #2B5FA6; --t-hero-bg:#0F1520;
+  --t-foot-bg:#172A47; --t-foot-ink:#E3ECF8; --t-foot-ink-2:#B5C7E2;
+  --t-label-ink:#9DBDEB;
+  --t-fig-border:1.5px solid #4E77B3; --t-cap-rule:1px solid #2A3A52; --t-tip-border:1.5px solid #8FB3E6;
+  --t-chip-on-bg:#2B5FA6; --t-chip-on-ink:#FFFFFF;
+  --sun:#E95143; --y1995:#235497; --y2003:#4578BE; --y2010:#699DE5; --y2022:#9EC7FF;
+  --mark:#8FB3E6; --mark-soft:rgba(143,179,230,.20); --mark-dim:rgba(143,179,230,.36); --pov:#F2685D;
+  --field:#18233A; --field-rule:#8FB3E6;
+}
+}
 
 </style>
 </head>
@@ -519,11 +542,9 @@ footer a{color:#FFFFFF}
 <div class="look-art" aria-hidden="true"></div>
   <div class="wide">
     <p class="kicker">Nepal Living Standards Survey &middot; 29.7 million people</p>
-    <h1>Where does my salary put me?<!-- "Ma kaha chu?" -- ASCII-only
-      fragment, so the Devanagari is numeric character references. -->
-      <span class="devanagari" lang="ne">&#2350; &#2325;&#2361;&#2366;&#2305; &#2331;&#2369;?</span></h1>
-    <p class="sub">Nepal knows exactly how its money is distributed &mdash; four
-      household surveys, the last of them covering the whole country &mdash; and
+    <h1>Where does my salary put me?</h1>
+    <p class="sub">Nepal knows exactly how its money is distributed (four
+      household surveys, the last of them covering the whole country) and
       almost nobody ever sees themselves on that curve. Put in what a household
       lives on and this finds the place, after the two corrections that decide
       the answer and that most calculators skip.</p>
@@ -582,8 +603,8 @@ footer a{color:#FFFFFF}
             <p class="lab mono" style="font-family:'Overpass Mono',monospace; font-size:11px;
                letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
                margin:0 0 4px">Better off than</p>
-            <div class="big" id="outPct">&mdash;<span class="unit">of Nepal</span></div>
-            <p class="exact" id="outPeople">&mdash;</p>
+            <div class="big" id="outPct">&ndash;<span class="unit">of Nepal</span></div>
+            <p class="exact" id="outPeople">&ndash;</p>
             <div class="ppbar"><i id="outMark"></i></div>
             <div class="ppends"><span>poorest</span><span>richest</span></div>
             <p class="tiny" style="margin:9px 0 0" id="outBandNote"></p>
@@ -631,8 +652,8 @@ footer a{color:#FFFFFF}
     <h2>The ladder, with you on it</h2>
     <p class="lede" style="margin-bottom:26px">These are the reference wages
       Nepali arguments about money are usually conducted in. Each is converted
-      the same way yours was &mdash; deflated, then divided across a household of
-      <span id="ladderHh">4</span> &mdash; so the comparison is like for like.</p>
+      the same way yours was, deflated and then divided across a household of
+      <span id="ladderHh">4</span>, so the comparison is like for like.</p>
     <div class="card">
       <table>
         <thead><tr><th>A month</th><th>Per person</th><th>Percentile</th><th>People below</th></tr></thead>
@@ -742,11 +763,11 @@ footer a{color:#FFFFFF}
       this curve than its income alone would suggest.</p>
     <p><b>It is priced in <span id="limYear">2022</span> rupees.</b> A wage quoted
       today buys less, so today's figure is deflated by
-      <span id="limDefl">&mdash;</span> before the lookup. Skip that step, as most
+      <span id="limDefl">&ndash;</span> before the lookup. Skip that step, as most
       calculators do, and everyone is flattered by several percentile points.</p>
     <p><b>The country is not one place.</b> Per-person consumption in the
-      Kathmandu Valley runs about <span id="limKtm">&mdash;</span> a month against
-      about <span id="limMad">&mdash;</span> in Madhesh. A single national curve
+      Kathmandu Valley runs about <span id="limKtm">&ndash;</span> a month against
+      about <span id="limMad">&ndash;</span> in Madhesh. A single national curve
       puts a modest Kathmandu household high and a comfortable Madhesh household
       higher still, and neither would recognise the description.</p>
     <p><b>The tail is thin and the top is missing.</b> Household surveys
@@ -1124,8 +1145,8 @@ var land = (function(){
              '<div class="l">' + t[1] + '</div></div>';
     }).join("");
     el("landNote").innerHTML = "That third figure is the one worth sitting with. " +
-      "It assumes the household spends nothing at all &mdash; no food, no rent, " +
-      "no school fees &mdash; and puts every rupee it earns toward " +
+      "It assumes the household spends nothing at all (no food, no rent, " +
+      "no school fees) and puts every rupee it earns toward " +
       D.land.reference_aana + " aana of ground at the valley's median asking " +
       "price. On those terms it takes <b>" +
       (years >= 100 ? "over a century" : years.toFixed(0) + " years") + "</b>. " +

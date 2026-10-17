@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#DCEBF4">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#DCEBF4">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10233A">
 <meta name="description" content="Where the Sea Is Falling">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231E7B3C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%B8%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231E7B3C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3ESL%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>Where the Sea Is Falling</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +38,7 @@
   --grid:rgba(21,21,28,.07);
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -236,6 +237,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -266,8 +269,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -284,7 +285,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -317,7 +318,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -362,6 +363,10 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-line:#D3DFE8; --t-line-2:#1D232B; --t-grid:rgba(29,35,43,.08);
   --t-accent:#2F75B5; --t-accent-2:#B02A86; --t-accent-ink:#FFFFFF;
   --nc-magenta:#B02A86; --nc-blue:#2F75B5; --nc-shallow:#DCEBF4;
+  
+  --nc-navy:#14385E;
+  --nc-b0:#F2E8CC; --nc-b1:#DCEBF4; --nc-b2:#C6DDEC; --nc-b3:#B1CFE3; --nc-contour:rgba(47,117,181,.14);
+  --nc-rose-ring:rgba(255,255,255,.35);
   --t-head-bg:#DCEBF4; --t-head-ink:#14385E; --t-head-ink-2:#33475E; --t-head-kick:#B02A86;
   --t-head-rule:1.5px solid #1D232B; --t-hero-bg:#EEF5FA;
   --t-foot-bg:#F2E8CC; --t-foot-ink:#454E5A; --t-foot-ink-2:#5F6874;
@@ -381,17 +386,17 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
 }
 
 header.top{position:relative; overflow:hidden; background:
-  repeating-linear-gradient(176deg,transparent 0 46px,rgba(47,117,181,.14) 46px 47px),
-  linear-gradient(180deg,#F2E8CC 0 10px,#DCEBF4 10px 46%,#C6DDEC 46% 74%,#B1CFE3 74%)}
+  repeating-linear-gradient(176deg,transparent 0 46px,var(--nc-contour) 46px 47px),
+  linear-gradient(180deg,var(--nc-b0) 0 10px,var(--nc-b1) 10px 46%,var(--nc-b2) 46% 74%,var(--nc-b3) 74%)}
 
 header.top .look-art{display:block; position:absolute; right:max(clamp(18px,6vw,90px), calc((100% - var(--wide,1120px)) / 2 + 24px)); top:50%; transform:translateY(-50%);
   width:clamp(110px,13vw,170px); aspect-ratio:1; border-radius:50%; pointer-events:none;
-  border:2px solid #B02A86; box-shadow:inset 0 0 0 10px rgba(255,255,255,.35), inset 0 0 0 11.5px #B02A86;
-  background:repeating-conic-gradient(from 0deg,#B02A86 0 1deg,transparent 1deg 10deg);
+  border:2px solid var(--nc-magenta); box-shadow:inset 0 0 0 10px var(--nc-rose-ring), inset 0 0 0 11.5px var(--nc-magenta);
+  background:repeating-conic-gradient(from 0deg,var(--nc-magenta) 0 1deg,transparent 1deg 10deg);
   -webkit-mask:radial-gradient(circle,#000 0 40%,transparent 40.5% 41%,#000 41.5%);
           mask:radial-gradient(circle,#000 0 40%,transparent 40.5% 41%,#000 41.5%)}
 header.top .look-art::after{content:""; position:absolute; left:50%; top:12%; width:0; height:0;
-  border-left:9px solid transparent; border-right:9px solid transparent; border-bottom:38% solid #B02A86;
+  border-left:9px solid transparent; border-right:9px solid transparent; border-bottom:38% solid var(--nc-magenta);
   transform:translateX(-50%)}
 header.top h1{font-style:italic}
 header.top .wrap,header.top .wide{position:relative}
@@ -399,18 +404,43 @@ header.top .wrap,header.top .wide{position:relative}
 
 @media(max-width:560px){header.top .look-art{display:none}}
 section .eyebrow::before{content:"Note to mariners \00b7\00a0"}
-.eyebrow::after{background:#B02A86; opacity:.6}
-h2{font-style:italic; color:#14385E}
-figure{border:1px solid #1D232B}
+.eyebrow::after{background:var(--nc-magenta); opacity:.6}
+h2{font-style:italic; color:var(--nc-navy)}
+figure{border:1px solid var(--t-line-2)}
 .fig-title{font-style:italic; font-size:22px}
 figcaption{font-style:italic}
 .stats{gap:0}
-.stat{box-shadow:none; border:1px solid #D3DFE8; background:#FFFFFF}
-.stat b{font-style:italic; color:#14385E; font-size:clamp(34px,4.6vw,50px)}
-.note{border-left:3px solid #B02A86; font-style:italic}
-.card,.answer,.offer,a.nextcard,.fig{border:1px solid #1D232B}
-.answer .top{background:#DCEBF4}
-.big{font-style:italic; color:#14385E}
+.stat{box-shadow:none; border:1px solid var(--t-line); background:var(--t-paper)}
+.stat b{font-style:italic; color:var(--nc-navy); font-size:clamp(34px,4.6vw,50px)}
+.note{border-left:3px solid var(--nc-magenta); font-style:italic}
+.card,.answer,.offer,a.nextcard,.fig{border:1px solid var(--t-line-2)}
+.answer .top{background:var(--nc-shallow)}
+.big{font-style:italic; color:var(--nc-navy)}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#0D131A; --t-paper:#121A23; --t-paper-2:#17212C;
+  --t-ink:#E3EAF1; --t-ink-2:#BCC7D3; --t-ink-3:#96A3B2;
+  --t-line:#263443; --t-line-2:#C8D3DE; --t-grid:rgba(227,234,241,.08);
+  --t-accent:#73ACE2; --t-accent-2:#E77BC4; --t-accent-ink:#0D131A;
+  --nc-magenta:#E77BC4; --nc-blue:#73ACE2; --nc-shallow:#15283A;
+  --nc-navy:#BCD5EE;
+  --nc-b0:#26221A; --nc-b1:#10233A; --nc-b2:#0D1D31; --nc-b3:#0A1728; --nc-contour:rgba(115,172,226,.12);
+  --nc-rose-ring:rgba(255,255,255,.10);
+  --t-head-bg:#10233A; --t-head-ink:#DCE9F5; --t-head-ink-2:#B6C8DB; --t-head-kick:#E77BC4;
+  --t-head-rule:1.5px solid #C8D3DE; --t-hero-bg:#121A23;
+  --t-foot-bg:#1C1A13; --t-foot-ink:#CFC9B6; --t-foot-ink-2:#ACA693;
+  --t-label-ink:#E77BC4;
+  --t-fig-border:1px solid #C8D3DE; --t-cap-rule:1px solid #263443; --t-tip-border:1px solid #C8D3DE;
+  --t-chip-on-bg:#2C5A85; --t-chip-on-ink:#FFFFFF;
+  --d3:#71B7FB; --d2:#397EBF; --d1:#00528E; --d0:#3A414A;
+  --u1:#96016F; --u2:#CD479F; --u3:#FF88D2; --fall:#4A94DA; --rise:#DE50AD;
+  --sea:#0F1A24; --land:#1F1C14; --landline:#4A4433;
+  --mark:#8CC4F2; --mark-soft:rgba(140,196,242,.18); --mark-dim:rgba(140,196,242,.36);
+  --warnc:#E77BC4; --field:#121A23; --field-rule:#C8D3DE;
+}
+}
 
 </style>
 </head>
@@ -439,8 +469,8 @@ figcaption{font-style:italic}
 
     <p>The second term is not a rounding error. Ice sheets kilometres thick
       pressed down the crust beneath Scandinavia and Canada, and since they
-      melted the land has been springing back &mdash; still, ten thousand years
-      later, at up to a centimetre a year. River deltas compact under their own
+      melted the land has been springing back. Ten thousand years
+      later it still is, at up to a centimetre a year. River deltas compact under their own
       weight. Cities pumping groundwater from beneath themselves sink into the
       hole. And a subduction earthquake can drop a coastline half a metre
       between one tide and the next.</p>
@@ -449,8 +479,8 @@ figcaption{font-style:italic}
       straight line to each of the <span data-n="trend_stats.n" data-fmt="int"></span>
       records long enough to support one gives trends from
       <span data-n="trend_stats.lo" data-fmt="1"></span> to
-      <span data-n="trend_stats.hi" data-fmt="1"></span> millimetres a year
-      &mdash; a spread of four centimetres a year between the extremes, around
+      <span data-n="trend_stats.hi" data-fmt="1"></span> millimetres a year:
+      a spread of four centimetres a year between the extremes, around
       a median of <b data-n="trend_stats.median" data-fmt="2"></b>. The median
       is roughly the number usually quoted for the ocean. Almost everything
       else in that range is land.</p>
@@ -492,7 +522,7 @@ figcaption{font-style:italic}
              aria-label="World map of tide gauge trends"></svg>
       </div>
       <figcaption>Equirectangular projection, which stretches the high
-        latitudes sideways &mdash; worth remembering, since the high latitudes
+        latitudes sideways. That is worth remembering, since the high latitudes
         are where the argument is. Coastline: Natural Earth 1:110m, public
         domain.</figcaption>
     </figure>
@@ -546,8 +576,8 @@ figcaption{font-style:italic}
       They are not. Sorted by latitude, they collect almost entirely into one
       band, and it is the band that was under ice.</p>
 
-    <p>Between 60 and 70 degrees north &mdash; the Gulf of Bothnia, the Baltic
-      coast of Finland, Hudson Bay, southern Alaska &mdash; the median gauge
+    <p>Between 60 and 70 degrees north (the Gulf of Bothnia, the Baltic
+      coast of Finland, Hudson Bay, southern Alaska), the median gauge
       reports the sea <em>falling</em>, and
       <span data-n="rebound_band.falling" data-fmt="pct"></span> of them do. Every
       other ten-degree band on Earth has a rising median. This is the
@@ -586,27 +616,27 @@ figcaption{font-style:italic}
     <p>On 11 March 2011 the Pacific plate slipped beneath north-east Japan and
       the coastline above it dropped. The gauge at Onahama recorded the sea
       rising <b data-n="featured.2.step" data-fmt="int"></b> millimetres and
-      staying there &mdash; about two and a half centuries of global mean sea
+      staying there. That is about two and a half centuries of global mean sea
       level rise, arriving in an afternoon and never going away.
       <span data-n="tohoku.stations.0.name"></span> recorded
       <span data-n="tohoku.stations.0.step" data-fmt="int"></span> millimetres.
       The ocean did not rise. Japan fell.</p>
 
     <p>The record does something else worth noticing afterwards. The level at
-      Onahama drifts back down over the following decade &mdash; not because
+      Onahama drifts back down over the following decade, not because
       the sea is retreating, but because the crust is slowly recovering some of
       what it dropped. That post-seismic relaxation is visible in the annual
       means as a decade-long decline that has nothing whatever to do with the
       ocean.</p>
 
     <p>Set against that, Brest has been keeping records since
-      <span data-n="featured.0.first"></span> &mdash; the longest
+      <span data-n="featured.0.first"></span>. It is the longest
       series in the world, on a stable piece of Brittany, and it climbs at a
       modest <span data-n="featured.0.trend" data-fmt="2"></span> mm a year.
       Stockholm falls at <span data-n="featured.1.trend" data-fmt="2"></span>,
       because Sweden is rising faster than the sea is. And the gauge at the
       mouth of the Chao Phraya below Bangkok rises at
-      <span data-n="featured.3.trend" data-fmt="2"></span> &mdash; not because
+      <span data-n="featured.3.trend" data-fmt="2"></span>, not because
       the Gulf of Thailand is behaving differently from the rest of the ocean,
       but because the city behind it has been pumping out the aquifer it stands
       on.</p>
@@ -636,8 +666,8 @@ figcaption{font-style:italic}
   <div class="wrap">
     <p class="eyebrow">What is changing</p>
     <h2>Steeper than it was, nearly everywhere</h2>
-    <p class="lede">Land motion of the slow kind &mdash; rebound, compaction
-      &mdash; is close to constant over a century. So comparing a station
+    <p class="lede">Land motion of the slow kind (rebound, compaction)
+      is close to constant over a century. So comparing a station
       against its own past is a way of subtracting most of the land and seeing
       what the ocean is doing.</p>
 
@@ -695,8 +725,8 @@ figcaption{font-style:italic}
 
     <p>So a nineteenth-century global mean built from tide gauges is a
       north-west European mean wearing a global label. This does not undo the
-      modern result &mdash; there are enough gauges now, spread widely enough
-      &mdash; but it does mean the early part of any long sea-level curve is
+      modern result (there are enough gauges now, spread widely enough),
+      but it does mean the early part of any long sea-level curve is
       carrying far more of Europe than of Earth.</p>
   </div>
 
@@ -725,7 +755,7 @@ figcaption{font-style:italic}
     <p><b>The land is never subtracted.</b> Separating vertical land motion
       from sea level needs GPS at the gauge or a glacial-rebound model, and
       neither is used here. Every trend on this page is land plus sea, which is
-      the essay&rsquo;s subject rather than its flaw &mdash; but it means no
+      the essay&rsquo;s subject rather than its flaw. But it means no
       number here is a measurement of the ocean alone.</p>
     <p><b>A straight line is a poor model of a century.</b> Sea level is not
       linear and the residuals are strongly autocorrelated. The intervals are

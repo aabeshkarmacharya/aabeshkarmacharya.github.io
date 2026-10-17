@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#121212">
-<meta name="description" content="Aabesh Karmacharya, a software engineer in Kathmandu, Nepal: experience, skills and data projects.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#121212">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B0B0B">
+<meta name="description" content="Aabesh Karmacharya, a senior software engineer in Kathmandu, Nepal: experience, skills and data projects.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23121212%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2743%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23F5C11A%27%3EAK%3C%2Ftext%3E%3C%2Fsvg%3E">
-<title>Aabesh Karmacharya | Software Engineer</title>
+<title>Aabesh Karmacharya | Senior Software Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600&family=Teko:wght@400;500;600;700&display=swap">
@@ -18,31 +19,55 @@
   --red:#D42A1F; --yellow:#F5C11A; --blue:#1C4C9C; --green:#1E7B3C;
   --f-sign:"Teko","Arial Narrow",sans-serif; --f-body:"Hind",system-ui,sans-serif;
   --gutter:24px;
+  /* what each part of the board is painted in */
+  --wall:var(--white); --ink:var(--black); --rim:var(--black); --sign-rim:var(--black); --lift:var(--black);
+  --bar:var(--black); --plate:var(--white); --plate-ink:var(--black);
+  --hero:var(--yellow); --hero-ink:var(--black); --hero-ink-2:var(--black); --hero-rule:var(--black);
+  --strip:var(--black); --strip-ink:var(--yellow);
+  --board:var(--black); --board-ink:var(--white); --board-ink-2:#D8D8D8; --board-rule:#3A3A3A;
+  --foot:var(--plaster); --foot-rule:var(--black); --foot-plate:var(--black); --foot-plate-ink:var(--white);
+  --focus:var(--blue);
+}
+/* After dark the wall goes black and the signs stay lit in their own enamel;
+   the yellow moves from the header's ground to its lettering and the stripe
+   beneath it, and the outlined plates are drawn in the wall's pale ink. */
+@media (prefers-color-scheme: dark){
+  :root{
+    color-scheme: dark;
+    --ink-2:#C4C1BA; --ink-3:#9C9992;
+    --wall:#121212; --ink:#ECEAE5; --rim:#ECEAE5; --sign-rim:#121212; --lift:#D9D6CF;
+    --bar:#0B0B0B; --plate:#ECEAE5; --plate-ink:#121212;
+    --hero:#191918; --hero-ink:var(--yellow); --hero-ink-2:#ECEAE5; --hero-rule:#0B0B0B;
+    --strip:var(--yellow); --strip-ink:#121212;
+    --board:#1C1C1B; --board-ink:#ECEAE5; --board-ink-2:#C9C6BF; --board-rule:#3A3A38;
+    --foot:#1A1A19; --foot-rule:#0B0B0B; --foot-plate:#ECEAE5; --foot-plate-ink:#121212;
+    --focus:var(--yellow);
+  }
 }
 *{box-sizing:border-box}
-body{margin:0; background:var(--white); color:var(--black); font-family:var(--f-body); font-size:18px; line-height:1.62;
+body{margin:0; background:var(--wall); color:var(--ink); font-family:var(--f-body); font-size:18px; line-height:1.62;
   -webkit-font-smoothing:antialiased}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--blue); outline-offset:2px}
+:focus-visible{outline:3px solid var(--focus); outline-offset:2px}
 p{margin:0 0 1em}
 .band{padding-left:max(var(--gutter),env(safe-area-inset-left,0px)); padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
 .in{max-width:1180px; margin:0 auto}
 
 /* top bar */
-.bar{background:var(--black); padding-block:7px 4px}
+.bar{background:var(--bar); padding-block:7px 4px}
 .bar .in{display:flex; justify-content:flex-end}
 .plates{display:flex; flex-wrap:wrap; gap:6px}
-.plates a{background:var(--white); color:var(--black); text-decoration:none; font-family:var(--f-sign); font-size:19px;
+.plates a{background:var(--plate); color:var(--plate-ink); text-decoration:none; font-family:var(--f-sign); font-size:19px;
   letter-spacing:.03em; padding:3px 11px 0; text-transform:uppercase; line-height:1.3}
 .plates a:hover{background:var(--yellow)}
 
 /* header */
-.hero{background:var(--yellow); padding-block:clamp(26px,5vw,56px) 0; border-bottom:4px solid var(--black)}
+.hero{background:var(--hero); color:var(--hero-ink); padding-block:clamp(26px,5vw,56px) 0; border-bottom:4px solid var(--hero-rule)}
 h1{font-family:var(--f-sign); font-weight:700; text-transform:uppercase; font-size:clamp(48px,14vw,196px);
   line-height:.8; letter-spacing:.005em; margin:0 0 10px}
 .hero .role{font-family:var(--f-sign); font-weight:500; text-transform:uppercase; font-size:clamp(24px,3vw,34px);
-  line-height:1.05; margin:0 0 clamp(22px,4vw,40px); text-wrap:balance}
-.strip{background:var(--black); color:var(--yellow); font-family:var(--f-sign); font-weight:500; text-transform:uppercase;
+  line-height:1.05; margin:0 0 clamp(22px,4vw,40px); text-wrap:balance; color:var(--hero-ink-2)}
+.strip{background:var(--strip); color:var(--strip-ink); font-family:var(--f-sign); font-weight:500; text-transform:uppercase;
   font-size:clamp(20px,2.4vw,28px); letter-spacing:.03em; padding-block:8px 3px}
 
 h2{text-wrap:balance; font-family:var(--f-sign); font-weight:600; text-transform:uppercase; font-size:clamp(36px,4.6vw,56px);
@@ -52,21 +77,21 @@ h2{text-wrap:balance; font-family:var(--f-sign); font-weight:600; text-transform
 .summary .lead{font-size:21px; line-height:1.5}
 
 /* experience and education */
-.board{background:var(--black); color:var(--white); padding-block:40px 46px}
+.board{background:var(--board); color:var(--board-ink); padding-block:40px 46px}
 .board h2{color:var(--yellow); margin-top:0}
 .board h2.next{margin-top:36px}
-.job{display:grid; grid-template-columns:minmax(0,1fr); gap:0 28px; padding:12px 0; border-top:2px solid #3A3A3A}
+.job{display:grid; grid-template-columns:minmax(0,1fr); gap:0 28px; padding:12px 0; border-top:2px solid var(--board-rule)}
 @media(min-width:760px){.job{grid-template-columns:240px minmax(0,1fr)}}
 .job .when{font-family:var(--f-sign); font-size:22px; color:var(--yellow); line-height:1.2}
 .job h3{font-family:var(--f-sign); font-weight:500; font-size:28px; text-transform:uppercase; margin:0; line-height:1.05}
-.job .org{margin:2px 0 6px; color:#D8D8D8; font-size:16px}
-.job ul{margin:0; padding-left:1.1em; color:#D8D8D8; font-size:16px}
+.job .org{margin:2px 0 6px; color:var(--board-ink-2); font-size:16px}
+.job ul{margin:0; padding-left:1.1em; color:var(--board-ink-2); font-size:16px}
 .job li{margin-bottom:.4em}
-.job li b{color:var(--white)}
+.job li b{color:var(--board-ink)}
 
 /* skills */
 .skills{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr)); padding-bottom:12px}
-.plate{border:3px solid var(--black); padding:12px 14px}
+.plate{border:3px solid var(--rim); padding:12px 14px}
 .plate b{display:block; font-family:var(--f-sign); font-weight:600; font-size:24px; text-transform:uppercase; line-height:1}
 .plate span{color:var(--ink-2); font-size:16px}
 
@@ -74,25 +99,24 @@ h2{text-wrap:balance; font-family:var(--f-sign); font-weight:600; text-transform
 #projects{scroll-margin-top:16px}
 .note{max-width:70ch; color:var(--ink-2); font-size:17px}
 .key{display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--f-sign); font-size:20px; text-transform:uppercase; margin:0 0 18px}
-.key i{display:inline-block; width:16px; height:16px; border:2px solid var(--black); margin-right:6px; vertical-align:-1px}
+.key i{display:inline-block; width:16px; height:16px; border:2px solid var(--rim); margin-right:6px; vertical-align:-1px}
 .signs{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr)); padding-bottom:48px}
-.sign{border:3px solid var(--black); padding:14px 16px 16px; text-decoration:none; display:flex; flex-direction:column;
+.sign{border:3px solid var(--sign-rim); padding:14px 16px 16px; text-decoration:none; display:flex; flex-direction:column;
   gap:2px; min-height:250px; transition:transform .12s, box-shadow .12s}
-.sign:hover{transform:translate(-3px,-3px); box-shadow:6px 6px 0 var(--black)}
+.sign:hover{transform:translate(-3px,-3px); box-shadow:6px 6px 0 var(--lift)}
 .sign.nepal{background:var(--red); color:var(--white)}
 .sign.earth{background:var(--green); color:var(--white)}
 .sign.sky{background:var(--blue); color:var(--white)}
 .sign.tool{background:var(--yellow); color:var(--black)}
-.sign .dev{font-family:var(--f-sign); font-weight:600; font-size:58px; line-height:1.15}
-.sign .t{font-family:var(--f-sign); font-weight:500; text-transform:uppercase; font-size:26px; line-height:.98; margin:0 0 6px; text-wrap:balance}
+.sign .t{font-family:var(--f-sign); font-weight:600; text-transform:uppercase; font-size:36px; line-height:.92; margin:0 0 8px; text-wrap:balance}
 .sign .s{font-size:13px; font-weight:600; margin:0 0 10px; line-height:1.35}
 .sign .f{margin-top:auto; font-size:15px; line-height:1.4}
 .sign .f b{display:block; font-family:var(--f-sign); font-weight:600; font-size:36px; line-height:1}
 @media(prefers-reduced-motion:reduce){.sign{transition:none}}
 
-footer{background:var(--plaster); border-top:4px solid var(--black); padding-block:22px 34px; font-size:14.5px; color:var(--ink-2)}
+footer{background:var(--foot); border-top:4px solid var(--foot-rule); padding-block:22px 34px; font-size:14.5px; color:var(--ink-2)}
 footer .plates{margin-bottom:14px}
-footer .plates a{background:var(--black); color:var(--white)}
+footer .plates a{background:var(--foot-plate); color:var(--foot-plate-ink)}
 @media(max-width:700px){:root{--gutter:16px} body{font-size:17px} .sign{min-height:0}}
 
 @media print{
@@ -111,7 +135,7 @@ footer .plates a{background:var(--black); color:var(--white)}
 
 <header class="hero band"><div class="in">
   <h1>Aabesh Karmacharya</h1>
-  <p class="role">Software Engineer at Maitri Services &middot; Kathmandu, Nepal</p>
+  <p class="role">Senior Software Engineer at Maitri Services &middot; Kathmandu, Nepal</p>
 </div></header>
 <div class="strip band"><div class="in">Python &middot; Django &middot; FastAPI &middot; Dagster &middot; PostgreSQL &middot; BigQuery &middot; AWS &middot; GCP</div></div>
 
@@ -130,7 +154,7 @@ footer .plates a{background:var(--black); color:var(--white)}
         <div class="job">
           <div class="when">April 2026 &ndash; present</div>
           <div>
-            <h3>Software Engineer</h3>
+            <h3>Senior Software Engineer</h3>
             <p class="org">Maitri Services</p>
           </div>
         </div>
@@ -205,145 +229,121 @@ footer .plates a{background:var(--black); color:var(--white)}
     <p class="key"><span><i style="background:var(--red)"></i>Nepal</span><span><i style="background:var(--green)"></i>Earth</span><span><i style="background:var(--blue)"></i>Science</span><span><i style="background:var(--yellow)"></i>Tools</span></p>
     <div class="signs">
       <a class="sign nepal" href="income/">
-        <span class="dev" lang="ne">&#2310;&#2350;&#2381;&#2342;&#2366;&#2344;&#2368;</span>
         <span class="t">Nine Thousand Rupees a Month</span>
         <span class="s">World Bank PIP + NSO Nepal &#183; four survey rounds</span>
         <span class="f"><b>Rs 9,175</b>a month per person is the median Nepali&#8217;s share of household spending</span>
       </a>
       <a class="sign tool" href="stand/">
-        <span class="dev" lang="ne">&#2340;&#2354;&#2348;</span>
         <span class="t">Where Does My Salary Put Me?</span>
         <span class="s">built on the four Nepal Living Standards Surveys</span>
         <span class="f"><b>Rs 9,172</b>a month per person is the national median. Half the country lives on less.</span>
       </a>
       <a class="sign nepal" href="land/">
-        <span class="dev" lang="ne">&#2332;&#2327;&#2381;&#2327;&#2366;</span>
         <span class="t">Four Million Rupees an Aana</span>
         <span class="s">nepalhomes.com + OpenStreetMap &#183; 2,115 plots</span>
         <span class="f"><b>Rs 4.3m</b>is the median asking price for one aana (342 sq ft) of land in the valley</span>
       </a>
       <a class="sign tool" href="worth/">
-        <span class="dev" lang="ne">&#2350;&#2370;&#2354;&#2381;&#2351;</span>
         <span class="t">What Is My Land Worth?</span>
         <span class="s">built on the 2,115-plot land model</span>
         <span class="f"><b>313 toles</b>across Kathmandu, Lalitpur and Bhaktapur, priced by one model</span>
       </a>
       <a class="sign nepal" href="remittances/">
-        <span class="dev" lang="ne">&#2357;&#2367;&#2346;&#2381;&#2352;&#2375;&#2359;&#2339;</span>
         <span class="t">Six Times What We Sell</span>
         <span class="s">Nepal Rastra Bank &#183; 212 monthly bulletins</span>
         <span class="f"><b>6.22&#215;</b>remittance compared with exports in FY2024/25, a year when exports grew 81.8%</span>
       </a>
       <a class="sign nepal" href="spread/">
-        <span class="dev" lang="ne">&#2348;&#2381;&#2351;&#2366;&#2332;&#2342;&#2352;</span>
         <span class="t">The Spread That Closed</span>
         <span class="s">Nepal Rastra Bank &#183; 107 months of rates</span>
         <span class="f"><b>51%</b>the spread is half what it was: 6.84 points down to 3.49</span>
       </a>
       <a class="sign nepal" href="asar/">
-        <span class="dev" lang="ne">&#2309;&#2360;&#2366;&#2352;</span>
         <span class="t">One Rupee in Three, Spent in Asar</span>
         <span class="s">Nepal Rastra Bank &#183; 154 fiscal months of government spending</span>
         <span class="f"><b>36.4%</b>of a typical year&#8217;s capital spending is paid in Asar, the last month of the fiscal year</span>
       </a>
       <a class="sign nepal" href="rice/">
-        <span class="dev" lang="ne">&#2343;&#2366;&#2344;</span>
         <span class="t">The Rice We Grow and Still Buy</span>
         <span class="s">FAOSTAT &#183; 64 years, four areas</span>
         <span class="f"><b>125.7%</b>of India&#8217;s rice yield in 1961. Nepal has trailed India for most years since.</span>
       </a>
       <a class="sign nepal" href="destinations/">
-        <span class="dev" lang="ne">&#2346;&#2352;&#2342;&#2375;&#2358;</span>
         <span class="t">One Hundred Forty-Four Destinations, Six Countries</span>
         <span class="s">Govt of Nepal &#183; 741,292 labour permits</span>
         <span class="f"><b>80.3%</b>of new permits went to the top six countries in 2023/24, down from 93.5% in 2017/18</span>
       </a>
       <a class="sign nepal" href="lakes/">
-        <span class="dev" lang="ne">&#2361;&#2367;&#2350;&#2340;&#2366;&#2354;</span>
         <span class="t">Two Hundred and Eighty Lakes</span>
         <span class="s">Glacial Lake Observatory &#183; 4,150 lakes</span>
         <span class="f"><b>280</b>glacial lakes grew by more than the measurement error. 84% showed no change.</span>
       </a>
       <a class="sign nepal" href="himalaya/">
-        <span class="dev" lang="ne">&#2361;&#2367;&#2350;&#2366;&#2354;</span>
         <span class="t">Twelve Hundred Metres Lower</span>
         <span class="s">The Himalayan Database &#183; 76,519 people on the mountain</span>
         <span class="f"><b>1,225 m</b>is the gap between where hired staff die and where paying members die</span>
       </a>
       <a class="sign tool" href="odds/">
-        <span class="dev" lang="ne">&#2358;&#2367;&#2326;&#2352;</span>
         <span class="t">What Are My Odds Up There?</span>
         <span class="s">built on the 40,605-climber Himalayan record</span>
         <span class="f"><b>75% vs 10%</b>chance of summiting Everest at 38, with and without bottled oxygen</span>
       </a>
       <a class="sign tool" href="shake/">
-        <span class="dev" lang="ne">&#2325;&#2350;&#2381;&#2346;&#2344;</span>
         <span class="t">How Often Does It Shake Here?</span>
         <span class="s">built on the USGS catalogue, 8,811 Himalayan earthquakes</span>
         <span class="f"><b>157</b>earthquakes of magnitude 4.5 or more within 100 km of Kathmandu since 1976, six of them 6 or above</span>
       </a>
       <a class="sign tool" href="due/">
-        <span class="dev" lang="ne">&#2350;&#2361;&#2366;&#2349;&#2370;&#2325;&#2350;&#2381;&#2346;</span>
         <span class="t">Is Nepal Due for a Great Earthquake?</span>
         <span class="s">GPS slip rates, checked against 654 Nepal earthquakes</span>
         <span class="f"><b>1 in 6</b>chance of a great rupture in western Nepal in the next fifty years</span>
       </a>
       <a class="sign earth" href="earthquakes/">
-        <span class="dev" lang="ne">&#2349;&#2370;&#2325;&#2350;&#2381;&#2346;</span>
         <span class="t">Four Hundred Thousand Earthquakes</span>
         <span class="s">USGS &#183; 457,408 earthquakes</span>
         <span class="f"><b>b = 1.078</b>the Gutenberg&#8211;Richter b-value, which holds across four orders of magnitude</span>
       </a>
       <a class="sign earth" href="sealevel/">
-        <span class="dev" lang="ne">&#2360;&#2350;&#2369;&#2342;&#2381;&#2352;</span>
         <span class="t">Where the Sea Is Falling</span>
         <span class="s">PSMSL &#183; 1,609 tide gauges since 1807</span>
         <span class="f"><b>19%</b>of tide gauges show the sea falling, mostly on coasts still rising after the last ice age</span>
       </a>
       <a class="sign tool" href="coast/">
-        <span class="dev" lang="ne">&#2340;&#2335;</span>
         <span class="t">How Fast Is The Sea Coming?</span>
         <span class="s">built on 659 tide gauges with forty years or more</span>
         <span class="f"><b>76%</b>of gauges show a faster rise over the last thirty years than over their whole record</span>
       </a>
       <a class="sign tool" href="warmed/">
-        <span class="dev" lang="ne">&#2340;&#2366;&#2346;&#2325;&#2381;&#2352;&#2350;</span>
         <span class="t">How Much Has It Warmed Here?</span>
         <span class="s">NOAA GHCN-Monthly, 3,243 long thermometer records</span>
         <span class="f"><b>+0.13 vs +0.30</b>&#176;C per decade at the median station, over its whole record vs since 1970</span>
       </a>
       <a class="sign sky" href="sunspots/">
-        <span class="dev" lang="ne">&#2360;&#2370;&#2352;&#2381;&#2351;</span>
         <span class="t">Eleven Years, Roughly</span>
         <span class="s">SILSO &#183; 277 years of counts</span>
         <span class="f"><b>11.107 yr</b>the strongest cycle in 3,332 months of sunspot counts</span>
       </a>
       <a class="sign sky" href="orbits/">
-        <span class="dev" lang="ne">&#2325;&#2325;&#2381;&#2359;</span>
         <span class="t">The Shells Above Us</span>
         <span class="s">CelesTrak &#183; 70,580 objects</span>
         <span class="f"><b>86.6%</b>of objects at 800&#8211;900 km are debris, against 1% at 400&#8211;500 km</span>
       </a>
       <a class="sign tool" href="shells/">
-        <span class="dev" lang="ne">&#2313;&#2330;&#2366;&#2311;</span>
         <span class="t">What Else Is At My Altitude?</span>
         <span class="s">built on 34,328 objects on orbit</span>
         <span class="f"><b>9% vs 83%</b>debris in the busiest orbit shell vs the most cluttered. Air drag keeps the lower one clean.</span>
       </a>
       <a class="sign sky" href="worlds/">
-        <span class="dev" lang="ne">&#2327;&#2381;&#2352;&#2361;</span>
         <span class="t">The Gap at Twice the Earth</span>
         <span class="s">NASA Exoplanet Archive &#183; 6,366 planets</span>
         <span class="f"><b>1.81 R&#8853;</b>is where the gap in planet sizes sits, 38% below the peaks on either side</span>
       </a>
       <a class="sign sky" href="nuclides/">
-        <span class="dev" lang="ne">&#2346;&#2352;&#2350;&#2366;&#2339;&#2369;</span>
         <span class="t">The Valley of Stability</span>
         <span class="s">IAEA &#183; 3,383 nuclides</span>
         <span class="f"><b>244</b>are stable, and only four of them have odd numbers of both protons and neutrons</span>
       </a>
       <a class="sign sky" href="keyboards/">
-        <span class="dev" lang="ne">&#2309;&#2325;&#2381;&#2359;&#2352;</span>
         <span class="t">The Layout Under Your Hands</span>
         <span class="s">Project Gutenberg + Python stdlib &#183; 10.5M keystrokes</span>
         <span class="f"><b>6.53%</b>of letter pairs on QWERTY are typed with the same finger, compared with 1.52% on Colemak</span>

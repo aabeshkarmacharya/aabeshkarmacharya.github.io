@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0F1520">
 <meta name="description" content="Nine Thousand Rupees a Month">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%86%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3EIN%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>Nine Thousand Rupees a Month</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400;0,600;0,800;1,400&amp;family=Overpass+Mono:wght@400;600&amp;family=Noto+Sans+Devanagari:wght@400;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400;0,600;0,800;1,400&amp;family=Overpass+Mono:wght@400;600&amp;display=swap">
 <style>
 :root{
   color-scheme: light;
@@ -26,7 +27,7 @@
   --grid:rgba(21,21,28,.07);
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -201,6 +202,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -231,8 +234,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -249,7 +250,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -282,7 +283,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -327,10 +328,12 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-line:#C7D6EA; --t-line-2:#1D4F91; --t-grid:rgba(29,79,145,.09);
   --t-accent:#1D4F91; --t-accent-2:#D23B30; --t-accent-ink:#FFFFFF;
   --sv-blue:#1D4F91; --sv-red:#D23B30; --sv-field:#EAF1FA;
+  
+  --sv-bar:#1D4F91; --sv-rule:#1D4F91; --sv-text:#1D4F91;
   --t-head-bg:#FFFFFF; --t-head-ink:#121A26; --t-head-ink-2:#3B4757; --t-head-kick:#FFFFFF;
   --t-head-rule:3px solid #1D4F91; --t-hero-bg:#FFFFFF;
   --t-foot-bg:#1D4F91; --t-foot-ink:#EAF1FA; --t-foot-ink-2:#BFD1EA;
-  --t-f-display:"Overpass","Noto Sans Devanagari",Arial,sans-serif; --t-f-body:"Overpass","Noto Sans Devanagari",Arial,sans-serif;
+  --t-f-display:"Overpass",Arial,sans-serif; --t-f-body:"Overpass",Arial,sans-serif;
   --t-f-label:"Overpass Mono",ui-monospace,monospace; --t-f-num:"Overpass Mono",ui-monospace,monospace;
   --t-f-chart:"Overpass Mono",ui-monospace,monospace;
   --t-body-size:17.5px; --t-body-lh:1.66;
@@ -347,35 +350,55 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
 }
 
 header.top{position:relative}
-header.top .kicker{display:inline-block; background:#1D4F91; color:#FFFFFF; padding:5px 12px 3px}
+header.top .kicker{display:inline-block; background:var(--sv-bar); color:#FFFFFF; padding:5px 12px 3px}
 header.top .look-art{display:block; height:30px; margin:0 auto 18px; max-width:var(--wide);
   padding-inline:24px; background:
-    repeating-linear-gradient(90deg,transparent 0 6px,#1D4F91 6px 7.5px,#EAF1FA 7.5px 30px,#1D4F91 30px 31.5px,transparent 31.5px 32px)
+    repeating-linear-gradient(90deg,transparent 0 6px,var(--sv-rule) 6px 7.5px,var(--sv-field) 7.5px 30px,var(--sv-rule) 30px 31.5px,transparent 31.5px 32px)
     24px 0/256px 30px no-repeat}
-header.top .devanagari{color:var(--sv-red); font-weight:400}
 
 body{counter-reset:sec}
-section .eyebrow{counter-increment:sec; background:#1D4F91; color:#FFFFFF; padding:6px 12px 4px; display:flex}
+section .eyebrow{counter-increment:sec; background:var(--sv-bar); color:#FFFFFF; padding:6px 12px 4px; display:flex}
 section .eyebrow::before{content:"SECTION " counter(sec) "\00a0\00a0"; font-weight:600}
 .eyebrow::after{display:none}
 h2::before{content:counter(sec) ".1\00a0\00a0"; color:var(--sv-red); font-family:var(--t-f-label); font-size:.62em; vertical-align:.2em}
 
-figure{border:1.5px solid #1D4F91}
-.fig-head{background:#EAF1FA; border-bottom:1.5px solid #1D4F91; padding-bottom:14px}
+figure{border:1.5px solid var(--sv-rule)}
+.fig-head{background:var(--sv-field); border-bottom:1.5px solid var(--sv-rule); padding-bottom:14px}
 .fig-title{font-weight:800}
-figcaption{background:#FFFFFF}
+figcaption{background:var(--t-paper)}
 .stats{gap:10px}
-.stat{box-shadow:none; border:1.5px solid #1D4F91; background:#EAF1FA}
-.stat b{color:#1D4F91; font-weight:600}
-.note{border-left:4px solid var(--sv-red); background:#FFFFFF}
+.stat{box-shadow:none; border:1.5px solid var(--sv-rule); background:var(--sv-field)}
+.stat b{color:var(--sv-text); font-weight:600}
+.note{border-left:4px solid var(--sv-red); background:var(--t-paper)}
 .pull{font-weight:800}
 
-.card,.answer,.offer,a.nextcard,.fig{border:1.5px solid #1D4F91}
-.answer .top{background:#EAF1FA}
-.big{color:#1D4F91; font-weight:600}
-input[type=text],input[type=number],select{background-color:#EAF1FA; border:1.5px solid #1D4F91}
-label.lab{color:#1D4F91}
+.card,.answer,.offer,a.nextcard,.fig{border:1.5px solid var(--sv-rule)}
+.answer .top{background:var(--sv-field)}
+.big{color:var(--sv-text); font-weight:600}
+input[type=text],input[type=number],select{background-color:var(--sv-field); border:1.5px solid var(--sv-rule)}
+label.lab{color:var(--sv-text)}
 footer a{color:#FFFFFF}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#0F1520; --t-paper:#141C29; --t-paper-2:#1A2435;
+  --t-ink:#E8EEF6; --t-ink-2:#BFCADA; --t-ink-3:#9AA8BC;
+  --t-line:#2A3A52; --t-line-2:#8FB3E6; --t-grid:rgba(143,179,230,.10);
+  --t-accent:#8FB3E6; --t-accent-2:#F2685D; --t-accent-ink:#0F1520;
+  --sv-blue:#8FB3E6; --sv-red:#F2685D; --sv-field:#18233A;
+  --sv-bar:#2B5FA6; --sv-rule:#4E77B3; --sv-text:#9DBDEB;
+  --t-head-bg:#0F1520; --t-head-ink:#E8EEF6; --t-head-ink-2:#BFCADA; --t-head-kick:#FFFFFF;
+  --t-head-rule:3px solid #2B5FA6; --t-hero-bg:#0F1520;
+  --t-foot-bg:#172A47; --t-foot-ink:#E3ECF8; --t-foot-ink-2:#B5C7E2;
+  --t-label-ink:#9DBDEB;
+  --t-fig-border:1.5px solid #4E77B3; --t-cap-rule:1px solid #2A3A52; --t-tip-border:1.5px solid #8FB3E6;
+  --t-chip-on-bg:#2B5FA6; --t-chip-on-ink:#FFFFFF;
+  --sun:#E95143; --y1995:#235497; --y2003:#4578BE; --y2010:#699DE5; --y2022:#9EC7FF;
+  --mark:#8FB3E6; --mark-soft:rgba(143,179,230,.20); --mark-dim:rgba(143,179,230,.36); --pov:#F2685D;
+  --field:#18233A; --field-rule:#8FB3E6;
+}
+}
 
 </style>
 </head>
@@ -390,7 +413,7 @@ footer a{color:#FFFFFF}
     <div class="kicker">Nepal &middot; NLSS 1995&ndash;2023 &middot; World Bank PIP</div>
     <h1>Nine Thousand Rupees a Month</h1>
     <p class="sub">That is the median Nepali&rsquo;s share of what their household
-    spends &mdash; the middle of a country of 29.7 million. This is what money looks
+    spends, the middle of a country of 29.7 million. This is what money looks
     like across that whole population, percentile by percentile, and where an
     actual salary lands on it.</p>
   </div>
@@ -451,8 +474,8 @@ footer a{color:#FFFFFF}
     <div class="eyebrow">The shape</div>
     <h2>The same survey, read the other way</h2>
     <p>The curve above answers &ldquo;what does the person at rank <em>p</em>
-    have?&rdquo; Turn the question around &mdash; &ldquo;how many people are at
-    this many rupees?&rdquo; &mdash; and the same numbers make the shape below:
+    have?&rdquo; Turn the question around (&ldquo;how many people are at
+    this many rupees?&rdquo;) and the same numbers make the shape below:
     a steep climb, a crowded peak in the single-digit thousands, and a tail that
     thins out long before it reaches anything anyone would call a good salary.</p>
     <p>This is the picture that makes the country legible. Nepal is not a place
@@ -483,8 +506,8 @@ footer a{color:#FFFFFF}
     <div class="eyebrow">The ladder</div>
     <h2>Where a salary actually lands</h2>
     <p>The curve above measures consumption per person. A salary is earned by one
-    person and feeds a household &mdash; four people, on the NLSS-IV&rsquo;s own
-    average. So to put a wage on the same axis, divide it by four and ask which
+    person and feeds a household, which on the NLSS-IV&rsquo;s own average is
+    four people. So to put a wage on the same axis, divide it by four and ask which
     percentile that household member occupies. Every wage below has been restated
     at 2022&ndash;23 prices first, so it is being compared against the curve at the
     same price level.</p>
@@ -509,7 +532,7 @@ footer a{color:#FFFFFF}
     <div class="note" id="minNote"></div>
 
     <details>
-      <summary>Table view &mdash; every percentile, all four rounds</summary>
+      <summary>Table view: every percentile, all four rounds</summary>
       <div class="tablewrap"><table id="pctTable"></table></div>
     </details>
   </div>
@@ -534,7 +557,7 @@ footer a{color:#FFFFFF}
     workers.</p>
 
     <p><strong>A quarter of the money arrives from abroad.</strong> Remittances are
-    <span id="remitRate" class="mono"></span>&nbsp;% of GDP &mdash; one of the
+    <span id="remitRate" class="mono"></span>&nbsp;% of GDP, one of the
     highest shares in the world. That income is in the consumption curve, because
     the household spends it. It is in no wage table anywhere, because it was not
     earned in Nepal.</p>
@@ -544,7 +567,7 @@ footer a{color:#FFFFFF}
     The p99 here should be read as a floor, not a measurement, and there is no
     reliable Nepali estimate of the top 1&nbsp;% at all.</p>
 
-    <p><strong>And the wage figure is eight years old</strong> &mdash; not for want
+    <p><strong>And the wage figure is eight years old</strong>, not for want
     of looking. The last completed Labour Force Survey was 2017/18; the fourth
     round is in the field as this is written, running to March 2027. When it
     reports it will be the first Nepali wage data in nearly a decade, and the first
@@ -733,7 +756,7 @@ const curve = (function(){
         stroke:css("--ink-2"), "stroke-width":1.4}));
       const g = el("text",{class:"dlab", x:W-R-4, y:Y(pv)-13, "text-anchor":"end"});
       g.textContent = narrow ? "Poverty line"
-        : "Poverty line \u2014 " + D.pov_p.toFixed(1) + "% of people below";
+        : "Poverty line (" + D.pov_p.toFixed(1) + "% of people below)";
       g.setAttribute("fill", css("--ink-2"));
       svg.appendChild(g);
     }
@@ -1006,7 +1029,7 @@ const ladder = (function(){
         '<div><span class="v">' + rs(r.real) + "</span> at 2022\u201323 prices, which is " +
         '<span class="v">' + rs(r.per_person) + "</span> a head in a household of 4</div>" +
         '<div style="margin-top:4px">Percentile <span class="v">' + r.p.toFixed(1) +
-        '</span> &mdash; <span class="v">' + people(r.below) + "</span> people below</div>";
+        '</span>, with <span class="v">' + people(r.below) + "</span> people below</div>";
       hit.addEventListener("mousemove", e => showTip(e.clientX, e.clientY, tipHtml));
       hit.addEventListener("mouseleave", hideTip);
       hit.addEventListener("touchstart", e => {
@@ -1033,7 +1056,7 @@ const ladder = (function(){
     const c0 = r.insertCell(); c0.textContent = "p"+p;
     YEARS.forEach(y => {
       const q = D.years[y.k].pct.find(o => o.p === p);
-      r.insertCell().textContent = q ? rs(q.npr) : "\u2014";
+      r.insertCell().textContent = q ? rs(q.npr) : "\u2013";
     });
   });
   const foot = t.createTFoot().insertRow();
@@ -1064,13 +1087,13 @@ const ladder = (function(){
     "Each rung is restated at 2022&ndash;23 prices before it is placed, so a recent " +
     "wage is not flattered by the inflation since: the " + rs(D.min_wage) +
     " minimum wage is " + rs(mwR.real) + " in the survey&rsquo;s money. The price " +
-    "index runs to " + D.cpi.latest_year + ", so anything set after that &mdash; the " +
-    "FY 2083/84 civil service scale &mdash; is deflated by the " + D.cpi.latest_year +
+    "index runs to " + D.cpi.latest_year + ", so anything set after that (the " +
+    "FY 2083/84 civil service scale) is deflated by the " + D.cpi.latest_year +
     " index and sits a little high. Civil service pay is basic plus the 10% incentive " +
     "and the Rs 5,000 dearness allowance, without grade increments, which depend on " +
     "years served. Rungs without a source are round numbers chosen for reference, " +
-    "not published figures. Rs 1 lakh a month &mdash; " + lakh.p.toFixed(1) +
-    "% of the country &mdash; stands above " + people(lakh.below) + " people.";
+    "not published figures. Rs 1 lakh a month stands above " + people(lakh.below) +
+    " people, " + lakh.p.toFixed(1) + "% of the country.";
 
   const peak = D.density["2022"].bars.reduce((a,b) => b.people > a.people ? b : a);
   document.getElementById("densCap").innerHTML =
@@ -1082,7 +1105,7 @@ const ladder = (function(){
 
   document.getElementById("povNote").innerHTML =
     "Nepal&rsquo;s official poverty line is <strong>" + rs(D.nlss.poverty_line_year) +
-    " per person per year</strong> &mdash; " + rs(D.pov_month) + " a month. " +
+    " per person per year</strong>, or " + rs(D.pov_month) + " a month. " +
     "Reading it off this curve puts <strong>" + D.pov_p.toFixed(2) + "&nbsp;%</strong> " +
     "of the population below it. The National Statistics Office, working from the " +
     "household records themselves, published <strong>" + D.nlss.poverty_rate +
@@ -1090,8 +1113,8 @@ const ladder = (function(){
 
   const mw = D.ladder[0];
   document.getElementById("minNote").innerHTML =
-    "The whole legal minimum wage &mdash; " + rs(D.min_wage) +
-    " a month, set by gazette in July 2025 &mdash; supports a household of four at " +
+    "The whole legal minimum wage (" + rs(D.min_wage) +
+    " a month, set by gazette in July 2025) supports a household of four at " +
     "about <strong>" + rs(mw.per_person) + " per person</strong>. That is the " +
     "<strong>" + mw.p.toFixed(0) + "th percentile</strong>, well under the poverty " +
     "line at the " + D.pov_p.toFixed(0) + "th. A single minimum wage is not a way " +

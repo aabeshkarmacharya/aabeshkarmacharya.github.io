@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#E9E7E2">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#E9E7E2">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141413">
 <meta name="description" content="Six Times What We Sell">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%B5%E0%A4%BF%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3ERE%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>Six Times What We Sell</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +38,7 @@
   --grid:rgba(26,24,19,.07);
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#14130F; --surface:#1C1A16; --surface-2:#23211C; --sunk:#0C0B08;
@@ -220,6 +221,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -250,8 +253,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -268,7 +269,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -301,7 +302,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -345,7 +346,7 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-ink:#232323; --t-ink-2:#4B4B4B; --t-ink-3:#666663;
   --t-line:#D5D4CE; --t-line-2:#232323; --t-grid:rgba(35,35,35,.08);
   --t-accent:#1F4FA0; --t-accent-2:#C8322D; --t-accent-ink:#FFFFFF;
-  --rc-red:#C8322D; --rc-blue:#1F4FA0;
+  --rc-red:#C8322D; --rc-blue:#1F4FA0; --rc-rule:#232323; --rc-stamp:rgba(200,50,45,.8); --rc-stamp-ink:rgba(200,50,45,.85);
   --t-head-bg:transparent; --t-head-ink:#232323; --t-head-ink-2:#4B4B4B; --t-head-kick:#4B4B4B;
   --t-head-rule:0; --t-hero-bg:#E9E7E2;
   --t-foot-bg:#E9E7E2; --t-foot-ink:#4B4B4B; --t-foot-ink-2:#666665;
@@ -362,43 +363,62 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --ratio:#6A3D9A; --ratio-soft:#D3C4E6; --g0:#EEEEEA; --g1:#9DB0D8; --g2:#1F4FA0;
 }
 
-body{background:#E9E7E2}
-header.top{padding-block:28px 0; background:#E9E7E2}
-header.top > .wrap,header.top > .wide{position:relative; background:#FCFCF8; max-width:780px; padding-block:34px 30px;
+body{background:var(--t-bg)}
+header.top{padding-block:28px 0; background:var(--t-bg)}
+header.top > .wrap,header.top > .wide{position:relative; background:var(--t-paper); max-width:780px; padding-block:34px 30px;
   padding-inline:max(30px,env(safe-area-inset-left,0px));
-  --tooth:linear-gradient(135deg,#FCFCF8 6px,transparent 6px),linear-gradient(225deg,#FCFCF8 6px,transparent 6px)}
+  --tooth:linear-gradient(135deg,var(--t-paper) 6px,transparent 6px),linear-gradient(225deg,var(--t-paper) 6px,transparent 6px)}
 header.top > .wrap::before,header.top > .wrap::after,header.top > .wide::before,header.top > .wide::after{
   content:""; position:absolute; left:0; right:0; height:12px; background-size:12px 12px; background-repeat:repeat-x}
 header.top > .wrap::before,header.top > .wide::before{top:-12px;
-  background-image:linear-gradient(45deg,#FCFCF8 6px,transparent 6px),linear-gradient(-45deg,#FCFCF8 6px,transparent 6px);
+  background-image:linear-gradient(45deg,var(--t-paper) 6px,transparent 6px),linear-gradient(-45deg,var(--t-paper) 6px,transparent 6px);
   background-position:0 6px,0 6px}
 header.top > .wrap::after,header.top > .wide::after{bottom:-12px;
-  background-image:linear-gradient(135deg,#FCFCF8 6px,transparent 6px),linear-gradient(-135deg,#FCFCF8 6px,transparent 6px)}
-header.top .kicker{text-align:center; border-bottom:1px dashed #232323; padding-bottom:12px; margin-bottom:18px}
-header.top .kicker::before{content:"*** TRANSACTION RECORD ***"; display:block; font-weight:700; color:#232323; margin-bottom:4px}
-header.top h1{border-bottom:1px dashed #232323; padding-bottom:16px; max-width:none}
+  background-image:linear-gradient(135deg,var(--t-paper) 6px,transparent 6px),linear-gradient(-135deg,var(--t-paper) 6px,transparent 6px)}
+header.top .kicker{text-align:center; border-bottom:1px dashed var(--rc-rule); padding-bottom:12px; margin-bottom:18px}
+header.top .kicker::before{content:"*** TRANSACTION RECORD ***"; display:block; font-weight:700; color:var(--t-ink); margin-bottom:4px}
+header.top h1{border-bottom:1px dashed var(--rc-rule); padding-bottom:16px; max-width:none}
 header.top .look-art{display:block; position:absolute; right:clamp(16px,6vw,90px); top:44px; z-index:2;
-  border:3px solid rgba(200,50,45,.8); color:rgba(200,50,45,.85); transform:rotate(9deg);
+  border:3px solid var(--rc-stamp); color:var(--rc-stamp-ink); transform:rotate(9deg);
   font-family:"Space Mono",monospace; font-weight:700; font-size:22px; letter-spacing:.12em; padding:4px 12px}
 header.top .look-art::after{content:"RECEIVED"}
 main,section{position:relative}
-section{background:#FCFCF8; max-width:860px; margin:26px auto 0; border:0}
+section{background:var(--t-paper); max-width:860px; margin:26px auto 0; border:0}
 section+section{border-top:0}
 body{counter-reset:item}
 section .eyebrow{counter-increment:item}
-section .eyebrow::before{content:"ITEM " counter(item, decimal-leading-zero) " .......... "; color:#232323}
+section .eyebrow::before{content:"ITEM " counter(item, decimal-leading-zero) " .......... "; color:var(--t-ink)}
 .eyebrow::after{display:none}
-figure{border:1px dashed #232323; background:#FCFCF8}
+figure{border:1px dashed var(--rc-rule); background:var(--t-paper)}
 .fig-title{text-transform:uppercase; font-size:15px}
 .stats{gap:0}
-.stat{box-shadow:none; border-bottom:1px dashed #232323; background:transparent}
+.stat{box-shadow:none; border-bottom:1px dashed var(--rc-rule); background:transparent}
 .stat b{color:var(--rc-blue)}
-.note{border-left:0; border-top:1px dashed #232323; border-bottom:1px dashed #232323; padding:10px 0; font-family:var(--t-f-label); font-size:15px}
-.chip{border:1px solid #232323}
-footer{background:#E9E7E2}
+.note{border-left:0; border-top:1px dashed var(--rc-rule); border-bottom:1px dashed var(--rc-rule); padding:10px 0; font-family:var(--t-f-label); font-size:15px}
+.chip{border:1px solid var(--rc-rule)}
+footer{background:var(--t-bg)}
 @media(max-width:760px){section{margin-top:14px}}
 
 @media(max-width:920px){header.top .look-art{display:none}}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#141413; --t-paper:#20201E; --t-paper-2:#292927;
+  --t-ink:#ECECE6; --t-ink-2:#C6C6C0; --t-ink-3:#A4A49E;
+  --t-line:#3A3A37; --t-line-2:#DADAD4; --t-grid:rgba(236,236,230,.08);
+  --t-accent:#86ABEE; --t-accent-2:#F2685F; --t-accent-ink:#141413;
+  --rc-red:#F2685F; --rc-blue:#86ABEE; --rc-rule:#DADAD4; --rc-stamp:rgba(242,104,95,.8); --rc-stamp-ink:rgba(242,104,95,.9);
+  --t-head-bg:transparent; --t-head-ink:#ECECE6; --t-head-ink-2:#C6C6C0; --t-head-kick:#C6C6C0;
+  --t-head-rule:0; --t-hero-bg:#141413;
+  --t-foot-bg:#141413; --t-foot-ink:#C6C6C0; --t-foot-ink-2:#A4A49E;
+  --t-label-ink:#C6C6C0;
+  --t-fig-border:1px dashed #DADAD4; --t-cap-rule:1px dashed #DADAD4; --t-tip-border:1px solid #DADAD4;
+  --t-chip-on-bg:#ECECE6; --t-chip-on-ink:#141413;
+  --rem:#578DE9; --rem-soft:#2A3D63; --exp:#EF5047; --exp-soft:#5A2724;
+  --ratio:#A97AE2; --ratio-soft:#3B2C5C; --g0:#2A2A28; --g1:#3F5F96; --g2:#578DE9;
+}
+}
 
 </style>
 </head>
@@ -479,7 +499,7 @@ footer{background:#E9E7E2}
       2019/20 issue says ten months, and the real ten-month issue sits at the
       same address with a <code>-2</code> on the end. A document states its own
       period on nearly every page and the filename states it once, so where the
-      two disagree the document wins &mdash; and both relabellings are counted
+      two disagree the document wins. Both relabellings are counted
       rather than quietly applied.</p>
 
     <div class="stats">
@@ -522,7 +542,7 @@ footer{background:#E9E7E2}
     <h2>Six times, in the best export year on the record</h2>
     <p class="lede">In <span data-n="headline.label"></span> Nepal&rsquo;s
       merchandise exports grew
-      <b data-n="headline.exp_growth" data-fmt="1"></b>% &mdash; the largest
+      <b data-n="headline.exp_growth" data-fmt="1"></b>%, the largest
       one-year rise anywhere in this record, against
       <span data-n="swing.exp_hi2" data-fmt="1"></span>% for the next largest,
       in <span data-n="swing.exp_hi2_fy"></span>. Remittance grew
@@ -549,7 +569,7 @@ footer{background:#E9E7E2}
       <b data-n="ratio.median" data-fmt="2"></b> times exports, with the middle
       half between <span data-n="ratio.q1" data-fmt="2"></span> and
       <span data-n="ratio.q3" data-fmt="2"></span>. The multiple has never once
-      been below <b data-n="ratio.min" data-fmt="2"></b> &mdash; that was
+      been below <b data-n="ratio.min" data-fmt="2"></b>, which it reached in
       <span data-n="ratio.min_label"></span> of
       <span data-n="ratio.min_fy"></span>, inside the export boom below.
       It has been above ten in <span data-n="ratio.above10" data-fmt="int"></span>
@@ -639,7 +659,7 @@ footer{background:#E9E7E2}
       <span data-n="booms.pre_label"></span> to Rs
       <b data-n="booms.first_exp" data-fmt="2"></b> billion in
       <span data-n="booms.first_label"></span>, which took the multiple down
-      to <b data-n="booms.first_r" data-fmt="2"></b> &mdash; its lowest since
+      to <b data-n="booms.first_r" data-fmt="2"></b>, its lowest since
       <span data-n="booms.first_lowest_since"></span>. The next year they
       fell <b data-n="booms.bust_drop" data-fmt="1"></b>% to Rs
       <span data-n="booms.bust_exp" data-fmt="2"></span> billion, and the
@@ -701,7 +721,7 @@ footer{background:#E9E7E2}
       <span data-n="episodes.blockade_pre.exp" data-fmt="2"></span> billion in
       <span data-n="episodes.blockade_pre.label"></span> to Rs
       <b data-n="episodes.blockade.exp" data-fmt="2"></b> billion in
-      <span data-n="episodes.blockade.label"></span> &mdash; down
+      <span data-n="episodes.blockade.label"></span>, down
       twenty-eight per cent in two months. Remittance over the same two months
       went from Rs <span data-n="episodes.blockade_pre.rem" data-fmt="2"></span>
       billion to Rs <span data-n="episodes.blockade.rem" data-fmt="2"></span>
@@ -716,8 +736,8 @@ footer{background:#E9E7E2}
       month earlier: it more than halved in four weeks. Exports in the
       following month fell to Rs
       <b data-n="episodes.covid_exp.exp" data-fmt="2"></b> billion, about a
-      third of normal, and that month holds the record for the whole series
-      &mdash; remittance at
+      third of normal, and that month holds the record for the whole series:
+      remittance at
       <b data-n="ratio.max" data-fmt="2"></b> times exports.</p>
 
     <p>Remittance recovered inside two months and exports did not, which is why
@@ -747,8 +767,8 @@ footer{background:#E9E7E2}
 
     <p><b>The indirect one, covering the whole record.</b> Every bulletin
       states its change against the same period a year earlier. Dividing the
-      level by that change reconstructs the earlier level &mdash; and the
-      earlier level sits in a different bulletin, parsed separately. There are
+      level by that change reconstructs the earlier level, which sits in a
+      different bulletin, parsed separately. There are
       <b data-n="checks.pct_n" data-fmt="int"></b> places in the archive where
       the two can be compared. The median disagreement is
       <b data-n="checks.pct_median" data-fmt="3"></b>%,
@@ -790,11 +810,11 @@ footer{background:#E9E7E2}
     <h2>Five limits</h2>
     <p><b>These are first prints, not revisions.</b> Each month is built from
       the issues published at the time, so a figure NRB later restated is
-      carried here as it was first typed. That is deliberate &mdash; it keeps
-      each month independent of what came after it &mdash; but it means the
+      carried here as it was first typed. That is deliberate (it keeps
+      each month independent of what came after it), but it means the
       series will not match a table NRB publishes today for the same period.</p>
     <p><b>Merchandise exports only.</b> Services are excluded: no tourism, no
-      transport, no the education payments that flow the other way. Adding
+      transport, and none of the education payments that flow the other way. Adding
       services would lower the multiple, and NRB reports them on a different
       basis in a different paragraph.</p>
     <p><b>Nominal rupees throughout.</b> Nothing here is deflated and nothing
@@ -831,7 +851,7 @@ footer{background:#E9E7E2}
     <p class="srcs" style="margin-top:1em">
       <b>Method.</b> <code>fetch.py</code> enumerates the sitemaps and caches
       both the PDF and its extracted text. <code>analyze.py</code> flattens
-      every document &mdash; all whitespace removed &mdash; because pypdf puts
+      every document (all whitespace removed) because pypdf puts
       spaces inside numbers and words, and matches the levels against the
       flattened string, where <code>Rs. 248 .18 billi on</code> and
       <code>Rs.248.18billion</code> are the same thing. Cumulative levels are

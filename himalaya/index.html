@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#E9E4D8">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#E9E4D8">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#181613">
 <meta name="description" content="Twelve Hundred Metres Lower">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%B9%E0%A4%BF%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3EHI%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>Twelve Hundred Metres Lower</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,7 +42,7 @@
   --grid:rgba(21,21,28,.07);
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -230,6 +231,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -260,8 +263,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -278,7 +279,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -311,7 +312,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -375,33 +376,33 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
 }
 
 header.top{padding-block:clamp(30px,5vw,60px)}
-header.top > .wrap,header.top > .wide{position:relative; overflow:hidden; background:#FFFDF5;
+header.top > .wrap,header.top > .wide{position:relative; overflow:hidden; background:var(--t-paper);
   padding-block:22px 28px; box-shadow:0 1px 2px rgba(0,0,0,.18),0 10px 24px -14px rgba(0,0,0,.35);
   transform:rotate(-.4deg)}
-header.top .kicker{font-family:"Cutive Mono",monospace; letter-spacing:.02em; color:#C8463D; text-transform:uppercase;
+header.top .kicker{font-family:"Cutive Mono",monospace; letter-spacing:.02em; color:var(--hw-red); text-transform:uppercase;
   position:relative; padding-bottom:9px}
 
-header.top .kicker::after{content:""; position:absolute; left:-200px; right:-200px; bottom:0; height:1.5px; background:#C8463D}
+header.top .kicker::after{content:""; position:absolute; left:-200px; right:-200px; bottom:0; height:1.5px; background:var(--hw-red)}
 
 @media(max-width:980px){header.top > .wrap{transform:none}}
 @media(max-width:1200px){header.top > .wide{transform:none}}
 header.top h1{margin-top:16px}
-section .eyebrow::before{content:"EXPED. FILE \2014 "; color:#1F1F1F}
-.eyebrow::after{background:#C8463D; height:1px}
-h2{color:#1F1F1F}
-figure{background:#FFFDF5; border:1px solid #D6D0C1; border-top:2px solid #C8463D}
+section .eyebrow::before{content:"EXPED. FILE\00a0\00b7\00a0"; color:var(--t-ink)}
+.eyebrow::after{background:var(--hw-red); height:1px}
+h2{color:var(--t-ink)}
+figure{background:var(--t-paper); border:1px solid var(--t-line); border-top:2px solid var(--hw-red)}
 .fig-title{font-family:"Special Elite",monospace; font-size:19px}
 .stats{gap:8px}
-.stat{box-shadow:0 1px 2px rgba(0,0,0,.12); border:1px solid #D6D0C1; background:#FFFDF5}
-.stat b{color:#1F1F1F}
-.note{border-left:0; border-top:1.5px solid #C8463D; background:#FFFDF5; padding:12px 16px; font-family:"Cutive Mono",monospace}
+.stat{box-shadow:0 1px 2px rgba(0,0,0,.12); border:1px solid var(--t-line); background:var(--t-paper)}
+.stat b{color:var(--t-ink)}
+.note{border-left:0; border-top:1.5px solid var(--hw-red); background:var(--t-paper); padding:12px 16px; font-family:"Cutive Mono",monospace}
 .pull{font-family:"Special Elite",monospace}
-.card,.answer,.offer,a.nextcard,.fig{background:#FFFDF5; border:1px solid #D6D0C1; border-top:2px solid #C8463D}
+.card,.answer,.offer,a.nextcard,.fig{background:var(--t-paper); border:1px solid var(--t-line); border-top:2px solid var(--hw-red)}
 .big{font-family:"Special Elite",monospace; font-weight:400}
 
-section{background:#FFFDF5; max-width:900px; margin:28px auto 0; border-top:2px solid #C8463D;
+section{background:var(--t-paper); max-width:900px; margin:28px auto 0; border-top:2px solid var(--hw-red);
   box-shadow:0 1px 2px rgba(0,0,0,.14),0 12px 26px -16px rgba(0,0,0,.35)}
-section+section{border-top:2px solid #C8463D}
+section+section{border-top:2px solid var(--hw-red)}
 section:nth-of-type(even){transform:rotate(.25deg)} section:nth-of-type(odd){transform:rotate(-.2deg)}
 @media(max-width:760px){section{margin-top:16px}}
 
@@ -410,6 +411,27 @@ section:nth-of-type(even){transform:rotate(.25deg)} section:nth-of-type(odd){tra
 
 h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[aria-pressed=true],button.cta{font-weight:400}
 .note b,.note strong{font-weight:400; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.18em}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#181613; --t-paper:#22201C; --t-paper-2:#2A2722;
+  --t-ink:#EEEAE0; --t-ink-2:#CDC8BC; --t-ink-3:#A8A295;
+  --t-line:#3D3932; --t-line-2:#E0DBCF; --t-grid:rgba(238,234,224,.08);
+  --t-accent:#F07A70; --t-accent-2:#8DA6E0; --t-accent-ink:#181613;
+  --hw-red:#F07A70; --hw-blue:#34445E;
+  --t-head-bg:#181613; --t-head-ink:#EEEAE0; --t-head-ink-2:#CDC8BC; --t-head-kick:#F07A70;
+  --t-head-rule:0; --t-hero-bg:#181613;
+  --t-foot-bg:#181613; --t-foot-ink:#CDC8BC; --t-foot-ink-2:#A8A295;
+  --t-label-ink:#F07A70;
+  --t-fig-border:1px solid #3D3932; --t-cap-rule:1px solid #3D3932; --t-tip-border:1px solid #E0DBCF;
+  --t-chip-on-bg:#EEEAE0; --t-chip-on-ink:#181613;
+  --member:#678DDB; --hired:#E65B50; --member-soft:rgba(103,141,219,.22); --hired-soft:rgba(230,91,80,.22);
+  --zone:rgba(238,234,224,.05); --zone-2:rgba(238,234,224,.09); --zoneink:rgba(238,234,224,.62);
+  --mark:#8DA6E0; --mark-soft:rgba(141,166,224,.18); --mark-line:rgba(141,166,224,.55);
+  --up:#678DDB; --down:#E65B50; --warn:#F0A04B; --axis:#8F8A7E; --field:#22201C; --field-rule:#E0DBCF;
+}
+}
 
 </style>
 </head>
@@ -424,7 +446,7 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
     <h1>Twelve Hundred Metres Lower</h1>
     <p class="sub">On Nepal&rsquo;s peaks, the people who are paid to climb and
       the people who pay to climb now die at almost the same rate. They do not
-      die the same deaths, in the same places, for the same reasons &mdash; and
+      die the same deaths, in the same places, for the same reasons. And
       that difference has not narrowed at all.</p>
   </div>
 </header>
@@ -435,7 +457,7 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
     <h2>Everyone on the mountain, counted twice</h2>
     <p class="lede">Elizabeth Hawley spent fifty years in Kathmandu
       interviewing climbers as they came down. The archive she built records
-      every expedition to every Nepali peak since 1905 &mdash;
+      every expedition to every Nepali peak since 1905:
       <span data-n="meta.n_expeditions" data-fmt="int"></span> of them, and
       <span data-n="meta.n_people" data-fmt="int"></span> individual people.</p>
 
@@ -473,7 +495,7 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
       <span data-n="rates.overall.hired.per1000" data-fmt="1"></span> per
       thousand against
       <span data-n="rates.overall.member.per1000" data-fmt="1"></span> for
-      members &mdash; half again as often. Split that by decade and nearly all
+      members, which is half again as often. Split that by decade and nearly all
       of it turns out to be history.</p>
 
     <p>By the 2010s the two rates are
@@ -482,9 +504,9 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
       thousand: the same number, within the noise. Since
       <span data-n="meta.modern_from"></span> the confidence
       intervals overlap, which means the archive cannot distinguish the two
-      rates at all. On Everest alone the ordering actually reverses &mdash;
-      members <span data-n="everest.member.per1000" data-fmt="1"></span>,
-      hired <span data-n="everest.hired.per1000" data-fmt="1"></span> &mdash;
+      rates at all. On Everest alone the ordering actually reverses
+      (members <span data-n="everest.member.per1000" data-fmt="1"></span>,
+      hired <span data-n="everest.hired.per1000" data-fmt="1"></span>),
       though there too the intervals overlap and the honest reading is that
       they are indistinguishable.</p>
 
@@ -499,7 +521,7 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
       <span data-n="rates.decades.2.hired.n" data-fmt="int"></span> hired
       appearances against
       <span data-n="rates.decades.2.member.n" data-fmt="int"></span> member
-      ones &mdash; one worker for every ten clients, which is not how those
+      ones: one worker for every ten clients, which is not how those
       expeditions were staffed. Porters and low-altitude workers went largely
       unrecorded; the ones who died were far more likely to be written down
       than the ones who walked home. A record that captures deaths more
@@ -547,7 +569,7 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
       by cause and the two populations separate almost completely, and they
       have stayed separated through every era the archive covers.</p>
 
-    <p>Count the deaths caused by something falling &mdash; avalanche, icefall
+    <p>Count the deaths caused by something falling: avalanche, icefall
       collapse, rock and ice, a crevasse opening underneath.
       <b data-n="causes.objective.hired_mod" data-fmt="pct"></b> of hired
       deaths since 2000 are of that kind, against
@@ -557,8 +579,8 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
       hours and days, in a place where the body is already failing.</p>
 
     <p>That distinction is not about skill or courage, and it is not really
-      about luck. It is about what the job is. Objective hazard &mdash; the
-      kind that kills you regardless of how well you are climbing &mdash; is a
+      about luck. It is about what the job is. Objective hazard, the
+      kind that kills you regardless of how well you are climbing, is a
       property of <em>ground</em>, and you are exposed to it in proportion to
       how often you cross that ground. A client crosses the Khumbu Icefall
       perhaps four to six times in a season. A worker ferrying loads and
@@ -598,8 +620,8 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
       different parts of the mountain.</p>
 
     <p>Since 2000 the median member death is at
-      <b data-n="heights.stats.modern.member.median" data-fmt="int"></b> metres
-      &mdash; high on the upper mountain, near where the climbing is hardest
+      <b data-n="heights.stats.modern.member.median" data-fmt="int"></b> metres,
+      high on the upper mountain, near where the climbing is hardest
       and the air is thinnest. The median hired death is at
       <b data-n="heights.stats.modern.hired.median" data-fmt="int"></b> metres.
       That is not the summit ridge. On Everest it is the Khumbu Icefall and
@@ -702,8 +724,8 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
     <p>The pattern that emerges is not &ldquo;hired staff are always at greater
       risk&rdquo;. It is that the two groups are exposed to different mountains
       even when they are standing on the same one. Where the danger is
-      concentrated in the approach and the load-carrying &mdash; steep,
-      avalanche-prone ground low down &mdash; the staff bear it. Where the
+      concentrated in the approach and the load-carrying (steep,
+      avalanche-prone ground low down), the staff bear it. Where the
       danger is concentrated in the summit push and the descent, the clients
       do. Everest, with a long dangerous approach and a very long summit day,
       manages to be both, which is why its two rates land on top of each

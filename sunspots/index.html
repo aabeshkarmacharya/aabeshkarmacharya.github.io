@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#FAF6EA">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FAF6EA">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#15171F">
 <meta name="description" content="Eleven Years, Roughly">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231C4C9C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%B8%E0%A5%82%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231C4C9C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3ESU%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>Eleven Years, Roughly</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +23,7 @@
   --grid:rgba(21,21,28,.07);
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -203,6 +204,8 @@ footer{padding:54px 24px 72px; border-top:1px solid var(--rule); background:var(
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -233,8 +236,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -251,7 +252,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -284,7 +285,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -329,6 +330,7 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-line:#D9CFB8; --t-line-2:#7E7766; --t-grid:rgba(34,48,74,.08);
   --t-accent:#C0392B; --t-accent-2:#2F5D9E; --t-accent-ink:#FFFDF6;
   --lb-red:#C0392B; --lb-rule:#C9D6E8; --lb-sepia:#7A5A3A;
+  --lb-margin:rgba(192,57,43,.55); --lb-margin-2:rgba(192,57,43,.35); --lb-corner:#E9DFC6;
   --t-head-bg:#FAF6EA; --t-head-ink:#22304A; --t-head-ink-2:#4A4A55; --t-head-kick:#C0392B;
   --t-head-rule:3px double #7A5A3A; --t-hero-bg:#FAF6EA;
   --t-foot-bg:#F2ECDB; --t-foot-ink:#4A4A55; --t-foot-ink-2:#6E6961;
@@ -345,44 +347,63 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
 }
 
 section .wrap{background:
-  linear-gradient(90deg,transparent 0 6px,rgba(192,57,43,.55) 6px 7px,transparent 7px),
+  linear-gradient(90deg,transparent 0 6px,var(--lb-margin) 6px 7px,transparent 7px),
   repeating-linear-gradient(180deg,transparent 0 31px,var(--lb-rule) 31px 32px);
   padding-left:max(34px,env(safe-area-inset-left,0px))}
 .hero-veil{opacity:.85}
-#hero h1{color:#22304A}
+#hero h1{color:var(--t-ink)}
 .hero-sub{font-style:italic}
 
-#hero h1,#hero .hero-sub{text-shadow:0 0 3px #FAF6EA,0 0 6px #FAF6EA,0 0 10px #FAF6EA}
-.hero-foot .hero-inner{font-family:"Kalam",cursive; letter-spacing:.02em; text-transform:none; font-size:15px; color:#7A5A3A}
+#hero h1,#hero .hero-sub{text-shadow:0 0 3px var(--t-bg),0 0 6px var(--t-bg),0 0 10px var(--t-bg)}
+.hero-foot .hero-inner{font-family:"Kalam",cursive; letter-spacing:.02em; text-transform:none; font-size:15px; color:var(--lb-sepia)}
 
 body{counter-reset:folio}
 section .eyebrow{counter-increment:folio; font-style:italic}
-section .eyebrow::before{content:"Folio " counter(folio, lower-roman) ".\00a0"; color:#7A5A3A}
-.eyebrow::after{background:#C0392B; opacity:.5}
-h2{color:#22304A}
-.lede{font-style:italic; color:#4A4A55}
+section .eyebrow::before{content:"Folio " counter(folio, lower-roman) ".\00a0"; color:var(--lb-sepia)}
+.eyebrow::after{background:var(--lb-red); opacity:.5}
+h2{color:var(--t-ink)}
+.lede{font-style:italic; color:var(--t-ink-2)}
 
-figure{border:1px solid var(--t-line); border-top:3px double #7A5A3A; border-bottom:3px double #7A5A3A}
+figure{border:1px solid var(--t-line); border-top:3px double var(--lb-sepia); border-bottom:3px double var(--lb-sepia)}
 .fig-title{font-size:22px}
 figcaption{font-style:italic; font-size:16px}
 .stats{gap:0}
-.stat{box-shadow:none; border-bottom:1px solid var(--lb-rule); border-right:1px solid rgba(192,57,43,.35); background:transparent}
-.stat b{font-family:"Kalam",cursive; font-weight:700; color:#C0392B; font-size:clamp(30px,4vw,40px)}
+.stat{box-shadow:none; border-bottom:1px solid var(--lb-rule); border-right:1px solid var(--lb-margin-2); background:transparent}
+.stat b{font-family:"Kalam",cursive; font-weight:700; color:var(--lb-red); font-size:clamp(30px,4vw,40px)}
 .stat span{font-family:var(--t-f-body); font-style:italic; text-transform:none; letter-spacing:0; font-size:15px}
-.note{font-family:"Kalam",cursive; font-size:17px; color:#7A5A3A; border-left:0; padding-left:0}
+.note{font-family:"Kalam",cursive; font-size:17px; color:var(--lb-sepia); border-left:0; padding-left:0}
 .pull{font-family:"IM Fell English",serif; font-style:italic}
 .chip{font-family:var(--t-f-body); font-size:15px}
-thead th,th{font-family:var(--t-f-body); font-style:italic; text-transform:none; letter-spacing:0; color:#7A5A3A; font-size:14px}
+thead th,th{font-family:var(--t-f-body); font-style:italic; text-transform:none; letter-spacing:0; color:var(--lb-sepia); font-size:14px}
 code{font-size:.8em}
 @media(max-width:760px){section .wrap{padding-left:max(24px,env(safe-area-inset-left,0px))}}
 
 figure{position:relative; overflow:visible}
 figure::before,figure::after{content:""; position:absolute; width:34px; height:34px; z-index:2; pointer-events:none;
-  background:linear-gradient(135deg,#E9DFC6 0 50%,transparent 50%)}
+  background:linear-gradient(135deg,var(--lb-corner) 0 50%,transparent 50%)}
 figure::before{left:-7px; top:-7px}
 figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
 
 .fig-title,.pull,h3{font-weight:400}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#15171F; --t-paper:#1B1E28; --t-paper-2:#222634;
+  --t-ink:#ECE6D6; --t-ink-2:#C9C2B2; --t-ink-3:#A59E8E;
+  --t-line:#353A48; --t-line-2:#8E8878; --t-grid:rgba(236,230,214,.08);
+  --t-accent:#F2705F; --t-accent-2:#7FA7E6; --t-accent-ink:#15171F;
+  --lb-red:#F2705F; --lb-rule:#283042; --lb-sepia:#CFA77E;
+  --lb-margin:rgba(242,112,95,.45); --lb-margin-2:rgba(242,112,95,.28); --lb-corner:#3A3F50;
+  --t-head-bg:#15171F; --t-head-ink:#ECE6D6; --t-head-ink-2:#C9C2B2; --t-head-kick:#F2705F;
+  --t-head-rule:3px double #CFA77E; --t-hero-bg:#15171F;
+  --t-foot-bg:#1B1E28; --t-foot-ink:#C9C2B2; --t-foot-ink-2:#A59E8E;
+  --t-label-ink:#F2705F;
+  --t-fig-border:1px solid #353A48; --t-cap-rule:1px solid #353A48; --t-tip-border:1px solid #CFA77E;
+  --t-chip-on-bg:#ECE6D6; --t-chip-on-ink:#15171F;
+  --sun:#F05F4D; --third:#6396E0; --gold:#BB8227;
+}
+}
 
 </style>
 </head>
@@ -398,7 +419,7 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
   <div class="hero-copy"><div class="hero-inner">
     <h1>Eleven Years, Roughly</h1>
     <p class="hero-sub">Every month since 1749, somebody has counted the spots on the sun. This
-      is all of it &mdash; 3,332 numbers, a rhythm you can see from across the room, and not one
+      is all of it: 3,332 numbers, a rhythm you can see from across the room, and not one
       cycle the same length as another.</p>
   </div></div>
   <div class="hero-foot"><div class="hero-inner">
@@ -458,7 +479,7 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
       <figcaption>Cycle numbering starts at the minimum of 1755, a convention Wolf chose because
         that is where his reconstructed record became trustworthy. Everything before it is real
         data and unnumbered.</figcaption>
-      <details><summary>Table view &mdash; all 24 complete cycles</summary>
+      <details><summary>Table view: all 24 complete cycles</summary>
         <div class="tbl-scroll"><table id="cycleTable"></table></div></details>
     </figure>
   </div>
@@ -475,7 +496,7 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
       them. The power spectrum has one dominant peak, and it sits at</p>
     <p class="pull">11.107 years.</p>
     <p>Not eleven. The autocorrelation agrees: the series is most similar to itself at a lag of
-      10.7 years, and most dissimilar at 5.25 years &mdash; half a cycle later, which is exactly
+      10.7 years, and most dissimilar at 5.25 years, half a cycle later, which is exactly
       where a periodic signal should be at its most out of step with itself.</p>
   </div>
   <div class="wide figspace">
@@ -488,7 +509,7 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
       <div class="fig-body"><svg id="specChart" viewBox="0 0 1000 420" role="img"
         aria-label="Power spectrum with a single dominant peak at 11.1 years and a smaller broad feature near 90 years"></svg></div>
       <figcaption>The shoulder just left of the main peak, near 9.9 years, carries about a
-        quarter of its power &mdash; the signature of a period that drifts rather than one that
+        quarter of its power: the signature of a period that drifts rather than one that
         holds. The second feature, near 90 years, is in the range usually called the Gleissberg
         cycle; the record is only 277 years long, so it contains about three of them, which is
         far too few to call it established. It is shown because it is in the data, not because
@@ -497,7 +518,7 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
   </div>
   <div class="wrap">
     <p>The width of that peak is the more interesting number. A perfectly periodic signal
-      observed for 277 years cannot produce an infinitely sharp peak &mdash; the finite record
+      observed for 277 years cannot produce an infinitely sharp peak. The finite record
       smears it to about 1.4 resolution elements. This peak is 3.0 across:
       <b>2.1 times broader than the record length alone can explain</b>. Its full width at half
       maximum runs from 10.28 to 11.57 years.</p>
@@ -527,7 +548,7 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
       </div>
       <div class="fig-body"><svg id="overlayChart" viewBox="0 0 1000 440" role="img"
         aria-label="Twenty-four solar cycles overlaid from their minima, showing a common asymmetric shape but widely varying height and duration"></svg></div>
-      <figcaption>The common shape is a fast rise and a slow decline &mdash; every cycle spends
+      <figcaption>The common shape is a fast rise and a slow decline: every cycle spends
         less time going up than coming down. The scatter around it is enormous.</figcaption>
     </figure>
   </div>
@@ -552,7 +573,7 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
       <div class="fig-body"><svg id="waldChart" viewBox="0 0 1000 440" role="img"
         aria-label="Scatter of cycle rise time against amplitude showing a clear negative relationship"></svg></div>
       <figcaption>Useful, but only halfway through. By the time you can measure how fast a cycle
-        is rising, you are already in it &mdash; which is why solar cycle forecasts are issued as
+        is rising, you are already in it, which is why solar cycle forecasts are issued as
         ranges and revised repeatedly.</figcaption>
     </figure>
   </div>
@@ -565,7 +586,7 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
     <p>Since 1992 the counts have been kept separately for the northern and southern halves of
       the solar disc, and they turn out to be surprisingly independent. Across 416 months, the
       average imbalance between them is 36&nbsp;per&nbsp;cent of the total. In 115 of those
-      months &mdash; more than a quarter &mdash; one hemisphere produced more than twice as many
+      months (more than a quarter), one hemisphere produced more than twice as many
       spots as the other.</p>
     <p>Over the whole period the two nearly balance, with the south ahead by about nine per
       cent. They arrive at that balance by taking turns, sometimes for years at a stretch.</p>
@@ -593,12 +614,12 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
       through a particular telescope on a particular day, scaled by a factor meant to make
       different observers comparable. That construction has consequences.</p>
     <p>The daily series begins in 1818, and for its first four decades between a fifth and
-      nearly two fifths of the days have no observation at all &mdash; 3,247 missing days in
-      total. The gaps close completely in 1850 and never reopen.</p>
+      nearly two fifths of the days have no observation at all (3,247 missing days in
+      total). The gaps close completely in 1850 and never reopen.</p>
     <p>The second column is stranger. The file records how many observations went into each
       day's value, and for <em>every single day before 1981</em> that number is 1. The
       historical daily series is not an average of many observers; it is a reconstruction from
-      one reference series, carried forward. Only from 1981 does the count climb &mdash; to a
+      one reference series, carried forward. Only from 1981 does the count climb, to a
       mean of 39 by the early 2020s, with a maximum of 69 observers on one day in August 2020.</p>
   </div>
   <div class="wide figspace">
@@ -612,13 +633,13 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
       <div class="fig-body"><svg id="covChart" viewBox="0 0 1000 400" role="img"
         aria-label="Missing observation days falling to zero after 1850, beside a second panel flat at one observation per day until 1981 and then rising to about forty"></svg></div>
       <figcaption>The right panel is flat at exactly 1 for 163 years and then steps. That is
-        not the sun and it is not the observers &mdash; it is the point where SILSO's records
+        not the sun and it is not the observers. It is the point where SILSO's records
         begin carrying individual observations rather than a single reconstructed value.</figcaption>
     </figure>
   </div>
   <div class="wrap">
     <div class="note"><b>The series has been rewritten once already.</b> In 2015 the sunspot
-      number was recalibrated end to end &mdash; the first revision since Wolf &mdash; after
+      number was recalibrated end to end (the first revision since Wolf) after
       historical cross-checks showed a drift in the reference observer's scaling. Values before
       1947 moved by roughly 45&nbsp;per&nbsp;cent. Every figure on this page uses version 2.0,
       the post-revision series. Papers written before 2015 are describing different numbers for
@@ -636,7 +657,7 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
     <h2>Where the current cycle sits</h2>
     <p>Cycle 25 began at the minimum of late 2019 and has been running for 81 months. Its
       smoothed maximum so far is 160.9, reached in late 2024.</p>
-    <p>That places it fifteenth of the twenty-five cycles since 1755 &mdash; comfortably above
+    <p>That places it fifteenth of the twenty-five cycles since 1755: comfortably above
       Cycle 24, the weakest in a century, and comfortably below the 179 average. It is also
       substantially above what most forecasts issued in 2019 predicted, which were clustered
       around a repeat of Cycle 24.</p>
@@ -651,7 +672,7 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
       <div class="fig-body"><svg id="ampChart" viewBox="0 0 1000 380" role="img"
         aria-label="Bar chart of peak sunspot number per cycle, showing the Dalton Minimum around cycles 5 and 6, the strong mid-twentieth-century cycles, and the weak cycle 24"></svg></div>
       <figcaption>The two lowest bars are Cycles 5 and 6, the Dalton Minimum of the early 1800s.
-        The highest is Cycle 19, peaking in 1958 &mdash; the strongest cycle ever recorded, and
+        The highest is Cycle 19, peaking in 1958. It is the strongest cycle ever recorded, and
         the reason mid-century radio operators had such an interesting decade.</figcaption>
     </figure>
   </div>
@@ -674,7 +695,7 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
     <p class="srcs">Cycle boundaries are the minima of the 13-month smoothed series,
       S[i]&nbsp;=&nbsp;(x[i&minus;6]/2&nbsp;+&nbsp;x[i&minus;5]&nbsp;+&nbsp;&hellip;&nbsp;+&nbsp;x[i+5]&nbsp;+&nbsp;x[i+6]/2)&nbsp;/&nbsp;12,
       located as the strict minimum of a &plusmn;4-year window. That reproduces the conventional
-      numbering exactly, with Cycle 1 beginning at 1755.12 and Cycle 24 ending at 2019.96 &mdash;
+      numbering exactly, with Cycle 1 beginning at 1755.12 and Cycle 24 ending at 2019.96,
       which is a reasonable check that the procedure is doing what the convention does.</p>
     <p class="srcs">The power spectrum is a Hann-windowed periodogram of the full monthly series
       with the mean removed; the peak sits at 11.107 years and is unchanged if the window is
@@ -688,8 +709,8 @@ figure::after{right:-7px; bottom:-7px; transform:rotate(180deg)}
       statistic that requires a completed cycle, and included only where it is labelled as
       in progress.</p>
     <p class="srcs" style="color:var(--ink-3)">Every number quoted here was computed from the
-      downloaded files. Where the record is ambiguous &mdash; the length of the Gleissberg cycle,
-      the size of Cycle 25's eventual maximum &mdash; that is said rather than resolved.</p>
+      downloaded files. Where the record is ambiguous (the length of the Gleissberg cycle,
+      the size of Cycle 25's eventual maximum), that is said rather than resolved.</p>
   </div>
 </footer>
 
@@ -1045,12 +1066,12 @@ register(function wald(){
     g.appendChild(c);
   });
   // label only the cycles the text refers to; the rest are in the tooltip
-  const NOTE={19:["19 &mdash; strongest on record",1],5:["5",-1],6:["6 &mdash; Dalton Minimum",-1],
+  const NOTE={19:["19 (strongest on record)",1],5:["5",-1],6:["6 (Dalton Minimum)",-1],
               24:["24",1],25:null};
   Wd.pts.forEach(([rise,amp,num])=>{
     const nn=NOTE[num]; if(!nn) return;
     const side=nn[1];
-    const t=txt(g,X(rise)+(side>0?11:-11),Y(amp)+3.6,nn[0].replace("&mdash;","\u2014"),
+    const t=txt(g,X(rise)+(side>0?11:-11),Y(amp)+3.6,nn[0],
                 "dlab",side>0?"start":"end");
     t.setAttribute("fill",css("--ink-2"));
   });
@@ -1176,7 +1197,7 @@ register(function amps(){
     D.cycles.map(c=>[String(c.num),c.start.toFixed(2),c.peak.toFixed(2),c.end.toFixed(2),
       c.length.toFixed(2),c.rise.toFixed(2),c.amp.toFixed(1)])
       .concat([[String(D.current.num),D.current.start.toFixed(2),
-                D.current.peak_at.toFixed(2),"in progress","&mdash;","&mdash;",
+                D.current.peak_at.toFixed(2),"in progress","&ndash;","&ndash;",
                 D.current.peak.toFixed(1)]]));
 });
 

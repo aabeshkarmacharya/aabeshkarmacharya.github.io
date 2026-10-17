@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E1210">
 <meta name="description" content="What Else Is At My Altitude?">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3E%E0%A4%89%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3EAL%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>What Else Is At My Altitude?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +30,7 @@
   --field:#FFFFFF; --field-rule:#C2C2CD;
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -277,7 +278,7 @@ a.nextcard:hover .go{color:var(--accent)}
 :root{
   --c-pay:#2a78d6; --c-rb:#e8871e; --c-deb:#7d5ba6; --c-unk:#84848f;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     --c-pay:#4a8ede; --c-rb:#c47a2e; --c-deb:#9169bd; --c-unk:#70707e;
   }
@@ -377,6 +378,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -407,8 +410,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -425,7 +426,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -458,7 +459,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -502,7 +503,7 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-ink:#1A1A1A; --t-ink-2:#454545; --t-ink-3:#6B6B6B;
   --t-line:#CFE3CB; --t-line-2:#1A1A1A; --t-grid:rgba(26,26,26,.08);
   --t-accent:#1F5FA8; --t-accent-2:#C2372B; --t-accent-ink:#FFFFFF;
-  --gb-band:#E3F1E0; --gb-dark:#2E6B3A;
+  --gb-band:#E3F1E0; --gb-dark:#2E6B3A; --gb-rule:#1A1A1A; --gb-hole:#D9D9D4;
   --t-head-bg:#FFFFFF; --t-head-ink:#1A1A1A; --t-head-ink-2:#454545; --t-head-kick:#2E6B3A;
   --t-head-rule:2px dashed #1A1A1A; --t-hero-bg:#FFFFFF;
   --t-foot-bg:#FFFFFF; --t-foot-ink:#454545; --t-foot-ink-2:#757575;
@@ -523,40 +524,60 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --warnc:#B54708; --field:#FFFFFF; --field-rule:#1A1A1A;
 }
 
-header.top,figure{background:repeating-linear-gradient(180deg,var(--gb-band) 0 3.4em,#FFFFFF 3.4em 6.8em)}
+header.top,figure{background:repeating-linear-gradient(180deg,var(--gb-band) 0 3.4em,var(--t-paper) 3.4em 6.8em)}
 
 header.top .kicker::before{content:"***\00a0"} header.top .kicker::after{content:"\00a0***"}
 
 @media(min-width:1260px){
   body{background:
-    radial-gradient(circle at 18px 50%,#D9D9D4 0 6px,transparent 6.5px) left top/36px 32px repeat-y,
-    radial-gradient(circle at 18px 50%,#D9D9D4 0 6px,transparent 6.5px) right top/36px 32px repeat-y,#FFFFFF}
+    radial-gradient(circle at 18px 50%,var(--gb-hole) 0 6px,transparent 6.5px) left top/36px 32px repeat-y,
+    radial-gradient(circle at 18px 50%,var(--gb-hole) 0 6px,transparent 6.5px) right top/36px 32px repeat-y,var(--t-bg)}
 }
-#hero{background:repeating-linear-gradient(180deg,var(--gb-band) 0 3.4em,#FFFFFF 3.4em 6.8em)}
+#hero{background:repeating-linear-gradient(180deg,var(--gb-band) 0 3.4em,var(--t-paper) 3.4em 6.8em)}
 #hero h1{text-transform:uppercase; letter-spacing:-.03em}
 
-#hero h1,#hero .hero-sub{text-shadow:0 0 3px #FFFFFF,0 0 6px #FFFFFF,0 0 10px #FFFFFF}
-.hero-foot .hero-inner span{background:#FFFFFF; padding:1px 6px}
+#hero h1,#hero .hero-sub{text-shadow:0 0 3px var(--t-paper),0 0 6px var(--t-paper),0 0 10px var(--t-paper)}
+.hero-foot .hero-inner span{background:var(--t-paper); padding:1px 6px}
 
-section+section{border-top:2px dashed #1A1A1A}
+section+section{border-top:2px dashed var(--gb-rule)}
 body{counter-reset:pg}
 section .eyebrow{counter-increment:pg}
-section .eyebrow::before{content:"PAGE " counter(pg, decimal-leading-zero) " //"; color:#1A1A1A}
-.eyebrow::after{background:none; border-top:1px dashed #1A1A1A}
+section .eyebrow::before{content:"PAGE " counter(pg, decimal-leading-zero) " //"; color:var(--t-ink)}
+.eyebrow::after{background:none; border-top:1px dashed var(--gb-rule)}
 .lede{font-style:italic}
 .fig-title{text-transform:uppercase; font-weight:700}
 .fig-head,.fig-body{background:transparent}
-.ctl{background:#FFFFFF}
+.ctl{background:var(--t-paper)}
 .stats{gap:0}
-.stat{box-shadow:none; border:1px solid #1A1A1A; margin:0 -1px -1px 0; background:#FFFFFF}
+.stat{box-shadow:none; border:1px solid var(--gb-rule); margin:0 -1px -1px 0; background:var(--t-paper)}
 .stat b{font-weight:700}
-.note{border-left:0; border:1px dashed #1A1A1A; padding:10px 14px; font-family:var(--t-f-label); font-size:15px}
+.note{border-left:0; border:1px dashed var(--gb-rule); padding:10px 14px; font-family:var(--t-f-label); font-size:15px}
 .pull{font-family:var(--t-f-label); text-transform:uppercase}
 #tip,.tip{background:var(--gb-band)}
-.card,.answer,.offer,a.nextcard,.fig{border:1px solid #1A1A1A}
+.card,.answer,.offer,a.nextcard,.fig{border:1px solid var(--gb-rule)}
 .answer .top{background:var(--gb-band)}
 .big{font-weight:700}
 button.cta{text-transform:uppercase}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#0E1210; --t-paper:#121814; --t-paper-2:#16201A;
+  --t-ink:#E4EDE5; --t-ink-2:#BCC9BE; --t-ink-3:#97A699;
+  --t-line:#26392B; --t-line-2:#CFE0D2; --t-grid:rgba(228,237,229,.08);
+  --t-accent:#6FA8E8; --t-accent-2:#F06B5E; --t-accent-ink:#0E1210;
+  --gb-band:#15241A; --gb-dark:#7CC48B; --gb-rule:#CFE0D2; --gb-hole:#26302A;
+  --t-head-bg:#0E1210; --t-head-ink:#E4EDE5; --t-head-ink-2:#BCC9BE; --t-head-kick:#7CC48B;
+  --t-head-rule:2px dashed #CFE0D2; --t-hero-bg:#0E1210;
+  --t-foot-bg:#0E1210; --t-foot-ink:#BCC9BE; --t-foot-ink-2:#97A699;
+  --t-label-ink:#7CC48B;
+  --t-fig-border:1px solid #CFE0D2; --t-cap-rule:1px dashed #CFE0D2; --t-tip-border:1px solid #CFE0D2;
+  --t-chip-on-bg:#E4EDE5; --t-chip-on-ink:#0E1210;
+  --pay:#3275C4; --deb:#CB372B; --rb:#B88500; --unk:#8C968E;
+  --mark:#6FA8E8; --mark-soft:rgba(111,168,232,.22); --mark-dim:rgba(111,168,232,.40);
+  --warnc:#F0A04B; --field:#121814; --field-rule:#CFE0D2;
+}
+}
 
 </style>
 </head>
@@ -634,9 +655,9 @@ button.cta{text-transform:uppercase}
           <div class="top">
             <p class="lab mono" style="font-family:'IBM Plex Sans Condensed',monospace; font-size:11px;
                letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
-               margin:0 0 4px" id="outWhere">&mdash;</p>
-            <div class="big" id="outBig">&mdash;</div>
-            <p class="exact" id="outLead">&mdash;</p>
+               margin:0 0 4px" id="outWhere">&ndash;</p>
+            <div class="big" id="outBig">&ndash;</div>
+            <p class="exact" id="outLead">&ndash;</p>
             <p class="tiny" style="margin:11px 0 0" id="outSub"></p>
             <p class="printonly mono" id="printPlan"></p>
           </div>

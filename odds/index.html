@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#E9E4D8">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#E9E4D8">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#181613">
 <meta name="description" content="What Are My Odds Up There?">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3E%E0%A4%B6%E0%A4%BF%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3EOD%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>What Are My Odds Up There?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +31,7 @@
   --field:#FFFFFF; --field-rule:#C2C2CD;
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -344,6 +345,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -374,8 +377,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -392,7 +393,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -425,7 +426,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -489,33 +490,33 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
 }
 
 header.top{padding-block:clamp(30px,5vw,60px)}
-header.top > .wrap,header.top > .wide{position:relative; overflow:hidden; background:#FFFDF5;
+header.top > .wrap,header.top > .wide{position:relative; overflow:hidden; background:var(--t-paper);
   padding-block:22px 28px; box-shadow:0 1px 2px rgba(0,0,0,.18),0 10px 24px -14px rgba(0,0,0,.35);
   transform:rotate(-.4deg)}
-header.top .kicker{font-family:"Cutive Mono",monospace; letter-spacing:.02em; color:#C8463D; text-transform:uppercase;
+header.top .kicker{font-family:"Cutive Mono",monospace; letter-spacing:.02em; color:var(--hw-red); text-transform:uppercase;
   position:relative; padding-bottom:9px}
 
-header.top .kicker::after{content:""; position:absolute; left:-200px; right:-200px; bottom:0; height:1.5px; background:#C8463D}
+header.top .kicker::after{content:""; position:absolute; left:-200px; right:-200px; bottom:0; height:1.5px; background:var(--hw-red)}
 
 @media(max-width:980px){header.top > .wrap{transform:none}}
 @media(max-width:1200px){header.top > .wide{transform:none}}
 header.top h1{margin-top:16px}
-section .eyebrow::before{content:"EXPED. FILE \2014 "; color:#1F1F1F}
-.eyebrow::after{background:#C8463D; height:1px}
-h2{color:#1F1F1F}
-figure{background:#FFFDF5; border:1px solid #D6D0C1; border-top:2px solid #C8463D}
+section .eyebrow::before{content:"EXPED. FILE\00a0\00b7\00a0"; color:var(--t-ink)}
+.eyebrow::after{background:var(--hw-red); height:1px}
+h2{color:var(--t-ink)}
+figure{background:var(--t-paper); border:1px solid var(--t-line); border-top:2px solid var(--hw-red)}
 .fig-title{font-family:"Special Elite",monospace; font-size:19px}
 .stats{gap:8px}
-.stat{box-shadow:0 1px 2px rgba(0,0,0,.12); border:1px solid #D6D0C1; background:#FFFDF5}
-.stat b{color:#1F1F1F}
-.note{border-left:0; border-top:1.5px solid #C8463D; background:#FFFDF5; padding:12px 16px; font-family:"Cutive Mono",monospace}
+.stat{box-shadow:0 1px 2px rgba(0,0,0,.12); border:1px solid var(--t-line); background:var(--t-paper)}
+.stat b{color:var(--t-ink)}
+.note{border-left:0; border-top:1.5px solid var(--hw-red); background:var(--t-paper); padding:12px 16px; font-family:"Cutive Mono",monospace}
 .pull{font-family:"Special Elite",monospace}
-.card,.answer,.offer,a.nextcard,.fig{background:#FFFDF5; border:1px solid #D6D0C1; border-top:2px solid #C8463D}
+.card,.answer,.offer,a.nextcard,.fig{background:var(--t-paper); border:1px solid var(--t-line); border-top:2px solid var(--hw-red)}
 .big{font-family:"Special Elite",monospace; font-weight:400}
 
-section{background:#FFFDF5; max-width:900px; margin:28px auto 0; border-top:2px solid #C8463D;
+section{background:var(--t-paper); max-width:900px; margin:28px auto 0; border-top:2px solid var(--hw-red);
   box-shadow:0 1px 2px rgba(0,0,0,.14),0 12px 26px -16px rgba(0,0,0,.35)}
-section+section{border-top:2px solid #C8463D}
+section+section{border-top:2px solid var(--hw-red)}
 section:nth-of-type(even){transform:rotate(.25deg)} section:nth-of-type(odd){transform:rotate(-.2deg)}
 @media(max-width:760px){section{margin-top:16px}}
 
@@ -524,6 +525,27 @@ section:nth-of-type(even){transform:rotate(.25deg)} section:nth-of-type(odd){tra
 
 h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[aria-pressed=true],button.cta{font-weight:400}
 .note b,.note strong{font-weight:400; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.18em}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#181613; --t-paper:#22201C; --t-paper-2:#2A2722;
+  --t-ink:#EEEAE0; --t-ink-2:#CDC8BC; --t-ink-3:#A8A295;
+  --t-line:#3D3932; --t-line-2:#E0DBCF; --t-grid:rgba(238,234,224,.08);
+  --t-accent:#F07A70; --t-accent-2:#8DA6E0; --t-accent-ink:#181613;
+  --hw-red:#F07A70; --hw-blue:#34445E;
+  --t-head-bg:#181613; --t-head-ink:#EEEAE0; --t-head-ink-2:#CDC8BC; --t-head-kick:#F07A70;
+  --t-head-rule:0; --t-hero-bg:#181613;
+  --t-foot-bg:#181613; --t-foot-ink:#CDC8BC; --t-foot-ink-2:#A8A295;
+  --t-label-ink:#F07A70;
+  --t-fig-border:1px solid #3D3932; --t-cap-rule:1px solid #3D3932; --t-tip-border:1px solid #E0DBCF;
+  --t-chip-on-bg:#EEEAE0; --t-chip-on-ink:#181613;
+  --member:#678DDB; --hired:#E65B50; --member-soft:rgba(103,141,219,.22); --hired-soft:rgba(230,91,80,.22);
+  --zone:rgba(238,234,224,.05); --zone-2:rgba(238,234,224,.09); --zoneink:rgba(238,234,224,.62);
+  --mark:#8DA6E0; --mark-soft:rgba(141,166,224,.18); --mark-line:rgba(141,166,224,.55);
+  --up:#678DDB; --down:#E65B50; --warn:#F0A04B; --axis:#8F8A7E; --field:#22201C; --field-rule:#E0DBCF;
+}
+}
 
 </style>
 </head>
@@ -538,7 +560,7 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
     <p class="sub">Every expedition operator on earth quotes you a success rate.
       None of them quote you theirs against the archive, and none of them quote
       you the other number at all. This page fits both from the record of forty
-      thousand people who went &mdash; and then shows you exactly how much of
+      thousand people who went. Then it shows you exactly how much of
       the outcome it cannot see, which is most of it.</p>
   </div>
 </header>
@@ -610,18 +632,18 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
         <div class="answer">
           <p class="cap mono" style="font-family:'Cutive Mono',monospace; font-size:11px;
              letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
-             margin:0; padding:18px 22px 0" id="outWho">&mdash;</p>
+             margin:0; padding:18px 22px 0" id="outWho">&ndash;</p>
           <div class="odds">
             <div class="odd">
               <span class="cap">Reach the summit</span>
-              <div class="big" id="outSummit">&mdash;</div>
-              <p class="sub2" id="outSummitSub">&mdash;</p>
+              <div class="big" id="outSummit">&ndash;</div>
+              <p class="sub2" id="outSummitSub">&ndash;</p>
               <p class="ci" id="outSummitCi"></p>
             </div>
             <div class="odd">
               <span class="cap">Do not come back</span>
-              <div class="big" id="outDeath">&mdash;</div>
-              <p class="sub2" id="outDeathSub">&mdash;</p>
+              <div class="big" id="outDeath">&ndash;</div>
+              <p class="sub2" id="outDeathSub">&ndash;</p>
               <p class="ci" id="outDeathCi"></p>
             </div>
           </div>
@@ -778,7 +800,7 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
       </div>
       <div class="field">
         <label class="lab">Climb as entered above</label>
-        <p class="small mono" id="leadPlan" style="margin:0; color:var(--ink-2)">&mdash;</p>
+        <p class="small mono" id="leadPlan" style="margin:0; color:var(--ink-2)">&ndash;</p>
       </div>
       <p class="err" id="leadErr"></p>
       <button type="button" class="cta" id="leadSubmit">Send request</button>
@@ -796,14 +818,14 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
     <p><b>Almost everything that decides the outcome.</b> The database records
       which peak, which season, member or hired, oxygen or not, age and sex. It
       does not record how fit you are, how many seasons you have climbed, how
-      good your guides are, how heavy your pack is, or &mdash; above all &mdash;
+      good your guides are, how heavy your pack is, or, above all,
       what the weather does in your particular summit window. Those are most of
       the answer. What is fitted here is the base rate for a category of person,
       which is a useful thing to know and is not a prediction about you.</p>
     <p><b>The death model is weak, and says so.</b> It separates who died from
-      who lived with a held-out AUC of <span id="limAuc">&mdash;</span>, where
+      who lived with a held-out AUC of <span id="limAuc">&ndash;</span>, where
       0.5 is a coin and 1.0 is perfect. The summit model reaches
-      <span id="limAuc2">&mdash;</span>. That gap is the honest finding of this
+      <span id="limAuc2">&ndash;</span>. That gap is the honest finding of this
       page: the record can tell you fairly well who gets to the top and barely at
       all who comes home. Dying on a mountain is mostly bad luck arriving at a
       specific place and minute, and no table of categories will predict it.</p>
@@ -814,7 +836,7 @@ h3,.fig-title,.stat b,.big,.odd .big,.price .amt,.pull,.seg button,.seg button[a
     <p><b>The record thins out behind you.</b> The fit starts at 2000 because
       before then the recording of hired staff is too uneven to compare, which is
       <a href="../himalaya/">the neighbouring essay's</a> own finding. It ends at
-      <span id="limYear">&mdash;</span>, where this copy of the database ends.</p>
+      <span id="limYear">&ndash;</span>, where this copy of the database ends.</p>
     <p class="small" id="limStats"></p>
   </div>
 </section>
@@ -1189,7 +1211,7 @@ var comps = (function(){
     if (mt.n && wd) {
       note += " Their death rate was " + per1000(wd.p) + " in 1,000, and with " +
         group(mt.n) + " people behind it the 95% interval runs " +
-        per1000(wd.lo) + " to " + per1000(wd.hi) + " &mdash; which is the real " +
+        per1000(wd.lo) + " to " + per1000(wd.hi) + ". That is the real " +
         "width of what anyone can tell you about a risk this small.";
     }
     el("compNote").innerHTML = note;
@@ -1437,7 +1459,7 @@ var calib = (function(){
         "read as the finding rather than as a flaw in the fitting. Given two " +
         "climbers, one of whom died, this model picks the right one about " +
         pct(FIT.death.auc, 0) + " of the time. The points still sit near the " +
-        "line, so the <em>level</em> is roughly honest &mdash; it knows what " +
+        "line, so the <em>level</em> is roughly honest: it knows what " +
         "share of a group will die, and not which of them."
       : "An AUC of " + FIT.summit.auc.toFixed(2) + " is a genuinely strong " +
         "separation, and almost all of it is oxygen and the choice of peak. " +

@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111214">
 <meta name="description" content="The Valley of Stability">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231C4C9C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%AA%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231C4C9C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3ENU%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>The Valley of Stability</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +24,7 @@
   --grid:rgba(23,22,20,.07);
   --measure:64ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#141312; --surface:#1C1B19; --surface-2:#232220; --sunk:#0D0C0B;
@@ -207,6 +208,8 @@ footer{padding:54px 24px 72px; border-top:1px solid var(--rule); background:var(
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -237,8 +240,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -255,7 +256,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -288,7 +289,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -333,7 +334,8 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-line:#DADDE0; --t-line-2:#111111; --t-grid:rgba(17,17,17,.08);
   --t-accent:#3B76BF; --t-accent-2:#E2463B; --t-accent-ink:#FFFFFF;
   
-  --nk-bm:#3B76BF; --nk-bp:#D24137; --nk-al:#2C8453; --nk-st:#111111;
+  --nk-bm:#3B76BF; --nk-bp:#D24137; --nk-al:#2C8453; --nk-st:#111111; --nk-st-ink:#FFFFFF;
+  --nk-rule:#111111;
   --t-head-bg:#FFFFFF; --t-head-ink:#111111; --t-head-ink-2:#3F4347; --t-head-kick:#6A6F74;
   --t-head-rule:3px solid #111111; --t-hero-bg:#FFFFFF;
   --t-foot-bg:#111111; --t-foot-ink:#E6E8EA; --t-foot-ink-2:#A9AEB3;
@@ -351,11 +353,11 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --heat0:#DCE6F3; --heat1:#3E7CC9;
 }
 
-#hero .hero-copy .hero-inner{background:#FFFFFF; border:2px solid #111111; padding:22px 24px 18px;
+#hero .hero-copy .hero-inner{background:var(--t-paper); border:2px solid var(--nk-rule); padding:22px 24px 18px;
   max-width:640px; margin-left:max(0px,calc((100% - var(--wide)) / 2)); margin-right:auto}
 .hero-veil{display:none}
-.hero-foot .hero-inner{color:#111111}
-.hero-foot .hero-inner span{background:#FFFFFF; padding:2px 6px; border:1px solid #111111}
+.hero-foot .hero-inner{color:var(--t-ink)}
+.hero-foot .hero-inner span{background:var(--t-paper); padding:2px 6px; border:1px solid var(--nk-rule)}
 #hero h1{font-size:clamp(38px,6.6vw,86px)}
 
 body{counter-reset:cell}
@@ -364,29 +366,49 @@ section .eyebrow::before{content:counter(cell); display:inline-grid; place-items
   background:var(--nk-bm); color:#FFFFFF; font-weight:800; font-size:14px; letter-spacing:0; flex:none}
 section:nth-of-type(4n+2) .eyebrow::before{background:var(--nk-bp)}
 section:nth-of-type(4n+3) .eyebrow::before{background:var(--nk-al)}
-section:nth-of-type(4n+4) .eyebrow::before{background:var(--nk-st)}
-.eyebrow::after{background:#111111; height:2px}
+section:nth-of-type(4n+4) .eyebrow::before{background:var(--nk-st); color:var(--nk-st-ink)}
+.eyebrow::after{background:var(--nk-rule); height:2px}
 
 footer{--t-label-ink:var(--t-foot-ink-2)}
 footer .eyebrow::after{background:#4A4F54}
 
-figure{border:2px solid #111111}
+figure{border:2px solid var(--nk-rule)}
 .fig-title{font-weight:800; letter-spacing:-.01em}
 .fig-head{border-bottom:1px solid var(--t-line)}
-figcaption{border-top:1px solid #111111}
+figcaption{border-top:1px solid var(--nk-rule)}
 .stats{gap:6px}
-.stat{box-shadow:none; border:2px solid #111111; border-top-width:10px}
+.stat{box-shadow:none; border:2px solid var(--nk-rule); border-top-width:10px}
 .stat:nth-child(4n+1){border-top-color:var(--nk-bm)} .stat:nth-child(4n+2){border-top-color:var(--nk-bp)}
 .stat:nth-child(4n+3){border-top-color:var(--nk-al)} .stat:nth-child(4n+4){border-top-color:var(--nk-st)}
 .stat b{font-weight:800; letter-spacing:-.03em}
-.chip{border:2px solid #111111}
+.chip{border:2px solid var(--nk-rule)}
 .note{border-left:6px solid var(--nk-bm)}
 .pull{font-weight:800; letter-spacing:-.02em}
-thead th,th{color:#111111; border-bottom:2px solid #111111}
+thead th,th{color:var(--t-ink); border-bottom:2px solid var(--nk-rule)}
 footer a{color:#FFFFFF}
 @media(max-width:760px){#hero .hero-copy .hero-inner{padding:14px 16px}}
 
 @media(max-width:600px){#hero{height:max(640px,calc(62vw + 380px)); min-height:0}}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#111214; --t-paper:#17181B; --t-paper-2:#1E1F23;
+  --t-ink:#EEEFF0; --t-ink-2:#C3C6CA; --t-ink-3:#9A9EA3;
+  --t-line:#2E3034; --t-line-2:#E6E8EA; --t-grid:rgba(238,239,240,.08);
+  --t-accent:#6FA3E8; --t-accent-2:#F2685D; --t-accent-ink:#111214;
+  --nk-bm:#2F6CB8; --nk-bp:#C73A30; --nk-al:#23784A; --nk-st:#E6E8EA; --nk-st-ink:#111214;
+  --nk-rule:#E6E8EA;
+  --t-head-bg:#111214; --t-head-ink:#EEEFF0; --t-head-ink-2:#C3C6CA; --t-head-kick:#9A9EA3;
+  --t-head-rule:3px solid #E6E8EA; --t-hero-bg:#111214;
+  --t-foot-bg:#1B1C1F; --t-foot-ink:#E6E8EA; --t-foot-ink-2:#A9AEB3;
+  --t-label-ink:#EEEFF0;
+  --t-fig-border:2px solid #E6E8EA; --t-cap-rule:1px solid #E6E8EA; --t-tip-border:2px solid #E6E8EA;
+  --t-chip-on-bg:#EEEFF0; --t-chip-on-ink:#111214;
+  --bm:#4587D9; --bp:#E74137; --al:#2F925B; --other:#8A8D91; --stable:#EEEFF0;
+  --heat0:#2D496D; --heat1:#4587D9;
+}
+}
 
 </style>
 </head>
@@ -423,7 +445,7 @@ footer a{color:#FFFFFF}
       plane, and everything in chemistry, geology and biology happens inside it.</p>
     <p>The chart above plots neutron count across and proton count up. Each square is one
       nuclide that has actually been made and measured. The empty region in the upper left is
-      not unexplored territory &mdash; it is territory where a nucleus would shed protons faster
+      not unexplored territory. It is territory where a nucleus would shed protons faster
       than it could be assembled. The empty region below right is the same story for neutrons.</p>
   </div>
   <div class="wide figspace">
@@ -465,8 +487,8 @@ footer a{color:#FFFFFF}
         <svg id="chartLegend" viewBox="0 0 1000 44" role="img"
           aria-label="Legend for the chart of nuclides"></svg>
       </div>
-      <figcaption>The dashed lines mark the magic numbers &mdash; 2, 8, 20, 28, 50, 82 and 126
-        &mdash; the proton and neutron counts at which a nuclear shell closes. Stable nuclides
+      <figcaption>The dashed lines mark the magic numbers (2, 8, 20, 28, 50, 82 and 126),
+        the proton and neutron counts at which a nuclear shell closes. Stable nuclides
         cluster on them the way noble gases cluster at the end of a periodic row, and for the
         same reason.</figcaption>
     </figure>
@@ -503,8 +525,8 @@ footer a{color:#FFFFFF}
     <div class="wide figspace">
       <div class="stats" id="oddOddStats"></div>
     </div>
-    <p>Every other odd&ndash;odd combination that has ever been assembled &mdash; and hundreds
-      have been &mdash; eventually rearranges itself into something even.</p>
+    <p>Every other odd&ndash;odd combination that has ever been assembled (and hundreds
+      have been) eventually rearranges itself into something even.</p>
   </div>
 </section>
 
@@ -517,7 +539,7 @@ footer a{color:#FFFFFF}
       Wigner reportedly called them magic because nobody could explain them; Maria
       Goeppert Mayer and Hans Jensen worked out why, and shared the 1963 Nobel Prize for it.</p>
     <p>The evidence is sitting in the data. Tin has fifty protons, and tin has ten stable
-      isotopes &mdash; more than any other element. Across the whole chart, elements with a magic
+      isotopes, more than any other element. Across the whole chart, elements with a magic
       proton number average 4.67 stable isotopes each; everything else averages 2.51.</p>
   </div>
   <div class="wide figspace">
@@ -530,7 +552,7 @@ footer a{color:#FFFFFF}
       <div class="fig-body"><svg id="magicChart" viewBox="0 0 1000 340" role="img"
         aria-label="Bar chart of stable isotope count per element, with spikes at the magic proton numbers 20, 28, 50 and 82"></svg></div>
       <figcaption>Calcium (Z=20) has five stable isotopes and tin (Z=50) has ten, both local
-        maxima. Technetium (43) and promethium (61) have none at all &mdash; the only two
+        maxima. Technetium (43) and promethium (61) have none at all. They are the only two
         elements below bismuth with no stable isotope, a gap predicted from the pairing rules
         before either element was found.</figcaption>
       <details><summary>Table view</summary><div class="tbl-scroll"><table id="magicTable"></table></div></details>
@@ -560,7 +582,7 @@ footer a{color:#FFFFFF}
       <div class="fig-body"><svg id="bindChart" viewBox="0 0 1000 460" role="img"
         aria-label="Binding energy per nucleon rising steeply from hydrogen to a maximum near mass 62 and declining slowly to uranium"></svg></div>
       <figcaption>The spike at mass 4 is helium-4, which is doubly magic and absurdly well bound
-        for something so small &mdash; 7.07 MeV per nucleon when its neighbours manage 2.8 and
+        for something so small: 7.07 MeV per nucleon when its neighbours manage 2.8 and
         5.5. That single anomaly is why alpha decay exists as a decay mode at all.</figcaption>
     </figure>
   </div>
@@ -569,8 +591,8 @@ footer a{color:#FFFFFF}
     <p>Both, depending on what you ask. The highest binding energy per nucleon in the whole chart
       belongs to <b>nickel-62</b>, at 8.7946 MeV. The lowest mass per nucleon belongs to
       <b>iron-56</b>. Those are different questions: binding energy asks how hard the nucleus is
-      to pull apart, mass per nucleon asks how much matter each nucleon actually carries &mdash;
-      and since a neutron is heavier than a proton, a neutron-rich nucleus can be more tightly
+      to pull apart, mass per nucleon asks how much matter each nucleon actually carries.
+      Since a neutron is heavier than a proton, a neutron-rich nucleus can be more tightly
       bound and still weigh more.</p>
     <p>Stars care about the mass, because photodisintegration equilibrium in a stellar core
       settles wherever mass per nucleon is lowest. So the ash at the centre of a dying massive
@@ -604,7 +626,7 @@ footer a{color:#FFFFFF}
         <div class="fig-title">How long nuclides last</div>
         <p class="fig-note">Count of nuclides per two decades of half-life, from
           10<sup>&minus;24</sup> to 10<sup>32</sup> seconds. The 244 stable nuclides are not
-          shown &mdash; they have no half-life to plot.</p>
+          shown: they have no half-life to plot.</p>
       </div>
       <div class="fig-body"><svg id="halfChart" viewBox="0 0 1000 380" role="img"
         aria-label="Histogram of nuclide half-lives peaking between one second and one thousand seconds and spanning fifty-four orders of magnitude"></svg></div>
@@ -633,7 +655,7 @@ footer a{color:#FFFFFF}
     <p>Stars get past it by cheating. In a hot enough core, beryllium-8 forms and dissociates
       constantly, and a tiny equilibrium population of it exists at any instant. If a third
       helium-4 arrives during that 10<sup>&minus;16</sup>-second window, carbon-12 results. The
-      reaction is far too slow at first glance to make the carbon we observe &mdash; which is
+      reaction is far too slow at first glance to make the carbon we observe, which is
       what led Fred Hoyle, in 1953, to predict that carbon-12 must have an excited state at just
       the right energy to speed it up. It does. It was found within a year, and it is the reason
       you are made of anything.</p>
@@ -645,20 +667,20 @@ footer a{color:#FFFFFF}
     <div class="eyebrow">Reclassification</div>
     <h2>The element that stopped being stable</h2>
     <p>For most of the twentieth century, bismuth-209 was the heaviest stable nuclide known. It
-      is the only isotope of bismuth &mdash; 100&nbsp;per&nbsp;cent of all natural bismuth
-      &mdash; and it sat at the top of the stable list as the last thing before the radioactive
+      is the only isotope of bismuth (100&nbsp;per&nbsp;cent of all natural bismuth),
+      and it sat at the top of the stable list as the last thing before the radioactive
       elements begin.</p>
     <p>In 2003 a group at the Institut d'Astrophysique Spatiale in Orsay measured its alpha
       decay. The half-life is 2.01&nbsp;&times;&nbsp;10<sup>19</sup> years: about 1.5 billion
       times the age of the universe. Bismuth is radioactive. It was simply too slow to notice.</p>
     <div class="note"><b>What that does to the count.</b> This dataset lists 244 stable
-      nuclides. Older references say 254, or 256, or 264. The differences are not errors &mdash;
+      nuclides. Older references say 254, or 256, or 264. The differences are not errors;
       they are the same measurement problem. &ldquo;Stable&rdquo; in practice means &ldquo;no
       decay has been detected yet,&rdquo; and every improvement in detection moves a few nuclides
       across the line. The number is a statement about instruments as much as about nuclei.</div>
     <p>Nothing in the world changed when bismuth was reclassified. Work the activity out from
-      the half-life and a gram of bismuth emits about 99 alpha particles a year &mdash; one every
-      three and a half days, from a sample containing 2.9&nbsp;&times;&nbsp;10<sup>21</sup>
+      the half-life and a gram of bismuth emits about 99 alpha particles a year, one every
+      3.7 days, from a sample containing 2.9&nbsp;&times;&nbsp;10<sup>21</sup>
       atoms. But a category that everyone had treated as a property of matter turned out to be a
       property of how hard anyone had looked, which is a thing worth knowing about categories.</p>
   </div>
@@ -670,8 +692,8 @@ footer a{color:#FFFFFF}
     <h2>Four ladders down</h2>
     <p>Alpha decay removes two protons and two neutrons; beta decay converts a neutron into a
       proton. Neither changes mass number by anything other than four or zero. So a heavy nucleus
-      falling apart can only ever reach mass numbers congruent to its own, modulo four &mdash;
-      and that divides the entire heavy end of the chart into exactly four separate descent
+      falling apart can only ever reach mass numbers congruent to its own, modulo four.
+      That divides the entire heavy end of the chart into exactly four separate descent
       routes that never intersect.</p>
     <p>Nothing below is looked up. Take a starting nuclide, read its dominant decay mode from the
       table, apply the arithmetic, look up where you land, repeat until you reach something
@@ -699,14 +721,14 @@ footer a{color:#FFFFFF}
     <p class="pull">The neptunium series was supposed to stop at bismuth-209. Since 2003 it has
       one more rung.</p>
     <p>Bismuth-209 sits in the 4n+1 family. As long as it counted as stable, that series ended
-      there &mdash; and that is what the textbooks said for seventy years. Once its alpha decay
+      there, and that is what the textbooks said for seventy years. Once its alpha decay
       was measured, the chain acquired one more step, down to <b>thallium-205</b>, which really
       is stable. A half-life of twenty billion billion years is not a detail for anyone waiting
       on the outcome, but it changed where a diagram ends.</p>
     <div class="note"><b>Why only three of these are still around.</b> The parent half-lives are
       1.4&nbsp;&times;&nbsp;10<sup>10</sup> years for thorium-232,
       4.5&nbsp;&times;&nbsp;10<sup>9</sup> for uranium-238 and
-      7.0&nbsp;&times;&nbsp;10<sup>8</sup> for uranium-235 &mdash; all comparable to the age of
+      7.0&nbsp;&times;&nbsp;10<sup>8</sup> for uranium-235. All are comparable to the age of
       the Earth, so all three are still with us. Neptunium-237 lasts only
       2.1&nbsp;&times;&nbsp;10<sup>6</sup> years. Whatever the Earth formed with ran out long
       ago, and the 4n+1 series exists on Earth today only where someone has made it.</div>
@@ -758,7 +780,7 @@ footer a{color:#FFFFFF}
       <b>ENSDF</b>, maintained by the international Nuclear Structure and Decay Data network.</p>
     <p class="srcs">&ldquo;Stable&rdquo; throughout means the value this dataset records, not a
       claim about physics: 244 nuclides for which no decay has been observed. Nuclides are
-      grouped by their dominant decay mode &mdash; &beta;<sup>&minus;</sup> includes double beta
+      grouped by their dominant decay mode: &beta;<sup>&minus;</sup> includes double beta
       decay and beta-delayed emission, &beta;<sup>+</sup>/EC includes electron capture and double
       electron capture, and the remaining group holds proton and neutron emission, spontaneous
       fission and isomeric transitions. Every nuclide's exact recorded mode is in its tooltip.</p>
@@ -768,9 +790,9 @@ footer a{color:#FFFFFF}
       unstable nuclides, 2,961 carry a measured half-life; the remaining 178 are omitted from
       time-based figures and still appear on the chart under their decay mode.</p>
     <p class="srcs" style="color:var(--ink-3)">Every figure and every number in the text is
-      computed from that single download. Where a claim needed checking &mdash; whether the
+      computed from that single download. Where a claim needed checking (whether the
       binding-energy peak is iron or nickel, whether technetium and promethium really are the
-      only gaps below bismuth &mdash; it was checked against the data rather than recalled.</p>
+      only gaps below bismuth), it was checked against the data rather than recalled.</p>
   </div>
 </footer>
 
@@ -1013,7 +1035,7 @@ function paintChart(ctx, W, H, opt){
     if (g===3) life = "<b>stable</b>";
     else if (NU.hl[i]===null) life = "<i>half-life not recorded</i>";
     else life = "<i>half-life</i> " + humanTime(Math.pow(10, NU.hl[i]));
-    const mode0 = NU.modes[NU.dc[i]] || "\u2014";
+    const mode0 = NU.modes[NU.dc[i]] || "\u2013";
     showTip(ev,
       '<span class="big">'+sym+"-"+A+"</span><br>"+
       "Z = "+NU.z[i]+"   N = "+NU.n[i]+"<br>"+life+
@@ -1365,7 +1387,7 @@ register(function chains(){
       r.style.cursor="pointer";
       r.addEventListener("mouseenter",ev=>showTip(ev,
         '<span class="big">'+d.name+"</span><br>"+sr.name+" ("+sr.family+")<br>"+
-        (d.stable? "<b>stable &mdash; end of the chain</b>"
+        (d.stable? "<b>stable, end of the chain</b>"
                  : "<i>half-life</i> "+(d.hl||"?")+"<br><i>decays by</i> "+(d.via||"?"))+
         "<br>Z = "+d.z+"   N = "+d.n));
       r.addEventListener("mouseleave",hideTip);

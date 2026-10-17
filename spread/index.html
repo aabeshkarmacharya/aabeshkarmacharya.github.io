@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#0B0D10">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#0B0D10">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#06080B">
 <meta name="description" content="The Spread That Closed">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2742%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%AC%E0%A5%8D%E0%A4%AF%E0%A4%BE%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3ESP%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>The Spread That Closed</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,7 +37,7 @@
   --miss:#DAD6CE; --have:#55514A;
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#15140F; --surface:#1D1B16; --surface-2:#24221C; --sunk:#0D0C09;
@@ -247,6 +248,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -277,8 +280,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -295,7 +296,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -328,7 +329,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -372,7 +373,9 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-ink:#14202E; --t-ink-2:#3E4B5C; --t-ink-3:#616E7F;
   --t-line:#D3DBE6; --t-line-2:#0F2E57; --t-grid:rgba(15,46,87,.08);
   --t-accent:#0F5BA8; --t-accent-2:#D2412F; --t-accent-ink:#FFFFFF;
-  --rt-board:#0B0D10; --rt-amber:#FFB000; --rt-led:#FF4A3D; --rt-navy:#0F2E57;
+  --rt-board:#0B0D10; --rt-dot:#1C2129; --rt-amber:#FFB000; --rt-led:#FF4A3D; --rt-navy:#0F2E57;
+  
+  --rt-navy-text:#0F2E57; --rt-navy-rule:#0F2E57;
   --t-head-bg:#0B0D10; --t-head-ink:#FFFFFF; --t-head-ink-2:#C9D1DC; --t-head-kick:#FFB000;
   --t-head-rule:6px solid #0F2E57; --t-hero-bg:#0B0D10;
   --t-foot-bg:#0F2E57; --t-foot-ink:#E4EAF2; --t-foot-ink-2:#A9B7C9;
@@ -387,7 +390,7 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --lend:#D2412F; --lend-2:#E9826F; --dep:#0F5BA8; --dep-2:#6EA0D8; --band:rgba(210,65,47,.12); --base:#7A8594;
 }
 
-header.top{background:radial-gradient(circle,#1C2129 1.2px,transparent 1.6px) 0 0/7px 7px,#0B0D10}
+header.top{background:radial-gradient(circle,var(--rt-dot) 1.2px,transparent 1.6px) 0 0/7px 7px,var(--rt-board)}
 header.top .kicker{font-family:"VT323",monospace; font-weight:400; font-size:22px; letter-spacing:.08em; text-transform:uppercase;
   color:var(--rt-amber); text-shadow:0 0 6px rgba(255,176,0,.55)}
 header.top h1{color:#FFFFFF}
@@ -396,24 +399,43 @@ header.top .sub b{font-family:"VT323",monospace; font-weight:400; font-size:1.5e
   text-shadow:0 0 6px rgba(255,74,61,.6); letter-spacing:.02em}
 
 body{counter-reset:rate}
-section .eyebrow{counter-increment:rate; display:inline-flex; background:#0B0D10; color:var(--rt-amber);
+section .eyebrow{counter-increment:rate; display:inline-flex; background:var(--rt-board); color:var(--rt-amber);
   font-family:"VT323",monospace; font-size:20px; letter-spacing:.06em; font-weight:400; padding:4px 12px 2px;
   text-shadow:0 0 5px rgba(255,176,0,.5)}
 section .eyebrow::before{content:counter(rate, decimal-leading-zero) "\00a0\00a0"}
 .eyebrow::after{display:none}
-h2{color:#0F2E57}
-figure{border:1px solid #D3DBE6; border-top:5px solid #0F2E57}
-.fig-title{font-weight:900; color:#0F2E57}
-.ctl{background:#EEF2F7}
+h2{color:var(--rt-navy-text)}
+figure{border:1px solid var(--t-line); border-top:5px solid var(--rt-navy-rule)}
+.fig-title{font-weight:900; color:var(--rt-navy-text)}
+.ctl{background:var(--t-paper-2)}
 .stats{gap:6px}
-.stat{box-shadow:none; background:#0B0D10; border:0}
+.stat{box-shadow:none; background:var(--rt-board); border:0}
 .stat b{color:var(--rt-amber); font-size:clamp(34px,4.4vw,48px); font-weight:400; text-shadow:0 0 6px rgba(255,176,0,.5)}
 .stat.l b{color:var(--rt-led); text-shadow:0 0 6px rgba(255,74,61,.55)} .stat.d b{color:#7FB2FF; text-shadow:0 0 6px rgba(127,178,255,.5)}
 .stat span{color:#C9D1DC}
-.note{border-left:4px solid #0F5BA8; background:#EEF2F7; padding:12px 16px}
-.note.warn{border-left-color:#D2412F}
-code{background:#EEF2F7; border-color:#D3DBE6}
+.note{border-left:4px solid var(--t-accent); background:var(--t-paper-2); padding:12px 16px}
+.note.warn{border-left-color:var(--t-accent-2)}
+code{background:var(--t-paper-2); border-color:var(--t-line)}
 footer a{color:#FFFFFF}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#0D1520; --t-paper:#121C2A; --t-paper-2:#182435;
+  --t-ink:#E9EEF5; --t-ink-2:#BFC9D6; --t-ink-3:#98A4B4;
+  --t-line:#273448; --t-line-2:#9DB4D4; --t-grid:rgba(157,180,212,.10);
+  --t-accent:#74ADEE; --t-accent-2:#F2735F; --t-accent-ink:#0D1520;
+  --rt-board:#06080B; --rt-dot:#161B22; --rt-navy:#9DB4D4;
+  --rt-navy-text:#B5C8E4; --rt-navy-rule:#3A5682;
+  --t-head-bg:#06080B; --t-head-ink:#FFFFFF; --t-head-ink-2:#C9D1DC; --t-head-kick:#FFB000;
+  --t-head-rule:6px solid #1E3A63; --t-hero-bg:#06080B;
+  --t-foot-bg:#0A1A30; --t-foot-ink:#E4EAF2; --t-foot-ink-2:#A9B7C9;
+  --t-label-ink:#74ADEE;
+  --t-fig-border:1px solid #273448; --t-cap-rule:1px solid #273448; --t-tip-border:2px solid #3A5682;
+  --t-chip-on-bg:#3A5682; --t-chip-on-ink:#FFFFFF;
+  --lend:#F55A45; --lend-2:#A24A3D; --dep:#4E97EE; --dep-2:#386BA7; --band:rgba(242,115,95,.14); --base:#8392A6;
+}
+}
 
 </style>
 </head>
@@ -431,8 +453,8 @@ footer a{color:#FFFFFF}
       <span data-n="stats.sp_max" data-fmt="2"></span> points more than it paid
       its depositors. The gap is now
       <span data-n="stats.sp_last" data-fmt="2"></span>. It halved while both
-      prices collapsed &mdash; and hardly any of the halving happened during
-      the collapse.</p>
+      prices collapsed. Hardly any of the halving happened during the
+      collapse.</p>
   </div>
 </header>
 
@@ -465,9 +487,9 @@ footer a{color:#FFFFFF}
       stood at 6.93 percent and 10.60 percent respectively&rdquo; in another,
       and after 2022 as one limb of a sentence that also covers development
       banks and finance companies. On top of that the text layer sprays spaces
-      through words and numbers &mdash; <code>Deposit s</code>,
+      through words and numbers (<code>Deposit s</code>,
       <code>com mercial</code>, <code>5. 96 percent</code>,
-      <code>1 0.55 percent</code> &mdash; so every phrase the parser looks for
+      <code>1 0.55 percent</code>), so every phrase the parser looks for
       is matched with any amount of whitespace allowed between any two
       characters, and every number is closed up before it is read.</p>
 
@@ -508,8 +530,8 @@ footer a{color:#FFFFFF}
   <div class="wrap">
     <p>The hole in the middle is not a download failure. Between
       <span data-n="meta.gap_from"></span> and
-      <span data-n="meta.gap_to"></span> &mdash;
-      <b data-n="meta.gap_months" data-fmt="int"></b> months &mdash; the
+      <span data-n="meta.gap_to"></span>
+      (<b data-n="meta.gap_months" data-fmt="int"></b> months), the
       bulletins stop printing the two rates and print a single
       &ldquo;interest rate spread&rdquo; instead, computed to the bank&rsquo;s
       own directive. <span data-n="meta.directive" data-fmt="int"></span>
@@ -531,7 +553,7 @@ footer a{color:#FFFFFF}
       Birgunj at another. Some of the spread in the figures below is the cost
       of running a bank; some of it is the difference between those two
       customers. The bulletin collapses all of it into one number a month, and
-      it publishes nothing about the shape underneath &mdash; no range, no
+      it publishes nothing about the shape underneath: no range, no
       quartiles, no breakdown by borrower, no distribution across banks.</p>
 
     <p class="note warn"><b>So this page cannot show you the spread any
@@ -628,7 +650,7 @@ footer a{color:#FFFFFF}
     <p class="lede">Over the
       <b data-n="cycle.months" data-fmt="int"></b> months since
       <span data-n="cycle.from"></span> the lending rate travelled
-      <b data-n="cycle.lend_range" data-fmt="2"></b> points &mdash; from
+      <b data-n="cycle.lend_range" data-fmt="2"></b> points, from
       <span data-n="crunch.lend_from" data-fmt="2"></span> up to
       <span data-n="cycle.lend_hi" data-fmt="2"></span> and back down to
       <span data-n="cycle.lend_lo" data-fmt="2"></span>. Over the same months
@@ -659,7 +681,7 @@ footer a{color:#FFFFFF}
       <span data-n="year.dep_from" data-fmt="2"></span> to
       <span data-n="year.dep_to" data-fmt="2"></span>. Credit got three points
       cheaper in a year and the bank&rsquo;s margin closed by
-      <b data-n="year.sp_fall" data-fmt="2"></b> &mdash; close to the largest
+      <b data-n="year.sp_fall" data-fmt="2"></b>, close to the largest
       change the spread makes in any year of this record. The most recent year
       is more typical: lending down
       <span data-n="year_now.lend_fall" data-fmt="2"></span>, deposit down
@@ -672,8 +694,8 @@ footer a{color:#FFFFFF}
       over the first <span data-n="stats.sp_early_n" data-fmt="int"></span>
       months it records and
       <b data-n="stats.sp_recent" data-fmt="2"></b> over the last twelve
-      &mdash; <span data-n="stats.sp_halved" data-fmt="pct"></span> of what it
-      was. It did not fall in one step and it did not fall during the cycle.
+      (<span data-n="stats.sp_halved" data-fmt="pct"></span> of what it
+      was). It did not fall in one step and it did not fall during the cycle.
       It reached its narrowest,
       <b data-n="cycle.sp_lo" data-fmt="2"></b>, in
       <span data-n="cycle.sp_lo_at"></span>, when the deposit rate was
@@ -743,11 +765,11 @@ footer a{color:#FFFFFF}
       closing, and it is running underneath everything else in this
       archive.</p>
 
-    <p>Month to month the relationship is looser &mdash; slope
+    <p>Month to month the relationship is looser (slope
       <span data-n="passthrough.beta1" data-fmt="2"></span>, standard error
       <span data-n="passthrough.se1" data-fmt="2"></span>, over
-      <span data-n="passthrough.n1" data-fmt="int"></span> consecutive pairs
-      &mdash; which is what you would expect if banks reprice deposits and
+      <span data-n="passthrough.n1" data-fmt="int"></span> consecutive pairs),
+      which is what you would expect if banks reprice deposits and
       loans on different schedules and catch up within the year. Differences
       are only taken where both months are present, so none of them is
       computed across a gap.</p>
@@ -790,7 +812,7 @@ footer a{color:#FFFFFF}
 
     <p><b>Anything before <span data-n="meta.first"></span>.</b> The bulletins
       go back further, and they are in the archive, but they report short-term
-      rates &mdash; treasury bills, interbank, refinance &mdash; and not the
+      rates (treasury bills, interbank, refinance) and not the
       deposit and lending rates of the banking system. The series starts where
       the publishing does.</p>
 
@@ -1378,7 +1400,7 @@ function buildTable(){
     var r = S[i];
     rows.push("<tr><td>" + monthName(r) + "</td><td>" + r.dep.toFixed(2) +
               "</td><td>" + r.lend.toFixed(2) + "</td><td>" + r.sp.toFixed(2) +
-              "</td><td>" + (r.base === undefined ? "&mdash;" : r.base.toFixed(2)) +
+              "</td><td>" + (r.base === undefined ? "&ndash;" : r.base.toFixed(2)) +
               "</td></tr>");
   }
   body.innerHTML = rows.join("");

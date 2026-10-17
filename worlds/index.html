@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#15123A">
 <meta name="description" content="The Gap at Twice the Earth">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231C4C9C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%97%E0%A5%8D%E0%A4%B0%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231C4C9C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3EEX%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>The Gap at Twice the Earth</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -272,6 +272,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -302,8 +304,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -320,7 +320,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -353,7 +353,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -452,7 +452,7 @@ a{color:#F4EBDD}
     <h1>The Gap at Twice the Earth</h1>
     <p class="sub">The catalogue of known planets has a hole in it. Almost nothing
       is about 1.8 times the size of Earth. The hole is not a gap in what our
-      telescopes can see &mdash; it is a gap in what is out there, and it was
+      telescopes can see. It is a gap in what is out there, and it was
       probably burned open by starlight.</p>
   </div>
 </header>
@@ -471,7 +471,7 @@ a{color:#F4EBDD}
       and a planet tugging its star shifts the starlight&rsquo;s colour by a few
       metres per second. Both work best on big planets in tight orbits, so that
       is what the catalogue is mostly made of. The empty bottom-right of the
-      plot &mdash; small planets on wide orbits &mdash; is not a statement about
+      plot (small planets on wide orbits) is not a statement about
       the universe. It is the shape of our instruments, printed onto the sky.</p>
 
     <p>There is a subtler trap in the same picture, and it is worth getting out
@@ -494,8 +494,8 @@ a{color:#F4EBDD}
         <p class="fig-title">Every confirmed planet, by orbital period and size</p>
         <p class="fig-note">Logarithmic on both axes. The solar system is marked
           for scale. Hollow points are planets whose radius was predicted from
-          their mass rather than measured &mdash; they are shown so you can see
-          how many there are, and dismissed with the toggle.</p>
+          their mass rather than measured. They are shown so you can see
+          how many there are, and the toggle hides them.</p>
       </div>
       <div class="ctl">
         <button class="chip" id="c-transit" aria-pressed="true"><i class="swatch" style="background:var(--m-transit)"></i>Transit</button>
@@ -552,7 +552,7 @@ a{color:#F4EBDD}
       of four knobs is not a result, so all four move. Loosen the precision cut
       to twenty per cent and the sample doubles while the gap shallows from
       <span data-n="valley.structure.depth" data-fmt="pct"></span> to about a
-      quarter &mdash; that is measurement error filling it in, not planets
+      quarter. That is measurement error filling it in, not planets
       appearing. Widen the smoothing and the same thing happens more gently,
       until at about 0.055 the two peaks merge into one bump and the finder
       gives up and says so, which is the honest failure mode of asking a blurry
@@ -587,10 +587,10 @@ a{color:#F4EBDD}
              aria-label="Density of planet radii showing a gap near 1.8 Earth radii"></svg>
       </div>
       <div class="readout">
-        <div><b id="ro-valley">&mdash;</b><span>Gap centre, R<sub>&oplus;</sub></span></div>
-        <div><b id="ro-depth">&mdash;</b><span>Depth below the peaks</span></div>
-        <div><b id="ro-peaks">&mdash;</b><span>Peaks either side</span></div>
-        <div><b id="ro-n">&mdash;</b><span>Planets in the cut</span></div>
+        <div><b id="ro-valley">&ndash;</b><span>Gap centre, R<sub>&oplus;</sub></span></div>
+        <div><b id="ro-depth">&ndash;</b><span>Depth below the peaks</span></div>
+        <div><b id="ro-peaks">&ndash;</b><span>Peaks either side</span></div>
+        <div><b id="ro-n">&ndash;</b><span>Planets in the cut</span></div>
       </div>
       <div class="warnbox" id="valley-warn"></div>
       <figcaption>Bars are counts in 60 equal bins of log radius, drawn as a density on
@@ -622,16 +622,16 @@ a{color:#F4EBDD}
 
     <p>That is the whole argument, and it is a strong one, because a smooth
       sensitivity curve cannot carve a local minimum into a smooth underlying
-      distribution. Sensitivity that falls with size can suppress the small end
-      &mdash; and it does; that is why the count drops away below one Earth
+      distribution. Sensitivity that falls with size can suppress the small end.
+      It does, and that is why the count drops away below one Earth
       radius. It cannot dig a pit in the middle and leave both sides standing.</p>
 
     <p>There is a second check sitting in the same table, and it is worth
       being precise about what it does and does not show. Rebuild the size
-      distribution from Kepler&rsquo;s own pipeline &mdash; its stellar
+      distribution from Kepler&rsquo;s own pipeline (its stellar
       parameters, its radii, its
       <span data-n="snr.counts.candidate" data-fmt="int"></span> candidates
-      alongside the confirmed planets &mdash; and the notch is still there, at
+      alongside the confirmed planets) and the notch is still there, at
       <span data-n="snr.koi_density.structure.mid_r" data-fmt="2"></span> Earth
       radii and
       <span data-n="snr.koi_density.structure.depth" data-fmt="pct"></span>
@@ -683,7 +683,7 @@ a{color:#F4EBDD}
 
     <p>This is where the archive&rsquo;s helpfulness has to be refused outright.
       Of its planetary masses, <span data-n="meta.predicted_mass" data-fmt="int"></span>
-      &mdash; nearly half &mdash; were not measured but computed from the radius
+      (nearly half) were not measured but computed from the radius
       through a mass&ndash;radius relation. Plot those against radius and you
       recover the relation you put in, a perfect curve with no scatter, and it
       means precisely nothing. Keeping only genuinely weighed planets, with a
@@ -691,8 +691,8 @@ a{color:#F4EBDD}
       <span data-n="mr.n" data-fmt="int"></span> of them.</p>
 
     <p>The split is stark. Below the gap, the median density is
-      <b data-n="mr.dens_small" data-fmt="2"></b> grams per cubic centimetre
-      &mdash; denser than Earth, which is 5.51, and consistent with bare rock and
+      <b data-n="mr.dens_small" data-fmt="2"></b> grams per cubic centimetre,
+      denser than Earth&rsquo;s 5.51 and consistent with bare rock and
       iron. Above the gap it is <b data-n="mr.dens_big" data-fmt="2"></b>, far too
       light for rock at any composition: <span data-n="mr.frac_big_above" data-fmt="pct"></span>
       of them sit above the pure-rock line, meaning they are too large for their
@@ -702,7 +702,7 @@ a{color:#F4EBDD}
       planet can be built from in bulk, and an ocean world of a given mass is
       about a third larger than a rocky one. Yet
       <span data-n="mr.above_water" data-fmt="int"></span> of these planets are
-      larger still &mdash; too big for their mass even if they were made of
+      larger still: too big for their mass even if they were made of
       nothing but water. Whatever is holding them up cannot be rock, iron or
       ice. It has to be gas. A hydrogen envelope of one or two per cent by mass
       is enough, because hydrogen at those temperatures is enormously puffy.
@@ -751,8 +751,8 @@ a{color:#F4EBDD}
       closer in, so the largest planet that can be stripped should be larger
       close to the star than far from it. The gap should therefore
       <em>tilt</em>: down with orbital period, up with the starlight received.
-      A rival account &mdash; that these planets simply formed late, in gas-poor
-      disks, and never had much atmosphere to lose &mdash; predicts the tilt in
+      A rival account holds that these planets simply formed late, in gas-poor
+      disks, and never had much atmosphere to lose. It predicts the tilt in
       the opposite direction.</p>
 
     <p>Fitting a straight line to the emptiest path through the plane, using all
@@ -819,7 +819,7 @@ a{color:#F4EBDD}
       in validated batches of hundreds, which is why the chart below has spikes
       rather than a trend. TESS now supplies the steady flow, and because it
       surveys the whole sky rather than one field, its planets orbit brighter,
-      nearer stars whose radii are known well &mdash; which is what a sharper
+      nearer stars whose radii are known well. That is what a sharper
       version of this measurement will need.</p>
   </div>
 
@@ -1376,10 +1376,10 @@ var valley = (function(){
 
     if (n < 40){
       warn.className = "warnbox on";
-      warn.textContent = "Only " + n + " planets pass this cut \u2014 too few to "
+      warn.textContent = "Only " + n + " planets pass this cut, too few to "
         + "estimate a distribution from. Loosen the precision or period limit.";
       ["ro-valley","ro-depth","ro-peaks","ro-n"].forEach(function(id){
-        el(id).textContent = id === "ro-n" ? fInt(n) : "\u2014"; });
+        el(id).textContent = id === "ro-n" ? fInt(n) : "\u2013"; });
       return;
     }
 
@@ -1486,13 +1486,13 @@ var valley = (function(){
       warn.className = "warnbox";
     } else {
       el("ro-valley").textContent = "none";
-      el("ro-depth").textContent = "\u2014";
-      el("ro-peaks").textContent = "\u2014";
+      el("ro-depth").textContent = "\u2013";
+      el("ro-peaks").textContent = "\u2013";
       warn.className = "warnbox on";
       warn.textContent = "At this setting the distribution has no two separate "
         + "peaks, so there is no gap to measure. That is the expected outcome "
         + "when the smoothing is wider than the feature or the radii are too "
-        + "imprecise to resolve it \u2014 not a bug.";
+        + "imprecise to resolve it. It is not a bug.";
     }
     el("ro-n").textContent = fInt(n);
   }

@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#FDFDFB">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FDFDFB">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131312">
 <meta name="description" content="How Often Does It Shake Here?">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3E%E0%A4%95%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3ESH%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>How Often Does It Shake Here?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,400;0,700;0,900;1,400&amp;family=Chivo+Mono:wght@400;500;600&amp;family=Mukta:wght@400;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,400;0,700;0,900;1,400&amp;family=Chivo+Mono:wght@400;500;600&amp;display=swap">
 <style>
 :root{
   color-scheme: light;
@@ -29,7 +30,7 @@
   --field:#FFFFFF; --field-rule:#C2C2CD;
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -374,6 +375,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -404,8 +407,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -422,7 +423,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -455,7 +456,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -503,7 +504,7 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-head-bg:#FDFDFB; --t-head-ink:#151515; --t-head-ink-2:#454545; --t-head-kick:#D7261E;
   --t-head-rule:2px solid #151515; --t-hero-bg:#FDFDFB;
   --t-foot-bg:#151515; --t-foot-ink:#E9E9E4; --t-foot-ink-2:#B9B9B2;
-  --t-f-display:"Chivo","Mukta",Arial,sans-serif; --t-f-body:"Chivo","Mukta",Arial,sans-serif;
+  --t-f-display:"Chivo",Arial,sans-serif; --t-f-body:"Chivo",Arial,sans-serif;
   --t-f-label:"Chivo Mono",ui-monospace,monospace; --t-f-num:"Chivo Mono",ui-monospace,monospace;
   
   --t-f-chart:"Chivo",Arial,sans-serif;
@@ -518,9 +519,12 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   
   --mark:#D7261E; --mark-soft:rgba(215,38,30,.16); --mark-dim:rgba(215,38,30,.32);
   --warnc:#B54708; --field:#FFFFFF; --field-rule:#151515;
+  
+  --sg-rule:#151515; --sg-mark:#151515; --sg-graph:rgba(21,21,21,.045); --sg-row:rgba(21,21,21,.06);
+  --sg-foot-red:#DF514B; --sg-foot-link:#FDFDFB;
 }
 
-body{background-image:repeating-linear-gradient(180deg,#151515 0 1px,transparent 1px 60px);
+body{background-image:repeating-linear-gradient(180deg,var(--sg-mark) 0 1px,transparent 1px 60px);
   background-size:7px 100%; background-repeat:repeat-y; background-position:left top}
 
 header.top{position:relative; padding-bottom:calc(clamp(40px,6.5vw,76px) + 74px)}
@@ -528,47 +532,70 @@ header.top .look-art,#hero .look-art{display:block; position:absolute; left:0; r
   background:var(--sg-trace) center/100% 100% no-repeat; pointer-events:none;
   border-top:1px dashed rgba(21,21,21,.25)}
 #hero .look-art{bottom:0; height:56px; z-index:2; background-color:rgba(253,253,251,.85)}
-header.top .kicker,.hero-tag .hero-inner span:first-child{display:inline-block; background:#151515; color:#FDFDFB;
+header.top .kicker,.hero-tag .hero-inner span:first-child{display:inline-block; background:var(--t-ink); color:var(--t-bg);
   padding:5px 10px 4px; letter-spacing:.06em}
-header.top .devanagari{font-family:var(--t-f-display); font-weight:400; color:var(--sg-red); text-transform:none}
-.hero-tag .hero-inner,.hero-foot .hero-inner{color:#151515}
+.hero-tag .hero-inner,.hero-foot .hero-inner{color:var(--t-ink)}
 .hero-veil{opacity:.7}
-#hero h1{text-shadow:0 0 18px #FDFDFB, 0 0 2px #FDFDFB}
+#hero h1{text-shadow:0 0 18px var(--t-bg), 0 0 2px var(--t-bg)}
 
-#hero .hero-sub{text-shadow:0 0 3px #FDFDFB,0 0 6px #FDFDFB,0 0 10px #FDFDFB}
+#hero .hero-sub{text-shadow:0 0 3px var(--t-bg),0 0 6px var(--t-bg),0 0 10px var(--t-bg)}
 
 body{counter-reset:ch}
 section .eyebrow{counter-increment:ch}
-section .eyebrow::before{content:"CH." counter(ch, decimal-leading-zero); color:#151515; margin-right:2px}
-.eyebrow::after{background:repeating-linear-gradient(90deg,#151515 0 1px,transparent 1px 8px); height:6px}
+section .eyebrow::before{content:"CH." counter(ch, decimal-leading-zero); color:var(--t-ink); margin-right:2px}
+.eyebrow::after{background:repeating-linear-gradient(90deg,var(--sg-rule) 0 1px,transparent 1px 8px); height:6px}
 
-footer{--t-label-ink:#DF514B}
+footer{--t-label-ink:var(--sg-foot-red)}
 footer .eyebrow::after{background:repeating-linear-gradient(90deg,#6E6E6A 0 1px,transparent 1px 8px)}
 
-figure,.fig{border:1.5px solid #151515; background:#FFFFFF}
-figure .fig-head{border-bottom:1px solid #151515; padding-bottom:12px;
-  background:repeating-linear-gradient(90deg,#151515 0 1px,transparent 1px 12px) left bottom/100% 5px no-repeat}
+figure,.fig{border:1.5px solid var(--sg-rule); background:var(--t-paper)}
+figure .fig-head{border-bottom:1px solid var(--sg-rule); padding-bottom:12px;
+  background:repeating-linear-gradient(90deg,var(--sg-rule) 0 1px,transparent 1px 12px) left bottom/100% 5px no-repeat}
 .fig-title{font-weight:900; text-transform:uppercase; letter-spacing:.01em}
 figcaption{font-family:var(--t-f-label); font-size:12.5px}
 .stats{gap:0}
-.stat{box-shadow:0 0 0 1px #151515}
-.stat b,.stat .n{color:#151515}
+.stat{box-shadow:0 0 0 1px var(--sg-rule)}
+.stat b,.stat .n{color:var(--t-ink)}
 .stat:first-child b{color:var(--sg-red)}
 .note{border-left:4px solid var(--sg-red)}
 .pull{font-weight:900; text-transform:uppercase; letter-spacing:-.01em}
 #tip b,.tip b{color:var(--sg-red)}
-footer a{color:#FDFDFB}
+footer a{color:var(--sg-foot-link)}
 
-.card,.answer,.offer,a.nextcard,.fig{border:1.5px solid #151515}
-.answer .top{background:repeating-linear-gradient(180deg,transparent 0 23px,rgba(21,21,21,.06) 23px 24px),#FFFFFF}
+.card,.answer,.offer,a.nextcard,.fig{border:1.5px solid var(--sg-rule)}
+.answer .top{background:repeating-linear-gradient(180deg,transparent 0 23px,var(--sg-row) 23px 24px),var(--t-paper)}
 .big{font-weight:500; color:var(--sg-red); font-size:clamp(30px,4.2vw,46px); letter-spacing:-.04em}
 button.cta{text-transform:uppercase; letter-spacing:.06em}
-.seg button[aria-pressed=true]{background:#151515; color:#FDFDFB}
+.seg button[aria-pressed=true]{background:var(--t-ink); color:var(--t-bg)}
 @media(max-width:760px){body{background-size:4px 100%} header.top{padding-bottom:110px}}
 
 figure .fig-body{background:
-  linear-gradient(90deg,rgba(21,21,21,.045) 1px,transparent 1px) 0 0/10px 10px,
-  linear-gradient(180deg,rgba(21,21,21,.045) 1px,transparent 1px) 0 0/10px 10px}
+  linear-gradient(90deg,var(--sg-graph) 1px,transparent 1px) 0 0/10px 10px,
+  linear-gradient(180deg,var(--sg-graph) 1px,transparent 1px) 0 0/10px 10px}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#131312; --t-paper:#1A1A18; --t-paper-2:#222220;
+  --t-ink:#EDECE6; --t-ink-2:#C9C8C1; --t-ink-3:#A09F98;
+  --t-line:#353430; --t-line-2:#D8D7D0; --t-grid:rgba(237,236,230,.08);
+  --t-accent:#FF6158; --t-accent-2:#79A3F0; --t-accent-ink:#131312;
+  --sg-red:#FF6158;
+  --t-head-bg:#131312; --t-head-ink:#EDECE6; --t-head-ink-2:#C9C8C1; --t-head-kick:#FF6158;
+  --t-head-rule:2px solid #D8D7D0; --t-hero-bg:#131312;
+  --t-foot-bg:#1E1E1B; --t-foot-ink:#E6E5DF; --t-foot-ink-2:#B5B4AD;
+  --t-label-ink:#FF6158;
+  --t-fig-border:1.5px solid #D8D7D0; --t-cap-rule:1px solid #D8D7D0; --t-tip-border:1.5px solid #D8D7D0;
+  --t-chip-on-bg:#EDECE6; --t-chip-on-ink:#131312;
+  --shallow:#F94134; --inter:#3A9C64; --deep:#588DE8; --slot4:#CA7900;
+  --mark:#FF6158; --mark-soft:rgba(255,97,88,.22); --mark-dim:rgba(255,97,88,.40);
+  --warnc:#F0A33A; --field:#1A1A18; --field-rule:#D8D7D0;
+  --sg-rule:#D8D7D0; --sg-mark:#5E5D57; --sg-graph:rgba(237,236,230,.05); --sg-row:rgba(237,236,230,.06);
+  --sg-foot-red:#FF7166; --sg-foot-link:#F2F1EC;
+}
+
+header.top .look-art,#hero .look-art{filter:invert(1)}
+}
 
 </style>
 </head>
@@ -579,11 +606,9 @@ figure .fig-body{background:
 <div class="look-art" aria-hidden="true"></div>
   <div class="wide">
     <p class="kicker">USGS ComCat &middot; 8,811 earthquakes since 1976</p>
-    <h1>How often does it shake here?<!-- "Yo thaunma" -- ASCII-only fragment,
-      so the Devanagari is numeric character references. -->
-      <span class="devanagari" lang="ne">&#2351;&#2361;&#2366;&#2305; &#2325;&#2340;&#2367;&#2325;&#2379; &#2361;&#2354;&#2381;&#2354;&#2367;&#2306;&#2342;&#2369;&#2331;?</span></h1>
+    <h1>How often does it shake here?</h1>
     <p class="sub">Pick a town anywhere in Nepal and this counts every
-      earthquake the instrumental record has put near it since 1976 &mdash; how
+      earthquake the instrumental record has put near it since 1976: how
       many, how big, how close, how often. It counts them and stops there,
       because counting is what a catalogue can honestly support. The one thing
       it cannot tell you is the thing you most want to know, and that is the
@@ -646,9 +671,9 @@ figure .fig-body{background:
           <div class="top">
             <p class="lab mono" style="font-family:'Chivo Mono',monospace; font-size:11px;
                letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
-               margin:0 0 4px" id="outWhere">&mdash;</p>
-            <div class="big" id="outBig">&mdash;</div>
-            <p class="exact" id="outLead">&mdash;</p>
+               margin:0 0 4px" id="outWhere">&ndash;</p>
+            <div class="big" id="outBig">&ndash;</div>
+            <p class="exact" id="outLead">&ndash;</p>
             <p class="tiny" style="margin:11px 0 0" id="outSub"></p>
             <p class="printonly mono" id="printPlan"></p>
           </div>
@@ -822,15 +847,15 @@ figure .fig-body{background:
       something this page can measure.</p>
     <p><b>It counts earthquakes; it does not model shaking.</b> How hard the
       ground moves at a particular address depends on the depth and geometry of
-      the rupture, the rock between, and above all the soil directly underneath
-      &mdash; Kathmandu sits on a lake bed that amplifies motion. Turning a
+      the rupture, the rock between, and above all the soil directly underneath.
+      Kathmandu sits on a lake bed that amplifies motion. Turning a
       magnitude and a distance into a shaking figure needs all of that, and a
       wrong ground-motion model produces a confident number nobody can see is
       wrong. So none is used here.</p>
     <p><b>These earthquakes are not independent.</b> About
       <span id="limAft">66%</span> of the events in this archive are triggered
-      by another event already in it &mdash; the neighbouring essay's own
-      finding. A tole that records forty earthquakes may have had four
+      by another event already in it (the neighbouring essay's own
+      finding). A tole that records forty earthquakes may have had four
       sequences, not forty occasions. The share falls sharply with size: the
       largest events are mostly not anybody's aftershock.</p>
     <p><b>Distance is to the epicentre, which is a point, and a large
@@ -1051,7 +1076,7 @@ var grid = (function(){
     el("gridBody").innerHTML = BANDS.map(function(m){
       var cells = RADII.map(function(r){
         var n = by[r][m];
-        return "<td>" + (n ? group(n) : "&mdash;") + "</td>";
+        return "<td>" + (n ? group(n) : "&ndash;") + "</td>";
       }).join("");
       return "<tr" + (m === 6.0 ? ' class="you"' : "") +
         "><td>M" + m.toFixed(1) + " and up</td>" + cells + "</tr>";
@@ -1066,8 +1091,8 @@ var grid = (function(){
           "magnitude 7.5. "
         : "") +
       "So a large number in the top row can be one sequence rather than many " +
-      "separate occasions, while the bottom rows &mdash; " + (big || 0) +
-      " events at M7 within 500 km &mdash; are mostly distinct earthquakes.";
+      "separate occasions, while the bottom rows (" + (big || 0) +
+      " events at M7 within 500 km) are mostly distinct earthquakes.";
   }
 
   return {draw: draw};
@@ -1211,11 +1236,11 @@ var gr = (function(){
     var p = points(), f = fit(p), r = state.radius;
     var by = NEAR.byRadius;
     var tiles = [
-      [by ? group(by[r][4.5]) : "--", "earthquakes within " + r + " km since " + M.year_min],
-      [f ? f.b.toFixed(2) : "--", "b-value, the slope of that line"],
-      [by && by[r][6.0] ? every(M.years / by[r][6.0]).replace("about ", "") : "--",
+      [by ? group(by[r][4.5]) : "\u2013", "earthquakes within " + r + " km since " + M.year_min],
+      [f ? f.b.toFixed(2) : "\u2013", "b-value, the slope of that line"],
+      [by && by[r][6.0] ? every(M.years / by[r][6.0]).replace("about ", "") : "\u2013",
        "between magnitude 6 events, observed"],
-      [f ? every(1 / f.rateAt(7.0)).replace("about ", "") : "--",
+      [f ? every(1 / f.rateAt(7.0)).replace("about ", "") : "\u2013",
        "between magnitude 7, if the line holds"]
     ];
     el("grStats").innerHTML = tiles.map(function(t){

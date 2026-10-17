@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#D9D5CB">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#D9D5CB">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
 <meta name="description" content="The Layout Under Your Hands">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231C4C9C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%85%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231C4C9C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3EKB%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>The Layout Under Your Hands</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +23,7 @@
   --shadow:0 1px 2px rgba(18,23,27,.05),0 8px 24px -12px rgba(18,23,27,.14);
   --measure:66ch; --wide:1140px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#101315; --surface:#1A1A19; --surface-2:#212423; --sunk:#0B0D0E;
@@ -198,6 +199,8 @@ footer{padding:44px 0 66px; border-top:1px solid var(--rule); background:var(--s
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -228,8 +231,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -246,7 +247,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -279,7 +280,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -323,7 +324,8 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-ink:#1E1E1E; --t-ink-2:#4A4844; --t-ink-3:#5E5B56;
   --t-line:#D2CEC4; --t-line-2:#8E8A80; --t-grid:rgba(30,30,30,.08);
   --t-accent:#C64C28; --t-accent-2:#2E6BB5; --t-accent-ink:#FFFFFF;
-  --kc-cap:#FBFAF7; --kc-edge:#BDB8AC; --kc-esc:#C64C28;
+  --kc-cap:#FBFAF7; --kc-edge:#BDB8AC; --kc-esc:#C64C28; --kc-esc-edge:#9C3A1D; --kc-panel:#D9D5CB;
+  --kc-best:#226841; --kc-worst:#A03D20; --kc-warn:#795700;
   --t-head-bg:#D9D5CB; --t-head-ink:#1E1E1E; --t-head-ink-2:#4A4844; --t-head-kick:#4A4844;
   --t-head-rule:0; --t-hero-bg:#D9D5CB;
   --t-foot-bg:#2A2926; --t-foot-ink:#E9E6DE; --t-foot-ink-2:#B8B3A8;
@@ -340,34 +342,54 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --cap:#FBFAF7; --cap-edge:#C9C4B8; --cap-ink:#1E1E1E;
 }
 
-header.hero{padding-block:56px 40px; border-bottom:6px solid #BDB8AC}
-header.hero h1{display:inline; background:var(--kc-cap); border:1px solid #BDB8AC; border-bottom:6px solid #BDB8AC;
+header.hero{padding-block:56px 40px; border-bottom:6px solid var(--kc-edge)}
+header.hero h1{display:inline; background:var(--kc-cap); border:1px solid var(--kc-edge); border-bottom:6px solid var(--kc-edge);
   border-radius:8px; padding:.06em .32em .02em; box-decoration-break:clone; -webkit-box-decoration-break:clone}
-header.hero .eyebrow,.eyebrow{display:inline-flex; background:var(--kc-cap); border:1px solid #BDB8AC;
-  border-bottom-width:4px; border-radius:6px; padding:5px 11px 4px; color:#1E1E1E}
+header.hero .eyebrow,.eyebrow{display:inline-flex; background:var(--kc-cap); border:1px solid var(--kc-edge);
+  border-bottom-width:4px; border-radius:6px; padding:5px 11px 4px; color:var(--t-ink)}
 header.hero .eyebrow::after,.eyebrow::after{display:none}
 
 header.hero .eyebrow{display:flex; width:fit-content; margin-bottom:16px}
-section .eyebrow{background:var(--kc-esc); border-color:#9C3A1D; color:#FFFFFF}
-.hero-card{background:var(--kc-cap); border:1px solid #BDB8AC; border-bottom:6px solid #BDB8AC}
+section .eyebrow{background:var(--kc-esc); border-color:var(--kc-esc-edge); color:#FFFFFF}
+.hero-card{background:var(--kc-cap); border:1px solid var(--kc-edge); border-bottom:6px solid var(--kc-edge)}
 .hero-grid{margin-top:26px}
 
-.chip{background:var(--kc-cap); border:1px solid #BDB8AC; border-bottom-width:4px; transition:transform .08s}
+.chip{background:var(--kc-cap); border:1px solid var(--kc-edge); border-bottom-width:4px; transition:transform .08s}
 .chip[aria-pressed="true"]{transform:translateY(2px); border-bottom-width:2px}
-.panel{background:#D9D5CB; border:1px solid #BDB8AC; border-radius:12px}
-figure{border-bottom:5px solid #BDB8AC}
+.panel{background:var(--kc-panel); border:1px solid var(--kc-edge); border-radius:12px}
+figure{border-bottom:5px solid var(--kc-edge)}
 .fig-title{font-weight:700}
-.stat{box-shadow:none; border:1px solid #BDB8AC; border-bottom-width:5px; border-radius:7px}
+.stat{box-shadow:none; border:1px solid var(--kc-edge); border-bottom-width:5px; border-radius:7px}
 .stats{gap:8px}
 .stat b{font-size:clamp(20px,2.6vw,28px); letter-spacing:-.02em}
 .note{border-left:5px solid var(--kc-esc); background:var(--kc-cap); border-radius:0 7px 7px 0; padding:10px 14px}
 .pull{font-weight:800; letter-spacing:-.02em}
-section+section{border-top:1px solid #D2CEC4}
+section+section{border-top:1px solid var(--t-line)}
 footer a{color:#FFFFFF}
 
-td.best{color:#226841} td.worst{color:#A03D20}
-#xcheck{--good:#226841; --hot:#A03D20}
-.note{--warn:#795700}
+td.best{color:var(--kc-best)} td.worst{color:var(--kc-worst)}
+#xcheck{--good:var(--kc-best); --hot:var(--kc-worst)}
+.note{--warn:var(--kc-warn)}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#1A1A19; --t-paper:#242422; --t-paper-2:#2C2C2A;
+  --t-ink:#ECEAE4; --t-ink-2:#C7C4BC; --t-ink-3:#A6A29A;
+  --t-line:#3A3936; --t-line-2:#8E8A80; --t-grid:rgba(236,234,228,.08);
+  --t-accent:#F0774F; --t-accent-2:#6FA3E8; --t-accent-ink:#1A1A19;
+  --kc-cap:#2C2C2A; --kc-edge:#4A4944; --kc-esc:#C64C28; --kc-esc-edge:#7E2F17; --kc-panel:#20201F;
+  --kc-best:#6FD39A; --kc-worst:#F58A68; --kc-warn:#E8C25A;
+  --t-head-bg:#121211; --t-head-ink:#ECEAE4; --t-head-ink-2:#C7C4BC; --t-head-kick:#C7C4BC;
+  --t-head-rule:0; --t-hero-bg:#121211;
+  --t-foot-bg:#0E0E0D; --t-foot-ink:#E9E6DE; --t-foot-ink-2:#B8B3A8;
+  --t-label-ink:#C7C4BC;
+  --t-fig-border:1px solid #3A3936; --t-cap-rule:1px solid #3A3936; --t-tip-border:1px solid #8E8A80;
+  --t-chip-on-bg:#C64C28; --t-chip-on-ink:#FFFFFF;
+  --hot:#EC572B; --cool:#5091E2; --good:#4CAB73; --warn:#B98500;
+  --cap:#2C2C2A; --cap-edge:#4A4944; --cap-ink:#ECEAE4;
+}
+}
 
 </style>
 </head>
@@ -383,7 +405,7 @@ td.best{color:#226841} td.worst{color:#A03D20}
     <div class="hero-grid">
       <p class="hero-sub">QWERTY puts about a third of your keystrokes on the home row. On
         ordinary prose, every layout designed since has put at least three fifths there. This page measures what that
-        difference is actually worth, on 10.5&nbsp;million keystrokes of real text &mdash; and
+        difference is actually worth, on 10.5&nbsp;million keystrokes of real text, and
         lets you rearrange the keys yourself to see if you can do better.</p>
       <div class="hero-card" id="heroCard"></div>
     </div>
@@ -442,7 +464,7 @@ td.best{color:#226841} td.worst{color:#A03D20}
     <p><b>Same-finger bigrams</b> are the one that matters most. When two letters in a row fall
       on the same finger, that finger has to lift, move and press again while the rest of the
       hand waits. QWERTY does this on <span class="mono" id="fSfbQ"></span> of letter pairs in
-      ordinary prose &mdash; think of <span class="mono">ed</span>, <span class="mono">de</span>,
+      ordinary prose: think of <span class="mono">ed</span>, <span class="mono">de</span>,
       <span class="mono">un</span>, <span class="mono">ce</span>. The best modern layouts are
       near <span class="mono" id="fSfbB"></span>.</p>
     <p><b>Travel</b> is how far the fingertips actually move, in millimetres, per thousand
@@ -450,8 +472,8 @@ td.best{color:#226841} td.worst{color:#A03D20}
       row-staggered, so the home row sits a quarter of a key to the right of the top row and the
       bottom row a half key right of that. Ignore the stagger and every distance is wrong.</p>
     <p><b>Alternation</b> and <b>rolls</b> pull against each other, which is why layout designers
-      disagree. Alternating hands lets one hand travel while the other presses. Rolls &mdash;
-      consecutive keys on the same hand moving inward toward the index finger &mdash; are faster
+      disagree. Alternating hands lets one hand travel while the other presses. Rolls
+      (consecutive keys on the same hand moving inward toward the index finger) are faster
       still when they come off cleanly. Dvorak maximises alternation; Colemak accepts less of it
       to buy more rolls. Neither is simply right.</p>
     <p><b>Lateral stretches</b> and <b>scissors</b> are the awkward ones. A stretch is the index
@@ -468,14 +490,14 @@ td.best{color:#226841} td.worst{color:#A03D20}
     <div class="eyebrow">Searching</div>
     <h2>What falls out of distance alone</h2>
     <p>The <b>Find a shorter layout</b> button runs simulated annealing over the keys, the same
-      procedure that produced Halmak. Its objective is fingertip travel and nothing else &mdash;
-      travel is the only quantity here carrying a physical unit, and it already contains the cost
+      procedure that produced Halmak. Its objective is fingertip travel and nothing else.
+      Travel is the only quantity here carrying a physical unit, and it already contains the cost
       of same-finger pairs, because a finger forced between two keys travels the distance between
       them. It is told nothing about rolls, alternation, or what a hand enjoys.</p>
     <p>On literary English it reliably lands near <span class="mono">7.85&nbsp;m</span> per
       thousand characters, against QWERTY's <span class="mono">17.08</span>, and drops
-      same-finger pairs to about <span class="mono">1.0%</span> &mdash; under Colemak's
-      <span class="mono">1.52%</span>, which is not a claim that it is a better layout, only that
+      same-finger pairs to about <span class="mono">1.0%</span>, under Colemak's
+      <span class="mono">1.52%</span>. That is not a claim that it is a better layout, only that
       distance is most of what the metric rewards.</p>
     <p>The interesting part is what it keeps rediscovering. Run it repeatedly and the objective
       settles within a few hundredths of a metre every time while the arrangement comes out
@@ -483,7 +505,7 @@ td.best{color:#226841} td.worst{color:#A03D20}
       row is nearly the same each run, and usually shares nine of its eleven letters with
       Colemak's. Nobody told it about Colemak. Two people and a search procedure, given the same
       language and the same hand, keep putting <span class="mono">e a i o n s t r</span> under the
-      fingers &mdash; which is a reasonable amount of evidence that the layouts designed by hand
+      fingers. That is a reasonable amount of evidence that the layouts designed by hand
       were not arbitrary.</p>
   </div>
 </section>
@@ -494,8 +516,8 @@ td.best{color:#226841} td.worst{color:#A03D20}
     <h2>Every layout, every metric</h2>
     <p class="small" style="max-width:var(--measure); margin-bottom:20px">Click a column to sort.
       Green is the best value in that column, orange the worst. Click a row to load that layout
-      above. The corpus follows the selector at the top of the page &mdash; currently
-      <b id="tblCorpus" class="mono"></b>.</p>
+      above. The corpus follows the selector at the top of the page (currently
+      <b id="tblCorpus" class="mono"></b>).</p>
     <div class="panel" style="padding:4px 18px 10px">
       <div class="tbl-scroll"><table id="cmp"></table></div>
     </div>
@@ -509,8 +531,8 @@ td.best{color:#226841} td.worst{color:#A03D20}
   <div class="wrap">
     <div class="eyebrow">Your own text</div>
     <h2>Measure what you actually type</h2>
-    <p>Published comparisons all use somebody else's corpus. Paste your own &mdash; an email you
-      sent, a file you wrote, a chat log &mdash; and everything above recomputes on it. The text
+    <p>Published comparisons all use somebody else's corpus. Paste your own (an email you
+      sent, a file you wrote, a chat log) and everything above recomputes on it. The text
       never leaves the page; it is counted in the browser and nothing is sent anywhere.</p>
   </div>
   <div class="wide" style="margin-top:10px">
@@ -525,15 +547,15 @@ td.best{color:#226841} td.worst{color:#A03D20}
   <div class="wrap">
     <div class="eyebrow">Method</div>
     <h2>How these numbers were made</h2>
-    <p><b>The corpora.</b> Literary English is six public-domain novels from Project Gutenberg
-      &mdash; Austen, Melville, Carroll, Doyle, Dickens and Darwin &mdash; chosen for a spread of
+    <p><b>The corpora.</b> Literary English is six public-domain books from Project Gutenberg
+      (Austen, Melville, Carroll, Doyle, Dickens and Darwin), chosen for a spread of
       registers, totalling <span class="mono" id="mProse"></span> keystrokes. Source code is
       <span class="mono" id="mCodeN"></span> files sampled across the Python standard library,
       <span class="mono" id="mCode"></span> keystrokes. Only frequency counts are published, never
       the text.</p>
     <p><b>A check worth doing.</b> The prose corpus reproduces the published relative frequencies
       of English letters to within <span class="mono">2.4</span> percentage points summed across
-      all twenty-six &mdash; e at <span class="mono">12.66%</span> against a reference
+      all twenty-six: e at <span class="mono">12.66%</span> against a reference
       <span class="mono">12.70%</span>, t at <span class="mono">9.06%</span> against
       <span class="mono">9.06%</span>. That agreement is the reason there is no separate
       &ldquo;modern English&rdquo; corpus here: at the level of letters and letter pairs, Victorian
@@ -560,8 +582,8 @@ td.best{color:#226841} td.worst{color:#A03D20}
       does not include. So on text containing those characters the layouts are not being scored
       on quite the same keystrokes, and the readout says what fraction of your text it could
       place rather than passing over the difference.</p>
-    <p><b>Two implementations.</b> Every metric was written twice &mdash; once in Python against
-      the raw corpora, once in JavaScript for this page &mdash; and the two agree to three decimal
+    <p><b>Two implementations.</b> Every metric was written twice: once in Python against
+      the raw corpora, once in JavaScript for this page. The two agree to three decimal
       places on all seven layouts and both corpora. The page checks this on load and says so below
       rather than asking to be trusted.</p>
     <p class="mono small" id="xcheck" style="margin-top:-.4em"></p>
@@ -576,7 +598,7 @@ td.best{color:#226841} td.worst{color:#A03D20}
   <div class="wrap">
     <p class="srcs back-home" style="margin-bottom:1.2em"><a href="../#projects" style="text-decoration-color:currentColor">&larr; All projects</a></p>
     <p class="srcs">
-      <b>Sources.</b> Text: Project Gutenberg (public domain) &mdash; Austen, <i>Pride and
+      <b>Sources.</b> Text from Project Gutenberg (public domain): Austen, <i>Pride and
       Prejudice</i>; Melville, <i>Moby-Dick</i>; Carroll, <i>Alice's Adventures in Wonderland</i>;
       Doyle, <i>The Adventures of Sherlock Holmes</i>; Dickens, <i>A Tale of Two Cities</i>;
       Darwin, <i>On the Origin of Species</i>. Code: the Python standard library (PSF licence).
@@ -725,7 +747,7 @@ function countText(text){
     else if (SHIFT_MAP[ch]){ shift++; ch = SHIFT_MAP[ch]; }
     else if ("\u2018\u2019\u02bc".indexOf(ch) >= 0) ch = "'";
     else if ("\u201c\u201d".indexOf(ch) >= 0){ shift++; ch = "'"; }
-    else if ("\u2013\u2014".indexOf(ch) >= 0) ch = "-";
+    else if (String.fromCharCode(0x2013, 0x2014).indexOf(ch) >= 0) ch = "-";
     if (KEYSET.has(ch)) run.push(ch); else flush();
   }
   flush();
@@ -957,7 +979,7 @@ function optimise(){
       (startC/1000).toFixed(2) + " m</b> to <b>" + (bestC/1000).toFixed(2) +
       " m</b> per 1000 characters, a " +
       ((1-bestC/startC)*100).toFixed(1) + "% reduction, and left same-finger pairs at <b>" +
-      after.sfb.toFixed(2) + "%</b>. It optimised distance only &mdash; it knows nothing " +
+      after.sfb.toFixed(2) + "%</b>. It optimised distance only and knows nothing " +
       "about rolls or alternation, so compare it against the table before believing it. " +
       "Run it again and you will get a different answer; the surface has many near-equal minima." +
       (overlap >= 8
@@ -978,7 +1000,7 @@ function drawWorst(m){
   if (!m.worst.length){ box.innerHTML = ""; return; }
   const peak = m.worst[0].pct;
   let h = '<div class="grp-l" style="margin-bottom:9px">Costliest same-finger pairs'+
-          ' &mdash; the ones making up that '+m.sfb.toFixed(2)+'%</div><div class="wgrid">';
+          ', the ones making up that '+m.sfb.toFixed(2)+'%</div><div class="wgrid">';
   for (const w of m.worst){
     h += '<div class="wrow" title="'+FINGER_NAME[w.f]+', '+(w.d*19.05).toFixed(0)+' mm apart">'+
          '<span class="wg">'+w.g.replace(/</g,"&lt;")+'</span>'+
@@ -1002,7 +1024,7 @@ function drawReadout(m){
   const hot = css("--hot"), cool = css("--cool"), good = css("--good"), warn = css("--warn");
   const c = curCorpus();
   let h = '<div class="big"><span class="v">'+m.sfb.toFixed(2)+'</span><span class="u">%</span></div>'+
-          '<div class="bigl">Same-finger bigrams &mdash; lower is better</div>'+
+          '<div class="bigl">Same-finger bigrams (lower is better)</div>'+
           '<div class="big"><span class="v">'+(m.travel_mm_per_1k/1000).toFixed(2)+
           '</span><span class="u">m / 1000 chars</span></div>'+
           '<div class="bigl">Fingertip travel</div>';
@@ -1036,7 +1058,7 @@ function drawReadout(m){
        (c.shift_rate!==undefined ? ' &middot; shift on '+(c.shift_rate*100).toFixed(1)+'%' : '')+
        (m.coverage_uni < 99.95
          ? '<br><span style="color:var(--warn)">covers '+m.coverage_uni.toFixed(1)+
-           '% of this text</span> &mdash; the rest is punctuation this layout keeps '+
+           '% of this text</span>; the rest is punctuation this layout keeps '+
            'outside the three letter rows'
          : '')+
        '</p>';
@@ -1164,7 +1186,7 @@ $("ta").addEventListener("input", ()=>{
     const v = $("ta").value;
     if (v.trim().length < 20){
       userCorpus = null;
-      $("taStat").textContent = v.trim() ? "Keep going \u2014 a few hundred words settles the letter frequencies." : "Nothing entered yet.";
+      $("taStat").textContent = v.trim() ? "Keep going. A few hundred words settles the letter frequencies." : "Nothing entered yet.";
       if (corpusName === "user"){ corpusName = "prose"; renderAll(); }
       else syncChips();
       return;

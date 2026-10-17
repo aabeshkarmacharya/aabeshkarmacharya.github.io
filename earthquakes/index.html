@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#FDFDFB">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FDFDFB">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131312">
 <meta name="description" content="Four Hundred Thousand Earthquakes">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231E7B3C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%AD%E0%A5%82%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%231E7B3C%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3EEQ%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>Four Hundred Thousand Earthquakes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,400;0,700;0,900;1,400&amp;family=Chivo+Mono:wght@400;500;600&amp;family=Mukta:wght@400;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,400;0,700;0,900;1,400&amp;family=Chivo+Mono:wght@400;500;600&amp;display=swap">
 <style>
 :root{
   color-scheme: light;
@@ -22,7 +23,7 @@
   --grid:rgba(18,23,27,.07);
   --measure:66ch; --wide:1080px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#101315; --surface:#1A1A19; --surface-2:#212423; --sunk:#0B0D0E;
@@ -208,6 +209,8 @@ footer{padding:56px 24px 72px; border-top:1px solid var(--rule); background:var(
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -238,8 +241,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -256,7 +257,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -289,7 +290,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -337,7 +338,7 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-head-bg:#FDFDFB; --t-head-ink:#151515; --t-head-ink-2:#454545; --t-head-kick:#D7261E;
   --t-head-rule:2px solid #151515; --t-hero-bg:#FDFDFB;
   --t-foot-bg:#151515; --t-foot-ink:#E9E9E4; --t-foot-ink-2:#B9B9B2;
-  --t-f-display:"Chivo","Mukta",Arial,sans-serif; --t-f-body:"Chivo","Mukta",Arial,sans-serif;
+  --t-f-display:"Chivo",Arial,sans-serif; --t-f-body:"Chivo",Arial,sans-serif;
   --t-f-label:"Chivo Mono",ui-monospace,monospace; --t-f-num:"Chivo Mono",ui-monospace,monospace;
   
   --t-f-chart:"Chivo",Arial,sans-serif;
@@ -352,9 +353,12 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   
   --mark:#D7261E; --mark-soft:rgba(215,38,30,.16); --mark-dim:rgba(215,38,30,.32);
   --warnc:#B54708; --field:#FFFFFF; --field-rule:#151515;
+  
+  --sg-rule:#151515; --sg-mark:#151515; --sg-graph:rgba(21,21,21,.045); --sg-row:rgba(21,21,21,.06);
+  --sg-foot-red:#DF514B; --sg-foot-link:#FDFDFB;
 }
 
-body{background-image:repeating-linear-gradient(180deg,#151515 0 1px,transparent 1px 60px);
+body{background-image:repeating-linear-gradient(180deg,var(--sg-mark) 0 1px,transparent 1px 60px);
   background-size:7px 100%; background-repeat:repeat-y; background-position:left top}
 
 header.top{position:relative; padding-bottom:calc(clamp(40px,6.5vw,76px) + 74px)}
@@ -362,47 +366,70 @@ header.top .look-art,#hero .look-art{display:block; position:absolute; left:0; r
   background:var(--sg-trace) center/100% 100% no-repeat; pointer-events:none;
   border-top:1px dashed rgba(21,21,21,.25)}
 #hero .look-art{bottom:0; height:56px; z-index:2; background-color:rgba(253,253,251,.85)}
-header.top .kicker,.hero-tag .hero-inner span:first-child{display:inline-block; background:#151515; color:#FDFDFB;
+header.top .kicker,.hero-tag .hero-inner span:first-child{display:inline-block; background:var(--t-ink); color:var(--t-bg);
   padding:5px 10px 4px; letter-spacing:.06em}
-header.top .devanagari{font-family:var(--t-f-display); font-weight:400; color:var(--sg-red); text-transform:none}
-.hero-tag .hero-inner,.hero-foot .hero-inner{color:#151515}
+.hero-tag .hero-inner,.hero-foot .hero-inner{color:var(--t-ink)}
 .hero-veil{opacity:.7}
-#hero h1{text-shadow:0 0 18px #FDFDFB, 0 0 2px #FDFDFB}
+#hero h1{text-shadow:0 0 18px var(--t-bg), 0 0 2px var(--t-bg)}
 
-#hero .hero-sub{text-shadow:0 0 3px #FDFDFB,0 0 6px #FDFDFB,0 0 10px #FDFDFB}
+#hero .hero-sub{text-shadow:0 0 3px var(--t-bg),0 0 6px var(--t-bg),0 0 10px var(--t-bg)}
 
 body{counter-reset:ch}
 section .eyebrow{counter-increment:ch}
-section .eyebrow::before{content:"CH." counter(ch, decimal-leading-zero); color:#151515; margin-right:2px}
-.eyebrow::after{background:repeating-linear-gradient(90deg,#151515 0 1px,transparent 1px 8px); height:6px}
+section .eyebrow::before{content:"CH." counter(ch, decimal-leading-zero); color:var(--t-ink); margin-right:2px}
+.eyebrow::after{background:repeating-linear-gradient(90deg,var(--sg-rule) 0 1px,transparent 1px 8px); height:6px}
 
-footer{--t-label-ink:#DF514B}
+footer{--t-label-ink:var(--sg-foot-red)}
 footer .eyebrow::after{background:repeating-linear-gradient(90deg,#6E6E6A 0 1px,transparent 1px 8px)}
 
-figure,.fig{border:1.5px solid #151515; background:#FFFFFF}
-figure .fig-head{border-bottom:1px solid #151515; padding-bottom:12px;
-  background:repeating-linear-gradient(90deg,#151515 0 1px,transparent 1px 12px) left bottom/100% 5px no-repeat}
+figure,.fig{border:1.5px solid var(--sg-rule); background:var(--t-paper)}
+figure .fig-head{border-bottom:1px solid var(--sg-rule); padding-bottom:12px;
+  background:repeating-linear-gradient(90deg,var(--sg-rule) 0 1px,transparent 1px 12px) left bottom/100% 5px no-repeat}
 .fig-title{font-weight:900; text-transform:uppercase; letter-spacing:.01em}
 figcaption{font-family:var(--t-f-label); font-size:12.5px}
 .stats{gap:0}
-.stat{box-shadow:0 0 0 1px #151515}
-.stat b,.stat .n{color:#151515}
+.stat{box-shadow:0 0 0 1px var(--sg-rule)}
+.stat b,.stat .n{color:var(--t-ink)}
 .stat:first-child b{color:var(--sg-red)}
 .note{border-left:4px solid var(--sg-red)}
 .pull{font-weight:900; text-transform:uppercase; letter-spacing:-.01em}
 #tip b,.tip b{color:var(--sg-red)}
-footer a{color:#FDFDFB}
+footer a{color:var(--sg-foot-link)}
 
-.card,.answer,.offer,a.nextcard,.fig{border:1.5px solid #151515}
-.answer .top{background:repeating-linear-gradient(180deg,transparent 0 23px,rgba(21,21,21,.06) 23px 24px),#FFFFFF}
+.card,.answer,.offer,a.nextcard,.fig{border:1.5px solid var(--sg-rule)}
+.answer .top{background:repeating-linear-gradient(180deg,transparent 0 23px,var(--sg-row) 23px 24px),var(--t-paper)}
 .big{font-weight:500; color:var(--sg-red); font-size:clamp(30px,4.2vw,46px); letter-spacing:-.04em}
 button.cta{text-transform:uppercase; letter-spacing:.06em}
-.seg button[aria-pressed=true]{background:#151515; color:#FDFDFB}
+.seg button[aria-pressed=true]{background:var(--t-ink); color:var(--t-bg)}
 @media(max-width:760px){body{background-size:4px 100%} header.top{padding-bottom:110px}}
 
 figure .fig-body{background:
-  linear-gradient(90deg,rgba(21,21,21,.045) 1px,transparent 1px) 0 0/10px 10px,
-  linear-gradient(180deg,rgba(21,21,21,.045) 1px,transparent 1px) 0 0/10px 10px}
+  linear-gradient(90deg,var(--sg-graph) 1px,transparent 1px) 0 0/10px 10px,
+  linear-gradient(180deg,var(--sg-graph) 1px,transparent 1px) 0 0/10px 10px}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#131312; --t-paper:#1A1A18; --t-paper-2:#222220;
+  --t-ink:#EDECE6; --t-ink-2:#C9C8C1; --t-ink-3:#A09F98;
+  --t-line:#353430; --t-line-2:#D8D7D0; --t-grid:rgba(237,236,230,.08);
+  --t-accent:#FF6158; --t-accent-2:#79A3F0; --t-accent-ink:#131312;
+  --sg-red:#FF6158;
+  --t-head-bg:#131312; --t-head-ink:#EDECE6; --t-head-ink-2:#C9C8C1; --t-head-kick:#FF6158;
+  --t-head-rule:2px solid #D8D7D0; --t-hero-bg:#131312;
+  --t-foot-bg:#1E1E1B; --t-foot-ink:#E6E5DF; --t-foot-ink-2:#B5B4AD;
+  --t-label-ink:#FF6158;
+  --t-fig-border:1.5px solid #D8D7D0; --t-cap-rule:1px solid #D8D7D0; --t-tip-border:1.5px solid #D8D7D0;
+  --t-chip-on-bg:#EDECE6; --t-chip-on-ink:#131312;
+  --shallow:#F94134; --inter:#3A9C64; --deep:#588DE8; --slot4:#CA7900;
+  --mark:#FF6158; --mark-soft:rgba(255,97,88,.22); --mark-dim:rgba(255,97,88,.40);
+  --warnc:#F0A33A; --field:#1A1A18; --field-rule:#D8D7D0;
+  --sg-rule:#D8D7D0; --sg-mark:#5E5D57; --sg-graph:rgba(237,236,230,.05); --sg-row:rgba(237,236,230,.06);
+  --sg-foot-red:#FF7166; --sg-foot-link:#F2F1EC;
+}
+
+header.top .look-art,#hero .look-art{filter:invert(1)}
+}
 
 </style>
 </head>
@@ -430,7 +457,7 @@ figure .fig-body{background:
   <div class="hero-copy"><div class="hero-inner">
     <h1>Four Hundred Thousand Earthquakes</h1>
     <p class="hero-sub">There is no map underneath this. Every mark is one earthquake, placed
-      where it happened. The continents never appear &mdash; but the plates do.</p>
+      where it happened. The continents never appear, but the plates do.</p>
   </div></div>
 </div>
 
@@ -442,7 +469,7 @@ figure .fig-body{background:
       States Geological Survey has recorded since 1 January 1976, plus four dense regional
       catalogues reaching down to magnitude 1. Then I asked the pile of numbers what it knew.</p>
     <p>What follows is not a summary of seismology. It is what falls out of one archive when
-      you take it seriously &mdash; including the places where the archive is lying to you, which
+      you take it seriously. That includes the places where the archive is lying to you, which
       turn out to be some of the most interesting places in it.</p>
   </div>
   <div class="wide figspace">
@@ -457,7 +484,7 @@ figure .fig-body{background:
   <div class="wrap">
     <p>The global file is not purely tectonic. Sifting it by event type turns up 470 nuclear
       explosions, 71 volcanic eruptions, eleven chemical blasts, four mine collapses, three
-      rock bursts and three landslides &mdash; all of them large enough to shake the planet
+      rock bursts and three landslides, all of them large enough to shake the planet
       measurably. We will come back to the bombs. First, the law that governs everything else.</p>
   </div>
 </section>
@@ -467,7 +494,7 @@ figure .fig-body{background:
     <div class="eyebrow">Frequency &amp; magnitude</div>
     <h2>One straight line, four decades wide</h2>
     <p>Count the earthquakes at each magnitude and something implausibly tidy happens. Plot the
-      logarithm of the count against magnitude and the points fall on a straight line &mdash; not
+      logarithm of the count against magnitude and the points fall on a straight line: not
       approximately, but for four full orders of magnitude, from eighty-five thousand events at
       M5.0 down to the two M9.1s that bracket the whole period.</p>
     <p>This is the Gutenberg&ndash;Richter relation, and its slope has a name: the
@@ -488,7 +515,7 @@ figure .fig-body{background:
       </div>
       <div class="fig-body"><svg id="grChart" viewBox="0 0 1000 480" role="img"
         aria-label="Log-linear plot of cumulative earthquake count against magnitude, showing a straight-line power law from magnitude 4.5 to 9.1"></svg></div>
-      <figcaption>The catalogue bends away from the line below M4.7 &mdash; that is not physics,
+      <figcaption>The catalogue bends away from the line below M4.7. That is not physics,
         that is the detection floor. Above it, the line holds for 285,000 events.</figcaption>
       <details><summary>Table view</summary><div class="tbl-scroll"><table id="grTable"></table></div></details>
     </figure>
@@ -511,25 +538,25 @@ figure .fig-body{background:
   <div class="wrap">
     <div class="eyebrow">Location</div>
     <h2>The plates draw themselves</h2>
-    <p>Plot every epicentre and you do not get a scatter. You get a map &mdash; of something that
+    <p>Plot every epicentre and you do not get a scatter. You get a map, but of something that
       is not the map you expected. A faint outline of the continents is laid underneath so you
       can find your way around, but take it away and almost nothing is lost: the earthquakes owe
-      the coastlines nothing. What appears instead is a network of thin bright seams &mdash; the
+      the coastlines nothing. What appears instead is a network of thin bright seams: the
       boundaries between the tectonic plates, traced out by a half-century of failures along
       them.</p>
     <p>Colour the points by how deep they were and the picture gains a third dimension. Deep
       earthquakes are not scattered among the shallow ones; they sit in narrow bands
       <em>behind</em> the trenches, on the far side from the ocean, marking the path of a slab of
       seafloor descending into the mantle. Switch the shallow events off and what remains is a
-      set of disconnected arcs &mdash; the Andes, the Kurils, Tonga, the Marianas, the Hindu
-      Kush &mdash; every one of them a subduction zone seen edge-on.</p>
+      set of disconnected arcs: the Andes, the Kurils, Tonga, the Marianas, the Hindu
+      Kush. Every one of them is a subduction zone seen edge-on.</p>
   </div>
   <div class="wide figspace">
     <figure>
       <div class="fig-head">
         <div class="fig-title">283,119 epicentres, coloured by focal depth</div>
         <p class="fig-note">Equirectangular projection. Coastlines (Natural Earth) and plate
-          boundaries (Bird, 2003) are drawn underneath for reference only &mdash; every coloured
+          boundaries (Bird, 2003) are drawn underneath for reference only. Every coloured
           mark is an observation. Switch the coastlines off to see what the earthquakes alone
           know about the shape of the world.</p>
       </div>
@@ -553,7 +580,7 @@ figure .fig-body{background:
   <div class="wrap">
     <p>The three bands are not arbitrary slices. They are different physics. Above about 70 km,
       rock is cold and brittle and fails by ordinary friction. Between 70 and 300 km the pressure
-      is far too high for friction to work at all, and earthquakes happen anyway &mdash; most
+      is far too high for friction to work at all, and earthquakes happen anyway, most
       likely because water driven out of hydrated minerals in the sinking slab briefly lets the
       rock slip. Below 300 km even that mechanism fails, and yet the earthquakes continue, all
       the way to 700 kilometres, where they stop abruptly and completely.</p>
@@ -565,7 +592,7 @@ figure .fig-body{background:
     <div class="eyebrow">Depth</div>
     <h2>Where the earthquakes stop</h2>
     <p>Seventy-seven per cent of recorded earthquakes happen in the top 70 kilometres of the
-      planet &mdash; a skin about one per cent of the way to the centre. Another eighteen per cent
+      planet, a skin about one per cent of the way to the centre. Another eighteen per cent
       occur between 70 and 300 km. The remaining five per cent go deeper, and then, at
       approximately 700 kilometres, the Earth goes silent. The deepest event in fifty years of
       records sits at 700.9 km, beneath Fiji.</p>
@@ -591,7 +618,7 @@ figure .fig-body{background:
   <div class="wrap">
     <p>The <span class="mono">b</span>-value changes with depth too, and it changes in a way that
       says something about stress. Shallow crustal earthquakes give b&nbsp;=&nbsp;1.04. Deep-focus
-      earthquakes below 300 km give b&nbsp;=&nbsp;0.88 &mdash; a flatter slope, meaning
+      earthquakes below 300 km give b&nbsp;=&nbsp;0.88. That is a flatter slope, meaning
       proportionally more large events. Low b-values are associated with high differential stress,
       which is exactly what you would expect of rock being forced through the mantle transition
       zone.</p>
@@ -610,8 +637,8 @@ figure .fig-body{background:
         independently by Kiyoo Wadati in 1927 and Hugo Benioff in 1949. A least-squares fit to
         the first 800 km gives a dip of 23.9&deg;. Nobody drilled to find this; it was read off
         arrival times. The empty band between roughly 350 and 500 km, and the tight deep cluster
-        beneath it, are the same gap and revival visible in the global histogram above &mdash;
-        here you can see they belong to a single descending slab.</figcaption>
+        beneath it, are the same gap and revival visible in the global histogram above.
+        Here you can see they belong to a single descending slab.</figcaption>
     </figure>
   </div>
 </section>
@@ -634,10 +661,10 @@ figure .fig-body{background:
         <div class="fig-title">The b-value, fitted locally</div>
         <p class="fig-note">Maximum-likelihood b from every M5.0+ earthquake within 300 km of
           each grid node. Nodes with fewer than 120 such events are left blank rather than
-          filled by interpolation &mdash; 915 nodes of 14,040 qualify, which is what
+          filled by interpolation. Of 14,040 nodes, 915 qualify, which is what
           &ldquo;seismicity is concentrated&rdquo; looks like as a coverage statistic. Coastlines
           (Natural Earth) and plate boundaries lie underneath for orientation; where you can see
-          them, there is no estimate &mdash; not a low one.</p>
+          them, there is no estimate, not a low one.</p>
       </div>
       <div class="fig-body" style="padding-bottom:8px">
         <div style="position:relative; background:var(--sunk); border-radius:2px; overflow:hidden">
@@ -646,7 +673,7 @@ figure .fig-body{background:
         <svg id="bmapLegend" viewBox="0 0 1000 56" role="img"
           aria-label="Colour scale running from orange at b equals 0.7 through neutral at 1.08 to blue at b equals 1.5"></svg>
       </div>
-      <figcaption>Warm means a shallower slope &mdash; proportionally more large earthquakes for
+      <figcaption>Warm means a shallower slope: proportionally more large earthquakes for
         a given number of small ones. Individual cells carry an uncertainty of roughly
         &plusmn;0.10, so read the pattern, not the pixel.</figcaption>
     </figure>
@@ -669,7 +696,7 @@ figure .fig-body{background:
       <div class="fig-body"><svg id="bclassChart" viewBox="0 0 1000 420" role="img"
         aria-label="Subduction zones produce 47 earthquakes per thousand kilometres per year against 8 for spreading ridges; b-values range from 0.97 at oceanic transforms to 1.18 at spreading ridges"></svg></div>
       <figcaption>Subduction zones are a fifth of the world's plate boundary and produce
-        51&nbsp;per&nbsp;cent of the earthquakes near one &mdash; 47 per 1,000 km per year
+        51&nbsp;per&nbsp;cent of the earthquakes near one. That is 47 per 1,000 km per year
         against 8 on a spreading ridge. And oceanic transform faults have the shallowest slope of
         any setting, b&nbsp;=&nbsp;0.969&nbsp;&plusmn;&nbsp;0.009, against
         1.176&nbsp;&plusmn;&nbsp;0.013 on the ridges they offset. Those two numbers are thirteen
@@ -685,9 +712,9 @@ figure .fig-body{background:
       reading the temperature and strength of the rock, which is why it varies at all.</p>
     <div class="note"><b>What this analysis cannot do.</b> Assignment is by nearest boundary
       step, which is a crude instrument. The 2004 Sumatra M9.1 lands 75 km from a step Bird
-      classifies as continental rift, so it is filed under rifts rather than subduction &mdash;
-      and because that one earthquake carries 13.8&nbsp;per&nbsp;cent of fifty years of global
-      moment, filing it in the wrong drawer moves a fifth of the moment budget. Event
+      classifies as continental rift, so it is filed under rifts rather than subduction.
+      Because that one earthquake carries 13.8&nbsp;per&nbsp;cent of fifty years of global
+      moment, filing it in the wrong drawer moves all of that from subduction to rifts. Event
       <em>rates</em> and b-values average over tens of thousands of events and are robust to
       this. Moment shares are not, so they are not quoted here.</div>
   </div>
@@ -698,11 +725,11 @@ figure .fig-body{background:
     <div class="eyebrow">Data honesty</div>
     <h2>One quarter of these depths are not measurements</h2>
     <p>Here is the histogram again, but honestly. The single most common depth in the entire
-      global catalogue is exactly 10.0 kilometres &mdash; 75,936 events, 26.8&nbsp;per&nbsp;cent of
+      global catalogue is exactly 10.0 kilometres: 75,936 events, 26.8&nbsp;per&nbsp;cent of
       the file. The second most common is exactly 33.0 kilometres, at 42,506 events.</p>
     <p>Neither number is a measurement. They are defaults. Depth is the hardest hypocentral
       parameter to resolve from distant stations, and when the data cannot constrain it, the
-      analysis pins it to a fixed value and moves on. For decades that value was 33 km &mdash; a
+      analysis pins it to a fixed value and moves on. For decades that value was 33 km, a
       standard crustal thickness. Modern processing pins it to 10 km instead.</p>
     <p>You can watch the convention change. In the decade from 1976, thirty-four per cent of
       events were filed at exactly 33 km. By 2016 that had fallen to essentially zero, while the
@@ -724,8 +751,8 @@ figure .fig-body{background:
   <div class="wrap">
     <p class="pull">Nearly half of all earthquakes recorded this decade have a depth of
       &ldquo;10 km,&rdquo; which means: we do not know.</p>
-    <p>This does not invalidate the depth histogram &mdash; the broad structure, the 300 km
-      minimum, the 700 km cutoff, all survive, because those features live at depths nobody uses
+    <p>This does not invalidate the depth histogram. The broad structure, the 300 km
+      minimum and the 700 km cutoff all survive, because those features live at depths nobody uses
       as a default. But it does mean the shallow peak is far sharper in the file than it is in
       the ground.</p>
   </div>
@@ -739,8 +766,8 @@ figure .fig-body{background:
       about 7,860 a year in the 2020s. That is a 2.3-fold increase, and the trend is one of the
       most statistically overwhelming things in the dataset: t&nbsp;=&nbsp;13.2,
       p&nbsp;&asymp;&nbsp;10<sup>&minus;39</sup>.</p>
-    <p>It is also mostly an illusion. Run the same test on large earthquakes &mdash; the ones no
-      network could possibly miss, in 1976 or now &mdash; and the doubling collapses to a drift.
+    <p>It is also mostly an illusion. Run the same test on large earthquakes (the ones no
+      network could possibly miss, in 1976 or now) and the doubling collapses to a drift.
       At M5.5, M6.0, M6.5 and M7.0 the fitted trends sit between +17 and +30&nbsp;per&nbsp;cent
       over fifty years, with t-statistics between 1.85 and 2.52. Test seven thresholds and a
       Bonferroni-corrected threshold is p&nbsp;=&nbsp;0.007; not one of them reaches it.</p>
@@ -757,9 +784,9 @@ figure .fig-body{background:
       <div class="fig-body"><svg id="rateChart" viewBox="0 0 1000 460" role="img"
         aria-label="Indexed annual earthquake counts showing magnitude 4.5 and above rising to 2.1 times its 1976-1985 rate while the larger thresholds drift up only 20 to 35 percent"></svg></div>
       <figcaption>M4.5+ climbs to 2.1&times; its first-decade rate. The three larger thresholds
-        drift up by 20&ndash;35&nbsp;per&nbsp;cent and wander around each other &mdash; a spread
+        drift up by 20&ndash;35&nbsp;per&nbsp;cent and wander around each other. That spread is
         consistent with counting noise, and far short of the doubling below them.</figcaption>
-      <details><summary>Table view &mdash; trend tests</summary><div class="tbl-scroll"><table id="trendTable"></table></div></details>
+      <details><summary>Table view: trend tests</summary><div class="tbl-scroll"><table id="trendTable"></table></div></details>
     </figure>
   </div>
   <div class="wrap">
@@ -770,7 +797,7 @@ figure .fig-body{background:
     <h3>The one place where it is genuinely hard to tell</h3>
     <p>At the very top of the scale the answer is less clean, and it is worth being precise
       rather than reassuring. Events of M7.5 and above ran at 3.44 per year in 1976&ndash;2000 and
-      5.28 per year in 2001&ndash;2025 &mdash; a 53&nbsp;per&nbsp;cent rise. Annual counts at that
+      5.28 per year in 2001&ndash;2025, a 53&nbsp;per&nbsp;cent rise. Annual counts at that
       size are Poisson (variance/mean&nbsp;=&nbsp;1.03), and the rise survives deleting the great
       earthquake cluster of 2004&ndash;2012.</p>
     <p>But the magnitude <em>scale</em> changed underneath it. In 1976&ndash;1985, sixty of the
@@ -800,7 +827,7 @@ figure .fig-body{background:
       (p&nbsp;=&nbsp;0.34), +25&nbsp;per&nbsp;cent at M7.5 (p&nbsp;=&nbsp;0.09) and
       +69&nbsp;per&nbsp;cent at M8.0 (p&nbsp;=&nbsp;0.09, on thirteen events against
       twenty-seven). None of these clears a conventional significance threshold, and the
-      correction itself is estimated from the same data it corrects &mdash; which is not ideal.</p>
+      correction itself is estimated from the same data it corrects, which is not ideal.</p>
     <div class="note"><b>The honest verdict.</b> The doubling of small earthquakes is definitely
       an artefact. The stability of M7+ is solid. At M7.5 and above, this catalogue cannot
       settle the question, and neither has the literature: the apparent burst of great
@@ -813,7 +840,7 @@ figure .fig-body{background:
   <div class="wrap">
     <div class="eyebrow">Aftershocks</div>
     <h2>The oldest quantitative law in seismology</h2>
-    <p>In 1894, Fusakichi Omori noticed that aftershocks do not simply fade &mdash; they fade at
+    <p>In 1894, Fusakichi Omori noticed that aftershocks do not simply fade: they fade at
       a specific rate. The number per day falls off as one over the time elapsed. Not
       exponentially, which would give the sequence a characteristic lifetime; as a power law,
       which gives it none.</p>
@@ -840,7 +867,7 @@ figure .fig-body{background:
   <div class="wrap">
     <p>Two sequences, different continents, different faults, different instruments, 130 years
       after Omori: the same exponent to two decimal places.</p>
-    <p>The largest Ridgecrest aftershock was M5.51 &mdash; 1.59 magnitude units below the
+    <p>The largest Ridgecrest aftershock was M5.51, 1.59 magnitude units below the
       mainshock. B&aring;th's law, another empirical regularity with no accepted derivation, says
       that gap should average about 1.2 regardless of mainshock size.</p>
     <h3>The first five minutes are blind</h3>
@@ -874,15 +901,15 @@ figure .fig-body{background:
     <div class="eyebrow">Triggering</div>
     <h2>Two out of every three</h2>
     <p>Ridgecrest is one sequence. The question it raises is how much of the whole catalogue
-      is sequences &mdash; how many of the earthquakes in the file are not independent events at
+      is sequences: how many of the earthquakes in the file are not independent events at
       all, but the echoes of earlier ones.</p>
     <p>The standard way to ask is declustering: draw a window in space and time around every
       earthquake, sized by its magnitude, and treat anything that falls inside a larger event's
       window as triggered. Running the classic Gardner&ndash;Knopoff windows over all 283,119
       global earthquakes leaves</p>
     <p class="pull">95,305 independent earthquakes and 187,814 aftershocks.</p>
-    <p>Two thirds of the catalogue is echo. Apply the windows only forward in time &mdash; a
-      stricter convention that refuses to count foreshocks as part of a cluster &mdash; and the
+    <p>Two thirds of the catalogue is echo. Apply the windows only forward in time (a
+      stricter convention that refuses to count foreshocks as part of a cluster) and the
       triggered share falls to 55.6&nbsp;per&nbsp;cent. Either way, the majority of the
       earthquakes ever recorded happened because another earthquake happened first.</p>
     <div class="note"><b>A caveat worth stating.</b> The Gardner&ndash;Knopoff windows were
@@ -900,7 +927,7 @@ figure .fig-body{background:
       <div class="fig-body"><svg id="prodChart" viewBox="0 0 1000 440" role="img"
         aria-label="Log-linear plot showing mean aftershock count rising from 0.2 at magnitude 4.75 to 203 at magnitude 8.25, along a straight line"></svg></div>
       <figcaption>A straight line again. Every unit of magnitude multiplies the aftershock count
-        by about 6.6, over three orders of magnitude &mdash; Utsu's productivity law, here with
+        by about 6.6, over three orders of magnitude. This is Utsu's productivity law, here with
         R&sup2;&nbsp;=&nbsp;0.97. A magnitude 5 makes about one recorded aftershock; a magnitude 8
         makes two hundred.</figcaption>
     </figure>
@@ -916,16 +943,16 @@ figure .fig-body{background:
     </div>
     <p>Great earthquakes are overwhelmingly their own cause. That is the same fact the
       overdispersion measurements showed earlier from a different angle: small-earthquake counts
-      arrive in bursts, great-earthquake counts arrive at random. Here it is stated directly
-      &mdash; the burstiness is aftershocks, and aftershocks are small.</p>
+      arrive in bursts, great-earthquake counts arrive at random. Here it is stated directly:
+      the burstiness is aftershocks, and aftershocks are small.</p>
     <h3>B&aring;th's law, and how a detection floor invents a trend</h3>
     <p>The gap between a mainshock and its largest aftershock is supposed to average about 1.2
       magnitude units, independently of how big the mainshock was. Measure it across all 29,980
       sequences and it looks like nothing of the sort: the gap climbs steadily from 0.35 at
       magnitude 5 to 1.57 above magnitude 8. B&aring;th's law appears to be false.</p>
     <p>It is not false. It is being truncated. The catalogue stops at magnitude 4.5, so the
-      largest aftershock of a magnitude 5.2 mainshock can be at most 0.7 units below it &mdash;
-      any bigger gap is not in the file to be measured. Averaging a quantity whose upper tail
+      largest aftershock of a magnitude 5.2 mainshock can be at most 0.7 units below it.
+      Any bigger gap is not in the file to be measured. Averaging a quantity whose upper tail
       has been cut off drags the average down, and it drags it down hardest where the cut is
       tightest. The result is a rising line that looks like physics and is arithmetic.</p>
   </div>
@@ -942,7 +969,7 @@ figure .fig-body{background:
       <figcaption>The grey line is the largest gap the catalogue is physically able to report.
         The measured mean is held well below it wherever the cut is tight, and climbs as the cut
         loosens. Above M7.5, where truncation barely bites, the mean gap is 1.33 on 208
-        sequences &mdash; B&aring;th's law, recovered once the artefact is accounted for. Read
+        sequences: B&aring;th's law, recovered once the artefact is accounted for. Read
         the same chart without the grey line and you would publish a magnitude dependence that
         is not there. Whiskers are &plusmn;1 standard deviation.</figcaption>
     </figure>
@@ -957,7 +984,7 @@ figure .fig-body{background:
       does to the accounting. Converting every event to seismic moment and adding them up gives
       4.09&nbsp;&times;&nbsp;10<sup>23</sup> newton-metres released between 1976 and 2026.</p>
     <p>The 2004 Sumatra&ndash;Andaman earthquake accounts for 13.8&nbsp;per&nbsp;cent of it. So
-      does Tohoku in 2011. Ten earthquakes &mdash; ten, out of 283,119 &mdash; account for
+      does Tohoku in 2011. Ten earthquakes (ten, out of 283,119) account for
       46.4&nbsp;per&nbsp;cent of all the seismic energy the planet released in half a century.
       The hundred largest account for 70.4&nbsp;per&nbsp;cent, leaving the other
       283,019 events to share the remaining thirty.</p>
@@ -975,7 +1002,7 @@ figure .fig-body{background:
       <figcaption>The twelfth entry is the odd one: the 2013 Sea of Okhotsk earthquake ruptured
         598 km down, and remains the largest deep-focus earthquake ever recorded. Everything
         else on this list broke the crust. This is also why decade-by-decade &ldquo;energy
-        released&rdquo; comparisons are nearly meaningless &mdash; a decade's total is decided
+        released&rdquo; comparisons are nearly meaningless: a decade's total is decided
         almost entirely by whether a magnitude 9 happened to fall inside it.</figcaption>
     </figure>
   </div>
@@ -995,8 +1022,8 @@ figure .fig-body{background:
     <p>Then something unusual in earth science happened: the experiment was reversed. Oklahoma's
       regulator began restricting disposal volumes across the affected area from 2015, tightened
       the limits regionally in early 2016, and ordered shut-ins around Pawnee after a magnitude
-      5.8 there in September 2016 &mdash; still the largest earthquake in the state's recorded
-      history. What the catalogue shows is the consequence: counts peak in 2015 and fall by an
+      5.8 there in September 2016 (still the largest earthquake in the state's recorded
+      history). What the catalogue shows is the consequence: counts peak in 2015 and fall by an
       order of magnitude within four years.</p>
     <p class="small">The regulatory timeline is context from the public record rather than
       something this dataset can establish. What the data establishes is the shape of the curve,
@@ -1028,7 +1055,7 @@ figure .fig-body{background:
       to a single treaty document: 152 at Semipalatinsk in Kazakhstan, 135 at the Nevada Test
       Site, 75 at Mururoa and Fangataufa in French Polynesia, 19 at Lop Nur in China, 18 at
       Novaya Zemlya in the Arctic. A scatter of others across Siberia are the Soviet
-      Union's &ldquo;peaceful nuclear explosions&rdquo; &mdash; devices used for seismic sounding
+      Union's &ldquo;peaceful nuclear explosions&rdquo;: devices used for seismic sounding
       and to stimulate gas fields.</p>
     <p>Sorting them by year reconstructs the arms-control timeline. The annual count runs in the
       twenties and thirties through the 1980s, collapses after 1990, and stops almost entirely
@@ -1045,8 +1072,8 @@ figure .fig-body{background:
       <div class="fig-body"><svg id="nukeChart" viewBox="0 0 1000 340" role="img"
         aria-label="Bar chart of nuclear explosions per year falling from over 40 in 1978 to isolated single events after 1996"></svg></div>
       <figcaption>Coloured bars are the only tests recorded after the treaty opened: India and
-        Pakistan in 1998, then four bars carrying North Korea's five tests &mdash; 2009, 2013,
-        two in 2016, and 2017. The 2006 North Korean test does not appear at all: at roughly
+        Pakistan in 1998, then four bars carrying North Korea's five tests (2009, 2013,
+        two in 2016, and 2017). The 2006 North Korean test does not appear at all: at roughly
         magnitude 4.3 it fell below this catalogue's threshold, which is its own kind of
         finding.</figcaption>
     </figure>
@@ -1065,7 +1092,7 @@ figure .fig-body{background:
   <div class="wrap">
     <div class="eyebrow">Folklore</div>
     <h2>Earthquake weather is real, in the instruments</h2>
-    <p>There is a persistent belief that earthquakes prefer certain conditions &mdash; a time of
+    <p>There is a persistent belief that earthquakes prefer certain conditions: a time of
       day, a kind of weather. It is testable. Bin fifty years of global earthquakes by hour and
       compare against uniform.</p>
     <p>They are not uniform. At M4.5 and above the chi-square statistic is 244 on 23 degrees of
@@ -1073,7 +1100,7 @@ figure .fig-body{background:
       6.4&nbsp;per&nbsp;cent above uniform and the quietest 3.5&nbsp;per&nbsp;cent below. On its
       face, earthquakes have a preferred time of day.</p>
     <p>Now raise the threshold. At M5.5 the statistic falls to 25.2 and the effect is gone. At
-      M6.0, 19.0. At M7.0, 26.3 &mdash; on 707 events, comfortably inside what chance produces.</p>
+      M6.0, 19.0. At M7.0, 26.3, which on 707 events is comfortably inside what chance produces.</p>
   </div>
   <div class="wide figspace">
     <figure>
@@ -1096,7 +1123,7 @@ figure .fig-body{background:
       small event cannot contribute to locating it. The pattern is in the listening, not in the
       shaking.</p>
     <div class="note"><b>A trap I walked into first.</b> Running the same test on the dense
-      Southern California catalogue gave an enormous chi-square &mdash; 416 at M3.0. It was
+      Southern California catalogue gave an enormous chi-square: 416 at M3.0. It was
       spurious. A quarter of that catalogue consists of Ridgecrest aftershocks, and the
       violently clustered first days of the sequence land in a handful of hour bins. Removing
       the sequence cut the statistic to 68. Any test that assumes independent events must
@@ -1104,14 +1131,14 @@ figure .fig-body{background:
     <h3>And the moon, which is the oldest version of the claim</h3>
     <p>The moon raises a tide in the solid Earth of about thirty centimetres twice a day, and at
       new and full moon the solar and lunar tides add. The stress this puts on a fault is tiny
-      &mdash; a few kilopascals against the megapascals a fault carries &mdash; but it is not
+      (a few kilopascals against the megapascals a fault carries), but it is not
       zero, and the idea that it sets earthquakes off is very old.</p>
     <p>Binning fifty years of earthquakes by lunar phase gives a chi-square of 123 against a
       critical value of 35.2. That looks like a discovery. It is the Ridgecrest trap again, at
       planetary scale: the catalogue is two-thirds aftershocks, aftershocks arrive in dense
       bursts, and bursts land unevenly across phase bins. Run the identical test on the 95,305
-      declustered independent events and the chi-square drops to 20.3 &mdash; below the critical
-      value, no signal at all.</p>
+      declustered independent events and the chi-square drops to 20.3, below the critical
+      value: no signal at all.</p>
   </div>
   <div class="wide figspace">
     <figure>
@@ -1129,8 +1156,8 @@ figure .fig-body{background:
     </figure>
   </div>
   <div class="wrap">
-    <p>There is one residue. Restricting to shallow independent events &mdash; the population
-      where the physics predicts tidal triggering should be easiest to see &mdash; leaves a
+    <p>There is one residue. Restricting to shallow independent events (the population
+      where the physics predicts tidal triggering should be easiest to see) leaves a
       1.2&nbsp;per&nbsp;cent excess during spring tides, at z&nbsp;=&nbsp;2.07,
       p&nbsp;=&nbsp;0.04. That is in the direction theory expects, and it is consistent with the
       published result that tidal triggering is real and very small. It is also one test among
@@ -1182,13 +1209,13 @@ figure .fig-body{background:
       threshold would be 0.007.</p>
     <p class="srcs">The epicentre map carries all 283,119 events in the page itself, stored at
       0.01&deg; and 0.05-magnitude precision to keep the file to a few megabytes. That rounding
-      moves a handful of events across a magnitude threshold &mdash; the map counts 84,871 at
+      moves a handful of events across a magnitude threshold: the map counts 84,871 at
       M5.0 where the full-precision catalogue has 84,833. Every statistic quoted in the text is
       computed from the unrounded data.</p>
     <p class="srcs" style="color:var(--ink-3)">Analysis and figures built from the raw catalogue;
       every number on this page is computed from the downloaded files rather than quoted from a
-      secondary source. Where the data could not answer a question &mdash; the great-earthquake
-      rate &mdash; that is stated rather than smoothed over.</p>
+      secondary source. Where the data could not answer a question (the great-earthquake
+      rate), that is stated rather than smoothed over.</p>
   </div>
 </footer>
 
@@ -1617,7 +1644,7 @@ register(function depth(){
   for (let d=0;d<=700;d+=100){ const y=Y(d); line(g,x0,y,x1,y); txt(g,x0-10,y+3.5,String(d),"tk","end"); }
   line(g,x0,y0,x0,y1,"ax");
   /* A stepped depth profile, not bars. On a logarithmic count axis a bar has no
-     zero to grow from, so its length would encode log(count) \u2014 which readers do
+     zero to grow from, so its length would encode log(count), which readers do
      not decode as length. A profile line carries the same five orders of
      magnitude without implying that length is proportional to count. */
   const hist = M.depth_hist.filter(r => r[1] > 0);
@@ -1663,7 +1690,7 @@ register(function depth(){
     [["0\u201370 km (crust &amp; uppermost mantle)", fmt(M.depth_bands.shallow),(M.depth_bands.shallow/M.meta.n_quakes*100).toFixed(1)+"%"],
      ["70\u2013300 km (intermediate)", fmt(M.depth_bands.inter),(M.depth_bands.inter/M.meta.n_quakes*100).toFixed(1)+"%"],
      ["300\u2013700 km (deep focus)", fmt(M.depth_bands.deep),(M.depth_bands.deep/M.meta.n_quakes*100).toFixed(1)+"%"]]
-     .concat(M.b_by_depth.map(r=>[r[0]+"\u2013"+r[1]+" km &mdash; b-value","b = "+r[2].toFixed(3),"&plusmn; "+r[3].toFixed(3)])));
+     .concat(M.b_by_depth.map(r=>[r[0]+"\u2013"+r[1]+" km: b-value","b = "+r[2].toFixed(3),"&plusmn; "+r[3].toFixed(3)])));
 });
 
 /* ================= 3. slab cross-section ================= */
@@ -1927,7 +1954,7 @@ register(function moment(){
     const col=[css("--shallow"),css("--inter"),css("--deep")][band];
     const rect=el("rect",{x:x0,y:y+3,width:Math.max(1,X(r[2])-x0),height:bh-6,fill:col,rx:2});
     rect.style.cursor="pointer";
-    rect.addEventListener("mouseenter",ev=>showTip(ev,"<b>M"+r[1]+" &mdash; "+r[0]+"</b><br>"+r[3]+
+    rect.addEventListener("mouseenter",ev=>showTip(ev,"<b>M"+r[1]+", "+r[0]+"</b><br>"+r[3]+
       "<br><i>depth</i> "+r[4]+" km<br><b>"+r[2].toFixed(2)+"%</b> of 50-year moment"));
     rect.addEventListener("mouseleave",hideTip);
     g.appendChild(rect);
@@ -2061,7 +2088,7 @@ register(function hour(){
     txt(g,bx-8,Y(0)+3.5,"0%","tk","end");
     txt(g,bx-8,Y(2*sig)+3.5,"+2\u03c3","tk","end");
   });
-  txt(g,W/2,H-6,"HOUR OF DAY, UTC  \u2014  SHADED BAND IS \u00b12\u03c3 POISSON NOISE","axlab","middle");
+  txt(g,W/2,H-6,"HOUR OF DAY, UTC. SHADED BAND IS \u00b12\u03c3 POISSON NOISE","axlab","middle");
 });
 
 
@@ -2183,7 +2210,7 @@ register(function tide(){
       txt(g,bx-8,Y(2*sig)+3.5,"+2\u03c3","tk","end");
       txt(g,bx+pw/2,by+ph+40,"n = "+fmt(dat.n),"tk","middle");
     });
-  txt(g,W/2,H-6,"PHASE OF THE MOON  \u2014  SHADED BAND IS \u00b12\u03c3 POISSON NOISE","axlab","middle");
+  txt(g,W/2,H-6,"PHASE OF THE MOON. SHADED BAND IS \u00b12\u03c3 POISSON NOISE","axlab","middle");
 });
 
 

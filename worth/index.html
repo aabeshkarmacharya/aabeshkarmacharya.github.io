@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#7E1B24">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#7E1B24">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#6A1720">
 <meta name="description" content="What Is My Land Worth?">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3E%E0%A4%AE%E0%A5%82%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3EWO%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>What Is My Land Worth?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +31,7 @@
   --field:#FFFFFF; --field-rule:#C2C2CD;
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -421,6 +422,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -451,8 +454,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -469,7 +470,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -502,7 +503,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -547,6 +548,8 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-line:#DCCFB4; --t-line-2:#7E1B24; --t-grid:rgba(30,26,22,.08);
   --t-accent:#7E1B24; --t-accent-2:#2F5E8E; --t-accent-ink:#FFF6E6;
   --lp-maroon:#7E1B24; --lp-ink:#4A3F8F; --lp-gold:#D4B46A;
+  
+  --lp-text:#7E1B24; --lp-h2:#561F12;
   --t-head-bg:#7E1B24; --t-head-ink:#FFF6E6; --t-head-ink-2:rgba(255,246,230,.9); --t-head-kick:#D4B46A;
   --t-head-rule:4px double #D4B46A; --t-hero-bg:#7E1B24;
   --t-foot-bg:#7E1B24; --t-foot-ink:#FFF6E6; --t-foot-ink-2:rgba(255,246,230,.75);
@@ -571,27 +574,26 @@ header.top::before{content:""; position:absolute; inset:12px; border:1px solid r
 header.top .look-art{display:block; position:absolute; right:clamp(18px,6vw,80px); bottom:clamp(18px,3vw,36px);
   width:clamp(90px,11vw,130px); aspect-ratio:1; border-radius:50%; border:3px solid rgba(174,166,240,.85);
   transform:rotate(-14deg); box-shadow:inset 0 0 0 6px transparent, inset 0 0 0 8px rgba(174,166,240,.6)}
-header.top .look-art::after{content:"\091C\0917\094D\0917\093E"; position:absolute; inset:0; display:grid; place-items:center;
+header.top .look-art::after{content:"LAND"; position:absolute; inset:0; display:grid; place-items:center;
   font-family:"Martel",serif; font-weight:800; font-size:clamp(20px,2.4vw,28px); color:rgba(196,190,250,.9)}
 header.top h1{color:#FFF6E6}
-header.top .devanagari{color:var(--lp-gold); font-family:"Martel",serif}
 @media(max-width:760px){header.top .look-art{display:none}}
 
 body{counter-reset:kitta}
 section .eyebrow{counter-increment:kitta}
 section .eyebrow::before{content:"Kitta no. " counter(kitta) "\00a0\00b7\00a0"; color:var(--lp-ink)}
-.eyebrow::after{background:#7E1B24; height:2px}
-h2{color:#561F12}
-figure,.fig{border:3px double #7E1B24; background:#FFFBF1}
+.eyebrow::after{background:var(--lp-maroon); height:2px}
+h2{color:var(--lp-h2)}
+figure,.fig{border:3px double var(--lp-maroon); background:var(--t-paper)}
 .fig-title{font-weight:800}
 .stats{gap:8px}
-.stat{box-shadow:none; border:1px solid #DCCFB4; border-top:3px double #7E1B24}
-.stat b{color:#7E1B24; font-weight:800}
+.stat{box-shadow:none; border:1px solid var(--t-line); border-top:3px double var(--lp-maroon)}
+.stat b{color:var(--lp-text); font-weight:800}
 .note{border-left:4px solid var(--lp-ink)}
-.card,.answer,.offer,a.nextcard{border:3px double #7E1B24}
-.answer .top{background:#EFE6D2}
-.big{color:#7E1B24; font-weight:800}
-input[type=text],input[type=number],select{border:1.5px solid #7E1B24}
+.card,.answer,.offer,a.nextcard{border:3px double var(--lp-maroon)}
+.answer .top{background:var(--t-paper-2)}
+.big{color:var(--lp-text); font-weight:800}
+input[type=text],input[type=number],select{border:1.5px solid var(--lp-maroon)}
 
 @media(max-width:560px){
   select{padding-left:10px; padding-right:21px; letter-spacing:-.01em;
@@ -600,6 +602,29 @@ input[type=text],input[type=number],select{border:1.5px solid #7E1B24}
 footer a{color:#FFF6E6}
 
 em,i{font-style:normal; font-weight:600}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#17120F; --t-paper:#1E1813; --t-paper-2:#271F19;
+  --t-ink:#F1E9DA; --t-ink-2:#D0C4AF; --t-ink-3:#AA9D88;
+  --t-line:#3B3128; --t-line-2:#C9575E; --t-grid:rgba(241,233,218,.08);
+  --t-accent:#E8898D; --t-accent-2:#7FA8D6; --t-accent-ink:#17120F;
+  --lp-maroon:#C9575E; --lp-ink:#AFA3F2; --lp-gold:#D4B46A;
+  --lp-text:#EC9297; --lp-h2:#EDB1A8;
+  --t-head-bg:#6A1720; --t-head-ink:#FFF6E6; --t-head-ink-2:rgba(255,246,230,.9); --t-head-kick:#D4B46A;
+  --t-head-rule:4px double #D4B46A; --t-hero-bg:#6A1720;
+  --t-foot-bg:#58121A; --t-foot-ink:#FFF6E6; --t-foot-ink-2:rgba(255,246,230,.78);
+  --t-label-ink:#EC9297;
+  --t-fig-border:3px double #C9575E; --t-cap-rule:1px solid #3B3128; --t-tip-border:2px solid #C9575E;
+  --t-chip-on-bg:#8E2530; --t-chip-on-ink:#FFF6E6;
+  --p1:#733B00; --p2:#8E4E0E; --p3:#A6642B; --p4:#BE7A43; --p5:#D7915A; --p6:#F0A871; --p7:#FFC599;
+  --up:#6599D1; --down:#DE6E6F; --mid:#3A332B; --under:#6599D1; --over:#DE6E6F;
+  --mapbg:#1A1511; --nodata:#2A231C; --labelink:#F1E9DA; --labelhalo:rgba(23,18,15,.88);
+  --waterfill:rgba(127,168,214,.22); --riverink:rgba(127,168,214,.55);
+  --field:#1E1813; --field-rule:#C9575E;
+}
+}
 
 </style>
 </head>
@@ -610,10 +635,7 @@ em,i{font-style:normal; font-weight:600}
 <div class="look-art" aria-hidden="true"></div>
   <div class="wide">
     <p class="kicker">Kathmandu Valley &middot; 2,115 asking prices</p>
-    <h1>What is my land worth?<!-- "Mero jagga ko mulya kati?" as numeric
-      character references, because every fragment in this repo stays ASCII
-      and the build asserts nothing about encoding. -->
-      <span class="devanagari" lang="ne">&#2350;&#2375;&#2352;&#2379; &#2332;&#2327;&#2381;&#2327;&#2366;&#2325;&#2379; &#2350;&#2379;&#2354; &#2325;&#2340;&#2367;?</span></h1>
+    <h1>What is my land worth?</h1>
     <p class="sub">Every Nepali household with land in the valley is holding
       its largest asset and has no idea what it is worth. A broker will give
       you a number in ten seconds and will not tell you how he got it. This
@@ -701,7 +723,7 @@ em,i{font-style:normal; font-weight:600}
           <div class="field" style="margin-top:17px; padding-top:17px;
                border-top:1px solid var(--rule)">
             <label class="lab" for="askNum">Asking price
-              <span style="text-transform:none; letter-spacing:0">&mdash; optional</span></label>
+              <span style="text-transform:none; letter-spacing:0">(optional)</span></label>
             <div class="roadrow">
               <input type="text" id="askNum" inputmode="numeric" autocomplete="off"
                      placeholder="1,80,00,000" aria-label="Asking price in rupees">
@@ -724,9 +746,9 @@ em,i{font-style:normal; font-weight:600}
             anywhere to move the pin off the tole centroid.</p>
           <div class="mapbox" id="mapWrap"></div>
           <div class="lgd">
-            <span id="lgdLo">&mdash;</span>
+            <span id="lgdLo">&ndash;</span>
             <span class="sw"><i style="background:var(--p1)"></i><i style="background:var(--p2)"></i><i style="background:var(--p3)"></i><i style="background:var(--p4)"></i><i style="background:var(--p5)"></i><i style="background:var(--p6)"></i><i style="background:var(--p7)"></i></span>
-            <span id="lgdHi">&mdash;</span>
+            <span id="lgdHi">&ndash;</span>
           </div>
         </div>
       </div>
@@ -737,12 +759,12 @@ em,i{font-style:normal; font-weight:600}
             <p class="lab mono" style="font-size:11px; letter-spacing:.14em;
                text-transform:uppercase; color:var(--ink-3); margin:0 0 4px"
                id="outWhere">Estimated value</p>
-            <div class="big" id="outTotal">&mdash;</div>
-            <p class="exact" id="outExact">&mdash;</p>
+            <div class="big" id="outTotal">&ndash;</div>
+            <p class="exact" id="outExact">&ndash;</p>
             <div class="band">
-              <div class="perana"><span>Per aana</span><b id="outPpa">&mdash;</b></div>
+              <div class="perana"><span>Per aana</span><b id="outPpa">&ndash;</b></div>
               <div class="bandbar"><i id="outMark"></i></div>
-              <div class="bandends"><span id="outLo">&mdash;</span><span id="outHi">&mdash;</span></div>
+              <div class="bandends"><span id="outLo">&ndash;</span><span id="outHi">&ndash;</span></div>
               <p class="tiny" style="margin:8px 0 0" id="outBandNote"></p>
             </div>
             <p class="printonly mono" id="printPlot"></p>
@@ -924,7 +946,7 @@ em,i{font-style:normal; font-weight:600}
       </div>
       <div class="field">
         <label class="lab">Plot as entered above</label>
-        <p class="small mono" id="leadPlot" style="margin:0; color:var(--ink-2)">&mdash;</p>
+        <p class="small mono" id="leadPlot" style="margin:0; color:var(--ink-2)">&ndash;</p>
       </div>
       <p class="err" id="leadErr"></p>
       <button type="button" class="cta" id="leadSubmit">Send request</button>
@@ -1296,9 +1318,9 @@ var answer = (function(){
 
   function blank(msg){
     el("outWhere").textContent = "No estimate";
-    el("outTotal").textContent = "--";
+    el("outTotal").textContent = "\u2013";
     el("outExact").textContent = "";
-    el("outPpa").textContent = "--";
+    el("outPpa").textContent = "\u2013";
     el("outLo").textContent = ""; el("outHi").textContent = "";
     el("outBandNote").textContent = "";
     el("outMark").style.left = "50%";
@@ -1779,10 +1801,10 @@ var comps = (function(){
     var shown = nb.list.slice(0, 12);
     body.innerHTML = shown.map(function(x){
       var l = localityOf({lat: x.lat, lon: x.lon}).loc;
-      return "<tr><td>" + esc(l ? l.name : "--") + "</td><td>" +
-        (x.d < 0.15 ? "&mdash;" : x.d.toFixed(1) + " km") + "</td><td>" +
+      return "<tr><td>" + esc(l ? l.name : "\u2013") + "</td><td>" +
+        (x.d < 0.15 ? "&ndash;" : x.d.toFixed(1) + " km") + "</td><td>" +
         x.aana.toFixed(2) + "</td><td>" +
-        (x.road > 0 ? x.road + " ft" : "&mdash;") + "</td><td>" +
+        (x.road > 0 ? x.road + " ft" : "&ndash;") + "</td><td>" +
         group(x.ppa) + "</td></tr>";
     }).join("");
     el("compNote").textContent = "Nearest " + shown.length + " of " +
@@ -1883,7 +1905,7 @@ var improve = (function(){
     if (!out.length)
       out.push('<div class="row"><span class="k">Nothing left to add<em>This ' +
         'plot already has the best road and facing the model knows about.' +
-        '</em></span><span class="v">&mdash;</span></div>');
+        '</em></span><span class="v">&ndash;</span></div>');
     el("improve").innerHTML = '<div class="rows tight">' + out.join("") + '</div>';
   }
 

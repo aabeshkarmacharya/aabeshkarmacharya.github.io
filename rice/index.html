@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#E3EBD3">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#E3EBD3">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#152019">
 <meta name="description" content="The Rice We Grow and Still Buy">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3E%E0%A4%A7%E0%A4%BE%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23D42A1F%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23FFFFFF%27%3ERI%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>The Rice We Grow and Still Buy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +39,7 @@
   --grid:rgba(26,25,19,.07);
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#15150F; --surface:#1D1C16; --surface-2:#24231C; --sunk:#0D0D09;
@@ -240,6 +241,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -270,8 +273,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -288,7 +289,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -321,7 +322,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -366,6 +367,7 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-line:#C3D0B0; --t-line-2:#23452B; --t-grid:rgba(35,69,43,.09);
   --t-accent:#B8322A; --t-accent-2:#23452B; --t-accent-ink:#FFFFFF;
   --rcd-green:#23452B; --rcd-red:#B8322A;
+  --rcd-rule:#23452B; --rcd-stamp:rgba(184,50,42,.85); --rcd-stamp-ring:rgba(184,50,42,.75); --rcd-ring:rgba(184,50,42,.72);
   --t-head-bg:#E3EBD3; --t-head-ink:#1E2A1F; --t-head-ink-2:#435243; --t-head-kick:#23452B;
   --t-head-rule:3px solid #23452B; --t-hero-bg:#E3EBD3;
   --t-foot-bg:#23452B; --t-foot-ink:#E8EFDC; --t-foot-ink-2:#B8C7A6;
@@ -386,32 +388,52 @@ header.top{position:relative}
 header.top .look-art{display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:4px; max-width:var(--wide);
   margin:0 auto 26px; padding-inline:24px}
 header.top .look-art{height:42px; background:
-  repeating-linear-gradient(90deg,#23452B 0 1.5px,transparent 1.5px calc((100% - 48px) / 12)) 24px 0/calc(100% - 48px) 100% no-repeat,
-  linear-gradient(#23452B,#23452B) 24px 0/calc(100% - 48px) 1.5px no-repeat,
-  linear-gradient(#23452B,#23452B) 24px 100%/calc(100% - 48px) 1.5px no-repeat}
-header.top .look-art::after{content:"\0927\093E\0928"; position:absolute; right:clamp(24px,8vw,120px); top:clamp(64px,8vw,96px);
-  font-family:"Courier Prime",monospace; font-weight:700; font-size:30px; color:rgba(184,50,42,.85);
-  border:3px solid rgba(184,50,42,.75); border-radius:50%; width:92px; height:92px; display:grid; place-items:center;
+  repeating-linear-gradient(90deg,var(--rcd-rule) 0 1.5px,transparent 1.5px calc((100% - 48px) / 12)) 24px 0/calc(100% - 48px) 100% no-repeat,
+  linear-gradient(var(--rcd-rule),var(--rcd-rule)) 24px 0/calc(100% - 48px) 1.5px no-repeat,
+  linear-gradient(var(--rcd-rule),var(--rcd-rule)) 24px 100%/calc(100% - 48px) 1.5px no-repeat}
+header.top .look-art::after{content:"RICE"; position:absolute; right:clamp(24px,8vw,120px); top:clamp(64px,8vw,96px);
+  font-family:"Courier Prime",monospace; font-weight:700; font-size:26px; color:var(--rcd-stamp);
+  border:3px solid var(--rcd-stamp-ring); border-radius:50%; width:92px; height:92px; display:grid; place-items:center;
   transform:rotate(-12deg)}
 header.top .kicker::before{content:"CARD NO. "; font-weight:400}
 
 body{counter-reset:entry}
 section .eyebrow{counter-increment:entry}
 section .eyebrow::before{content:"ENTRY " counter(entry, decimal-leading-zero) " / "; color:var(--rcd-red)}
-.eyebrow::after{background:none; border-top:1.5px dashed #23452B}
-figure{border:1.5px solid #23452B; background:#F8FAF2}
-.fig-head{border-bottom:1px dashed #23452B; padding-bottom:12px}
+.eyebrow::after{background:none; border-top:1.5px dashed var(--rcd-rule)}
+figure{border:1.5px solid var(--rcd-rule); background:var(--t-paper)}
+.fig-head{border-bottom:1px dashed var(--rcd-rule); padding-bottom:12px}
 .fig-title{text-transform:uppercase; font-weight:800}
 .stats{gap:6px}
-.stat{box-shadow:none; border:1.5px solid #23452B; background:#F8FAF2}
+.stat{box-shadow:none; border:1.5px solid var(--rcd-rule); background:var(--t-paper)}
 .stat b{color:var(--rcd-red); font-weight:700}
-.note{border:1.5px dashed #23452B; border-left-width:1.5px; padding:10px 14px; background:#F8FAF2}
+.note{border:1.5px dashed var(--rcd-rule); border-left-width:1.5px; padding:10px 14px; background:var(--t-paper)}
 .pull{font-weight:800; text-transform:uppercase}
 footer a{color:#FFFFFF}
 @media(max-width:760px){header.top .look-art::after{display:none}}
 
 header.top .look-art{position:relative}
-header.top .look-art::before{content:""; position:absolute; left:24px; right:24px; top:0; bottom:0; background:radial-gradient(circle at 5.07% 58%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px),radial-gradient(circle at 11.30% 44%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px),radial-gradient(circle at 21.73% 44%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px),radial-gradient(circle at 27.97% 58%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px),radial-gradient(circle at 38.40% 44%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px),radial-gradient(circle at 44.63% 44%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px),radial-gradient(circle at 55.07% 58%,transparent 0 10px,rgba(184,50,42,.72) 10px 12.5px,transparent 13px)}
+header.top .look-art::before{content:""; position:absolute; left:24px; right:24px; top:0; bottom:0; background:radial-gradient(circle at 5.07% 58%,transparent 0 10px,var(--rcd-ring) 10px 12.5px,transparent 13px),radial-gradient(circle at 11.30% 44%,transparent 0 10px,var(--rcd-ring) 10px 12.5px,transparent 13px),radial-gradient(circle at 21.73% 44%,transparent 0 10px,var(--rcd-ring) 10px 12.5px,transparent 13px),radial-gradient(circle at 27.97% 58%,transparent 0 10px,var(--rcd-ring) 10px 12.5px,transparent 13px),radial-gradient(circle at 38.40% 44%,transparent 0 10px,var(--rcd-ring) 10px 12.5px,transparent 13px),radial-gradient(circle at 44.63% 44%,transparent 0 10px,var(--rcd-ring) 10px 12.5px,transparent 13px),radial-gradient(circle at 55.07% 58%,transparent 0 10px,var(--rcd-ring) 10px 12.5px,transparent 13px)}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#101912; --t-paper:#152019; --t-paper-2:#1B2A20;
+  --t-ink:#E6EEDC; --t-ink-2:#C2CEB5; --t-ink-3:#9DAC90;
+  --t-line:#2C3D2F; --t-line-2:#A8C79A; --t-grid:rgba(168,199,154,.10);
+  --t-accent:#F2705F; --t-accent-2:#A8C79A; --t-accent-ink:#101912;
+  --rcd-green:#A8C79A; --rcd-red:#F2705F;
+  --rcd-rule:#7AA673; --rcd-stamp:rgba(242,112,95,.9); --rcd-stamp-ring:rgba(242,112,95,.8); --rcd-ring:rgba(242,112,95,.72);
+  --t-head-bg:#152019; --t-head-ink:#E6EEDC; --t-head-ink-2:#C2CEB5; --t-head-kick:#A8C79A;
+  --t-head-rule:3px solid #7AA673; --t-hero-bg:#152019;
+  --t-foot-bg:#1D3424; --t-foot-ink:#E8EFDC; --t-foot-ink-2:#BACAA8;
+  --t-label-ink:#A8C79A;
+  --t-fig-border:1.5px solid #7AA673; --t-cap-rule:1px dashed #7AA673; --t-tip-border:1.5px solid #7AA673;
+  --t-chip-on-bg:#A8C79A; --t-chip-on-ink:#101912;
+  --nep:#F05F52; --ind:#5B90DA; --ban:#5DA35A; --sas:#C9CFC2;
+  --nep-soft:#4C2420; --ind-soft:#22354F; --ban-soft:#213A23; --warn:#F2705F;
+}
+}
 
 </style>
 </head>
@@ -465,7 +487,7 @@ header.top .look-art::before{content:""; position:absolute; left:24px; right:24p
         <span data-n="flags.qcl.nepal.counts.A" data-fmt="int"></span> are
         marked <span class="flagtag">A</span>, an official figure, and
         <b data-n="flags.nepal_yield_estimated.0" data-fmt="yr"></b> is marked
-        <span class="flagtag">E</span>, an FAO estimate &mdash; the most recent
+        <span class="flagtag">E</span>, an FAO estimate. That is the most recent
         year, which is also the highest. On the import side it is worse:
         <b data-n="flags.fb_imputed" data-fmt="int"></b> of the
         <span data-n="flags.fb_total" data-fmt="int"></span> supply-line values
@@ -503,7 +525,7 @@ header.top .look-art::before{content:""; position:absolute; left:24px; right:24p
       paddy per hectare. India harvested
       <span data-n="levels.india_first" data-fmt="int"></span>. Nepal was
       <span data-n="ratio_stat.india.first" data-fmt="0"></span> per cent of
-      India&rsquo;s figure &mdash; which is to say a quarter more.</p>
+      India&rsquo;s figure, which is to say a quarter more.</p>
 
     <p>India passed Nepal in
       <b data-n="overtaken.india.first" data-fmt="yr"></b> and has been above it
@@ -586,10 +608,10 @@ header.top .look-art::before{content:""; position:absolute; left:24px; right:24p
       <span data-n="eras.1.by.bangladesh.fit" data-fmt="2"></span>, pulled
       further ahead.</p>
 
-    <p>Over the whole record the averages still favour everyone else &mdash;
-      Nepal <span data-n="whole.nepal.fit" data-fmt="2"></span> per cent a year
+    <p>Over the whole record the averages still favour everyone else
+      (Nepal <span data-n="whole.nepal.fit" data-fmt="2"></span> per cent a year
       against the region&rsquo;s
-      <span data-n="whole.southasia.fit" data-fmt="2"></span> &mdash; but that
+      <span data-n="whole.southasia.fit" data-fmt="2"></span>), but that
       average is carrying a quarter century in which nothing moved. Nepal&rsquo;s
       yield was still below its
       <span data-n="lost.start" data-fmt="yr"></span> level of
@@ -658,7 +680,7 @@ header.top .look-art::before{content:""; position:absolute; left:24px; right:24p
     <p class="lede">Nepal&rsquo;s paddy harvest grew from
       <span data-n="levels.nepal_prod_first" data-fmt="int"></span> thousand
       tonnes to <span data-n="levels.nepal_prod_last" data-fmt="int"></span>
-      thousand &mdash; a factor of
+      thousand, a factor of
       <b data-n="grow.production" data-fmt="2"></b>. Area harvested grew by a
       factor of <span data-n="grow.area" data-fmt="2"></span>, yield by
       <span data-n="grow.yield" data-fmt="2"></span>.</p>
@@ -753,9 +775,9 @@ header.top .look-art::before{content:""; position:absolute; left:24px; right:24p
       <span data-n="imports.first_over_ten" data-fmt="yr"></span>. They peaked
       at <b data-n="imports.peak" data-fmt="1"></b> per cent in
       <span data-n="imports.peak_year" data-fmt="yr"></span> and were
-      <b data-n="imports.now" data-fmt="1"></b> per cent &mdash;
-      <span data-n="imports.now_kt" data-fmt="int"></span> thousand tonnes
-      &mdash; in <span data-n="imports.now_year" data-fmt="yr"></span>. The
+      <b data-n="imports.now" data-fmt="1"></b> per cent
+      (<span data-n="imports.now_kt" data-fmt="int"></span> thousand tonnes)
+      in <span data-n="imports.now_year" data-fmt="yr"></span>. The
       series is volatile because it is a residual: it moves with the monsoon,
       with the Indian export ban of 2023, and with whatever the border trade did
       that year.</p>
@@ -766,7 +788,7 @@ header.top .look-art::before{content:""; position:absolute; left:24px; right:24p
       and a new one from <span data-n="imports.curr_from" data-fmt="yr"></span>.
       Over the four years they overlap, every Nepali rice tonnage in the new
       series is <b data-n="imports.basis_ratio" data-fmt="3"></b> times the old
-      one &mdash; a change of commodity basis, milled against paddy equivalent,
+      one: a change of commodity basis, milled against paddy equivalent,
       not a change in what was shipped. Splicing the tonnages would put a fifty
       per cent step into 2010 that never happened. The <em>share</em> survives
       the change: the two vintages agree on it to
@@ -789,8 +811,8 @@ header.top .look-art::before{content:""; position:absolute; left:24px; right:24p
       </div>
       <figcaption>Every value in this figure carries FAOSTAT&rsquo;s
         <span class="flagtag">I</span> flag: imputed by FAO, not reported by
-        Nepal. Read the level with that in mind. The shape &mdash; nothing, then
-        something, then a lot &mdash; is more trustworthy than any single year.</figcaption>
+        Nepal. Read the level with that in mind. The shape (nothing, then
+        something, then a lot) is more trustworthy than any single year.</figcaption>
     </figure>
   </div>
 
@@ -801,8 +823,8 @@ header.top .look-art::before{content:""; position:absolute; left:24px; right:24p
       hectares would have produced about
       <b data-n="gapwork.southasia.tonnes" data-fmt="int"></b> tonnes more paddy.
       At Bangladesh&rsquo;s, about
-      <b data-n="gapwork.bangladesh.tonnes" data-fmt="int"></b> tonnes more
-      &mdash; roughly
+      <b data-n="gapwork.bangladesh.tonnes" data-fmt="int"></b> tonnes more,
+      or roughly
       <span data-n="gapwork.bangladesh.per_ha" data-fmt="int"></span> kilograms
       on every hectare. That is arithmetic, not a forecast: Bangladesh grows
       rice on a delta with three crops a year, and Nepal does not have that
@@ -826,7 +848,7 @@ header.top .look-art::before{content:""; position:absolute; left:24px; right:24p
       flatters the comparison slightly in Nepal&rsquo;s direction.</p>
     <p><b>Harvested area is not land.</b> A hectare cropped twice counts twice.
       Cropping intensity rose over this period, so part of what reads as more
-      area is the same ground used harder &mdash; and yield per harvested hectare
+      area is the same ground used harder. And yield per harvested hectare
       is not yield per hectare of ground.</p>
     <p><b>No cause is established anywhere on this page.</b> Irrigation,
       fertiliser, seed variety, land fragmentation, labour leaving for the Gulf:

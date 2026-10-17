@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#DCEBF4">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#DCEBF4">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10233A">
 <meta name="description" content="How Fast Is The Sea Coming?">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3E%E0%A4%A4%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3ECO%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>How Fast Is The Sea Coming?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +30,7 @@
   --field:#FFFFFF; --field-rule:#C2C2CD;
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -280,7 +281,7 @@ a.nextcard:hover .go{color:var(--accent)}
   --d0:#b9b9c4;
   --u1:#f5b97e; --u2:#e17a37; --u3:#a8430c;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     --d3:#6fb2f0; --d2:#3987e5; --d1:#28598f;
     --d0:#4a4a58;
@@ -397,6 +398,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -427,8 +430,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -445,7 +446,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -478,7 +479,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -523,6 +524,10 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-line:#D3DFE8; --t-line-2:#1D232B; --t-grid:rgba(29,35,43,.08);
   --t-accent:#2F75B5; --t-accent-2:#B02A86; --t-accent-ink:#FFFFFF;
   --nc-magenta:#B02A86; --nc-blue:#2F75B5; --nc-shallow:#DCEBF4;
+  
+  --nc-navy:#14385E;
+  --nc-b0:#F2E8CC; --nc-b1:#DCEBF4; --nc-b2:#C6DDEC; --nc-b3:#B1CFE3; --nc-contour:rgba(47,117,181,.14);
+  --nc-rose-ring:rgba(255,255,255,.35);
   --t-head-bg:#DCEBF4; --t-head-ink:#14385E; --t-head-ink-2:#33475E; --t-head-kick:#B02A86;
   --t-head-rule:1.5px solid #1D232B; --t-hero-bg:#EEF5FA;
   --t-foot-bg:#F2E8CC; --t-foot-ink:#454E5A; --t-foot-ink-2:#5F6874;
@@ -542,17 +547,17 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
 }
 
 header.top{position:relative; overflow:hidden; background:
-  repeating-linear-gradient(176deg,transparent 0 46px,rgba(47,117,181,.14) 46px 47px),
-  linear-gradient(180deg,#F2E8CC 0 10px,#DCEBF4 10px 46%,#C6DDEC 46% 74%,#B1CFE3 74%)}
+  repeating-linear-gradient(176deg,transparent 0 46px,var(--nc-contour) 46px 47px),
+  linear-gradient(180deg,var(--nc-b0) 0 10px,var(--nc-b1) 10px 46%,var(--nc-b2) 46% 74%,var(--nc-b3) 74%)}
 
 header.top .look-art{display:block; position:absolute; right:max(clamp(18px,6vw,90px), calc((100% - var(--wide,1120px)) / 2 + 24px)); top:50%; transform:translateY(-50%);
   width:clamp(110px,13vw,170px); aspect-ratio:1; border-radius:50%; pointer-events:none;
-  border:2px solid #B02A86; box-shadow:inset 0 0 0 10px rgba(255,255,255,.35), inset 0 0 0 11.5px #B02A86;
-  background:repeating-conic-gradient(from 0deg,#B02A86 0 1deg,transparent 1deg 10deg);
+  border:2px solid var(--nc-magenta); box-shadow:inset 0 0 0 10px var(--nc-rose-ring), inset 0 0 0 11.5px var(--nc-magenta);
+  background:repeating-conic-gradient(from 0deg,var(--nc-magenta) 0 1deg,transparent 1deg 10deg);
   -webkit-mask:radial-gradient(circle,#000 0 40%,transparent 40.5% 41%,#000 41.5%);
           mask:radial-gradient(circle,#000 0 40%,transparent 40.5% 41%,#000 41.5%)}
 header.top .look-art::after{content:""; position:absolute; left:50%; top:12%; width:0; height:0;
-  border-left:9px solid transparent; border-right:9px solid transparent; border-bottom:38% solid #B02A86;
+  border-left:9px solid transparent; border-right:9px solid transparent; border-bottom:38% solid var(--nc-magenta);
   transform:translateX(-50%)}
 header.top h1{font-style:italic}
 header.top .wrap,header.top .wide{position:relative}
@@ -560,18 +565,43 @@ header.top .wrap,header.top .wide{position:relative}
 
 @media(max-width:560px){header.top .look-art{display:none}}
 section .eyebrow::before{content:"Note to mariners \00b7\00a0"}
-.eyebrow::after{background:#B02A86; opacity:.6}
-h2{font-style:italic; color:#14385E}
-figure{border:1px solid #1D232B}
+.eyebrow::after{background:var(--nc-magenta); opacity:.6}
+h2{font-style:italic; color:var(--nc-navy)}
+figure{border:1px solid var(--t-line-2)}
 .fig-title{font-style:italic; font-size:22px}
 figcaption{font-style:italic}
 .stats{gap:0}
-.stat{box-shadow:none; border:1px solid #D3DFE8; background:#FFFFFF}
-.stat b{font-style:italic; color:#14385E; font-size:clamp(34px,4.6vw,50px)}
-.note{border-left:3px solid #B02A86; font-style:italic}
-.card,.answer,.offer,a.nextcard,.fig{border:1px solid #1D232B}
-.answer .top{background:#DCEBF4}
-.big{font-style:italic; color:#14385E}
+.stat{box-shadow:none; border:1px solid var(--t-line); background:var(--t-paper)}
+.stat b{font-style:italic; color:var(--nc-navy); font-size:clamp(34px,4.6vw,50px)}
+.note{border-left:3px solid var(--nc-magenta); font-style:italic}
+.card,.answer,.offer,a.nextcard,.fig{border:1px solid var(--t-line-2)}
+.answer .top{background:var(--nc-shallow)}
+.big{font-style:italic; color:var(--nc-navy)}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#0D131A; --t-paper:#121A23; --t-paper-2:#17212C;
+  --t-ink:#E3EAF1; --t-ink-2:#BCC7D3; --t-ink-3:#96A3B2;
+  --t-line:#263443; --t-line-2:#C8D3DE; --t-grid:rgba(227,234,241,.08);
+  --t-accent:#73ACE2; --t-accent-2:#E77BC4; --t-accent-ink:#0D131A;
+  --nc-magenta:#E77BC4; --nc-blue:#73ACE2; --nc-shallow:#15283A;
+  --nc-navy:#BCD5EE;
+  --nc-b0:#26221A; --nc-b1:#10233A; --nc-b2:#0D1D31; --nc-b3:#0A1728; --nc-contour:rgba(115,172,226,.12);
+  --nc-rose-ring:rgba(255,255,255,.10);
+  --t-head-bg:#10233A; --t-head-ink:#DCE9F5; --t-head-ink-2:#B6C8DB; --t-head-kick:#E77BC4;
+  --t-head-rule:1.5px solid #C8D3DE; --t-hero-bg:#121A23;
+  --t-foot-bg:#1C1A13; --t-foot-ink:#CFC9B6; --t-foot-ink-2:#ACA693;
+  --t-label-ink:#E77BC4;
+  --t-fig-border:1px solid #C8D3DE; --t-cap-rule:1px solid #263443; --t-tip-border:1px solid #C8D3DE;
+  --t-chip-on-bg:#2C5A85; --t-chip-on-ink:#FFFFFF;
+  --d3:#71B7FB; --d2:#397EBF; --d1:#00528E; --d0:#3A414A;
+  --u1:#96016F; --u2:#CD479F; --u3:#FF88D2; --fall:#4A94DA; --rise:#DE50AD;
+  --sea:#0F1A24; --land:#1F1C14; --landline:#4A4433;
+  --mark:#8CC4F2; --mark-soft:rgba(140,196,242,.18); --mark-dim:rgba(140,196,242,.36);
+  --warnc:#E77BC4; --field:#121A23; --field-rule:#C8D3DE;
+}
+}
 
 </style>
 </head>
@@ -585,7 +615,7 @@ figcaption{font-style:italic}
     <h1>How fast is the sea coming?</h1>
     <p class="sub">The global figure is the wrong number. A tide gauge is bolted
       to a pier and measures the distance down to the water, so it records the
-      ocean rising and the ground sinking together &mdash; and it is the sum
+      ocean rising and the ground sinking together. It is the sum
       that floods a street. At one coast in five that sum is negative and the
       sea is going away. Pick a gauge and this says what its own record
       actually shows.</p>
@@ -643,9 +673,9 @@ figcaption{font-style:italic}
             one to read it.</p>
           <div class="mapbox" id="mapWrap"></div>
           <div class="lgd">
-            <span id="lgdLo">&mdash;</span>
+            <span id="lgdLo">&ndash;</span>
             <span class="ramp"><i style="background:var(--d3)"></i><i style="background:var(--d2)"></i><i style="background:var(--d1)"></i><i style="background:var(--d0)"></i><i style="background:var(--u1)"></i><i style="background:var(--u2)"></i><i style="background:var(--u3)"></i></span>
-            <span id="lgdHi">&mdash;</span>
+            <span id="lgdHi">&ndash;</span>
             <span style="width:100%; color:var(--ink-3)">millimetres a year, the gauge's own record</span>
           </div>
           <div class="tip" id="mapTip"></div>
@@ -657,9 +687,9 @@ figcaption{font-style:italic}
           <div class="top">
             <p class="lab mono" style="font-family:'Lora',monospace; font-size:11px;
                letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
-               margin:0 0 4px" id="outWhere">&mdash;</p>
-            <div class="big" id="outBig">&mdash;</div>
-            <p class="exact" id="outLead">&mdash;</p>
+               margin:0 0 4px" id="outWhere">&ndash;</p>
+            <div class="big" id="outBig">&ndash;</div>
+            <p class="exact" id="outLead">&ndash;</p>
             <p class="tiny" style="margin:11px 0 0" id="outSub"></p>
             <p class="printonly mono" id="printPlan"></p>
           </div>
@@ -774,7 +804,7 @@ figcaption{font-style:italic}
         <a class="nextcard" href="../sealevel/">
           <h3>The essay behind this page</h3>
           <p>What the spread of 1,609 gauge trends reveals about the land they
-            are bolted to &mdash; including the fifth of them where the sea is
+            are bolted to, including the fifth of them where the sea is
             falling.</p>
           <span class="go">Where the sea is falling &rarr;</span>
         </a>
@@ -804,7 +834,7 @@ figcaption{font-style:italic}
       four are already steeper over their last thirty years than over their
       whole record, so a line fitted to the whole record is, for most coasts,
       known to be too shallow. Both numbers are shown for exactly that reason,
-      and the steeper one is still not a projection of the future &mdash; it is
+      and the steeper one is still not a projection of the future. It is
       a projection of the recent past.</p>
     <p><b>The average is not what floods you.</b> Damage arrives when a surge
       and a high tide land on top of the mean. Raising the mean by a few
@@ -986,7 +1016,7 @@ var answer = (function(){
       msgs.push("<b>This gauge says the sea is falling.</b> About " +
         (100 * M.falling_share).toFixed(0) + "% of the world's gauges do, and " +
         "almost none of them are measuring an ocean that is going away. They " +
-        "are on land that is rising &mdash; usually ground still springing " +
+        "are on land that is rising, usually ground still springing " +
         "back from ice that melted ten thousand years ago. That rebound is " +
         "roughly constant; the ocean term is not.");
       warn = true;
@@ -1032,10 +1062,10 @@ var near = (function(){
     var all = s.trend !== undefined ? [self].concat(rows) : rows;
     el("nearBody").innerHTML = all.map(function(r){
       return "<tr" + (r.d === 0 ? ' class="you"' : "") + "><td>" + esc(r.s.name) +
-        "</td><td>" + (r.d === 0 ? "&mdash;" : Math.round(r.d) + " km") +
+        "</td><td>" + (r.d === 0 ? "&ndash;" : Math.round(r.d) + " km") +
         "</td><td>" + r.s.first + "&ndash;" + r.s.last + "</td><td>" +
         mm(r.s.trend) + "</td><td>" +
-        (r.s.recent !== undefined ? mm(r.s.recent) : "&mdash;") + "</td></tr>";
+        (r.s.recent !== undefined ? mm(r.s.recent) : "&ndash;") + "</td></tr>";
     }).join("");
     var spread = rows.length
       ? Math.max.apply(null, rows.map(function(r){ return r.s.trend; })) -
@@ -1132,8 +1162,8 @@ var acc = (function(){
              '<div class="l">' + t[1] + '</div></div>';
     }).join("");
     el("accNote").innerHTML = "The cloud sits above the line, and that is the " +
-      "whole finding. Land motion of the slow kind &mdash; a coast still " +
-      "rebounding from vanished ice, a delta compacting &mdash; runs at very " +
+      "whole finding. Land motion of the slow kind (a coast still " +
+      "rebounding from vanished ice, a delta compacting) runs at very " +
       "nearly the same rate for centuries, so it cancels out of the " +
       "difference between a station's recent slope and its long one. What is " +
       "left over is mostly ocean. Across " + group(M.with_recent) +

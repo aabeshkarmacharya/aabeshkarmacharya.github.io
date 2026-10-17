@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10141A">
 <meta name="description" content="How Much Has It Warmed Here?">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2744%27%20font-family%3D%27Nirmala%20UI%2CKohinoor%20Devanagari%2CNoto%20Sans%20Devanagari%2CMangal%2Csans-serif%27%20font-size%3D%2740%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3E%E0%A4%A4%E0%A4%BE%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%2760%27%20height%3D%2760%27%20rx%3D%279%27%20fill%3D%27%23F5C11A%27%20stroke%3D%27%23121212%27%20stroke-width%3D%274%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2741%27%20font-family%3D%27Arial%20Black%2CArial%2Csans-serif%27%20font-size%3D%2726%27%20font-weight%3D%27700%27%20text-anchor%3D%27middle%27%20fill%3D%27%23121212%27%3EWA%3C%2Ftext%3E%3C%2Fsvg%3E">
 <title>How Much Has It Warmed Here?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +30,7 @@
   --field:#FFFFFF; --field-rule:#C2C2CD;
   --measure:65ch; --wide:1120px;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     color-scheme: dark;
     --ground:#121218; --surface:#1A1A21; --surface-2:#212129; --sunk:#0B0B0F;
@@ -280,7 +281,7 @@ a.nextcard:hover .go{color:var(--accent)}
   --d0:#b9b9c4;
   --u1:#f5b97e; --u2:#e17a37; --u3:#a8430c;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     --d3:#6fb2f0; --d2:#3987e5; --d1:#28598f;
     --d0:#4a4a58;
@@ -308,7 +309,7 @@ a.nextcard:hover .go{color:var(--accent)}
   --w1:#fde4c4; --w2:#f8c391; --w3:#e17a37; --w4:#c25a1c; --w5:#6b2906;
   --cool:#2a78d6;
 }
-@media not all{
+@media (prefers-color-scheme: dark){
   :root:where(:not([data-theme="light"])){
     --w1:#4a1d05; --w2:#99400d; --w3:#e17a37; --w4:#f09f5e; --w5:#f8c391;
     --cool:#6fb2f0;
@@ -437,6 +438,8 @@ footer{background:var(--sunk); border-top:1px solid var(--rule); padding-block:4
   --accent:var(--t-accent); --alt:var(--t-accent-2);
   --shadow:none; --shadow-lg:none;
   --field:var(--t-paper); --field-rule:var(--t-line-2); --you:var(--t-ink);
+  
+  --measure:var(--wide,1120px);
 }
 
 html{background:var(--t-bg); font-synthesis:style}
@@ -467,8 +470,6 @@ header.top .sub,header.hero .hero-sub{color:var(--t-head-ink-2)}
 .hero-tag .hero-inner,.hero-foot .hero-inner{font-family:var(--t-f-label)}
 .look-art,.look-tag{display:none}
 
-.devanagari{font-family:var(--t-f-body); line-height:1.32}
-
 figure,.fig,.card,.answer,.offer,a.nextcard,details,.hero-card,.panel,.stats,.flag,.done,
 .seg,.seg2,.opts,.mapbox,input[type=text],input[type=number],input[type=email],input[type=tel],select,textarea,
 button.cta,.chip,.ppbar,#tip,.tip{border-radius:var(--t-radius); box-shadow:none}
@@ -485,7 +486,7 @@ figcaption{background:var(--t-paper-2); border-top:var(--t-cap-rule); color:var(
 .halo{stroke:var(--t-paper)}
 
 .stats{border:0; background:transparent; gap:1px;
-  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .stat{background:var(--t-paper); box-shadow:0 0 0 1px var(--t-line)}
 .stat b,.stat .n,.big{font-family:var(--t-f-num); font-variation-settings:normal}
 .stat span,.stat .l{font-family:var(--t-f-label)}
@@ -518,7 +519,7 @@ button.cta{background:var(--t-accent); color:var(--t-accent-ink); font-family:va
 button.cta.ghost{background:transparent; color:var(--t-ink); border:1px solid var(--t-line-2)}
 .seg{border-color:var(--t-line-2); background:var(--t-paper)}
 .seg button{font-family:var(--t-f-label); border-color:var(--t-line-2)}
-.seg button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
+.seg button[aria-pressed=true],.seg2 button[aria-pressed=true]{background:var(--t-accent); color:var(--t-accent-ink)}
 
 .seg button:focus-visible{outline:2px solid var(--t-accent); outline-offset:-4px}
 .seg button[aria-pressed=true]:focus-visible{outline-color:var(--t-accent-ink)}
@@ -562,7 +563,7 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
   --t-ink:#1C2430; --t-ink-2:#4A5563; --t-ink-3:#65707C;
   --t-line:#D3DCE5; --t-line-2:#1C2430; --t-grid:rgba(28,36,48,.08);
   --t-accent:#D7263D; --t-accent-2:#2F6DB3; --t-accent-ink:#FFFFFF;
-  --rg-red:#D7263D; --rg-grid:#E3EAF1;
+  --rg-red:#D7263D; --rg-grid:#E3EAF1; --rg-graph:rgba(28,36,48,.05);
   --t-head-bg:#FFFFFF; --t-head-ink:#1C2430; --t-head-ink-2:#4A5563; --t-head-kick:#D7263D;
   --t-head-rule:2px solid #1C2430; --t-hero-bg:#FFFFFF;
   --t-foot-bg:#F1F5F9; --t-foot-ink:#4A5563; --t-foot-ink-2:#65707D;
@@ -579,31 +580,50 @@ footer code{background:transparent; border-color:currentColor; color:inherit}
 }
 header.top{position:relative; background:
   linear-gradient(90deg,var(--rg-grid) 1px,transparent 1px) 0 0/24px 24px,
-  linear-gradient(180deg,var(--rg-grid) 1px,transparent 1px) 0 0/24px 24px,#FFFFFF}
+  linear-gradient(180deg,var(--rg-grid) 1px,transparent 1px) 0 0/24px 24px,var(--t-head-bg)}
 
 header.top .look-art{display:block; position:absolute; right:max(clamp(20px,6vw,90px), calc((100% - var(--wide,1120px)) / 2 + 24px)); top:28px; bottom:28px; width:28px;
-  background:linear-gradient(180deg,transparent 0 34%,#D7263D 34%) 9px 0/10px calc(100% - 26px) no-repeat,
-    repeating-linear-gradient(180deg,#1C2430 0 1.5px,transparent 1.5px 12px) 0 0/7px calc(100% - 26px) no-repeat,
-    repeating-linear-gradient(180deg,#1C2430 0 1.5px,transparent 1.5px 12px) 21px 0/7px calc(100% - 26px) no-repeat;
+  background:linear-gradient(180deg,transparent 0 34%,var(--rg-red) 34%) 9px 0/10px calc(100% - 26px) no-repeat,
+    repeating-linear-gradient(180deg,var(--t-ink) 0 1.5px,transparent 1.5px 12px) 0 0/7px calc(100% - 26px) no-repeat,
+    repeating-linear-gradient(180deg,var(--t-ink) 0 1.5px,transparent 1.5px 12px) 21px 0/7px calc(100% - 26px) no-repeat;
   border-radius:6px}
 header.top .look-art::after{content:""; position:absolute; left:2px; bottom:0; width:24px; height:24px; border-radius:50%;
-  background:#D7263D}
+  background:var(--rg-red)}
 header.top .wrap,header.top .wide{position:relative; padding-right:max(24px,90px)}
 @media(max-width:760px){header.top .look-art{display:none} header.top .wrap,header.top .wide{padding-right:16px}}
 
 body{counter-reset:form} section .eyebrow{counter-increment:form}
-section .eyebrow::before{content:"FORM \2116\00a0" counter(form) "\00a0\00b7\00a0"; color:#1C2430}
-.eyebrow::after{background:#1C2430; height:2px}
-figure,.fig,.card,.answer,.offer,a.nextcard{border:1.5px solid #1C2430}
-.answer .top{background:linear-gradient(90deg,var(--rg-grid) 1px,transparent 1px) 0 0/20px 20px,#FFFFFF}
-.big{color:#D7263D; font-weight:700}
-.stat{box-shadow:none; border:1.5px solid #1C2430}
-.stat b,.stat .n{color:#D7263D}
-.note{border-left:4px solid #D7263D}
+section .eyebrow::before{content:"FORM \2116\00a0" counter(form) "\00a0\00b7\00a0"; color:var(--t-ink)}
+.eyebrow::after{background:var(--t-line-2); height:2px}
+figure,.fig,.card,.answer,.offer,a.nextcard{border:1.5px solid var(--t-line-2)}
+.answer .top{background:linear-gradient(90deg,var(--rg-grid) 1px,transparent 1px) 0 0/20px 20px,var(--t-paper)}
+.big{color:var(--rg-red); font-weight:700}
+.stat{box-shadow:none; border:1.5px solid var(--t-line-2)}
+.stat b,.stat .n{color:var(--rg-red)}
+.note{border-left:4px solid var(--rg-red)}
 
 figure .fig-body,.fig svg{background:
-  linear-gradient(90deg,rgba(28,36,48,.05) 1px,transparent 1px) 0 0/20px 20px,
-  linear-gradient(180deg,rgba(28,36,48,.05) 1px,transparent 1px) 0 0/20px 20px}
+  linear-gradient(90deg,var(--rg-graph) 1px,transparent 1px) 0 0/20px 20px,
+  linear-gradient(180deg,var(--rg-graph) 1px,transparent 1px) 0 0/20px 20px}
+
+@media (prefers-color-scheme: dark){
+:root:root:root{
+  --t-scheme:dark;
+  --t-bg:#10141A; --t-paper:#151A22; --t-paper-2:#1B212B;
+  --t-ink:#E8EDF3; --t-ink-2:#C1CAD5; --t-ink-3:#9BA5B1;
+  --t-line:#2B3440; --t-line-2:#D3DBE4; --t-grid:rgba(232,237,243,.08);
+  --t-accent:#FF6B7D; --t-accent-2:#78A9E8; --t-accent-ink:#10141A;
+  --rg-red:#FF6B7D; --rg-grid:#1D2531; --rg-graph:rgba(232,237,243,.05);
+  --t-head-bg:#10141A; --t-head-ink:#E8EDF3; --t-head-ink-2:#C1CAD5; --t-head-kick:#FF6B7D;
+  --t-head-rule:2px solid #D3DBE4; --t-hero-bg:#10141A;
+  --t-foot-bg:#151A22; --t-foot-ink:#C1CAD5; --t-foot-ink-2:#9BA5B1;
+  --t-label-ink:#FF6B7D;
+  --t-fig-border:1.5px solid #D3DBE4; --t-cap-rule:1px solid #2B3440; --t-tip-border:1.5px solid #D3DBE4;
+  --t-chip-on-bg:#E8EDF3; --t-chip-on-ink:#10141A;
+  --mark:#FF6B7D; --mark-soft:rgba(255,107,125,.20); --mark-dim:rgba(255,107,125,.38);
+  --warnc:#F0A04B; --field:#151A22; --field-rule:#D3DBE4;
+}
+}
 
 </style>
 </head>
@@ -617,7 +637,7 @@ figure .fig-body,.fig svg{background:
     <h1>How much has it warmed here?</h1>
     <p class="sub">Not the planet. One thermometer, in a place you can name,
       with a record long enough to say something. Pick it, say what year you
-      want to count from, and this reads that station's own series &mdash; in
+      want to count from, and this reads that station's own series, in
       both the version the thermometers produced and the version after
       homogenisation, because the gap between them is the thing everybody
       argues about and almost nobody is shown.</p>
@@ -674,9 +694,9 @@ figure .fig-body,.fig svg{background:
             Click one to read it.</p>
           <div class="mapbox" id="mapWrap"></div>
           <div class="lgd">
-            <span id="lgdLo">&mdash;</span>
+            <span id="lgdLo">&ndash;</span>
             <span class="ramp"><i style="background:var(--w1)"></i><i style="background:var(--w2)"></i><i style="background:var(--w3)"></i><i style="background:var(--w4)"></i><i style="background:var(--w5)"></i></span>
-            <span id="lgdHi">&mdash;</span>
+            <span id="lgdHi">&ndash;</span>
             <span style="display:inline-flex; align-items:center; gap:6px">
               <i style="width:11px; height:11px; border-radius:50%; background:var(--cool); display:inline-block"></i>cooling</span>
             <span style="width:100%; color:var(--ink-3)">degrees per decade, over each station's whole record</span>
@@ -690,9 +710,9 @@ figure .fig-body,.fig svg{background:
           <div class="top">
             <p class="lab mono" style="font-family:'Assistant',monospace; font-size:11px;
                letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
-               margin:0 0 4px" id="outWhere">&mdash;</p>
-            <div class="big" id="outBig">&mdash;</div>
-            <p class="exact" id="outLead">&mdash;</p>
+               margin:0 0 4px" id="outWhere">&ndash;</p>
+            <div class="big" id="outBig">&ndash;</div>
+            <p class="exact" id="outLead">&ndash;</p>
             <p class="tiny" style="margin:11px 0 0" id="outSub"></p>
             <p class="printonly mono" id="printPlan"></p>
           </div>
@@ -873,9 +893,9 @@ figure .fig-body,.fig svg{background:
       itself a model, which is why both versions are on this page and you can
       switch between them.</p>
     <p><b>The adjustment is not small and not hidden.</b> Across the
-      <span id="limBoth">&mdash;</span> stations here it raises the fitted trend
-      at <span id="limRaise">&mdash;</span> of them, by a median of
-      <span id="limMed">&mdash;</span> degrees per decade. Over a century that
+      <span id="limBoth">&ndash;</span> stations here it raises the fitted trend
+      at <span id="limRaise">&ndash;</span> of them, by a median of
+      <span id="limMed">&ndash;</span> degrees per decade. Over a century that
       is a third of a degree. You are entitled to know that, to see it per
       station, and to decide for yourself what you think of it.</p>
     <p class="small" id="limStats"></p>
@@ -1128,7 +1148,7 @@ var answer = (function(){
     if (!msgs.length) {
       el("outFlag").className = "flag";
       el("outFlag").innerHTML = "One station, on land, at one site. It is not " +
-        "the planet and does not claim to be \u2014 but it is the only thermometer " +
+        "the planet and does not claim to be. But it is the only thermometer " +
         "that has actually been standing where you are.";
     } else {
       el("outFlag").className = "flag" + (warn ? " warn" : "");
@@ -1154,9 +1174,9 @@ var near = (function(){
     el("nearBody").innerHTML = all.map(function(r){
       return "<tr" + (r.d === 0 ? ' class="you"' : "") + "><td>" +
         esc(nice(r.s.name)) + "</td><td>" +
-        (r.d === 0 ? "&mdash;" : Math.round(r.d) + " km") + "</td><td>" +
+        (r.d === 0 ? "&ndash;" : Math.round(r.d) + " km") + "</td><td>" +
         r.s.first + "&ndash;" + r.s.last + "</td><td>" + deg(r.s.trend) +
-        "</td><td>" + (r.s.trend70 !== undefined ? deg(r.s.trend70) : "&mdash;") +
+        "</td><td>" + (r.s.trend70 !== undefined ? deg(r.s.trend70) : "&ndash;") +
         "</td></tr>";
     }).join("");
     if (!rows.length) { el("nearNote").textContent = ""; return; }
@@ -1278,7 +1298,7 @@ var serie = (function(){
       "decade over its whole life. Take only the years since 1970 and the " +
       "median more than doubles. That is the shape of the thing: not a steady " +
       "slope since the nineteenth century, but a slow drift that got much " +
-      "faster in living memory \u2014 which is also why the year you pick to " +
+      "faster in living memory, which is also why the year you pick to " +
       "count from changes the answer so much.";
   }
 
@@ -1344,7 +1364,7 @@ var adj = (function(){
       "swapped for a different one. It is a correction, and a correction is a " +
       "model. Across these " + group(M.with_raw) + " records it raises the " +
       "fitted trend at <b>" + pct(M.adj_raises) + "</b> of them by a median of " +
-      "<b>" + deg(M.adj_median) + "</b> degrees a decade \u2014 about a third of " +
+      "<b>" + deg(M.adj_median) + "</b> degrees a decade, or about a third of " +
       "a degree over a century. That is not nothing, it is not hidden, and the " +
       "switch above lets you read every number on this page either way.";
   }
